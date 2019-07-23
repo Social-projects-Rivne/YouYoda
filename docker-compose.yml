@@ -1,0 +1,40 @@
+version: '3'
+services:
+
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    ports: 
+       - '3465:3306'
+    environment:
+       MYSQL_DATABASE: 'database'
+       MYSQL_USER: 'admin'
+       MYSQL_PASSWORD: 'password'
+       MYSQL_ROOT_PASSWORD: 'root_password'
+       MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+       MYSQL_RANDOM_ROOT_PASSWORD: 'random'
+
+  redis:
+    image: redis:latest
+    environment:
+       REDIS_PASSWORD: 'password'
+    ports:
+      - '6379:6379'
+
+  front:
+    build: ./frontend
+    environment:
+      NODE_ENV: production
+    volumes:
+      - ./frontend:/home/node/frontend
+    ports:
+      - '3001:3000'
+    command: npm start
+
+  back:
+    build: ./backend
+    ports: 
+       - '5000:5000'
+    volumes: 
+       - ./:/backend
+
