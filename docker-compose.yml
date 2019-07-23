@@ -23,8 +23,6 @@ services:
 
   front:
     build: ./frontend
-    environment:
-      NODE_ENV: production
     volumes:
       - ./frontend:/home/node/frontend
     ports:
@@ -34,7 +32,9 @@ services:
   back:
     build: ./backend
     ports: 
-       - '5000:5000'
+       - '8000:8000'
     volumes: 
-       - ./:/backend
-
+       - ./backend:/backend
+    depends_on:
+       - mariadb
+    command: gunicorn -b 0.0.0.0:8000 myproject.wsgi:application 

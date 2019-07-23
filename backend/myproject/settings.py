@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'MYSQL_DATABASE',
-        'USER': 'MYSQL_USER',
-        'PASSWORD': 'MYSQL_PASSWORD',
+        'NAME': 'database',
+        'USER': 'admin',
+        'PASSWORD': 'password',
         'HOST': 'mariadb',   
         'PORT': '3465',
     }
