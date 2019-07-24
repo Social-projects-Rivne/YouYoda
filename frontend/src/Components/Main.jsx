@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Main = React.createClass({
-  render: () {
+  render () {
     return (
       <div className="">
         <main>
