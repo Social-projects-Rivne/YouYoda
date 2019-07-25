@@ -1,0 +1,11 @@
+header {
+    width: 100%;
+    background-color: #4f4f4f;
+    color: #fff;
+}
+.nav-link {
+    color: #fff;
+}
+header img{
+    width: 144px;
+}

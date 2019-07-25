@@ -8,7 +8,6 @@ import Footer from './Components/Footer'
 function MainLayout() {
   return (
     <div>
-        <h1>Hello YouYoda</h1>
         <Header/>
         <Main/>
         <Footer/>
