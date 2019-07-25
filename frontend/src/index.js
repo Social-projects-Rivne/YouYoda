@@ -1,18 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MainLayout from './App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {Router, Route} from 'react-router';
 
 
-ReactDOM.render((
-  <Router>
-    <Route path="/" component={MainLayout}>
-
-    </Route>
-  </Router>
-), document.getElementById('root'))
+ReactDOM.render(<App/>, document.getElementById('root'))
 
 
 // If you want your app to work offline and load faster, you can change
