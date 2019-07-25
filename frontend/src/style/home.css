@@ -1,10 +1,19 @@
-header {
+.header {
     width: 100%;
+    height: 56px;
     background-color: #4f4f4f;
-    color: #fff;
 }
-.nav-link {
+.header li a {
     color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+    line-height: 18px;
+    border-bottom: 2px solid transparent;
+}
+.header li a:hover {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    font-weight: 700;
 }
 header img{
     width: 144px;
