@@ -11,7 +11,8 @@ import {
     Row,
     Col } from 'reactstrap';
 
-    
+
+
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -30,13 +31,13 @@ export default class Header extends React.Component {
     render() {
         return (
             <div>
-            <header className="header">
+            <header className='header'>
             <Container>
             <Row>
             <Col>
-            <Navbar color="fade" dark expand="md">
+            <Navbar color="#4f4f4f" dark expand="md">
                 <NavbarBrand href="/">
-                    <img src={require('../img/logo_grey.png')} />
+                    <img src={require('../imgnotignor/logo_grey.svg')} className="logo"/>
                 </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -60,14 +61,6 @@ export default class Header extends React.Component {
             </Row>
             </Container>
             </header>
-            <Container fluid>
-                <Row>
-                    <Col className="">
-
-                    </Col>
-                </Row>
-            </Container>
-
             </div>
     );
   }

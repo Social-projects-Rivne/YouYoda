@@ -1,10 +1,10 @@
+/* Styles for Navbar */
 .header {
     width: 100%;
     height: 56px;
     background-color: #4f4f4f;
 }
 .header li a {
-    color: #fff;
     text-transform: uppercase;
     font-size: 18px;
     line-height: 18px;
@@ -15,6 +15,447 @@
     border-bottom: 2px solid #fff;
     font-weight: 700;
 }
-header img{
+.logo{
     width: 144px;
+}
+.navbar-collapse {
+    background-color: rgba(79, 79, 79, 0.9);
+    text-align: right;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff;
+}
+.navbar-nav .nav-link {
+    padding-right: 15px;
+}
+
+
+/* Stytes for Footer */
+footer {
+  background-image: url("../imgnotignor/footer-bg.png");
+  width: 100%;
+  -webkit-background-size: cover;
+          background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  height: 416px;
+  border-top: 5px solid #f61837;
+  /*facebook*/
+  /*twitter*/
+  /* instagram */
+  /* whatsapp */ }
+  footer .form {
+    width: 100%;
+    max-width: 290px;
+    margin: 0 auto;
+    padding-top: 60px;
+    position: relative;
+    top: 50px; }
+    footer .form .inp {
+      position: relative;
+      display: block;
+      height: 48px;
+      cursor: text; }
+      footer .form .inp input {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        padding-left: 32px;
+        border: 0;
+        -webkit-border-radius: 2px;
+                border-radius: 2px;
+        -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        -webkit-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+        vertical-align: bottom; }
+        footer .form .inp input:focus, footer .form .inp input.filled {
+          height: 100%;
+          outline: none; }
+          footer .form .inp input:focus label, footer .form .inp input.filled label {
+            position: absolute;
+            -webkit-transform: translateY(-34px);
+                -ms-transform: translateY(-34px);
+                    transform: translateY(-34px);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6); }
+          footer .form .inp input:focus label, footer .form .inp input.filled label {
+            -webkit-transform: translateY(0px);
+                -ms-transform: translateY(0px);
+                    transform: translateY(0px);
+            visibility: visible;
+            -webkit-transition: -webkit-transform .3s ease;
+            transition: -webkit-transform .3s ease;
+            -o-transition: transform .3s ease;
+            transition: transform .3s ease;
+            transition: transform .3s ease, -webkit-transform .3s ease; }
+      footer .form .inp label {
+        color: white;
+        line-height: 48px;
+        padding-left: 3px;
+        -webkit-transform: translateY(0);
+            -ms-transform: translateY(0);
+                transform: translateY(0);
+        -webkit-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+        pointer-events: none; }
+    footer .form .m-btm-40 {
+      margin-bottom: 40px; }
+  @media (min-width: 780px) {
+    footer .wrapper {
+      width: 600px;
+      display: grid;
+      grid-template-columns: repeat(2, [col] -webkit-calc(100%/2));
+      grid-template-columns: repeat(2, [col] calc(100%/2));
+      grid-auto-rows: 120px;
+      margin: 30px auto 40px; } }
+  footer .button {
+    min-width: 150px;
+    margin: 30px auto;
+    background: rgba(0, 0, 0, 0);
+    color: #fefefe;
+    font-size: 18px;
+    border: 2px solid #fff;
+    -webkit-border-radius: 10px;
+            border-radius: 10px;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    -moz-appearance: none;
+         appearance: none;
+    -webkit-appearance: none;
+    -webkit-transition: width linear 0.05s, -webkit-border-radius linear 0.05s;
+    transition: width linear 0.05s, -webkit-border-radius linear 0.05s;
+    -o-transition: border-radius linear 0.05s, width linear 0.05s;
+    transition: border-radius linear 0.05s, width linear 0.05s;
+    transition: border-radius linear 0.05s, width linear 0.05s, -webkit-border-radius linear 0.05s; }
+    footer .button:focus {
+      outline: 0; }
+    footer .button.animate {
+      width: 68.18182px;
+      height: 68.18182px;
+      min-width: 0;
+      -webkit-border-radius: 50%;
+              border-radius: 50%;
+      color: transparent; }
+      footer .button.animate:after {
+        position: absolute;
+        content: '';
+        width: 25px;
+        height: 25px;
+        border: 4px solid #fefefe;
+        -webkit-border-radius: 50%;
+                border-radius: 50%;
+        border-left-color: transparent;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        -webkit-animation: spin ease-in 2.5s forwards;
+                animation: spin ease-in 2.5s forwards;
+        animation-name: spin;
+        -webkit-animation-name: spin;
+        -o-transition-timing-function: ease-in-out;
+           transition-timing-function: ease-in-out;
+        -webkit-transition-timing-function: ease-in-out;
+        animation-duration: 2.5s;
+        -webkit-animation-duration: 2.5s;
+        animation-fill-mode: forwards;
+        -webkit-animation-fill-mode: forwards; }
+      footer .button.animate.success:before {
+        position: absolute;
+        content: '';
+        width: 25px;
+        height: 12.5px;
+        border: 4px solid #fefefe;
+        border-right: 0;
+        border-top: 0;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(0);
+        -ms-transform: translate(-50%, -50%) rotate(0deg) scale(0);
+            transform: translate(-50%, -50%) rotate(0deg) scale(0);
+        -webkit-animation: success ease-in 0.15s forwards;
+        animation: success ease-in 0.15s forwards;
+        -webkit-animation-delay: 2.5s;
+                animation-delay: 2.5s; }
+      footer .button.animate.error {
+        position: relative;
+        -webkit-animation: vibrate ease-in 0.5s forwards;
+        animation: vibrate ease-in 0.5s forwards;
+        -webkit-animation-delay: 2.5s;
+        animation-delay: 2.5s; }
+        footer .button.animate.error:before {
+          color: #fff;
+          position: absolute;
+          content: '!';
+          font-size: 1.8rem;
+          font-weight: bold;
+          text-align: center;
+          left: 50%;
+          top: 50%;
+          -webkit-transform: translate(-50%, -50%) scale(0);
+          -ms-transform: translate(-50%, -50%) scale(0);
+              transform: translate(-50%, -50%) scale(0);
+          -webkit-animation: error ease-in 0.5s forwards;
+          animation: error ease-in 0.5s forwards;
+          -webkit-animation-delay: 2.5s;
+                  animation-delay: 2.5s; }
+
+@keyframes spin {
+  0% {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(1);
+            transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  90% {
+    -webkit-transform: translate(-50%, -50%) rotate(1080deg) scale(1);
+            transform: translate(-50%, -50%) rotate(1080deg) scale(1); }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); } }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  98% {
+    -webkit-transform: translate(-50%, -50%) rotate(1080deg) scale(1); }
+  100% {
+    -webkit-transform: translate(-50%, -50%) rotate(1080deg) scale(0); } }
+
+@keyframes success {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0) scale(0);
+            transform: translate(-50%, -50%) rotate(0) scale(0); }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+            transform: translate(-50%, -50%) rotate(-45deg) scale(1); } }
+
+@-webkit-keyframes success {
+  from {
+    -webkit-transform: translate(-50%, -50%) rotate(0) scale(0); }
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(-45deg) scale(1); } }
+
+@keyframes error {
+  from {
+    -webkit-transform: translate(-50%, -50%) scale(0);
+            transform: translate(-50%, -50%) scale(0); }
+  to {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+            transform: translate(-50%, -50%) scale(1);
+    background-color: #f44336; } }
+
+@-webkit-keyframes error {
+  from {
+    -webkit-transform: translate(-50%, -50%) scale(0); }
+  to {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    background-color: #f44336; } }
+
+@-webkit-keyframes vibrate {
+  0%, 30%, 60%, 85%, 100% {
+    left: 0;
+    background-color: #f44336; }
+  10%, 40%, 90%, 70% {
+    left: -2px;
+    background-color: #f44336; }
+  20%, 50%, 80%, 95% {
+    left: 2px;
+    background-color: #f44336; } }
+
+@keyframes vibrate {
+  0%, 30%, 60%, 85%, 100% {
+    left: 0;
+    background-color: #f44336; }
+  10%, 40%, 90%, 70% {
+    left: -2px;
+    background-color: #f44336; }
+  20%, 50%, 80%, 95% {
+    left: 2px;
+    background-color: #f44336; } }
+  footer .logo-footer {
+    position: absolute;
+    top: 40px;
+    left: 80%; }
+    footer .logo-footer span {
+      margin-top: 10px;
+      color: #e0e0e0;
+      display: block;
+      font-size: 1.25rem; }
+  footer .soc {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    width: 100%;
+    position: relative;
+    top: 300px; }
+    footer .soc ul {
+      list-style: none; }
+      footer .soc ul li {
+        width: 65px;
+        height: 65px;
+        margin: 0 15px;
+        text-align: center;
+        cursor: pointer;
+        -webkit-border-radius: 50%;
+                border-radius: 50%;
+        border: 5px solid #fff;
+        float: left;
+        position: relative;
+        -webkit-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease; }
+        footer .soc ul li .fab {
+          color: #fff;
+          line-height: 55px;
+          font-size: 30px;
+          -webkit-transition: all 0.5s ease;
+          -o-transition: all 0.5s ease;
+          transition: all 0.5s ease; }
+  footer ul li:before {
+    content: "";
+    position: absolute;
+    bottom: -35px;
+    left: -5px;
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li:hover.facebook {
+    border: 5px solid #3b5998;
+    -webkit-box-shadow: 0 0 15px #3b5998;
+            box-shadow: 0 0 15px #3b5998;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li:hover .fa-facebook {
+    color: #3b5998;
+    text-shadow: 0 0 15px #3b5998;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li.facebook:hover:before {
+    color: #3b5998;
+    text-shadow: 0 0 15px #3b5998; }
+  footer .soc ul li:hover.twitter {
+    border: 5px solid #00aced;
+    -webkit-box-shadow: 0 0 15px #00aced;
+            box-shadow: 0 0 15px #00aced;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li:hover .fa-twitter {
+    color: #00aced;
+    text-shadow: 0 0 15px #00aced;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li.twitter:hover:before {
+    color: #00aced;
+    text-shadow: 0 0 15px #00aced; }
+  footer .soc ul li:hover.instagram {
+    border: 5px solid #bc2a8d;
+    -webkit-box-shadow: 0 0 15px #bc2a8d;
+            box-shadow: 0 0 15px #bc2a8d;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li:hover .fa-instagram {
+    color: #bc2a8d;
+    text-shadow: 0 0 15px #bc2a8d;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li.instagram:hover:before {
+    color: #bc2a8d;
+    text-shadow: 0 0 15px #bc2a8d; }
+  footer .soc ul li:hover.whatsapp {
+    border: 5px solid #4dc247;
+    -webkit-box-shadow: 0 0 15px #4dc247;
+            box-shadow: 0 0 15px #4dc247;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li:hover .fa-whatsapp {
+    color: #4dc247;
+    text-shadow: 0 0 15px #4dc247;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+  footer .soc ul li.whatsapp:hover:before {
+    color: #4dc247;
+    text-shadow: 0 0 15px #4dc247; }
+
+
+
+
+
+
+
+/* Styles for Home */
+
+.header-img {
+      height: 100vh;
+      background-image: url("../imgnotignor/headerimg.png");
+      /* background-image: url("../imgnotignor/yodahome.png"); */
+      background-color: #000;
+      background-position: center;
+      background-repeat: no-repeat;
+      -webkit-background-size: cover;
+              background-size: cover;
+}
+.bg-yoda {
+    height: 100vh;
+    background-image: url("../imgnotignor/yodahome.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+            background-size: cover;
+}
+
+.header-img .container {
+    height: 90%;
+}
+.header-img .language li {
+    display: inline;
+    font-size: 24px;
+    color: #fff;
+}
+.header-img .language li a {
+      color: #fff;
+ }
+.header-img .language .language-active {
+    color: #aaa;
+}
+.header-img .middle_bar {
+  position: relative;
+  top: 30%;
+  text-align: right;
+  color: #fff;
+}
+.header-img .middle_bar p { font-size: 48px; }
+.header-img .middle_bar cite { font-size: 36px; }
+.btn-sign {
+    width: 260px;
+    height: 47px;
+    border-radius: 20px;
+}
+.btn-group-sign {
+    display: flex;
+    position: relative;
+    top:40%;
+    justify-content: center;
+    align-items: center;
+
 }
