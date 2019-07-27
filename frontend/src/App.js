@@ -1,15 +1,20 @@
 import React from 'react';
 import './App.css';
-import Header from './Components/Header';
-import Main from './Components/Main';
-import Footer from './Components/Footer';
+import Home from './Pages/Home';
+import {Router, Route} from 'react-router';
+
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
+
+library.add(fab, faCheckSquare, faCoffee);
 
 
 function MainLayout() {
   return (
-    <div>
-        //here will be routers
-    </div>
+    <Router>
+        <Route path='/' component={Home}/>
+    </Router>
   );
 }
 

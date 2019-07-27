@@ -2,7 +2,13 @@ import React from 'react';
 import {
     Container,
     Row,
-    Col } from 'reactstrap';
+    Col,
+    Form,
+    Input,
+    Button} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+
 
 
 class Footer extends React.Component{
@@ -13,42 +19,53 @@ class Footer extends React.Component{
         <section>
           <Container>
             <Row>
-              <Col md="4">
-                <form className="form" action="#" method="post">
-                  <label className="inp m-btm-40" for="text">
-                    <input type="text" id="text"></input>
-                    <label for="text">Name</label>
-                  </label>
-                  <label className="inp" for="email">
-                    <input type="email" id="email" required></input>
-                    <label for="email">Email</label>
-                  </label>
-                  <div className="wrapper">
-                    <button className="button error">Submit</button>
-                    </div>
-                </form>
+              <Col md="5">
+                <ul className="footer-nav">
+                    <li>
+                        <a href="">About</a>
+                    </li>
+                    <li>
+                        <a href="">Courses</a>
+                    </li>
+                    <li>
+                        <a href="">Trainers</a>
+                    </li>
+                    <li>
+                        <a href="">Events</a>
+                    </li>
+                </ul>
+                <Form action="#" className="form">
+                    <Input type="search" id="text" className="search-input"
+                            placeholder="Search..."/>
+                    <Button className="search-button">
+                        <FontAwesomeIcon icon="search"/>
+                    </Button>
+                </Form>
               </Col>
               <Col>
-                <div className="logo-footer">
-                  <img src="img/2_kopya.png" alt="logo" />
-                  <span>Better every day</span>
-                </div>
-                <div className="soc">
-                  <ul>
+                  <ul className="soc">
                     <li className="facebook">
-                      <i className="fab fa-facebook " aria-hidden="true"></i>
+                      <a href="#">
+                        <FontAwesomeIcon icon={['fab', 'facebook']}/>
+                      </a>
                     </li>
                     <li className="twitter">
-                      <i className="fab fa-twitter" aria-hidden="true"></i>
+                      <a href="#">
+                        <FontAwesomeIcon icon={['fab', 'twitter']}/>
+                      </a>
                     </li>
                     <li className="instagram">
-                      <i className="fab fa-instagram fa-2x" aria-hidden="true"></i>
+                      <a href="#">
+                        <FontAwesomeIcon icon={['fab', 'instagram']}/>
+                      </a>
                     </li>
                     <li className="whatsapp">
-                      <i className="fab fa-whatsapp fa-2x" aria-hidden="true"></i>
+                      <a href="#">
+                        <FontAwesomeIcon icon={['fab', 'whatsapp']}/>
+                      </a>
                     </li>
                   </ul>
-                  </div>
+                  <span>© YouYoda 2019 All rights reserved</span>
               </Col>
             </Row>
           </Container>

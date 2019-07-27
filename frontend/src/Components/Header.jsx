@@ -35,9 +35,10 @@ export default class Header extends React.Component {
             <Container>
             <Row>
             <Col>
-            <Navbar color="#4f4f4f" dark expand="md">
+            <Navbar dark expand="md">
                 <NavbarBrand href="/">
-                    <img src={require('../imgnotignor/logo_grey.svg')} className="logo"/>
+                    <img src={require('../img/static/logo_grey.svg')}
+                            className="logo" alt="YouYoda"/>
                 </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>

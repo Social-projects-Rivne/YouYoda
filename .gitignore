@@ -128,6 +128,6 @@ venv.bak/
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 
-/imgignor/*.ico
-/imgignor/*.png
-/imgignor/*.jpeg
+/content/*.ico
+/content/*.png
+/content/*.jpeg
