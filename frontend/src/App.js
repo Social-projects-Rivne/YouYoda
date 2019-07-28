@@ -1,18 +1,16 @@
 import React from 'react';
 import './App.css';
-import Header from './Components/Header'
-import Main from './Components/Main'
-import Footer from './Components/Footer'
+import Routes from './Routes'
 
 
 function MainLayout() {
   return (
-    <div>
+  	 
+      <div className="wrapper">
         <h1>Hello YouYoda</h1>
-        <Header/>
-        <Main/>
-        <Footer/>
-    </div>
+        <Routes />
+      </div>
+   
   );
 }
 

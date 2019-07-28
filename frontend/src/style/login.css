@@ -1,0 +1,63 @@
+.Login,
+.SignUp {
+	height: 550px;
+	padding-top: 20px;
+	padding-left: 40px;
+}
+
+.SignUp {
+    background: url(../imgnotignor/Rectangle.png), #2F2F2F;
+}
+
+.SignUp h1 {
+  /* Hello, Dear Friend */
+  /*font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;*/
+  font-size: 44px;
+  line-height: 65px;
+  align-items: center;
+  color: #FFFFFF;
+}
+
+.SignUpText {
+    /* blah blah blah */
+    /*font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: bold;*/
+    font-size: 34px;
+    line-height: 40px;
+    color: #FFFFFF;
+}
+
+.SignUpInvite {
+    /* If you don’t have an account yet */
+    /*font-family: Roboto Condensed;
+    font-style: normal;
+    font-weight: normal;*/
+    font-size: 18px;
+    line-height: 175.78%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 50px;
+}
+
+.SignUpButton {
+	border-radius: 20px;
+	width: 40%;
+	height: auto; 
+	color:#000000; 
+    background-color:#E1E1E1;
+    margin-top: 35px;
+}
+
+.SignInButton {
+    background-color: #FFD466;
+    border-radius: 20px;
+    color: #091133;
+    margin-top: 30px;
+    width: 40%;
+    height: auto; 
+}
