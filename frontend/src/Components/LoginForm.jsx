@@ -4,19 +4,55 @@ import {
   FormGroup, Label, Input,
   Button, Row
 } from 'reactstrap';
+import axios from 'axios';
 import FacebookLogo from '../imgnotignor/Facebook(1).png';
 import GoogleLogo from '../imgnotignor/Google +.png';
 import '../style/login.css';
 
 
 class LoginForm extends Component {
+    constructor(props){
+    	super(props);
+
+    	this.state={
+    		email:'',
+  			password:''
+  		};
+  	}
+
+  	handleClick(event){
+		 var apiBaseUrl = "http://localhost:8000/api/";
+		 // var self = this;
+		 var userdata={
+		 "email":this.state.username,
+		 "password":this.state.password
+		 }
+		 axios.post(apiBaseUrl+'login', userdata)
+		 .then(function (response) {
+		 console.log(response);
+		 if(response.data.code === 200){
+		 console.log("Login successfull");
+		 }
+		 else if(response.data.code === 204){
+		 console.log("Username password do not match");
+		 alert("username password do not match")
+		 }
+		 else{
+		 console.log("Username does not exists");
+		 alert("Username does not exist");
+		 }
+		 })
+		 .catch(function (error) {
+		 console.log(error);
+		 });
+		 }
     render() {
         return (
 		  <Container>
 			<Row>
 			  <Col md="6">
 			    <section className="Login">
-			      <Form className="form" action="#" method="post">
+			      <Form>
 				    <Row>
 				      <Col>
 				        <h2>Log In<br></br><br></br></h2>
@@ -27,6 +63,7 @@ class LoginForm extends Component {
 						name="email"
 						id="exampleEmail"
 						placeholder="myemail@email.com"
+						onChange = {(event,newValue) => this.setState({email:newValue})}
 						  />
 					    </FormGroup>
 					    <FormGroup>
@@ -36,6 +73,7 @@ class LoginForm extends Component {
 						name="password"
 						id="examplePassword"
 						placeholder="********"
+						onChange = {(event,newValue) => this.setState({password:newValue})}
 						/>
 					    </FormGroup>	
 				      </Col>
@@ -55,7 +93,7 @@ class LoginForm extends Component {
 				    <Row>
 				      <Col>
 				        <br></br>
-				        <Button className="SignInButton">Sign in</Button>
+				        <Button className="SignInButton" onClick={(event) => this.handleClick(event)}>Sign in</Button>
 				      </Col>
 				    </Row>
 				  </Form>
@@ -88,6 +126,5 @@ class LoginForm extends Component {
         );
     }
 }
-// so...
 
 export default LoginForm;
