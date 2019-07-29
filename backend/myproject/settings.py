@@ -83,7 +83,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'password',
         'HOST': 'mariadb',
-        'PORT': '3465',
+        'PORT': '3306',
     }
 }
 

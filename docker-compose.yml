@@ -4,8 +4,8 @@ services:
   mariadb:
     image: mariadb:latest
     restart: always
-    ports: 
-       - '3465:3306'
+    ports:
+       - '3306:3306'
     environment:
        MYSQL_DATABASE: 'database'
        MYSQL_USER: 'admin'
@@ -31,10 +31,10 @@ services:
 
   back:
     build: ./backend
-    ports: 
+    ports:
        - '8000:8000'
-    volumes: 
+    volumes:
        - ./backend:/backend
     depends_on:
        - mariadb
-    command: gunicorn -b 0.0.0.0:8000 myproject.wsgi:application 
+    command: gunicorn -b 0.0.0.0:8000 myproject.wsgi:application
