@@ -6,7 +6,7 @@ import HomeEvent from '../Components/HomeEvent';
 import HomeTrainers from '../Components/HomeTrainers';
 import HomeCourses from '../Components/HomeCourses';
 import HomeLastBlock from '../Components/HomeLastBlock';
-
+import Registration from '../Components/Registration';
 
 class Home extends React.Component{
 
@@ -22,6 +22,7 @@ class Home extends React.Component{
 
 
             <Footer/>
+            <Registration/>
             </>
         )
     }
