@@ -2,7 +2,8 @@ import React from 'react';
 import Header from './Header';
 import {Container,
 Button} from 'reactstrap';
-import {quotes} from './JSON/quotes.json'
+import {quotes} from './JSON/quotes.json';
+import {Link} from 'react-router-dom';
 
 
 class HomeHeader extends React.Component{

@@ -1,7 +1,6 @@
 import React from 'react';
-import './App.css';
 import Home from './Pages/Home';
-import {Router, Route} from 'react-router';
+import {Route, BrowserRouter as Router} from 'react-router-dom';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -10,13 +9,15 @@ import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons';
 library.add(fab, faCheckSquare, faCoffee);
 
 
-function MainLayout() {
+function Routes() {
   return (
+    <div>
     <Router>
         <Route path='/' component={Home}/>
     </Router>
+    </div>
   );
 }
 
 
-export default MainLayout;
+export default Routes;
