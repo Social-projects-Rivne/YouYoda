@@ -7,7 +7,7 @@ import {quotes} from './JSON/quotes.json'
 
 class HomeHeader extends React.Component{
     render(){
-        const rand = Math.floor(Math.random() * quotes.length);
+        const RAND = Math.floor(Math.random() * quotes.length);
         return(
             <>
             <section className="header-img ">
@@ -22,7 +22,7 @@ class HomeHeader extends React.Component{
 				</div>
                 <blockquote className="col middle_bar">
                     <p className="mb-0 ">
-                        {quotes[rand]}
+                        {quotes[RAND]}
                     </p>
             	    <cite title="Source Title">-master Yoda</cite>
             	</blockquote>

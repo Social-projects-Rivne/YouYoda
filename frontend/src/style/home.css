@@ -28,23 +28,26 @@
 .navbar-nav .nav-link {
     padding-right: 15px;
 }
+.navbar-collapse {
+    z-index: 2;
+}
 
 
 /* Stytes for Footer */
-footer {
+.footer {
   background-image: url("../img/static/footer-bg.png");
   width: 100%;
   -webkit-background-size: cover;
           background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
-  height: 210px;
+  height: 214px;
   border-top: 3px solid #444;
 }
-footer a{
+.footer a{
     color: #343a40;
 }
-footer .form {
+.footer .form {
     width: 100%;
     display: flex;
 }
@@ -78,7 +81,7 @@ footer .form {
 .soc li {
     margin: 0 25px;
 }
-span {
+.footer span {
     display: flex;
 
     justify-content: flex-end;
@@ -89,10 +92,11 @@ span {
 
 
 
-/* Styles for Home */
+/* Styles for HomeHeader */
 
 .header-img {
       height: 100vh;
+      min-height: 510px;
       background-image: url("../img/static/headerimg.png");
       /* background-image: url("../img/static/yodahome.png"); */
       background-color: #000;
@@ -103,6 +107,7 @@ span {
 }
 .bg-yoda {
     height: 100vh;
+    min-height: 510px;
     background-image: url("../img/static/yodahome.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -147,4 +152,114 @@ span {
     justify-content: center;
     align-items: center;
 
+}
+
+
+/* Styles for HomeAbout */
+.header-block h1{
+    margin-top: 95px;
+    margin-bottom: 31px;
+    font-size: 48px;
+    font-weight: 700;
+    text-align: center;
+}
+.header-block p{
+    text-align: center;
+    margin-bottom: 130px;
+}
+.main-text {
+    font-size: 18px;
+}
+.secondary-header {
+    font-weight: 700;
+    font-size: 34px;
+    margin-bottom: 30px;
+}
+.home-about img{
+    height: 130px;
+}
+.home-about p{
+    margin-bottom: 130px;
+}
+
+
+/* Styles for HomeEvent */
+.home-event .secondary-header {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+.home-event {
+    padding-bottom: 150px;
+}
+.btn-yellow{
+    background-color: #FFD466;
+    border-radius: 20px;
+    width: 135px;
+}
+.home-event .slick-prev, .slick-next {
+    top: 30%;
+}
+.home-event .slick-prev:before, .slick-next:before {
+    font-size: 40px;
+}
+.home-event .slick-prev {
+    left: -50px;
+}
+.sl-slide img{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sl-slide {
+    text-align: center;
+}
+
+
+/* Styles for HomeTrainers */
+.trainer-photo {
+    display: flex;
+    margin: 0 auto;
+    width: 260px;
+    border-radius: 50%;
+    align-self: center;
+}
+.trainer-name {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.trainer-title {
+    text-align: center;
+    font-size: 12px;
+    color: #76848C;
+}
+.home-trainers {
+    padding-bottom: 250px;
+}
+
+
+/* Style for HomeCourses */
+.home-course {
+    margin-bottom: 50px;
+}
+
+
+/* Styles for HomeLastBlock */
+.home-last-block h1 {
+    text-align: left;
+    margin: 320px 0 51px 15px;
+}
+.home-last-block p {
+    text-align: left;
+    margin-bottom: 51px;
+}
+.home-last-block img {
+    margin-top: 240px;
+}
+.home-last-block .btn-group-sign {
+    top: 0;
+    margin-bottom: 240px;
 }

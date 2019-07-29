@@ -44,7 +44,7 @@ class Footer extends React.Component{
               </Col>
               <Col>
                   <ul className="soc">
-                    <li className="facebook">
+                   <li className="facebook">
                       <a href="#">
                         <FontAwesomeIcon icon={['fab', 'facebook']}/>
                       </a>
