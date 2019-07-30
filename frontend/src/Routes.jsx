@@ -1,11 +1,10 @@
 import React from 'react';
+
 import Home from './Pages/Home';
 import {Route, BrowserRouter as Router} from 'react-router-dom';
 
 
-
-
-function Routes() {
+export default function Routes() {
   return (
     <Router>
     <div>
@@ -13,7 +12,4 @@ function Routes() {
     </div>
     </Router>
   );
-}
-
-
-export default Routes;
+};

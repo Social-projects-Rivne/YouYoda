@@ -1,11 +1,9 @@
 import React from 'react';
-import {Container,
-    Button,
-    Row,
-    Col} from 'reactstrap';
+
+import {Container, Button, Row, Col} from 'reactstrap';
 
 
-class HomeLastBlock extends React.Component{
+export default class HomeLastBlock extends React.Component{
     render (){
         return(
             <>
@@ -40,5 +38,3 @@ class HomeLastBlock extends React.Component{
         )
     }
 };
-
-export default HomeLastBlock;

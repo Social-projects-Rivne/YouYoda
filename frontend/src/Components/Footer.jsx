@@ -1,17 +1,10 @@
 import React from 'react';
-import {
-    Container,
-    Row,
-    Col,
-    Form,
-    Input,
-    Button} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import {Container, Row, Col, Form, Input, Button} from 'reactstrap';
+import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-
-
-class Footer extends React.Component{
+export default class Footer extends React.Component{
   render(){
     return (
       <>
@@ -74,6 +67,4 @@ class Footer extends React.Component{
       </>
       )
   }
-}
-
-export default Footer;
+};

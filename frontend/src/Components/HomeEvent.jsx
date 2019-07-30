@@ -1,13 +1,10 @@
 import React from 'react';
+
+import {Container, Row, Button, Col} from 'reactstrap';
 import Slider from "react-slick";
-import {Container,
-Row,
-Button,
-Col} from 'reactstrap';
 
 
-class HomeEvent extends React.Component{
-
+export default class HomeEvent extends React.Component{
     render(){
         const SETTINGS = {
           dots: false,
@@ -85,6 +82,4 @@ class HomeEvent extends React.Component{
             </div>
         )
     }
-}
-
-export default HomeEvent;
+};

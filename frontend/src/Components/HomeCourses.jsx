@@ -1,12 +1,9 @@
 import React from 'react';
 
-import {Container,
-Row,
-Button,
-Col} from 'reactstrap';
+import {Container,Row,Button,Col} from 'reactstrap';
 
 
-class HomeCourses extends React.Component{
+export default class HomeCourses extends React.Component{
 
     render(){
 
@@ -95,6 +92,4 @@ class HomeCourses extends React.Component{
             </div>
         )
     }
-}
-
-export default HomeCourses;
+};

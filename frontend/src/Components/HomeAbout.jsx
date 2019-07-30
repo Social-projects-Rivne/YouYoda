@@ -1,10 +1,9 @@
 import React from 'react';
-import {Container,
-Row,
-Col} from 'reactstrap';
+
+import {Container, Row, Col} from 'reactstrap';
 
 
-class HomeAbout extends React.Component{
+export default class HomeAbout extends React.Component{
     render (){
         return(
             <div id="home-about">
@@ -64,5 +63,3 @@ class HomeAbout extends React.Component{
         )
     }
 };
-
-export default HomeAbout;
