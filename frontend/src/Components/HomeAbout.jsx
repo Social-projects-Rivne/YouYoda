@@ -7,7 +7,7 @@ Col} from 'reactstrap';
 class HomeAbout extends React.Component{
     render (){
         return(
-            <>
+            <div id="home-about">
             <Container className="home-about">
             <Row>
                 <Col className="header-block">
@@ -60,7 +60,7 @@ class HomeAbout extends React.Component{
                 </Col>
             </Row>
             </Container>
-            </>
+            </div>
         )
     }
 };
