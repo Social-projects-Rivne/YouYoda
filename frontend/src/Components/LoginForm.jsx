@@ -19,12 +19,6 @@ class LoginForm extends Component {
     	this.state={
 			modal: false,
     		email:'',
-<<<<<<< HEAD
-  			password:'',
-  		};
-  }
-  
-=======
   			password:''
 		  };
 		this.toggle = this.toggle.bind(this);
@@ -36,7 +30,6 @@ class LoginForm extends Component {
         }));
     }
 
->>>>>>> 04d195d4dc15a6dfcd6ffca694d48522fe1c9037
   	handleClick(event){
 		 var apiBaseUrl = "http://localhost:8000/api/";
 		 // var self = this;

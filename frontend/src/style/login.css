@@ -1,17 +1,8 @@
 .btn {
     border-radius: 20px;
 }
-<<<<<<< HEAD
-
-.SignUp {
-    background: url(../img/content//Rectangle.png), #2F2F2F;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-=======
 .btn:hover {
     opacity: 0.8;
->>>>>>> 04d195d4dc15a6dfcd6ffca694d48522fe1c9037
 }
 .modal .btn {
     width: 260px;
@@ -57,7 +48,7 @@ button.close {
     margin-bottom: 25px;
 }
 .SignUp {
-    background: url(../imgnotignor/Rectangle.png) 0 0 no-repeat;
+    background: url(../img/content/Rectangle.png) 0 0 no-repeat;
     background-size: cover;
     margin-top: -17px;
     margin-right: -2px;
