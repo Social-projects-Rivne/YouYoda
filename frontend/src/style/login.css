@@ -1,66 +1,89 @@
-.Login,
-.SignUp {
-	height: 550px;
-	padding-top: 20px;
-	padding-left: 40px;
+.btn {
+    border-radius: 20px;
 }
+<<<<<<< HEAD
 
 .SignUp {
     background: url(../img/content//Rectangle.png), #2F2F2F;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+=======
+.btn:hover {
+    opacity: 0.8;
+>>>>>>> 04d195d4dc15a6dfcd6ffca694d48522fe1c9037
 }
-
-.SignUp h1 {
-  /* Hello, Dear Friend */
-  /*font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;*/
-  font-size: 44px;
-  line-height: 65px;
-  align-items: center;
-  color: #FFFFFF;
+.modal .btn {
+    width: 260px;
 }
-
-.SignUpText {
-    /* blah blah blah */
-    /*font-family: Roboto Condensed;
-    font-style: normal;
-    font-weight: bold;*/
-    font-size: 34px;
-    line-height: 40px;
-    color: #FFFFFF;
+.btn-grey{
+    background-color: #E1E1E1;
 }
-
-.SignUpInvite {
-    /* If you don’t have an account yet */
-    /*font-family: Roboto Condensed;
-    font-style: normal;
-    font-weight: normal;*/
-    font-size: 18px;
-    line-height: 175.78%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #FFFFFF;
-    margin-top: 50px;
-}
-
-.SignUpButton {
-	border-radius: 20px;
-	width: 40%;
-	height: auto; 
-	color:#000000; 
-    background-color:#E1E1E1;
-    margin-top: 35px;
-}
-
-.SignInButton {
-    background-color: #FFD466;
+input.form-control {
     border-radius: 20px;
-    color: #091133;
-    margin-top: 30px;
-    width: 40%;
-    height: auto; 
+}
+input.form-control.validate {
+    border: 1px solid #5CB85C;
+    position: relative;
+}
+.modal .form-group.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+.modal-content,
+.modal-dialog.wild .modal-content {
+    border-radius: 0px;
+    border-color: transparent;
+    background: #fff;
+    border: 0px none;
+}
+.modal-body {
+    margin-right: -1px;
+}
+.modal-title {
+    font-weight: bold;
+}
+button.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 1001;
+}
+
+/* login form */
+.Login {
+    background: #fff;
+    text-align: left;
+    margin-bottom: 25px;
+}
+.SignUp {
+    background: url(../imgnotignor/Rectangle.png) 0 0 no-repeat;
+    background-size: cover;
+    margin-top: -17px;
+    margin-right: -2px;
+    margin-bottom: -17px;
+    padding: 25px;
+}
+.Login .form-horizontal {
+    padding-right: 10%;
+}
+.custom-title span {
+    display: block;
+}
+
+@media (min-width: 576px)
+{
+    .modal-dialog.wild {
+        max-width: 980px;
+    }
+}
+
+@media (max-width: 768px)
+{
+    .custom-title span {
+        display: inline;
+    }
+    .Login {
+        margin-bottom: 20px;
+    }
 }
