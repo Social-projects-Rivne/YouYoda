@@ -131,10 +131,12 @@ venv.bak/
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 
+
 *.ico
 *.svg
 
 *.png
 *.jpeg
 package-lock.json
+/content
 
