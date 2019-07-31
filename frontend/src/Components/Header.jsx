@@ -31,13 +31,14 @@ export default class Header extends React.Component {
     render() {
         return (
             <div>
-            <header>
+            <header className='header'>
             <Container>
             <Row>
             <Col>
-            <Navbar color="faded" light expand="md">
+            <Navbar dark expand="md">
                 <NavbarBrand href="/">
-                    <img src={require('../img/logo_grey.png')} />
+                    <img src={require('../img/static/logo_grey.svg')}
+                            className="logo" alt="YouYoda"/>
                 </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>

@@ -1,0 +1,88 @@
+#trainerButton{
+    margin-top: 50px;
+}
+.fill-edit-collumn{
+    height: 1260px;
+}
+.col-4{
+    margin-top: 407px;
+
+}
+.top-text{
+    margin-top: 56px;
+    font-weight: bold;
+}
+.top-text-2{
+    margin-top: 56px;
+
+}
+.avatar{
+    margin-top: 22px;
+}
+
+.city-country-2{
+    margin-top: 49px;
+}
+.top-text-contact{
+    font-weight: bold;
+    margin-top: 116px;
+}
+.fill-edit-collumn label{
+
+    margin-top: 17px;
+}
+.row-email{
+    margin-left: 14px;
+    max-height: 40px;
+    max-width: 50%;
+    border: 0;
+    padding-left: 0;
+}
+.button-change{
+    max-width: 45%;
+
+}
+.textarea{
+    min-height: 75px;
+    border-radius: 25px;
+}
+.textarea-2{
+    min-height: 135px;
+    border-radius: 25px;
+}
+.marg-top{
+
+    margin-top: 17px;
+}
+.text-button-trainer{
+    margin-top: 35px;
+    border-radius: 25px;
+
+}
+.submit-button{
+    min-width: 100px;
+    border-radius: 25px;
+}
+.col-5 {
+    flex: 0 0 40%;
+    max-width: 50%;
+    padding-right: 0px;
+
+}
+.password {
+    margin-left: -7px;
+    border-radius: 25px;
+}
+.button-saveall{
+    background-color: orange;
+    min-width: 262px;
+    margin-left: 263px;
+    border-color: orange;
+    border-radius: 25px;
+}
+.button-verify-email{
+    border-radius: 25px;
+}
+.field-box{
+    border-radius: 25px;
+}
