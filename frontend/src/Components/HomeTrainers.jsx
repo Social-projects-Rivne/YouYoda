@@ -1,10 +1,9 @@
 import React from 'react';
-import {Container,
-Row,
-Col} from 'reactstrap';
+
+import {Container, Row, Col} from 'reactstrap';
 
 
-class HomeTrainers extends React.Component{
+export default class HomeTrainers extends React.Component{
     render (){
         return(
             <>
@@ -52,5 +51,3 @@ class HomeTrainers extends React.Component{
         )
     }
 };
-
-export default HomeTrainers;

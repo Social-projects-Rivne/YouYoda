@@ -1,12 +1,13 @@
 import React from 'react';
+
+import {Container, Button} from 'reactstrap';
 import Header from './Header';
-import {Container,
-Button} from 'reactstrap';
-import {quotes} from './JSON/quotes.json'
+import {Link} from 'react-router-dom';
+import {quotes} from './JSON/quotes.json';
 
 
-class HomeHeader extends React.Component{
-    constructor(props) {
+export default class HomeHeader extends React.Component{
+	constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
     }
@@ -51,6 +52,4 @@ class HomeHeader extends React.Component{
             </>
         )
     }
-}
-
-export default HomeHeader;
+};

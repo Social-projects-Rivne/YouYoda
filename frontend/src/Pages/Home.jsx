@@ -1,14 +1,16 @@
 import React from 'react';
-import HomeHeader from '../Components/HomeHeader';
+
 import Footer from '../Components/Footer';
 import HomeAbout from '../Components/HomeAbout';
-import HomeEvent from '../Components/HomeEvent';
-import HomeTrainers from '../Components/HomeTrainers';
 import HomeCourses from '../Components/HomeCourses';
+import HomeEvent from '../Components/HomeEvent';
+import HomeHeader from '../Components/HomeHeader';
 import HomeLastBlock from '../Components/HomeLastBlock';
 import Registration from '../Components/Registration';
+import HomeTrainers from '../Components/HomeTrainers';
 
-class Home extends React.Component{
+
+export default class Home extends React.Component{
 
     render(){
         return(
@@ -19,13 +21,9 @@ class Home extends React.Component{
             <HomeTrainers/>
             <HomeCourses/>
             <HomeLastBlock/>
-
-
             <Footer/>
             <Registration/>
             </>
         )
     }
 }
-
-export default Home;

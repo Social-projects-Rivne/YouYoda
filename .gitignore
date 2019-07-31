@@ -128,8 +128,4 @@ venv.bak/
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 
-/content/*.ico
-/content/*.png
-/content/*.jpeg
-
-package-lock.json
+/content

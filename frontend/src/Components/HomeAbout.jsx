@@ -1,13 +1,12 @@
 import React from 'react';
-import {Container,
-Row,
-Col} from 'reactstrap';
+
+import {Container, Row, Col} from 'reactstrap';
 
 
-class HomeAbout extends React.Component{
+export default class HomeAbout extends React.Component{
     render (){
         return(
-            <>
+            <div id="home-about">
             <Container className="home-about">
             <Row>
                 <Col className="header-block">
@@ -60,9 +59,7 @@ class HomeAbout extends React.Component{
                 </Col>
             </Row>
             </Container>
-            </>
+            </div>
         )
     }
 };
-
-export default HomeAbout;
