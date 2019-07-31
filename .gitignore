@@ -133,6 +133,8 @@ venv.bak/
 
 *.ico
 *.svg
+
 *.png
 *.jpeg
 package-lock.json
+
