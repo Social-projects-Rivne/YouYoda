@@ -4,10 +4,7 @@
 .fill-edit-collumn{
     height: 1260px;
 }
-.col-4{
-    margin-top: 407px;
 
-}
 .top-text{
     margin-top: 56px;
     font-weight: bold;
@@ -17,7 +14,8 @@
 
 }
 .avatar{
-    margin-top: 22px;
+
+    margin: 22px 160px 0 183px ;
 }
 
 .city-country-2{
@@ -79,10 +77,20 @@
     margin-left: 263px;
     border-color: orange;
     border-radius: 25px;
+    margin-top: 312px;
 }
 .button-verify-email{
     border-radius: 25px;
 }
 .field-box{
     border-radius: 25px;
+}
+.your-email{
+    max-width: 50%;
+}
+.login{
+    margin-top: 22px;
+}
+.security-button{
+    margin-top: 36px;
 }

@@ -18,8 +18,7 @@ import { faSearch, faCoffee } from '@fortawesome/free-solid-svg-icons';
 library.add(fab, faSearch, faCoffee);
 
 
-// ReactDOM.render(<FillEditPage/>, document.getElementById('root'))
-// ReactDOM.render(<EditPageProfile/>, document.getElementById('root'))
+
  ReactDOM.render(<Routes/>, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
