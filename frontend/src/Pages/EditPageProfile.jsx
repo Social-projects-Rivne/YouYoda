@@ -3,9 +3,7 @@ import Header from '../Components/Header';
 import FillEditPage from "../Components/FillEditPage";
 import Footer from "../Components/Footer";
 
-
-class EditPageProfile extends React.Component{
-
+export default class EditPageProfile extends React.Component{
     render(){
         return(
             <>
@@ -16,4 +14,4 @@ class EditPageProfile extends React.Component{
         )
     }
 }
-export default EditPageProfile ;
+

@@ -9,7 +9,7 @@ export default function Routes() {
   return (
     <Router>
     <div>
-        <Route path='/$' component={Home}/>
+        <Route exact path='/' component={Home}/>
         <Route path='/editprofile' component={EditPageProfile}/>
     </div>
     </Router>
