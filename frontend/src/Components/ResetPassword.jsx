@@ -1,7 +1,37 @@
 import React from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import axios from 'axios';
+import {Container} from 'reactstrap';
 
 export default class ResetPassword extends React.Component{
+    constructor(props){
+    	super(props);
+
+    	this.state={email:''};
+	}
+    handleClick(event){
+		 let apiBaseUrl = "http://localhost:8000/api/";
+		 let userdata={"email":this.state.email}
+
+		 axios.post(apiBaseUrl+'passrecovery', userdata)
+		 .then(function (response) {
+		 console.log(response);
+		 if(response.data.code === 200){
+		 console.log("Login successfull");
+		 window.location.href = "/";
+		 }
+		 else if(response.data.code === 204){
+		 console.log("Username password do not match");
+		 alert("username password do not match")
+		 }
+		 else{
+		 console.log("Username does not exists");
+		 alert("Username does not exist");
+		 }
+		 })
+		 .catch(function (error) {
+		 console.log(error);
+		 });
+	}
   render () {
     return (
       <div style={{width:"500px"}}>
@@ -18,4 +48,3 @@ export default class ResetPassword extends React.Component{
       )
   }
 }
-
