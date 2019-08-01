@@ -15,7 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),       
+    url('user/', include('appsrc.urls')),
+    url('auth/', include('djoser.urls')),
+    url('auth/', include('djoser.urls.authtoken')),
+    url('auth/', include('djoser.urls.jwt')),
 ]

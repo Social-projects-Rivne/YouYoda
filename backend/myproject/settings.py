@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appsrc',
     'rest_framework',
+    'rest_framework.authtoken', 
     'djoser',
 ]
 
@@ -125,5 +126,51 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = (
+#     ("js", os.path.join(STATIC_ROOT, 'js')),
+#     ("css", os.path.join(STATIC_ROOT, 'css')),
+#     ("images", os.path.join(STATIC_ROOT, 'images')),
+#     ("fonts", os.path.join(STATIC_ROOT, 'fonts')),
+# )
+
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',                                                                                                                                  
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    'DEFAULT_METADATA_CLASSES': [
+        'rest_framework.metadata.JSONApiMetadata',
+    ]
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "appsrc.serializers.user_registration_serializer.UserRegistrationSerializer",
+}
+
+DJOSER = {
+    'SERIALIZERS': {
+         'user_create': 'appsrc.serializers.user_registration_serializer.UserRegistrationSerializer'
+    }
+}
