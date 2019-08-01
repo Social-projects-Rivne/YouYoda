@@ -15,17 +15,15 @@ export default class ResetPassword extends React.Component{
 		 axios.post(apiBaseUrl+'passrecovery', userdata)
 		 .then(function (response) {
 		 console.log(response);
+		 alert("Password confirmation has been sent to your email")
 		 if(response.data.code === 200){
-		 console.log("Login successfull");
-		 window.location.href = "/";
+		 console.log("Successfull");
 		 }
 		 else if(response.data.code === 204){
-		 console.log("Username password do not match");
-		 alert("username password do not match")
+		 console.log("Useremail do not match");
 		 }
 		 else{
 		 console.log("Username does not exists");
-		 alert("Username does not exist");
 		 }
 		 })
 		 .catch(function (error) {
@@ -40,8 +38,17 @@ export default class ResetPassword extends React.Component{
         <p>Enter your email address below, and we'll email instructions for setting a new one.</p>
 
         <form method="POST" className="form-group">
-          <input type="email" className="form-control" style={{borderRadius:"20px"}} placeholder="Enter Email" required/>
-          <input type="submit" value="Send me instructions!" className="btn btn-warning" style={{marginTop:"15px", borderRadius:"20px"}}/>
+					<input type="email" 
+							className="form-control" 
+							style={{borderRadius:"20px"}} 
+							placeholder="Enter Email" 
+							onChange = {(event,newValue) => this.setState({email:newValue})} 
+							required/>
+					<input type="submit" 
+							value="Send me instructions!" 
+							className="btn btn-warning" 
+							style={{marginTop:"15px", borderRadius:"20px"}} 
+							onClick={(event) => this.handleClick(event)}/>
         </form>
         </Container>
       </div>

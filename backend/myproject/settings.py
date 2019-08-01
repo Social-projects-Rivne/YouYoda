@@ -154,3 +154,8 @@ REST_FRAMEWORK = {
         'rest_framework.metadata.JSONApiMetadata',
     ]
 }
+
+DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    'SERIALIZERS': {"user":"serializers.user_serializer.UserSerializer"}
+}
