@@ -9,10 +9,10 @@ export default class ResetPassword extends React.Component{
     	this.state={email:''};
 	}
     handleClick(event){
-		 let apiBaseUrl = "http://localhost:8000/api/";
+		 let apiBaseUrl = "http://localhost:8000/";
 		 let userdata={"email":this.state.email}
 
-		 axios.post(apiBaseUrl+'passrecovery', userdata)
+		 axios.post(apiBaseUrl+'auth/users/reset_password/', userdata)
 		 .then(function (response) {
 		 console.log(response);
 		 alert("Password confirmation has been sent to your email")
@@ -38,16 +38,16 @@ export default class ResetPassword extends React.Component{
         <p>Enter your email address below, and we'll email instructions for setting a new one.</p>
 
         <form method="POST" className="form-group">
-					<input type="email" 
-							className="form-control" 
-							style={{borderRadius:"20px"}} 
-							placeholder="Enter Email" 
-							onChange = {(event,newValue) => this.setState({email:newValue})} 
+					<input type="email"
+							className="form-control"
+							style={{borderRadius:"20px"}}
+							placeholder="Enter Email"
+							onChange = {(event,newValue) => this.setState({email:newValue})}
 							required/>
-					<input type="submit" 
-							value="Send me instructions!" 
-							className="btn btn-warning" 
-							style={{marginTop:"15px", borderRadius:"20px"}} 
+					<input type="submit"
+							value="Send me instructions!"
+							className="btn btn-warning"
+							style={{marginTop:"15px", borderRadius:"20px"}}
 							onClick={(event) => this.handleClick(event)}/>
         </form>
         </Container>

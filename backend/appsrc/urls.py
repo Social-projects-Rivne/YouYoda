@@ -13,12 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include, url
 
+from .views.passwordrecovery import PasswordRecovery
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    url(r'^auth/', include('djoser.urls')),
-    url(r'^reset/password/reset/confirm/(?P<uid>[\w-]+)/(?P<token>[\w-]+)/$', PasswordResetView.as_view(),),
+        path('user/reset_password/', PasswordRecovery.as_view(), name="reset_password"),
 ]

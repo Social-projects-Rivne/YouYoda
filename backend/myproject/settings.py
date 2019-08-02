@@ -144,6 +144,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 
     'DEFAULT_PERMISSION_CLASSES': [
@@ -157,5 +159,19 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'SERIALIZERS': {"user":"serializers.user_serializer.UserSerializer"}
+    'SERIALIZERS': {"user":"appsrc.serializers.user_serializer.UserSerializer"},
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
 }
+
+
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'test@gmail.com'
+# SERVER_EMAIL = 'test@gmail.com'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'test@gmail.com'
+# EMAIL_HOST_PASSWORD = 'test123##'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
