@@ -1,0 +1,33 @@
+@media screen and (max-width: 980px) {
+    .footer .soc {
+        font-size: 40px;
+    }
+    .footer .soc li{
+        margin: 0 20px;
+    }
+}
+@media screen and (max-width: 767px) {
+    .home-about div,
+    .home-course {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .footer {
+        height: auto;
+    }
+    .footer span {
+        bottom: 0;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .home-last-block img{
+        display: none;
+    }
+    .home-last-block .header-block{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
