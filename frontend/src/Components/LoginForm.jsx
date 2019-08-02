@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
-// import { Redirect } from 'react-router'
-// import { BrowserRouter } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -30,7 +28,6 @@ class LoginForm extends Component {
 
   	handleClick(event){
 		 const apiBaseUrl = "http://localhost:8000/api/";
-		 // var self = this;
 		 const userdata={
 		 "email":this.state.username,
 		 "password":this.state.password
@@ -66,7 +63,7 @@ class LoginForm extends Component {
 					<span aria-hidden="true">&times;</span>
 				</button>
 			<Row>
-			  <Col md="7" className="Login">
+			  <Col md="7" className="login">
 			      <Form className="form-horizontal">
 				    <Row className="m-0">
 				      <Col>
@@ -124,7 +121,7 @@ class LoginForm extends Component {
 				      </Col>
 				    </Row>
 			  </Col>
-			  <Col md="5" className="SignUp">
+			  <Col md="5" className="signup">
 			  	<Row className="container h-auto mx-0 mb-4">
 					<h1 className="modal-title text-white custom-title">Hello, <span>Dear Friend!</span></h1>
                 </Row>
