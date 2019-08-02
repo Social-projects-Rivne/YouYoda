@@ -8,14 +8,14 @@ from rest_framework.views import APIView
 
 
 class UserRegistration(APIView):
-    permission_classes = (permissions.AllowAny)
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, *args, **kwargs):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
             # user = serializer.save()
             try: 
-                User.objects.create_user(serializer.init_data)
+                User.objects.create_user(serializer.data)
             except IntegrityError:
                 status = 'User already exists'
             else:

@@ -23,5 +23,5 @@ urlpatterns = [
     url('user/', include('appsrc.urls')),
     url('auth/', include('djoser.urls')),
     url('auth/', include('djoser.urls.authtoken')),
-    url('auth/', include('djoser.urls.jwt')),
+    #url('auth/', include('djoser.urls.jwt')),
 ]
