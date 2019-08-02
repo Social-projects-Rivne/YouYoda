@@ -7,14 +7,6 @@ import {quotes} from './JSON/quotes.json';
 
 
 export default class HomeHeader extends React.Component{
-	constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
-    handleClick() {
-        //document.getElementById('#registration-form').setState({'className': 'show'});
-        console.log('Click happened');
-    }
     render(){
         const RAND = Math.floor(Math.random() * quotes.length);
         return(
@@ -38,7 +30,7 @@ export default class HomeHeader extends React.Component{
                 <div className="btn-group-sign">
                     <Button color="warning" className="btn-sign"
                             style={{marginRight:'33px'}}
-                            data-toggle="modal" data-target="#registration-form" onClick={this.handleClick}>
+                            onClick={this.props.handleClickReg}>
                         Sign Up
                     </Button>
                     <Button color="secondary" className="btn-sign">
