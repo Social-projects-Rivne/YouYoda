@@ -1,7 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 
 import Home from './Pages/Home';
-import {Route, BrowserRouter as Router} from 'react-router-dom';
+import LoginForm from './Components/LoginForm';
+
 
 
 export default function Routes() {
@@ -9,7 +12,10 @@ export default function Routes() {
     <Router>
     <div>
         <Route path='/' component={Home}/>
+        <Route path="/login" component={LoginForm} />
     </div>
     </Router>
   );
 };
+
+
