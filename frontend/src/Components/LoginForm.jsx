@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import {
-  Col, Form,
-  FormGroup, Label, Input,
-  Button, Row, Modal
-} from 'reactstrap';
+import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
 // import { Redirect } from 'react-router'
 // import { BrowserRouter } from 'react-router-dom';
+
 import axios from 'axios';
+
 import FacebookLogo from '../img/content/Facebook(1).png';
 import GoogleLogo from '../img/content/Google +.png';
 import '../style/login.css';
@@ -31,9 +29,9 @@ class LoginForm extends Component {
     }
 
   	handleClick(event){
-		 var apiBaseUrl = "http://localhost:8000/api/";
+		 const apiBaseUrl = "http://localhost:8000/api/";
 		 // var self = this;
-		 var userdata={
+		 const userdata={
 		 "email":this.state.username,
 		 "password":this.state.password
 		 }
@@ -43,7 +41,7 @@ class LoginForm extends Component {
 		 if(response.data.code === 200){
 		 console.log("Login successfull");
 		 //this.props.history.push('/');
-		 window.location.href = "/";
+		 //window.location.href = "/";
 		 }
 		 else if(response.data.code === 204){
 		 console.log("Username password do not match");
