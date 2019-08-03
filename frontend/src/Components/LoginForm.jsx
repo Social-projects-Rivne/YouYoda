@@ -3,7 +3,7 @@ import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstr
 
 import FacebookLogo from '../img/content/Facebook(1).png';
 import GoogleLogo from '../img/content/Google +.png';
-import {userLogin} from '../api/userLogin';
+import { userLogin } from '../api/userLogin';
 import '../style/login.css';
 
 
@@ -11,17 +11,11 @@ class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false,
             email: '',
             password: ''
         };
-        this.toggle = this.toggle.bind(this);
-    }
 
-    toggle() {
-        this.setState(prevState => ({
-            modal: !prevState.modal
-        }));
+    this.handleClick = this.handleClick.bind(this)
     }
 
     handleClick(event) {
@@ -29,14 +23,13 @@ class LoginForm extends Component {
     }
 
     render() {
-            return (
-                    <div>
-	<Button color="danger" onClick={this.toggle}>Click here</Button>
-			  <Modal id="login-form" isOpen={this.state.modal} toggle={this.toggle} className="wild">
+    return (
+        <div>
+			  <Modal id="login-form" isOpen={this.props.isOpen} className="wild">
 			  <div className="modal-body">
-			  	<button onClick={this.toggle} type="button" className="close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+			    <button onClick={this.props.handleClickReg} type="button" className="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
 			<Row>
 			  <Col md="7" className="login">
 			      <Form className="form-horizontal">
@@ -80,13 +73,13 @@ class LoginForm extends Component {
 				    </Row>
 				    <Row className="m-0">
 				      <Col className="mt-4 text-right">
-				        <Button type="submit" className="btn-yellow btn btn-warning" onClick={(event) => this.handleClick(event)}>Sign in</Button>
+				        <Button type="submit" className="btn-yellow btn btn-warning" onClick={(event) => this.handleClick(event)}>Log in</Button>
 				      </Col>
 				    </Row>
 				  </Form>
 				    <Row className="m-0 mt-4 mb-4">
 				      <Col xs="3">
-				        <p>Sign in with:</p>
+				        <p>Log in with:</p>
 				      </Col>
 				      <Col xs="2">
 				        <a href="#"><img src={FacebookLogo} width="40" alt="FacebookLogo"/></a>
@@ -106,7 +99,7 @@ class LoginForm extends Component {
 				<Row className="container h-auto">
 					<div className="col-sm-12 form-group">
 						<p className="text-title text-white d-block pb-2">If you don’t have an account yet</p>
-						<Button color="gray" type="button" className="btn-grey btn">Sign up</Button>
+						<Button type="button" className="btn-grey btn">Sign up</Button>
 					</div>
                 </Row>      
 			  </Col> 
@@ -114,8 +107,8 @@ class LoginForm extends Component {
 		</div>
 		</Modal>
 		</div>
-        );
-    }
+    );
+}
 }
 
 export default LoginForm;

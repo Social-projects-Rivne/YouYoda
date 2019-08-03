@@ -12,7 +12,6 @@ export default function Routes() {
     <Router>
     <div>
         <Route exact path='/' component={Home}/>
-        <Route path="/login" component={LoginForm} />
     </div>
     </Router>
   );
