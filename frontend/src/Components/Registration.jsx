@@ -1,8 +1,56 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import { Button, Col, Modal, Row } from 'reactstrap';
 
 class Registration extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            confirmpass: '',
+            redirect: false
+        }
+        //this.handleClickReg = this.handleClickReg.bind(this);
+    }
+    handleClick(event){
+        event.preventDefault();
+        var apiBaseUrl = "http://localhost:8000/api/";
+        var datasend={
+            "email":this.state.email,
+            "password":this.state.password,
+            "confirmpass":this.state.confirmpass
+        }
+
+        axios.post(apiBaseUrl+'register', datasend)
+            .then(function (response) {
+                console.log(response);
+                if(response.data.code === 200){
+                    console.log("Registration successfull");
+                    alert("Registration successfull");
+                }
+                else if(response.data.code === 204){
+                    console.log("Username password do not match");
+                    alert("username password do not match");
+                }
+                else{
+                    console.log("Username does not exists");
+                    alert("Username does not exist");
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+            this.setState({ redirect: true });
+        return false;
+    }
     render () {
+        const { redirect } = this.state;
+        if (redirect) {
+            return <Redirect to='/somewhere'/>;
+        }
+
         return (
         <div>
             <Modal id="registration-form" isOpen={this.props.isOpen} className="wild">
@@ -27,15 +75,24 @@ class Registration extends React.Component{
                         <form className="form-horizontal">
                             <div className="form-group">
                                 <label htmlFor="email" className="mb-1">Email</label>
-                                <input type="email" id="email" name="email" className="form-control" required />
+                                <input type="email" id="email" name="email" className="form-control" 
+                                onChange={(event,newValue) => this.setState({email:newValue})} 
+                                required
+                                />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password" className="mb-1">Password</label>
-                                <input type="password" id="password" name="password" className="form-control" required />
+                                <input type="password" id="password" name="password" className="form-control" 
+                                onChange = {(event,newValue) => this.setState({password:newValue})}
+                                required
+                                />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="confirmpass" className="mb-1">Confirm Password</label>
-                                <input type="password" id="confirmpass" name="confirmpass" className="form-control" required />
+                                <input type="password" id="confirmpass" name="confirmpass" className="form-control" 
+                                onChange = {(event,newValue) => this.setState({confirmpass:newValue})}
+                                required
+                                />
                             </div>
                             <span className="text-title">Profile type</span>
                             <Row className="form-group">
@@ -55,7 +112,8 @@ class Registration extends React.Component{
                                 </div>
                             </div>
                             <div className="form-group text-right">
-                                <button type="submit" className="btn-yellow btn btn-warning">Sign up</button>
+                                <button type="submit" className="btn-yellow btn btn-warning"
+                                onClick={(event) => this.handleClick(event)}>Sign up</button>
                             </div>
                         </form>
                     </Col>
