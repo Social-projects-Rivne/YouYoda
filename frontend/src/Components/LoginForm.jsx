@@ -1,61 +1,36 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
 
-import axios from 'axios';
-
 import FacebookLogo from '../img/content/Facebook(1).png';
 import GoogleLogo from '../img/content/Google +.png';
+import {userLogin} from '../api/userLogin';
 import '../style/login.css';
 
 
 class LoginForm extends Component {
-    constructor(props){
-    	super(props);
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false,
+            email: '',
+            password: ''
+        };
+        this.toggle = this.toggle.bind(this);
+    }
 
-    	this.state={
-			modal: false,
-    		email:'',
-  			password:''
-		  };
-		this.toggle = this.toggle.bind(this);
-	}
-	
-	toggle() {
+    toggle() {
         this.setState(prevState => ({
-          modal: !prevState.modal
+            modal: !prevState.modal
         }));
     }
 
-  	handleClick(event){
-		 const apiBaseUrl = "http://localhost:8000/api/";
-		 const userdata={
-		 "email":this.state.username,
-		 "password":this.state.password
-		 }
-		 axios.post(apiBaseUrl+'login', userdata)
-		 .then(function (response) {
-		 console.log(response);
-		 if(response.data.code === 200){
-		 console.log("Login successfull");
-		 //this.props.history.push('/');
-		 //window.location.href = "/";
-		 }
-		 else if(response.data.code === 204){
-		 console.log("Username password do not match");
-		 alert("username password do not match")
-		 }
-		 else{
-		 console.log("Username does not exists");
-		 alert("Username does not exist");
-		 }
-		 })
-		 .catch(function (error) {
-		 console.log(error);
-		 });
-	}
+    handleClick(event) {
+        userLogin();
+    }
+
     render() {
-        return (
-		  <div>
+            return (
+                    <div>
 	<Button color="danger" onClick={this.toggle}>Click here</Button>
 			  <Modal id="login-form" isOpen={this.state.modal} toggle={this.toggle} className="wild">
 			  <div className="modal-body">
