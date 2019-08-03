@@ -13,19 +13,22 @@ from ..serializers.profile_edit_serializer import ProfileEditSerializer
 
 
 class EditProfile(APIView):
-    #permission_classes = [permissions.IsAuthenticated,]
+    permission_classes = [permissions.IsAuthenticated,]
 
-    permission_classes = [permissions.AllowAny,]
+    #permission_classes = [permissions.AllowAny,]
 
-    def get(self, request):
-        content = {'message': 'Hello, World!'}
-        return Response(content)
+    #def get(self, request):
+     #  content = {'message': 'Hello, World!'}
+      # return Response(content)
 
-    """def get_object(self, pk):
+    def get_object(self, pk):
         try:
             return user.objects.get(pk=pk)
         except user.DoesNotExist:
             raise Http404
+
+    def my_view(request):
+        user = get_object_or_404(MyModel, pk=pk)
 
     def get(self, request, pk, format=None):
         user = self.get_object(pk)
@@ -43,18 +46,5 @@ class EditProfile(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def patch(self, request, pk, format=None):
-        user = self.get_object(pk)
-        serializer = ProfileEditSerializer(user, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk, format=None):
-        user = self.get_object(pk)
-        user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)"""
-
+    
 
