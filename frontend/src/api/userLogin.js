@@ -5,7 +5,7 @@ import axios from 'axios';
 
 async function userLogin(props) {
     const apiBaseUrl = "http://localhost:8000/api/";
-    const { email, password } = props;
+    const { email, password } = props ;
     try {
         const response = axios.post(apiBaseUrl + 'login', { email, password })
             .then(function(response) {

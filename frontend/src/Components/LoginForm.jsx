@@ -8,8 +8,8 @@ import '../style/login.css';
 
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             email: '',
             password: ''
@@ -19,7 +19,7 @@ class LoginForm extends Component {
     }
 
     handleClick(event) {
-        userLogin();
+            userLogin(this.state);
     }
 
     render() {
