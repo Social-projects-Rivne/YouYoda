@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import ResetPassword from './Components/ResetPassword';
-// import Routes from './Routes';
+// import EnterNewPassword from './Components/EnterNewPassword';
+import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "slick-carousel/slick/slick.css";
@@ -18,7 +18,7 @@ import { faSearch, faCoffee } from '@fortawesome/free-solid-svg-icons';
 library.add(fab, faSearch, faCoffee);
 
 
-ReactDOM.render(<ResetPassword/>, document.getElementById('root'))
+ReactDOM.render(<Routes/>, document.getElementById('root'))
 
 
 // If you want your app to work offline and load faster, you can change

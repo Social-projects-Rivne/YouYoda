@@ -15,10 +15,3 @@ Including another URLconf
 """
 from django.urls import path
 from django.conf.urls import include, url
-
-from .views.passwordrecovery import PasswordRecovery
-
-
-urlpatterns = [
-        path('user/reset_password/', PasswordRecovery.as_view(), name="reset_password"),
-]

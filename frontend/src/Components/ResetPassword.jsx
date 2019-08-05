@@ -16,14 +16,14 @@ export default class ResetPassword extends React.Component{
 		 .then(function (response) {
 		 console.log(response);
 		 alert("Password confirmation has been sent to your email")
-		 if(response.data.code === 200){
+		 if(response.data.code === 204){
 		 console.log("Successfull");
 		 }
-		 else if(response.data.code === 204){
-		 console.log("Useremail do not match");
+		 else if(response.data.code === 400){
+		 console.log("Bad request");
 		 }
 		 else{
-		 console.log("Username does not exists");
+		 console.log("Something goes wrong");
 		 }
 		 })
 		 .catch(function (error) {

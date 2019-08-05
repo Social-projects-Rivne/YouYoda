@@ -158,20 +158,20 @@ REST_FRAMEWORK = {
 }
 
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'SERIALIZERS': {"user":"appsrc.serializers.user_serializer.UserSerializer"},
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
+    "SEND_ACTIVATION_EMAIL": True,
+    "PASSWORD_RESET_CONFIRM_URL": "/reset/password/new/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'youyoda.academy@gmail.com'
+EMAIL_HOST_PASSWORD = 'kxjwwretyhbjlgah'
+DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
 
-# EMAIL_USE_TLS = True
-# DEFAULT_FROM_EMAIL = 'test@gmail.com'
-# SERVER_EMAIL = 'test@gmail.com'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'test@gmail.com'
-# EMAIL_HOST_PASSWORD = 'test123##'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+JWT_AUTH = {"JWT_ALLOW_REFRESH": True}
