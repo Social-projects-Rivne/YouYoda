@@ -58,7 +58,7 @@ export default class EnterNewPassword extends React.Component{
 							onChange = {(event,newValue) => this.setState({re_new_password:newValue})}
 							required/>
 					<input type="submit"
-							value="Send me instructions!"
+							value="Change password"
 							className="btn btn-warning"
 							style={{marginTop:"15px", borderRadius:"20px"}}
 							onClick={(event) => this.handleClick(event)}/>

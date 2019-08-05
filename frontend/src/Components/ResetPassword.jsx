@@ -8,7 +8,7 @@ export default class ResetPassword extends React.Component{
 
     	this.state={email:''};
 	}
-    handleClick(event){
+    resetPassword(event){
 		 let apiBaseUrl = "http://localhost:8000/";
 		 let userdata={"email":this.state.email}
 
@@ -48,7 +48,7 @@ export default class ResetPassword extends React.Component{
 							value="Send me instructions!"
 							className="btn btn-warning"
 							style={{marginTop:"15px", borderRadius:"20px"}}
-							onClick={(event) => this.handleClick(event)}/>
+							onClick={(event) => this.resetPassword(event)}/>
         </form>
         </Container>
       </div>
