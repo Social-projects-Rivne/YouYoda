@@ -41,7 +41,7 @@ export default class EnterNewPassword extends React.Component{
     return (
       <div style={{width:"500px"}}>
         <Container>
-        <h1>Forgot your password?{this.props.match.params.uid}</h1>
+        <h1>Forgot your password?</h1>
         <p>Enter your email address below, and we'll email instructions for setting a new one.</p>
 
         <form method="POST" className="form-group">

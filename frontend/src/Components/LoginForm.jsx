@@ -25,9 +25,9 @@ class LoginForm extends Component {
     render() {
     return (
         <div>
-			  <Modal id="login-form" isOpen={this.props.isOpen} className="wild">
+			  <Modal id="login-form" isOpen={this.props.isOpenL} className="wild">
 			  <div className="modal-body">
-			    <button onClick={this.props.handleClickReg} type="button" className="close">
+			    <button onClick={this.props.handleClickLogin} type="button" className="close">
                             <span aria-hidden="true">&times;</span>
                         </button>
 			<Row>

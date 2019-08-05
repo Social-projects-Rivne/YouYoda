@@ -15,9 +15,11 @@ export default class Home extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isOpenL: false
         }
         this.handleClickReg = this.handleClickReg.bind(this);
+        this.handleClickLogin = this.handleClickLogin.bind(this);
      }
     handleClickReg() {
         console.log('Click happened');
@@ -25,17 +27,23 @@ export default class Home extends React.Component{
             isOpen: !prevState.isOpen
         }));
     }
+    handleClickLogin() {
+        console.log('Click happened');
+        this.setState(prevState => ({
+            isOpenL: !prevState.isOpenL
+        }));
+    }
     render(){
         return(
             <>
-            <HomeHeader handleClickReg={this.handleClickReg}/>
+            <HomeHeader handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin}/>
             <HomeAbout/>
             <HomeEvent/>
             <HomeTrainers/>
             <HomeCourses/>
-            <HomeLastBlock handleClickReg={this.handleClickReg}/>
+            <HomeLastBlock handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin}/>
             <Footer/>
-            <LoginForm handleClickReg={this.handleClickReg} isOpen={this.state.isOpen} />
+            <LoginForm handleClickLogin={this.handleClickLogin} isOpenL={this.state.isOpenL} />
             <Registration handleClickReg={this.handleClickReg} isOpen={this.state.isOpen} />
             </>
         )

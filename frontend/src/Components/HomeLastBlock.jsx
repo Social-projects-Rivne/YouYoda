@@ -22,7 +22,7 @@ export default class HomeLastBlock extends React.Component{
                                 onClick={this.props.handleClickReg}>
                             Sign Up
                         </Button>
-                        <Button color="secondary" className="btn-sign"  onClick={this.props.handleClickReg}>
+                        <Button color="secondary" className="btn-sign"  onClick={this.props.handleClickLogin}>
                             Log In
                         </Button>
                     </div>
