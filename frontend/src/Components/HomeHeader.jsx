@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Container, Button} from 'reactstrap';
 import Header from './Header';
-import {Link} from 'react-router-dom';
+
 import {quotes} from './JSON/quotes.json';
 
 

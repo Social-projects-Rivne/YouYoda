@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'database',
         'USER': 'admin',
         'PASSWORD': 'password',
-        'HOST': 'mariadb',   
+        'HOST': 'mariadb',
         'PORT': '3465',
     }
 }
@@ -127,3 +127,51 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+REST_FRAMEWORK = {
+
+	'DEFAULT_RENDERER_CLASSES': [
+		'rest_framework.renderers.JSONRenderer',
+		'rest_framework.renderers.BrowsableAPIRenderer',
+	],
+
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+
+    'DEFAULT_METADATA_CLASSES': [
+        'rest_framework.metadata.JSONApiMetadata',
+    ]
+}
+
+DJOSER = {
+    "SEND_ACTIVATION_EMAIL": True,
+    "PASSWORD_RESET_CONFIRM_URL": "/reset/password/new/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'youyoda.academy@gmail.com'
+EMAIL_HOST_PASSWORD = 'kxjwwretyhbjlgah'
+DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
+
+JWT_AUTH = {"JWT_ALLOW_REFRESH": True}
