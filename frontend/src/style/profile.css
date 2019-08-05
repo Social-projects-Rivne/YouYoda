@@ -1,0 +1,85 @@
+/*Styles for Dropdown*/
+.profile-photo-dropdown {
+    border-radius: 20px;
+    height: 35px;
+}
+.dropdown-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    position: relative;
+    bottom: 2px;
+    margin-left: 20px;
+}
+.dropdown-button:hover {
+    background-color: transparent;
+}
+
+/*Styles for ProfileInfo*/
+.profile-photo {
+    border-radius: 50px;
+    height: 100px;
+    margin-left: 30px;
+    margin-top: 20px;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+.profile-info {
+    margin-top: 40px;
+    margin-left: -30px;
+}
+.user-name div {
+    display: inline-block;
+    font-weight: bold;
+}
+.edit-tool {
+    height: 25px;
+    opacity: 0.47;
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+.user-info {
+    position: relative;
+    bottom: 7px;
+}
+.profile-photo:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    cursor: pointer;
+}
+.edit-label {
+    color: black;
+}
+.profile-photo-container:hover .profile-photo {
+    transform: scale(1.1);
+    opacity: 0.3;
+}
+.profile-photo-container:hover .edit-label {
+    opacity: 1;
+}
+.edit-label {
+    cursor: pointer;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    position: relative;
+    left: 78px;
+    bottom: 45px;
+}
+.hr-line {
+    position: relative;
+    top: -35px;
+    border: 1px solid #707070;
+    opacity: 0.3;
+}
+@media screen and (max-width: 767px) {
+    .profile-photo-container .profile-info {
+        display: flex;
+        justify-content: center;
+    }
+}

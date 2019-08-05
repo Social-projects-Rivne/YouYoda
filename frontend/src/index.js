@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import './index.css';
 import './style/home.css';
 import './style/media.css';
+import './style/profile.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
