@@ -7,6 +7,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './index.css';
 import './style/home.css';
+import './style/forms.css';
+import './style/media.css';
+
 
 import './style/fillEditPage.css';
 import { library } from '@fortawesome/fontawesome-svg-core';

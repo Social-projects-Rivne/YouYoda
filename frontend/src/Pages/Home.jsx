@@ -7,8 +7,8 @@ import HomeEvent from '../Components/HomeEvent';
 import HomeHeader from '../Components/HomeHeader';
 import HomeLastBlock from '../Components/HomeLastBlock';
 import HomeTrainers from '../Components/HomeTrainers';
-//import Registration from '../Components/Registration';
 import Footer from '../Components/Footer';
+import Registration from '../Components/Registration';
 
 
 export default class Home extends React.Component{
@@ -36,6 +36,7 @@ export default class Home extends React.Component{
             <HomeLastBlock handleClickReg={this.handleClickReg}/>
             <Footer/>
             <LoginForm handleClickReg={this.handleClickReg} isOpen={this.state.isOpen} />
+            <Registration handleClickReg={this.handleClickReg} isOpen={this.state.isOpen} />
             </>
         )
     }
