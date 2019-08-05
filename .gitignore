@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+#Pycharm
+.idea/
+
 # Distribution / packaging
 .Python
 build/
@@ -128,4 +131,5 @@ venv.bak/
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 
+/package-lock.json
 /content
