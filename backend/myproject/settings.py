@@ -83,7 +83,11 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'password',
         'HOST': 'mariadb',   
-        'PORT': '3465',
+        'PORT': '3306',
+		'default-character-set': 'utf8',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+        }
     }
 }
 
@@ -123,6 +127,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/')  # add STATIC_ROOT to DIRS
+]
 
 STATIC_URL = '/static/'
 

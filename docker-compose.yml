@@ -7,6 +7,8 @@ services:
     ports: 
        - '3465:3306'
     environment:
+       MYSQL_HOST: localhost
+       MYSQL_PORT: 3306
        MYSQL_DATABASE: 'database'
        MYSQL_USER: 'admin'
        MYSQL_PASSWORD: 'password'
