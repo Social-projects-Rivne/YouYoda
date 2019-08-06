@@ -11,7 +11,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=20, null=True)
     location = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=20, unique=True)
-    password = models.CharField(max_length=40)
+    password = models.CharField(max_length=80)
     email = models.EmailField(unique=True)
     about_me = models.TextField(blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
