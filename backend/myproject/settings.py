@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'appsrc',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_auth', 
     'djoser',
 ]
 

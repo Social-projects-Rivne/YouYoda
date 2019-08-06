@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from ..models.user import User
 
-class ProfileEditSerializer(serializers.ModelSerializer):
+class ProfileViewSerializer(serializers.ModelSerializer):
 
 	class Meta:
 
@@ -10,7 +10,8 @@ class ProfileEditSerializer(serializers.ModelSerializer):
 
 		 fields = (
 		 	'first_name', 'last_name', 'location', 'username', 
-		 	'about_me', 'birth_date', 'phone_number'
+		 	'email', 'about_me', 'birth_date', 'phone_number',
+		 	'avatar_url', 'role_id'
 		 	)
 
 	
