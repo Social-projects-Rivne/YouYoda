@@ -10,8 +10,7 @@ class ProfileViewSerializer(serializers.ModelSerializer):
 
 		 fields = (
 		 	'first_name', 'last_name', 'location', 'username', 
-		 	'email', 'about_me', 'birth_date', 'phone_number',
-		 	'avatar_url', 'role_id'
+		 	'avatar_url'
 		 	)
 
 	
