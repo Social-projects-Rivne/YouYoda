@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import { Button, Col, Modal, Row } from 'reactstrap';
+import { registration } from '../api/registration';
 
 class Registration extends React.Component{
     constructor(props) {
@@ -10,45 +11,32 @@ class Registration extends React.Component{
             email: '',
             password: '',
             confirmpass: '',
+            userstudent: true,
+            userteacher: false,
             redirect: false
         }
-        //this.handleClickReg = this.handleClickReg.bind(this);
+        this.rowGetter = this.rowGetter.bind(this);
+    }
+    rowGetter = () => {
+        if(this.state) {
+          console.log(this.state);
+          return this.state;
+        }
+        else {
+          console.log('undefined this.state');
+          return {};
+        }
     }
     handleClick(event){
         event.preventDefault();
-        var apiBaseUrl = "http://localhost:8000/api/";
-        var datasend={
-            "email":this.state.email,
-            "password":this.state.password,
-            "confirmpass":this.state.confirmpass
-        }
-
-        axios.post(apiBaseUrl+'register', datasend)
-            .then(function (response) {
-                console.log(response);
-                if(response.data.code === 200){
-                    console.log("Registration successfull");
-                    alert("Registration successfull");
-                }
-                else if(response.data.code === 204){
-                    console.log("Username password do not match");
-                    alert("username password do not match");
-                }
-                else{
-                    console.log("Username does not exists");
-                    alert("Username does not exist");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-            this.setState({ redirect: true });
+        registration(this.state);
+    this.setState({ redirect: true });
         return false;
     }
     render () {
         const { redirect } = this.state;
         if (redirect) {
-            return <Redirect to='/somewhere'/>;
+            //return <Redirect to='/somewhere'/>;
         }
 
         return (
@@ -63,7 +51,7 @@ class Registration extends React.Component{
                         <Row className="container h-auto">
                             <div className="col-sm-12 form-group">
                                 <span className="text-title text-white d-block pb-2">If you already have an account</span>
-                                <Button className="btn-grey btn">Log in</Button>
+                                <Button className="btn-grey btn" onClick={(event) => {this.props.handleClickReg(); this.props.handleClickLogin();}}>Log in</Button>
                             </div>
                         </Row>
                     </Col>
@@ -97,11 +85,25 @@ class Registration extends React.Component{
                             <span className="text-title">Profile type</span>
                             <Row className="form-group">
                                 <Col md="6" className="form-check col-xs-6">
-                                    <input className="form-check-input" type="radio" name="typeUser" id="userstudent" value="option1" defaultChecked />
+                                    <input className="form-check-input" type="radio"
+                                        name="typeUser" id="userstudent" value="option1" defaultChecked
+                                        checked={this.state.userstudent}
+                                        onChange={(event) => {
+                                            this.setState({userteacher:false, userstudent:true});
+                                            this.rowGetter();
+                                        }}
+                                        />
                                     <label className="form-check-label" htmlFor="userstudent">I want to develop myself</label>
                                 </Col>
                                 <Col md="6" className="form-check col-xs-6">
-                                    <input className="form-check-input" type="radio" name="typeUser" id="userteacher" value="option2" />
+                                    <input className="form-check-input" type="radio"
+                                        name="typeUser" id="userteacher" value="option2"
+                                        checked={this.state.userteacher}                                       
+                                        onChange={(event) => {
+                                            this.setState({userteacher:true, userstudent:false});
+                                            this.rowGetter();
+                                        }}
+                                        />
                                     <label className="form-check-label" htmlFor="userteacher">I'm a teacher/coach</label>
                                 </Col>
                             </Row>
