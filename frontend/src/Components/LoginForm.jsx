@@ -8,8 +8,8 @@ import '../style/login.css';
 
 
 class LoginForm extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             email: '',
             password: ''
@@ -100,6 +100,8 @@ class LoginForm extends Component {
 					<div className="col-sm-12 form-group">
 						<p className="text-title text-white d-block pb-2">If you don’t have an account yet</p>
 						<Button type="button" className="btn-grey btn">Sign up</Button>
+						<br></br><br></br>
+						<Button onClick={this.props.handleClickLogin} type="button" color="danger" className="btn-red btn">Cancel</Button>
 					</div>
                 </Row>      
 			  </Col> 
