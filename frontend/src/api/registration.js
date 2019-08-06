@@ -33,5 +33,3 @@ async function registration(props) {
 }
 
 export { registration };
-
-

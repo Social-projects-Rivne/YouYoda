@@ -22,7 +22,6 @@ export default class Home extends React.Component{
         this.handleClickLogin = this.handleClickLogin.bind(this);
      }
     handleClickReg() {
-        console.log('Click happened');
         this.setState(prevState => ({
             isOpen: !prevState.isOpen
         }));
