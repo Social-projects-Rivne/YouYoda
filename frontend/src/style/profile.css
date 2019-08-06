@@ -32,6 +32,8 @@
 }
 .user-name div {
     display: inline-block;
+}
+.user-name h2 {
     font-weight: bold;
 }
 .edit-tool {
@@ -77,9 +79,32 @@
     border: 1px solid #707070;
     opacity: 0.3;
 }
+
+/*Styles for UserCourses*/
+#following-courses,
+#completed-courses,
+#favorites-courses {
+    display: flex;
+    justify-content: center;
+}
+.tab-item:active {
+    background-color: #ffd466;
+}
 @media screen and (max-width: 767px) {
-    .profile-photo-container .profile-info {
+    .profile-photo-container,
+    .user-name,
+    .user-info {
         display: flex;
         justify-content: center;
+    }
+    .user-name,
+    .user-info {
+        margin-left: 110px;
+    }
+    .user-name {
+        margin-top: -20px;
+    }
+    .profile-photo-container {
+        margin-top: 20px;
     }
 }
