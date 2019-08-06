@@ -3,7 +3,7 @@ import API from './axiosConf';
 
 async function resetPassword(email){
     const response = await API.post('auth/users/reset_password/', email)
-    alert("cccccc")
+    console.log(response)
     .then(function (response) {
         console.log(response);
         alert("Password confirmation has been sent to your email")
@@ -24,6 +24,7 @@ async function resetPassword(email){
 
 async function newPassword (userdata) {
     const response = await API.post('auth/users/reset_password_confirm/', userdata)
+    console.log(response)
     .then(function (response) {
         console.log(response);
         if(response.data.code === 204){

@@ -5,14 +5,11 @@ services:
     image: mariadb:latest
     restart: always
     ports: 
-       - '3465:3306'
+       - '3306:3306'
     environment:
-       MYSQL_DATABASE: 'database'
-       MYSQL_USER: 'admin'
+       MYSQL_DATABASE: 'YouYoda'
        MYSQL_PASSWORD: 'password'
        MYSQL_ROOT_PASSWORD: 'root_password'
-       MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
-       MYSQL_RANDOM_ROOT_PASSWORD: 'random'
 
   redis:
     image: redis:latest

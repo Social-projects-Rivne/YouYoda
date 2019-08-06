@@ -2,9 +2,9 @@ from django.db import models
 from .roles import Roles
 
 
+DEFAULT_ROLE_ID = 1
 class User(models.Model):
-    role_id = models.ForeignKey(Roles, default=lambda: Roles.objects.get(id=1),
-                on_delete=models.CASCADE)
+    role_id = models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
     hide_my_data = models.BooleanField()
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)

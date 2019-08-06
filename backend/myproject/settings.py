@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'database',
-        'USER': 'admin',
-        'PASSWORD': 'password',
-        'HOST': 'mariadb',
-        'PORT': '3465',
+        'NAME': 'YouYoda',
+        'USER': 'root',
+        'PASSWORD': 'root_password',
+        'HOST': 'mariadb',   
+        'PORT': '3306',
     }
 }
 
@@ -165,8 +165,8 @@ DJOSER = {
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "SERIALIZERS": {
-        'password_reset': 'appsrc.serializers.user_serializer.UserSerializer',
-        'password_reset_confirm': 'appsrc.serializers.user_serializer.UserSerializer',
+        'password_reset': 'appsrc.serializers.password_reset.SerializerPasswordReset',
+        'password_reset_confirm': 'appsrc.serializers.password_reset_confirm.PasswordResetConfirm',
     }
 }
 
