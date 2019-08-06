@@ -6,8 +6,9 @@ import axios from 'axios';
 async function userLogin(props) {
     const apiBaseUrl = "http://localhost:8000/api/";
     const { email, password } = props ;
+    console.log('function')
     try {
-        const response = await axios.post(apiBaseUrl + 'login', { email, password })
+        const response = await axios.post(apiBaseUrl + 'user/login', { email, password })
             .then(function(response) {
                 console.log(response);
                 if (response.data.code === 200) {
@@ -25,6 +26,7 @@ async function userLogin(props) {
                 }
             })
     } catch (error) {
+    	console.log('error');
         console.log(error);
     }
 }
