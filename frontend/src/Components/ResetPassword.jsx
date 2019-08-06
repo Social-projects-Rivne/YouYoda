@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from 'axios';
 import {Container} from 'reactstrap';
+import {resetPassword} from '../api/resetPassword'
 
 export default class ResetPassword extends React.Component{
     constructor(props){
@@ -8,50 +8,37 @@ export default class ResetPassword extends React.Component{
 
     	this.state={email:''};
 	}
-    resetPassword(event){
-		 let apiBaseUrl = "http://localhost:8000/";
-		 let userdata={"email":this.state.email}
 
-		 axios.post(apiBaseUrl+'auth/users/reset_password/', userdata)
-		 .then(function (response) {
-		 console.log(response);
-		 alert("Password confirmation has been sent to your email")
-		 if(response.data.code === 204){
-		 console.log("Successfull");
-		 }
-		 else if(response.data.code === 400){
-		 console.log("Bad request");
-		 }
-		 else{
-		 console.log("Something goes wrong");
-		 }
-		 })
-		 .catch(function (error) {
-		 console.log(error);
-		 });
+    handlChangeEmail = (event) => {
+        this.setState({email: event.target.value});
+    }
+
+    handlPasswordReset = (event) => {
+		 const userdata={"email":this.state.email}
+         resetPassword(userdata);
 	}
-  render () {
+
+    render () {
     return (
-      <div style={{width:"500px"}}>
-        <Container>
+      <div className="reset-pass">
+        <Container style={{width:"500px"}}>
         <h1>Forgot your password?</h1>
         <p>Enter your email address below, and we'll email instructions for setting a new one.</p>
 
-        <form method="POST" className="form-group">
-					<input type="email"
-							className="form-control"
-							style={{borderRadius:"20px"}}
-							placeholder="Enter Email"
-							onChange = {(event,newValue) => this.setState({email:newValue})}
-							required/>
-					<input type="submit"
-							value="Send me instructions!"
-							className="btn btn-warning"
-							style={{marginTop:"15px", borderRadius:"20px"}}
-							onClick={(event) => this.resetPassword(event)}/>
+        <form method="POST" className="form-group ">
+    				<input type="email"
+    						className="form-control reset-pass-form "
+    						placeholder="Enter Email"
+                            value={this.state.email}
+                            onChange = {this.handlChangeEmail}
+    						required/>
+    				<input type="submit"
+    						value="Send me instructions!"
+    						className="btn btn-warning reset-pass-form"
+    						onClick={this.handlPasswordReset}/>
         </form>
         </Container>
       </div>
       )
-  }
+    }
 }

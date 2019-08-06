@@ -263,3 +263,20 @@
     top: 0;
     margin-bottom: 240px;
 }
+
+/* Styles for ResetPassword */
+
+.reset-pass {
+    height: 100vh;
+    min-height: 510px;
+    background-image: url("../img/static/patternfon.png");
+    background-position: center;
+    background-repeat:repeat;
+    display: flex;
+    align-items: center;
+}
+.reset-pass-form {
+    border-radius: 20px;
+    margin-bottom: 20px;
+
+}

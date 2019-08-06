@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Container, Row, Col, Form, Input, Button} from 'reactstrap';
 import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {Link} from 'react-router-dom';
 
 
 export default class Footer extends React.Component{
@@ -15,16 +16,16 @@ export default class Footer extends React.Component{
               <Col md="5">
                 <ul className="footer-nav">
                     <li>
-                        <a href="">About</a>
+                        <Link to={"/about"} activeClassName="active">About</Link>
                     </li>
                     <li>
-                        <a href="">Courses</a>
+                        <Link to={"/courses"} activeClassName="active">Courses</Link>
                     </li>
                     <li>
-                        <a href="">Trainers</a>
+                        <Link to={"/trainers"} activeClassName="active">Trainers</Link>
                     </li>
                     <li>
-                        <a href="">Events</a>
+                        <Link to={"/events"} activeClassName="active">Events</Link>
                     </li>
                 </ul>
                 <Form action="#" className="form">

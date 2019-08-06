@@ -164,6 +164,10 @@ DJOSER = {
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "SERIALIZERS": {
+        'password_reset': 'appsrc.serializers.user_serializer.UserSerializer',
+        'password_reset_confirm': 'appsrc.serializers.user_serializer.UserSerializer',
+    }
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
