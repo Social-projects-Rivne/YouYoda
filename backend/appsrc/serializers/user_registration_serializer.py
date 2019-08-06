@@ -1,6 +1,6 @@
 from ..models.user import User
 
-from django.contrib.auth.hashers import make_password
+import bcrypt
 from rest_framework import serializers
 
 
@@ -13,7 +13,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create(
             username=validated_data['username'],
-            password=make_password(validated_data['password']),
+            password=bcrypt.hashpw(validated_data['password'], bcrypt.gensalt(12)),
             email=validated_data['email'], 
             is_trainer=validated_data['is_trainer'])
 
