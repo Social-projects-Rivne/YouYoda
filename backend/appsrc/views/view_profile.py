@@ -11,7 +11,8 @@ from ..serializers.profile_view_serializer import ProfileViewSerializer
 
 class ViewProfile(APIView):
 
-    permission_classes = [permissions.AllowAny,]
+    permission_classes = [permissions.IsAuthenticated,]
+    #permission_classes = [permissions.AllowAny,]
 
     def get_object(self, pk):
         try:
@@ -25,8 +26,9 @@ class ViewProfile(APIView):
       #return Response(serializer.data)
 
     def get(self, request):
-       serializer = ProfileViewSerializer(request.user)
-       return Response(serializer.data)"""
+        user = User.objects.all()
+        serializer = ProfileEditSerializer(user, many=True)
+        return Response(serializer.data)
 
 
     
