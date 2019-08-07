@@ -7,13 +7,13 @@ from rest_framework import serializers
 class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
-    	model = User
-    	fields = ('username', 'password', 'email', 'is_trainer')
+        model = User
+        fields = ('username', 'password', 'email', 'is_trainer')
 
     def create(self, validated_data):
         user = User.objects.create(
             username=validated_data['username'],
-            password=bcrypt.hashpw(validated_data['password'], bcrypt.gensalt(12)),
+            password=bcrypt.hashpw(validated_data['password'].encode(encoding='UTF-8'), bcrypt.gensalt(12)),
             email=validated_data['email'], 
             is_trainer=validated_data['is_trainer'])
 

@@ -1,7 +1,7 @@
 from .views.user_login_logout import UserLogin, UserLogout
 from .views.user_registration import UserRegistration
 
-from django.urls import include, path
+from django.urls import path
 
 
 urlpatterns = [

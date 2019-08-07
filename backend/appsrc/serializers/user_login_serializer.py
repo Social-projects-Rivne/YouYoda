@@ -11,7 +11,8 @@ class LoginSerializer(serializers.ModelSerializer):
         fields = ('email', 'password')
 
     def validate(self, data):
-    	hashed_pass = bcrypt.hashpw(data['password'], bcrypt.gensalt(12))
+        hashed_pass = bcrypt.hashpw(data['password'].encode(encoding='UTF-8'), bcrypt.gensalt(12))
         user = authenticate(data['email'], hashed_pass)
+        # user = authenticate(**data)
         if user and user.is_active:
             return user

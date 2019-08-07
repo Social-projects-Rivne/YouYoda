@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'appsrc',
     'rest_framework',
-    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'djoser',
 )
 
@@ -136,7 +136,7 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
 
@@ -163,13 +163,11 @@ REST_AUTH_SERIALIZERS = {
 }
 
 REST_AUTH_REGISTER_SERIALIZERS = {
-    "REGISTER_SERIALIZER": "appsrc.serializers.user_registration_serializer.UserRegistrationSerializer",
+    "REGISTER_SERIALIZER": "appsrc.serializers.user_registration_serializer.RegistrationSerializer",
 }
 
 DJOSER = {
     'SERIALIZERS': {
-         'user_create': 'appsrc.serializers.user_registration_serializer.UserRegistrationSerializer'
+         'user_create': 'appsrc.serializers.user_registration_serializer.RegistrationSerializer'
     }
 }
-
-AUTH_USER_MODEL = 'appsrc.models.user.User'
