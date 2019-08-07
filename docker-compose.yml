@@ -4,7 +4,7 @@ services:
   mariadb:
     image: mariadb:latest
     restart: always
-    ports:
+    ports: 
        - '3306:3306'
     environment:
        MYSQL_DATABASE: 'YouYoda'
@@ -28,10 +28,10 @@ services:
 
   back:
     build: ./backend
-    ports:
+    ports: 
        - '8000:8000'
-    volumes:
+    volumes: 
        - ./backend:/backend
     depends_on:
        - mariadb
-    command: gunicorn -b 0.0.0.0:8000 myproject.wsgi:application
+    command: gunicorn -b 0.0.0.0:8000 myproject.wsgi:application 

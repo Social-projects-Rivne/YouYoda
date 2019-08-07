@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'YouYoda',
         'USER': 'root',
         'PASSWORD': 'root_password',
-        'HOST': 'mariadb',
+        'HOST': 'mariadb',   
         'PORT': '3306',
     }
 }
