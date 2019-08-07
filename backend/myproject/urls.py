@@ -23,5 +23,4 @@ urlpatterns = [
     url('api/', include('appsrc.urls')),
     url('auth/', include('djoser.urls')),
     url('auth/', include('djoser.urls.authtoken')),
-    #url('auth/', include('djoser.urls.jwt')),
 ]

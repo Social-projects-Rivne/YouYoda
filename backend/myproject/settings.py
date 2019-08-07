@@ -128,25 +128,16 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-    ("js", os.path.join(STATIC_ROOT,'js')),
-    ("css", os.path.join(STATIC_ROOT,'css')),
-    ("images", os.path.join(STATIC_ROOT,'images')),
-    ("fonts", os.path.join(STATIC_ROOT,'fonts')),
-)
 
 REST_FRAMEWORK = {
 
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAdminUser',
         'rest_framework.permissions.AllowAny',
     ),
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',                                                                                                                                  
-        #'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 
     'DEFAULT_PARSER_CLASSES': (
@@ -167,6 +158,10 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+REST_AUTH_SERIALIZERS = {
+    "LOGIN_SERIALIZER": "appsrc.serializers.user_login_serializer.LoginSerializer",
+}
+
 REST_AUTH_REGISTER_SERIALIZERS = {
     "REGISTER_SERIALIZER": "appsrc.serializers.user_registration_serializer.UserRegistrationSerializer",
 }
@@ -176,3 +171,5 @@ DJOSER = {
          'user_create': 'appsrc.serializers.user_registration_serializer.UserRegistrationSerializer'
     }
 }
+
+AUTH_USER_MODEL = 'appsrc.models.user.User'
