@@ -1,5 +1,4 @@
 import React from 'react';
-//import { Redirect } from 'react-router-dom';
 import { Button, Col, Modal, Row } from 'reactstrap';
 import { FormErrors } from '../api/FormErrors';
 import { registration } from '../api/registration';
@@ -14,11 +13,11 @@ class Registration extends React.Component{
             userstudent: true,
             userteacher: false,
             isagreed: true,
-            formErrors: {email: '', password: '', confirmpass: '', isagreed: false},
+            formErrors: {email: '', password: '', confirmpass: '', isAgreed: false},
             emailValid: false,
             passwordValid: false,
             confirmPasswordValid: false,
-            isagreedValid: false,
+            isAgreedValid: false,
             formValid: false,
             redirect: false
         }
@@ -31,7 +30,7 @@ class Registration extends React.Component{
         let emailValid = this.state.emailValid;
         let passwordValid = this.state.passwordValid;
         let confirmPasswordValid = this.state.confirmPasswordValid;
-        let isagreedValid = this.state.isagreedValid;
+        let isAgreedValid = this.state.isAgreedValid;
     
         switch(fieldName) {
           case 'email':
@@ -41,6 +40,15 @@ class Registration extends React.Component{
           case 'password':
             passwordValid = value.length >= 6;
             fieldValidationErrors.password = passwordValid ? '': ' is too short';
+            var passwordValidSym = false;
+            passwordValidSym = value.match(/[0-9a-zA-Z!@#$%^&*]{6,}/g);
+            if(!passwordValid && !passwordValidSym)
+                fieldValidationErrors.password += passwordValidSym ? '': ' and has not allowed symbols';
+            else
+                fieldValidationErrors.password += passwordValidSym ? '': ' has not allowed symbols';
+            if(passwordValid)
+                passwordValid = passwordValidSym;
+
             if(passwordValid){
                 var passConfirm = document.getElementById('confirmpass').value;
                 passwordValid = value.length == passConfirm.length;
@@ -55,8 +63,8 @@ class Registration extends React.Component{
             fieldValidationErrors.confirmpass = confirmPasswordValid ? '': ' and password are different';
             break;
           case 'isagreed':
-            isagreedValid = this.state.isagreed;
-            fieldValidationErrors.isagreed = isagreedValid ? '': ' is not checked';
+            isAgreedValid = this.state.isagreed;
+            fieldValidationErrors.isAgreed = isAgreedValid ? '': ' is not checked';
             break;
           default:
             break;
@@ -65,7 +73,7 @@ class Registration extends React.Component{
                         emailValid: emailValid,
                         passwordValid: passwordValid,
                         confirmPasswordValid: confirmPasswordValid,
-                        isagreedValid: isagreedValid
+                        isAgreedValid: isAgreedValid
                       }, this.validateForm);
     }
     
@@ -82,34 +90,20 @@ class Registration extends React.Component{
         else
             this.setState({[idParam]:valueParam},
                           () => { this.validateField(idParam, valueParam) });
-        if(this.state)
-            return this.state;
-        else
-            return {};
     }
     radioGetter = (event) => {
         this.setState({
             userteacher:!this.state.userteacher,
             userstudent:!this.state.userstudent
         });
-        if(this.state)
-            return this.state;
-        else
-            return {};
     }
-    handleClick(event){
+    async handleClick(event){
         event.preventDefault();
         console.log(this.state);
-        registration(this.state);
-        //this.setState({ redirect: true });
+        await registration(this.state);
         return false;
     }
     render () {
-        const { redirect } = this.state;
-        if (redirect) {
-            //return <Redirect to='/somewhere'/>;
-        }
-
         return (
         <div>
             <Modal id="registration-form" isOpen={this.props.isOpen} className="wild">
@@ -175,7 +169,7 @@ class Registration extends React.Component{
                                     <label className="form-check-label" htmlFor="userteacher">I'm a teacher/coach</label>
                                 </Col>
                             </Row>
-                            <div className={this.state.formErrors.isagreed ? 'form-group is-error': 'form-group'}>
+                            <div className={this.state.formErrors.isAgreed ? 'form-group is-error': 'form-group'}>
                                 <div className="form-check">
                                     <input className="form-check-input" type="checkbox" value="" id="isagreed"
                                         name="isagreed"

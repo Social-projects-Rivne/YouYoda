@@ -1,12 +1,16 @@
 import React from "react";
+
 import axios from 'axios';
 
 
 async function registration(props) {
     const apiBaseUrl = "http://localhost:8000/api/";
-    const { email, password, confirmpass } = props;
+    const { email, password, confirmpass, userstudent, userteacher, isagreed } = props;
     try {
-        const response = axios.post(apiBaseUrl + 'register', { email, password, confirmpass }, {
+        const response = await axios.post(
+            apiBaseUrl + 'register', 
+            { email, password, confirmpass, userstudent, userteacher, isagreed }, 
+            {
                 headers: {
                     'Accept' : 'application/json',
                     'Content-Type': 'application/json'
