@@ -11,7 +11,6 @@
     outline: none;
     position: relative;
     bottom: 2px;
-    margin-left: 20px;
 }
 .dropdown-button:hover {
     background-color: transparent;
@@ -81,14 +80,85 @@
 }
 
 /*Styles for UserCourses*/
-#following-courses,
-#completed-courses,
-#favorites-courses {
+.user-courses {
     display: flex;
     justify-content: center;
 }
-.tab-item:active {
+.user-courses div {
+    font-weight: bold;
+    margin-left: 15px;
+}
+.tab-item:hover {
     background-color: #ffd466;
+    border-radius: 44px;
+}
+.tab-item {
+    border: none;
+    margin-top: 5px;
+}
+.tab-link {
+    border-radius: 44px;
+}
+
+.tabs-user-courses {
+    cursor: pointer;
+    border: none;
+}
+.pdp {
+    display: flex;
+    color: black;
+    justify-content: center;
+}
+.active {
+    background-color: #ffd466;
+    border-radius: 44px;
+}
+.join-course,
+.join-course:hover {
+    background-color: #ffd466;
+    border: none;
+    border-radius: 44px;
+    font-weight: bold;
+    color: black;
+    width: 100px;
+}
+.card {
+    border: none;
+}
+.description-background {
+    height: 100px;
+    background-color: #2f2f2f;
+    position: relative;
+    margin-top: -100px;
+    opacity: 0.4;
+}
+.course-description {
+    color: white;
+    margin-top: -90px;
+    margin-left: 20px;
+}
+.join-course {
+    margin-top: -120px;
+    margin-left: -20px;
+}
+.rating {
+    margin-top: -20px;
+    float: right;
+    padding-right: 20px;
+}
+.add-favorites {
+    margin-right: 40px;
+    cursor: pointer;
+}
+.course-tools {
+    cursor: pointer;
+    margin-top: -20px;
+    float: left;
+    padding-left: 20px;
+}
+.tool-plane {
+    height: 20px;
+    margin-left: 40px;
 }
 @media screen and (max-width: 767px) {
     .profile-photo-container,
@@ -99,12 +169,16 @@
     }
     .user-name,
     .user-info {
-        margin-left: 110px;
+        margin-left: 80px;
     }
     .user-name {
         margin-top: -20px;
     }
     .profile-photo-container {
         margin-top: 20px;
+        margin-left: -10px;
+    }
+    .join-course-container {
+        text-align: center;
     }
 }

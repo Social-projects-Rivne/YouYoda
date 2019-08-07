@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {TabContent, TabPane, Nav, NavItem, NavLink, Card, Button,
-   CardTitle, CardText, Row, Col, Container } from 'reactstrap';
+   CardTitle, CardText, CardImg, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
 
 export default class UserCourses extends React.Component {
@@ -10,17 +10,9 @@ export default class UserCourses extends React.Component {
 
   this.toggle = this.toggle.bind(this);
   this.state = {
-      activeTab: '1',
-      activeTabColor: 'white'
+      activeTab: '1'
     }
   }
-
-  handleClickTab() {
-    this.setState({
-      activeTabColor: '#ffd466'
-    })
-  }
-
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -33,29 +25,37 @@ export default class UserCourses extends React.Component {
       <Container>
         <Row>
           <Col md="3">
-            <Nav className="user-courses" tabs vertical>
+            <Nav className="tabs-user-courses" vertical>
               <NavItem className="tab-item">
                 <NavLink
-                  className={classnames({ active: this.state.activeTab === '1' })}
-                  onClick={() => { this.toggle('1'); this.handleClickTab()}}
-                  style={{backgroundColor:this.state.activeTab}}>
-                  <span id="following-courses">Following</span>
+                  className={classnames({ active: this.state.activeTab === '1' })} tab-link
+                  onClick={() => { this.toggle('1');}}>
+                  <div className="user-courses">Following
+                    <div id="number-following-courses">17</div>
+                  </div>
                 </NavLink>
               </NavItem>
               <NavItem className="tab-item">
                 <NavLink
-                  className={classnames({ active: this.state.activeTab === '2' })}
-                  onClick={() => { this.toggle('2'); this.handleClickTab()}}
-                  style={{backgroundColor:this.state.activeTab}}>
-                  <span id="completed-courses">Completed</span>
+                  className={classnames({ active: this.state.activeTab === '2' })} tab-link
+                  onClick={() => { this.toggle('2');}}>
+                  <div className="user-courses">Completed
+                    <div id="number-completed-courses">20</div>
+                  </div>
                 </NavLink>
               </NavItem>
               <NavItem className="tab-item">
                 <NavLink
-                  className={classnames({ active: this.state.activeTab === '3' })}
-                  onClick={() => { this.toggle('3'); this.handleClickTab()}}
-                  style={{backgroundColor:this.state.activeTab}}>
-                  <span id="favorites-courses">Favorites</span>
+                  className={classnames({ active: this.state.activeTab === '3' })} tab-link
+                  onClick={() => { this.toggle('3');}}>
+                  <div className="user-courses">Favorites
+                    <div id="number-favorites-courses">60</div>
+                  </div>
+                </NavLink>
+              </NavItem>
+              <NavItem className="tab-item">
+                <NavLink className="tab-link" href="#">
+                  <div className="pdp">Personal Development Plan</div>
                 </NavLink>
               </NavItem>
             </Nav>
@@ -64,25 +64,234 @@ export default class UserCourses extends React.Component {
             <TabContent md="9" activeTab={this.state.activeTab}>
               <TabPane tabId="1">
                 <Row>
-                  <Col sm="12">
-                    <h4>Tab 1 Contents</h4>
+                  <Col>
+                    <Card className="card" body>
+                      <CardImg top width="100%" src={require('../img/static/course-image.png')}
+                        className="course-image" alt="course-image" />
+                      <div className="description-background"></div>
+                        <Row>
+                          <Col xs="12" md="9">
+                            <CardText className="course-description">With supporting text below as a natural lead-in to additional content.
+                            </CardText>
+                          </Col>
+                          <Col xs="12" md="3">
+                            <div className="join-course-container">
+                              <Button className="join-course">Join</Button>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <div>
+                              <div className="rating">
+                                <span className="add-favorites" href="#">Add to favorites</span>
+                                <span>Rating: </span>
+                                <span className="course-rating">143</span>
+                              </div>
+                              <div className="course-tools">
+                                <span>...</span>
+                                <span href="#">
+                                  <img src={require('../img/static/course-tool.png')}
+                                  className="tool-plane"alt="course-plane"/>
+                                </span>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                    </Card>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Card className="card" body>
+                      <CardImg top width="100%" src={require('../img/static/course-image.png')}
+                        className="course-image" alt="course-image" />
+                      <div className="description-background"></div>
+                        <Row>
+                          <Col xs="12" md="9">
+                            <CardText className="course-description">With supporting text below as a natural lead-in to additional content.
+                            </CardText>
+                          </Col>
+                          <Col xs="12" md="3">
+                            <div className="join-course-container">
+                              <Button className="join-course">Join</Button>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <div>
+                              <div className="rating">
+                                <span className="add-favorites" href="#">Add to favorites</span>
+                                <span>Rating: </span>
+                                <span className="course-rating">143</span>
+                              </div>
+                              <div className="course-tools">
+                                <span>...</span>
+                                <span href="#">
+                                  <img src={require('../img/static/course-tool.png')}
+                                  className="tool-plane"alt="course-plane"/>
+                                </span>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                    </Card>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Card className="card" body>
+                      <CardImg top width="100%" src={require('../img/static/course-image.png')}
+                        className="course-image" alt="course-image" />
+                      <div className="description-background"></div>
+                        <Row>
+                          <Col xs="12" md="9">
+                            <CardText className="course-description">With supporting text below as a natural lead-in to additional content.
+                            </CardText>
+                          </Col>
+                          <Col xs="12" md="3">
+                            <div className="join-course-container">
+                              <Button className="join-course">Join</Button>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <div>
+                              <div className="rating">
+                                <span className="add-favorites" href="#">Add to favorites</span>
+                                <span>Rating: </span>
+                                <span className="course-rating">143</span>
+                              </div>
+                              <div className="course-tools">
+                                <span>...</span>
+                                <span href="#">
+                                  <img src={require('../img/static/course-tool.png')}
+                                  className="tool-plane"alt="course-plane"/>
+                                </span>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                    </Card>
                   </Col>
                 </Row>
               </TabPane>
               <TabPane tabId="2">
                 <Row>
-                  <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                      <Button>Go somewhere</Button>
+                  <Col>
+                    <Card className="card" body>
+                      <CardImg top width="100%" src={require('../img/static/course-image.png')}
+                        className="course-image" alt="course-image" />
+                      <div className="description-background"></div>
+                        <Row>
+                          <Col xs="12" md="9">
+                            <CardText className="course-description">With supporting text below as a natural lead-in to additional content.
+                            </CardText>
+                          </Col>
+                          <Col xs="12" md="3">
+                            <div className="join-course-container">
+                              <Button className="join-course">Join</Button>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <div>
+                              <div className="rating">
+                                <span className="add-favorites" href="#">Add to favorites</span>
+                                <span>Rating: </span>
+                                <span className="course-rating">143</span>
+                              </div>
+                              <div className="course-tools">
+                                <span>...</span>
+                                <span href="#">
+                                  <img src={require('../img/static/course-tool.png')}
+                                  className="tool-plane"alt="course-plane"/>
+                                </span>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
                     </Card>
                   </Col>
-                  <Col sm="6">
-                    <Card body>
-                      <CardTitle>Special Title Treatment</CardTitle>
-                      <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-                      <Button>Go somewhere</Button>
+                </Row>
+                <Row>
+                  <Col>
+                    <Card className="card" body>
+                      <CardImg top width="100%" src={require('../img/static/course-image.png')}
+                        className="course-image" alt="course-image" />
+                      <div className="description-background"></div>
+                        <Row>
+                          <Col xs="12" md="9">
+                            <CardText className="course-description">With supporting text below as a natural lead-in to additional content.
+                            </CardText>
+                          </Col>
+                          <Col xs="12" md="3">
+                            <div className="join-course-container">
+                              <Button className="join-course">Join</Button>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <div>
+                              <div className="rating">
+                                <span className="add-favorites" href="#">Add to favorites</span>
+                                <span>Rating: </span>
+                                <span className="course-rating">143</span>
+                              </div>
+                              <div className="course-tools">
+                                <span>...</span>
+                                <span href="#">
+                                  <img src={require('../img/static/course-tool.png')}
+                                  className="tool-plane"alt="course-plane"/>
+                                </span>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
+                    </Card>
+                  </Col>
+                </Row>
+              </TabPane>
+              <TabPane tabId="3">
+                <Row>
+                  <Col>
+                    <Card className="card" body>
+                      <CardImg top width="100%" src={require('../img/static/course-image.png')}
+                        className="course-image" alt="course-image" />
+                      <div className="description-background"></div>
+                        <Row>
+                          <Col xs="12" md="9">
+                            <CardText className="course-description">With supporting text below as a natural lead-in to additional content.
+                            </CardText>
+                          </Col>
+                          <Col xs="12" md="3">
+                            <div className="join-course-container">
+                              <Button className="join-course">Join</Button>
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <div>
+                              <div className="rating">
+                                <span className="add-favorites" href="#">Add to favorites</span>
+                                <span>Rating: </span>
+                                <span className="course-rating">143</span>
+                              </div>
+                              <div className="course-tools">
+                                <span>...</span>
+                                <span href="#">
+                                  <img src={require('../img/static/course-tool.png')}
+                                  className="tool-plane"alt="course-plane"/>
+                                </span>
+                              </div>
+                            </div>
+                          </Col>
+                        </Row>
                     </Card>
                   </Col>
                 </Row>
