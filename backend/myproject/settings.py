@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'YouYoda',
         'USER': 'root',
         'PASSWORD': 'root_password',
-        'HOST': 'mariadb',   
+        'HOST': 'mariadb',
         'PORT': '3306',
     }
 }
@@ -123,6 +123,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+
 
 STATIC_URL = '/static/'
 
@@ -165,7 +167,7 @@ DJOSER = {
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "SERIALIZERS": {
-        'password_reset': 'appsrc.serializers.password_reset.SerializerPasswordReset',
+        'password_reset': 'appsrc.serializers.password_reset.SendEmailResetSerializer',
         'password_reset_confirm': 'appsrc.serializers.password_reset_confirm.PasswordResetConfirm',
     }
 }
