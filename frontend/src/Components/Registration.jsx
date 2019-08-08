@@ -132,63 +132,57 @@ class Registration extends React.Component{
                             <div className={this.state.formErrors.email ? 'form-group is-error': 'form-group'}>
                                 <label htmlFor="email" className="mb-1">Email</label>
                                 <input type="email" id="email" name="email" className="form-control" 
-                                onChange = {(event) => {this.onChangeInputs(event)}} 
-                                required
-                                />
+                                       onChange = {(event) => {this.onChangeInputs(event)}}
+                                       required/>
                             </div>
                             <div className={this.state.formErrors.password ? 'form-group is-error': 'form-group'}>
                                 <label htmlFor="password" className="mb-1">Password</label>
                                 <input type="password" id="password" name="password" className="form-control" 
-                                onChange = {(event) => {this.onChangeInputs(event)}}
-                                required
-                                />
+                                       onChange = {(event) => {this.onChangeInputs(event)}}
+                                       required/>
                             </div>
                             <div className={this.state.formErrors.confirmpass ? 'form-group is-error': 'form-group'}>
                                 <label htmlFor="confirmpass" className="mb-1">Confirm Password</label>
                                 <input type="password" id="confirmpass" name="confirmpass" className="form-control" 
-                                onChange = {(event) => {this.onChangeInputs(event)}}
-                                required
-                                />
+                                       onChange = {(event) => {this.onChangeInputs(event)}}
+                                       required/>
                             </div>
                             <span className="text-title">Profile type</span>
                             <Row className="form-group">
                                 <Col md="6" className="form-check col-xs-6">
                                     <input className="form-check-input" type="radio"
-                                        name="typeUser" id="userstudent" value="option1"
-                                        checked={this.state.userstudent}
-                                        onChange={(event) => {this.radioGetter(event)}}
-                                        />
+                                           name="typeUser" id="userstudent" value="option1"
+                                           checked={this.state.userstudent}
+                                           onChange={(event) => {this.radioGetter(event)}}/>
                                     <label className="form-check-label" htmlFor="userstudent">I want to develop myself</label>
                                 </Col>
                                 <Col md="6" className="form-check col-xs-6">
                                     <input className="form-check-input" type="radio"
-                                        name="typeUser" id="userteacher" value="option2"
-                                        checked={this.state.userteacher}                                       
-                                        onChange={(event) => {this.radioGetter(event)}}
-                                        />
+                                           name="typeUser" id="userteacher" value="option2"
+                                           checked={this.state.userteacher}
+                                           onChange={(event) => {this.radioGetter(event)}}/>
                                     <label className="form-check-label" htmlFor="userteacher">I'm a teacher/coach</label>
                                 </Col>
                             </Row>
                             <div className={this.state.formErrors.isAgreed ? 'form-group is-error': 'form-group'}>
                                 <div className="form-check">
                                     <input className="form-check-input" type="checkbox" value="" id="isagreed"
-                                        name="isagreed"
-                                        checked={this.state.isagreed}
-                                        onChange = {(event) => {this.onChangeInputs(event)}}
-                                        required
-                                        />
+                                           name="isagreed"
+                                           checked={this.state.isagreed}
+                                           onChange = {(event) => {this.onChangeInputs(event)}}
+                                           required/>
                                     <label className="form-check-label" htmlFor="isagreed">I Accept terms and conditions & privacy policy</label>
                                 </div>
                             </div>
                             <Row className="form-group text-right">
                                 <Col md="4">
                                     <button type="button" className="btn-grey btn btn-cancel"
-                                        onClick={this.props.handleClickReg}>Cancel</button>
+                                            onClick={this.props.handleClickReg}>Cancel</button>
                                 </Col>
                                 <Col md="8">
                                     <button type="submit" className="btn-yellow btn btn-warning"
-                                        onClick={(event) => this.handleClick(event)}
-                                        disabled={!this.state.formValid}>Sign up</button>
+                                            onClick={(event) => this.handleClick(event)}
+                                            disabled={!this.state.formValid}>Sign up</button>
                                 </Col>
                                 
                             </Row>
