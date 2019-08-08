@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'djoser',
 ]
 
-
+# AUTH_USER_MODEL = 'appsrc.models.user.YouYodaUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -170,8 +170,8 @@ DJOSER = {
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
     "SERIALIZERS": {
-        'password_reset': 'appsrc.serializers.password_reset.SendEmailResetSerializer',
-        'password_reset_confirm': 'appsrc.serializers.password_reset_confirm.PasswordResetConfirm',
+        'password_reset': 'appsrc.serializers.password_reset_serializer.SendEmailResetSerializer',
+        'password_reset_confirm': 'appsrc.serializers.password_reset_confirm_serializator.PasswordResetConfirm',
     }
 }
 

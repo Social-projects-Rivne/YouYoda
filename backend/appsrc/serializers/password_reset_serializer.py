@@ -1,10 +1,8 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
 from ..models.user import User
 from djoser.conf import settings
 from djoser.compat import get_user_email_field_name
 
-User = get_user_model()
 
 class UserFunctionsMixin:
     def get_user(self, is_active=True):
