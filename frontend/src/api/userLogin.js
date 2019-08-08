@@ -24,8 +24,7 @@ async function userLogin(props) {
                 }
             })
     } catch (error) {
-        console.log('error');
-        console.log(error);
+        console.log('Error: ' + error.message);
     }
 }
 

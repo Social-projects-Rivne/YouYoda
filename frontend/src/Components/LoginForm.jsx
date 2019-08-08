@@ -72,9 +72,12 @@ class LoginForm extends Component {
             <div>
 			  <Modal id="login-form" isOpen={this.props.isOpenL} className="wild">
 			  <div className="modal-body">
-			    <button onClick={this.props.handleClickLogin} type="button" className="close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+			    <button
+			    type="button"
+			    className="close"
+			    onClick={this.props.handleClickLogin}>
+                     <span aria-hidden="true">&times;</span>
+                 </button>
 			<Row>
 			  <Col md="7" className="login">
 			      <Form className="form-horizontal">
@@ -87,22 +90,22 @@ class LoginForm extends Component {
 					    <FormGroup className={this.state.formErrors.email ? 'is-error': ''}>
 						  <Label for="email" className="mb-1">Email</Label>
 						  <Input
-						type="email"
-						name="email"
-						id="email"
-						placeholder="myemail@email.com"
-						required
-						onChange = {(event) => {this.handleUserInput(event)}}/>
+						   type="email"
+						   name="email"
+						   id="email"
+						   placeholder="myemail@email.com"
+						   required
+						   onChange = {(event) => {this.handleUserInput(event)}}/>
 					    </FormGroup>
 					    <FormGroup className={this.state.formErrors.password ? 'is-error': ''}>
 						  <Label for="password" className="mb-1">Password</Label>
 						  <Input
-						type="password"
-						name="password"
-						id="password"
-						placeholder="********"
-						required
-						onChange = {(event) => {this.handleUserInput(event)}}/>
+						   type="password"
+						   name="password"
+						   id="password"
+						   placeholder="********"
+						   required
+						   onChange = {(event) => {this.handleUserInput(event)}}/>
 					    </FormGroup>	
 				      </Col>
 				    </Row>
@@ -119,7 +122,10 @@ class LoginForm extends Component {
 				    </Row>
 				    <Row className="m-0">
 				      <Col className="mt-4 text-right">
-				        <Button type="submit" className="btn-yellow btn btn-warning" onClick={(event) => this.handleClick(event)}
+				        <Button
+				        type="submit" 
+				        className="btn-yellow btn btn-warning" 
+				        onClick={(event) => this.handleClick(event)}
 				        disabled={!this.state.formValid}>Log in</Button>
 				      </Col>
 				    </Row>
@@ -146,9 +152,15 @@ class LoginForm extends Component {
 				<Row className="container h-auto">
 					<div className="col-sm-12 form-group">
 						<p className="text-title text-white d-block pb-2">If you don’t have an account yet</p>
-						<Button type="button" className="btn-grey btn" onClick={(event) => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
+						<Button 
+						type="button" 
+						className="btn-grey btn" 
+						onClick={(event) => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
 						<br></br><br></br>
-						<Button onClick={this.props.handleClickLogin} type="button" color="danger" className="btn-red btn">Cancel</Button>
+						<Button 
+						type="button"
+						className="btn-red btn" color="danger"
+						onClick={this.props.handleClickLogin}>Cancel</Button>
 					</div>
                 </Row>      
 			  </Col> 
