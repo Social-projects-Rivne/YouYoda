@@ -62,6 +62,28 @@ button.close {
     display: block;
 }
 
+.panel-errors {
+    display: none;
+}
+.panel-errors.errors-show {
+    display: block;
+}
+.formErrors {
+    z-index: 1;
+    color: red;
+    font-size: 15px;
+    width: 90%;
+    padding: 8px 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+} 
+.formErrors p {
+    margin: 2px;
+}
+.modal .is-error input {
+    border: 1px solid red;
+}
+
 @media (min-width: 576px)
 {
     .modal-dialog.wild {

@@ -43,7 +43,7 @@ export default class Home extends React.Component{
             <HomeCourses/>
             <HomeLastBlock handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin}/>
             <Footer/>
-            <LoginForm handleClickLogin={this.handleClickLogin} isOpenL={this.state.isOpenL} />
+            <LoginForm handleClickLogin={this.handleClickLogin} handleClickReg={this.handleClickReg} isOpenL={this.state.isOpenL} />
             <Registration handleClickReg={this.handleClickReg} isOpen={this.state.isOpen} />
             </>
         )
