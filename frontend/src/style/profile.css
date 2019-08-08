@@ -34,6 +34,7 @@
 }
 .user-name h2 {
     font-weight: bold;
+    display: inline-block;
 }
 .edit-tool {
     height: 25px;

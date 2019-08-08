@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {Collapse, Navbar, NavbarToggler, Dropdown, DropdownToggle, DropdownMenu,
-    DropdownItem, UncontrolledDropdown, NavbarBrand, Nav, NavItem, NavLink,
+    DropdownItem, NavbarBrand, Nav, NavItem, NavLink,
     Container, Row, Col} from 'reactstrap';
-
+import axios from 'axios';
 
     export default class ProfileHeader extends React.Component {
         constructor(props) {
