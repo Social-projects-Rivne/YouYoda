@@ -6,7 +6,6 @@ import {editForm} from "../api/editForm";
 import axios from 'axios'
 
 
-
 class FillEditPage extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +18,7 @@ class FillEditPage extends React.Component {
             email: '',
             password: '',
             about_me: '',
-            about_me1: '',
+            i_like: '',
             birth_date: '',
             phone_number: ''
         };
@@ -47,29 +46,31 @@ class FillEditPage extends React.Component {
     };
     postUser = async (formData) => {
         try {
-            const response = await axios.post('http://localhost:5000/test', formData);
+            // const response = await axios.post('http://localhost:5000/test', formData);
+            const response = await axios.post('http://localhost:8000/api/user/profile/edit', formData);
         } catch (error) {
             console.error(error);
         }
     };
-    saveForm =async()=>{
+    saveForm = async () => {
         let payLoad = {};
         payLoad.username = this.state.username;
         payLoad.first_name = this.state.first_name;
         payLoad.last_name = this.state.last_name;
         payLoad.location = this.state.location;
         payLoad.about_me = this.state.about_me;
-        payLoad.about_me1 = this.state.about_me;
+        payLoad.i_like = this.state.i_like;
         payLoad.birth_date = this.state.birth_date;
         payLoad.phone_number = this.state.phone_number;
-        await this.postUser (payLoad)
+        await this.postUser(payLoad)
     };
     updateField = (event) => {
         let fieldName = event.target.name;
         let newState = {};
         newState[fieldName] = event.target.value;
         // this.setState({username: event.target.value})
-        this.setState(newState)
+        this.setState(newState);
+        console.log(event.target.value, event.target.value);
     };
 
     async componentDidMount() {
@@ -129,36 +130,42 @@ class FillEditPage extends React.Component {
                                 />
                                 <Row>
                                     {/*<Col md={6}>*/}
-                                        {/*<FormGroup className="city-country">*/}
-                                        {/*    <Label for="state">City and country*</Label>*/}
-                                        {/*    <Input*/}
-                                        {/*        type="select"*/}
-                                        {/*        name="location"*/}
-                                        {/*        className="field-box">*/}
-                                        {/*        onChange={(e) => this.updateField(e)}*/}
-                                        {/*        {countries.map((country) => (*/}
-                                        {/*            <option>{country}</option>*/}
-                                        {/*        ))}*/}
-                                        {/*        value = {this.state.location}*/}
-                                        {/*    </Input>*/}
-                                        {/*</FormGroup>*/}
+                                    {/*<FormGroup className="city-country">*/}
+                                    {/*    <Label for="state">City and country*</Label>*/}
+                                    {/*    <Input*/}
+                                    {/*        type="select"*/}
+                                    {/*        name="location"*/}
+                                    {/*        className="field-box">*/}
+                                    {/*        onChange={(e) => this.updateField(e)}*/}
+                                    {/*        {countries.map((country) => (*/}
+                                    {/*            <option>{country}</option>*/}
+                                    {/*        ))}*/}
+                                    {/*        value = {this.state.location}*/}
+                                    {/*    </Input>*/}
+                                    {/*</FormGroup>*/}
                                     {/*</Col>*/}
                                     <Col md={12}>
                                         <FormGroup className="city-country-2">
-                                            <Input
-                                                type="select"
-                                                name="location"
-                                                className="field-box">
-
+                                            {/*<Input*/}
+                                            {/*    type="select"*/}
+                                            {/*    name="location"*/}
+                                            {/*    className="field-box">*/}
+                                            {/*    {regions.map((region) => (*/}
+                                            {/*        <option>{region}</option>*/}
+                                            {/*    ))}*/}
+                                            {/*    onChange={(e) => this.updateField(e)}*/}
+                                            {/*    value = {this.state.location}*/}
+                                            {/*</Input>*/}
+                                            <select type="text"
+                                                    value={this.state.location}
+                                                    onChange={this.updateField}
+                                                    name={'location'}
+                                                    className="field-box button-region">
+                                            >
                                                 {regions.map((region) => (
-                                                    <option>{region}</option>
+                                                    <option value={region}>{region}</option>
                                                 ))}
-                                                {/*<option>Rivne</option>*/}
-                                                {/*<option>Vinnytsia</option>*/}
-                                                {/*<option>Lutsk</option>*/}
-                                                onChange={() => this.updateField()}
-                                                value = {this.state.location}
-                                            </Input>
+                                            </select>
                                         </FormGroup>
                                     </Col>
                                 </Row>
@@ -193,11 +200,11 @@ class FillEditPage extends React.Component {
                                 <Label className="marg-top">I like</Label>
                                 <Input
                                     type="textarea"
-                                    name="about_me1"
+                                    name="i_like"
                                     className="loginInputTextArea"
                                     // onChange={() => this.updateField()}
-                                    onChange={() => this.handleChange}
-                                    value={this.state.about_me1}
+                                    onChange={(e) => this.updateField(e)}
+                                    value={this.state.i_like}
                                 />
                                 <Label className="marg-top">Something about me</Label>
                                 <Input

@@ -6,12 +6,12 @@ CORS(app)
 
 RESPONSE = {'first_name': '1',
             'last_name': '2',
-            'location': 'stateFromApi_test.py',
+            'location': 'Lviv',
             'username': '4',
             'email': 'rrr@gn.com',
             'password': '6a',
-            'about_me': '7_from_Api',
-            'about_me1': 'Fuck_from_Api',
+            'about_me': 'about_me feild_from_Api',
+            'i_like': 'i like field',
             'birth_date': '9',
             'phone_number': '99999'}
 
