@@ -30,21 +30,22 @@
     margin-top: 17px;
 }
 .row-email{
-    margin-left: 14px;
+    margin-left: 0px;
     max-height: 40px;
-    max-width: 50%;
-    border: 0;
-    padding-left: 0;
+    max-width: 100%;
+    /*border: 0;*/
+    padborder-radius: 25px;ding-left: 0;
+    border-radius: 25px;
 }
 .button-change{
     max-width: 45%;
 
 }
-.textarea{
+.loginInputTextArea{
     min-height: 75px;
     border-radius: 25px;
 }
-.textarea-2{
+.loginInputTextArea-2{
     min-height: 135px;
     border-radius: 25px;
 }

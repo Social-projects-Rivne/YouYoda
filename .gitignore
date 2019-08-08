@@ -132,11 +132,8 @@ venv.bak/
 /frontend/yarn-error.log*
 
 
-*.ico
-*.svg
-
-*.png
-*.jpeg
 package-lock.json
 /content
+
+/node_modules
 

@@ -1,121 +1,255 @@
 import React from 'react';
 import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import Button from "reactstrap/es/Button";
-import { countries, regions } from './Variables/location';
+import {countries, regions} from './Variables/location';
+import {editForm} from "../api/editForm";
+import axios from 'axios'
+
 
 
 class FillEditPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false,
+            first_name: '',
+            last_name: '',
+            location: '',
+            username: '',
+            email: '',
+            password: '',
+            about_me: '',
+            about_me1: '',
+            birth_date: '',
+            phone_number: ''
+        };
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    toggle = () => {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    };
+
+
+    async handleClick(event) {
+        await editForm(this.state);
+    }
+
+    getUser = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/test');
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    postUser = async (formData) => {
+        try {
+            const response = await axios.post('http://localhost:5000/test', formData);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    saveForm =async()=>{
+        let payLoad = {};
+        payLoad.username = this.state.username;
+        payLoad.first_name = this.state.first_name;
+        payLoad.last_name = this.state.last_name;
+        payLoad.location = this.state.location;
+        payLoad.about_me = this.state.about_me;
+        payLoad.about_me1 = this.state.about_me;
+        payLoad.birth_date = this.state.birth_date;
+        payLoad.phone_number = this.state.phone_number;
+        await this.postUser (payLoad)
+    };
+    updateField = (event) => {
+        let fieldName = event.target.name;
+        let newState = {};
+        newState[fieldName] = event.target.value;
+        // this.setState({username: event.target.value})
+        this.setState(newState)
+    };
+
+    async componentDidMount() {
+        let userData = await this.getUser();
+        // this.setState({username: userData.username,
+        // first_name: userData.first_name})
+        let test_dict = {}
+        Object.keys(this.state).map(function (key) {
+            test_dict[key] = userData[key]
+        })
+        this.setState(test_dict)
+    }
+
     render() {
         const {header, main} = this.props;
         return (
             <div className="">
                 <Container>
-                    <Row>
-                        <Col md="6" sm="12" className="fill-edit-collumn">
-                            <h2 class="font-weight-bold" className="top-text">Personal details</h2>
-                            <img src={require('../img/static/avatar.png')} className="avatar"/>
-                            <Label for="login" name="login" className="login">Login*</Label>
-                            <Input
-                                type="login"
-                                className="field-box"
-                                required
-                            />
-                            <Label for="name" className="name">Name*</Label>
-                            <Input
-                                type="name"
-                                className="field-box"
-                                required
-                            />
-                            <Label for="surname" className="surname">Surname*</Label>
-                            <Input
-                                type="surname"
-                                className="field-box"
-                                required
-                            />
-                            <Row form>
-                                <Col md={6}>
-                                    <FormGroup className="city-country">
-                                        <Label for="state">City and country*</Label>
-                                        <Input type="select" className="field-box" required>
-                                            {countries.map((country) => (
-                                                <option>{country}</option>
-                                            ))}
-                                        </Input>
-                                    </FormGroup>
-                                </Col>
-                                <Col md={6}>
-                                    <FormGroup className="city-country-2">
-                                        <Input type="select" className="field-box" required>
-                                            {regions.map((region) => (
-                                                <option>{region}</option>
-                                            ))}
-                                                                                    </Input>
-                                    </FormGroup>
-                                </Col>
-                            </Row>
-                            <h2 class="font-weight-bold" className="top-text-contact">Contacts</h2>
-                            <Label for="number">Mobile phone</Label>
-                            <Input
-                                type="number"
-                                className="field-box"
-                                placeholder="+3(80_)-__-___-__-__"
-                                required
-                            />
-                            <Label>Your email*</Label>
-                            <Row>
-                                <Label for="email"></Label>
-                                <Input type="email" name="email" placeholder="example@email" className="row-email"/>
-                                <Button color="link" className="button-change">change</Button>
-                            </Row>
-                            <h6 class="font-weight-bold">Verify your email address</h6>
-                            <hr/>
-                            <Row>
-                                <Col md="9">
-                                    In order to start using your account, <br/>you need to conform your email address.
-                                    <hr/>
-                                </Col>
-                                <Col md="3">
-                                    <Button className="button-verify-email">Verify Email</Button>
-                                </Col>
-                            </Row>
-                        </Col>
+                    <Form
+                        // onSubmit={this.handleSubmit} method="Post"
+                        method="POST" className="form-group "
+                    >
+                        <Row>
+                            <Col md="6" sm="12" className="fill-edit-collumn">
+                                <h2 class="font-weight-bold" className="top-text">Personal details</h2>
+                                <img src={require('../img/static/avatar.png')} className="avatar"/>
+                                <Label for="login" className="login">Login*</Label>
+                                <Input
+                                    type="login"
+                                    name="username"
+                                    className="field-box"
+                                    onChange={(e) => this.updateField(e)}
+                                    value={this.state.username}
+                                />
+                                <Label for="name" className="name">Name*</Label>
+                                <Input
+                                    name="first_name"
+                                    className="field-box"
+                                    onChange={(e) => this.updateField(e)}
+                                    value={this.state.first_name}
+                                />
+                                <Label for="surname" className="surname">Surname*</Label>
+                                <Input
+                                    name="last_name"
+                                    className="field-box"
+                                    onChange={(e) => this.updateField(e)}
+                                    value={this.state.last_name}
+                                />
+                                <Label>Your email*</Label>
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    placeholder="example@email.com"
+                                    className="row-email"
+                                    value={this.state.email}
+                                    onChange={(e) => this.updateField(e)}
+                                />
+                                <Row>
+                                    {/*<Col md={6}>*/}
+                                        {/*<FormGroup className="city-country">*/}
+                                        {/*    <Label for="state">City and country*</Label>*/}
+                                        {/*    <Input*/}
+                                        {/*        type="select"*/}
+                                        {/*        name="location"*/}
+                                        {/*        className="field-box">*/}
+                                        {/*        onChange={(e) => this.updateField(e)}*/}
+                                        {/*        {countries.map((country) => (*/}
+                                        {/*            <option>{country}</option>*/}
+                                        {/*        ))}*/}
+                                        {/*        value = {this.state.location}*/}
+                                        {/*    </Input>*/}
+                                        {/*</FormGroup>*/}
+                                    {/*</Col>*/}
+                                    <Col md={12}>
+                                        <FormGroup className="city-country-2">
+                                            <Input
+                                                type="select"
+                                                name="location"
+                                                className="field-box">
 
-                        <Col md="6" sm="12" className="fill-edit-collumn" className="top-text-2">
-                            <h2 class="font-weight-bold">About me</h2>
-                            <Label className="marg-top">I like</Label>
-                            <Input type="textarea" name="text" className="textarea"/>
-                            <Label className="marg-top">Something about me</Label>
-                            <Input type="textarea" name="text" className="textarea-2"/>
-                            <Label for="exampleDate" className="marg-top">Date of birth</Label>
-                            <Input
-                                type="date"
-                                className="field-box"
-                                placeholder="date placeholder"
-                            />
-                            <h2 class="security-button">Security</h2>
-                            <Label>Change my password</Label>
-                            <div className="row justify-content-lg-start">
-                                <div className="col-5 passwords-change">
-                                    <Input type="password"
-                                           placeholder="New password"
-                                           className="field-box"
-                                    />
+                                                {regions.map((region) => (
+                                                    <option>{region}</option>
+                                                ))}
+                                                {/*<option>Rivne</option>*/}
+                                                {/*<option>Vinnytsia</option>*/}
+                                                {/*<option>Lutsk</option>*/}
+                                                onChange={() => this.updateField()}
+                                                value = {this.state.location}
+                                            </Input>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <h2 class="font-weight-bold" className="top-text-contact">Contacts</h2>
+                                <Label for="number">Mobile phone</Label>
+                                <Input
+                                    onSubmit={() => {
+                                        console.log("test")
+                                    }}
+                                    type="number"
+                                    name="phone_number"
+                                    className="field-box"
+                                    placeholder="+38(0__)-___-__-__"
+                                    onChange={(e) => this.updateField(e)}
+                                    value={this.state.phone_number}
+                                />
+                                <hr/>
+                                <Row>
+                                    <Col md="9">
+                                        In order to start using your account, <br/>you need to confirm your email
+                                        address.
+                                        <hr/>
+                                    </Col>
+                                    <Col md="3">
+                                        {/*<Button className="button-verify-email">Verify Email</Button>*/}
+                                    </Col>
+                                </Row>
+                            </Col>
+
+                            <Col md="6" sm="12" className="fill-edit-collumn" className="top-text-2">
+                                <h2 class="font-weight-bold">About me</h2>
+                                <Label className="marg-top">I like</Label>
+                                <Input
+                                    type="textarea"
+                                    name="about_me1"
+                                    className="loginInputTextArea"
+                                    // onChange={() => this.updateField()}
+                                    onChange={() => this.handleChange}
+                                    value={this.state.about_me1}
+                                />
+                                <Label className="marg-top">Something about me</Label>
+                                <Input
+                                    type="textarea"
+                                    name="about_me"
+                                    className="loginInputTextArea-2"
+                                    onChange={(e) => this.updateField(e)}
+                                    value={this.state.about_me}
+                                />
+                                <Label for="exampleDate" className="marg-top">Date of birth</Label>
+                                <Input
+                                    type="date"
+                                    name="birth_date"
+                                    className="field-box"
+                                    placeholder="date placeholder"
+                                    onChange={(e) => this.updateField(e)}
+                                    value={this.state.birth_date}
+                                />
+                                <h2 class="security-button">Security</h2>
+                                <Label>Change my password</Label>
+                                <div className="row justify-content-lg-start">
+                                    <div className="col-5 passwords-change">
+                                        <Input type="password"
+                                               name="password"
+                                               placeholder="New password"
+                                               className="field-box"
+                                               onChange={(e) => this.updateField(e)}
+                                               value={this.state.password}
+                                        />
+                                    </div>
+                                    <div className="col-5">
+                                        <Input type="password"
+                                               name="password"
+                                               className="password"
+                                               placeholder="Confirm password"
+                                               onChange={(e) => this.updateField(e)}
+                                               value={this.state.password}
+                                        />
+                                    </div>
+                                    <Button className="submit-button"
+                                            onClick={() => this.saveForm()}>Submit</Button>
                                 </div>
-                                <div className="col-5">
-                                    <Input type="password"
-                                           className="password"
-                                           placeholder="Confirm password"
-                                    />
+                                <Button color="secondary" className="text-button-trainer" size="lg" block>I want to
+                                    become a
+                                    trainer</Button>
+                                <div class="col-4">
+                                    <Button color="secondary" type size="lg" className="button-saveall" block>Save
+                                        all</Button>
                                 </div>
-                                <Button className="submit-button">Submit</Button>
-                            </div>
-                            <Button color="secondary" className="text-button-trainer" size="lg" block>I want to become a
-                                trainer</Button>
-                            <div class="col-4">
-                                <Button color="secondary" size="lg" className="button-saveall" block>Save all</Button>
-                            </div>
-                        </Col>
-                    </Row>
+                            </Col>
+                        </Row>
+                    </Form>
                 </Container>
             </div>
         )
@@ -124,5 +258,7 @@ class FillEditPage extends React.Component {
 
 export default FillEditPage;
 
+
+// onSubmit={() => {alert("test")}}
 
 
