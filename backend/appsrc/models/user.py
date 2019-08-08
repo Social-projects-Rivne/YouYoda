@@ -14,6 +14,7 @@ class User(models.Model):
     password = models.CharField(max_length=40)
     email = models.EmailField(unique=True)
     about_me = models.TextField(blank=True, null=True)
+    i_like = models.TextField(blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     phone_number = models.CharField(max_length=9, blank=True, null=True)
     is_active = models.BooleanField(default=True)

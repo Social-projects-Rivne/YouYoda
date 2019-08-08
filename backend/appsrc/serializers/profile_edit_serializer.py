@@ -10,7 +10,7 @@ class ProfileEditSerializer(serializers.ModelSerializer):
 
         fields = (
 		 	'first_name', 'last_name', 'location', 'username', 'about_me', 
-            'birth_date', 'phone_number'
+            'birth_date', 'phone_number', 'i_like'
             )
 
     def create(self, validated_data):
