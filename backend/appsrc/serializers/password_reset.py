@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from ..models.user import User
 from djoser.conf import settings
-from djoser.compat import get_user_email, get_user_email_field_name
+from djoser.compat import get_user_email_field_name
 
 User = get_user_model()
 
@@ -34,4 +34,3 @@ class SendEmailResetSerializer(serializers.Serializer, UserFunctionsMixin):
 
         self.email_field = get_user_email_field_name(User)
         self.fields[self.email_field] = serializers.EmailField()
-

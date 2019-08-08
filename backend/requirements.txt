@@ -2,10 +2,12 @@ Django==2.2.3
 django-templated-mail==1.1.1
 djangorestframework==3.10.2
 djoser==2.0.1
+djangorestframework-simplejwt==4.1.4
+django-rest-passwordreset==1.0.0
+django-templated-mail==1.1.1
 mysqlclient==1.4.2.post1
 npm==0.1.1
 optional-django==0.1.0
 pytz==2019.1
 sqlparse==0.3.0
 gunicorn==19.9.0
-djangorestframework-simplejwt==4.1.4

@@ -15,9 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 from django.conf.urls import include, url
-from django.contrib import admin
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
+    path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]

@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_rest_passwordreset',
     'appsrc',
     'rest_framework',
     'djoser',
 ]
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,7 +56,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'myproject.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -82,7 +84,7 @@ DATABASES = {
         'NAME': 'YouYoda',
         'USER': 'root',
         'PASSWORD': 'root_password',
-        'HOST': 'mariadb',   
+        'HOST': 'mariadb',
         'PORT': '3306',
     }
 }
@@ -166,6 +168,7 @@ DJOSER = {
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
     "SERIALIZERS": {
         'password_reset': 'appsrc.serializers.password_reset.SendEmailResetSerializer',
         'password_reset_confirm': 'appsrc.serializers.password_reset_confirm.PasswordResetConfirm',
