@@ -1,0 +1,102 @@
+#trainerButton{
+    margin-top: 50px;
+}
+.fill-edit-collumn{
+    height: 1260px;
+}
+
+.top-text{
+    margin-top: 56px;
+    font-weight: bold;
+}
+.top-text-2{
+    margin-top: 56px;
+
+}
+.avatar{
+
+    margin: 22px 160px 0 183px ;
+}
+
+.city-country-2{
+    margin-top: 49px;
+}
+.top-text-contact{
+    font-weight: bold;
+    margin-top: 116px;
+}
+.fill-edit-collumn label{
+
+    margin-top: 17px;
+}
+.row-email{
+    margin-left: 0px;
+    max-height: 40px;
+    max-width: 100%;
+    /*border: 0;*/
+    padborder-radius: 25px;ding-left: 0;
+    border-radius: 25px;
+}
+.button-change{
+    max-width: 45%;
+
+}
+.loginInputTextArea{
+    min-height: 75px;
+    border-radius: 25px;
+}
+.loginInputTextArea-2{
+    min-height: 135px;
+    border-radius: 25px;
+}
+.marg-top{
+
+    margin-top: 17px;
+}
+.text-button-trainer{
+    margin-top: 35px;
+    border-radius: 25px;
+
+}
+.submit-button{
+    min-width: 100px;
+    border-radius: 25px;
+}
+.passwords-change {
+    flex: 0 0 40%;
+    max-width: 50%;
+    padding-right: 0px;
+
+}
+.password {
+    margin-left: -7px;
+    border-radius: 25px;
+}
+.button-saveall{
+    background-color: orange;
+    min-width: 262px;
+    margin-left: 263px;
+    border-color: orange;
+    border-radius: 25px;
+    margin-top: 312px;
+}
+.button-verify-email{
+    border-radius: 25px;
+}
+.field-box{
+    border-radius: 25px;
+}
+.your-email{
+    max-width: 50%;
+}
+.login{
+    margin-top: 22px;
+}
+.security-button{
+    margin-top: 36px;
+}
+.button-region{
+    min-width: 257px;
+    min-height: 45px;
+    background-color: #6c757d;
+}

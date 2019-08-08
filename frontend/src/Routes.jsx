@@ -1,20 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
-/* import Home from './Pages/HomePage'; */
-import LoginForm from './Components/LoginForm';
+
+import Home from './Pages/Home';
+import {Route, BrowserRouter as Router} from 'react-router-dom';
+import EditPageProfile from "./Pages/EditPageProfile";
 
 
-function Routes() {
-
+export default function Routes() {
   return (
-
     <Router>
-      <div>
-        <Route path="/login" component={LoginForm} />
-      </div>
+    <div>
+        <Route exact path='/' component={Home}/>
+        <Route path='/editprofile' component={EditPageProfile}/>
+    </div>
     </Router>
-  )
-}
+  );
+};
 
-export default Routes;
+

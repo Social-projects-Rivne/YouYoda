@@ -1,7 +1,6 @@
 from django.urls import include, path
 from django.conf.urls import include, url
 
-
 from .views.edit_profile import EditProfile
 from .views.view_profile import ViewProfile
 
