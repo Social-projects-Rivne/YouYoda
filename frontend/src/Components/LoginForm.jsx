@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
 
-import FacebookLogo from '../img/content/Facebook(1).png';
+import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
-import GoogleLogo from '../img/content/Google +.png';
+import GoogleLogo from '../img/content/google.png';
 import { userLogin } from '../api/userLogin';
 import '../style/login.css';
 
@@ -60,7 +60,6 @@ class LoginForm extends Component {
         this.setState({
                 [name]: value },
             () => { this.validateField(name, value) });
-        console.log(this.state);
     }
 
     async handleClick(event) {
