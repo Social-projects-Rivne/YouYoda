@@ -25,19 +25,19 @@ class Migration(migrations.Migration):
         role.save()
 
         User = apps.get_model('appsrc', 'User')
-        user = User(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky', 
-            location = 'Ukraine, Rivne', username = 'Yoda-admin', password = '$2y$12$UF3XjBwS3Oz6phT4WfXPkepcUuro.4BxotLKiY22QonRm2/cEYzBa', 
-            email = 'youyoda.academy@gmail.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "", 
+        user = User(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
+            location = 'Ukraine, Rivne', username = 'Yoda-admin', password = '$2y$12$UF3XjBwS3Oz6phT4WfXPkepcUuro.4BxotLKiY22QonRm2/cEYzBa',
+            email = 'youyoda.academy@gmail.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
             is_active = True, avatar_url = '', is_trainer = True, role_id = Roles.objects.get(id=3, name='admin'))
         user.save()
-        user = User(id=2, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky', 
-            location = 'Ukraine, Rivne', username = 'Yoda-moderator', password = '$2y$12$ce08PZUTOELFeDh3EewjsuhOBMxbp.lBQBQ0cODMtDJp13sXMRDk2', 
-            email = 'test@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "", 
+        user = User(id=2, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
+            location = 'Ukraine, Rivne', username = 'Yoda-moderator', password = '$2y$12$ce08PZUTOELFeDh3EewjsuhOBMxbp.lBQBQ0cODMtDJp13sXMRDk2',
+            email = 'test@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
             is_active = True, avatar_url = '', is_trainer = True, role_id = Roles.objects.get(id=2, name='moderator'))
         user.save()
-        user = User(id=3, hide_my_data = False, first_name = 'Yoda', last_name = 'Rivensky', 
-            location = 'Ukraine, Rivne', username = 'Yoda-user', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm', 
-            email = 'test1@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "", 
+        user = User(id=3, hide_my_data = False, first_name = 'Yoda', last_name = 'Rivensky',
+            location = 'Ukraine, Rivne', username = 'Yoda-user', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+            email = 'test1@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
             is_active = True, avatar_url = '', is_trainer = False, role_id = Roles.objects.get(id=1, name='user'))
         user.save()
 

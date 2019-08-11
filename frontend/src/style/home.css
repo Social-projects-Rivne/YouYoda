@@ -267,7 +267,7 @@
 /* Styles for ResetPassword */
 
 .reset-pass {
-    height: 100vh;
+    height: 71vh;
     min-height: 510px;
     background-image: url("../img/static/patternfon.png");
     background-position: center;
@@ -275,8 +275,17 @@
     display: flex;
     align-items: center;
 }
+.reset-pass .container{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 50px;
+    border-radius: 20px;
+}
 .reset-pass-form {
     border-radius: 20px;
     margin-bottom: 20px;
 
+}
+.form-error {
+    padding-left: 20px;
+    color: #710000;
 }

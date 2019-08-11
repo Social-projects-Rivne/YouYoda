@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_rest_passwordreset',
     'appsrc',
     'rest_framework',
     'djoser',
@@ -163,16 +162,14 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     "SEND_ACTIVATION_EMAIL": True,
-    "PASSWORD_RESET_CONFIRM_URL": "/reset/password/new/{uid}/{token}",
-    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+    "PASSWORD_RESET_CONFIRM_URL": "reset/password/new/{uid}/{token}",
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
-    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
     "SERIALIZERS": {
         'password_reset': 'appsrc.serializers.password_reset_serializer.SendEmailResetSerializer',
         'password_reset_confirm': 'appsrc.serializers.password_reset_confirm_serializator.PasswordResetConfirm',
-    }
+    },
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -180,7 +177,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'youyoda.academy@gmail.com'
-EMAIL_HOST_PASSWORD = 'kxjwwretyhbjlgah'
+EMAIL_HOST_PASSWORD = os.environ.get("GMAIL_ACCOUNT_PASSWORD", '')
 DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
 
 JWT_AUTH = {"JWT_ALLOW_REFRESH": True}
