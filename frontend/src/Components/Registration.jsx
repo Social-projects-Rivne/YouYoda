@@ -13,13 +13,13 @@ class Registration extends React.Component{
             userstudent: true,
             userteacher: false,
             isagreed: true,
-            formErrors: {email: '', password: '', confirmpass: '', isAgreed: false},
+            formErrors: {email: '', password: '', confirmpass: '', isAgreed: ''},
             emailValid: false,
             passwordValid: false,
             confirmPasswordValid: false,
-            isAgreedValid: false,
+            isAgreedValid: true,
             formValid: false,
-            redirect: false
+            showErrors: false
         }
         this.onChangeInputs = this.onChangeInputs.bind(this);
         this.radioGetter = this.radioGetter.bind(this);
@@ -76,9 +76,21 @@ class Registration extends React.Component{
                         isAgreedValid: isAgreedValid
                       }, this.validateForm);
     }
+
+    errorShowBlock(formErrors) {
+        for (var errorText in formErrors) {
+            if(formErrors[errorText].length > 0)
+                return true;
+        }
+        return false;
+    }
     
     validateForm() {
-        this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid && this.state.isagreed});
+        this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid && this.state.isAgreedValid});
+        var show = this.errorShowBlock(this.state.formErrors);
+        this.setState({
+            showErrors: show
+        });
     }
 
     onChangeInputs = (event) => {
@@ -99,7 +111,6 @@ class Registration extends React.Component{
     }
     async handleClick(event){
         event.preventDefault();
-        console.log(this.state);
         await registration(this.state);
         return false;
     }
@@ -125,7 +136,7 @@ class Registration extends React.Component{
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <h3 className="modal-title">Register</h3>
-                        <div className={!this.state.formValid ? 'panel-errors errors-show':'panel-errors'}>
+                        <div className={this.state.showErrors ? 'panel-errors errors-show':'panel-errors'}>
                             <FormErrors formErrors={this.state.formErrors} />
                         </div>
                         <form className="form-horizontal">
