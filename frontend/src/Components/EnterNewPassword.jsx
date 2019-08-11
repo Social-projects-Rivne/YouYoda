@@ -31,9 +31,10 @@ export default class EnterNewPassword extends React.Component{
           let fieldValidationErrors = this.state.formErrors;
           let {passwordValid, rePasswordValid} = this.state;
           let {new_password, re_new_password} = this.state;
+          const passregex = RegExp(/^(\w+){6,18}$/g);
 
-          passwordValid = value.length >= 6;
-          fieldValidationErrors.fieldName = passwordValid ? '': ' is too short';
+          passwordValid = passregex.test(value);
+          fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain 6-18 characters';
           (new_password !== re_new_password) ?
               fieldValidationErrors.fieldName= "Passwords don't match" :
               rePasswordValid = true;
