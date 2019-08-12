@@ -1,4 +1,4 @@
-/*Styles for Dropdown*/
+/*Styles for ProfileHeader*/
 .profile-photo-dropdown {
     border-radius: 20px;
     height: 35px;
@@ -161,6 +161,22 @@
     height: 20px;
     margin-left: 40px;
 }
+
+/*Styles for ProfileMainInfo*/
+.contact-info {
+    margin-top: 30px;
+}
+.horz-line {
+    position: relative;
+    top: 5px;
+    border: 1px solid #707070;
+    opacity: 0.3;
+}
+.main-info {
+    position: relative;
+    top: 20px;
+}
+
 @media screen and (max-width: 767px) {
     .profile-photo-container,
     .user-name,
