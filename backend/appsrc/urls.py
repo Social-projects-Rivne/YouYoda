@@ -16,6 +16,8 @@ Including another URLconf
 from django.urls import path
 from django.conf.urls import include, url
 
-urlpatterns = [
+from .views.reset_password_confirm import ResetPasswordConfirm
 
+urlpatterns = [
+    path('users/reset_password_confirm/', ResetPasswordConfirm.as_view(), name='reset-password'),
 ]

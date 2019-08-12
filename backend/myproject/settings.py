@@ -172,12 +172,22 @@ DJOSER = {
     },
 }
 
+PASSWORD_HASHERS = [
+    'appsrc.hashers.BcriptHash',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+]
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'youyoda.academy@gmail.com'
-EMAIL_HOST_PASSWORD = os.environ.get("GMAIL_ACCOUNT_PASSWORD", '')
+EMAIL_HOST_PASSWORD = 'kxjwwretyhbjlgah'
 DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
 
 JWT_AUTH = {"JWT_ALLOW_REFRESH": True}
