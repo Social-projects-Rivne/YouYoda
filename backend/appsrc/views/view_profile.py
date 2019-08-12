@@ -11,23 +11,18 @@ from ..serializers.profile_view_serializer import ProfileViewSerializer
 
 class ViewProfile(APIView):
 
-    permission_classes = [permissions.IsAuthenticated,]
-    #permission_classes = [permissions.AllowAny,]
+    #permission_classes = [permissions.IsAuthenticated,]
+    permission_classes = [permissions.AllowAny,]
 
-    def get_object(self, pk):
-        try:
-            return user.objects.get(pk=pk)
-        except user.DoesNotExist:
-            raise Http404
-
-    #def get(self, request, pk, format=None):
-     # user = self.get_object(pk)
-      #serializer = ProfileViewSerializer(user)
-      #return Response(serializer.data)
+    # def get_object(self, pk):
+    #     try:
+    #         return user.objects.get(pk=pk)
+    #     except user.DoesNotExist:
+    #         raise Http404
 
     def get(self, request):
         user = User.objects.all()
-        serializer = ProfileEditSerializer(user, many=True)
+        serializer = ProfileViewSerializer(user, many=True)
         return Response(serializer.data)
 
 
