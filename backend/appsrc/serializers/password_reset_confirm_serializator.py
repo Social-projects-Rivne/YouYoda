@@ -1,8 +1,7 @@
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions as django_exceptions
-from rest_framework import exceptions, serializers
+from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-import warnings
 
 from djoser import utils
 from djoser.conf import settings

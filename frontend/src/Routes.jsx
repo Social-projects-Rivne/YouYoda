@@ -1,9 +1,10 @@
 import React from 'react';
 
+import {Route, BrowserRouter as Router} from 'react-router-dom';
+
+import EnterNewPassword from './Components/EnterNewPassword';
 import Home from './Pages/Home';
 import MainLayout from './Pages/MainLayout';
-import {Route, BrowserRouter as Router} from 'react-router-dom';
-import EnterNewPassword from './Components/EnterNewPassword';
 import ResetPassword from './Components/ResetPassword';
 
 

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {Container} from 'reactstrap';
+
 import {newPassword} from '../api/resetPassword';
 import {FormErrors} from '../api/FormError';
 
@@ -44,6 +45,7 @@ export default class EnterNewPassword extends React.Component{
                         rePasswordValid: rePasswordValid,
                         }, this.validateForm);
     }
+
     validateForm() {
       this.setState({formValid: this.state.rePasswordValid &&
                                 this.state.passwordValid});

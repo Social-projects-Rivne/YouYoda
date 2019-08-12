@@ -6,7 +6,7 @@ import {Container, Row, Col} from 'reactstrap';
 export default class HomeTrainers extends React.Component{
     render (){
         return(
-            <>
+            <div id="home-trainer">
             <Container className="home-trainers">
             <Row>
                 <Col className="header-block">
@@ -47,7 +47,7 @@ export default class HomeTrainers extends React.Component{
             </Row>
 
             </Container>
-            </>
+            </div>
         )
     }
 };

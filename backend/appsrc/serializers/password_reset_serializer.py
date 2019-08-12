@@ -1,7 +1,8 @@
 from rest_framework import serializers
-from ..models.user import User
-from djoser.conf import settings
+
 from djoser.compat import get_user_email_field_name
+from djoser.conf import settings
+from ..models.user import User
 
 
 class UserFunctionsMixin:

@@ -55,6 +55,9 @@
     display: flex;
     margin: 49px 0 30px 0;
 }
+.footer-nav li {
+    cursor: pointer;
+}
 .footer-nav a {
     color: #000;
     margin-right: 30px;

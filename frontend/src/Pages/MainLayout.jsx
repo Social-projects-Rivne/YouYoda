@@ -10,7 +10,7 @@ export default class MainLayout extends React.Component{
         return(
             <>
             <Header/>
-            <main>{this.props.children}</main>
+                <main>{this.props.children}</main>
             <Footer/>
             </>
         )

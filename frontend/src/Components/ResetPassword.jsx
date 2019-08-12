@@ -1,6 +1,9 @@
 import React from 'react';
+
 import {Container} from 'reactstrap';
+
 import {resetPassword} from '../api/resetPassword'
+
 
 export default class ResetPassword extends React.Component{
     constructor(props){

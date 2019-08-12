@@ -24,7 +24,7 @@ export default class HomeEvent extends React.Component{
           ]
         };
         return(
-            <div style={{backgroundColor:'#E8E8E8'}}>
+            <div style={{backgroundColor:'#E8E8E8'}} id="home-event">
             <Container className="home-event">
             <Row>
                 <Col className="header-block">

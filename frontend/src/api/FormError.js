@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const FormErrors = ({formErrors}) =>
+export const FormErrors = ({formErrors}) =>
   <div className='formErrors'>
     {Object.keys(formErrors).map((fieldName, i) => {
         return (
@@ -9,5 +9,3 @@ const FormErrors = ({formErrors}) =>
         )
     })}
     </div>
-
-export { FormErrors };
