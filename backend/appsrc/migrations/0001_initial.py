@@ -61,6 +61,7 @@ class Migration(migrations.Migration):
                 ('last_name', models.CharField(max_length=20, null=True)),
                 ('location', models.TextField(blank=True, null=True)),
                 ('username', models.CharField(max_length=20, unique=True)),
+                ('psalt', models.CharField(max_length=20),
                 ('password', models.CharField(max_length=80)),
                 ('email', models.EmailField(max_length=254, unique=True)),
                 ('about_me', models.TextField(blank=True, null=True)),

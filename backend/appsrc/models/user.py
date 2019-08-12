@@ -10,7 +10,7 @@ class User(AbstractUser):
     hide_my_data = models.BooleanField(default=False)
     first_name = models.CharField(max_length=20, blank=True, null=True)
     last_name = models.CharField(max_length=20, blank=True, null=True)
-    location = models.TextField(blank=True, blank=True, null=True)
+    location = models.TextField(blank=True, null=True)
     username = models.CharField(max_length=20, unique=True)
     psalt = models.CharField(max_length=20)
     password = models.CharField(max_length=80)

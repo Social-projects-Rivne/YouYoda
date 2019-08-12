@@ -145,3 +145,5 @@ DJOSER = {
         'token_create': 'djoser.serializers.TokenCreateSerializer',
     }
 }
+
+AUTH_USER_MODEL = 'appsrc.User'
