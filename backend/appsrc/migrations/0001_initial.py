@@ -25,18 +25,21 @@ class Migration(migrations.Migration):
         role.save()
 
         User = apps.get_model('appsrc', 'User')
+        salt=bcrypt.gensalt(12)
         user = User(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky', 
-            location = 'Ukraine, Rivne', username = 'Yoda-admin', password = '$2y$12$UF3XjBwS3Oz6phT4WfXPkepcUuro.4BxotLKiY22QonRm2/cEYzBa', 
+            location = 'Ukraine, Rivne', username = 'Yoda-admin', psalt=salt, password=bcrypt.hashpw('admin1111'.encode(encoding='UTF-8'), salt), 
             email = 'youyoda.academy@gmail.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "", 
             is_active = True, avatar_url = '', is_trainer = True, role_id = Roles.objects.get(id=3, name='admin'))
         user.save()
+        salt=bcrypt.gensalt(12)
         user = User(id=2, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky', 
-            location = 'Ukraine, Rivne', username = 'Yoda-moderator', password = '$2y$12$ce08PZUTOELFeDh3EewjsuhOBMxbp.lBQBQ0cODMtDJp13sXMRDk2', 
+            location = 'Ukraine, Rivne', username = 'Yoda-moderator', psalt=salt, password=bcrypt.hashpw('moderator1111'.encode(encoding='UTF-8'), salt), 
             email = 'test@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "", 
             is_active = True, avatar_url = '', is_trainer = True, role_id = Roles.objects.get(id=2, name='moderator'))
         user.save()
+        salt=bcrypt.gensalt(12)
         user = User(id=3, hide_my_data = False, first_name = 'Yoda', last_name = 'Rivensky', 
-            location = 'Ukraine, Rivne', username = 'Yoda-user', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm', 
+            location = 'Ukraine, Rivne', username = 'Yoda-user', psalt=salt, password=bcrypt.hashpw('user1111'.encode(encoding='UTF-8'), salt), 
             email = 'test1@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "", 
             is_active = True, avatar_url = '', is_trainer = False, role_id = Roles.objects.get(id=1, name='user'))
         user.save()
