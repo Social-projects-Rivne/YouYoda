@@ -30,7 +30,13 @@ class EditProfile(APIView):
         user = User.objects.all()
         serializer = ProfileEditSerializer(user, many=True)
         return Response(serializer.data[0])
-   
+
+    # method for filtering data
+    # def get(self, request):
+    #     user = User.objects.all().filter()
+    #     serializer = ProfileEditSerializer(user, many=True)
+    #     return Response(serializer.data)
+
     # def post(self, request, format=None):
     #     serializer = ProfileEditSerializer(data=request.data)
     #     if serializer.is_valid():

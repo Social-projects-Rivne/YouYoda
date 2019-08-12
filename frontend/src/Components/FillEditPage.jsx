@@ -38,8 +38,8 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/test');
-            // const response = await axios.get('http://localhost:8000/api/user/profile/edit');
+            // const response = await axios.get('http://localhost:5000/test');
+            const response = await axios.get('http://localhost:8000/api/user/profile/edit');
             // console.log(response.data);
             // alert(response.data);
             return response.data;
