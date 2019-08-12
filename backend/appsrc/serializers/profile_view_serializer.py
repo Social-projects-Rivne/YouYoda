@@ -9,7 +9,7 @@ class ProfileViewSerializer(serializers.ModelSerializer):
 		 model = User
 
 		 fields = (
-		 	'first_name', 'last_name', 'about_me', 'avatar_url'
-		 	)
-
+		 	'first_name', 'last_name', 'location', 'username', 'about_me', 
+            'birth_date', 'phone_number', 'i_like', 'email', 'avatar_url'
+            )
 	

@@ -15,7 +15,7 @@ class User(models.Model):
     about_me = models.TextField(blank=True, null=True)
     i_like = models.TextField(blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
-    phone_number = models.CharField(max_length=9, blank=True, null=True)
+    phone_number = models.CharField(max_length=13, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     avatar_url = models.CharField(max_length=80, null=True)
     is_trainer = models.BooleanField(default=False)
