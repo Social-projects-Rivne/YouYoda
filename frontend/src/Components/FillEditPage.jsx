@@ -47,7 +47,7 @@ class FillEditPage extends React.Component {
     postUser = async (formData) => {
         try {
             // const response = await axios.post('http://localhost:5000/test', formData);
-            const response = await axios.put('http://localhost:8000/api/user/profile/edit', formData);
+            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData);
         } catch (error) {
             console.error(error);
         }
@@ -60,6 +60,7 @@ class FillEditPage extends React.Component {
         payLoad.location = this.state.location;
         payLoad.about_me = this.state.about_me;
         payLoad.i_like = this.state.i_like;
+        payLoad.email = this.state.email;
         payLoad.birth_date = this.state.birth_date;
         payLoad.phone_number = this.state.phone_number;
         await this.postUser(payLoad)
