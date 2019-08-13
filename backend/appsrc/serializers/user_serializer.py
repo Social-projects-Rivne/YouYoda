@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from ..models.user import User
+from ..models.user import YouYodaUser
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
 
-        model = User
+        model = YouYodaUser
 
         fields = (
             'role_id', 'hide_my_data', 'first_name', 'last_name',

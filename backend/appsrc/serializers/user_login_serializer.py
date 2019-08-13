@@ -1,4 +1,4 @@
-from ..models.user import User
+from ..models import YouYodaUser
 
 import bcrypt
 from django.contrib.auth import authenticate, login

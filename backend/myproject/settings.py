@@ -137,13 +137,13 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-DJOSER = {
-    'SERIALIZERS': {
-        'user_create': 'appsrc.serializers.user_registration_serializer.RegistrationSerializer',
-        'user': 'appsrc.serializers.user_serializer.UserSerializer',
-        'token': 'djoser.serializers.TokenSerializer',
-        'token_create': 'djoser.serializers.TokenCreateSerializer',
-    }
-}
+# DJOSER = {
+#     'SERIALIZERS': {
+#         'user_create': 'appsrc.serializers.user_registration_serializer.RegistrationSerializer',
+#         'user': 'appsrc.serializers.user_serializer.UserSerializer',
+#         'token': 'djoser.serializers.TokenSerializer',
+#         'token_create': 'djoser.serializers.TokenCreateSerializer',
+#     }
+# }
 
-AUTH_USER_MODEL = 'appsrc.User'
+AUTH_USER_MODEL = 'appsrc.YouYodaUser'
