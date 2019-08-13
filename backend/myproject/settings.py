@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'djoser',
 ]
 
-# AUTH_USER_MODEL = 'appsrc.models.user.YouYodaUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -166,20 +165,15 @@ DJOSER = {
     "ACTIVATION_URL": "#/activate/{uid}/{token}",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
-    "SERIALIZERS": {
-        'password_reset': 'appsrc.serializers.password_reset_serializer.SendEmailResetSerializer',
-        'password_reset_confirm': 'appsrc.serializers.password_reset_confirm_serializator.PasswordResetConfirm',
-    },
+    # "SERIALIZERS": {
+    #     'password_reset': 'appsrc.serializers.password_reset_serializer.SendEmailResetSerializer',
+    #     'password_reset_confirm': 'appsrc.serializers.password_reset_confirm_serializator.PasswordResetConfirm',
+    # },
 }
 
-# PASSWORD_HASHERS = [
-#     'appsrc.hashers.BcriptHash',
-#     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-#     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-#     'django.contrib.auth.hashers.Argon2PasswordHasher',
-#     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
-#     'django.contrib.auth.hashers.BCryptPasswordHasher',
-# ]
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher'
+]
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -191,3 +185,4 @@ EMAIL_HOST_PASSWORD = 'kxjwwretyhbjlgah'
 DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
 
 JWT_AUTH = {"JWT_ALLOW_REFRESH": True}
+AUTH_USER_MODEL = 'appsrc.YouYodaUser'
