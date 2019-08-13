@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
@@ -10,20 +9,24 @@ from ..serializers.profile_view_serializer import ProfileViewSerializer
 
 
 class ViewProfile(APIView):
+    """Takes data from ProfileViewSerializer for view user profile."""
 
     #permission_classes = [permissions.IsAuthenticated,]
     permission_classes = [permissions.AllowAny,]
 
-    # def get_object(self, pk):
-    #     try:
-    #         return user.objects.get(pk=pk)
-    #     except user.DoesNotExist:
-    #         raise Http404
-
+  
     def get(self, request):
+        """Receives and transmits user profile data"""
         user = User.objects.all()
         serializer = ProfileViewSerializer(user, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data[0])
+
+    # def get(self, request):
+    #     """Receives and transmits user profile data"""
+    #     user= get_object_or_404(User.objects.all(), email=request.data.get('email'))
+    #     serializer = ProfileViewSerializer(user)
+    #     return Response(serializer.data)
+
 
 
     

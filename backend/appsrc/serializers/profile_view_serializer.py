@@ -3,6 +3,11 @@ from rest_framework import serializers
 from ..models.user import User
 
 class ProfileViewSerializer(serializers.ModelSerializer):
+	"""Takes data from the User model for view user profile.
+     
+    Converts it to JSON format for transmission via the API.
+
+    """
 
 	class Meta:
 

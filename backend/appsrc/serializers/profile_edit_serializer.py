@@ -3,6 +3,11 @@ from rest_framework import serializers
 from ..models.user import User
 
 class ProfileEditSerializer(serializers.ModelSerializer):
+    """Takes or updates data from the User model for fill/edit user profile.
+     
+    Converts it to JSON format for transmission via the API.
+
+    """
 
     class Meta:
 
@@ -14,6 +19,7 @@ class ProfileEditSerializer(serializers.ModelSerializer):
             )
 
     def create(self, validated_data):
+        """Create user profile"""
         user = User.objects.create(
             first_name = validated_data.get('first_name'),
             last_name = validated_data.get('last_name'),
@@ -28,6 +34,7 @@ class ProfileEditSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
+        """Update user profile"""
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.location = validated_data.get('location', instance.location)
