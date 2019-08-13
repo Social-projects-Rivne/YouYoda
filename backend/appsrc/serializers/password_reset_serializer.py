@@ -16,17 +16,9 @@ class UserFunctionsMixin:
                 return user
         except User.DoesNotExist:
             pass
-        if (
-            settings.PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND
-            or settings.USERNAME_RESET_SHOW_EMAIL_NOT_FOUND
-        ):
-            self.fail("email_not_found")
 
 
 class SendEmailResetSerializer(serializers.Serializer, UserFunctionsMixin):
-    default_error_messages = {
-        "email_not_found": settings.CONSTANTS.messages.EMAIL_NOT_FOUND
-    }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

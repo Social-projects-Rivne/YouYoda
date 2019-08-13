@@ -8,24 +8,10 @@ from djoser.conf import settings
 from ..models.user import User
 
 
-class PasswordSerializer(serializers.Serializer):
-    new_password = serializers.CharField(style={"input_type": "password"})
-
-    def validate(self, attrs):
-        user = self.context["request"].user or self.user
-        # why assert? There are ValidationError / fail everywhere
-        assert user is not None
-
-        try:
-            validate_password(attrs["new_password"], user)
-        except django_exceptions.ValidationError as e:
-            raise serializers.ValidationError({"new_password": list(e.messages)})
-        return super().validate(attrs)
-
-
 class UidAndTokenSerializer(serializers.Serializer):
     uid = serializers.CharField()
     token = serializers.CharField()
+    new_password = serializers.CharField(style={"input_type": "password"})
 
     default_error_messages = {
         "invalid_token": settings.CONSTANTS.messages.INVALID_TOKEN_ERROR,
@@ -39,7 +25,9 @@ class UidAndTokenSerializer(serializers.Serializer):
         # doesn't work with modelserializer
         try:
             uid = utils.decode_uid(self.initial_data.get("uid", ""))
-            self.user = User.objects.get(pk=uid)
+            user = User.objects.get(pk=uid)
+
+
         except (User.DoesNotExist, ValueError, TypeError, OverflowError):
             key_error = "invalid_uid"
             raise ValidationError(
@@ -47,15 +35,35 @@ class UidAndTokenSerializer(serializers.Serializer):
             )
 
         is_token_valid = self.context["view"].token_generator.check_token(
-            self.user, self.initial_data.get("token", "")
+            user, self.initial_data.get("token", "")
         )
+
         if is_token_valid:
+            assert user is not None
+
             return validated_data
         else:
             key_error = "invalid_token"
             raise ValidationError(
                 {"token": [self.error_messages[key_error]]}, code=key_error
             )
+
+class PasswordSerializer(serializers.Serializer):
+    new_password = serializers.CharField(style={"input_type": "password"})
+
+    def validate(self, attrs):
+        user = or self.user
+        # why assert? There are ValidationError / fail everywhere
+        assert user is not None
+
+        try:
+            validate_password(attrs["new_password"], user)
+        except django_exceptions.ValidationError as e:
+            raise serializers.ValidationError({"new_password": list(e.messages)})
+        return super().validate(attrs)
+
+
+
 
 class PasswordResetConfirm(UidAndTokenSerializer, PasswordSerializer):
     #this code created by Djoser and edited for our Models
