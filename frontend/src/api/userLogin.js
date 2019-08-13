@@ -5,14 +5,18 @@ import axios from 'axios';
 
 async function userLogin(props) {
     const apiBaseUrl = "http://localhost:8000/api/";
-    const { email, password } = props ;
+    const { email, password } = props;
+    console.log('function')
     try {
-        const response = axios.post(apiBaseUrl + 'login', { email, password })
+        const response = await axios.post(apiBaseUrl + 'user/login', { email, password })
             .then(function(response) {
                 console.log(response);
-                if (response.data.code === 200) {
+                console.log('OKKKKKKKKKKKKKKKKK');
+                if (response.status === 200) {
                     console.log("Login successfull");
-                } else if (response.data.code === 204) {
+                    const user_token = response.data.user_token;
+                    axios.defaults.headers.common['Authorization'] = user_token;
+                } else if (response.status === 401) {
                     console.log("Username password do not match");
                     alert("username password do not match");
                 } else {
@@ -21,7 +25,7 @@ async function userLogin(props) {
                 }
             })
     } catch (error) {
-        console.log(error);
+        console.log('Error: ' + error.message);
     }
 }
 
