@@ -9,7 +9,7 @@ async function registration(props) {
     props["username"] = props.email;
     try {
         const response = await axios.post(
-            apiBaseUrl + 'user/user/register', 
+            apiBaseUrl + 'api/user/register', 
             props, 
             {
 				crossdomain: true,
@@ -24,8 +24,8 @@ async function registration(props) {
                     alert("Registration successfull");
                 }
                 else if(response.status === 400){
-                    console.log("Username password do not match");
-                    alert("username password do not match");
+                    console.log("User data incorrect");
+                    alert("User data incorrect");
                 }
                 else{
                     console.log("Database error");

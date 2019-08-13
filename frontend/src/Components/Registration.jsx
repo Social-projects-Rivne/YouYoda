@@ -21,8 +21,6 @@ class Registration extends React.Component{
             formValid: false,
             showErrors: false
         }
-        this.onChangeInputs = this.onChangeInputs.bind(this);
-        this.radioGetter = this.radioGetter.bind(this);
     }
     
     validateField(fieldName, value) {
