@@ -5,7 +5,7 @@ services:
     image: mariadb:latest
     restart: always
     ports: 
-       - '3465:3306'
+       - '3306:3306'
     environment:
        MYSQL_DATABASE: 'database'
        MYSQL_USER: 'admin'

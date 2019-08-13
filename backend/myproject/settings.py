@@ -25,7 +25,7 @@ SECRET_KEY = '3&67d(g-3w-#f&q+l6e^&92pfo(hqnum1j=_n-v+@&4rke(o3='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appsrc',
     'rest_framework',
+    'rest_framework.authtoken',
     'djoser',
+    'corsheaders',
 ]
+
+CORS_ORIGIN_ALLOW_ALL=True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -83,7 +89,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'password',
         'HOST': 'mariadb',   
-        'PORT': '3465',
+        'PORT': '3306',
     }
 }
 
@@ -127,3 +133,32 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ],
+
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+
+    'DEFAULT_METADATA_CLASSES': [
+        'rest_framework.metadata.JSONApiMetadata',
+    ]
+}
+
