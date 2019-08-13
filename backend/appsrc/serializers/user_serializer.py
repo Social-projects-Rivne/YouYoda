@@ -14,3 +14,4 @@ class UserSerializer(serializers.ModelSerializer):
             'birth_date', 'phone_number', 'is_active', 'avatar_url',
             'is_trainer'
             )
+
