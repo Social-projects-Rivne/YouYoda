@@ -12,4 +12,5 @@ gunicorn==19.9.0
 djangorestframework-simplejwt==4.3.0
 PyJWT==1.7.1
 bcrypt==3.1.7
+django-cors-headers==3.0.2
 
