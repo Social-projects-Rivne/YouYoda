@@ -7,6 +7,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './index.css';
 import './style/home.css';
+import './style/media.css';
+import './style/profile.css';
+
+
 
 import './style/fillEditPage.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -22,7 +26,3 @@ ReactDOM.render(<Routes/>, document.getElementById('root'))
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-
-
-
-
