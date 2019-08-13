@@ -32,18 +32,18 @@ class YouYodaUser(AbstractUser):
     REQUIRED_FIELDS = ['username', 'password']
 
 class StatusHistory(models.Model):
-    usr_stat_id = models.ForeignKey(UserStatuses)
+    usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)
     date = models.DateTimeField()
-    user_id = models.ForeignKey(YouYodaUser)
+    user_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
 
 class TrainerCertificates(models.Model):
-    user_id = models.ForeignKey(YouYodaUser)
+    user_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     description = models.TextField()
     image_url = models.CharField(max_length=80)
 
 class Courses(models.Model):
     coursename = models.CharField(max_length=60)
-    owner_id = models.ForeignKey(YouYodaUser)
+    owner_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     status = models.CharField(max_length=10)
     description = models.TextField()
     is_public = models.BooleanField()
@@ -51,31 +51,31 @@ class Courses(models.Model):
     duration = models.DurationField()
     rate = models.IntegerField()
     members_limit = models.IntegerField()
-    category_id = models.ForeignKey(Categories)
+    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
     location = models.TextField()
     cover_url = models.CharField(max_length=80)
 
 class CoursesSubscribers(models.Model):
-    participant_id = models.ForeignKey(YouYodaUser)
-    course_id = models.ForeignKey(Courses)
+    participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
     completed = models.BooleanField()
     feedback = models.TextField()
     rate = models.IntegerField()
 
 class Achievements(models.Model):
-    course_id = models.ForeignKey(Courses)
+    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
     image_url = models.CharField(max_length=80)
     name = models.CharField(max_length=20)
 
 class Events(models.Model):
-    category_id = models.ForeignKey(Categories)
+    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
     description = models.TextField()
-    owner_id = models.ForeignKey(YouYodaUser)
+    owner_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     date = models.DateTimeField()
     location = models.TextField()
     cover_url = models.CharField(max_length=80)
 
 class EventsSubscribers(models.Model):
-    participant_id = models.ForeignKey(YouYodaUser)
-    event_id = models.ForeignKey(Events)
+    participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
