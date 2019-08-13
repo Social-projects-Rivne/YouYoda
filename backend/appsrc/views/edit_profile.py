@@ -19,19 +19,27 @@ class EditProfile(APIView):
     #authentication_classes = (TokenAuthentication,) 
     permission_classes = [permissions.AllowAny,]
 
-   
+
     # def get(self, request):
     #     """Receives and transmits user profile data"""
     #     user= get_object_or_404(User.objects.all(), email=request.data.get('email'))
     #     serializer = ProfileEditSerializer(user)
     #     return Response(serializer.data)
 
+
     def get(self, request):
         """Receives and transmits user profile data"""
         user = User.objects.all()
         serializer = ProfileEditSerializer(user, many=True)
         return Response(serializer.data[0])
-   
+
+    # method for filtering data
+    # def get(self, request):
+    #     user = User.objects.all().filter()
+    #     serializer = ProfileEditSerializer(user, many=True)
+    #     return Response(serializer.data)
+
+
     # def post(self, request, format=None):
     #     serializer = ProfileEditSerializer(data=request.data)
     #     if serializer.is_valid():
@@ -49,6 +57,3 @@ class EditProfile(APIView):
             return Response(ProfileEditSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    
-
-    
