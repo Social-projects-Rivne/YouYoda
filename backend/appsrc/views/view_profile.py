@@ -14,7 +14,7 @@ class ViewProfile(APIView):
     #permission_classes = [permissions.IsAuthenticated,]
     permission_classes = [permissions.AllowAny,]
 
-  
+
     def get(self, request):
         """Receives and transmits user profile data"""
         user = User.objects.all()
@@ -26,11 +26,3 @@ class ViewProfile(APIView):
     #     user= get_object_or_404(User.objects.all(), email=request.data.get('email'))
     #     serializer = ProfileViewSerializer(user)
     #     return Response(serializer.data)
-
-
-
-
-    
-    
-
-

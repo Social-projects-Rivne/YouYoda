@@ -40,14 +40,14 @@ export default class ProfileInfo extends React.Component {
               <Row>
                 <Col>
                   <h6 className="contact-info">Birthday:</h6>
-                  <h6 className="contact-info">Active:</h6>
                   <h6 className="contact-info">I like:</h6>
+                  <h6 className="contact-info">Active:</h6>
                   <h6 className="contact-info">Role:</h6>
                 </Col>
                 <Col>
                   <h6 className="contact-info">{profile.birth_date}</h6>
+                  <h6 className="contact-info">{profile.i_like}</h6>
                   <h6 className="contact-info">{profile.is_active}</h6>
-                  <h6 className="contact-info">{profile.about_me}</h6>
                   <h6 className="contact-info">{profile.is_trainer}</h6>
                 </Col>
               </Row>
