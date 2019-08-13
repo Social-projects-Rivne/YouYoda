@@ -135,6 +135,10 @@ REST_FRAMEWORK = {
     )
 }
 
+PASSWORD_HASHERS = [
+   'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 # DJOSER = {
