@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import UpdateAPIView
 
 
-from ..models.user import User
+from ..models import YouYodaUser
 from ..serializers.profile_edit_serializer import ProfileEditSerializer
 
 
@@ -29,7 +29,7 @@ class EditProfile(APIView):
 
     def get(self, request):
         """Receives and transmits user profile data"""
-        user = User.objects.all()
+        user = YouYodaUser.objects.all()
         serializer = ProfileEditSerializer(user, many=True)
         return Response(serializer.data[0])
 
@@ -50,7 +50,7 @@ class EditProfile(APIView):
 
     def patch(self, request, *args, **kwargs):
         """Receives and updates user profile data"""
-        user= get_object_or_404(User, email=request.data.get('email'))
+        user= get_object_or_404(YouYodaUser, email=request.data.get('email'))
         serializer = ProfileEditSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             user = serializer.save()

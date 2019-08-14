@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models.user import User
+from ..models import YouYodaUser
 
 class ProfileViewSerializer(serializers.ModelSerializer):
 	"""Takes data from the User model for view user profile.
@@ -11,7 +11,7 @@ class ProfileViewSerializer(serializers.ModelSerializer):
 
 	class Meta:
 
-		 model = User
+		 model = YouYodaUser
 
 		 fields = (
 		 	'first_name', 'last_name', 'location', 'username', 'about_me', 

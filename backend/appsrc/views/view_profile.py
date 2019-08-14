@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 
-from ..models.user import User
+from ..models import YouYodaUser
 from ..serializers.profile_view_serializer import ProfileViewSerializer
 
 
@@ -17,7 +17,7 @@ class ViewProfile(APIView):
   
     def get(self, request):
         """Receives and transmits user profile data"""
-        user = User.objects.all()
+        user = YouYodaUser.objects.all()
         serializer = ProfileViewSerializer(user, many=True)
         return Response(serializer.data[0])
 

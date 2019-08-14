@@ -6,6 +6,7 @@ import Home from './Pages/Home';
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
 import ResetPassword from './Components/ResetPassword';
+import Profile from './Pages/Profile';
 
 
 export default function Routes() {
