@@ -18,9 +18,11 @@ class EditProfile(APIView):
     #authentication_classes = (TokenAuthentication,) 
     permission_classes = [permissions.AllowAny,]
 
-
+    # method for filtering data
     # def get(self, request):
     #     """Receives and transmits user profile data"""
+    #     user = User.objects.all().filter()
+    #     serializer = ProfileEditSerializer(user, many=True)
     #     user= get_object_or_404(User.objects.all(), email=request.data.get('email'))
     #     serializer = ProfileEditSerializer(user)
     #     return Response(serializer.data)
@@ -32,12 +34,10 @@ class EditProfile(APIView):
         serializer = ProfileEditSerializer(user, many=True)
         return Response(serializer.data[0])
 
-    # method for filtering data
-    # def get(self, request):
-    #     user = User.objects.all().filter()
-    #     serializer = ProfileEditSerializer(user, many=True)
+    # def get(self, request, pk, format=None):
+    #     user = self.get_object(pk)
+    #     serializer = ProfileEditSerializer(user)
     #     return Response(serializer.data)
-
 
     # def post(self, request, format=None):
     #     serializer = ProfileEditSerializer(data=request.data)
