@@ -14,7 +14,6 @@ class ViewProfile(APIView):
     #permission_classes = [permissions.IsAuthenticated,]
     permission_classes = [permissions.AllowAny,]
 
-  
     def get(self, request):
         """Receives and transmits user profile data"""
         user = YouYodaUser.objects.all()
@@ -27,6 +26,11 @@ class ViewProfile(APIView):
     #     serializer = ProfileViewSerializer(user)
     #     return Response(serializer.data)
 
+
+    def get(self, request):
+        user =YouYodaUser.objects.all()
+        serializer = ProfileEditSerializer(user, many=True)
+        return Response(serializer.data)
 
 
 

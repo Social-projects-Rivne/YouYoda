@@ -5,7 +5,6 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import UpdateAPIView
 
 
 from ..models import YouYodaUser
@@ -52,8 +51,3 @@ class EditProfile(APIView):
         """Receives and updates user profile data"""
         user= get_object_or_404(YouYodaUser, email=request.data.get('email'))
         serializer = ProfileEditSerializer(user, data=request.data, partial=True)
-        if serializer.is_valid():
-            user = serializer.save()
-            return Response(ProfileEditSerializer(user).data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
