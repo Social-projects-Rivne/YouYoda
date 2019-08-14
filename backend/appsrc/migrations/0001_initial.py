@@ -6,6 +6,7 @@ import django.contrib.auth.models
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -25,7 +26,7 @@ class Migration(migrations.Migration):
         role = Roles(id = 3, name = 'admin')
         role.save()
 
-        User = apps.get_model('appsrc', 'User')
+        User = apps.get_model('appsrc', 'YouYodaUser')
         user = User(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
             location = 'Ukraine, Rivne', username = 'Yoda-admin',
             email = 'youyoda.academy@gmail.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
