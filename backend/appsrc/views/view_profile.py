@@ -27,12 +27,7 @@ class ViewProfile(APIView):
     #     return Response(serializer.data)
 
 
-    def get(self, request):
-        user =YouYodaUser.objects.all()
-        serializer = ProfileEditSerializer(user, many=True)
-        return Response(serializer.data)
-
-
+    
 
     
     

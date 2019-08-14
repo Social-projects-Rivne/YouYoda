@@ -43,7 +43,6 @@ class EditProfile(APIView):
     #     serializer = ProfileEditSerializer(data=request.data)
     #     if serializer.is_valid():
     #         serializer.save()
-    #         print(serializer.data)
     #         return Response(serializer.data, status=status.HTTP_201_CREATED)
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -51,3 +50,8 @@ class EditProfile(APIView):
         """Receives and updates user profile data"""
         user= get_object_or_404(YouYodaUser, email=request.data.get('email'))
         serializer = ProfileEditSerializer(user, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
