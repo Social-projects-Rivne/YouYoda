@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser
 from django.db import models
 
 
@@ -12,7 +12,7 @@ class UserStatuses(models.Model):
     status = models.CharField(max_length=40)
 
 DEFAULT_ROLE_ID = 1
-class YouYodaUser(AbstractUser):
+class YouYodaUser(AbstractBaseUser):
     role_id = models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
     hide_my_data = models.BooleanField(default=False)
     first_name = models.CharField(max_length=20, blank=True, null=True)

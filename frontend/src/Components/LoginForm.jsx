@@ -6,7 +6,7 @@ import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
 import { userLogin } from '../api/userLogin';
 import '../style/login.css';
-
+import { Link } from 'react-router-dom'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -117,7 +117,7 @@ class LoginForm extends Component {
 					    </FormGroup>
 					  </Col>
 					  <Col className="text-right">
-					    <a href="dog.html">Fogot password?</a>
+					    <Link to="/reset/password">	Fogot password?</Link>
 					  </Col>
 				    </Row>
 				    <Row className="m-0">

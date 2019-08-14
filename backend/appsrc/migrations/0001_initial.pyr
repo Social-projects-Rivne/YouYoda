@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         role.save()
         role = Roles(id = 3, name = 'admin')
         role.save()
-    
+
         User = apps.get_model('appsrc', 'YouYodaUser')
         user = User(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
             location = 'Ukraine, Rivne', username = 'Yoda-admin',
@@ -45,8 +45,6 @@ class Migration(migrations.Migration):
             avatar_url = '', is_trainer = False, role_id = Roles.objects.get(id=1, name='user'))
         user.set_password('user1111')
         user.save()
-    
-        
 
     operations = [
         migrations.CreateModel(

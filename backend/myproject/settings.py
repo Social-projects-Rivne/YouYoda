@@ -44,6 +44,8 @@ INSTALLED_APPS = (
     'djoser',
 )
 
+AUTH_USER_MODEL = 'appsrc.YouYodaUser'
+
 CORS_ORIGIN_ALLOW_ALL=True
 
 MIDDLEWARE = (
@@ -78,6 +80,11 @@ TEMPLATES = (
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -150,7 +157,7 @@ DJOSER = {
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
     # "SERIALIZERS": {
     #     'password_reset': 'appsrc.serializers.password_reset_serializer.SendEmailResetSerializer',
-    #     'password_reset_confirm': 'appsrc.serializers.password_reset_confirm_serializator.PasswordResetConfirm',
+    #      'password_reset_confirm': 'appsrc.serializers.password_reset_confirm_serializator.PasswordResetConfirm',
     # },
 }
 
@@ -167,4 +174,4 @@ EMAIL_HOST_USER = 'youyoda.academy@gmail.com'
 EMAIL_HOST_PASSWORD = 'kxjwwretyhbjlgah'
 DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
 
-AUTH_USER_MODEL = 'appsrc.YouYodaUser'
+
