@@ -42,12 +42,12 @@ button.close {
 }
 
 /* login form */
-.Login {
+.login {
     background: #fff;
     text-align: left;
     margin-bottom: 25px;
 }
-.SignUp {
+.signup {
     background: url(../img/content/Rectangle.png) 0 0 no-repeat;
     background-size: cover;
     margin-top: -17px;
@@ -55,11 +55,33 @@ button.close {
     margin-bottom: -17px;
     padding: 25px;
 }
-.Login .form-horizontal {
+.login .form-horizontal {
     padding-right: 10%;
 }
 .custom-title span {
     display: block;
+}
+
+.panel-errors {
+    display: none;
+}
+.panel-errors.errors-show {
+    display: block;
+}
+.formErrors {
+    z-index: 1;
+    color: red;
+    font-size: 15px;
+    width: 90%;
+    padding: 8px 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+} 
+.formErrors p {
+    margin: 2px;
+}
+.modal .is-error input {
+    border: 1px solid red;
 }
 
 @media (min-width: 576px)

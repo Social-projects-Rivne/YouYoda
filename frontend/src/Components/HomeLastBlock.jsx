@@ -18,10 +18,11 @@ export default class HomeLastBlock extends React.Component{
                     to potential customers.</p>
                     <div className="btn-group-sign">
                         <Button color="warning" className="btn-sign"
-                                style={{marginRight:'33px'}}>
+                                style={{marginRight:'33px'}}
+                                onClick={this.props.handleClickReg}>
                             Sign Up
                         </Button>
-                        <Button color="secondary" className="btn-sign">
+                        <Button color="secondary" className="btn-sign"  onClick={this.props.handleClickLogin}>
                             Log In
                         </Button>
                     </div>

@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -131,9 +132,8 @@ venv.bak/
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 
-
-package-lock.json
-/content
+*.ico
+*.svg
 
 /node_modules
 
