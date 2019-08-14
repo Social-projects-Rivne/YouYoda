@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Container, Button} from 'reactstrap';
 import Header from './Header';
-import {Link} from 'react-router-dom';
+
 import {quotes} from './JSON/quotes.json';
 
 
@@ -18,7 +18,7 @@ export default class HomeHeader extends React.Component{
                 <div className="col d-flex justify-content-end language">
 					<ul>
 						<li><a href="#">UA </a>|</li>
-						<li><a href="#" class="language-active"> EN</a></li>
+						<li><a href="#" className="language-active"> EN</a></li>
 					</ul>
 				</div>
                 <blockquote className="col middle_bar">
@@ -29,10 +29,11 @@ export default class HomeHeader extends React.Component{
             	</blockquote>
                 <div className="btn-group-sign">
                     <Button color="warning" className="btn-sign"
-                            style={{marginRight:'33px'}}>
+                            style={{marginRight:'33px'}}
+                            onClick={this.props.handleClickReg}>
                         Sign Up
                     </Button>
-                    <Button color="secondary" className="btn-sign">
+                    <Button color="secondary" className="btn-sign" onClick={this.props.handleClickLogin}>
                         Log In
                     </Button>
                 </div>

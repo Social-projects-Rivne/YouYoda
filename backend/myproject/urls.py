@@ -17,10 +17,10 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import include, url
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),       
     url('api/', include('appsrc.urls')),
-    #url('auth/', include('djoser.urls')),
-    #url('auth/', include('djoser.urls.authtoken')),
-    #url('auth/', include('djoser.urls.jwt')),
+    url('api/auth/', include('djoser.urls.authtoken')),
+    url('api/auth/', include('djoser.urls.jwt')),
 ]

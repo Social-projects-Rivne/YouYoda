@@ -5,10 +5,9 @@ from rest_framework import status
 from rest_framework import permissions
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import UpdateAPIView
 
 
-from ..models.user import User
+from ..models import YouYodaUser
 from ..serializers.profile_edit_serializer import ProfileEditSerializer
 
 
@@ -29,7 +28,7 @@ class EditProfile(APIView):
 
     def get(self, request):
         """Receives and transmits user profile data"""
-        user = User.objects.all()
+        user = YouYodaUser.objects.all()
         serializer = ProfileEditSerializer(user, many=True)
         return Response(serializer.data[0])
 
@@ -44,16 +43,15 @@ class EditProfile(APIView):
     #     serializer = ProfileEditSerializer(data=request.data)
     #     if serializer.is_valid():
     #         serializer.save()
-    #         print(serializer.data)
     #         return Response(serializer.data, status=status.HTTP_201_CREATED)
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, *args, **kwargs):
         """Receives and updates user profile data"""
-        user= get_object_or_404(User, email=request.data.get('email'))
+        user= get_object_or_404(YouYodaUser, email=request.data.get('email'))
         serializer = ProfileEditSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
-            user = serializer.save()
-            return Response(ProfileEditSerializer(user).data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
