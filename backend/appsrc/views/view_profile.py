@@ -26,10 +26,3 @@ class ViewProfile(APIView):
     #     serializer = ProfileViewSerializer(user)
     #     return Response(serializer.data)
 
-
-    
-
-    
-    
-
-
