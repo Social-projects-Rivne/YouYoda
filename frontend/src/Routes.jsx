@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
+import AdminPage from "./Pages/AdminPage";
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import Home from './Pages/Home';
 import MainLayout from './Pages/MainLayout';
@@ -13,12 +14,12 @@ import ResetPassword from './Components/ResetPassword';
 import Profile from './Pages/Profile';
 
 
-
 export default function Routes() {
   return (
       <div>
         <Router>
             <Route exact path='/' component={Home}/>
+            <Route path='/admin' component={AdminPage}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
             <Route component={MainLayout}>
@@ -34,6 +35,6 @@ export default function Routes() {
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}/>
             </Route>
         </Router>
-    </div>
+      </div>
   );
 };
