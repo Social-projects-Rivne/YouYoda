@@ -20,8 +20,8 @@ export default class EnterNewPassword extends React.Component{
 	}
 
     handlChangePassword = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
+        let name = e.target.name;
+        let value = e.target.value;
         this.setState({[name]: value},
                         () => { this.validateField(name, value) }
                     );
@@ -30,9 +30,8 @@ export default class EnterNewPassword extends React.Component{
 
     validateField(fieldName, value) {
           let fieldValidationErrors = this.state.formErrors;
-          let {passwordValid, rePasswordValid} = this.state;
-          let {new_password, re_new_password} = this.state;
-          const passregex = RegExp(/^(\w+){6,18}$/g);
+          let {passwordValid, rePasswordValid, new_password, re_new_password} = this.state;
+          let passregex = RegExp(/^(\w+){6,18}$/g);
 
           passwordValid = passregex.test(value);
           fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain 6-18 characters';
@@ -52,12 +51,12 @@ export default class EnterNewPassword extends React.Component{
     }
 
     handleSubmitNewPassword = (event) => {
-        const userdata={
+        const USERDATA={
             "uid":this.props.match.params.uid,
             "token":this.props.match.params.token,
             "new_password":this.state.new_password
             }
-        newPassword(userdata);
+        newPassword(USERDATA);
     }
 
   render () {

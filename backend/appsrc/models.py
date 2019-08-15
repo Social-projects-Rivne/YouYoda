@@ -13,6 +13,8 @@ class UserStatuses(models.Model):
 
 DEFAULT_ROLE_ID = 1
 class YouYodaUser(AbstractUser):
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'password']
     role_id = models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
     hide_my_data = models.BooleanField(default=False)
     first_name = models.CharField(max_length=20, blank=True, null=True)
@@ -26,8 +28,6 @@ class YouYodaUser(AbstractUser):
     phone_number = models.CharField(max_length=9, blank=True, null=True)
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField()
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'password']
 
 class StatusHistory(models.Model):
     usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)

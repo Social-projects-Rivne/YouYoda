@@ -35,10 +35,10 @@ export default class ResetPassword extends React.Component{
                             value={this.state.email}
                             onChange = {this.handlChangeEmail}
     						required/>
-    				<input type="submit"
-                            value="Send me instructions!"
+    				<button type="submit"
+                            
                             className="btn btn-warning reset-pass-form"
-    						onClick={this.handlPasswordReset}/>
+    						onClick={this.handlPasswordReset}>Send me instructions!</button>
         </form>
         </Container>
       </div>

@@ -1,9 +1,10 @@
-from django.conf import settings
+import datetime
 import django.contrib.auth.models
-from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-import datetime
+
+from django.conf import settings
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):

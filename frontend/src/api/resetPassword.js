@@ -3,8 +3,8 @@ import API from './axiosConf';
 
 async function resetPassword(email){
     try {
-        const response = await API.post('auth/users/reset_password/', email)
         alert(email);
+        const response = await API.post('auth/users/reset_password/', email)
         console.log(response)
         .then(function (response) {
             console.log(response);
