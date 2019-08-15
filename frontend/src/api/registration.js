@@ -5,12 +5,17 @@ import axios from 'axios';
 
 async function registration(props) {
     const apiBaseUrl = "http://localhost:8000/";
-    props["is_trainer"] = props.userteacher;
-    props["username"] = props.email;
+    var nameU = props.email.split('@', 1);
+    var datasend = {
+        "username": nameU[0],
+        "password": props.password,
+        "email": props.email,
+        "is_trainer": props.userteacher
+    }
     try {
         const response = await axios.post(
             apiBaseUrl + 'api/user/register', 
-            props, 
+            datasend, 
             {
 				crossdomain: true,
                 headers: {
