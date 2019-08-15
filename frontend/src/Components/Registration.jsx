@@ -10,6 +10,8 @@ class Registration extends React.Component{
             email: '',
             password: '',
             confirmpass: '',
+            is_trainer: '',
+            username: '',
             redirect: false
         }
         //this.handleClickReg = this.handleClickReg.bind(this);
@@ -20,10 +22,11 @@ class Registration extends React.Component{
         var datasend={
             "email":this.state.email,
             "password":this.state.password,
-            "confirmpass":this.state.confirmpass
+            "username":this.state.username,
+            "is_trainer":this.state.is_trainer
         }
 
-        axios.post(apiBaseUrl+'register', datasend)
+        axios.post(apiBaseUrl+'user/register', datasend)
             .then(function (response) {
                 console.log(response);
                 if(response.data.code === 200){
@@ -74,34 +77,43 @@ class Registration extends React.Component{
                         <h3 className="modal-title">Register</h3>
                         <form className="form-horizontal">
                             <div className="form-group">
+                                <label htmlFor="username" className="mb-1">User Name</label>
+                                <input type="username" id="username" name="username" className="form-control"
+                                onChange={(event) => this.setState({username:event.target.value})}
+                                required
+                                />
+                            </div>
+                            <div className="form-group">
                                 <label htmlFor="email" className="mb-1">Email</label>
-                                <input type="email" id="email" name="email" className="form-control" 
-                                onChange={(event,newValue) => this.setState({email:newValue})} 
+                                <input type="email" id="email" name="email" className="form-control"
+                                onChange={(event) => this.setState({email:event.target.value})}
                                 required
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password" className="mb-1">Password</label>
-                                <input type="password" id="password" name="password" className="form-control" 
-                                onChange = {(event,newValue) => this.setState({password:newValue})}
+                                <input type="password" id="password" name="password" className="form-control"
+                                onChange = {(event) => this.setState({password:event.target.value})}
                                 required
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="confirmpass" className="mb-1">Confirm Password</label>
-                                <input type="password" id="confirmpass" name="confirmpass" className="form-control" 
-                                onChange = {(event,newValue) => this.setState({confirmpass:newValue})}
+                                <input type="password" id="confirmpass" name="confirmpass" className="form-control"
+                                onChange = {(event) => this.setState({confirmpass:event.target.value})}
                                 required
                                 />
                             </div>
                             <span className="text-title">Profile type</span>
                             <Row className="form-group">
                                 <Col md="6" className="form-check col-xs-6">
-                                    <input className="form-check-input" type="radio" name="typeUser" id="userstudent" value="option1" defaultChecked />
+                                    <input className="form-check-input" type="radio" name="typeUser" id="userstudent" value="option1"
+                                      onChange = {(event) => this.setState({is_trainer:false})} />
                                     <label className="form-check-label" htmlFor="userstudent">I want to develop myself</label>
                                 </Col>
                                 <Col md="6" className="form-check col-xs-6">
-                                    <input className="form-check-input" type="radio" name="typeUser" id="userteacher" value="option2" />
+                                    <input className="form-check-input" type="radio" name="typeUser" id="userteacher" value="option2"
+                                      onChange = {(event) => this.setState({is_trainer:true})}/>
                                     <label className="form-check-label" htmlFor="userteacher">I'm a teacher/coach</label>
                                 </Col>
                             </Row>
