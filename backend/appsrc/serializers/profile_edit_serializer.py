@@ -29,7 +29,6 @@ class ProfileEditSerializer(serializers.ModelSerializer):
             username = validated_data.get('username'),
             about_me = validated_data.get('about_me'),
             i_like = validated_data.get('i_like'),
-            #email = validated_data.get('email'),
             birth_date = validated_data.get('birth_date'),
             phone_number = validated_data.get('phone_number'))
 
@@ -45,7 +44,6 @@ class ProfileEditSerializer(serializers.ModelSerializer):
         instance.username = validated_data.get('username', instance.username)
         instance.about_me = validated_data.get('about_me', instance.about_me)
         instance.i_like = validated_data.get('i_like', instance.i_like)
-        #instance.email = validated_data.get('email', instance.email)
         instance.birth_date = validated_data.get('birth_date', instance.birth_date)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
 
