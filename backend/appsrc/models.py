@@ -1,4 +1,4 @@
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -12,7 +12,7 @@ class UserStatuses(models.Model):
     status = models.CharField(max_length=40)
 
 DEFAULT_ROLE_ID = 1
-class YouYodaUser(AbstractBaseUser):
+class YouYodaUser(AbstractUser):
     role_id = models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
     hide_my_data = models.BooleanField(default=False)
     first_name = models.CharField(max_length=20, blank=True, null=True)
@@ -26,7 +26,6 @@ class YouYodaUser(AbstractBaseUser):
     phone_number = models.CharField(max_length=9, blank=True, null=True)
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField()
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'password']
 

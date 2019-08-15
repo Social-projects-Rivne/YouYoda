@@ -173,5 +173,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'youyoda.academy@gmail.com'
 EMAIL_HOST_PASSWORD = 'kxjwwretyhbjlgah'
 DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
-
-

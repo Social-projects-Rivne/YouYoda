@@ -69,7 +69,7 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <div>
+            <div className="login-form">
 			  <Modal id="login-form" isOpen={this.props.isOpenL} className="wild">
 			  <div className="modal-body">
 			    <button
@@ -106,7 +106,7 @@ class LoginForm extends Component {
 						   placeholder="********"
 						   required
 						   onChange = {(event) => {this.handleUserInput(event)}}/>
-					    </FormGroup>	
+					    </FormGroup>
 				      </Col>
 				    </Row>
 				    <Row className="m-0">
@@ -123,8 +123,8 @@ class LoginForm extends Component {
 				    <Row className="m-0">
 				      <Col className="mt-4 text-right">
 				        <Button
-				        type="submit" 
-				        className="btn-yellow btn btn-warning" 
+				        type="submit"
+				        className="btn-yellow btn btn-warning"
 				        onClick={(event) => this.handleClick(event)}
 				        disabled={!this.state.formValid}>Log in</Button>
 				      </Col>
@@ -152,18 +152,18 @@ class LoginForm extends Component {
 				<Row className="container h-auto">
 					<div className="col-sm-12 form-group">
 						<p className="text-title text-white d-block pb-2">If you don’t have an account yet</p>
-						<Button 
-						type="button" 
-						className="btn-grey btn" 
+						<Button
+						type="button"
+						className="btn-grey btn"
 						onClick={(event) => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
 						<br></br><br></br>
-						<Button 
+						<Button
 						type="button"
 						className="btn-red btn" color="danger"
 						onClick={this.props.handleClickLogin}>Cancel</Button>
 					</div>
-                </Row>      
-			  </Col> 
+                </Row>
+			  </Col>
 			</Row>
 		</div>
 		</Modal>

@@ -52,7 +52,7 @@ class Registration extends React.Component{
         }
 
         return (
-        <div>
+        <div className="login-form">
             <Modal id="registration-form" isOpen={this.props.isOpen} className="wild">
                 <div className="modal-body">
                 <Row>
@@ -75,21 +75,21 @@ class Registration extends React.Component{
                         <form className="form-horizontal">
                             <div className="form-group">
                                 <label htmlFor="email" className="mb-1">Email</label>
-                                <input type="email" id="email" name="email" className="form-control" 
-                                onChange={(event,newValue) => this.setState({email:newValue})} 
+                                <input type="email" id="email" name="email" className="form-control"
+                                onChange={(event,newValue) => this.setState({email:newValue})}
                                 required
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="password" className="mb-1">Password</label>
-                                <input type="password" id="password" name="password" className="form-control" 
+                                <input type="password" id="password" name="password" className="form-control"
                                 onChange = {(event,newValue) => this.setState({password:newValue})}
                                 required
                                 />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="confirmpass" className="mb-1">Confirm Password</label>
-                                <input type="password" id="confirmpass" name="confirmpass" className="form-control" 
+                                <input type="password" id="confirmpass" name="confirmpass" className="form-control"
                                 onChange = {(event,newValue) => this.setState({confirmpass:newValue})}
                                 required
                                 />
