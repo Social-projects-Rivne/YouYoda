@@ -12,23 +12,6 @@ async function editForm(props) {
          { crossdomain: true }
             // headers: { 'Authorization': authorization }
         )
-//             console.log(response)
-//             .then(response => {
-//             this.setState({
-//
-//               first_name:response.data.first_name,
-//               last_name:response.data.last_name,
-//               location:response.data.location,
-//               username:response.data.username,
-//               email:response.data.email,
-//               // password:response.data.password,
-//               about_me:response.data.about_me,
-//               birth_date:response.data.birth_date,
-//               phone_number:response.data.phone_number
-//             })
-//           })
-//
-//
         .then(function (response) {
         console.log(response);
         if(response.data.code === 204){
