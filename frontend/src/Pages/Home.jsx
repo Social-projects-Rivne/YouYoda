@@ -22,7 +22,6 @@ export default class Home extends React.Component{
         this.handleClickLogin = this.handleClickLogin.bind(this);
      }
     handleClickReg() {
-        console.log('Click happened');
         this.setState(prevState => ({
             isOpen: !prevState.isOpen
         }));
@@ -44,7 +43,7 @@ export default class Home extends React.Component{
             <HomeLastBlock handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin}/>
             <Footer/>
             <LoginForm handleClickLogin={this.handleClickLogin} handleClickReg={this.handleClickReg} isOpenL={this.state.isOpenL} />
-            <Registration handleClickReg={this.handleClickReg} isOpen={this.state.isOpen} />
+            <Registration handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin} isOpen={this.state.isOpen} />
             </>
         )
     }
