@@ -4,7 +4,11 @@ import {Container} from 'reactstrap';
 
 import {newPassword} from '../api/resetPassword';
 import {FormErrors} from '../api/FormError';
+import {extractToken} from '../utils';
 
+
+const UIDPOS = 4;
+const TOKENPOS = 5;
 
 export default class EnterNewPassword extends React.Component{
     constructor(props){
@@ -50,13 +54,19 @@ export default class EnterNewPassword extends React.Component{
                                 this.state.passwordValid});
     }
 
+    extractToken (idx) {
+        return window.location.pathname.split("/")[idx]
+    }
+    
     handleSubmitNewPassword = (event) => {
+        console.log(this.props)
+        const URLPATH = 'auth/users/reset_password_confirm/';
         const USERDATA={
-            "uid":this.props.match.params.uid,
-            "token":this.props.match.params.token,
+            "uid": this.extractToken(UIDPOS),
+            "token": this.extractToken(TOKENPOS),
             "new_password":this.state.new_password
             }
-        newPassword(USERDATA);
+        newPassword(URLPATH, USERDATA);
     }
 
   render () {
@@ -64,7 +74,7 @@ export default class EnterNewPassword extends React.Component{
       <div className="reset-pass">
         <Container style={{width:"500px"}}>
         <h1>Forgot your password?</h1>
-        <p>Enter your new password:</p>
+        <p>Enter your new password: </p>
 
         <div className="form-error">
              <FormErrors formErrors={this.state.formErrors} />
@@ -85,11 +95,10 @@ export default class EnterNewPassword extends React.Component{
                             value={this.state.re_new_password}
 							onChange = {this.handlChangePassword}
 							required/>
-					<input type="submit"
-							value="Change password"
+					<button type="button"
 							className="btn btn-warning reset-pass-form"
-							onClick={this.handleNewPassword}
-                            disabled={!this.state.formValid}/>
+							onClick={this.handleSubmitNewPassword}
+                            disabled={!this.state.formValid}>Change password</button>
         </form>
         </Container>
       </div>

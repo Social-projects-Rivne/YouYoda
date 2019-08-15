@@ -1,4 +1,4 @@
-.login-form .btn {
+.btn {
     border-radius: 20px;
 }
 .btn:hover {
@@ -10,7 +10,7 @@
 .btn-grey{
     background-color: #E1E1E1;
 }
-.login-form input.form-control {
+input.form-control {
     border-radius: 20px;
 }
 input.form-control.validate {

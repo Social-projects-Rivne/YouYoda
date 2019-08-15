@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Container} from 'reactstrap';
 
-import {resetPassword} from '../api/resetPassword'
+import {newPassword} from '../api/resetPassword'
 
 
 export default class ResetPassword extends React.Component{
@@ -16,9 +16,11 @@ export default class ResetPassword extends React.Component{
         this.setState({email: event.target.value});
     }
 
-    handlPasswordReset = (event) => {
-        const userdata={"email":this.state.email}
-        resetPassword(userdata);
+    handlPasswordReset = async (event) => {
+        const URLPATH = 'auth/users/reset_password/';
+        const USERDATA = {"email":this.state.email}
+        await newPassword(URLPATH, USERDATA);
+        
 	}
 
     render () {
@@ -35,8 +37,7 @@ export default class ResetPassword extends React.Component{
                             value={this.state.email}
                             onChange = {this.handlChangeEmail}
     						required/>
-    				<button type="submit"
-                            
+    				<button type="button"
                             className="btn btn-warning reset-pass-form"
     						onClick={this.handlPasswordReset}>Send me instructions!</button>
         </form>

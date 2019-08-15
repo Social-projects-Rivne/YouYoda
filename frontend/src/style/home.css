@@ -292,3 +292,13 @@
     padding-left: 20px;
     color: #710000;
 }
+.reset-pass .confirm {
+    text-align: center;
+}
+.reset-pass .confirm h1{
+    font-size: 120px;
+}
+.reset-pass .confirm p {
+    font-size: 2rem;
+    margin-top: 20px;
+}
