@@ -17,8 +17,8 @@ export default class ResetPassword extends React.Component{
     }
 
     handlPasswordReset = (event) => {
-		 const userdata={"email":this.state.email}
-         resetPassword(userdata);
+        const userdata={"email":this.state.email}
+        resetPassword(userdata);
 	}
 
     render () {
@@ -35,9 +35,10 @@ export default class ResetPassword extends React.Component{
                             value={this.state.email}
                             onChange = {this.handlChangeEmail}
     						required/>
-    				<button className="btn btn-warning reset-pass-form"
-    						eventHandler={this.handlPasswordReset}>"Send me instructions!"
-                            </button>
+    				<input type="submit"
+                            value="Send me instructions!"
+                            className="btn btn-warning reset-pass-form"
+    						onClick={this.handlPasswordReset}/>
         </form>
         </Container>
       </div>
