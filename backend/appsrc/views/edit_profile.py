@@ -28,7 +28,7 @@ class EditProfile(APIView):
 
     def get(self, request):
         """Receives and transmits user profile data"""
-        user = YouYodaUser.objects.all()
+        user = YouYodaUser.objects.get(user=request.user)
         serializer = ProfileEditSerializer(user, many=True)
         return Response(serializer.data[0])
 

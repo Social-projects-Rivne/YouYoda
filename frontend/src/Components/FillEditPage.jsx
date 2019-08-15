@@ -11,7 +11,6 @@ class FillEditPage extends React.Component {
         super(props);
         this.state = {
             modal: false,
-            id:'',
             first_name: '',
             last_name: '',
             location: '',
@@ -41,7 +40,7 @@ class FillEditPage extends React.Component {
         try {
             // const response = await axios.get('http://localhost:5000/test');
             // const response = await axios.get('http://localhost:8000/api/user/profile/edit');
-            const response = await axios.get('http://localhost:8000/api/user/${this.state.id}/profile/edit');
+            const response = await axios.get('http://localhost:8000/api/user/profile/edit');
             // console.log(response.data);
             // alert(response.data);
             return response.data;
