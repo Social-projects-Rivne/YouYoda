@@ -65,6 +65,7 @@ class LoginForm extends Component {
     async handleClick(event) {
     	event.preventDefault();
         await userLogin(this.state);
+        return false;
     }
 
     render() {
