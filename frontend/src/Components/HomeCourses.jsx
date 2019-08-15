@@ -13,7 +13,7 @@ export default class HomeCourses extends React.Component{
             <Row>
                 <Col className="header-block">
                     <h1>Top Courses </h1>
-                    <p class="main-text">People are busy.
+                    <p className="main-text">People are busy.
                     So, this UI Kit let’s you customize,
                     build and deploy your landing page,<br/>
                     so you can start selling your product

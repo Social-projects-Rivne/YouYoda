@@ -11,7 +11,7 @@ export default class HomeLastBlock extends React.Component{
             <Row>
                 <Col sm="7" className="header-block">
                     <h1>Top Trainers</h1>
-                    <p class="main-text">People are busy.
+                    <p className="main-text">People are busy.
                     So, this UI Kit let’s you customize,
                     build and deploy your landing page,
                     so you can start selling your product
