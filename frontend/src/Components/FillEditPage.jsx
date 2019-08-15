@@ -11,6 +11,7 @@ class FillEditPage extends React.Component {
         super(props);
         this.state = {
             modal: false,
+            id:'',
             first_name: '',
             last_name: '',
             location: '',
@@ -39,7 +40,8 @@ class FillEditPage extends React.Component {
     getUser = async () => {
         try {
             // const response = await axios.get('http://localhost:5000/test');
-            const response = await axios.get('http://localhost:8000/api/user/profile/edit');
+            // const response = await axios.get('http://localhost:8000/api/user/profile/edit');
+            const response = await axios.get('http://localhost:8000/api/user/${this.state.id}/profile/edit');
             // console.log(response.data);
             // alert(response.data);
             return response.data;
@@ -255,7 +257,7 @@ class FillEditPage extends React.Component {
                                     become a
                                     trainer</Button>
                                 <div class="col-4">
-                                    <Button color="secondary" type size="lg" className="button-saveall" block>Save
+                                    <Button color="secondary" type size="lg" className="button-saveall" block onClick={() => this.saveForm()}>Save
                                         all</Button>
                                 </div>
                             </Col>
