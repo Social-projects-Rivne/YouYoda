@@ -37,9 +37,9 @@ export default class Footer extends React.Component{
                     </li>
                 </ul>
                 <Form action="#" className="form">
-                    <Input type="search" id="text" className="search-input"
+                    <Input type="search" id="search-input"
                             placeholder="Search..."/>
-                    <Button className="search-button">
+                    <Button id="search-button">
                         <FontAwesomeIcon icon="search"/>
                     </Button>
                 </Form>

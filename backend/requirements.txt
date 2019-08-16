@@ -1,6 +1,6 @@
 Django==2.2.3
 django-templated-mail==1.1.1
-djangorestframework==3.10.1
+djangorestframework==3.10.2
 djangorestframework-jwt==1.8.0
 djoser==2.0.1
 django-templated-mail==1.1.1

@@ -7,6 +7,10 @@
 .modal .btn {
     width: 260px;
 }
+.modal .btn.btn-cancel {
+    margin-bottom: 5px;
+    width: 130px;
+}
 .btn-grey{
     background-color: #E1E1E1;
     color: #212529;
@@ -27,6 +31,30 @@ input.form-control.validate {
     border-radius: 0px;
     border-color: transparent;
     background: #fff;
+}
+
+.panel-errors {
+    display: none;
+}
+.panel-errors.errors-show {
+    display: block;
+}
+.formErrors {
+    background: #e1e1e1;
+    border: 2px solid #ffc107;
+    z-index: 1;
+    color: red;
+    font-size: 15px;
+    width: 90%;
+    padding: 8px 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.formErrors p {
+    margin: 2px;
+}
+.modal .is-error input {
+    border: 1px solid red;
 }
 /*input.form-control.correct::after {
     position: absolute;

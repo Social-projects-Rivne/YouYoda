@@ -11,7 +11,7 @@ export default class HomeAbout extends React.Component{
             <Row>
                 <Col className="header-block">
                     <h1>What is YouYoda?</h1>
-                    <p class="main-text">People are busy.
+                    <p className="main-text">People are busy.
                     So, this UI Kit let’s you customize,
                     build and deploy your landing page,<br/>
                     so you can start selling your product
@@ -23,7 +23,7 @@ export default class HomeAbout extends React.Component{
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Choose what to learn</h3>
-                    <p class="main-text">People are busy. So, this UI Kit let’s
+                    <p className="main-text">People are busy. So, this UI Kit let’s
                     you customize, build and deploy your landing page,
                     so you can start selling your product to potential
                     customers.</p>
@@ -32,7 +32,7 @@ export default class HomeAbout extends React.Component{
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Find personal coach</h3>
-                    <p class="main-text">People are busy. So, this UI Kit let’s
+                    <p className="main-text">People are busy. So, this UI Kit let’s
                     you customize, build and deploy your landing page,
                     so you can start selling your product to potential
                     customers.</p>
@@ -43,7 +43,7 @@ export default class HomeAbout extends React.Component{
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Learn by doing</h3>
-                    <p class="main-text">People are busy. So, this UI Kit let’s
+                    <p className="main-text">People are busy. So, this UI Kit let’s
                     you customize, build and deploy your landing page,
                     so you can start selling your product to potential
                     customers.</p>
@@ -52,7 +52,7 @@ export default class HomeAbout extends React.Component{
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Make own Events</h3>
-                    <p class="main-text">People are busy. So, this UI Kit let’s
+                    <p className="main-text">People are busy. So, this UI Kit let’s
                     you customize, build and deploy your landing page,
                     so you can start selling your product to potential
                     customers.</p>

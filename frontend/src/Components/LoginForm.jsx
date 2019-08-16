@@ -65,11 +65,12 @@ class LoginForm extends Component {
     async handleClick(event) {
     	event.preventDefault();
         await userLogin(this.state);
+        return false;
     }
 
     render() {
         return (
-            <div className="login-form">
+            <div>
 			  <Modal id="login-form" isOpen={this.props.isOpenL} className="wild">
 			  <div className="modal-body">
 			    <button
