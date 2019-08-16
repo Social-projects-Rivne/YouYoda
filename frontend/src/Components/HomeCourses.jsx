@@ -8,7 +8,7 @@ export default class HomeCourses extends React.Component{
     render(){
 
         return(
-            <div style={{backgroundColor:'#E8E8E8'}}>
+            <div style={{backgroundColor:'#E8E8E8'}} id="home-course">
             <Container className="home-event">
             <Row>
                 <Col className="header-block">

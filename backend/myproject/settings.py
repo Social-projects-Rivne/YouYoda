@@ -20,7 +20,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '3&67d(g-3w-#f&q+l6e^&92pfo(hqnum1j=_n-v+@&4rke(o3='
+try:
+    from .local_settings import SECRET_KEY
+except ImportError:
+    pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,6 +46,8 @@ INSTALLED_APPS = (
     'corsheaders',
     'djoser',
 )
+
+AUTH_USER_MODEL = 'appsrc.YouYodaUser'
 
 CORS_ORIGIN_ALLOW_ALL=True
 
@@ -79,19 +84,18 @@ TEMPLATES = (
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'YouYoda',
-        'HOST': 'mariadb',   
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': 'root_password',
-    }
-}
+try:
+    from .local_settings import DATABASES
+except ImportError:
+    pass
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -141,14 +145,26 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# DJOSER = {
-#     'SERIALIZERS': {
-#         'user_create': 'appsrc.serializers.user_registration_serializer.RegistrationSerializer',
-#         'user': 'appsrc.serializers.user_serializer.UserSerializer',
-#         'token': 'djoser.serializers.TokenSerializer',
-#         'token_create': 'djoser.serializers.TokenCreateSerializer',
-#     }
-# }
+DJOSER = {
+    "SEND_ACTIVATION_EMAIL": True,
+    "PASSWORD_RESET_CONFIRM_URL": "reset/password/new/{uid}/{token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+}
 
-AUTH_USER_MODEL = 'appsrc.YouYodaUser'
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher'
+]
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'youyoda.academy@gmail.com'
+try:
+    from .local_settings import EMAIL_HOST_PASSWORD
+except ImportError:
+    pass
+DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
