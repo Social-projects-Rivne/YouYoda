@@ -2,12 +2,11 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 DEFAULT_ROLE_ID = 1
+USERNAME_FIELD = 'email'
+REQUIRED_FIELDS = ['username', 'password']
 
 
 class Categories(models.Model):
-    name = models.CharField(max_length=20)
-
-class Roles(models.Model):
     name = models.CharField(max_length=20)
 
 class UserStatuses(models.Model):
@@ -29,8 +28,6 @@ class YouYodaUser(AbstractUser):
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'password']
 
 class StatusHistory(models.Model):
     usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)
