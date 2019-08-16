@@ -1,4 +1,4 @@
-from ..models import YouYodaUser
+from ..models import YouYodaUser as User
 
 from django.contrib.auth import authenticate, login
 from rest_framework import serializers

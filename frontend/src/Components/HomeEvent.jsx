@@ -6,7 +6,7 @@ import Slider from "react-slick";
 
 export default class HomeEvent extends React.Component{
     render(){
-        const SETTINGS = {
+        let settings = {
           dots: false,
           infinite: true,
           slidesToShow: 2,
@@ -24,7 +24,7 @@ export default class HomeEvent extends React.Component{
           ]
         };
         return(
-            <div style={{backgroundColor:'#E8E8E8'}}>
+            <div style={{backgroundColor:'#E8E8E8'}} id="home-event">
             <Container className="home-event">
             <Row>
                 <Col className="header-block">
@@ -38,7 +38,7 @@ export default class HomeEvent extends React.Component{
             </Row>
             <Row>
             <Col >
-                <Slider {...SETTINGS}>
+                <Slider {...settings}>
                   <div className="sl-slide">
                     <img src={require("../img/static/event.png")}
                         alt="foto-event" />

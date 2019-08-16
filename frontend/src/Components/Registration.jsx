@@ -22,14 +22,14 @@ class Registration extends React.Component{
             showErrors: false
         }
     }
-    
+
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
         let emailValid = this.state.emailValid;
         let passwordValid = this.state.passwordValid;
         let confirmPasswordValid = this.state.confirmPasswordValid;
         let isAgreedValid = this.state.isAgreedValid;
-    
+
         switch(fieldName) {
           case 'email':
             emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
@@ -82,7 +82,7 @@ class Registration extends React.Component{
         }
         return false;
     }
-    
+
     validateForm() {
         this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.confirmPasswordValid && this.state.isAgreedValid});
         var show = this.errorShowBlock(this.state.formErrors);
@@ -140,19 +140,19 @@ class Registration extends React.Component{
                         <form className="form-horizontal">
                             <div className={this.state.formErrors.email ? 'form-group is-error': 'form-group'}>
                                 <label htmlFor="email" className="mb-1">Email</label>
-                                <input type="email" id="email" name="email" className="form-control" 
+                                <input type="email" id="email" name="email" className="form-control"
                                        onChange = {(event) => {this.onChangeInputs(event)}}
                                        required/>
                             </div>
                             <div className={this.state.formErrors.password ? 'form-group is-error': 'form-group'}>
                                 <label htmlFor="password" className="mb-1">Password</label>
-                                <input type="password" id="password" name="password" className="form-control" 
+                                <input type="password" id="password" name="password" className="form-control"
                                        onChange = {(event) => {this.onChangeInputs(event)}}
                                        required/>
                             </div>
                             <div className={this.state.formErrors.confirmpass ? 'form-group is-error': 'form-group'}>
                                 <label htmlFor="confirmpass" className="mb-1">Confirm Password</label>
-                                <input type="password" id="confirmpass" name="confirmpass" className="form-control" 
+                                <input type="password" id="confirmpass" name="confirmpass" className="form-control"
                                        onChange = {(event) => {this.onChangeInputs(event)}}
                                        required/>
                             </div>
@@ -193,7 +193,7 @@ class Registration extends React.Component{
                                             onClick={(event) => this.handleClick(event)}
                                             disabled={!this.state.formValid}>Sign up</button>
                                 </Col>
-                                
+
                             </Row>
                         </form>
                     </Col>

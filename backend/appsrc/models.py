@@ -9,8 +9,9 @@ class UserStatuses(models.Model):
     status = models.CharField(max_length=40)
 
 class YouYodaUser(AbstractUser):
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'password']
     role_id = models.CharField(max_length=20, null=True)
-    #role_id = models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
     hide_my_data = models.BooleanField(default=False)
     first_name = models.CharField(max_length=20, blank=True, null=True)
     last_name = models.CharField(max_length=20, blank=True, null=True)
@@ -25,8 +26,6 @@ class YouYodaUser(AbstractUser):
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'password']
 
 DEFAULT_ROLE_ID = 1
 class Roles(models.Model):

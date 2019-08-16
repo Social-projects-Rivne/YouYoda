@@ -1,67 +1,109 @@
 import React from 'react';
 
-import axios from 'axios';
 import {Container} from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
+import {newPassword} from '../api/resetPassword';
+import {FormErrors} from '../api/FormError';
+
+
+const UIDPOS = 4;
+const TOKENPOS = 5;
 
 export default class EnterNewPassword extends React.Component{
     constructor(props){
     	super(props);
 
     	this.state={new_password:'',
-                    re_new_password:''};
+                    re_new_password:'',
+                    formErrors: {re_new_password: '', new_password: ''},
+                    rePasswordValid: false,
+                    passwordValid: false,
+                    formValid: false
+                };
 	}
-    handleClick(event){
-		 let apiBaseUrl = "http://localhost:8000/";
-		 let userdata={"uid":this.props.match.params.uid,
-            "token":this.props.match.params.token,
-            "new_password":this.state.new_password,
-            "re_new_password":this.state.new_password
-            }
 
-		 axios.post(apiBaseUrl+'auth/users/reset_password_confirm/', userdata)
-		 .then(function (response) {
-    		 console.log(response);
-    		 if(response.data.code === 204){
-    		 console.log("Successfull");
-             alert("Password was changed")
-    		 }
-    		 else if(response.data.code === 400){
-    		 console.log("Bad request");
-    		 }
-    		 else{
-    		 console.log("Something goes wrong");
-    		 }
-    		 })
-    		 .catch(function (error) {
-    		 console.log(error);
-    		 });
-	}
+    handlChangePassword = (e) => {
+        let name = e.target.name;
+        let value = e.target.value;
+        this.setState({[name]: value},
+                        () => { this.validateField(name, value) }
+                    );
+        console.log(this.state);
+    }
+
+    validateField(fieldName, value) {
+          let fieldValidationErrors = this.state.formErrors;
+          let {passwordValid, rePasswordValid, new_password, re_new_password} = this.state;
+          let passregex = RegExp(/^(\w+){6,24}$/g);
+
+          passwordValid = passregex.test(value);
+          fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain 6-24 characters';
+          (new_password !== re_new_password) ?
+              fieldValidationErrors.fieldName= "Passwords don't match" :
+              rePasswordValid = true;
+
+          this.setState({formErrors: fieldValidationErrors,
+                        passwordValid: passwordValid,
+                        rePasswordValid: rePasswordValid,
+                        }, this.validateForm);
+    }
+
+    validateForm() {
+      this.setState({formValid: this.state.rePasswordValid &&
+                                this.state.passwordValid});
+    }
+
+    extractToken (idx) {
+        return window.location.pathname.split("/")[idx]
+    }
+
+    handleSubmitNewPassword = async (event) => {
+        console.log(this.props)
+        const URLPATH = 'auth/users/reset_password_confirm/';
+        const USERDATA={
+            "uid": this.extractToken(UIDPOS),
+            "token": this.extractToken(TOKENPOS),
+            "new_password":this.state.new_password
+            }
+        await newPassword(URLPATH, USERDATA)
+            .then(() => this.setState({ redirect: true }));
+    }
+
   render () {
+      const { redirect } = this.state;
+      if (redirect) {
+         return <Redirect to='/'/>;
+      }
     return (
-      <div style={{width:"500px"}}>
-        <Container>
+      <div className="reset-pass">
+        <Container style={{width:"500px"}}>
         <h1>Forgot your password?</h1>
-        <p>Enter your email address below, and we'll email instructions for setting a new one.</p>
+        <p>Enter your new password: </p>
+
+        <div className="form-error">
+             <FormErrors formErrors={this.state.formErrors} />
+        </div>
 
         <form method="POST" className="form-group">
 					<input type="password"
-							className="form-control"
-							style={{borderRadius:"20px", marginBottom:"15px"}}
+                            name="new_password"
+                            className="form-control reset-pass-form"
 							placeholder="Enter New Password"
-							onChange = {(event,newValue) => this.setState({new_password:newValue})}
+                            value={this.state.new_password}
+							onChange = {this.handlChangePassword}
 							required/>
                     <input type="password"
-							className="form-control"
-							style={{borderRadius:"20px", marginBottom:"15px"}}
+                            name="re_new_password"
+							className="form-control reset-pass-form"
 							placeholder="Retype New Password"
-							onChange = {(event,newValue) => this.setState({re_new_password:newValue})}
+                            value={this.state.re_new_password}
+							onChange = {this.handlChangePassword}
 							required/>
-					<input type="submit"
-							value="Send me instructions!"
-							className="btn btn-warning"
-							style={{marginTop:"15px", borderRadius:"20px"}}
-							onClick={(event) => this.handleClick(event)}/>
+					<button type="button"
+							className="btn btn-warning reset-pass-form"
+							onClick={this.handleSubmitNewPassword}
+                            disabled={!this.state.formValid}>Change password</button>
         </form>
         </Container>
       </div>
