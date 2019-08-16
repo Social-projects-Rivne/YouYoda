@@ -78,16 +78,16 @@ class FillEditPage extends React.Component {
         console.log(event.target.value, event.target.value);
     };
 
-    async componentDidMount() {
-        let userData = await this.getUser();
-        // this.setState({username: userData.username,
-        // first_name: userData.first_name})
-        let test_dict = {}
-        Object.keys(this.state).map(function (key) {
-            test_dict[key] = userData[key]
-        })
-        this.setState(test_dict)
-    }
+    // async componentDidMount() {
+    //     let userData = await this.getUser();
+    //     // this.setState({username: userData.username,
+    //     // first_name: userData.first_name})
+    //     let test_dict = {}
+    //     Object.keys(this.state).map(function (key) {
+    //         test_dict[key] = userData[key]
+    //     })
+    //     this.setState(test_dict)
+    // }
 
     render() {
         const {header, main} = this.props;
@@ -101,7 +101,9 @@ class FillEditPage extends React.Component {
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
                                 <h2  className="top-text">Personal details</h2>
-                                <img src={require('../img/static/avatar.png')} className="avatar"/>
+                                <div className="edit-avatar">
+                                    <img src={require('../img/static/avatar.png')} className="avatar"/>
+                                </div>
                                 <Label for="login" className="login">Login*</Label>
                                 <Input
                                     type="login"
