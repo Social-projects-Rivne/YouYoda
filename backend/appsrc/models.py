@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 DEFAULT_ROLE_ID = 1
+USERNAME_FIELD = 'email'
+REQUIRED_FIELDS = ['username', 'password']
 
 
 class Categories(models.Model):
