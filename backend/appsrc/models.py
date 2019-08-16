@@ -5,9 +5,6 @@ from django.db import models
 class Categories(models.Model):
     name = models.CharField(max_length=20)
 
-class Roles(models.Model):
-    name = models.CharField(max_length=20)
-
 class UserStatuses(models.Model):
     status = models.CharField(max_length=40)
 
