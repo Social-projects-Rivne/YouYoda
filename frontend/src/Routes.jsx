@@ -16,7 +16,7 @@ export default function Routes() {
     <div>
         <Route exact path='/' component={Home}/>
         <Route path='/profile' component={Profile}/>
-        <Route path='/edit' component={EditPageProfile}/>
+        <Route path='/editprofile' component={EditPageProfile}/>
         <Route exact path='/reset/password' component={ResetPassword}/> 
         <Route path={'/reset/password/new/:uid/:token'} component={EnterNewPassword}/>
     </div>

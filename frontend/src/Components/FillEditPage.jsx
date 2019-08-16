@@ -31,7 +31,6 @@ class FillEditPage extends React.Component {
         }));
     };
 
-
     async handleClick(event) {
         await editForm(this.state);
     }
@@ -39,8 +38,7 @@ class FillEditPage extends React.Component {
     getUser = async () => {
         try {
             // const response = await axios.get('http://localhost:5000/test');
-            // const response = await axios.get('http://localhost:8000/api/user/profile/edit');
-            const response = await axios.get('http://localhost:8000/api/user/edit');
+            const response = await axios.get('http://localhost:8000/api/user/profile/edit');
             // console.log(response.data);
             // alert(response.data);
             return response.data;
@@ -48,14 +46,16 @@ class FillEditPage extends React.Component {
             console.error(error);
         }
     };
+
     postUser = async (formData) => {
         try {
             // const response = await axios.post('http://localhost:5000/test', formData);
-            const response = await axios.patch('http://localhost:8000/api/user/edit', formData);
+            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData);
         } catch (error) {
             console.error(error);
         }
     };
+
     saveForm = async () => {
         let payLoad = {};
         payLoad.username = this.state.username;
@@ -69,6 +69,7 @@ class FillEditPage extends React.Component {
         payLoad.phone_number = this.state.phone_number;
         await this.postUser(payLoad)
     };
+
     updateField = (event) => {
         let fieldName = event.target.name;
         let newState = {};
@@ -89,6 +90,14 @@ class FillEditPage extends React.Component {
         this.setState(test_dict)
     }
 
+    becomeTrainer = async (trainerStatus) => {
+        try {
+            const response = await axios.patch('http://localhost:8000/api/user/profile/', trainerStatus);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     render() {
         const {header, main} = this.props;
         return (
@@ -100,7 +109,7 @@ class FillEditPage extends React.Component {
                     >
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
-                                <h2  className="top-text">Personal details</h2>
+                                <h2 className="top-text">Personal details</h2>
                                 <img src={require('../img/static/avatar.png')} className="avatar"/>
                                 <Label for="login" className="login">Login*</Label>
                                 <Input
@@ -131,7 +140,6 @@ class FillEditPage extends React.Component {
                                 <Input
                                     type="email"
                                     name="email"
-
                                     required
                                     placeholder="example@email.com"
                                     className="row-email"
@@ -172,7 +180,7 @@ class FillEditPage extends React.Component {
                                                     name={'location'}
                                                     required
                                                     className="field-box button-region">
-                                            >
+                                                >
                                                 {regions.map((region) => (
                                                     <option value={region}>{region}</option>
                                                 ))}
@@ -259,11 +267,13 @@ class FillEditPage extends React.Component {
                                     <Button className="submit-button"
                                             onClick={() => this.saveForm()}>Submit</Button>
                                 </div>
-                                <Button color="secondary" className="text-button-trainer" size="lg" block>I want to
-                                    become a
-                                    trainer</Button>
+                                <Button color="secondary" className="text-button-trainer" size="lg" block
+                                        onClick={() => this.becomeTrainer()}>
+                                    I want to become a trainer
+                                </Button>
                                 <div className="col-4">
-                                    <Button color="secondary" type size="lg" className="button-saveall" block onClick={() => this.saveForm()}>Save
+                                    <Button color="secondary" type size="lg" className="button-saveall" block
+                                            onClick={() => this.saveForm()}>Save
                                         all</Button>
                                 </div>
                             </Col>

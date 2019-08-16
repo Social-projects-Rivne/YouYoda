@@ -8,7 +8,7 @@ async function editForm(props) {
     // const apiBaseUrl = "api/user/profile/edit";
     const {first_name, last_name, location, username, email, password, about_me, birth_date, phone_number} = props;
     try {
-        const response = API.patch("/user/profile/edit", props,
+        const response = API.patch("/user/editprofile", props,
          { crossdomain: true }
             // headers: { 'Authorization': authorization }
         )
