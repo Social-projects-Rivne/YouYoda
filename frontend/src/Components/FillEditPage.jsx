@@ -41,7 +41,7 @@ class FillEditPage extends React.Component {
             // const response = await axios.get('http://localhost:5000/test');
             // const response = await axios.get('http://localhost:8000/api/user/profile/edit');
             const response = await axios.get('http://localhost:8000/api/user/edit');
-            console.log(response.data);
+            // console.log(response.data);
             // alert(response.data);
             return response.data;
         } catch (error) {
@@ -80,14 +80,13 @@ class FillEditPage extends React.Component {
 
     async componentDidMount() {
         let userData = await this.getUser();
-        this.setState({username: userData.username,
-        first_name: userData.first_name})
-        console.log(userData)
+        // this.setState({username: userData.username,
+        // first_name: userData.first_name})
         let test_dict = {}
-        // Object.keys(this.state).map(function (key) {
-        //     test_dict[key] = userData[key]
-        // })
-        // this.setState(test_dict)
+        Object.keys(this.state).map(function (key) {
+            test_dict[key] = userData[key]
+        })
+        this.setState(test_dict)
     }
 
     render() {
@@ -250,8 +249,8 @@ class FillEditPage extends React.Component {
                                     </div>
                                     <div className="col-5">
                                         <Input type="password"
-                                               name="passwordconf"
-                                               className="password"
+                                               name="password"
+                                               className="passwordconf"
                                                placeholder="Confirm password"
                                                onChange={(e) => this.updateField(e)}
                                                value={this.state.password}
