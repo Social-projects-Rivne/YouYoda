@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {Container} from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
 import {newPassword} from '../api/resetPassword';
 import {FormErrors} from '../api/FormError';
-import {extractToken} from '../utils';
 
 
 const UIDPOS = 4;
@@ -57,8 +57,8 @@ export default class EnterNewPassword extends React.Component{
     extractToken (idx) {
         return window.location.pathname.split("/")[idx]
     }
-    
-    handleSubmitNewPassword = (event) => {
+
+    handleSubmitNewPassword = async (event) => {
         console.log(this.props)
         const URLPATH = 'auth/users/reset_password_confirm/';
         const USERDATA={
@@ -66,10 +66,15 @@ export default class EnterNewPassword extends React.Component{
             "token": this.extractToken(TOKENPOS),
             "new_password":this.state.new_password
             }
-        newPassword(URLPATH, USERDATA);
+        await newPassword(URLPATH, USERDATA)
+            .then(() => this.setState({ redirect: true }));
     }
 
   render () {
+      const { redirect } = this.state;
+      if (redirect) {
+         return <Redirect to='/'/>;
+      }
     return (
       <div className="reset-pass">
         <Container style={{width:"500px"}}>

@@ -20,7 +20,6 @@ async function newPassword (pathurl, userdata) {
     catch(error) {
         console.log('Error: ' + error.message);
     };
-
 }
 
 export { newPassword };
