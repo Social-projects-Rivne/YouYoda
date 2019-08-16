@@ -28,6 +28,7 @@ class YouYodaUser(AbstractUser):
     phone_number = models.CharField(max_length=13, blank=True, null=True)
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'password']
 

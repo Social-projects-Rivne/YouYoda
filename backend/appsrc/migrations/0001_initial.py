@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('role_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Roles')),
+                ('role_id', models.ForeignKey(on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Roles')),
                 ('hide_my_data', models.BooleanField(default=False)),
                 ('first_name', models.CharField(blank=True, max_length=20, null=True)),
                 ('last_name', models.CharField(blank=True, max_length=20, null=True)),
