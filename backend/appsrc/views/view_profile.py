@@ -18,7 +18,7 @@ class ViewProfile(APIView):
         """Receives and transmits user profile data"""
         user = YouYodaUser.objects.all()
         serializer = ProfileViewSerializer(user, many=True)
-        return Response(serializer.data[0])
+        return Response(serializer.data[0] )
 
     # def get(self, request):
     #     """Receives and transmits user profile data"""

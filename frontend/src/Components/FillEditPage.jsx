@@ -40,8 +40,8 @@ class FillEditPage extends React.Component {
         try {
             // const response = await axios.get('http://localhost:5000/test');
             // const response = await axios.get('http://localhost:8000/api/user/profile/edit');
-            const response = await axios.get('http://localhost:8000/api/user/profile/edit');
-            // console.log(response.data);
+            const response = await axios.get('http://localhost:8000/api/user/edit');
+            console.log(response.data);
             // alert(response.data);
             return response.data;
         } catch (error) {
@@ -51,7 +51,7 @@ class FillEditPage extends React.Component {
     postUser = async (formData) => {
         try {
             // const response = await axios.post('http://localhost:5000/test', formData);
-            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData);
+            const response = await axios.patch('http://localhost:8000/api/user/edit', formData);
         } catch (error) {
             console.error(error);
         }
@@ -80,13 +80,14 @@ class FillEditPage extends React.Component {
 
     async componentDidMount() {
         let userData = await this.getUser();
-        // this.setState({username: userData.username,
-        // first_name: userData.first_name})
+        this.setState({username: userData.username,
+        first_name: userData.first_name})
+        console.log(userData)
         let test_dict = {}
-        Object.keys(this.state).map(function (key) {
-            test_dict[key] = userData[key]
-        })
-        this.setState(test_dict)
+        // Object.keys(this.state).map(function (key) {
+        //     test_dict[key] = userData[key]
+        // })
+        // this.setState(test_dict)
     }
 
     render() {
@@ -100,13 +101,14 @@ class FillEditPage extends React.Component {
                     >
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
-                                <h2 class="font-weight-bold" className="top-text">Personal details</h2>
+                                <h2  className="top-text">Personal details</h2>
                                 <img src={require('../img/static/avatar.png')} className="avatar"/>
                                 <Label for="login" className="login">Login*</Label>
                                 <Input
                                     type="login"
                                     name="username"
                                     className="field-box"
+                                    required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.username}
                                 />
@@ -114,6 +116,7 @@ class FillEditPage extends React.Component {
                                 <Input
                                     name="first_name"
                                     className="field-box"
+                                    required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.first_name}
                                 />
@@ -121,6 +124,7 @@ class FillEditPage extends React.Component {
                                 <Input
                                     name="last_name"
                                     className="field-box"
+                                    required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.last_name}
                                 />
@@ -128,6 +132,8 @@ class FillEditPage extends React.Component {
                                 <Input
                                     type="email"
                                     name="email"
+
+                                    required
                                     placeholder="example@email.com"
                                     className="row-email"
                                     value={this.state.email}
@@ -165,6 +171,7 @@ class FillEditPage extends React.Component {
                                                     value={this.state.location}
                                                     onChange={this.updateField}
                                                     name={'location'}
+                                                    required
                                                     className="field-box button-region">
                                             >
                                                 {regions.map((region) => (
@@ -174,7 +181,7 @@ class FillEditPage extends React.Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
-                                <h2 class="font-weight-bold" className="top-text-contact">Contacts</h2>
+                                <h2 className="top-text-contact">Contacts</h2>
                                 <Label for="number">Mobile phone</Label>
                                 <Input
                                     onSubmit={() => {
@@ -182,8 +189,9 @@ class FillEditPage extends React.Component {
                                     }}
                                     type="number"
                                     name="phone_number"
+                                    required
                                     className="field-box"
-                                    placeholder="+38(0__)-___-__-__"
+                                    placeholder="(0__)-___-__-__"
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.phone_number}
                                 />
@@ -200,8 +208,8 @@ class FillEditPage extends React.Component {
                                 </Row>
                             </Col>
 
-                            <Col md="6" sm="12" className="fill-edit-collumn" className="top-text-2">
-                                <h2 class="font-weight-bold">About me</h2>
+                            <Col md="6" sm="12" className="top-text-2 fill-edit-collumn">
+                                <h2>About me</h2>
                                 <Label className="marg-top">I like</Label>
                                 <Input
                                     type="textarea"
@@ -228,7 +236,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.birth_date}
                                 />
-                                <h2 class="security-button">Security</h2>
+                                <h2 className="security-button">Security</h2>
                                 <Label>Change my password</Label>
                                 <div className="row justify-content-lg-start">
                                     <div className="col-5 passwords-change">
@@ -242,7 +250,7 @@ class FillEditPage extends React.Component {
                                     </div>
                                     <div className="col-5">
                                         <Input type="password"
-                                               name="password"
+                                               name="passwordconf"
                                                className="password"
                                                placeholder="Confirm password"
                                                onChange={(e) => this.updateField(e)}
@@ -255,7 +263,7 @@ class FillEditPage extends React.Component {
                                 <Button color="secondary" className="text-button-trainer" size="lg" block>I want to
                                     become a
                                     trainer</Button>
-                                <div class="col-4">
+                                <div className="col-4">
                                     <Button color="secondary" type size="lg" className="button-saveall" block onClick={() => this.saveForm()}>Save
                                         all</Button>
                                 </div>
