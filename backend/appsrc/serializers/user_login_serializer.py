@@ -9,7 +9,7 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
-        user = YouYodaUser.objects.get(email=data['email'])
+        user = User.objects.get(email=data['email'])
         if user.check_password(data['password']):
             user_auth = authenticate(user)
             if user_auth and user.is_active:

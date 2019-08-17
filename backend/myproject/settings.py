@@ -44,8 +44,12 @@ INSTALLED_APPS = (
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'allauth',
+    'django.contrib.sites',
     'djoser',
 )
+
+SITE_ID = 1
 
 AUTH_USER_MODEL = 'appsrc.YouYodaUser'
 
