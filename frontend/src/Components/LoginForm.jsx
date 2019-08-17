@@ -17,7 +17,8 @@ class LoginForm extends Component {
             formErrors: { email: '', password: '' },
             emailValid: false,
             passwordValid: false,
-            formValid: false
+			formValid: false,
+			showErrors: false
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -46,11 +47,22 @@ class LoginForm extends Component {
             emailValid: emailValid,
             passwordValid: passwordValid
         }, this.validateForm);
+	}
+	errorShowBlock(formErrors) {
+        for (var errorText in formErrors) {
+            if(formErrors[errorText].length > 0)
+                return true;
+        }
+        return false;
     }
     validateForm() {
         this.setState({
             formValid: this.state.emailValid &&
                        this.state.passwordValid
+		});
+		var show = this.errorShowBlock(this.state.formErrors);
+        this.setState({
+            showErrors: show
         });
     }
 
@@ -85,7 +97,7 @@ class LoginForm extends Component {
 				    <Row className="m-0">
 				      <Col>
 						<h3 className="modal-title mb-3">Log In</h3>
-						<div className={!this.state.formValid ? 'panel-errors errors-show':'panel-errors'}>
+						<div className={this.state.showErrors ? 'panel-errors errors-show':'panel-errors'}>
                             <FormErrors formErrors={this.state.formErrors} />
                         </div>
 					    <FormGroup className={this.state.formErrors.email ? 'is-error': ''}>
