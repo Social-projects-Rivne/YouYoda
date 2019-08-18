@@ -11,7 +11,7 @@ class UserToTrainerSerializer(serializers.ModelSerializer):
 
 	class Meta:
 
-		 model = User
+		 model = YouYodaUser
 
 		 fields = (
 		 	'is_trainer',
