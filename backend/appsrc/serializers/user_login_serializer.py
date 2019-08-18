@@ -10,9 +10,16 @@ class LoginSerializer(serializers.Serializer):
 
     def validate(self, data):
         user = User.objects.get(email=data['email'])
-        if user.check_password(data['password']):
-            user_auth = authenticate(user)
-            if user_auth and user.is_active:
-                login(user_auth)
-                return user_auth
+        email=data['email']
+        password=data['password']
+        if email and password:
+            if user.check_password(password):
+                user = authenticate(email=email, password=password)
+                if user and user.is_active:
+                    #login(user)
+                    return user
         return False
+ 
+
+
+ 
