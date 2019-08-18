@@ -49,7 +49,7 @@ class Registration extends React.Component{
 
             if(passwordValid){
                 var passConfirm = document.getElementById('confirmpass').value;
-                passwordValid = value.length == passConfirm.length;
+                passwordValid = value.length === passConfirm.length;
                 fieldValidationErrors.confirmpass = passwordValid ? '': ' and password are different';
             }
             break;
@@ -57,7 +57,7 @@ class Registration extends React.Component{
             var pass = document.getElementById('password').value;
             passwordValid = pass.length >= 6;
             fieldValidationErrors.password = passwordValid ? '': ' is too short';
-            confirmPasswordValid = value.length == pass.length;
+            confirmPasswordValid = value.length === pass.length;
             fieldValidationErrors.confirmpass = confirmPasswordValid ? '': ' and password are different';
             break;
           case 'isagreed':
@@ -94,7 +94,7 @@ class Registration extends React.Component{
     onChangeInputs = (event) => {
         const idParam = event.target.id;
         const valueParam = event.target.value;
-        if( idParam == 'isagreed')
+        if( idParam === 'isagreed')
             this.setState({[idParam]:!this.state.isagreed},
                           () => { this.validateField(idParam, this.state.isagreed) });
         else
