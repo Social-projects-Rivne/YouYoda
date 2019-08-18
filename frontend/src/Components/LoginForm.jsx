@@ -19,7 +19,7 @@ class LoginForm extends Component {
             emailValid: false,
             passwordValid: false,
             formValid: false,
-            redirect: false
+            redirect: false,
 			showErrors: false
         };
 
