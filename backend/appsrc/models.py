@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+DEFAULT_ROLE_ID = 1
+
 
 DEFAULT_ROLE_ID = 1
 class Categories(models.Model):

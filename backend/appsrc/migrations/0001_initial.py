@@ -6,6 +6,7 @@ import django.utils.timezone
 from django.conf import settings
 from django.db import migrations, models
 
+
 def insertData(apps, schema_editor):
     Roles = apps.get_model('appsrc', 'Roles')
     Roles.objects.create(
@@ -41,8 +42,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-
-
         migrations.CreateModel(
             name='Roles',
             fields=[
