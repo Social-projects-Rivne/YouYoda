@@ -20,7 +20,9 @@ class FillEditPage extends React.Component {
             about_me: '',
             i_like: '',
             birth_date: '',
-            phone_number: ''
+            phone_number: '',
+            avatar_url: '',
+            is_trainer: 'true'
         };
         this.handleClick = this.handleClick.bind(this)
     }
@@ -67,6 +69,7 @@ class FillEditPage extends React.Component {
         payLoad.email = this.state.email;
         payLoad.birth_date = this.state.birth_date;
         payLoad.phone_number = this.state.phone_number;
+        payLoad.avatar_url = this.state.avatar_url;
         await this.postUser(payLoad)
     };
 
@@ -90,9 +93,10 @@ class FillEditPage extends React.Component {
         this.setState(test_dict)
     }
 
-    becomeTrainer = async (trainerStatus) => {
+    becomeTrainer = async () => {
+        let trainer = {is_trainer: this.state.is_trainer}
         try {
-            const response = await axios.patch('http://localhost:8000/api/user/profile/', trainerStatus);
+            const response = await axios.patch('http://localhost:8000/api/user/totrainer/', trainer);
         } catch (error) {
             console.error(error);
         }
@@ -109,8 +113,17 @@ class FillEditPage extends React.Component {
                     >
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
-                                <h2 className="top-text">Personal details</h2>
-                                <img src={require('../img/static/avatar.png')} className="avatar"/>
+
+                                <h2  className="top-text">Personal details</h2>
+                                <div className="edit-avatar">
+                                    <img src={require('../img/static/avatar.png')}
+                                         className="avatar"
+                                         href="#" alt="profile-photo"
+                                         onChange={(e) => this.updateField(e)}
+                                         value={this.state.avatar_url}
+                                         href={this.state.avatar_url}
+                                    />
+                                </div>
                                 <Label for="login" className="login">Login*</Label>
                                 <Input
                                     type="login"

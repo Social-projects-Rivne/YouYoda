@@ -14,8 +14,9 @@
 
 }
 .avatar{
-
-    margin: 22px 160px 0 183px ;
+    border-radius: 50%;
+    width: 165px;
+    height: 165px;
 }
 
 .city-country-2{
@@ -99,4 +100,32 @@
     min-width: 257px;
     min-height: 45px;
     background-color: #6c757d;
+}
+.edit-avatar{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.edit-avatar::after{
+    content: "\f030";
+    text-align: center;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    font-family: FontAwesome;
+    position: absolute;
+    border-radius: 0 0 82px 82px;
+    top: 82px;
+    width: 165px;
+    height: 82px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.edit-avatar:hover::after{
+    color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    border-radius: 0 0 82px 82px;
+    top: 82px;
+    width: 165px;
+    height: 82px;
+    background-color: rgba(0, 0, 0, 0.6);
 }
