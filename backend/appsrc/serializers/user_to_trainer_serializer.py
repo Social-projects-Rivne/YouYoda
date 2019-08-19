@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from ..models import YouYodaUser
 
+
 class UserToTrainerSerializer(serializers.ModelSerializer):
     """Takes or updates data from the YouYodaUser model for change user role.
 

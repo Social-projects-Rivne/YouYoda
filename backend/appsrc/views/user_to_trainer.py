@@ -6,7 +6,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-
 from ..models import YouYodaUser
 from ..serializers.user_to_trainer_serializer import UserToTrainerSerializer
 

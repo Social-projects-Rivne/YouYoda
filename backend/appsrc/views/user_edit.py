@@ -1,10 +1,10 @@
-from ..serializers.user_registration_serializer import RegistrationSerializer
-from ..models.user import User
-
 from rest_framework import permissions, status
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from ..models.user import User
+from ..serializers.user_registration_serializer import RegistrationSerializer
 
 
 class UserRegistration(APIView):

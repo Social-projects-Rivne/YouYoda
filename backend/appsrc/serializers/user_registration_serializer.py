@@ -1,6 +1,6 @@
-from ..models import YouYodaUser
-
 from rest_framework import serializers
+
+from ..models import YouYodaUser
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -12,7 +12,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create(
             username=validated_data['username'],
-            email=validated_data['email'], 
+            email=validated_data['email'],
             is_trainer=validated_data['is_trainer'])
         user.set_password(validated_data['password'])
 

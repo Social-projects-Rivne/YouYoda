@@ -6,7 +6,6 @@ from rest_framework import permissions
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-
 from ..models import YouYodaUser
 from ..serializers.profile_edit_serializer import ProfileEditSerializer
 
@@ -33,4 +32,3 @@ class EditProfile(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-

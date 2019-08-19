@@ -2,9 +2,10 @@ from rest_framework import serializers
 
 from ..models import YouYodaUser
 
+
 class ProfileEditSerializer(serializers.ModelSerializer):
     """Takes or updates data from the User model for fill/edit user profile.
-     
+
     Converts it to JSON format for transmission via the API.
 
     """
@@ -14,14 +15,14 @@ class ProfileEditSerializer(serializers.ModelSerializer):
         model = YouYodaUser
 
         fields = (
-		 	'first_name', 'last_name', 'location', 'username', 'about_me', 
+		 	'first_name', 'last_name', 'location', 'username', 'about_me',
             'birth_date', 'phone_number', 'i_like', 'email'
             )
 
-    
+
     def create(self, validated_data):
         """Create user profile"""
-        
+
         user = YouYodaUser.objects.create(
             first_name = validated_data.get('first_name'),
             last_name = validated_data.get('last_name'),
@@ -49,5 +50,3 @@ class ProfileEditSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
-
-	

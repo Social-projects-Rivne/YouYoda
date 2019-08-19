@@ -1,9 +1,8 @@
-from ..serializers.user_login_serializer import LoginSerializer
- 
-
 from rest_framework import permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
+from ..serializers.user_login_serializer import LoginSerializer
 
 
 class UserLogin(APIView):
