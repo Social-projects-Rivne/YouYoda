@@ -32,7 +32,7 @@ class YouYodaUser(AbstractUser):
     phone_number = models.CharField(max_length=13, blank=True, null=True)
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
+    is_active = models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
 
 class StatusHistory(models.Model):
     usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)
