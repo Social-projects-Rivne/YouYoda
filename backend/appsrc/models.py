@@ -3,8 +3,6 @@ from django.db import models
 
 DEFAULT_ROLE_ID = 1
 
-
-DEFAULT_ROLE_ID = 1
 class Categories(models.Model):
     name = models.CharField(max_length=20)
 
@@ -16,7 +14,6 @@ class Roles(models.Model):
 
 class UserStatuses(models.Model):
     status = models.CharField(max_length=40)
-
 
 class YouYodaUser(AbstractUser):
     USERNAME_FIELD = 'email'
