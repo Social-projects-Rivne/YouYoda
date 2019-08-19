@@ -1,8 +1,8 @@
-#from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
-from django.shortcuts import get_object_or_404
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 from ..models import YouYodaUser
 from ..serializers.profile_view_serializer import ProfileViewSerializer
@@ -16,11 +16,7 @@ class ViewProfile(APIView):
 
     def get(self, request):
         """Receives and transmits user profile data"""
-        user = YouYodaUser.objects.get(user=request.user)
-        # user = YouYodaUser.objects.get_object_or_404(user=request.user)
-        serializer = ProfileEditSerializer(user)
+        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
+        serializer = ProfileViewSerializer(user)
         return Response(serializer.data)
-
-
-    
 

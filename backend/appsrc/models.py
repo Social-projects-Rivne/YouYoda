@@ -3,12 +3,14 @@ from django.db import models
 
 DEFAULT_ROLE_ID = 1
 
-
 class Categories(models.Model):
     name = models.CharField(max_length=20)
 
 class Roles(models.Model):
     name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.id
 
 class UserStatuses(models.Model):
     status = models.CharField(max_length=40)
