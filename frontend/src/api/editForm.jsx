@@ -8,10 +8,7 @@ async function editForm(props) {
     // const apiBaseUrl = "api/user/profile/edit";
     const {first_name, last_name, location, username, email, password, about_me, birth_date, phone_number} = props;
     try {
-        const response = API.patch("/user/editprofile", props,
-         { crossdomain: true }
-            // headers: { 'Authorization': authorization }
-        )
+        const response = API.patch("/user/editprofile", props, {headers: { Authorization: "Token " + localStorage.getItem('token')}})
         .then(function (response) {
         console.log(response);
         if(response.data.code === 204){

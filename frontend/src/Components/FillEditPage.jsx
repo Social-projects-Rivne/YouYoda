@@ -2,8 +2,11 @@ import React from 'react';
 import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import Button from "reactstrap/es/Button";
 import {countries, regions} from './Variables/location';
+
+import axios from 'axios';
+
 import {editForm} from "../api/editForm";
-import axios from 'axios'
+
 
 
 class FillEditPage extends React.Component {
@@ -40,7 +43,7 @@ class FillEditPage extends React.Component {
     getUser = async () => {
         try {
             // const response = await axios.get('http://localhost:5000/test');
-            const response = await axios.get('http://localhost:8000/api/user/profile/edit');
+            const response = await axios.get('http://localhost:8000/api/user/profile/edit', {headers: { Authorization: "Token " + localStorage.getItem('token')}});
             // console.log(response.data);
             // alert(response.data);
             return response.data;
@@ -52,7 +55,7 @@ class FillEditPage extends React.Component {
     postUser = async (formData) => {
         try {
             // const response = await axios.post('http://localhost:5000/test', formData);
-            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData);
+            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData, {headers: { Authorization: "Token " + localStorage.getItem('token')}});
         } catch (error) {
             console.error(error);
         }
@@ -96,7 +99,7 @@ class FillEditPage extends React.Component {
     becomeTrainer = async () => {
         let trainer = {is_trainer: this.state.is_trainer}
         try {
-            const response = await axios.patch('http://localhost:8000/api/user/totrainer/', trainer);
+            const response = await axios.patch('http://localhost:8000/api/user/totrainer/', trainer, {headers: { Authorization: "Token " + localStorage.getItem('token')}});
         } catch (error) {
             console.error(error);
         }
@@ -302,5 +305,3 @@ export default FillEditPage;
 
 
 // onSubmit={() => {alert("test")}}
-
-
