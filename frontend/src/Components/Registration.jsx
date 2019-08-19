@@ -28,6 +28,8 @@ class Registration extends React.Component{
         }
     }
 
+    
+
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
         let emailValid = this.state.emailValid;
