@@ -3,14 +3,12 @@ from django.db import models
 
 DEFAULT_ROLE_ID = 1
 
+
 class Categories(models.Model):
     name = models.CharField(max_length=20)
 
 class Roles(models.Model):
     name = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.id
 
 class UserStatuses(models.Model):
     status = models.CharField(max_length=40)
@@ -18,7 +16,7 @@ class UserStatuses(models.Model):
 class YouYodaUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'password']
-    role = models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
+    role= models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.SET_DEFAULT)
     hide_my_data = models.BooleanField(default=False)
     first_name = models.CharField(max_length=20, blank=True, null=True)
     last_name = models.CharField(max_length=20, blank=True, null=True)
@@ -32,13 +30,7 @@ class YouYodaUser(AbstractUser):
     phone_number = models.CharField(max_length=13, blank=True, null=True)
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
-
-DEFAULT_ROLE_ID = 1
-class Roles(models.Model):
-    role = models.ForeignKey(YouYodaUser, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
-    name = models.CharField(max_length=20)
-
+    
 class StatusHistory(models.Model):
     usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)
     date = models.DateTimeField()
