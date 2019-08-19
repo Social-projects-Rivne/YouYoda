@@ -1,7 +1,8 @@
 from ..models import YouYodaUser
 
+from djoser.compat import get_user_email
+from djoser.conf import settings
 from rest_framework import serializers
-
 
 class RegistrationSerializer(serializers.ModelSerializer):
 
@@ -15,6 +16,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             is_trainer=validated_data['is_trainer'])
         user.set_password(validated_data['password'])
-
         user.save()
+
         return user

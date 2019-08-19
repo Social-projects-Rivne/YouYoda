@@ -151,8 +151,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 DJOSER = {
     "SEND_ACTIVATION_EMAIL": True,
+    "SEND_CONFIRMATION_EMAIL": True,
     "PASSWORD_RESET_CONFIRM_URL": "reset/password/new/{uid}/{token}",
-    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "ACTIVATION_URL": "activate/user/{uid}/{token}",
     "SOCIAL_AUTH_ALLOWED_REDIRECT_URIS": ["http://test.localhost/"],
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
 }
