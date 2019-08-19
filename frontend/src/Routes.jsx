@@ -10,6 +10,7 @@ import EnterNewPassword from './Components/EnterNewPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ResetPassword from './Components/ResetPassword';
+import Profile from './Pages/Profile';
 
 
 
@@ -18,6 +19,7 @@ export default function Routes() {
       <div>
         <Router>
             <Route exact path='/' component={Home}/>
+            <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
             <Route component={MainLayout}>
                 <Route exact path='/reset/password'

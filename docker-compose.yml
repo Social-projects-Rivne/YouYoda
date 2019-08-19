@@ -11,7 +11,7 @@ services:
        MYSQL_DATABASE: 'YouYoda'
        MYSQL_USER: 'root'
        MYSQL_PASSWORD: 'root_password'
-       
+
   redis:
     image: redis:latest
     environment:

@@ -34,6 +34,11 @@ class YouYodaUser(AbstractUser):
     is_trainer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
 
+DEFAULT_ROLE_ID = 1
+class Roles(models.Model):
+    role = models.ForeignKey(YouYodaUser, default=DEFAULT_ROLE_ID, on_delete=models.CASCADE)
+    name = models.CharField(max_length=20)
+
 class StatusHistory(models.Model):
     usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)
     date = models.DateTimeField()
