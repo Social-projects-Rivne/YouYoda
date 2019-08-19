@@ -16,8 +16,8 @@ class ViewProfile(APIView):
 
     def get(self, request):
         """Receives and transmits user profile data"""
-        # user = YouYodaUser.objects.get(user=request.user)
-        user = YouYodaUser.objects.get_object_or_404(user=request.user)
+        user = YouYodaUser.objects.get(user=request.user)
+        # user = YouYodaUser.objects.get_object_or_404(user=request.user)
         serializer = ProfileEditSerializer(user)
         return Response(serializer.data)
 
