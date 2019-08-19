@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from ..models.user import YouYodaUser
 
+
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -14,4 +15,3 @@ class UserSerializer(serializers.ModelSerializer):
             'birth_date', 'phone_number', 'is_active', 'avatar_url',
             'is_trainer'
             )
-

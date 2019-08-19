@@ -1,7 +1,11 @@
 import React from 'react';
+
 import { Button, Col, Modal, Row } from 'reactstrap';
+import {Redirect} from 'react-router-dom';
+
 import { FormErrors } from '../api/FormErrors';
 import { registration } from '../api/registration';
+
 
 class Registration extends React.Component{
     constructor(props) {
@@ -19,9 +23,12 @@ class Registration extends React.Component{
             confirmPasswordValid: false,
             isAgreedValid: true,
             formValid: false,
-            showErrors: false
+            showErrors: false,
+            redirect: false,
         }
     }
+
+    
 
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
@@ -109,10 +116,15 @@ class Registration extends React.Component{
     }
     async handleClick(event){
         event.preventDefault();
-        await registration(this.state);
+        await registration(this.state)
+            .then(() => this.setState({ redirect: true }));
         return false;
     }
     render () {
+        const { redirect } = this.state;
+        if (redirect) {
+           return <Redirect to='/activation/send/email'/>;
+        }
         return (
         <div>
             <Modal id="registration-form" isOpen={this.props.isOpen} className="wild">

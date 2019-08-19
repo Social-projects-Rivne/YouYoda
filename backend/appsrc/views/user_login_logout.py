@@ -6,6 +6,8 @@ from rest_framework.authtoken.models import Token
 
 from ..serializers.user_login_serializer import LoginSerializer
 
+from ..serializers.user_login_serializer import LoginSerializer
+
 
 class UserLogin(APIView):
     permission_classes = (permissions.AllowAny,)

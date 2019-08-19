@@ -3,7 +3,7 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-import {newPassword} from '../api/resetPassword'
+import {sendDataToDjoser} from '../api/resetPassword'
 
 
 export default class ResetPassword extends React.Component{
@@ -21,7 +21,7 @@ export default class ResetPassword extends React.Component{
     handlPasswordReset = async (event) => {
         const URLPATH = 'auth/users/reset_password/';
         const USERDATA = {"email":this.state.email}
-        await newPassword(URLPATH, USERDATA)
+        await sendDataToDjoser(URLPATH, USERDATA)
             .then(() => this.setState({ redirect: true }));
 	}
 

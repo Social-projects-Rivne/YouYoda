@@ -1,7 +1,7 @@
 import API from './axiosConf';
 
 
-async function newPassword (pathurl, userdata) {
+async function sendDataToDjoser (pathurl, userdata) {
         try {
             const response = await API.post(pathurl, userdata)
             .then(function (response) {
@@ -22,4 +22,4 @@ async function newPassword (pathurl, userdata) {
     };
 }
 
-export { newPassword };
+export { sendDataToDjoser };
