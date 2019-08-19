@@ -3,7 +3,7 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-import {newPassword} from '../api/resetPassword';
+import {sendDataToDjoser} from '../api/resetPassword';
 import {FormErrors} from '../api/FormError';
 
 
@@ -19,7 +19,8 @@ export default class EnterNewPassword extends React.Component{
                     formErrors: {re_new_password: '', new_password: ''},
                     rePasswordValid: false,
                     passwordValid: false,
-                    formValid: false
+                    formValid: false,
+                    redirect: false,
                 };
 	}
 
@@ -66,7 +67,7 @@ export default class EnterNewPassword extends React.Component{
             "token": this.extractToken(TOKENPOS),
             "new_password":this.state.new_password
             }
-        await newPassword(URLPATH, USERDATA)
+        await sendDataToDjoser(URLPATH, USERDATA)
             .then(() => this.setState({ redirect: true }));
     }
 

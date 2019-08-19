@@ -14,8 +14,8 @@ async function registration(props) {
     }
     try {
         const response = await axios.post(
-            apiBaseUrl + 'api/user/register', 
-            datasend, 
+            apiBaseUrl + 'api/user/register',
+            datasend,
             {
 				crossdomain: true,
                 headers: {
