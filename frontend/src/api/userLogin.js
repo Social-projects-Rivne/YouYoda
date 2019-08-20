@@ -17,7 +17,7 @@ async function userLogin(props) {
                     localStorage.setItem('token', AUTH_TOKEN)
                     axios.defaults.headers.common['Authorization'] = "Token " + localStorage.getItem('token')
                     console.log(axios.defaults.headers.common['Authorization'])
-                } else if (response.status === 401) {
+                } else if (response.status === 400) {
                     console.log("Username password do not match");
                     alert("username password do not match");
                 } else {

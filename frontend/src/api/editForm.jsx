@@ -11,7 +11,7 @@ async function editForm(props) {
         const response = API.patch("/user/editprofile", props, {headers: { Authorization: "Token " + localStorage.getItem('token')}})
         .then(function (response) {
         console.log(response);
-        if(response.data.code === 204){
+        if(response.data.code === 201){
             console.log("Successfull");
             alert("Password was changed")
         }
