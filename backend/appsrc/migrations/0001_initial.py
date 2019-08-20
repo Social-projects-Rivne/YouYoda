@@ -22,15 +22,15 @@ def insertData(apps, schema_editor):
     User.objects.create(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
         location = 'Ukraine, Rivne', username = 'Yoda-admin', password = '$2y$12$UF3XjBwS3Oz6phT4WfXPkepcUuro.4BxotLKiY22QonRm2/cEYzBa',
         email = 'youyoda.academy@gmail.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
-        is_active = True, avatar_url = '', is_trainer = True, role = 3)
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 3)
     User.objects.create(id=2, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
         location = 'Ukraine, Rivne', username = 'Yoda-moderator', password = '$2y$12$ce08PZUTOELFeDh3EewjsuhOBMxbp.lBQBQ0cODMtDJp13sXMRDk2',
         email = 'test@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
-        is_active = True, avatar_url = '', is_trainer = True, role = 2)
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 2)
     User.objects.create(id=3, hide_my_data = False, first_name = 'Yoda', last_name = 'Rivensky',
         location = 'Ukraine, Rivne', username = 'Yoda-user', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
         email = 'test1@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
-        is_active = True, avatar_url = '', is_trainer = False, role = 1)
+        is_active = True, avatar_url = '', is_trainer = False, role_id = 1)
 
 
 class Migration(migrations.Migration):
