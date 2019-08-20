@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('phone_number', models.CharField(blank=True, max_length=13, null=True)),
                 ('avatar_url', models.CharField(blank=True, max_length=80, null=True)),
                 ('is_trainer', models.BooleanField(default=False)),
-                ('role', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='appsrc.Roles')),
+                ('role', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Roles')),
             ],
             options={
                 'verbose_name': 'user',
