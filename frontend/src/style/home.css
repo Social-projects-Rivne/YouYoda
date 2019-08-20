@@ -55,17 +55,20 @@
     display: flex;
     margin: 49px 0 30px 0;
 }
+.footer-nav li {
+    cursor: pointer;
+}
 .footer-nav a {
     color: #000;
     margin-right: 30px;
     text-transform: uppercase;
 }
-.search-input {
+#search-input {
     width: 400px;
     border-radius: 20px 0px 0px 20px;
     height: 50px;
 }
-.search-button {
+#search-button {
     border: none;
     width: 50px;
     height: 50px;
@@ -262,4 +265,43 @@
 .home-last-block .btn-group-sign {
     top: 0;
     margin-bottom: 240px;
+}
+
+/* Styles for ResetPassword */
+
+.reset-pass {
+    height: 80vh;
+    min-height: 510px;
+    background-image: url("../img/static/patternfon.png");
+    background-position: center;
+    background-repeat:repeat;
+    display: flex;
+    align-items: center;
+}
+.reset-pass .container{
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 50px;
+    border-radius: 20px;
+}
+.reset-pass-form {
+    border-radius: 20px;
+    margin-bottom: 20px;
+
+}
+.form-error {
+    padding-left: 20px;
+    color: #710000;
+}
+.reset-pass .confirm {
+    text-align: center;
+}
+.reset-pass .confirm h1{
+    font-size: 120px;
+}
+.reset-pass .confirm p {
+    font-size: 2rem;
+    margin-top: 20px;
+}
+.re-send {
+    margin-left: 10px;
 }

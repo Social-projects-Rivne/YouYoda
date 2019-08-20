@@ -1,4 +1,5 @@
 import React from 'react';
+
 import axios from 'axios';
 
 import Footer from '../Components/Footer';
@@ -19,7 +20,7 @@ export default class Profile extends React.Component{
     }
     getInfo = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/user/profile/view');
+        const response = await axios.get('http://localhost:8000/api/user/profile/view', {headers: { Authorization: "Token " + localStorage.getItem('token')}});
         return response.data;
       }
       catch (error) {

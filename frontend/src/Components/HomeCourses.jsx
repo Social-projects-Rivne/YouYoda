@@ -8,12 +8,12 @@ export default class HomeCourses extends React.Component{
     render(){
 
         return(
-            <div style={{backgroundColor:'#E8E8E8'}}>
+            <div style={{backgroundColor:'#E8E8E8'}} id="home-course">
             <Container className="home-event">
             <Row>
                 <Col className="header-block">
                     <h1>Top Courses </h1>
-                    <p class="main-text">People are busy.
+                    <p className="main-text">People are busy.
                     So, this UI Kit let’s you customize,
                     build and deploy your landing page,<br/>
                     so you can start selling your product

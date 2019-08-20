@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
 import { userLogin } from '../api/userLogin';
 import '../style/login.css';
-
+import { Link } from 'react-router-dom'
 
 class LoginForm extends Component {
     constructor(props) {
@@ -17,7 +18,9 @@ class LoginForm extends Component {
             formErrors: { email: '', password: '' },
             emailValid: false,
             passwordValid: false,
-            formValid: false
+            formValid: false,
+            redirect: false,
+			showErrors: false
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -46,11 +49,22 @@ class LoginForm extends Component {
             emailValid: emailValid,
             passwordValid: passwordValid
         }, this.validateForm);
+	}
+	errorShowBlock(formErrors) {
+        for (var errorText in formErrors) {
+            if(formErrors[errorText].length > 0)
+                return true;
+        }
+        return false;
     }
     validateForm() {
         this.setState({
             formValid: this.state.emailValid &&
                        this.state.passwordValid
+		});
+		var show = this.errorShowBlock(this.state.formErrors);
+        this.setState({
+            showErrors: show
         });
     }
 
@@ -64,10 +78,15 @@ class LoginForm extends Component {
 
     async handleClick(event) {
     	event.preventDefault();
-        await userLogin(this.state);
+        await userLogin(this.state)
+             .then(() => this.setState({ redirect: true }));
     }
 
     render() {
+    	const { redirect } = this.state;
+        if (redirect) {
+           return <Redirect to='/'/>;
+        }
         return (
             <div>
 			  <Modal id="login-form" isOpen={this.props.isOpenL} className="wild">
@@ -84,7 +103,7 @@ class LoginForm extends Component {
 				    <Row className="m-0">
 				      <Col>
 						<h3 className="modal-title mb-3">Log In</h3>
-						<div className={!this.state.formValid ? 'panel-errors errors-show':'panel-errors'}>
+						<div className={this.state.showErrors ? 'panel-errors errors-show':'panel-errors'}>
                             <FormErrors formErrors={this.state.formErrors} />
                         </div>
 					    <FormGroup className={this.state.formErrors.email ? 'is-error': ''}>
@@ -106,7 +125,7 @@ class LoginForm extends Component {
 						   placeholder="********"
 						   required
 						   onChange = {(event) => {this.handleUserInput(event)}}/>
-					    </FormGroup>	
+					    </FormGroup>
 				      </Col>
 				    </Row>
 				    <Row className="m-0">
@@ -117,14 +136,14 @@ class LoginForm extends Component {
 					    </FormGroup>
 					  </Col>
 					  <Col className="text-right">
-					    <a href="dog.html">Fogot password?</a>
+					    <Link to="/reset/password">	Fogot password?</Link>
 					  </Col>
 				    </Row>
 				    <Row className="m-0">
 				      <Col className="mt-4 text-right">
 				        <Button
-				        type="submit" 
-				        className="btn-yellow btn btn-warning" 
+				        type="submit"
+				        className="btn-yellow btn btn-warning"
 				        onClick={(event) => this.handleClick(event)}
 				        disabled={!this.state.formValid}>Log in</Button>
 				      </Col>
@@ -152,18 +171,18 @@ class LoginForm extends Component {
 				<Row className="container h-auto">
 					<div className="col-sm-12 form-group">
 						<p className="text-title text-white d-block pb-2">If you don’t have an account yet</p>
-						<Button 
-						type="button" 
-						className="btn-grey btn" 
+						<Button
+						type="button"
+						className="btn-grey btn"
 						onClick={(event) => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
 						<br></br><br></br>
-						<Button 
+						<Button
 						type="button"
 						className="btn-red btn" color="danger"
 						onClick={this.props.handleClickLogin}>Cancel</Button>
 					</div>
-                </Row>      
-			  </Col> 
+                </Row>
+			  </Col>
 			</Row>
 		</div>
 		</Modal>
