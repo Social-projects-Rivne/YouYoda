@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
+import {Redirect} from 'react-router-dom';
 
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
@@ -17,7 +18,8 @@ class LoginForm extends Component {
             formErrors: { email: '', password: '' },
             emailValid: false,
             passwordValid: false,
-			formValid: false,
+            formValid: false,
+            redirect: false,
 			showErrors: false
         };
 
@@ -76,11 +78,15 @@ class LoginForm extends Component {
 
     async handleClick(event) {
     	event.preventDefault();
-        await userLogin(this.state);
-        return false;
+        await userLogin(this.state)
+             .then(() => this.setState({ redirect: true }));
     }
 
     render() {
+    	const { redirect } = this.state;
+        if (redirect) {
+           return <Redirect to='/'/>;
+        }
         return (
             <div>
 			  <Modal id="login-form" isOpen={this.props.isOpenL} className="wild">

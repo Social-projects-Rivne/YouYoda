@@ -1,4 +1,5 @@
-export const countries = ['Ukraine',
+export const countries = [
+    'Ukraine',
     'Abkhazia',
     'Albania',
     'China',
