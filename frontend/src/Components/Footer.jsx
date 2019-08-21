@@ -16,22 +16,22 @@ export default class Footer extends React.Component{
               <Col md="5">
                 <ul className="footer-nav">
                     <li>
-                        <Link to="home-about" spy={true} smooth={true} duration={500} activeClassName="active">
+                        <Link to="home-about" spy={true} smooth={true} duration={500} activeClass="active">
                             About
                         </Link>
                     </li>
                     <li>
-                        <Link to="home-course" spy={true} smooth={true} duration={500} activeClassName="active">
+                        <Link to="home-course" spy={true} smooth={true} duration={500} activeClass="active">
                             Courses
                         </Link>
                     </li>
                     <li>
-                        <Link to="home-trainer" spy={true} smooth={true} duration={500} activeClassName="active">
+                        <Link to="home-trainer" spy={true} smooth={true} duration={500} activeClass="active">
                             Trainers
                         </Link>
                     </li>
                     <li>
-                        <Link to="home-event" spy={true} smooth={true} duration={500} activeClassName="active">
+                        <Link to="home-event" spy={true} smooth={true} duration={500} activeClass="active">
                             Events
                         </Link>
                     </li>

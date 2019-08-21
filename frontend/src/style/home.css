@@ -1,14 +1,23 @@
 /* Styles for Navbar */
+#root {
+    padding-top: 56px;
+}
 .header {
     width: 100%;
     height: 56px;
     background-color: #4f4f4f;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
 }
 .header li a {
     text-transform: uppercase;
     font-size: 18px;
     line-height: 18px;
     border-bottom: 2px solid transparent;
+    font-weight: 700;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 .header li a:hover {
     color: #fff;
