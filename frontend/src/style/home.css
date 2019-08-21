@@ -305,3 +305,28 @@
 .re-send {
     margin-left: 10px;
 }
+
+
+/* Styles for UserMenu */
+ .profile-photo-dropdown {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+ .dropdown-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+}
+.dropdown-button:hover {
+    background-color: transparent;
+}
+.header-user-menu {
+    position: relative;
+    right: 0px;
+    top: 5px;
+}
+.auth-display-none {
+    display: none;
+}

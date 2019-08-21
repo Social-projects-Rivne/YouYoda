@@ -6,6 +6,28 @@ import {quotes} from './JSON/quotes.json';
 
 
 export default class HomeHeader extends React.Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isOpen: false,
+            dropdownOpen: false,
+            authVisible: "",
+        };
+    }
+    verifyAuth = () => {
+        if(localStorage.getItem('token')){
+            if(!this.state.authVisible){
+                this.setState({authVisible: "auth-display-none"})
+                return this.state.authVisible;
+            } else {
+                return this.state.authVisible;
+            }
+        } else {
+            this.setState({authVisible: ""})
+            return this.state.authVisible;
+        }
+    }
     render(){
         const RAND = Math.floor(Math.random() * quotes.length);
         return(
@@ -26,7 +48,7 @@ export default class HomeHeader extends React.Component{
                     </p>
             	    <cite title="Source Title">-master Yoda</cite>
             	</blockquote>
-                <div className="btn-group-sign">
+                <div className={`btn-group-sign ${this.verifyAuth()}`}>
                     <Button color="warning" className="btn-sign"
                             style={{marginRight:'33px'}}
                             onClick={this.props.handleClickReg}>

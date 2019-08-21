@@ -12,8 +12,8 @@ code {
     monospace;
 }
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 li {
-    list-style: none;
+    list-style: none !important;
 }

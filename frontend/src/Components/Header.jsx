@@ -3,6 +3,7 @@ import React from 'react';
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
     Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-scroll';
+import { UserMenu } from './UserMenu';
 
 
 export default class Header extends React.Component {
@@ -58,6 +59,7 @@ export default class Header extends React.Component {
             </Collapse>
             </Navbar>
             </Col>
+            <UserMenu/>
             </Row>
             </Container>
             </header>
@@ -65,4 +67,3 @@ export default class Header extends React.Component {
     );
   }
 };
-
