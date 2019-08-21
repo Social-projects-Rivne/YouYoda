@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
 
+from ..models import YouYodaUser
 from ..serializers.user_login_serializer import LoginSerializer
 
 
@@ -26,4 +27,4 @@ class UserLogout(APIView):
     def get(self, request, format=None):
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
         user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
