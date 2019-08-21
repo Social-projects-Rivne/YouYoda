@@ -137,7 +137,7 @@ class Registration extends React.Component{
                         <Row className="container h-auto">
                             <div className="col-sm-12 form-group">
                                 <span className="text-title text-white d-block pb-2">If you already have an account</span>
-                                <Button className="btn-grey btn" onClick={(event) => {this.props.handleClickReg(); this.props.handleClickLogin();}}>Sign in</Button>
+                                <Button className="btn-grey btn" onClick={() => {this.props.handleClickReg(); this.props.handleClickLogin();}}>Sign in</Button>
                             </div>
                         </Row>
                     </Col>

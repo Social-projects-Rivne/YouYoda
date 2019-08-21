@@ -8,7 +8,7 @@ async function logOut() {
         const response = await API.get('user/logout', {headers: { Authorization: "Token " + localStorage.getItem('token')}})
             .then(function(response) {
                 console.log(response);
-                if (response.status === 200) {
+                if (response.status === 204) {
                     console.log("Logout successfull");
                     alert("Logout successfull");
                     localStorage.removeItem('token');
