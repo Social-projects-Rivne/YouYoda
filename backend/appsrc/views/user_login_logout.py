@@ -28,3 +28,4 @@ class UserLogout(APIView):
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
         user.auth_token.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
