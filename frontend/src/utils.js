@@ -1,17 +1,10 @@
-export function extractToken (idx) {
-    return window.location.pathname.split("/")[idx]
-}
 
-export const verifyAuth = () => {
-    if(localStorage.getItem('token')){
-        if(!this.state.authVisible){
-            this.setState({authVisible: "auth-display-none"})
-            return this.state.authVisible;
-        } else {
-            return this.state.authVisible;
+export const isAuthenticated = (dosmth) => {
+    let show = "auth-display-none";
+    if (localStorage.getItem('token')){
+        if (dosmth == "show"){
+            show = ""
         }
-    } else {
-        this.setState({authVisible: ""})
-        return this.state.authVisible;
     }
+    return show;
 }

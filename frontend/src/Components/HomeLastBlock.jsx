@@ -2,6 +2,8 @@ import React from 'react';
 
 import {Container, Button, Row, Col} from 'reactstrap';
 
+import { isAuthenticated } from '../utils';
+
 
 export default class HomeLastBlock extends React.Component{
     render (){
@@ -16,7 +18,7 @@ export default class HomeLastBlock extends React.Component{
                     build and deploy your landing page,
                     so you can start selling your product
                     to potential customers.</p>
-                    <div className="btn-group-sign">
+                    <div className={`btn-group-sign ${isAuthenticated()}`}>
                         <Button color="warning" className="btn-sign"
                                 style={{marginRight:'33px'}}
                                 onClick={this.props.handleClickReg}>

@@ -3,7 +3,7 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-import {sendDataToDjoser} from '../api/resetPassword'
+import {sendDataToDjoser} from '../api/axiosPost'
 
 
 export default class ResetPassword extends React.Component{

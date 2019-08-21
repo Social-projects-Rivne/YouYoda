@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Container} from 'reactstrap';
 
-import {sendDataToDjoser} from '../api/resetPassword'
+import {sendDataToDjoser} from '../api/axiosPost'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 

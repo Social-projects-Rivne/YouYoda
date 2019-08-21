@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { verifyAuth } from '../utils'
+import { isAuthenticated } from '../utils';
 
 export class UserMenu extends React.Component{
     constructor(props) {
@@ -24,22 +24,16 @@ export class UserMenu extends React.Component{
             dropdownOpen: !prevState.dropdownOpen
         }));
     }
-    verifyAuth = () => {
+    isAuthenticated = () => {
+        let show = "auth-display-none";
         if(localStorage.getItem('token')){
-            if(!this.state.authVisible){
-                this.setState({authVisible: "auth-display-none"})
-                return this.state.authVisible;
-            } else {
-                return this.state.authVisible;
-            }
-        } else {
-            this.setState({authVisible: ""})
-            return this.state.authVisible;
+            show = ""   
         }
+        return show;
     }
   render () {
     return (
-      <div className={`header-user-menu ${!this.verifyAuth()}`}>
+      <div className={`header-user-menu ${isAuthenticated("show")}`}>
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropdowntoggle}>
             <DropdownToggle className="dropdown-button">

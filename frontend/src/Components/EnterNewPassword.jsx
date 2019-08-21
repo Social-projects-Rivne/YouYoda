@@ -3,8 +3,9 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-import {sendDataToDjoser} from '../api/resetPassword';
+import {sendDataToDjoser} from '../api/axiosPost';
 import {FormErrors} from '../api/FormError';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const UIDPOS = 4;
@@ -66,8 +67,14 @@ export default class EnterNewPassword extends React.Component{
             "token": this.extractToken(TOKENPOS),
             "new_password":this.state.new_password
             }
-        await sendDataToDjoser(URLPATH, USERDATA)
-            .then(() => this.setState({ redirect: true }));
+        try {
+            await sendDataToDjoser(URLPATH, USERDATA);
+            this.setState({ redirect: true });
+            toast.success('Password was changed');
+        } catch (error){
+            toast.error('Changing password failed');
+            console.log(error.message)
+        }
     }
 
   render () {
@@ -92,20 +99,23 @@ export default class EnterNewPassword extends React.Component{
 							placeholder="Enter New Password"
                             value={this.state.new_password}
 							onChange = {this.handlChangePassword}
-							required/>
+							required
+                    />
                     <input type="password"
                             name="re_new_password"
 							className="form-control reset-pass-form"
 							placeholder="Retype New Password"
                             value={this.state.re_new_password}
 							onChange = {this.handlChangePassword}
-							required/>
+							required
+                    />
 					<button type="button"
 							className="btn btn-warning reset-pass-form"
 							onClick={this.handleSubmitNewPassword}
                             disabled={!this.state.formValid}>Change password</button>
         </form>
         </Container>
+        <ToastContainer />
       </div>
       )
   }

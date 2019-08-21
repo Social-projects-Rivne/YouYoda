@@ -261,10 +261,10 @@
 }
 .home-last-block img {
     margin-top: 240px;
+    margin-bottom: 240px;
 }
 .home-last-block .btn-group-sign {
-    top: 0;
-    margin-bottom: 240px;
+    top: 0;  
 }
 
 /* Styles for ResetPassword */

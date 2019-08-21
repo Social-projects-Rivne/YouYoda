@@ -3,6 +3,8 @@ import React from 'react';
 import {Container, Button} from 'reactstrap';
 import Header from './Header';
 import {quotes} from './JSON/quotes.json';
+import { isAuthenticated } from '../utils';
+
 
 
 export default class HomeHeader extends React.Component{
@@ -48,7 +50,7 @@ export default class HomeHeader extends React.Component{
                     </p>
             	    <cite title="Source Title">-master Yoda</cite>
             	</blockquote>
-                <div className={`btn-group-sign ${this.verifyAuth()}`}>
+                <div className={`btn-group-sign ${isAuthenticated()}`}>
                     <Button color="warning" className="btn-sign"
                             style={{marginRight:'33px'}}
                             onClick={this.props.handleClickReg}>
