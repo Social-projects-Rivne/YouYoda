@@ -1,18 +1,15 @@
-import axios from 'axios';
-
 import API from './axiosConf';
 
-async function isAuthorized() {
+
+async function isAuthorized(checkParam) {
     var tokenUser = localStorage.getItem('token');
-    const apiBaseUrl = "http://localhost:8000/";
     var datasend = {
         "token": tokenUser,
-        "checkParam": "authorized"
+        "checkParam": checkParam
     }
-    console.log(datasend);
     try {
-        const response = await axios.post(
-            apiBaseUrl + 'api/user/check',
+        const response = await API.post(
+            'user/check',
             datasend,
             {
 				crossdomain: true,
@@ -21,22 +18,28 @@ async function isAuthorized() {
                 }
             })
             .then(response => {
-                console.log(response);
                 if(response.status === 200){
-                    console.log("200");
-                }
-                else if(response.status === 400){
-                    console.log("User data incorrect");
+                    if(response.data['data_status'])
+                    {
+                        if(response.data['data_status'] == 'authorized' && checkParam == 'authorized')
+                            return true;
+                        if(response.data['data_status'] == 'role' && checkParam == 'role')
+                            return response.data;
+                        
+                    }
+                    else
+                        console.log(response.data);
                 }
                 else{
-                    console.log("Database error");
+                    console.log(response);
                 }
             });
+        return response;
     } catch (error) {
         console.log(error);
     }
 
-    return tokenUser;
+    return false;
 }
 
 export {isAuthorized}
