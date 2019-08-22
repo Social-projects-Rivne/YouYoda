@@ -3,9 +3,9 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-import {sendDataToDjoser} from '../api/axiosPost';
+import {axiosPost} from '../api/axiosPost';
 import {FormErrors} from '../api/FormError';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 const UIDPOS = 4;
@@ -24,6 +24,7 @@ export default class EnterNewPassword extends React.Component{
                     redirect: false,
                 };
 	}
+
 
     handlChangePassword = (e) => {
         let name = e.target.name;
@@ -68,11 +69,11 @@ export default class EnterNewPassword extends React.Component{
             "new_password":this.state.new_password
             }
         try {
-            await sendDataToDjoser(URLPATH, USERDATA);
+            await axiosPost(URLPATH, USERDATA);
             this.setState({ redirect: true });
             toast.success('Password was changed');
         } catch (error){
-            toast.error('Changing password failed');
+            toast.error('Changing password failed. Please, contact administrator or support system ;)');
             console.log(error.message)
         }
     }
@@ -112,10 +113,10 @@ export default class EnterNewPassword extends React.Component{
 					<button type="button"
 							className="btn btn-warning reset-pass-form"
 							onClick={this.handleSubmitNewPassword}
-                            disabled={!this.state.formValid}>Change password</button>
+                            disabled={!this.state.formValid}>Change password
+                    </button>
         </form>
         </Container>
-        <ToastContainer />
       </div>
       )
   }

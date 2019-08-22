@@ -2,8 +2,9 @@ import React from 'react';
 
 import {Container} from 'reactstrap';
 
-import {sendDataToDjoser} from '../api/axiosPost'
+import {axiosPost} from '../api/axiosPost'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toast } from 'react-toastify';
 
 
 export default class ResetPassword extends React.Component{
@@ -21,7 +22,13 @@ export default class ResetPassword extends React.Component{
   handleSubmitReSendActivation = async (event) => {
         const URLPATH = 'auth/users/resend_activation/';
         const USERDATA = {"email":this.state.email}
-        await sendDataToDjoser(URLPATH, USERDATA);
+        try {
+            await axiosPost(URLPATH, USERDATA);
+            toast.success('Email was sended');
+        } catch (error){
+            toast.error('Please, check entered email. Contact administrator or support system ;)');
+            console.log(error.message)
+        }
   }
     render () {
     return (
@@ -30,8 +37,8 @@ export default class ResetPassword extends React.Component{
         <h1><FontAwesomeIcon icon="paper-plane"/></h1>
         <p>Email whith activation confirmation has been sent to your email.</p>
         <p>If you didn't receive the email, check Spam or
-          
-            
+
+
         </p>
         <form method="POST" className="form-group ">
     				<input type="email"
