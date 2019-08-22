@@ -3,6 +3,7 @@ import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstr
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom'
 import {Redirect} from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
@@ -81,15 +82,24 @@ class LoginForm extends Component {
 
     async handleClick(event) {
     	event.preventDefault();
-        await userLogin(this.state)
-             .then(() => this.setState({ redirect: true }));
+        try {
+            await userLogin(this.state)
+                if (localStorage.getItem('token')) {
+                    toast.success('Login successfull');
+                    this.setState({ redirect: true })
+                }
+       } catch (error){
+           toast.error('Please, check entered email and password. Contact administrator or support system ;)');
+           console.log(error.message)
+       }
+
     }
 
     render() {
     	const { redirect } = this.state;
         if (redirect) {
            return <Redirect to='/profile'/>;
-        }
+        } 
         return (
             <div>
 			  <Modal id="login-form" isOpen={this.props.isOpenL} className="wild">
