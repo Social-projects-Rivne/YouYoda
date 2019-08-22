@@ -15,14 +15,14 @@
     font-size: 18px;
     line-height: 18px;
     border-bottom: 2px solid transparent;
-    font-weight: 700;
+    font-weight: 300;
     margin-left: 3px;
     margin-right: 3px;
 }
 .header li a:hover {
     color: #fff;
     border-bottom: 2px solid #fff;
-    font-weight: 700;
+    font-weight: 300;
 }
 .logo{
     width: 144px;
@@ -313,4 +313,22 @@
 }
 .re-send {
     margin-left: 10px;
+}
+
+/* Styles for 404 page */
+.page-404 {
+    text-align: center;
+    background-image: url("../img/static/patternfon.png");
+    background-position: center;
+    background-repeat: repeat;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.page-404 .dragon-div {
+    margin: 5rem;
+    opacity: 0.6;
+}
+.page-404 a {
+    color: #343a40;
 }
