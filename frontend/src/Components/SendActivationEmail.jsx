@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {Container} from 'reactstrap';
+import { toast } from 'react-toastify';
 
 import {axiosPost} from '../api/axiosPost'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-toastify';
 
 
 export default class ResetPassword extends React.Component{
