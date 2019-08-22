@@ -33,7 +33,7 @@ export default class HomeHeader extends React.Component{
                         Sign Up
                     </Button>
                     <Button color="secondary" className="btn-sign" onClick={this.props.handleClickLogin}>
-                        Log In
+                        Sign In
                     </Button>
                 </div>
                 </Container>
