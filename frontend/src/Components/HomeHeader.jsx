@@ -17,19 +17,7 @@ export default class HomeHeader extends React.Component{
             authVisible: "",
         };
     }
-    verifyAuth = () => {
-        if(localStorage.getItem('token')){
-            if(!this.state.authVisible){
-                this.setState({authVisible: "auth-display-none"})
-                return this.state.authVisible;
-            } else {
-                return this.state.authVisible;
-            }
-        } else {
-            this.setState({authVisible: ""})
-            return this.state.authVisible;
-        }
-    }
+
     render(){
         const RAND = Math.floor(Math.random() * quotes.length);
         return(
@@ -50,14 +38,14 @@ export default class HomeHeader extends React.Component{
                     </p>
             	    <cite title="Source Title">-master Yoda</cite>
             	</blockquote>
-                <div className={`btn-group-sign ${isAuthenticated()}`}>
+                <div className={`btn-group-sign ${isAuthenticated("hide")}`}>
                     <Button color="warning" className="btn-sign"
                             style={{marginRight:'33px'}}
                             onClick={this.props.handleClickReg}>
                         Sign Up
                     </Button>
                     <Button color="secondary" className="btn-sign" onClick={this.props.handleClickLogin}>
-                        Log In
+                        Sign In
                     </Button>
                 </div>
                 </Container>

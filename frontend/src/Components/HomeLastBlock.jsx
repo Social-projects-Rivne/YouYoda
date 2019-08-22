@@ -18,14 +18,14 @@ export default class HomeLastBlock extends React.Component{
                     build and deploy your landing page,
                     so you can start selling your product
                     to potential customers.</p>
-                    <div className={`btn-group-sign ${isAuthenticated()}`}>
+                    <div className={`btn-group-sign ${isAuthenticated("hide")}`}>
                         <Button color="warning" className="btn-sign"
                                 style={{marginRight:'33px'}}
                                 onClick={this.props.handleClickReg}>
                             Sign Up
                         </Button>
                         <Button color="secondary" className="btn-sign"  onClick={this.props.handleClickLogin}>
-                            Log In
+                            Sign In
                         </Button>
                     </div>
                 </Col>
