@@ -120,6 +120,7 @@ class Registration extends React.Component{
             .then(() => this.setState({ redirect: true }));
         return false;
     }
+
     render () {
         const { redirect } = this.state;
         if (redirect) {
