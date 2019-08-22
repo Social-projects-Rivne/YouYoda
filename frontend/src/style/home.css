@@ -19,10 +19,15 @@
     margin-left: 3px;
     margin-right: 3px;
 }
+.header a.active,
 .header li a:hover {
     color: #fff;
     border-bottom: 2px solid #fff;
     font-weight: 300;
+}
+.header .active {
+    background-color: transparent;
+    border-radius: 0px;
 }
 .logo{
     width: 144px;
