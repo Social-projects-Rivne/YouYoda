@@ -5,7 +5,6 @@ import Header from '../Components/Header';
 
 
 export default class MainLayout extends React.Component{
-
     render(){
         return(
             <>

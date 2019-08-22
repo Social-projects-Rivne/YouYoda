@@ -12,8 +12,8 @@ export default class ResetPassword extends React.Component{
     super(props);
 
     this.state={email:'',
-                  redirect: false,};
-}
+                redirect: false,};
+  }
 
   handlChangeEmail = (event) => {
       this.setState({email: event.target.value});
@@ -37,6 +37,8 @@ export default class ResetPassword extends React.Component{
         <h1><FontAwesomeIcon icon="paper-plane"/></h1>
         <p>Email whith activation confirmation has been sent to your email.</p>
         <p>If you didn't receive the email, check Spam or
+        
+          {this.props.data}
 
 
         </p>

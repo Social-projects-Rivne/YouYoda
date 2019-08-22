@@ -14,8 +14,9 @@ import Profile from './Pages/Profile';
 
 
 
-export default function Routes() {
-  return (
+export default class Routes extends React.Component{
+  render(){
+    return (
       <div>
         <Router>
             <Route exact path='/' component={Home}/>
@@ -29,11 +30,16 @@ export default function Routes() {
                 <Route path={'/reset/password/new/:uid/:token'}
                     render={()=><MainLayout><EnterNewPassword/></MainLayout>}/>
                 <Route exact path='/activation/send/email'
-                    render={()=><MainLayout><SendActivationEmail/></MainLayout>}/>
+                    render={ (props) =>
+                        <MainLayout>
+                            <SendActivationEmail data = {props.location.state.email}/>
+                        </MainLayout>}
+                />
                 <Route exact path='/activate/user/:uid/:token'
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}/>
             </Route>
         </Router>
     </div>
   );
+                    }
 };
