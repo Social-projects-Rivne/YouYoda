@@ -14,8 +14,8 @@ import './style/forms.css';
 import './style/fillEditPage.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faSearch, faCoffee, fas, faCamera, faPaperPlane} from '@fortawesome/free-solid-svg-icons';
-library.add(fab, faSearch, faCoffee, fas, faCamera, faPaperPlane);
+import { faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey} from '@fortawesome/free-solid-svg-icons';
+library.add(fab, faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey);
 
 
 ReactDOM.render(<Routes/>, document.getElementById('root'))

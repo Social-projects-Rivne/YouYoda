@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom'
 import {Redirect} from 'react-router-dom';
 
 import FacebookLogo from '../img/content/facebook.png';
@@ -7,7 +9,8 @@ import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
 import { userLogin } from '../api/userLogin';
 import '../style/login.css';
-import { Link } from 'react-router-dom'
+
+
 
 class LoginForm extends Component {
     constructor(props) {
@@ -85,7 +88,7 @@ class LoginForm extends Component {
     render() {
     	const { redirect } = this.state;
         if (redirect) {
-           return <Redirect to='/'/>;
+           return <Redirect to='/profile'/>;
         }
         return (
             <div>
@@ -102,29 +105,31 @@ class LoginForm extends Component {
 			      <Form className="form-horizontal">
 				    <Row className="m-0">
 				      <Col>
-						<h3 className="modal-title mb-3">Log In</h3>
+						<h3 className="modal-title mb-3">Sign In</h3>
 						<div className={this.state.showErrors ? 'panel-errors errors-show':'panel-errors'}>
                             <FormErrors formErrors={this.state.formErrors} />
                         </div>
 					    <FormGroup className={this.state.formErrors.email ? 'is-error': ''}>
-						  <Label for="email" className="mb-1">Email</Label>
+						  <Label for="email" className="mb-1">
+						  <FontAwesomeIcon icon="envelope" size="sm"/> Email</Label>
 						  <Input
-						   type="email"
-						   name="email"
-						   id="email"
-						   placeholder="myemail@email.com"
-						   required
-						   onChange = {(event) => {this.handleUserInput(event)}}/>
+						     type="email"
+						     name="email"
+						     id="email"
+						     placeholder="myemail@email.com"
+						     required
+						     onChange = {(event) => {this.handleUserInput(event)}}/>
 					    </FormGroup>
 					    <FormGroup className={this.state.formErrors.password ? 'is-error': ''}>
-						  <Label for="password" className="mb-1">Password</Label>
+						  <Label for="password" className="mb-1">
+						  <FontAwesomeIcon icon="key" size="sm"/> Password</Label>
 						  <Input
-						   type="password"
-						   name="password"
-						   id="password"
-						   placeholder="********"
-						   required
-						   onChange = {(event) => {this.handleUserInput(event)}}/>
+						     type="password"
+						     name="password"
+						     id="password"
+						     placeholder="********"
+						     required
+						     onChange = {(event) => {this.handleUserInput(event)}}/>
 					    </FormGroup>
 				      </Col>
 				    </Row>
@@ -142,10 +147,10 @@ class LoginForm extends Component {
 				    <Row className="m-0">
 				      <Col className="mt-4 text-right">
 				        <Button
-				        type="submit"
-				        className="btn-yellow btn btn-warning"
-				        onClick={(event) => this.handleClick(event)}
-				        disabled={!this.state.formValid}>Log in</Button>
+				          type="submit"
+				          className="btn-yellow btn btn-warning"
+				          onClick={(event) => this.handleClick(event)}
+				          disabled={!this.state.formValid}>Sign in</Button>
 				      </Col>
 				    </Row>
 				  </Form>
@@ -172,14 +177,14 @@ class LoginForm extends Component {
 					<div className="col-sm-12 form-group">
 						<p className="text-title text-white d-block pb-2">If you don’t have an account yet</p>
 						<Button
-						type="button"
-						className="btn-grey btn"
-						onClick={(event) => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
+						  type="button"
+						  className="btn-grey btn"
+						  onClick={(event) => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
 						<br></br><br></br>
 						<Button
-						type="button"
-						className="btn-red btn" color="danger"
-						onClick={this.props.handleClickLogin}>Cancel</Button>
+						  type="button"
+						  className="btn-red btn" color="danger"
+						  onClick={this.props.handleClickLogin}>Cancel</Button>
 					</div>
                 </Row>
 			  </Col>
