@@ -165,7 +165,7 @@ class LoginForm extends Component {
 					<h1 className="modal-title text-white custom-title">Hello, <span>Dear Friend!</span></h1>
                 </Row>
 				<Row className="container mx-0 mb-4">
-					<h2 className="text-white"></h2>
+					<h2 className="text-white">You will find here what you are looking for</h2>
 				</Row>
 				<Row className="container h-auto">
 					<div className="col-sm-12 form-group">
