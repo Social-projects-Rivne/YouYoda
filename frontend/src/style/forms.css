@@ -15,7 +15,7 @@
     background-color: #E1E1E1;
     color: #212529;
 }
-.login-form .form-control {
+.login-form .form-control, input.form-control {
     border-radius: 20px;
 }
 input.form-control.validate {
@@ -56,17 +56,11 @@ input.form-control.validate {
 .modal .is-error input {
     border: 1px solid red;
 }
-/*input.form-control.correct::after {
-    position: absolute;
-    width: 16.7px;
-    height: 9.2px;
-    left: 986.67px;
-    top: 264.83px;
-    background: #5CB85C;
-    transform: matrix(0.71, -0.85, 0.59, 0.71, 0, 0);
-}*/
 .modal-title {
     font-weight: bold;
+}
+.modal-body {
+    margin-right: -1px;
 }
 
 /* registration form */
@@ -87,6 +81,37 @@ input.form-control.validate {
 }
 .custom-title span {
     display: block;
+}
+
+button.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    z-index: 1001;
+}
+
+/* login form */
+#login-form .hidden {
+    display: none;
+}
+#login-form .login-row {
+    margin-right: -16px;
+}
+.login {
+    background: #fff;
+    text-align: left;
+    margin-bottom: 25px;
+}
+.signup {
+    background: url("../img/content/Rectangle.png") 0 0 no-repeat;
+    background-size: cover;
+    margin-top: -17px;
+    margin-right: -2px;
+    margin-bottom: -17px;
+    padding: 25px;
+}
+.login .form-horizontal {
+    padding-right: 10%;
 }
 
 @media (min-width: 576px)

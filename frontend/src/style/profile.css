@@ -16,6 +16,11 @@
     background-color: transparent;
 }
 
+@media (min-width: 768px)
+{
+    .order-1.ico-user-profile {order: 2;}
+}
+
 /*Styles for ProfileInfo*/
 .profile-photo {
     border-radius: 50px;

@@ -35,23 +35,23 @@ export default class Header extends React.Component {
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Link activeClass="active" to="home-about" spy={true} smooth={true} duration={500}>
-                        <NavLink href="/about">About</NavLink>
+                        <Link href="/about" className="nav-link" activeClass="active" to="home-about" spy={true} smooth={true} duration={500}>
+                        About
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link activeClass="active" to="home-course" spy={true} smooth={true} duration={500}>
-                        <NavLink href="/courses">Courses</NavLink>
+                        <Link href="/courses" className="nav-link" activeClass="active" to="home-course" spy={true} smooth={true} duration={500}>
+                        Courses
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link activeClass="active" to="home-trainer" spy={true} smooth={true} duration={500}>
-                        <NavLink href="/trainers">Trainers</NavLink>
+                        <Link href="/trainers" className="nav-link" activeClass="active" to="home-trainer" spy={true} smooth={true} duration={500}>
+                        Trainers
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link activeClass="active" to="home-event" spy={true} smooth={true} duration={500}>
-                        <NavLink href="/events">Events</NavLink>
+                        <Link href="/events" className="nav-link" activeClass="active" to="home-event" spy={true} smooth={true} duration={500}>
+                        Events
                         </Link>
                     </NavItem>
                 </Nav>
