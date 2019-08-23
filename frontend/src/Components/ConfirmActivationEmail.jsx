@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {Container} from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import { Container } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import {sendDataToDjoser} from '../api/resetPassword'
+import { axiosPost } from '../api/axiosPost'
 
 
 const UIDPOS = 3;
@@ -28,8 +29,14 @@ export default class ResetPassword extends React.Component{
             "uid": this.extractToken(UIDPOS),
             "token": this.extractToken(TOKENPOS),
             }
-        await sendDataToDjoser(URLPATH, USERDATA)
-            .then(() => this.setState({ redirect: true }));
+            try {
+                await axiosPost(URLPATH, USERDATA);
+                this.setState({ redirect: true });
+                toast.success('Thank you, now can Sign In');
+            } catch (error){
+                toast.error('Activation was failed. Please, contact administrator or support system ;)');
+                console.log(error.message)
+            }
     }
     render () {
         const { redirect } = this.state;

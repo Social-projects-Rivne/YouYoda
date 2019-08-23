@@ -275,10 +275,10 @@
 }
 .home-last-block img {
     margin-top: 240px;
+    margin-bottom: 240px;
 }
 .home-last-block .btn-group-sign {
     top: 0;
-    margin-bottom: 240px;
 }
 
 /* Styles for ResetPassword */
@@ -320,6 +320,30 @@
     margin-left: 10px;
 }
 
+
+/* Styles for UserMenu */
+ .profile-photo-dropdown {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+ .dropdown-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+}
+.dropdown-button:hover {
+    background-color: transparent;
+}
+.header-user-menu {
+    position: relative;
+    right: 0px;
+    top: 5px;
+}
+.auth-display-none {
+    display: none;
+}
 /* Styles for 404 page */
 .page-404 {
     text-align: center;

@@ -28,8 +28,6 @@ class Registration extends React.Component{
         }
     }
 
-    
-
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
         let emailValid = this.state.emailValid;
@@ -120,10 +118,14 @@ class Registration extends React.Component{
             .then(() => this.setState({ redirect: true }));
         return false;
     }
+
     render () {
         const { redirect } = this.state;
         if (redirect) {
-           return <Redirect to='/activation/send/email'/>;
+           return <Redirect to={{
+               pathname: '/activation/send/email',
+               state: {email:this.state.email},
+            }}/>;
         }
         return (
         <div>

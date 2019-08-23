@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Footer from '../Components/Footer';
-import Header from '../Components/Header';
+import PageHeader from '../Components/PageHeader';
 
 
 export default class NotFoundPage extends React.Component{
     render(){
         return(
             <>
-            <Header/>
+            <PageHeader/>
             <div className="page-404">
                 <h1>404 Page Not Found</h1>
                 <h2>

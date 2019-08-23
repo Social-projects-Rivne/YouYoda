@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
-import { Link, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
@@ -78,8 +79,15 @@ class LoginForm extends Component {
 
     async handleClick(event) {
     	event.preventDefault();
-        await userLogin(this.state)
-             .then(() => this.setState({ redirect: true }));
+        try {
+            await userLogin(this.state)
+                toast.success('Login successfull');
+                this.setState({ redirect: true });
+       } catch (error){
+           toast.error('Please, check entered email and password. Contact administrator or support system ;)');
+           console.log(error.message)
+       }
+
     }
 
     render() {

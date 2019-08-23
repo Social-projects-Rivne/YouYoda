@@ -3,8 +3,9 @@ import React from 'react';
 import {Container} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-import {sendDataToDjoser} from '../api/resetPassword';
+import {axiosPost} from '../api/axiosPost';
 import {FormErrors} from '../api/FormError';
+import { toast } from 'react-toastify';
 
 
 const UIDPOS = 4;
@@ -24,6 +25,7 @@ export default class EnterNewPassword extends React.Component{
                 };
 	}
 
+
     handlChangePassword = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -36,12 +38,12 @@ export default class EnterNewPassword extends React.Component{
     validateField(fieldName, value) {
           let fieldValidationErrors = this.state.formErrors;
           let {passwordValid, rePasswordValid, new_password, re_new_password} = this.state;
-          let passregex = RegExp(/^(\w+){6,24}$/g);
+          let passregex = RegExp(/^(\w+){6,80}$/g);
 
           passwordValid = passregex.test(value);
-          fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain 6-24 characters';
+          fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain at least 6 characters';
           (new_password !== re_new_password) ?
-              fieldValidationErrors.fieldName= "Passwords don't match" :
+              fieldValidationErrors.fieldName= "Password and password confirm do not match" :
               rePasswordValid = true;
 
           this.setState({formErrors: fieldValidationErrors,
@@ -60,15 +62,20 @@ export default class EnterNewPassword extends React.Component{
     }
 
     handleSubmitNewPassword = async (event) => {
-        console.log(this.props)
         const URLPATH = 'auth/users/reset_password_confirm/';
         const USERDATA={
             "uid": this.extractToken(UIDPOS),
             "token": this.extractToken(TOKENPOS),
             "new_password":this.state.new_password
             }
-        await sendDataToDjoser(URLPATH, USERDATA)
-            .then(() => this.setState({ redirect: true }));
+        try {
+            await axiosPost(URLPATH, USERDATA);
+            this.setState({ redirect: true });
+            toast.success('Password was changed');
+        } catch (error){
+            toast.error('Changing password failed. Please, contact administrator or support system ;)');
+            console.log(error.message)
+        }
     }
 
   render () {
@@ -93,18 +100,21 @@ export default class EnterNewPassword extends React.Component{
 							placeholder="Enter New Password"
                             value={this.state.new_password}
 							onChange = {this.handlChangePassword}
-							required/>
+							required
+                    />
                     <input type="password"
                             name="re_new_password"
 							className="form-control reset-pass-form"
 							placeholder="Retype New Password"
                             value={this.state.re_new_password}
 							onChange = {this.handlChangePassword}
-							required/>
+							required
+                    />
 					<button type="button"
 							className="btn btn-warning reset-pass-form"
 							onClick={this.handleSubmitNewPassword}
-                            disabled={!this.state.formValid}>Change password</button>
+                            disabled={!this.state.formValid}>Change password
+                    </button>
         </form>
         </Container>
       </div>

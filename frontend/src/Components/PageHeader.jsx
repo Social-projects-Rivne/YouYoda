@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
     Container, Row, Col } from 'reactstrap';
-import { Link } from 'react-scroll';
+import { Link } from 'react-router-dom';
 import { UserMenu } from './UserMenu';
 
 
@@ -36,22 +36,22 @@ export default class Header extends React.Component {
             <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Link href="/about" className="nav-link" activeClass="active" to="home-about" spy={true} smooth={true} duration={500}>
+                        <Link to="/about" className="nav-link" activeClass="active" >
                         About
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/courses" className="nav-link" activeClass="active" to="home-course" spy={true} smooth={true} duration={500}>
+                        <Link to="/courses" className="nav-link" activeClass="active" >
                         Courses
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/trainers" className="nav-link" activeClass="active" to="home-trainer" spy={true} smooth={true} duration={500}>
+                        <Link to="/trainers" className="nav-link" activeClass="active" >
                         Trainers
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/events" className="nav-link" activeClass="active" to="home-event" spy={true} smooth={true} duration={500}>
+                        <Link to="/events" className="nav-link" activeClass="active" >
                         Events
                         </Link>
                     </NavItem>
