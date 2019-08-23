@@ -1,19 +1,33 @@
 /* Styles for Navbar */
+#root {
+    padding-top: 56px;
+}
 .header {
     width: 100%;
     height: 56px;
     background-color: #4f4f4f;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
 }
 .header li a {
     text-transform: uppercase;
     font-size: 18px;
     line-height: 18px;
     border-bottom: 2px solid transparent;
+    font-weight: 300;
+    margin-left: 3px;
+    margin-right: 3px;
 }
+.header a.active,
 .header li a:hover {
     color: #fff;
     border-bottom: 2px solid #fff;
-    font-weight: 700;
+    font-weight: 300;
+}
+.header .active {
+    background-color: transparent;
+    border-radius: 0px;
 }
 .logo{
     width: 144px;
@@ -264,7 +278,7 @@
     margin-bottom: 240px;
 }
 .home-last-block .btn-group-sign {
-    top: 0;  
+    top: 0;
 }
 
 /* Styles for ResetPassword */
@@ -329,4 +343,21 @@
 }
 .auth-display-none {
     display: none;
+}
+/* Styles for 404 page */
+.page-404 {
+    text-align: center;
+    background-image: url("../img/static/patternfon.png");
+    background-position: center;
+    background-repeat: repeat;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.page-404 .dragon-div {
+    margin: 5rem;
+    opacity: 0.6;
+}
+.page-404 a {
+    color: #343a40;
 }

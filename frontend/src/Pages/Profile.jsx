@@ -4,8 +4,8 @@ import axios from 'axios';
 
 import Footer from '../Components/Footer';
 import {ProfileContext} from '../Components/profile-context';
+import PageHeader from '../Components/PageHeader';
 import ProfileInfo from '../Components/ProfileInfo';
-import Header from '../Components/Header';
 import ProfileMainInfo from '../Components/ProfileMainInfo';
 import UserCourses from '../Components/UserCourses';
 
@@ -42,7 +42,7 @@ export default class Profile extends React.Component{
       return(
           <>
           <ProfileContext.Provider value={this.state}>
-            <Header/>
+            <PageHeader/>
             <ProfileInfo/>
             <ProfileMainInfo/>
             <Footer/>
