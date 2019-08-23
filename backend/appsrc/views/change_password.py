@@ -7,25 +7,18 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from ..models import YouYodaUser
-from ..serializers.profile_edit_serializer import ProfileEditSerializer
+from ..serializers.change_password_serializer import ChangePasswordSerializer
 
-
-class EditProfile(APIView):
-    """Takes data from ProfileEditSerializer for fill/edit user profile."""
+class ChangePassword(APIView):
+    """Takes data from ChangePasswordSerializer for edit user password."""
 
     permission_classes = [permissions.IsAuthenticated,]
 
-    def get(self, request):
-        """Receives and transmits user profile data"""
-        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
-        serializer = ProfileEditSerializer(user)
-        return Response(serializer.data)
-
-    def patch(self, request, *args, **kwargs):
-        """Receives and updates user profile data"""
+    def put(self, request, *args, **kwargs):
+        """Receives and updates user password"""
         user= get_object_or_404(YouYodaUser, email=request.data.get('email'))
         # user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
-        serializer = ProfileEditSerializer(user, data=request.data, partial=True)
+        serializer = ChangePasswordSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
