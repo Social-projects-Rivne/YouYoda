@@ -20,7 +20,7 @@ export default class Profile extends React.Component{
     }
     getInfo = async () => {
       try {
-        const response = await API.get('user/profile/view', {headers: { Authorization: "Token " + localStorage.getItem('token')}});
+        const response = await API.get('user/profile/view');
         return response.data;
       }
       catch (error) {

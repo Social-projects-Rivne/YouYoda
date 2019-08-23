@@ -5,15 +5,17 @@ const axiosInstance = axios.create({
   baseURL: 'http://localhost:8000/api/'
 })
 
-const requestHandler = (request) => {
-    request.headers['Authorization'] = "Token " + localStorage.getItem('token')
-  return request
-}
+axiosInstance.interceptors.request.use(function(config) {
+  const token = localStorage.getItem('token');
 
-const token = localStorage.getItem('token')
-if (token != null) {
-axiosInstance.interceptors.request.use(
-  request => requestHandler(request)
-)}
+  if ( token != null ) {
+    config.headers.Authorization = "Token " + token;
+  }
+  return config;
+}, function(err) {
+  return Promise.reject(err);
+});
 
 export const API = axiosInstance;
+
+
