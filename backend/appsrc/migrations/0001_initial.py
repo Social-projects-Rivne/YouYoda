@@ -18,6 +18,7 @@ def insertData(apps, schema_editor):
     Roles.objects.create(
         id=3, name="admin"
     )
+
     User = apps.get_model('appsrc', 'YouYodaUser')
     User.objects.create(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
         location = 'Ukraine, Rivne', username = 'Yoda-admin', password = '$2y$12$UF3XjBwS3Oz6phT4WfXPkepcUuro.4BxotLKiY22QonRm2/cEYzBa',
@@ -31,6 +32,40 @@ def insertData(apps, schema_editor):
         location = 'Ukraine, Rivne', username = 'Yoda-user', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
         email = 'test1@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
         is_active = True, avatar_url = '', is_trainer = False, role_id = 1)
+    User.objects.create(id=4, hide_my_data = False, first_name = 'Sonya', last_name = 'Alcock',
+        location = 'Ukraine, Kyiv', username = 'Trainer1', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        email = 'trainer1@test.com', about_me = "Trainer1", birth_date = datetime.datetime.now(), phone_number = "0922221133",
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
+    User.objects.create(id=5, hide_my_data = False, first_name = 'Gordon', last_name = 'Mason',
+        location = 'Ukraine, Lviv', username = 'Trainer2', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        email = 'trainer2@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "09233322211",
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
+    User.objects.create(id=6, hide_my_data = False, first_name = 'Aliya', last_name = 'Workman',
+        location = 'Ukraine, Rivne', username = 'Trainer3', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        email = 'trainer3@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "0928885522",
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
+    User.objects.create(id=7, hide_my_data = False, first_name = 'Kyran', last_name = 'Wills',
+        location = 'Ukraine, Harkiv', username = 'Trainer4', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        email = 'trainer4@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "0928885533",
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
+
+    Categories = apps.get_model('appsrc', 'Categories')
+    Categories.objects.create(
+        id=1, name="other"
+    )
+    Categories.objects.create(
+        id=2, name="sport"
+    )
+    Categories.objects.create(
+        id=3, name="music"
+    )
+    Categories.objects.create(
+        id=4, name="software"
+    )
+
+    # Courses = apps.get_model('appsrc', 'Courses')
+    # Courses.objects.create(id=1, name="sport"
+    # )
 
 
 class Migration(migrations.Migration):
@@ -98,7 +133,7 @@ class Migration(migrations.Migration):
                 ('members_limit', models.IntegerField()),
                 ('location', models.TextField()),
                 ('cover_url', models.CharField(max_length=80)),
-                ('category_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Categories')),
+                ('category', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Categories')),
             ],
         ),
         migrations.CreateModel(
@@ -110,7 +145,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateTimeField()),
                 ('location', models.TextField()),
                 ('cover_url', models.CharField(max_length=80)),
-                ('category_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Categories')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Categories')),
             ],
         ),
         migrations.CreateModel(
@@ -183,7 +218,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='events',
-            name='owner_id',
+            name='owner',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
         migrations.CreateModel(
@@ -199,7 +234,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='courses',
-            name='owner_id',
+            name='owner',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
         migrations.CreateModel(

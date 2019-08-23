@@ -2,9 +2,13 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 DEFAULT_ROLE_ID = 1
+DEFAULT_CATEGORIES_ID = 1
 
 class Categories(models.Model):
     name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.id
 
 class Roles(models.Model):
     name = models.CharField(max_length=20)
@@ -33,7 +37,10 @@ class YouYodaUser(AbstractUser):
     avatar_url = models.CharField(max_length=80, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
-    
+
+    def __str__(self):
+        return self.id
+
 class StatusHistory(models.Model):
     usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)
     date = models.DateTimeField()
@@ -46,7 +53,7 @@ class TrainerCertificates(models.Model):
 
 class Courses(models.Model):
     coursename = models.CharField(max_length=60)
-    owner_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     status = models.CharField(max_length=10)
     description = models.TextField()
     is_public = models.BooleanField()
@@ -54,7 +61,7 @@ class Courses(models.Model):
     duration = models.DurationField()
     rate = models.IntegerField()
     members_limit = models.IntegerField()
-    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, default=DEFAULT_CATEGORIES_ID, on_delete=models.SET_DEFAULT)
     location = models.TextField()
     cover_url = models.CharField(max_length=80)
 
@@ -71,10 +78,10 @@ class Achievements(models.Model):
     name = models.CharField(max_length=20)
 
 class Events(models.Model):
-    category_id = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
     description = models.TextField()
-    owner_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     date = models.DateTimeField()
     location = models.TextField()
     cover_url = models.CharField(max_length=80)
