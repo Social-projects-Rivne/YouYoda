@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 import AdminPage from "./Pages/AdminPage";
+import AdminDashboard from './Components/AdminDashboard';
+import AdminPageInner from './Components/AdminPageInner';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import Home from './Pages/Home';
 import MainLayout from './Pages/MainLayout';
@@ -19,7 +21,14 @@ export default function Routes() {
       <div>
         <Router>
             <Route exact path='/' component={Home}/>
-            <Route path='/admin' component={AdminPage}/>
+            <Route component={AdminPage}>
+                <Switch>
+                    <Route exact path='/admin'
+                        render={()=><AdminPage><AdminDashboard/></AdminPage>}/>
+                    <Route exact path={'/admin/:option'}
+                        render={()=><AdminPage><AdminPageInner/></AdminPage>}/>
+                </Switch>
+            </Route>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
             <Route component={MainLayout}>

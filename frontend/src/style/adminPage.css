@@ -24,3 +24,18 @@
     color: #212529;
     opacity: 0.8;
 }
+
+/* admin menu styles */
+.admin-left-menu {
+    background-color: rgb(232, 232, 232);
+    padding: 25px 0;
+}
+.admin-left-menu a,
+.admin-left-menu a:hover {
+    color: black;
+}
+.admin-left-menu li:hover,
+.admin-left-menu li.active {
+    background-color: #fff;
+    opacity: 0.6;
+}
