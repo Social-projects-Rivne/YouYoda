@@ -28,8 +28,6 @@ class Registration extends React.Component{
         }
     }
 
-    
-
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
         let emailValid = this.state.emailValid;
@@ -120,10 +118,14 @@ class Registration extends React.Component{
             .then(() => this.setState({ redirect: true }));
         return false;
     }
+
     render () {
         const { redirect } = this.state;
         if (redirect) {
-           return <Redirect to='/activation/send/email'/>;
+           return <Redirect to={{
+               pathname: '/activation/send/email',
+               state: {email:this.state.email},
+            }}/>;
         }
         return (
         <div>
@@ -131,8 +133,11 @@ class Registration extends React.Component{
                 <div className="modal-body">
                 <Row>
                     <Col md="5" className="left-wrap">
-                        <Row className="container h-50 mx-0 mb-4">
+                        <Row className="container h-25 mx-0 mb-4">
                             <h1 className="modal-title text-white custom-title">Hello, <span>Dear Friend!</span></h1>
+                        </Row>
+                        <Row className="container mx-0 mb-4">
+                            <h2 className="text-white">You will find here what you are looking for</h2>
                         </Row>
                         <Row className="container h-auto">
                             <div className="col-sm-12 form-group">

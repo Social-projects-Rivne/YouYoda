@@ -4,6 +4,7 @@ import {TabContent, TabPane, Nav, NavItem, NavLink, Card, Button,
    CardTitle, CardText, CardImg, Row, Col, Container } from 'reactstrap';
 import classnames from 'classnames';
 
+
 export default class UserCourses extends React.Component {
   constructor(props) {
   super(props);
