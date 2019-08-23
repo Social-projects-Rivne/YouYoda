@@ -81,10 +81,8 @@ class LoginForm extends Component {
     	event.preventDefault();
         try {
             await userLogin(this.state)
-                if (localStorage.getItem('token')) {
-                    toast.success('Login successfull');
-                    this.setState({ redirect: true })
-                }
+                toast.success('Login successfull');
+                this.setState({ redirect: true });
        } catch (error){
            toast.error('Please, check entered email and password. Contact administrator or support system ;)');
            console.log(error.message)
