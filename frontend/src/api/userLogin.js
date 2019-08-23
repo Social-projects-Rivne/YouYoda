@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import API from './axiosConf';
+import { API } from './axiosConf';
 
 
 async function userLogin(props) {
@@ -11,7 +11,7 @@ async function userLogin(props) {
                 if (response.status === 202) {
                     const AUTH_TOKEN = response.data.token;
                     localStorage.setItem('token', AUTH_TOKEN)
-                    axios.defaults.headers.common['Authorization'] = "Token " + localStorage.getItem('token')
+                    //axios.defaults.headers.common['Authorization'] = "Token " + localStorage.getItem('token')
                 } 
             })
     } catch(error) {

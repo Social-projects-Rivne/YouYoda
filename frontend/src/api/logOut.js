@@ -1,9 +1,9 @@
-import API from './axiosConf';
+import { API } from './axiosConf';
 
 
 async function logOut() {
     try {
-        const response = await API.get('user/logout', {headers: { Authorization: "Token " + localStorage.getItem('token')}})
+        const response = await API.get('user/logout')
             .then(function(response) {
                 console.log(response);
                 if (response.status === 204) {
