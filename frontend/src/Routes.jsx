@@ -32,7 +32,7 @@ export default class Routes extends React.Component{
                 <Route exact path='/activation/send/email'
                     render={ (props) =>
                         <MainLayout>
-                            <SendActivationEmail data = {props.location.state.email}/>
+                            <SendActivationEmail email = {props.location.state.email}/>
                         </MainLayout>}
                 />
                 <Route exact path='/activate/user/:uid/:token'

@@ -43,7 +43,7 @@ export default class EnterNewPassword extends React.Component{
           passwordValid = passregex.test(value);
           fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain at least 6 characters';
           (new_password !== re_new_password) ?
-              fieldValidationErrors.fieldName= "Passwords don't match" :
+              fieldValidationErrors.fieldName= "Password and password confirm do not match" :
               rePasswordValid = true;
 
           this.setState({formErrors: fieldValidationErrors,

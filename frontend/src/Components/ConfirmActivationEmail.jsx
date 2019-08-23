@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {Container} from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import { Container } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import {axiosPost} from '../api/axiosPost'
+import { axiosPost } from '../api/axiosPost'
 
 
 const UIDPOS = 3;
