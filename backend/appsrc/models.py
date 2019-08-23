@@ -55,15 +55,15 @@ class Courses(models.Model):
     coursename = models.CharField(max_length=60)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     status = models.CharField(max_length=10)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     is_public = models.BooleanField()
-    start_date = models.DateTimeField()
-    duration = models.DurationField()
+    start_date = models.DateTimeField(blank=False)
+    duration = models.DurationField(blank=False)
     rate = models.IntegerField()
-    members_limit = models.IntegerField()
-    category = models.ForeignKey(Categories, default=DEFAULT_CATEGORIES_ID, on_delete=models.SET_DEFAULT)
-    location = models.TextField()
-    cover_url = models.CharField(max_length=80)
+    members_limit = models.IntegerField(blank=True, null=True)
+    categories = models.ForeignKey(Categories, default=DEFAULT_CATEGORIES_ID, on_delete=models.SET_DEFAULT)
+    location = models.TextField(blank=True, null=True)
+    cover_url = models.CharField(max_length=100)
 
 class CoursesSubscribers(models.Model):
     participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
@@ -78,7 +78,7 @@ class Achievements(models.Model):
     name = models.CharField(max_length=20)
 
 class Events(models.Model):
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
     description = models.TextField()
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
