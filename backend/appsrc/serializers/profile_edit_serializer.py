@@ -26,7 +26,7 @@ class ProfileEditSerializer(serializers.ModelSerializer):
         user = YouYodaUser.objects.create(
             first_name = validated_data.get('first_name'),
             last_name = validated_data.get('last_name'),
-            location = validated_data.get('location'),
+            location = validated_data.get('location').encode(),
             username = validated_data.get('username'),
             about_me = validated_data.get('about_me'),
             i_like = validated_data.get('i_like'),

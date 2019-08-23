@@ -19,8 +19,17 @@
     height: 165px;
 }
 
-.city-country-2{
-    margin-top: 49px;
+.city-country-2 input{
+    margin-top: 12px;
+    padding-left: 10px;
+    width: 100%;
+    height: 37px;
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+
+}
+.city-country-2 input:focus {
+    outline-offset: 0;
 }
 .top-text-contact{
     font-weight: bold;

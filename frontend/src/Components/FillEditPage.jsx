@@ -2,10 +2,14 @@ import React from 'react';
 import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import Button from "reactstrap/es/Button";
 import {countries, regions} from './Variables/location';
+import location from "./Variables/location";
 
 import axios from 'axios';
 
 import {editForm} from "../api/editForm";
+import LocationSearchInput from './cityselector'
+
+
 
 
 
@@ -43,7 +47,7 @@ class FillEditPage extends React.Component {
     getUser = async () => {
         try {
             // const response = await axios.get('http://localhost:5000/test');
-            const response = await axios.get('http://localhost:8000/api/user/profile/edit', {headers: { Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await axios.get('http://localhost:8000/api/user/profile/edit', {headers: {Authorization: "Token " + localStorage.getItem('token')}});
             // console.log(response.data);
             // alert(response.data);
             return response.data;
@@ -55,7 +59,7 @@ class FillEditPage extends React.Component {
     postUser = async (formData) => {
         try {
             // const response = await axios.post('http://localhost:5000/test', formData);
-            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData, {headers: { Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData, {headers: {Authorization: "Token " + localStorage.getItem('token')}});
         } catch (error) {
             console.error(error);
         }
@@ -85,6 +89,11 @@ class FillEditPage extends React.Component {
         console.log(event.target.value, event.target.value);
     };
 
+    updateLocation = (location) => {
+        this.setState({ location: location.split(',')[0] });
+        console.log(location);
+    }
+
     async componentDidMount() {
         let userData = await this.getUser();
         // this.setState({username: userData.username,
@@ -99,7 +108,7 @@ class FillEditPage extends React.Component {
     becomeTrainer = async () => {
         let trainer = {is_trainer: this.state.is_trainer}
         try {
-            const response = await axios.patch('http://localhost:8000/api/user/totrainer/', trainer, {headers: { Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await axios.patch('http://localhost:8000/api/user/totrainer/', trainer, {headers: {Authorization: "Token " + localStorage.getItem('token')}});
         } catch (error) {
             console.error(error);
         }
@@ -115,9 +124,10 @@ class FillEditPage extends React.Component {
                         method="POST" className="form-group "
                     >
                         <Row>
+
                             <Col md="6" sm="12" className="fill-edit-collumn">
 
-                                <h2  className="top-text">Personal details</h2>
+                                <h2 className="top-text">Personal details</h2>
                                 <div className="edit-avatar">
                                     <img src={require('../img/static/avatar.png')}
                                          className="avatar"
@@ -163,44 +173,10 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                 />
                                 <Row>
-                                    {/*<Col md={6}>*/}
-                                    {/*<FormGroup className="city-country">*/}
-                                    {/*    <Label for="state">City and country*</Label>*/}
-                                    {/*    <Input*/}
-                                    {/*        type="select"*/}
-                                    {/*        name="location"*/}
-                                    {/*        className="field-box">*/}
-                                    {/*        onChange={(e) => this.updateField(e)}*/}
-                                    {/*        {countries.map((country) => (*/}
-                                    {/*            <option>{country}</option>*/}
-                                    {/*        ))}*/}
-                                    {/*        value = {this.state.location}*/}
-                                    {/*    </Input>*/}
-                                    {/*</FormGroup>*/}
-                                    {/*</Col>*/}
                                     <Col md={12}>
                                         <FormGroup className="city-country-2">
-                                            {/*<Input*/}
-                                            {/*    type="select"*/}
-                                            {/*    name="location"*/}
-                                            {/*    className="field-box">*/}
-                                            {/*    {regions.map((region) => (*/}
-                                            {/*        <option>{region}</option>*/}
-                                            {/*    ))}*/}
-                                            {/*    onChange={(e) => this.updateField(e)}*/}
-                                            {/*    value = {this.state.location}*/}
-                                            {/*</Input>*/}
-                                            <select type="text"
-                                                    value={this.state.location}
-                                                    onChange={this.updateField}
-                                                    name={'location'}
-                                                    required
-                                                    className="field-box button-region">
-                                                >
-                                                {regions.map((region) => (
-                                                    <option value={region}>{region}</option>
-                                                ))}
-                                            </select>
+                                            <Label>Location</Label>
+                                            <LocationSearchInput updateLocation={this.updateLocation} city={this.state.location} className="form-control" />
                                         </FormGroup>
                                     </Col>
                                 </Row>
