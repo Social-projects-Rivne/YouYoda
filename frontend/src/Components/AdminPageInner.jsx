@@ -13,14 +13,13 @@ const pages = [
 
 export default class AdminPageInner extends React.Component {
   render() {
-    console.log(pages);
       return (
           <Container id="admin-dashboard">
               <Row>
                   <Col md="12"><h2>Admin Dashboard</h2></Col>
               </Row>
               <Row>
-                  <Col md="3">
+                  <Col md="2">
                       <Nav className="admin-left-menu" vertical>
                       {
                         pages.map(function(item){
@@ -31,7 +30,7 @@ export default class AdminPageInner extends React.Component {
                       }
                       </Nav>
                   </Col>
-                  <Col md="9">
+                  <Col md="10">
                       <Switch>
                           <Route exact path='/admin/users' component={AdminUsers}/>
                           <Route exact path='/admin/logs' component={AdminUsers}/>

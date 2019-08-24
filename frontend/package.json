@@ -20,6 +20,9 @@
     "reactstrap": "^8.0.1",
     "slick-carousel": "^1.8.1"
   },
+  "devDependencies": {
+    "faker": "^4.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

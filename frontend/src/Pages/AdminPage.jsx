@@ -1,13 +1,11 @@
 import React from 'react';
-
-//import AdminDashboard from '../Components/AdminDashboard';
-import Footer from '../Components/Footer';
-import ProfileHeader from '../Components/ProfileHeader';
-import '../style/adminPage.css';
-
 import {Redirect} from 'react-router-dom';
 
+import Footer from '../Components/Footer';
 import {isAuthorized} from '../api/isAuthorized';
+import ProfileHeader from '../Components/ProfileHeader';
+import '../style/adminPage.css';
+import '../style/dataTable.css';
 
 
 export default class AdminPage extends React.Component{
@@ -25,11 +23,11 @@ export default class AdminPage extends React.Component{
         var urlRedirect = '/';
         if(typeof response === 'object') {
             if(response.data_status === 'role' && response.role > 0) {
+                /** response correct - user is admin */
                 if(response.role == 3) {
                     this.setState({
                         displayDashboard: 'block'
-                    });
-                    console.log('response correct - user is admin');
+                    });    
                 }
                 else {
                     if(response.role == 2)
@@ -42,11 +40,11 @@ export default class AdminPage extends React.Component{
             }
         }
         else {
+            /** not authorized */
             this.setState({ 
                 redirect: true,
                 redirectTo: urlRedirect
             });
-            console.log('not authorized');
         }
     }
 
