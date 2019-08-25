@@ -1,21 +1,3 @@
-/*Styles for ProfileHeader*/
-.profile-photo-dropdown {
-    border-radius: 20px;
-    height: 35px;
-}
-.dropdown-button {
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-    position: relative;
-    bottom: 2px;
-}
-.dropdown-button:hover {
-    background-color: transparent;
-}
-
 /*Styles for ProfileInfo*/
 .profile-photo {
     border-radius: 50px;
