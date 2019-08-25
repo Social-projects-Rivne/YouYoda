@@ -1,7 +1,5 @@
 from rest_framework import serializers
 
-from djoser.conf import settings
-
 from ..models import YouYodaUser
 
 
@@ -16,7 +14,9 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
         model = YouYodaUser
 
-        fields = ('password')
+        fields = (
+            'password',
+            )
 
     def update(self, instance, validated_data):
         """Update user password"""
