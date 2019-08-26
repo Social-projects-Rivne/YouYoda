@@ -4,7 +4,6 @@ import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
 
 import {getUsersList} from '../api/getAdminUsers';
-import faker from 'faker';
 
 
 class AdminUsers extends React.Component {
@@ -23,22 +22,6 @@ class AdminUsers extends React.Component {
                 dataList: valueUsers,
             });  
         });
-
-        /*for (let i = 0; i < 10; i++) {
-            const user = {
-                id: i,
-                city: faker.address.city(),
-                email: faker.internet.email(),
-                firstName: faker.name.firstName(),
-                lastName: faker.name.lastName(),
-                street: faker.address.streetName(),
-            }
-             
-            this.setState(prevState => ({
-                dataList: [...prevState.dataList, user],
-            }))
-            
-        }*/
     }
 
     renderUsers(user) {
