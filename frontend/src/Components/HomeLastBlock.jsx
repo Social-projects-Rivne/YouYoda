@@ -2,6 +2,8 @@ import React from 'react';
 
 import {Container, Button, Row, Col} from 'reactstrap';
 
+import { isAuthenticated } from '../utils';
+
 
 export default class HomeLastBlock extends React.Component{
     render (){
@@ -11,12 +13,12 @@ export default class HomeLastBlock extends React.Component{
             <Row>
                 <Col sm="7" className="header-block">
                     <h1>So, How about it?</h1>
-                    <p class="main-text">People are busy.
+                    <p className="main-text">People are busy.
                     So, this UI Kit let’s you customize,
                     build and deploy your landing page,
                     so you can start selling your product
                     to potential customers.</p>
-                    <div className="btn-group-sign">
+                    <div className={`btn-group-sign ${isAuthenticated("hide")}`}>
                         <Button color="warning" className="btn-sign"
                                 style={{marginRight:'33px'}}
                                 onClick={this.props.handleClickReg}>
@@ -32,8 +34,6 @@ export default class HomeLastBlock extends React.Component{
                     alt="foto-event" />
                 </Col>
             </Row>
-
-
             </Container>
             </>
         )

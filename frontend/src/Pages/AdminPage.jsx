@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 
 import Footer from '../Components/Footer';
 import {isAuthorized} from '../api/isAuthorized';
-import ProfileHeader from '../Components/ProfileHeader';
+import PageHeader from '../Components/PageHeader';
 import '../style/adminPage.css';
 import '../style/dataTable.css';
 
@@ -55,7 +55,7 @@ export default class AdminPage extends React.Component{
         }
         return(
             <>
-            <ProfileHeader/>
+            <PageHeader/>
                 <main style={{display:displayDashboard}}>{this.props.children}</main>
             <Footer/>
             </>

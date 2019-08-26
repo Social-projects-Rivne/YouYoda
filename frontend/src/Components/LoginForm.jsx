@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom'
-import {Redirect} from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
 import { userLogin } from '../api/userLogin';
-import '../style/login.css';
-
 
 
 class LoginForm extends Component {
@@ -81,8 +79,15 @@ class LoginForm extends Component {
 
     async handleClick(event) {
     	event.preventDefault();
-        await userLogin(this.state)
-             .then(() => this.setState({ redirect: true }));
+        try {
+            await userLogin(this.state)
+                toast.success('Login successfull');
+                this.setState({ redirect: true });
+       } catch (error){
+           toast.error('Please, check entered email and password. Contact administrator or support system ;)');
+           console.log(error.message)
+       }
+
     }
 
     render() {
@@ -98,9 +103,9 @@ class LoginForm extends Component {
 			    type="button"
 			    className="close"
 			    onClick={this.props.handleClickLogin}>
-                     <span aria-hidden="true">&times;</span>
-                 </button>
-			<Row>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+			<Row className="login-row">
 			  <Col md="7" className="login">
 			      <Form className="form-horizontal">
 				    <Row className="m-0">
@@ -135,7 +140,7 @@ class LoginForm extends Component {
 				    </Row>
 				    <Row className="m-0">
 					  <Col>
-					    <FormGroup check>
+					    <FormGroup check className="hidden">
 						  <Input type="checkbox" name="check" id="exampleCheck"/>
 						  <Label for="exampleCheck" check>Remember me</Label>
 					    </FormGroup>
@@ -171,7 +176,7 @@ class LoginForm extends Component {
 					<h1 className="modal-title text-white custom-title">Hello, <span>Dear Friend!</span></h1>
                 </Row>
 				<Row className="container mx-0 mb-4">
-					<h2 className="text-white">blah blah blah</h2>
+					<h2 className="text-white">You will find here what you are looking for</h2>
 				</Row>
 				<Row className="container h-auto">
 					<div className="col-sm-12 form-group">
@@ -179,7 +184,7 @@ class LoginForm extends Component {
 						<Button
 						  type="button"
 						  className="btn-grey btn"
-						  onClick={(event) => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
+						  onClick={() => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
 						<br></br><br></br>
 						<Button
 						  type="button"
