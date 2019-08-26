@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
+import Events from './Pages/Events';
 import Home from './Pages/Home';
 import MainLayout from './Pages/MainLayout';
 import EditPageProfile from "./Pages/EditPageProfile";
@@ -24,6 +25,7 @@ export default class Routes extends React.Component{
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
+            <Route path='/events' component={Events}/>
             <Route component={MainLayout}>
             <Switch>
                 <Route exact path='/reset/password'
