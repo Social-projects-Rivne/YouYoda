@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
-import { userLogin } from '../api/userLogin';
+import { userLogin, userSocialLogin } from '../api/userLogin';
 import '../style/login.css';
 import { Link } from 'react-router-dom'
 
@@ -15,12 +16,13 @@ class LoginForm extends Component {
         this.state = {
             email: '',
             password: '',
+            access_token: '',
             formErrors: { email: '', password: '' },
             emailValid: false,
             passwordValid: false,
             formValid: false,
             redirect: false,
-			showErrors: false
+			      showErrors: false
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -80,6 +82,26 @@ class LoginForm extends Component {
     	event.preventDefault();
         await userLogin(this.state)
              .then(() => this.setState({ redirect: true }));
+    }
+
+    async handleClickSocial(event) {
+    	event.preventDefault();
+        await userSocialLogin(this.state)
+             .then(() => this.setState({ redirect: true }));
+    }
+
+    loginFacebook = (response) => {
+      this.setState({
+        access_token: response.accessToken,
+        email:response.email,
+      })
+      this.handleClickSocial(this.state.reg_event)
+    }
+
+    setEvent = (event) => {
+      this.setState({
+        reg_event: event
+      })
     }
 
     render() {
@@ -154,7 +176,16 @@ class LoginForm extends Component {
 				        <p>Log in with:</p>
 				      </Col>
 				      <Col xs="2">
-				        <a href="#"><img src={FacebookLogo} width="40" alt="FacebookLogo"/></a>
+                <FacebookLogin
+                  appId="687674024977590"
+                  autoLoad={false}
+                  fields="name, email, picture"
+                  callback={this.loginFacebook}
+                  onClick={this.setEvent}
+                  cssClass="btnFacebook"
+                  textButton = "&nbsp;&nbsp;"
+                  icon={<img src={FacebookLogo} width="40" style={{marginLeft:"-15px"}} alt="FacebookLogo"/>}
+                />
 				      </Col>
 				      <Col xs="2">
 				        <a href="#"><img src={GoogleLogo} width="40" alt="GoogleLogo"/></a>

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
 
-from ..serializers.user_login_serializer import LoginSerializer
+from ..serializers.user_login_serializer import LoginSerializer, SocialLoginSerializer
 
 
 class UserLogin(APIView):
@@ -12,6 +12,19 @@ class UserLogin(APIView):
 
     def post(self, request, format='json'):
         serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.validated_data
+            login(request, user)
+            token = Token.objects.create(user=user)
+            return Response({'token': token.key}, status=status.HTTP_202_ACCEPTED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserSocialLogin(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format='json'):
+        serializer = SocialLoginSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data
             login(request, user)

@@ -21,7 +21,16 @@ class LoginSerializer(serializers.Serializer):
                     #login(user)
                     return user
         return False
- 
 
 
- 
+class SocialLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    access_token = serializers.CharField(max_length=None)
+
+    def validate(self, data):
+        user = User.objects.get(email=data['email'])
+        email=data['email']
+        access_token=data['access_token']
+        if email and access_token:
+            return user
+        return False

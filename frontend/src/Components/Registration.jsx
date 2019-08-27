@@ -2,9 +2,14 @@ import React from 'react';
 
 import { Button, Col, Modal, Row } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 import { FormErrors } from '../api/FormErrors';
-import { registration } from '../api/registration';
+import { registration, socialRegistration } from '../api/registration';
+import '../style/login.css';
+import FacebookLogo from '../img/content/facebook.png';
+import GoogleLogo from '../img/content/google.png';
 
 
 class Registration extends React.Component{
@@ -13,6 +18,10 @@ class Registration extends React.Component{
         this.state = {
             email: '',
             password: '',
+            first_name: '',
+            last_name: '',
+            picture: {},
+            reg_event: {},
             confirmpass: '',
             userstudent: true,
             userteacher: false,
@@ -28,7 +37,7 @@ class Registration extends React.Component{
         }
     }
 
-    
+
 
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
@@ -108,18 +117,44 @@ class Registration extends React.Component{
             this.setState({[idParam]:valueParam},
                           () => { this.validateField(idParam, valueParam) });
     }
+
     radioGetter = (event) => {
         this.setState({
             userteacher:!this.state.userteacher,
             userstudent:!this.state.userstudent
         });
     }
+
     async handleClick(event){
         event.preventDefault();
         await registration(this.state)
             .then(() => this.setState({ redirect: true }));
         return false;
     }
+
+    async handleClickSocial(event){
+        event.preventDefault();
+        await socialRegistration(this.state)
+            .then(() => this.setState({ redirect: true }));
+        return false;
+    }
+
+    registerFacebook = (response) => {
+      this.setState({
+        email:response.email,
+        first_name:response.first_name,
+        last_name:response.last_name,
+        picture:response.picture,
+      })
+      this.handleClickSocial(this.state.reg_event)
+    }
+
+    setEvent = (event) => {
+      this.setState({
+        reg_event: event
+      })
+    }
+
     render () {
         const { redirect } = this.state;
         if (redirect) {
@@ -138,6 +173,21 @@ class Registration extends React.Component{
                             <div className="col-sm-12 form-group">
                                 <span className="text-title text-white d-block pb-2">If you already have an account</span>
                                 <Button className="btn-grey btn" onClick={(event) => {this.props.handleClickReg(); this.props.handleClickLogin();}}>Log in</Button>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <span className="text-title text-white d-block pb-2">Or you can register with:</span>
+                                <div style={{marginLeft:"10px"}}>
+                                  <FacebookLogin
+                                    appId="687674024977590"
+                                    autoLoad={false}
+                                    fields="first_name, last_name, email, picture"
+                                    callback={this.registerFacebook}
+                                    onClick={this.setEvent}
+                                    cssClass="btnFacebook"
+                                    textButton = "&nbsp;&nbsp;"
+                                    icon={<img src={FacebookLogo} width="40" style={{marginLeft:"-15px"}} alt="FacebookLogo"/>}
+                                  />
+                                </div>
                             </div>
                         </Row>
                     </Col>
