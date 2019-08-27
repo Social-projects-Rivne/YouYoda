@@ -78,12 +78,12 @@ class Achievements(models.Model):
     name = models.CharField(max_length=20)
 
 class Events(models.Model):
-    categories = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    categories = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=DEFAULT_CATEGORIES_ID)
     name = models.CharField(max_length=60)
-    description = models.TextField()
+    description = models.TextField(blank=False)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    date = models.DateTimeField()
-    location = models.TextField()
+    date = models.DateTimeField(blank=False)
+    location = models.TextField(blank=False)
     cover_url = models.CharField(max_length=80)
 
 class EventsSubscribers(models.Model):

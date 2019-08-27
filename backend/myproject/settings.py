@@ -169,3 +169,16 @@ try:
 except ImportError:
     pass
 DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://localhost:6379/",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+    }
+}
+
+# Cache time to live is 15 minutes.
+CACHE_TTL = 60 * 15

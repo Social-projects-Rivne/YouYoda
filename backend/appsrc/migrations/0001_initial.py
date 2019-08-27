@@ -82,7 +82,17 @@ def insertData(apps, schema_editor):
     Courses.objects.create(id=6, coursename="Course6", owner_id=7, status="Open", description="Perfect for people who never swam",
         is_public=False, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=500, hours=10), rate=7,
         members_limit=12, categories_id=1, location="Rivne, Ukraine", cover_url="")
-    
+
+    Events = apps.get_model('appsrc', 'Events')
+    Events.objects.create(id=1, name="Event-1", owner_id=3, description="Perfect for people who never swam",
+        date=datetime.datetime.now(), categories_id=1, location="Kiev, Ukraine", cover_url="")
+    Events.objects.create(id=2, name="Event-2", owner_id=4, description="Perfect for people who never swam",
+        date=datetime.datetime.now(), categories_id=2, location="Rivne, Ukraine", cover_url="")
+    Events.objects.create(id=3, name="Event-3", owner_id=5, description="Perfect for people who never swam",
+        date=datetime.datetime.now(), categories_id=3, location="Lviv, Ukraine", cover_url="")
+    Events.objects.create(id=4, name="Event-4", owner_id=6, description="Perfect for people who never swam",
+        date=datetime.datetime.now(), categories_id=4, location="Rivne, Ukraine", cover_url="")
+
 
 class Migration(migrations.Migration):
 
@@ -139,16 +149,17 @@ class Migration(migrations.Migration):
             name='Courses',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('coursename', models.CharField(max_length=60)),
                 ('status', models.CharField(max_length=10)),
-                ('description', models.TextField()),
+                ('description', models.TextField(blank=True, null=True)),
                 ('is_public', models.BooleanField()),
                 ('start_date', models.DateTimeField()),
                 ('duration', models.DurationField()),
                 ('rate', models.IntegerField()),
-                ('members_limit', models.IntegerField()),
-                ('location', models.TextField()),
-                ('cover_url', models.CharField(max_length=80)),
+                ('members_limit', models.IntegerField(blank=True, null=True)),
+                ('location', models.TextField(blank=True, null=True)),
+                ('cover_url', models.CharField(max_length=100)),
                 ('categories', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Categories')),
             ],
         ),
@@ -156,6 +167,7 @@ class Migration(migrations.Migration):
             name='Events',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('name', models.CharField(max_length=60)),
                 ('description', models.TextField()),
                 ('date', models.DateTimeField()),
@@ -232,11 +244,6 @@ class Migration(migrations.Migration):
                 ('participant_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
-        migrations.AddField(
-            model_name='events',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
-        ),
         migrations.CreateModel(
             name='CoursesSubscribers',
             fields=[
@@ -247,11 +254,6 @@ class Migration(migrations.Migration):
                 ('course_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Courses')),
                 ('participant_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
-        ),
-        migrations.AddField(
-            model_name='courses',
-            name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
         ),
         migrations.CreateModel(
             name='Achievements',
