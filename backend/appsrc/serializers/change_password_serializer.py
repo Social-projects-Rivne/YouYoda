@@ -5,7 +5,9 @@ from ..models import YouYodaUser
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
     """Updates password from the User model for fill/edit user profile.
+
     Converts it to JSON format for transmission via the API.
+
     """
 
     class Meta:

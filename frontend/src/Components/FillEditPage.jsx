@@ -6,6 +6,10 @@ import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import {editForm} from "../api/editForm";
 import LocationSearchInput from '../api/cityselector'
 import ChangePassword from "./ChangePassword";
+import {API} from '../api/axiosConf';
+
+
+
 
 
 class FillEditPage extends React.Component {
@@ -41,7 +45,7 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/user/profile/edit', {headers: {Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await API.get('user/profile/edit');
             return response.data;
         } catch (error) {
             console.error(error);
@@ -50,7 +54,7 @@ class FillEditPage extends React.Component {
 
     postUser = async (formData) => {
         try {
-            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData, {headers: {Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await API.patch('user/profile/edit', formData);
         } catch (error) {
             console.error(error);
         }
@@ -97,7 +101,7 @@ class FillEditPage extends React.Component {
     becomeTrainer = async () => {
         let trainer = {is_trainer: this.state.is_trainer}
         try {
-            const response = await axios.patch('http://localhost:8000/api/user/totrainer/', trainer, {headers: {Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await API.patch('user/totrainer', trainer);
         } catch (error) {
             console.error(error);
         }

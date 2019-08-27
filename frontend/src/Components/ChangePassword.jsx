@@ -3,9 +3,10 @@ import React from 'react';
 import {Col, Container, Row} from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 
-import {sendDataToDjoser} from '../api/resetPassword';
+
 import {FormErrors} from '../api/FormError';
 import axios from "axios";
+import {API} from '../api/axiosConf';
 
 
 export default class ChangePassword extends React.Component {
@@ -61,7 +62,7 @@ export default class ChangePassword extends React.Component {
     changePassword = async () => {
         try {
             const data = {email: this.props.email, password: this.state.new_password}
-            await axios.put('http://localhost:8000/api/user/profile/change_password', data, {headers: {Authorization: "Token " + localStorage.getItem('token')}});
+            await API.put('user/profile/change_password', data);
         } catch (error) {
             console.error(error);
         }
