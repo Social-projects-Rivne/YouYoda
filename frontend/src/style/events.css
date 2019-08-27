@@ -1,7 +1,52 @@
 /*Styles for Events*/
 
+/* SEARCH */
 .btn-search-events {
-    width: 200px;
+    width: 250px;
     margin-left: 20px;
 }
 
+.btn-search-events-title {
+	font-family: Roboto Condensed;
+	font-weight: bold;
+	/*font-size: 20px;*/
+}
+
+.search-input-group {
+	margin-top: 10%;
+	margin-bottom: 10%;
+}
+
+/* TITLE */
+.title-events {
+	text-align: center;
+	font-weight: bold;
+	margin-top: 5%;
+	margin-bottom: 10%;
+	font-family: Roboto Condensed;
+	font-size: 48px;
+	line-height: 56px;
+}
+
+/* EVENTS */
+.event-header {
+ 	background: white;
+	border: 1px solid #4F4F4F;
+	/*box-sizing: border-box;*/
+}
+
+.event-body {
+	border-left: 1px solid #4F4F4F;
+	border-right: 1px solid #4F4F4F;
+}
+
+.event-card .card-footer{
+	padding: 0;
+}
+
+/* PAGINATION */
+.pagination {
+	margin-top: 50px;
+	margin-bottom: 100px;
+	justify-content: center;
+}
