@@ -13,19 +13,19 @@ NUMBER_OF_TOP = 6
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 class TopCourses(APIView):
-    """Takes data from CoursesTopSerializator for view user profile."""
+    """Takes data from CoursesTopSerializator for view top rate courses"""
 
     permission_classes = [permissions.AllowAny,]
 
     def get(self, request):
-        """Receives and transmits user profile data"""
+        """First check request data in cache, then pull data from db"""
         if 'top_courses' in cache:
             # get results from cache
-            top_courses = cache.get('top_courses')
-            return Response(top_courses.data)
+            top_course = cache.get('top_courses')
+            return Response(top_course)
         else:
-            courses = Courses.objects.order_by('rate')[:NUMBER_OF_TOP]
+            courses = Courses.objects.order_by('-rate')[:NUMBER_OF_TOP]
             serializer = CoursesTopSerializator(courses, many=True)
             # store data in cache
-            cache.set(top_courses, serializer, timeout=CACHE_TTL)
+            cache.set('top_courses', serializer.data, timeout=CACHE_TTL)
             return Response(serializer.data)

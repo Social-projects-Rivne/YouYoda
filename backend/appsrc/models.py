@@ -3,6 +3,8 @@ from django.db import models
 
 DEFAULT_ROLE_ID = 1
 DEFAULT_CATEGORIES_ID = 1
+DEFAULT_RATE=0
+DEFAULT_COST=0
 
 class Categories(models.Model):
     name = models.CharField(max_length=20)
@@ -59,7 +61,8 @@ class Courses(models.Model):
     is_public = models.BooleanField()
     start_date = models.DateTimeField(blank=False)
     duration = models.DurationField(blank=False)
-    rate = models.IntegerField()
+    rate = models.IntegerField(default=DEFAULT_RATE)
+    cost = models.IntegerField(default=DEFAULT_COST)
     members_limit = models.IntegerField(blank=True, null=True)
     categories = models.ForeignKey(Categories, default=DEFAULT_CATEGORIES_ID, on_delete=models.SET_DEFAULT)
     location = models.TextField(blank=True, null=True)

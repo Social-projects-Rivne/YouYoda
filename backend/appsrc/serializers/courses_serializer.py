@@ -4,7 +4,7 @@ from ..models import Courses
 
 
 class CoursesTopSerializator(serializers.ModelSerializer):
-	"""Takes data from the User model for view user profile.
+	"""Takes data from the Courses model for Top Courses component.
     Converts it to JSON format for transmission via the API.
 
     """
@@ -14,6 +14,5 @@ class CoursesTopSerializator(serializers.ModelSerializer):
 		 model = Courses
 
 		 fields = (
-			'coursename', "owner", "status", "description", "is_public", "start_date",
-		 	"duration", "rate", "members_limit", "categories", "location", "cover_url" 
+			'coursename', "description", "rate", "cover_url" 
             )

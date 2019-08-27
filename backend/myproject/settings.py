@@ -173,9 +173,9 @@ DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://localhost:6379/",
+        "LOCATION": "redis://redis:6379/1",
         "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
     }
 }

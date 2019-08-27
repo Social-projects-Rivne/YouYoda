@@ -82,6 +82,9 @@ def insertData(apps, schema_editor):
     Courses.objects.create(id=6, coursename="Course6", owner_id=7, status="Open", description="Perfect for people who never swam",
         is_public=False, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=500, hours=10), rate=7,
         members_limit=12, categories_id=1, location="Rivne, Ukraine", cover_url="")
+    Courses.objects.create(id=7, coursename="Course7", owner_id=4, status="Open", description="Perfect for people who never swam",
+        is_public=False, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=500, hours=10), rate=7,
+        members_limit=12, categories_id=3, location="Rivne, Ukraine", cover_url="")
 
     Events = apps.get_model('appsrc', 'Events')
     Events.objects.create(id=1, name="Event-1", owner_id=3, description="Perfect for people who never swam",
@@ -92,6 +95,8 @@ def insertData(apps, schema_editor):
         date=datetime.datetime.now(), categories_id=3, location="Lviv, Ukraine", cover_url="")
     Events.objects.create(id=4, name="Event-4", owner_id=6, description="Perfect for people who never swam",
         date=datetime.datetime.now(), categories_id=4, location="Rivne, Ukraine", cover_url="")
+    Events.objects.create(id=5, name="Event-5", owner_id=3, description="Perfect for people who never swam",
+        date=datetime.datetime.now(), categories_id=2, location="Rivne, Ukraine", cover_url="")
 
 
 class Migration(migrations.Migration):
@@ -156,7 +161,8 @@ class Migration(migrations.Migration):
                 ('is_public', models.BooleanField()),
                 ('start_date', models.DateTimeField()),
                 ('duration', models.DurationField()),
-                ('rate', models.IntegerField()),
+                ('rate', models.IntegerField(default=0)),
+                ('cost', models.IntegerField(default=0)),
                 ('members_limit', models.IntegerField(blank=True, null=True)),
                 ('location', models.TextField(blank=True, null=True)),
                 ('cover_url', models.CharField(max_length=100)),
@@ -173,7 +179,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateTimeField()),
                 ('location', models.TextField()),
                 ('cover_url', models.CharField(max_length=80)),
-                ('categories', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Categories')),
+                ('categories', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Categories')),
             ],
         ),
         migrations.CreateModel(

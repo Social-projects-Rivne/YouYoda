@@ -16,6 +16,5 @@ urlpatterns = [
     path('user/login', UserLogin.as_view(), name='login'),
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
-    path('courses/top', TopCourses.as_view(), name='top_courses'),
-    
+    path('courses/top', TopCourses.as_view(), name='top-courses'),
 ]
