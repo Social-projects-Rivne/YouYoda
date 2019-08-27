@@ -1,5 +1,3 @@
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
@@ -17,7 +15,7 @@ class UserToTrainer(APIView):
 
 	def patch(self, request):
 		"""Receives and updates user role"""
-		user= get_object_or_404(YouYodaUser, email=request.user)
+		user= YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
 		serializer = UserToTrainerSerializer(user)
 		if serializer.is_valid():
 			serializer.save()

@@ -1,11 +1,6 @@
 import React from 'react';
 
-import {Col, Container, Row} from 'reactstrap';
-import {Redirect} from 'react-router-dom';
-
-
 import {FormErrors} from '../api/FormError';
-import axios from "axios";
 import {API} from '../api/axiosConf';
 
 

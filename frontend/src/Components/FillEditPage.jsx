@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import Button from "reactstrap/es/Button";
 import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
