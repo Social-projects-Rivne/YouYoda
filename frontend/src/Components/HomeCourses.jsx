@@ -88,6 +88,16 @@ export default class HomeCourses extends React.Component{
                   </div>
             </Col>
             </Row>
+            <Row className="d-flex justify-content-end"> 
+                <div className="more-courses-events">
+                    <button className="learn-more">
+                        <div className="circle">
+                        <span className="icon arrow"></span>
+                        </div>
+                        <p className="button-text">More Courses</p>
+                    </button>
+                </div>
+                </Row>
             </Container>
             </div>
         )

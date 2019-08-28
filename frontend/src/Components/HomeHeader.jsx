@@ -39,12 +39,12 @@ export default class HomeHeader extends React.Component{
             	    <cite title="Source Title">-master Yoda</cite>
             	</blockquote>
                 <div className={`btn-group-sign ${isAuthenticated("hide")}`}>
-                    <Button color="warning" className="btn-sign"
+                    <Button color="warning" className="btn-sign btn-color-w"
                             style={{marginRight:'33px'}}
                             onClick={this.props.handleClickReg}>
                         Sign Up
                     </Button>
-                    <Button color="secondary" className="btn-sign" onClick={this.props.handleClickLogin}>
+                    <Button color="secondary" className="btn-sign btn-color-w" onClick={this.props.handleClickLogin}>
                         Sign In
                     </Button>
                 </div>
