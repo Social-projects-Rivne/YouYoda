@@ -1,8 +1,8 @@
-import API from './axiosConf';
+import { API } from './axiosConf';
 
 async function logOut() {
     try {
-        await API.get('user/logout', {headers: { Authorization: "Token " + localStorage.getItem('token')}})
+        await API.get('user/logout')
             localStorage.removeItem('token');
     } catch (error) {
         throw TypeError('Error: ' + error.message);
