@@ -1,9 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
-from django.core.cache import cache
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from ..models import Courses
 from ..serializers.courses_serializer import CoursesTopSerializator
@@ -17,15 +18,9 @@ class TopCourses(APIView):
 
     permission_classes = [permissions.AllowAny,]
 
+    @method_decorator(cache_page(CACHE_TTL), name='top_courses')
     def get(self, request):
         """First check request data in cache, then pull data from db"""
-        if 'top_courses' in cache:
-            # get results from cache
-            top_course = cache.get('top_courses')
-            return Response(top_course)
-        else:
             courses = Courses.objects.order_by('-rate')[:NUMBER_OF_TOP]
             serializer = CoursesTopSerializator(courses, many=True)
-            # store data in cache
-            cache.set('top_courses', serializer.data, timeout=CACHE_TTL)
             return Response(serializer.data)
