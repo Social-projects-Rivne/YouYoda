@@ -83,13 +83,6 @@ button.close {
 .modal .is-error input {
     border: 1px solid red;
 }
-.btnSocial {
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-  background-color: transparent;
-  border: 0px transparent;
-}
 
 @media (min-width: 576px)
 {

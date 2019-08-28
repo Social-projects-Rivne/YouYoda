@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Container, Row, Col, Form, Input, Button} from 'reactstrap';
-import {FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-scroll';
+import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 
 export default class Footer extends React.Component{
@@ -15,26 +15,26 @@ export default class Footer extends React.Component{
             <Row>
               <Col md="5">
                 <ul className="footer-nav">
-                    <li>
-                        <Link to="home-about" spy={true} smooth={true} duration={500} activeClassName="active">
-                            About
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="home-course" spy={true} smooth={true} duration={500} activeClassName="active">
-                            Courses
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="home-trainer" spy={true} smooth={true} duration={500} activeClassName="active">
-                            Trainers
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="home-event" spy={true} smooth={true} duration={500} activeClassName="active">
-                            Events
-                        </Link>
-                    </li>
+                  <li>
+                    <Link to="/about" >
+                        About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/courses" >
+                        Courses
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/trainers" >
+                        Trainers
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/events" >
+                        Events
+                    </Link>
+                  </li>
                 </ul>
                 <Form action="#" className="form">
                     <Input type="search" id="search-input"

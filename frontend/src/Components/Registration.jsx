@@ -7,7 +7,7 @@ import GoogleLogin from 'react-google-login';
 
 import { FormErrors } from '../api/FormErrors';
 import { registration, socialRegistration } from '../api/registration';
-import '../style/login.css';
+import '../style/forms.css';
 import FacebookLogo from '../img/content/facebook.png';
 import GoogleLogo from '../img/content/google.png';
 
@@ -36,8 +36,6 @@ class Registration extends React.Component{
             redirect: false,
         }
     }
-
-
 
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
@@ -172,7 +170,10 @@ class Registration extends React.Component{
     render () {
         const { redirect } = this.state;
         if (redirect) {
-           return <Redirect to='/activation/send/email'/>;
+           return <Redirect to={{
+               pathname: '/activation/send/email',
+               state: {email:this.state.email},
+            }}/>;
         }
         return (
         <div>
@@ -180,16 +181,19 @@ class Registration extends React.Component{
                 <div className="modal-body">
                 <Row>
                     <Col md="5" className="left-wrap">
-                        <Row className="container h-50 mx-0 mb-4">
+                        <Row className="container h-25 mx-0 mb-4">
                             <h1 className="modal-title text-white custom-title">Hello, <span>Dear Friend!</span></h1>
+                        </Row>
+                        <Row className="container mx-0 mb-4">
+                            <h2 className="text-white">You will find here what you are looking for</h2>
                         </Row>
                         <Row className="container h-auto">
                             <div className="col-sm-12 form-group">
                                 <span className="text-title text-white d-block pb-2">If you already have an account</span>
-                                <Button className="btn-grey btn" onClick={(event) => {this.props.handleClickReg(); this.props.handleClickLogin();}}>Log in</Button>
+                                <Button className="btn-grey btn" onClick={() => {this.props.handleClickReg(); this.props.handleClickLogin();}}>Sign in</Button>
                             </div>
                             <div className="col-sm-12 form-group">
-                                <span className="text-title text-white d-block pb-2">Or you can register with:</span>
+                                <span className="text-title text-white d-block pb-2">Or you can sign up with:</span>
                                   <Row style={{paddingLeft:"10px"}}>
                   				           <Col xs="3">
                                        <FacebookLogin

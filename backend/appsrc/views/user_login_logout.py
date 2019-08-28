@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
 
 from ..serializers.user_login_serializer import LoginSerializer, SocialLoginSerializer
+from ..models import YouYodaUser
 
 
 class UserLogin(APIView):
@@ -37,5 +38,6 @@ class UserLogout(APIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
-        request.user.auth_token.delete()
-        return Response(status=status.HTTP_200_OK)
+        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
+        user.auth_token.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -1,6 +1,7 @@
 import React from "react";
 
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import API from './axiosConf';
 
@@ -26,16 +27,13 @@ async function registration(props) {
             .then(response => {
                 console.log(response);
                 if(response.status === 201){
-                    console.log("Registration successfull");
-                    alert("Registration successfull");
+                    toast.success('Registration successfull');
                 }
                 else if(response.status === 400){
-                    console.log("User data incorrect");
-                    alert("User data incorrect");
+                    toast.warn('User data incorrect');
                 }
                 else{
-                    console.log("Database error");
-                    alert("Database error");
+                    toast.error('Database error');
                 }
             });
     } catch (error) {
@@ -69,16 +67,13 @@ async function socialRegistration(props) {
             .then(response => {
                 console.log(response);
                 if(response.status === 201){
-                    console.log("Registration successfull");
-                    alert("Registration successfull");
+                    toast.success('Registration successfull');
                 }
                 else if(response.status === 400){
-                    console.log("User data incorrect");
-                    alert("User data incorrect");
+                    toast.warn('User data incorrect');
                 }
                 else{
-                    console.log("Database error");
-                    alert("Database error");
+                    toast.error('Database error');
                 }
             });
     } catch (error) {

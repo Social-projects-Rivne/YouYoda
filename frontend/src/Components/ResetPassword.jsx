@@ -1,9 +1,10 @@
 import React from 'react';
 
-import {Container} from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import { Container } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-import {sendDataToDjoser} from '../api/resetPassword'
+import {axiosPost} from '../api/axiosPost'
 
 
 export default class ResetPassword extends React.Component{
@@ -21,8 +22,14 @@ export default class ResetPassword extends React.Component{
     handlPasswordReset = async (event) => {
         const URLPATH = 'auth/users/reset_password/';
         const USERDATA = {"email":this.state.email}
-        await sendDataToDjoser(URLPATH, USERDATA)
-            .then(() => this.setState({ redirect: true }));
+        try {
+            await axiosPost(URLPATH, USERDATA);
+            this.setState({ redirect: true });
+            toast.success('Email was sended');
+        } catch (error){
+            toast.error('Please, check entered email. Contact administrator or support system ;)');
+            console.log(error.message)
+        }
 	}
 
     render () {
@@ -42,10 +49,12 @@ export default class ResetPassword extends React.Component{
     						placeholder="Enter Email"
                             value={this.state.email}
                             onChange = {this.handlChangeEmail}
-    						required/>
+    						required
+                    />
     				<button type="button"
                             className="btn btn-warning reset-pass-form"
-    						onClick={this.handlPasswordReset}>Send me instructions!</button>
+    						onClick={this.handlPasswordReset}>Send me instructions!
+                    </button>
         </form>
         </Container>
       </div>

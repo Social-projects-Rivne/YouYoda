@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {Container} from 'reactstrap';
-
+import { Container } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 

@@ -3,9 +3,21 @@ import React from 'react';
 import {Container, Button} from 'reactstrap';
 import Header from './Header';
 import {quotes} from './JSON/quotes.json';
+import { isAuthenticated } from '../utils';
+
 
 
 export default class HomeHeader extends React.Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isOpen: false,
+            dropdownOpen: false,
+            authVisible: "",
+        };
+    }
+
     render(){
         const RAND = Math.floor(Math.random() * quotes.length);
         return(
@@ -26,14 +38,14 @@ export default class HomeHeader extends React.Component{
                     </p>
             	    <cite title="Source Title">-master Yoda</cite>
             	</blockquote>
-                <div className="btn-group-sign">
+                <div className={`btn-group-sign ${isAuthenticated("hide")}`}>
                     <Button color="warning" className="btn-sign"
                             style={{marginRight:'33px'}}
                             onClick={this.props.handleClickReg}>
                         Sign Up
                     </Button>
                     <Button color="secondary" className="btn-sign" onClick={this.props.handleClickLogin}>
-                        Log In
+                        Sign In
                     </Button>
                 </div>
                 </Container>
