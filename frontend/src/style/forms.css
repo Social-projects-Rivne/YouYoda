@@ -149,8 +149,9 @@ button.close {
 .login .form-horizontal {
     padding-right: 10%;
 }
-
-
+.btn-color-w:hover {
+    color: #fff;
+}
 
 
 @media (min-width: 576px)

@@ -6,21 +6,22 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-from ..models import Courses
-from ..serializers.courses_serializer import CoursesTopSerializator
+from ..models import Events
+from ..serializers.events_serializer import EventsTopSerializator
 
 
-NUMBER_OF_TOP = 6
+NUMBER_OF_TOP = 4
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
-class TopCourses(APIView):
-    """Takes data from CoursesTopSerializator for view top rate courses"""
+class TopEvents(APIView):
+    """Takes data from EventsTopSerializator for view latest events"""
 
     permission_classes = [permissions.AllowAny,]
 
-    @method_decorator(cache_page(CACHE_TTL), name='top_courses')
+    @method_decorator(cache_page(CACHE_TTL), name='top_events')
     def get(self, request):
-        """First check request data in cache, then pull data from db"""
-            courses = Courses.objects.order_by('-rate')[:NUMBER_OF_TOP]
-            serializer = CoursesTopSerializator(courses, many=True)
+        """First, check request data in cache, then pull data from db
+            and set to cache"""
+            events = Events.objects.order_by('-date')[:NUMBER_OF_TOP]
+            serializer = EventsTopSerializator(events, many=True)
             return Response(serializer.data)
