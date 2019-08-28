@@ -1,7 +1,5 @@
 import React from 'react';
 
-import axios from 'axios';
-
 import Footer from '../Components/Footer';
 import {ProfileContext} from '../Components/profile-context';
 import PageHeader from '../Components/PageHeader';
