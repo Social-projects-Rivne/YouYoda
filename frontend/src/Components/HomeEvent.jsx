@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Row, Button, Col } from 'reactstrap';
+import { Container, Row, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Slider from "react-slick";
 
 import { axiosGet } from '../api/axiosGet';
@@ -11,6 +11,7 @@ export default class HomeEvent extends React.Component{
         super(props);
 
         this.state = {
+            modal: false,
             eventsList: [ {
    "name": "Event-5",
    "description": "Perfect for people who never swam",
@@ -40,7 +41,15 @@ export default class HomeEvent extends React.Component{
    "location": "Rivne, Ukraine"
  }],
         };
-    }
+
+        this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
 
     componentWillMount() {
         let path = 'events/top'
@@ -53,6 +62,7 @@ export default class HomeEvent extends React.Component{
     }
 
     renderEvents(event) {
+        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
         if(!event.cover_url)
             event.cover_url = require("../img/static/event.png");
         return (
@@ -60,7 +70,21 @@ export default class HomeEvent extends React.Component{
                 <img src={event.cover_url} alt={event.name}/>
                 <h3 className="secondary-header">{event.name}</h3>
                 <p className="main-text">{event.description}</p>
-                <Button color="warning" className="btn-yellow" disabled>Details</Button>
+                <div>
+        <Button color="warning" className="btn-yellow" onClick={this.toggle}>{this.props.buttonLabel}Details</Button>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+          <ModalHeader toggle={this.toggle} close={closeBtn}><h4 className="secondary-header">{event.name}</h4></ModalHeader>
+          <ModalBody>
+            <img src={event.cover_url} alt={event.name}/>
+            <p className="main-text">{event.description}</p>
+            <p className="main-text">{event.location}</p>
+            <p className="main-text">{event.date}</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+          </ModalFooter>
+        </Modal>
+      </div>    
             </div>
         )
     }
