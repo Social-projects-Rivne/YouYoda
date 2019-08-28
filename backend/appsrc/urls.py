@@ -16,5 +16,5 @@ urlpatterns = [
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
-    path('user/social/login', UserSocialLogin.as_view(), name='social-login')
+    path('user/social/login', UserSocialLogin.as_view(), name='social_login')
 ]
