@@ -14,5 +14,7 @@ class CoursesTopSerializator(serializers.ModelSerializer):
 		 model = Courses
 
 		 fields = (
-			'coursename', "description", "rate", "cover_url" 
+			"coursename", "description", "rate", "cover_url", 
+			"owner", "status", "is_public", "start_date", 
+			"duration", "cost", "members_limit", "categories", "location" 
             )
