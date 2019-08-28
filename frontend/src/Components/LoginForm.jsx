@@ -87,8 +87,7 @@ class LoginForm extends Component {
                 toast.success('Login successfull');
                 this.setState({ redirect: true });
        } catch (error){
-           toast.error('Please, check entered email and password. Contact administrator or support system ;)');
-           console.log(error.message)
+           toast.error('Please, check entered email and password. Contact administrator or support system.');
        }
 
     }
@@ -122,7 +121,7 @@ class LoginForm extends Component {
     }
 
     loginGoogleFail = () => {
-      toast.error('You can not sing up with Google, please try to clean your browser cache or contact support.');
+      toast.error('You can not sing in with Google, please try to clean your browser cache or contact support.');
     }
 
     setEvent = (event) => {

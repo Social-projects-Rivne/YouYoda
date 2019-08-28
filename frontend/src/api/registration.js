@@ -3,7 +3,7 @@ import React from "react";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-import API from './axiosConf';
+import { API } from './axiosConf';
 
 
 async function registration(props) {
