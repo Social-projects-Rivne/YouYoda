@@ -89,7 +89,7 @@ class LoginForm extends Component {
 						localStorage.setItem('role', response.role);
                 this.setState({ redirect: true });
        } catch (error){
-           toast.error('Please, check entered email and password. Contact administrator or support system ;)');
+           toast.error('Please, check entered email and password. Contact administrator or support system.');
        }
 
     }
