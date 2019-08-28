@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
+import { isAuthorized } from '../api/isAuthorized';
 import { userLogin } from '../api/userLogin';
 
 
@@ -81,11 +82,14 @@ class LoginForm extends Component {
     	event.preventDefault();
         try {
             await userLogin(this.state)
-                toast.success('Login successfull');
+				toast.success('Login successfull');
+				let response = await isAuthorized('role');
+				if(typeof response === 'object')
+					if(response.data_status === 'role' && response.role > 0)
+						localStorage.setItem('role', response.role);
                 this.setState({ redirect: true });
        } catch (error){
            toast.error('Please, check entered email and password. Contact administrator or support system ;)');
-           console.log(error.message)
        }
 
     }
