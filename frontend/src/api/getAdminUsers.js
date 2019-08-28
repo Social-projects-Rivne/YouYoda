@@ -1,4 +1,4 @@
-import API from './axiosConf';
+import { API } from './axiosConf';
 
 
 async function getUsersList() {
@@ -10,7 +10,7 @@ async function getUsersList() {
             })
         return response.data;
     } catch (error) {
-        throw TypeError('Error: ' + error.message);
+        return Promise.reject(error);
     }
 }
 export {getUsersList}

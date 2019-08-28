@@ -1,10 +1,8 @@
-import React from "react";
-
-import axios from 'axios';
+import { API } from './axiosConf';
+import { toast } from 'react-toastify';
 
 
 async function registration(props) {
-    const apiBaseUrl = "http://localhost:8000/";
     var nameU = props.email.split('@', 1);
     var datasend = {
         "username": nameU[0],
@@ -13,8 +11,8 @@ async function registration(props) {
         "is_trainer": props.userteacher
     }
     try {
-        const response = await axios.post(
-            apiBaseUrl + 'api/user/register',
+        const response = await API.post(
+            'user/register',
             datasend,
             {
 				crossdomain: true,
@@ -23,22 +21,18 @@ async function registration(props) {
                 }
             })
             .then(response => {
-                console.log(response);
                 if(response.status === 201){
-                    console.log("Registration successfull");
-                    alert("Registration successfull");
+                    toast.success("Registration successfull");
                 }
                 else if(response.status === 400){
-                    console.log("User data incorrect");
-                    alert("User data incorrect");
+                    toast.error("User data incorrect");
                 }
                 else{
-                    console.log("Database error");
-                    alert("Database error");
+                    toast.error("Database error");
                 }
             });
     } catch (error) {
-        console.log(error);
+        toast.error("Database error");
     }
 }
 

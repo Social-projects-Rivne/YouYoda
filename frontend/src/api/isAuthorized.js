@@ -1,4 +1,4 @@
-import API from './axiosConf';
+import { API } from './axiosConf';
 
 
 async function isAuthorized(checkParam) {
@@ -12,7 +12,7 @@ async function isAuthorized(checkParam) {
             'user/check',
             datasend,
             {
-				crossdomain: true,
+                crossdomain: true,
                 headers: {
                     'Content-Type': 'application/json',
                 }
@@ -36,10 +36,8 @@ async function isAuthorized(checkParam) {
             });
         return response;
     } catch (error) {
-        console.log(error);
+        return false;
     }
-
-    return false;
 }
 
 export {isAuthorized}
