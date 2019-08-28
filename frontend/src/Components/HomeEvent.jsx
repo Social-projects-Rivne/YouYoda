@@ -1,10 +1,70 @@
 import React from 'react';
 
-import {Container, Row, Button, Col} from 'reactstrap';
+import { Container, Row, Button, Col } from 'reactstrap';
 import Slider from "react-slick";
+
+import { axiosGet } from '../api/axiosGet';
 
 
 export default class HomeEvent extends React.Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            eventsList: [ {
+   "name": "Event-5",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-28T10:26:37.438766+03:00",
+   "cover_url": "",
+   "location": "Rivne, Ukraine"
+ },
+ {
+   "name": "Event-4",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-28T10:26:37.438199+03:00",
+   "cover_url": "",
+   "location": "Rivne, Ukraine"
+ },
+ {
+   "name": "Event-3",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-28T10:26:37.437632+03:00",
+   "cover_url": "",
+   "location": "Lviv, Ukraine"
+ },
+ {
+   "name": "Event-2",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-28T10:26:37.436932+03:00",
+   "cover_url": "",
+   "location": "Rivne, Ukraine"
+ }],
+        };
+    }
+
+    componentWillMount() {
+        let path = 'events/top'
+        let eventsList = axiosGet(path);
+        eventsList.then( valueEvents => {
+            this.setState({
+                eventsList: valueEvents,
+            });  
+        });
+    }
+
+    renderEvents(event) {
+        if(!event.cover_url)
+            event.cover_url = require("../img/static/event.png");
+        return (
+            <div className="sl-slide" id={`event_${event.id}`} key={event.id}>
+                <img src={event.cover_url} alt={event.name}/>
+                <h3 className="secondary-header">{event.name}</h3>
+                <p className="main-text">{event.description}</p>
+                <Button color="warning" className="btn-yellow" disabled>Details</Button>
+            </div>
+        )
+    }
+
     render(){
         let settings = {
           dots: false,
@@ -23,6 +83,10 @@ export default class HomeEvent extends React.Component{
             },
           ]
         };
+
+       console.log(this.state.eventList);   
+
+
         return(
             <div style={{backgroundColor:'#E8E8E8'}} id="home-event">
             <Container className="home-event">
@@ -39,42 +103,7 @@ export default class HomeEvent extends React.Component{
             <Row>
             <Col >
                 <Slider {...settings}>
-                  <div className="sl-slide">
-                    <img src={require("../img/static/event.png")}
-                        alt="foto-event" />
-                    <h3 className="secondary-header">Event1</h3>
-                    <p className="main-text">People are busy. So, this
-                    let’s you customize, build and deploy your landing page,
-                    so you can start selling your customers.</p>
-                    <Button color="warning" className="btn-yellow" disabled>Details</Button>
-                  </div>
-                  <div className="sl-slide">
-                    <img src={require("../img/static/event1.png")}
-                        alt="foto-event" />
-                    <h3 className="secondary-header">Event2</h3>
-                    <p className="main-text">People are busy. So, this
-                    let’s you customize, build and deploy your landing page,
-                    so you can start selling your customers.</p>
-                    <Button color="warning" className="btn-yellow" disabled>Details</Button>
-                  </div>
-                  <div className="sl-slide">
-                    <img src={require("../img/static/event.png")}
-                        alt="foto-event" />
-                    <h3 className="secondary-header">Event3</h3>
-                    <p className="main-text">People are busy. So, this
-                    let’s you customize, build and deploy your landing page,
-                    so you can start selling your customers.</p>
-                    <Button color="warning" className="btn-yellow" disabled>Details</Button>
-                  </div>
-                  <div className="sl-slide">
-                    <img src={require("../img/static/event1.png")}
-                        alt="foto-event" />
-                    <h3 className="secondary-header">Event4</h3>
-                    <p className="main-text">People are busy. So, this
-                    let’s you customize, build and deploy your landing page,
-                    so you can start selling your customers.</p>
-                    <Button color="warning" className="btn-yellow" disabled>Details</Button>
-                  </div>
+                   {this.state.eventsList.map( event => this.renderEvents(event) )}
                 </Slider>
             </Col>
             </Row>
