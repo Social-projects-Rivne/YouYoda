@@ -3,10 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Row, Col, Container } from 'reactstrap';
 
 import AdminUsers from './AdminUsers';
-//import AdminLogs from './AdminLogs';
+import AdminLogs from './AdminLogs';
 
 
-const pages = [
+const PAGES = [
   {option: 'users', name: "Users", title: "Users List"},
   {option: 'logs', name: "Logs", title: "Last Logs"}
 ];
@@ -22,7 +22,7 @@ export default class AdminPageInner extends React.Component {
                   <Col md="2">
                       <Nav className="admin-left-menu" vertical>
                       {
-                        pages.map(function(item){
+                        PAGES.map(function(item){
                             return <NavItem className="menu-item" key={item.option}>
                                       <NavLink href={`/admin/${item.option}`} title={item.title}>{item.name}</NavLink>
                                    </NavItem>
@@ -33,7 +33,7 @@ export default class AdminPageInner extends React.Component {
                   <Col md="10">
                       <Switch>
                           <Route exact path='/admin/users' component={AdminUsers}/>
-                          <Route exact path='/admin/logs' component={AdminUsers}/>
+                          <Route exact path='/admin/logs' component={AdminLogs}/>
                       </Switch>
                   </Col>
               </Row>

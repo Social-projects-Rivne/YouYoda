@@ -8,20 +8,9 @@ async function getUsersList() {
                 crossdomain: true,
                 headers: { Authorization: "Token " + localStorage.getItem('token')}
             })
-            .then(function(response) {
-                if(response.status == 200){
-                    if(response.data.length > 0)
-                        return response.data;
-                    else
-                        return [];
-                }
-            })
-            .catch(function(error) {
-                console.log('Error: ' + error);
-            });
-            return response;
+        return response.data;
     } catch (error) {
-        console.log('Error: ' + error.message);
+        throw TypeError('Error: ' + error.message);
     }
 }
 export {getUsersList}

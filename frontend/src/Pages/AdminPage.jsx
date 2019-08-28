@@ -8,6 +8,9 @@ import '../style/adminPage.css';
 import '../style/dataTable.css';
 
 
+const ROLE_ADMIN = 3,
+      ROLE_MODERATOR = 2;
+
 export default class AdminPage extends React.Component{
     constructor(props){
     	super(props);
@@ -24,13 +27,14 @@ export default class AdminPage extends React.Component{
         if(typeof response === 'object') {
             if(response.data_status === 'role' && response.role > 0) {
                 /** response correct - user is admin */
-                if(response.role == 3) {
+                if(response.role == ROLE_ADMIN) {
                     this.setState({
                         displayDashboard: 'block'
                     });    
                 }
                 else {
-                    if(response.role == 2)
+                    /** user is moderator or simple user */
+                    if(response.role == ROLE_MODERATOR)
                         urlRedirect = '/moderator';
                     this.setState({ 
                         redirect: true,
@@ -40,7 +44,7 @@ export default class AdminPage extends React.Component{
             }
         }
         else {
-            /** not authorized */
+            /** not authorized or get param authorized */
             this.setState({ 
                 redirect: true,
                 redirectTo: urlRedirect

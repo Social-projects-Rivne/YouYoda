@@ -47,7 +47,6 @@ class AdminUsers extends React.Component {
     }
 
     render() {
-        console.log(this.state.dataList);
         return (
             <div id="users-table">
                 <Row>

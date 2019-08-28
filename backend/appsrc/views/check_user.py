@@ -6,9 +6,16 @@ from ..serializers.check_user_serializer import CheckUserSerializer
 
 
 class CheckUser(APIView):
+    """Checks user access rights by token param using CheckUserSerializer for getting user authorization and role status."""
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format='json'):
+        """ 
+        Checks user access rights by 'checkParam' request param.
+        Returns data_status:
+        - 'authorized' or error string - if we have received request 'authorized'
+        - 'role' and role ID or error string - if we have received request 'role'
+        """
         data_request=request.data
         serializer = CheckUserSerializer(data=data_request)
         if serializer.is_valid():
