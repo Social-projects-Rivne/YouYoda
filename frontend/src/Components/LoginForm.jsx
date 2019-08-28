@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 
 import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
@@ -98,6 +99,18 @@ class LoginForm extends Component {
       this.handleClickSocial(this.state.reg_event)
     }
 
+    loginGoogle = (response) => {
+      this.setState({
+        access_token: response.accessToken,
+        email: response.profileObj.email,
+      })
+      this.handleClickSocial(this.state.reg_event)
+    }
+
+    loginGoogleFail = () => {
+      console.error('You cannot sing up with Google, please try to clean your browser cache or contact support.');
+    }
+
     setEvent = (event) => {
       this.setState({
         reg_event: event
@@ -182,13 +195,23 @@ class LoginForm extends Component {
                   fields="name, email, picture"
                   callback={this.loginFacebook}
                   onClick={this.setEvent}
-                  cssClass="btnFacebook"
+                  cssClass="btnSocial"
                   textButton = "&nbsp;&nbsp;"
                   icon={<img src={FacebookLogo} width="40" style={{marginLeft:"-15px"}} alt="FacebookLogo"/>}
                 />
 				      </Col>
 				      <Col xs="2">
-				        <a href="#"><img src={GoogleLogo} width="40" alt="GoogleLogo"/></a>
+                <GoogleLogin
+                  clientId="23688062582-ng86179snpui9v4h65gfitdo685bt4cg.apps.googleusercontent.com"
+                  render={renderProps => (
+                    <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btnSocial">
+                      <img onClick={this.setEvent} src={GoogleLogo} width="40" style={{marginLeft:"-15px"}} alt="GoogleLogo"/>
+                    </button>
+                  )}
+                  onSuccess={this.loginGoogle}
+                  onFailure={this.loginGoogleFail}
+                  cookiePolicy={'single_host_origin'}
+                  />
 				      </Col>
 				    </Row>
 			  </Col>
