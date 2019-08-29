@@ -21,6 +21,6 @@ class TopCourses(APIView):
     @method_decorator(cache_page(CACHE_TTL), name='top_courses')
     def get(self, request):
         """First check request data in cache, then pull data from db"""
-            courses = Courses.objects.order_by('-rate')[:NUMBER_OF_TOP]
-            serializer = CoursesTopSerializator(courses, many=True)
-            return Response(serializer.data)
+        courses = Courses.objects.order_by('-rate')[:NUMBER_OF_TOP]
+        serializer = CoursesTopSerializator(courses, many=True)
+        return Response(serializer.data)

@@ -22,6 +22,6 @@ class TopEvents(APIView):
     def get(self, request):
         """First, check request data in cache, then pull data from db
             and set to cache"""
-            events = Events.objects.order_by('-date')[:NUMBER_OF_TOP]
-            serializer = EventsTopSerializator(events, many=True)
-            return Response(serializer.data)
+        events = Events.objects.order_by('-date')[:NUMBER_OF_TOP]
+        serializer = EventsTopSerializator(events, many=True)
+        return Response(serializer.data)
