@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Mukta:700");
+
 /* Styles for Navbar */
 #root {
     padding-top: 56px;
@@ -361,3 +363,96 @@
 .page-404 a {
     color: #343a40;
 }
+
+/* Styles for button more */
+.more-courses-events {
+    position: relative;
+    top: 100px;
+}
+.more-courses-events button {
+    position: relative;
+    outline: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+  }
+  .more-courses-events button.learn-more {
+    width: 12rem;
+    height: auto;
+  }
+  .more-courses-events button.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #6c757d;
+    border-radius: 1.625rem;
+  }
+  .more-courses-events button.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .more-courses-events button.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+  }
+  .more-courses-events button.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: '';
+    top: -0.25rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+  }
+  .more-courses-events button.learn-more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #282936;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .more-courses-events button:hover .circle {
+    width: 100%;
+  }
+  .more-courses-events button:hover .circle .icon.arrow {
+    background: #fff;
+    -webkit-transform: translate(1rem, 0);
+            transform: translate(1rem, 0);
+  }
+  .more-courses-events button:hover .button-text {
+    color: #fff;
+  }
+  
+  @supports (display: grid) {
+    .more-courses-events body {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 0.625rem;
+      grid-template-areas: ". main main ." ". main main .";
+    }
+  
+    .more-courses-events {
+      grid-area: main;
+      align-self: center;
+      justify-self: center;
+    }
+  }
+  

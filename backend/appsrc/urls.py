@@ -6,6 +6,8 @@ from .views.view_profile import ViewProfile
 from .views.user_login_logout import UserLogin, UserLogout
 from .views.user_registration import UserRegistration
 from .views.user_to_trainer import UserToTrainer
+from .views.courses import TopCourses
+from .views.events import TopEvents
 
 
 urlpatterns = [
@@ -15,4 +17,6 @@ urlpatterns = [
     path('user/login', UserLogin.as_view(), name='login'),
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
+    path('courses/top', TopCourses.as_view(), name='top-courses'),
+    path('events/top', TopEvents.as_view(), name='top-events'),
 ]
