@@ -85,6 +85,9 @@ def insertData(apps, schema_editor):
     Courses.objects.create(id=7, coursename="Course7", owner_id=4, status="Open", description="Perfect for people who never swam",
         is_public=False, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=500, hours=10), rate=7,
         members_limit=12, categories_id=3, location="Rivne, Ukraine", cover_url="")
+    Courses.objects.create(id=8, coursename="Course8", owner_id=4, status="Open", description="Perfect for people who never swam",
+        is_public=False, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=500, hours=10), rate=9,
+        members_limit=12, categories_id=3, location="Rivne, Ukraine", cover_url="")
 
     Events = apps.get_model('appsrc', 'Events')
     Events.objects.create(id=1, name="Event-1", owner_id=3, description="Perfect for people who never swam",

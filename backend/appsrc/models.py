@@ -10,7 +10,7 @@ class Categories(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.id
+        return "%s" % (self.name)
 
 class Roles(models.Model):
     name = models.CharField(max_length=20)
@@ -41,7 +41,7 @@ class YouYodaUser(AbstractUser):
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
 
     def __str__(self):
-        return self.id
+        return "%s %s" % (self.first_name, self.last_name)
 
 class StatusHistory(models.Model):
     usr_stat_id = models.ForeignKey(UserStatuses, on_delete=models.CASCADE)
