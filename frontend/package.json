@@ -31,7 +31,7 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-},
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -43,9 +43,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-},
-  "engines" : {
-      "npm" : "5.8.0",
-      "node": "10.15"
-   }
+  }
 }

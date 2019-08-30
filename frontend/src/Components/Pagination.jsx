@@ -19,7 +19,11 @@ export default class Footer extends React.Component{
     }
     async componentDidMount() {
       try {
-        const response = await API.get('/courses/pagination')
+        const response = await API.get('/courses/pagination', {
+          params: {
+            "coursename": "cour"
+          }
+        })
             this.setState({numberofpages:response.data})
       }
       catch (error) {
