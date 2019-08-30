@@ -11,6 +11,8 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
@@ -29,7 +31,7 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
+},
   "browserslist": {
     "production": [
       ">0.2%",
@@ -41,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+},
+  "engines" : {
+      "npm" : "5.8.0",
+      "node": "10.15"
+   }
 }

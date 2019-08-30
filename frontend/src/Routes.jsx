@@ -8,6 +8,7 @@ import MainLayout from './Pages/MainLayout';
 import EditPageProfile from "./Pages/EditPageProfile";
 import NotFoundPage from './Pages/NotFoundPage';
 import EnterNewPassword from './Components/EnterNewPassword';
+import Pagination from './Components/Pagination';
 import SendActivationEmail from './Components/SendActivationEmail';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ResetPassword from './Components/ResetPassword';
@@ -25,7 +26,7 @@ export default class Routes extends React.Component{
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
             <Route component={MainLayout}>
-            <Switch>
+
                 <Route exact path='/reset/password'
                     render={()=><MainLayout><ResetPassword/></MainLayout>}
                 />
@@ -44,8 +45,12 @@ export default class Routes extends React.Component{
                 <Route exact path='/activate/user/:uid/:token'
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
                 />
-                <Route path="*" component={NotFoundPage} />
-            </Switch>
+                <Route exect path="/pagination"
+                    render={()=><MainLayout><Pagination/></MainLayout>}
+                />
+
+
+
             </Route>
 
         </Switch>

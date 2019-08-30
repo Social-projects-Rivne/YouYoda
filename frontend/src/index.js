@@ -13,6 +13,7 @@ import './style/media.css';
 import './style/profile.css';
 import './style/forms.css';
 import './style/fillEditPage.css';
+import './style/filter.scss';
 import './index.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
