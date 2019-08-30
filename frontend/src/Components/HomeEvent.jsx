@@ -15,7 +15,42 @@ export default class HomeEvent extends React.Component{
 
         this.state = {
             modal: false,
-            eventsList: [],
+            eventsList: [ {
+   "name": "Event-5",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-29T16:58:02.979209+03:00",
+   "cover_url": "",
+   "location": "Rivne, Ukraine",
+   "categories": "sport",
+   "owner": "Yoda Rivensky"
+ },
+ {
+   "name": "Event-4",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-29T16:58:02.978696+03:00",
+   "cover_url": "",
+   "location": "Rivne, Ukraine",
+   "categories": "software",
+   "owner": "Aliya Workman"
+ },
+ {
+   "name": "Event-3",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-29T16:58:02.978144+03:00",
+   "cover_url": "",
+   "location": "Lviv, Ukraine",
+   "categories": "music",
+   "owner": "Gordon Mason"
+ },
+ {
+   "name": "Event-2",
+   "description": "Perfect for people who never swam",
+   "date": "2019-08-29T16:58:02.977571+03:00",
+   "cover_url": "",
+   "location": "Rivne, Ukraine",
+   "categories": "sport",
+   "owner": "Sonya Alcock"
+ }],
         };    
   }
 
