@@ -12,6 +12,8 @@ import SendActivationEmail from './Components/SendActivationEmail';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ResetPassword from './Components/ResetPassword';
 import Profile from './Pages/Profile';
+import HomeCourses from './Components/HomeCourses';
+import CourseDetail from './Components/CourseDetail';
 
 
 
@@ -43,6 +45,9 @@ export default class Routes extends React.Component{
                 />
                 <Route exact path='/activate/user/:uid/:token'
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
+                />
+                <Route exact path='/course/detail'
+                   render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
                 />
                 <Route path="*" component={NotFoundPage} />
             </Switch>
