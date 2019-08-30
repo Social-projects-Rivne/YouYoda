@@ -8,13 +8,16 @@ class CoursesTopSerializator(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
 
     """
+	owner = serializers.StringRelatedField()
+	categories = serializers.StringRelatedField()
+
 
 	class Meta:
 
 		 model = Courses
 
 		 fields = (
-			"coursename", "description", "rate", "cover_url", 
-			"owner", "status", "is_public", "start_date", 
-			"duration", "cost", "members_limit", "categories", "location" 
+			"coursename", "description", "rate", "cover_url",
+			"owner", "status", "is_public", "start_date",
+			"duration", "cost", "members_limit", "categories", "location"
             )

@@ -24,7 +24,7 @@ class UserStatuses(models.Model):
 class YouYodaUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'password']
-    role= models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, on_delete=models.SET_DEFAULT)
+    role= models.ForeignKey(Roles, default=DEFAULT_ROLE_ID, related_name='owner',on_delete=models.SET_DEFAULT)
     hide_my_data = models.BooleanField(default=False)
     first_name = models.CharField(max_length=20, blank=True, null=True)
     last_name = models.CharField(max_length=20, blank=True, null=True)

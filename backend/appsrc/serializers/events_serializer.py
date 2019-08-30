@@ -8,12 +8,14 @@ class EventsTopSerializator(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
 
     """
+	owner = serializers.StringRelatedField()
+	categories = serializers.StringRelatedField()
 
 	class Meta:
 
 		 model = Events
 
 		 fields = (
-			"name", "description", "date", "cover_url", "location", 
+			"name", "description", "date", "cover_url", "location",
 			"categories", "owner"
             )
