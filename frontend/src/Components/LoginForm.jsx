@@ -10,7 +10,6 @@ import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
 import { userLogin, userSocialLogin } from '../api/userLogin';
-import '../style/forms.css';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -19,6 +18,7 @@ class LoginForm extends Component {
             email: '',
             password: '',
             access_token: '',
+            network_name: '',
             formErrors: { email: '', password: '' },
             emailValid: false,
             passwordValid: false,
@@ -108,6 +108,7 @@ class LoginForm extends Component {
       this.setState({
         access_token: response.accessToken,
         email:response.email,
+        network_name: "Facebook",
       })
       this.handleClickSocial(this.state.reg_event)
     }
@@ -116,6 +117,7 @@ class LoginForm extends Component {
       this.setState({
         access_token: response.accessToken,
         email: response.profileObj.email,
+        network_name: "Google",
       })
       this.handleClickSocial(this.state.reg_event)
     }
@@ -203,7 +205,7 @@ class LoginForm extends Component {
 				      <Col xs="3">
 				        <p>Sign in with:</p>
 				      </Col>
-				      <Col xs="2">
+				      <Col xs="1" className="social-networks">
                 <FacebookLogin
                   appId="687674024977590"
                   autoLoad={false}
@@ -215,7 +217,7 @@ class LoginForm extends Component {
                   icon={<img src={FacebookLogo} width="40" style={{marginLeft:"-15px"}} alt="FacebookLogo"/>}
                 />
 				      </Col>
-				      <Col xs="2">
+				      <Col xs="1" className="ml-2 social-networks">
                 <GoogleLogin
                   clientId="23688062582-ng86179snpui9v4h65gfitdo685bt4cg.apps.googleusercontent.com"
                   render={renderProps => (

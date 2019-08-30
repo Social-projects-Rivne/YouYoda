@@ -120,6 +120,10 @@ button.close {
 .login .form-horizontal {
     padding-right: 10%;
 }
+.social-networks {
+    position: relative;
+    right: 20px;
+}
 
 @media (min-width: 576px)
 {

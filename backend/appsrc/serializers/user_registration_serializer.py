@@ -7,6 +7,11 @@ from ..generate_password import generate_password
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    """Takes data from registration request and create new user.
+
+    Converts it to JSON format for transmission via the API.
+
+    """
 
     class Meta:
         model = YouYodaUser
@@ -24,6 +29,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class SocialRegistrationSerializer(serializers.ModelSerializer):
+    """Takes data from registration via social networks request and create new user.
+
+    Converts it to JSON format for transmission via the API.
+
+    """
 
     class Meta:
         model = YouYodaUser

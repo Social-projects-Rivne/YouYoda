@@ -1,6 +1,5 @@
 import React from "react";
 
-import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import { API } from './axiosConf';
@@ -15,29 +14,11 @@ async function registration(props) {
         "is_trainer": props.userteacher
     }
     try {
-        const response = await API.post(
-            '/user/register',
-            datasend,
-            {
-				crossdomain: true,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                console.log(response);
-                if(response.status === 201){
-                    toast.success('Registration successfull');
-                }
-                else if(response.status === 400){
-                    toast.warn('User data incorrect');
-                }
-                else{
-                    toast.error('Database error');
-                }
-            });
-    } catch (error) {
-        console.log(error);
+        const response = await API.post('/user/register', datasend)
+        toast.success('Registration successfull');
+    }
+    catch (error) {
+        throw TypeError('Error' + error.message);
     }
 }
 
@@ -55,29 +36,11 @@ async function socialRegistration(props) {
         "avatar_url": props.picture
     }
     try {
-        const response = await API.post(
-            '/user/social/register',
-            datasend,
-            {
-				crossdomain: true,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                console.log(response);
-                if(response.status === 201){
-                    toast.success('Registration successfull');
-                }
-                else if(response.status === 400){
-                    toast.warn('User data incorrect');
-                }
-                else{
-                    toast.error('Database error');
-                }
-            });
-    } catch (error) {
-        console.log(error);
+        const response = await API.post('/user/social/register', datasend)
+        toast.success('Registration successfull');
+    }
+    catch (error) {
+        throw TypeError('Error' + error.message);
     }
 }
 

@@ -15,9 +15,9 @@ async function userLogin(props) {
 export { userLogin};
 
 async function userSocialLogin(props) {
-    const { email, access_token } = props;
+    const { email, access_token, network_name } = props;
     try {
-        const response = await API.post('user/social/login', { email, access_token })
+        const response = await API.post('user/social/login', { email, access_token, network_name })
             const AUTH_TOKEN = response.data.token;
             localStorage.setItem('token', AUTH_TOKEN)
     } catch (error) {

@@ -4,10 +4,10 @@ import { Button, Col, Modal, Row } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
+import { toast } from 'react-toastify';
 
 import { FormErrors } from '../api/FormErrors';
 import { registration, socialRegistration } from '../api/registration';
-import '../style/forms.css';
 import FacebookLogo from '../img/content/facebook.png';
 import GoogleLogo from '../img/content/google.png';
 
@@ -138,6 +138,7 @@ class Registration extends React.Component{
     }
 
     registerFacebook = (response) => {
+      console.log(response);
       this.setState({
         email:response.email,
         first_name:response.first_name,
@@ -158,7 +159,7 @@ class Registration extends React.Component{
     }
 
     registerGoogleFail = () => {
-        console.error('You cannot sing up with Google, please try to clean your browser cache or contact support.');
+        toast.error('You cannot sing up with Google, please try to clean your browser cache or contact support.');
     }
 
     setEvent = (event) => {
@@ -195,7 +196,7 @@ class Registration extends React.Component{
                             <div className="col-sm-12 form-group">
                                 <span className="text-title text-white d-block pb-2">Or you can sign up with:</span>
                                   <Row style={{paddingLeft:"10px"}}>
-                  				           <Col xs="3">
+                  				           <Col xs="2">
                                        <FacebookLogin
                                          appId="687674024977590"
                                          autoLoad={false}
@@ -207,7 +208,7 @@ class Registration extends React.Component{
                                          icon={<img src={FacebookLogo} width="40" style={{marginLeft:"-15px"}} alt="FacebookLogo"/>}
                                          />
                                      </Col>
-                                     <Col xs="3">
+                                     <Col xs="2">
                                        <GoogleLogin
                                          clientId="23688062582-ng86179snpui9v4h65gfitdo685bt4cg.apps.googleusercontent.com"
                                          render={renderProps => (
