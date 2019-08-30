@@ -267,12 +267,32 @@
     padding-bottom: 250px;
 }
 
+.course-star-rating {
+    font-size: 25px;
+}
 
 /* Style for HomeCourses */
 .home-course {
     margin-bottom: 50px;
 }
 
+.btn-group-course-detail {
+    margin-top: 100px;
+    text-align: center;
+}
+
+.course-detail-second-col {
+    padding-left: 70px;
+}
+
+.header-course-detail {
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.main-text-span {
+    color: grey;
+}
 
 /* Styles for HomeLastBlock */
 .home-last-block h1 {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Container,Row,Button,Col} from 'reactstrap';
+import { Container,Row,Button,Col } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 
 import { axiosGet } from '../api/axiosGet';
@@ -12,103 +12,14 @@ export default class HomeCourses extends React.Component{
 
         this.state = {
             redirect: false,
-            coursesList: [ {
-   "coursename": "Course3",
-   "description": "Perfect for people who never swam",
-   "rate": 9,
-   "cover_url": "",
-   "owner": 4,
-   "status": "Closed",
-   "is_public": true,
-   "start_date": "2019-08-28T10:26:37.432800+03:00",
-   "duration": "3 10:00:00",
-   "cost": 0,
-   "members_limit": 10,
-   "categories": 4,
-   "location": "Lviv, Ukraine"
- },
- {
-   "coursename": "Lesson of swimming",
-   "description": "Perfect for people who never swam",
-   "rate": 8,
-   "cover_url": "",
-   "owner": 5,
-   "status": "Open",
-   "is_public": true,
-   "start_date": "2019-08-28T10:26:37.429073+03:00",
-   "duration": "20 10:00:00",
-   "cost": 0,
-   "members_limit": 20,
-   "categories": 2,
-   "location": "Rivne, Ukraine"
- },
- {
-   "coursename": "Front-end",
-   "description": "React Redux bla bla the best",
-   "rate": 7,
-   "cover_url": "",
-   "owner": 5,
-   "status": "In Progres",
-   "is_public": true,
-   "start_date": "2019-08-28T10:26:37.432041+03:00",
-   "duration": "10 10:00:00",
-   "cost": 0,
-   "members_limit": 40,
-   "categories": 3,
-   "location": "Kiev, Ukraine"
- },
- {
-   "coursename": "Course6",
-   "description": "Perfect for people who never swam",
-   "rate": 7,
-   "cover_url": "",
-   "owner": 7,
-   "status": "Open",
-   "is_public": false,
-   "start_date": "2019-08-28T10:26:37.434667+03:00",
-   "duration": "500 10:00:00",
-   "cost": 0,
-   "members_limit": 12,
-   "categories": 1,
-   "location": "Rivne, Ukraine"
- },
- {
-   "coursename": "Course7",
-   "description": "Perfect for people who never swam",
-   "rate": 7,
-   "cover_url": "",
-   "owner": 4,
-   "status": "Open",
-   "is_public": false,
-   "start_date": "2019-08-28T10:26:37.435245+03:00",
-   "duration": "500 10:00:00",
-   "cost": 0,
-   "members_limit": 12,
-   "categories": 3,
-   "location": "Rivne, Ukraine"
- },
- {
-   "coursename": "Course5",
-   "description": "Perfect for people who never swam",
-   "rate": 6,
-   "cover_url": "",
-   "owner": 6,
-   "status": "Scheduled",
-   "is_public": false,
-   "start_date": "2019-08-28T10:26:37.434069+03:00",
-   "duration": "200 10:00:00",
-   "cost": 0,
-   "members_limit": 50,
-   "categories": 3,
-   "location": "Lviv, Ukraine"
- }],
+            coursesList: [],
         };
 
     this.handleClick = this.handleClick.bind(this);
 
     }
 
-    /*componentWillMount() {
+    componentWillMount() {
         let path = 'courses/top'
         let coursesList = axiosGet(path);
         coursesList.then( valueCourses=> {
@@ -116,11 +27,11 @@ export default class HomeCourses extends React.Component{
                 coursesList: valueCourses,
             });  
         });
-    }*/
+    }
 
     handleClick(course) {
        this.setState({ redirect: true });
-       this.setState({course});
+       this.setState({ course });
     };
 
     renderCourses(course) {
