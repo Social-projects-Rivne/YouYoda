@@ -13,42 +13,7 @@ export default class HomeEvent extends React.Component{
 
         this.state = {
             modal: false,
-            eventsList: [ {
-   "name": "Event-5",
-   "description": "Perfect for people who never swam",
-   "date": "2019-08-29T16:58:02.979209+03:00",
-   "cover_url": "",
-   "location": "Rivne, Ukraine",
-   "categories": "sport",
-   "owner": "Yoda Rivensky"
- },
- {
-   "name": "Event-4",
-   "description": "Perfect for people who never swam",
-   "date": "2019-08-29T16:58:02.978696+03:00",
-   "cover_url": "",
-   "location": "Rivne, Ukraine",
-   "categories": "software",
-   "owner": "Aliya Workman"
- },
- {
-   "name": "Event-3",
-   "description": "Perfect for people who never swam",
-   "date": "2019-08-29T16:58:02.978144+03:00",
-   "cover_url": "",
-   "location": "Lviv, Ukraine",
-   "categories": "music",
-   "owner": "Gordon Mason"
- },
- {
-   "name": "Event-2",
-   "description": "Perfect for people who never swam",
-   "date": "2019-08-29T16:58:02.977571+03:00",
-   "cover_url": "",
-   "location": "Rivne, Ukraine",
-   "categories": "sport",
-   "owner": "Sonya Alcock"
- }],
+            eventsList: [{}],
         };    
   }
 
@@ -59,14 +24,12 @@ export default class HomeEvent extends React.Component{
     }));
   }
 
-    componentWillMount() {
+    async componentWillMount() {
         let path = 'events/top'
-        let eventsList = axiosGet(path);
-        eventsList.then( valueEvents => {
-            this.setState({
-                eventsList: valueEvents,
-            });  
-        });
+        let listEvents = await axiosGet(path);
+        this.setState({
+                eventsList: listEvents,
+                });
     }
 
     renderEvents(event) {
@@ -80,7 +43,10 @@ export default class HomeEvent extends React.Component{
                 <h3 className="secondary-header">{event.name}</h3>
                 <p className="main-text">{event.description}</p>
                 <div>
-                    <Button color="warning" className="btn-yellow" onClick={() => this.toggle(event)}>{this.props.buttonLabel}Details</Button>
+                    <Button color="warning" 
+                            className="btn-yellow" 
+                            onClick={() => this.toggle(event)}>{this.props.buttonLabel}Details
+                    </Button>
                 </div>    
             </div>
         )
@@ -108,7 +74,7 @@ export default class HomeEvent extends React.Component{
        const event = this.state.event || this.state.eventsList[0];
        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
        const eventDate = event.date;
-       const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');  
+       const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');
 
         return(
             <div style={{backgroundColor:'#E8E8E8'}} id="home-event">
@@ -125,24 +91,24 @@ export default class HomeEvent extends React.Component{
                     </Row>
                     <Row>
                         <Col >
-                            <Modal isOpen={this.state.modal} className={this.props.className}>
+                            <Slider {...settings}>
+                                {this.state.eventsList.map( event => this.renderEvents(event) )}
+                            </Slider> 
+                             <Modal isOpen={this.state.modal} className={this.props.className}>
                                 <ModalHeader toggle={this.toggle} close={closeBtn}><h4 className="secondary-header">{event.name}</h4>
                                     <p className="main-category">Category:{'  '}{event.categories}</p>
                                     <p className="main-text-event-modal">{event.description}</p></ModalHeader>
                                 <ModalBody>
-                                   <img src={event.cover_url} alt={event.name}/>
-                                   <p className="main-text">{event.location}</p>
-                                   <p className="main-text">{newEventDate}</p>
-                                   <p className="main-text">Event organizer:{'  '}{event.owner}</p>
+                                    <img src={event.cover_url} alt={event.name}/>
+                                    <p className="main-text">{event.location}</p>
+                                    <p className="main-text">{newEventDate}</p>
+                                    <p className="main-text">Event organizer:{'  '}{event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button className={`btn-join ${isAuthenticated("show")}`} color="warning" onClick={this.toggle}>Join</Button>{' '}
                                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                                 </ModalFooter>
-                            </Modal>  
-                            <Slider {...settings}>
-                               {this.state.eventsList.map( event => this.renderEvents(event) )}
-                            </Slider>   
+                            </Modal>    
                         </Col>
                     </Row>
                 </Container>
