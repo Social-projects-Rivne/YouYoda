@@ -74,7 +74,7 @@ export default class HomeEvent extends React.Component{
        const event = this.state.event || this.state.eventsList[0];
        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
        const eventDate = event.date;
-       const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');  
+       const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');
 
         return(
             <div style={{backgroundColor:'#E8E8E8'}} id="home-event">
@@ -108,7 +108,7 @@ export default class HomeEvent extends React.Component{
                                     <Button className={`btn-join ${isAuthenticated("show")}`} color="warning" onClick={this.toggle}>Join</Button>{' '}
                                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                                 </ModalFooter>
-                            </Modal>     
+                            </Modal>    
                         </Col>
                     </Row>
                 </Container>
