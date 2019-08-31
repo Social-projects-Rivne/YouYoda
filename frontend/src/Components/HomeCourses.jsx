@@ -161,6 +161,16 @@ export default class HomeCourses extends React.Component{
             <Row>
                 {this.state.coursesList.map( course => this.renderCourses(course) )}
             </Row>
+            <Row className="d-flex justify-content-end"> 
+                <div className="more-courses-events">
+                    <button className="learn-more">
+                        <div className="circle">
+                        <span className="icon arrow"></span>
+                        </div>
+                        <p className="button-text">More Courses</p>
+                    </button>
+                </div>
+                </Row>
             </Container>
             </div>
         )

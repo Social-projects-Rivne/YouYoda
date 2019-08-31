@@ -152,7 +152,7 @@ class LoginForm extends Component {
 				      <Col className="mt-4 text-right">
 				        <Button
 				          type="submit"
-				          className="btn-yellow btn btn-warning"
+				          className="btn-yellow btn btn-warning "
 				          onClick={(event) => this.handleClick(event)}
 				          disabled={!this.state.formValid}>Sign in</Button>
 				      </Col>
@@ -182,12 +182,12 @@ class LoginForm extends Component {
 						<p className="text-title text-white d-block pb-2">If you don’t have an account yet</p>
 						<Button
 						  type="button"
-						  className="btn-grey btn"
+						  className="btn-grey btn btn-color-w"
 						  onClick={() => {this.props.handleClickLogin(); this.props.handleClickReg();}}>Sign up</Button>
 						<br></br><br></br>
 						<Button
 						  type="button"
-						  className="btn-red btn" color="danger"
+						  className="btn-red btn btn-color-w" color="danger"
 						  onClick={this.props.handleClickLogin}>Cancel</Button>
 					</div>
                 </Row>
