@@ -1,12 +1,10 @@
 import React from 'react';
 import { Container, Row, Button, Col, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import moment from 'moment';
 import Slider from "react-slick";
 
 import { axiosGet } from '../api/axiosGet';
 import { isAuthenticated } from '../utils';
-
-import moment from 'moment';
-
 
 
 export default class HomeEvent extends React.Component{
