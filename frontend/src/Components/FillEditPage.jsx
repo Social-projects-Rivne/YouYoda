@@ -8,8 +8,6 @@ import {editForm} from "../api/editForm";
 import {API} from '../api/axiosConf';
 
 
-
-
 class FillEditPage extends React.Component {
     constructor(props) {
         super(props);
@@ -25,8 +23,7 @@ class FillEditPage extends React.Component {
             i_like: '',
             birth_date: '',
             phone_number: '',
-            avatar_url: '',
-            is_trainer: 'true'
+            avatar_url: ''
         };
         this.handleClick = this.handleClick.bind(this)
     }
@@ -94,11 +91,21 @@ class FillEditPage extends React.Component {
     }
 
     becomeTrainer = async () => {
-        let trainer = {is_trainer: this.state.is_trainer}
+        const URLPATH = 'user/totrainer/sendrequest';
+        const USERDATA = {
+            "email": this.state.email
+        };
         try {
-            const response = await API.patch('user/totrainer', trainer);
+            const response = await API.post(URLPATH, USERDATA);
+            if(response.status == 208)
+                toast.info(response.data);
+            else if(response.status == 201)
+                toast.success('Request was successfully sent. Please, wait for moderation results.');
+            else
+                toast.error(response.data);
         } catch (error) {
             toast.error('You cannot be a trainer. Contact administrator or support system.');
+            console.log(error.message);
         }
     };
 

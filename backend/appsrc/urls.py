@@ -6,7 +6,7 @@ from .views.edit_profile import EditProfile
 from .views.view_profile import ViewProfile
 from .views.user_login_logout import UserLogin, UserLogout
 from .views.user_registration import UserRegistration
-from .views.user_to_trainer import UserToTrainer
+from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
 
 
@@ -18,5 +18,7 @@ urlpatterns = [
     path('user/login', UserLogin.as_view(), name='login'),
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
+    path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
+    path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('users/getlist', UsersGetList.as_view()),
 ]

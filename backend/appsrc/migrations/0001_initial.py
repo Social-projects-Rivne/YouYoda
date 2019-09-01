@@ -78,6 +78,16 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
+            name='UserRequests',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateTimeField(auto_now_add=True)),
+                ('status_code', models.CharField(max_length=3)),
+                ('comment', models.TextField(blank=True, null=True)),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
             name='Categories',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),

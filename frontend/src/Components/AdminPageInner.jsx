@@ -4,10 +4,12 @@ import { Nav, NavItem, NavLink, Row, Col, Container } from 'reactstrap';
 
 import AdminUsers from './AdminUsers';
 import AdminLogs from './AdminLogs';
+import AdminRequests from './AdminRoleRequests';
 
 
 const PAGES = [
   {option: 'users', name: "Users", title: "Users List"},
+  {option: 'roles', name: "Roles", title: "Roles"},
   {option: 'logs', name: "Logs", title: "Last Logs"}
 ];
 
@@ -34,6 +36,7 @@ export default class AdminPageInner extends React.Component {
                       <Switch>
                           <Route exact path='/admin/users' component={AdminUsers}/>
                           <Route exact path='/admin/logs' component={AdminLogs}/>
+                          <Route exact path='/admin/roles' component={AdminRequests}/>
                       </Switch>
                   </Col>
               </Row>
