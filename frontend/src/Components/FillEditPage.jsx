@@ -2,8 +2,7 @@ import React from 'react';
 import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import Button from "reactstrap/es/Button";
 import {countries, regions} from './Variables/location';
-
-import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import {editForm} from "../api/editForm";
 import {API} from '../api/axiosConf';
@@ -44,22 +43,18 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            // const response = await axios.get('http://localhost:5000/test');
             const response = await API.get('user/profile/edit');
-            // console.log(response.data);
-            // alert(response.data);
             return response.data;
         } catch (error) {
-            console.error(error);
+            toast.error('You cannot view your profile. Contact administrator or support system.');
         }
     };
 
     postUser = async (formData) => {
         try {
-            // const response = await axios.post('http://localhost:5000/test', formData);
             const response = await API.patch('user/profile/edit', formData);
         } catch (error) {
-            console.error(error);
+            toast.error('You cannot update your profile. Contact administrator or support system.');
         }
     };
 
@@ -103,7 +98,7 @@ class FillEditPage extends React.Component {
         try {
             const response = await API.patch('user/totrainer', trainer);
         } catch (error) {
-            console.error(error);
+            toast.error('You cannot be a trainer. Contact administrator or support system.');
         }
     };
 
