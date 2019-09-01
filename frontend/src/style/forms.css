@@ -82,6 +82,13 @@ input.form-control.validate {
 .custom-title span {
     display: block;
 }
+.btnSocial {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 0px transparent;
+}
 
 button.close {
     position: absolute;
@@ -112,6 +119,10 @@ button.close {
 }
 .login .form-horizontal {
     padding-right: 10%;
+}
+.social-networks {
+    position: relative;
+    right: 20px;
 }
 
 @media (min-width: 576px)

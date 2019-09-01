@@ -25,8 +25,7 @@ class FillEditPage extends React.Component {
             i_like: '',
             birth_date: '',
             phone_number: '',
-            avatar_url: '',
-            is_trainer: 'true'
+            avatar_url: ''
         };
         this.handleClick = this.handleClick.bind(this)
     }
@@ -94,7 +93,9 @@ class FillEditPage extends React.Component {
     }
 
     becomeTrainer = async () => {
-        let trainer = {is_trainer: this.state.is_trainer}
+        let trainer = {};
+        trainer.is_trainer = true;
+        trainer.email = this.state.email;
         try {
             const response = await API.patch('user/totrainer', trainer);
         } catch (error) {

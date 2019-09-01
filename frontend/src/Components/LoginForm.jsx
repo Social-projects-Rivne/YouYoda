@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Form, FormGroup, Label, Input, Button, Row, Modal } from 'reactstrap';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -8,7 +10,7 @@ import FacebookLogo from '../img/content/facebook.png';
 import { FormErrors } from '../api/FormErrors';
 import GoogleLogo from '../img/content/google.png';
 import { isAuthorized } from '../api/isAuthorized';
-import { userLogin } from '../api/userLogin';
+import { userLogin, userSocialLogin } from '../api/userLogin';
 
 
 class LoginForm extends Component {
@@ -17,12 +19,14 @@ class LoginForm extends Component {
         this.state = {
             email: '',
             password: '',
+            access_token: '',
+            network_name: '',
             formErrors: { email: '', password: '' },
             emailValid: false,
             passwordValid: false,
             formValid: false,
             redirect: false,
-			showErrors: false
+			      showErrors: false
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -94,6 +98,45 @@ class LoginForm extends Component {
 
     }
 
+    async handleClickSocial(event) {
+    	event.preventDefault();
+      try {
+          await userSocialLogin(this.state)
+              toast.success('Login successfull');
+              this.setState({ redirect: true });
+      } catch (error){
+        toast.error('For some reason you can not login, please contact administrator or support system ;)');
+      }
+    }
+
+    loginFacebook = (response) => {
+      this.setState({
+        access_token: response.accessToken,
+        email:response.email,
+        network_name: "Facebook",
+      })
+      this.handleClickSocial(this.state.reg_event)
+    }
+
+    loginGoogle = (response) => {
+      this.setState({
+        access_token: response.accessToken,
+        email: response.profileObj.email,
+        network_name: "Google",
+      })
+      this.handleClickSocial(this.state.reg_event)
+    }
+
+    loginGoogleFail = () => {
+      toast.error('You can not sing in with Google, please try to clean your browser cache or contact support.');
+    }
+
+    setEvent = (event) => {
+      this.setState({
+        reg_event: event
+      })
+    }
+
     render() {
     	const { redirect } = this.state;
         if (redirect) {
@@ -114,10 +157,10 @@ class LoginForm extends Component {
 			      <Form className="form-horizontal">
 				    <Row className="m-0">
 				      <Col>
-						<h3 className="modal-title mb-3">Sign In</h3>
-						<div className={this.state.showErrors ? 'panel-errors errors-show':'panel-errors'}>
-                            <FormErrors formErrors={this.state.formErrors} />
-                        </div>
+              <h3 className="modal-title mb-3">Sign In</h3>
+              <div className={this.state.showErrors ? 'panel-errors errors-show':'panel-errors'}>
+                  <FormErrors formErrors={this.state.formErrors} />
+              </div>
 					    <FormGroup className={this.state.formErrors.email ? 'is-error': ''}>
 						  <Label for="email" className="mb-1">
 						  <FontAwesomeIcon icon="envelope" size="sm"/> Email</Label>
@@ -165,13 +208,32 @@ class LoginForm extends Component {
 				  </Form>
 				    <Row className="m-0 mt-4 mb-4">
 				      <Col xs="3">
-				        <p>Log in with:</p>
+				        <p>Sign in with:</p>
 				      </Col>
-				      <Col xs="2">
-				        <a href="#"><img src={FacebookLogo} width="40" alt="FacebookLogo"/></a>
+				      <Col xs="1" className="social-networks">
+                <FacebookLogin
+                  appId="687674024977590"
+                  autoLoad={false}
+                  fields="name, email, picture"
+                  callback={this.loginFacebook}
+                  onClick={this.setEvent}
+                  cssClass="btnSocial"
+                  textButton = "&nbsp;&nbsp;"
+                  icon={<img src={FacebookLogo} width="40" style={{marginLeft:"-15px"}} alt="FacebookLogo"/>}
+                />
 				      </Col>
-				      <Col xs="2">
-				        <a href="#"><img src={GoogleLogo} width="40" alt="GoogleLogo"/></a>
+				      <Col xs="1" className="ml-2 social-networks">
+                <GoogleLogin
+                  clientId="23688062582-ng86179snpui9v4h65gfitdo685bt4cg.apps.googleusercontent.com"
+                  render={renderProps => (
+                    <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btnSocial">
+                      <img onClick={this.setEvent} src={GoogleLogo} width="40" style={{marginLeft:"-15px"}} alt="GoogleLogo"/>
+                    </button>
+                  )}
+                  onSuccess={this.loginGoogle}
+                  onFailure={this.loginGoogleFail}
+                  cookiePolicy={'single_host_origin'}
+                  />
 				      </Col>
 				    </Row>
 			  </Col>
