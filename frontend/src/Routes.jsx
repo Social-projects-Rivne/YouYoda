@@ -14,6 +14,8 @@ import NotFoundPage from './Pages/NotFoundPage';
 import Profile from './Pages/Profile';
 import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
+import SearchingCourses from './Components/SearchingCourses';
+import SearchingEvents from './Components/SearchingEvents';
 
 
 export default class Routes extends React.Component{
@@ -27,7 +29,7 @@ export default class Routes extends React.Component{
             <Route path='/editprofile' component={EditPageProfile}/>
             <Route path='/events' component={Events}/>
             <Route component={MainLayout}>
-            <Switch>
+
                 <Route exact path='/reset/password'
                     render={()=><MainLayout><ResetPassword/></MainLayout>}
                 />
@@ -46,11 +48,16 @@ export default class Routes extends React.Component{
                 <Route exact path='/activate/user/:uid/:token'
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
                 />
+                <Route path="/courses/search"
+                    render={()=><MainLayout><SearchingCourses/></MainLayout>}
+                />
+                <Route path="/events/search"
+                    render={()=><MainLayout><SearchingEvents/></MainLayout>}
+                />
                 <Route exact path='/course/detail'
                    render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
                 />
                 <Route path="*" component={NotFoundPage} />
-            </Switch>
             </Route>
 
         </Switch>

@@ -25,3 +25,8 @@ class TopEvents(APIView):
         events = Events.objects.order_by('-date')[:NUMBER_OF_TOP]
         serializer = EventsTopSerializator(events, many=True)
         return Response(serializer.data)
+
+
+class SearchingCourses(APIView):
+
+    permission_classes = [permissions.AllowAny,]

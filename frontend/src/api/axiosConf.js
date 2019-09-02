@@ -17,5 +17,3 @@ axiosInstance.interceptors.request.use(function(config) {
 });
 
 export const API = axiosInstance;
-
-

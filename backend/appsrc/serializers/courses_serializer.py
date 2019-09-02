@@ -3,7 +3,7 @@ from rest_framework import serializers
 from ..models import Courses
 
 
-class CoursesTopSerializator(serializers.ModelSerializer):
+class CoursesSerializator(serializers.ModelSerializer):
 	"""Takes data from the Courses model for Top Courses component.
     Converts it to JSON format for transmission via the API.
 

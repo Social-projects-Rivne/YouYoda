@@ -7,7 +7,7 @@ from .views.view_profile import ViewProfile
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer
-from .views.courses import TopCourses
+from .views.courses import TopCourses, SearchingCourses
 from .views.events import TopEvents
 
 
@@ -20,6 +20,8 @@ urlpatterns = [
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
     path('courses/top', TopCourses.as_view(), name='top-courses'),
+    path('courses/search', SearchingCourses.as_view(), name='search-courses'),
+    # path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
     path('user/social/login', UserSocialLogin.as_view(), name='social_login')
