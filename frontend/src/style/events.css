@@ -35,6 +35,11 @@
 	/*box-sizing: border-box;*/
 }
 
+.event-card-header {
+	font-weight: bold;
+	font-size: 20px;
+}
+
 .event-body {
 	border-left: 1px solid #4F4F4F;
 	border-right: 1px solid #4F4F4F;
@@ -44,9 +49,11 @@
 	padding: 0;
 }
 
-/* PAGINATION */
-.pagination {
-	margin-top: 50px;
-	margin-bottom: 100px;
-	justify-content: center;
+.event-card {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.event-body {
+	height: 170px;
 }
