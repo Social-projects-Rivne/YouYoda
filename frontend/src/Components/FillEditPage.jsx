@@ -1,13 +1,11 @@
 import React from 'react';
-import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import Button from "reactstrap/es/Button";
-import {countries, regions} from './Variables/location';
+import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
+import { countries, regions } from './Variables/location';
 import { toast } from 'react-toastify';
 
-import {editForm} from "../api/editForm";
-import {API} from '../api/axiosConf';
-
-
+import { API } from '../api/axiosConf';
+import { editForm } from "../api/editForm";
 
 
 class FillEditPage extends React.Component {
@@ -25,8 +23,7 @@ class FillEditPage extends React.Component {
             i_like: '',
             birth_date: '',
             phone_number: '',
-            avatar_url: '',
-            is_trainer: 'true'
+            avatar_url: ''
         };
         this.handleClick = this.handleClick.bind(this)
     }
@@ -94,7 +91,9 @@ class FillEditPage extends React.Component {
     }
 
     becomeTrainer = async () => {
-        let trainer = {is_trainer: this.state.is_trainer}
+        let trainer = {};
+        trainer.is_trainer = true;
+        trainer.email = this.state.email;
         try {
             const response = await API.patch('user/totrainer', trainer);
         } catch (error) {

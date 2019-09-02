@@ -2,9 +2,14 @@ import React from 'react';
 
 import { Button, Col, Modal, Row } from 'reactstrap';
 import {Redirect} from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import { toast } from 'react-toastify';
 
 import { FormErrors } from '../api/FormErrors';
-import { registration } from '../api/registration';
+import { registration, socialRegistration } from '../api/registration';
+import FacebookLogo from '../img/content/facebook.png';
+import GoogleLogo from '../img/content/google.png';
 
 
 class Registration extends React.Component{
@@ -13,6 +18,10 @@ class Registration extends React.Component{
         this.state = {
             email: '',
             password: '',
+            first_name: '',
+            last_name: '',
+            picture: {},
+            reg_event: {},
             confirmpass: '',
             userstudent: true,
             userteacher: false,
@@ -106,17 +115,57 @@ class Registration extends React.Component{
             this.setState({[idParam]:valueParam},
                           () => { this.validateField(idParam, valueParam) });
     }
+
     radioGetter = (event) => {
         this.setState({
             userteacher:!this.state.userteacher,
             userstudent:!this.state.userstudent
         });
     }
+
     async handleClick(event){
         event.preventDefault();
         await registration(this.state)
             .then(() => this.setState({ redirect: true }));
         return false;
+    }
+
+    async handleClickSocial(event){
+        event.preventDefault();
+        await socialRegistration(this.state)
+            .then(() => this.setState({ redirect: true }));
+        return false;
+    }
+
+    registerFacebook = (response) => {
+      console.log(response);
+      this.setState({
+        email:response.email,
+        first_name:response.first_name,
+        last_name:response.last_name,
+        picture:response.picture.url,
+      })
+      this.handleClickSocial(this.state.reg_event)
+    }
+
+    registerGoogle = (response) => {
+      this.setState({
+        email: response.profileObj.email,
+        last_name: response.profileObj.familyName,
+        first_name: response.profileObj.givenName,
+        picture: response.profileObj.imageUrl,
+      })
+      this.handleClickSocial(this.state.reg_event)
+    }
+
+    registerGoogleFail = () => {
+        toast.error('You cannot sing up with Google, please try to clean your browser cache or contact support.');
+    }
+
+    setEvent = (event) => {
+      this.setState({
+        reg_event: event
+      })
     }
 
     render () {
@@ -143,6 +192,36 @@ class Registration extends React.Component{
                             <div className="col-sm-12 form-group">
                                 <span className="text-title text-white d-block pb-2">If you already have an account</span>
                                 <Button className="btn-grey btn btn-color-w" onClick={() => {this.props.handleClickReg(); this.props.handleClickLogin();}}>Sign in</Button>
+                            </div>
+                            <div className="col-sm-12 form-group">
+                                <span className="text-title text-white d-block pb-2">Or you can sign up with:</span>
+                                  <Row style={{paddingLeft:"10px"}}>
+                  				           <Col xs="2">
+                                       <FacebookLogin
+                                         appId="687674024977590"
+                                         autoLoad={false}
+                                         fields="first_name, last_name, email, picture"
+                                         callback={this.registerFacebook}
+                                         onClick={this.setEvent}
+                                         cssClass="btnSocial"
+                                         textButton = "&nbsp;&nbsp;"
+                                         icon={<img src={FacebookLogo} width="40" style={{marginLeft:"-15px"}} alt="FacebookLogo"/>}
+                                         />
+                                     </Col>
+                                     <Col xs="2">
+                                       <GoogleLogin
+                                         clientId="23688062582-ng86179snpui9v4h65gfitdo685bt4cg.apps.googleusercontent.com"
+                                         render={renderProps => (
+                                           <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btnSocial">
+                                             <img onClick={this.setEvent} src={GoogleLogo} width="40" style={{marginLeft:"-15px"}} alt="GoogleLogo"/>
+                                           </button>
+                                         )}
+                                         onSuccess={this.registerGoogle}
+                                         onFailure={this.registerGoogleFail}
+                                         cookiePolicy={'single_host_origin'}
+                                         />
+                                     </Col>
+                                   </Row>
                             </div>
                         </Row>
                     </Col>
