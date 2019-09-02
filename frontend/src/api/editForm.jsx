@@ -1,6 +1,6 @@
 import React from "react";
 
-import API from './axiosConf';
+import {API} from './axiosConf';
 
 
 async function editForm(props) {
@@ -22,7 +22,7 @@ async function editForm(props) {
             console.log("Something goes wrong");
         }
     })
-   
+
 } catch
 (error)
 {
@@ -31,5 +31,3 @@ async function editForm(props) {
 }
 
 export {editForm};
-
-

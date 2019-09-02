@@ -1,4 +1,4 @@
-import API from './axiosConf';
+import {API} from './axiosConf';
 
 async function logOut() {
     try {

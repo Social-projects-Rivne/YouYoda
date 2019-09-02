@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import API from './axiosConf';
+import {API} from './axiosConf';
 
 
 async function userLogin(props) {
@@ -12,7 +12,7 @@ async function userLogin(props) {
                     const AUTH_TOKEN = response.data.token;
                     localStorage.setItem('token', AUTH_TOKEN)
                     axios.defaults.headers.common['Authorization'] = "Token " + localStorage.getItem('token')
-                } 
+                }
             })
     } catch(error) {
         throw TypeError('Error: ' + error.message);
@@ -20,5 +20,3 @@ async function userLogin(props) {
 }
 
 export { userLogin };
-
-
