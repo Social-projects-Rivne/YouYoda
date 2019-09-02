@@ -1,13 +1,21 @@
 import React from 'react';
 
+import { css } from '@emotion/core';
+import ClipLoader from 'react-spinners/ClipLoader';
 import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
 import {API} from '../api/axiosConf';
 import '../api/pagination';
+
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: #FFD466;
+`;
 
 function renderCourses(course) {
 
@@ -23,12 +31,32 @@ function renderCourses(course) {
 export default class Cours extends React.Component{
     constructor(props) {
       super(props);
+
+      this.state = {
+      loading: true
+    }
+  }
+  componentWillMount(){
+      this.setState({loading: true})
+  }
+
+  componentDidMount(){
+      this.setState({loading: false})
   }
       render(){
 
     return (
       <>
-        <Container>
+            <Container>
+            <div className='sweet-loading'>
+                <ClipLoader
+                  css={override}
+                  sizeUnit={"px"}
+                  size={150}
+                  color={'#123abc'}
+                  loading={this.state.loading}
+                />
+              </div>
 
                 {this.props.coursesList.map( course => renderCourses(course) )}
 
