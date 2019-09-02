@@ -1,6 +1,6 @@
 import React from "react";
 
-import API from './axiosConf';
+import {API} from './axiosConf';
 
 
 async function editForm(props) {

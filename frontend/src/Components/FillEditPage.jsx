@@ -1,12 +1,11 @@
 import React from 'react';
-import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import Button from "reactstrap/es/Button";
-import {countries, regions} from './Variables/location';
+import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
+import { countries, regions } from './Variables/location';
+import { toast } from 'react-toastify';
 
-import axios from 'axios';
-
-import {editForm} from "../api/editForm";
-
+import { API } from '../api/axiosConf';
+import { editForm } from "../api/editForm";
 
 
 class FillEditPage extends React.Component {
@@ -42,22 +41,18 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            // const response = await axios.get('http://localhost:5000/test');
-            const response = await axios.get('http://localhost:8000/api/user/profile/edit', {headers: { Authorization: "Token " + localStorage.getItem('token')}});
-            // console.log(response.data);
-            // alert(response.data);
+            const response = await API.get('user/profile/edit');
             return response.data;
         } catch (error) {
-            console.error(error);
+            toast.error('You cannot view your profile. Contact administrator or support system.');
         }
     };
 
     postUser = async (formData) => {
         try {
-            // const response = await axios.post('http://localhost:5000/test', formData);
-            const response = await axios.patch('http://localhost:8000/api/user/profile/edit', formData, {headers: { Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await API.patch('user/profile/edit', formData);
         } catch (error) {
-            console.error(error);
+            toast.error('You cannot update your profile. Contact administrator or support system.');
         }
     };
 
@@ -99,9 +94,9 @@ class FillEditPage extends React.Component {
     becomeTrainer = async () => {
         let trainer = {is_trainer: this.state.is_trainer}
         try {
-            const response = await axios.patch('http://localhost:8000/api/user/totrainer/', trainer, {headers: { Authorization: "Token " + localStorage.getItem('token')}});
+            const response = await API.patch('user/totrainer', trainer);
         } catch (error) {
-            console.error(error);
+            toast.error('You cannot be a trainer. Contact administrator or support system.');
         }
     };
 
