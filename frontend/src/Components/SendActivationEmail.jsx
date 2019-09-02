@@ -30,7 +30,7 @@ export default class ResetPassword extends React.Component{
       <div className="reset-pass">
         <Container style={{width:"500px"}} className="confirm">
         <h1><FontAwesomeIcon icon="paper-plane"/></h1>
-        <p>Email whith activation confirmation has been sent to your email.</p>
+        <p>Email with activation confirmation has been sent to your email.</p>
         <p>If you didn't receive the email, check Spam or </p>
         <form method="POST" className="form-group ">
             <button type="button"

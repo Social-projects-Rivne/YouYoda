@@ -24,6 +24,9 @@
     "react-icons": "^3.7.0",
     "react-google-login": "^5.0.5"
   },
+  "devDependencies": {
+    "faker": "^4.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -1,3 +1,5 @@
+const ROLE_ADMIN = 3,
+      ROLE_MODERATOR = 2;
 
 export const isAuthenticated = (dosmth) => {
     let show = "auth-display-none";
@@ -11,4 +13,16 @@ export const isAuthenticated = (dosmth) => {
         }
     }
     return show;
+}
+
+export const isAdmin = () => {
+    if (localStorage.getItem('role') == ROLE_ADMIN)
+        return true;
+    return false;
+}
+
+export const isModerator = () => {
+    if (localStorage.getItem('role') == ROLE_MODERATOR)
+        return true;
+    return false;
 }

@@ -4,7 +4,7 @@ import {Dropdown, DropdownToggle, DropdownMenu} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { isAuthenticated } from '../utils';
+import { isAuthenticated, isAdmin, isModerator } from '../utils';
 import { logOut } from '../api/logOut';
 
 
@@ -45,6 +45,11 @@ export class UserMenu extends React.Component{
       if (redirect) {
          return <Redirect to='/'/>;
       }
+      let ManageDashboard;
+      if (isAdmin())
+          ManageDashboard = <Link to="/admin" className="dropdown-item">Admin Dashboard</Link>;
+      else if (isModerator())
+          ManageDashboard = <Link to="/moderator" className="dropdown-item">Moderator Dashboard</Link>;
     return (
       <div className={`header-user-menu ${isAuthenticated("show")}`}>
 
@@ -54,6 +59,7 @@ export class UserMenu extends React.Component{
                       className="profile-photo-dropdown" alt="profile"/>
             </DropdownToggle>
             <DropdownMenu right>
+                {ManageDashboard}
                 <Link to="/profile" className="dropdown-item">View profile</Link>
                 <Link to="/editprofile" className="dropdown-item">User settings</Link>
                 <Link to="" className="dropdown-item">Create course</Link>
