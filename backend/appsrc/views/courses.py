@@ -42,7 +42,6 @@ class SearchingCourses(APIView):
 
         courses = Courses.objects.filter(
             coursename__regex = r'(?i){word}'.format(word=regex_word)
-            # is_public = data_filter['is_public'],
             # rate__gte=data_filter['rate'],
             # status=data_filter['status'],
             # location=data_filter['location'],

@@ -6,18 +6,18 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 import {API} from '../api/axiosConf';
-import Cours from './cours';
+import Event from './event';
 import '../api/pagination';
 
 
-export default class SearchingCourses extends React.Component{
+export default class SearchingEvents extends React.Component{
     constructor(props) {
       super(props);
 
       this.state = {
         numberofpages: 0,
         curentpage: 1,
-        coursesList:[]
+        eventList:[]
       };
     }
 
@@ -29,16 +29,16 @@ export default class SearchingCourses extends React.Component{
 
     getData = async() => {
         try {
-          let response = await API.get('/courses/search', {
+          let response = await API.get('/events/search', {
             params: {
                 pagenumber:this.state.curentpage,
-                coursename: 'cour',
+                name: 'vent',
             }
           })
 
           this.setState({
               numberofpages:response.data.num_of_pages,
-              coursesList:response.data.data
+              eventList:response.data.data
           })
           toast.success("after" + this.state.curentpage)
         }
@@ -63,25 +63,24 @@ export default class SearchingCourses extends React.Component{
                <a   href={`#!${i}`}
                     className="cdp_i"
                     key={i+1}
-                    onClick={() => this.changePages(i)}
+                    onClick={(e) => this.changePages(i)}
                 >
                {i}</a>
            )
        }
 
     return (
-
         <Router>
           <>
             <Container>
                 <Route
-                    path='/courses/search:page'
-                    render={() => <Cours coursesList={this.state.coursesList}/>}
+                    path='/events/search:page'
+                    render={() => <Event enentList={this.state.eventList}/>}
                 />
                 <Route
                     exact
-                    path='/courses/search'
-                    render={() => <Cours coursesList={this.state.coursesList}/>}
+                    path='/events/search'
+                    render={() => <Event eventList={this.state.eventList}/>}
                   />
                 <Row>
                     <Col>

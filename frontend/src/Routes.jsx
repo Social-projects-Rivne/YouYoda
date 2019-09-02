@@ -9,6 +9,7 @@ import EditPageProfile from "./Pages/EditPageProfile";
 import NotFoundPage from './Pages/NotFoundPage';
 import EnterNewPassword from './Components/EnterNewPassword';
 import SearchingCourses from './Components/SearchingCourses';
+import SearchingEvents from './Components/SearchingEvents';
 import SendActivationEmail from './Components/SendActivationEmail';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ResetPassword from './Components/ResetPassword';
@@ -45,8 +46,11 @@ export default class Routes extends React.Component{
                 <Route exact path='/activate/user/:uid/:token'
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
                 />
-                <Route path="/pagination/page"
+                <Route path="/courses/search"
                     render={()=><MainLayout><SearchingCourses/></MainLayout>}
+                />
+                <Route path="/events/search"
+                    render={()=><MainLayout><SearchingEvents/></MainLayout>}
                 />
 
 

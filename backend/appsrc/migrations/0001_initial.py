@@ -64,10 +64,10 @@ def insertData(apps, schema_editor):
     )
 
     Courses = apps.get_model('appsrc', 'Courses')
-    Courses.objects.create(id=1, coursename="Lesson of swimming", owner_id=5, status="Open", description="Perfect for people who never swam",
+    Courses.objects.create(id=1, coursename="Course1", owner_id=5, status="Open", description="Perfect for people who never swam",
         is_public=True, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=20, hours=10), rate=8,
         members_limit=20, categories_id=2, location="Rivne, Ukraine", cover_url="", cost=0)
-    Courses.objects.create(id=2, coursename="Front-end", owner_id=5, status="In Progres", description="React Redux bla bla the best",
+    Courses.objects.create(id=2, coursename="Course2", owner_id=5, status="In Progres", description="React Redux bla bla the best",
         is_public=True, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=10, hours=10), rate=7,
         members_limit=40, categories_id=3, location="Kiev, Ukraine", cover_url="", cost=0.5)
     Courses.objects.create(id=3, coursename="Course3", owner_id=4, status="Closed", description="Perfect for people who never swam",
@@ -135,7 +135,7 @@ class Migration(migrations.Migration):
                 ('phone_number', models.CharField(blank=True, max_length=13, null=True)),
                 ('avatar_url', models.CharField(blank=True, max_length=80, null=True)),
                 ('is_trainer', models.BooleanField(default=False)),
-                ('role', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Roles')),
+                ('role', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='owner', to='appsrc.Roles')),
             ],
             options={
                 'verbose_name': 'user',
