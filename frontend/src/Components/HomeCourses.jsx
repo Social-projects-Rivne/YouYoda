@@ -14,9 +14,6 @@ export default class HomeCourses extends React.Component{
             redirect: false,
             coursesList: [],
         };
-
-    this.handleClick = this.handleClick.bind(this);
-
     }
 
     async componentWillMount() {
@@ -27,7 +24,7 @@ export default class HomeCourses extends React.Component{
             });
     }
 
-    handleClick(course) {
+    handleClick = (course) => {
        this.setState({ redirect: true });
        this.setState({ course });
     };
@@ -42,7 +39,7 @@ export default class HomeCourses extends React.Component{
                     <h3 className="secondary-header">{course.coursename}</h3>
                     <p className="main-text">{course.description}</p>
                     <p className="main-text">Rate:  {course.rate}</p>
-                    <Button color="warning" className="btn-yellow" onClick={(event) => this.handleClick(course)}>Details</Button>
+                    <Button color="warning" className="btn-yellow" onClick={() => this.handleClick(course)}>Details</Button>
                   </div>
             </Col>
         )

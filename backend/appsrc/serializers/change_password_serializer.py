@@ -9,14 +9,9 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
 
     """
-
     class Meta:
-
         model = YouYodaUser
-
-        fields = (
-            'password',
-            )
+        fields = ('password',)
 
     def update(self, instance, validated_data):
         """Update user password"""

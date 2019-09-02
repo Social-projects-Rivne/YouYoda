@@ -14,12 +14,9 @@ export default class CourseDetail extends React.Component{
       this.state = {
             redirect: false,
        };
-
-       this.handleClickReturn = this.handleClickReturn.bind(this);     
-    
     };
 
-    handleClickReturn() {
+    handleClickReturn = () => {
        this.setState({ redirect: true });
     };
 
