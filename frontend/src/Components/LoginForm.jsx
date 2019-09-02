@@ -84,8 +84,7 @@ class LoginForm extends Component {
                 toast.success('Login successfull');
                 this.setState({ redirect: true });
        } catch (error){
-           toast.error('Please, check entered email and password. Contact administrator or support system ;)');
-           console.log(error.message)
+           toast.error('Please, check entered email and password. Contact administrator or support system.');
        }
 
     }

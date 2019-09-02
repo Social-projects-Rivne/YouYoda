@@ -1,20 +1,20 @@
 import React from 'react';
-
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
+import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
+import CourseDetail from './Components/CourseDetail';
 import Home from './Pages/Home';
-import MainLayout from './Pages/MainLayout';
+import HomeCourses from './Components/HomeCourses';
 import EditPageProfile from "./Pages/EditPageProfile";
-import NotFoundPage from './Pages/NotFoundPage';
 import EnterNewPassword from './Components/EnterNewPassword';
+import MainLayout from './Pages/MainLayout';
+import NotFoundPage from './Pages/NotFoundPage';
+import Profile from './Pages/Profile';
+import ResetPassword from './Components/ResetPassword';
+import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
-import SendActivationEmail from './Components/SendActivationEmail';
-import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
-import ResetPassword from './Components/ResetPassword';
-import Profile from './Pages/Profile';
-
 
 
 export default class Routes extends React.Component{
@@ -52,9 +52,10 @@ export default class Routes extends React.Component{
                 <Route path="/events/search"
                     render={()=><MainLayout><SearchingEvents/></MainLayout>}
                 />
-
-
-
+                <Route exact path='/course/detail'
+                   render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
+                />
+                <Route path="*" component={NotFoundPage} />
             </Route>
 
         </Switch>

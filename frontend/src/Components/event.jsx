@@ -28,7 +28,7 @@ function renderCourses(course) {
     )
 }
 
-export default class Cours extends React.Component{
+export default class Event extends React.Component{
     constructor(props) {
       super(props);
 
@@ -58,7 +58,7 @@ export default class Cours extends React.Component{
                 />
               </div>
 
-                {this.props.coursesList.map( course => renderCourses(course) )}
+                {this.props.eventList.map( course => renderCourses(course) )}
 
         </Container>
       </>
