@@ -33,6 +33,16 @@ export default class SearchingCourses extends React.Component{
             params: {
                 pagenumber:this.state.curentpage,
                 coursename: 'cour',
+                rate: 5,
+                status: "Open",
+                location: "",
+                categories: 1,
+                cost_gte: 0,
+                cost_lte: 10000,
+                sort_rate: "rate", 
+                sort_duration: "duration",
+                sort_start_date: "start_date",
+                sort_cost: "cost"
             }
           })
 

@@ -55,10 +55,11 @@ export default class Routes extends React.Component{
                 <Route exact path='/course/detail'
                    render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
                 />
-                <Route path="*" component={NotFoundPage} />
+                
             </Route>
 
         </Switch>
+        {/* <Route path="*" component={NotFoundPage} /> */}
         </Router>
     </div>
   );
