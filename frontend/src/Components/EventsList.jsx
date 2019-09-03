@@ -108,10 +108,7 @@ export default class EventsList extends React.Component{
                <Row>
       {this.state.eventsList.map( event => this.renderEvents(event) )}
       
-    </Row> 
-
-   
-
+            </Row> 
         	  </Container>
         	</div>       
         	);

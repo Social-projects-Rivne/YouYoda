@@ -29,6 +29,11 @@
 }
 
 /* EVENTS */
+.event-card {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 .event-header {
  	background: white;
 	border: 1px solid #4F4F4F;
@@ -38,22 +43,21 @@
 .event-card-header {
 	font-weight: bold;
 	font-size: 20px;
+	margin-bottom: 20px;
 }
 
 .event-body {
 	border-left: 1px solid #4F4F4F;
 	border-right: 1px solid #4F4F4F;
+	height: 200px;
+}
+
+.event-body p {
+	line-height: 80%;
 }
 
 .event-card .card-footer{
 	padding: 0;
 }
 
-.event-card {
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
 
-.event-body {
-	height: 170px;
-}

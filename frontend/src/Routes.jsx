@@ -27,7 +27,7 @@ export default class Routes extends React.Component{
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
-            <Route path='/events' component={Events}/>
+            <Route exact path='/events' component={Events}/>
             <Route component={MainLayout}>
 
                 <Route exact path='/reset/password'
@@ -51,15 +51,15 @@ export default class Routes extends React.Component{
                 <Route path="/courses/search"
                     render={()=><MainLayout><SearchingCourses/></MainLayout>}
                 />
-                <Route path="/events/search"
+                <Route exact path="/events/search"
                     render={()=><MainLayout><SearchingEvents/></MainLayout>}
                 />
                 <Route exact path='/course/detail'
                    render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
                 />
-                <Route path="*" component={NotFoundPage} />
+                
             </Route>
-
+            <Route path="*" component={NotFoundPage} />
         </Switch>
         </Router>
     </div>
