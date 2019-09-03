@@ -57,10 +57,12 @@ export default class Routes extends React.Component{
                 <Route exact path={'/admin/:option'}
                     render={()=><AdminPage><AdminPageInner/></AdminPage>}
                 />
-                <Route path="*" component={NotFoundPage} 
-                />
+                
             </Switch>
+            
             </Route>
+            <Route path="*" component={NotFoundPage} 
+                />
         </Switch>
         </Router>
       </div>
