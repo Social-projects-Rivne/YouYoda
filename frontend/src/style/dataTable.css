@@ -1,0 +1,20 @@
+#users-table table,
+#users-table tr {
+  border-color: #d3d3d3;
+}
+#users-table tr:nth-of-type(2n+1) {
+  background-color: #f6f7f8;
+}
+#users-table thead tr {
+  background-color: #4f4f4f!important;
+  color: #fff;
+}
+#users-table th,
+.username-td,
+.date-td,
+.phone-td {
+  white-space: nowrap;
+}
+.users-table-wrap {
+  overflow-x: scroll;
+}

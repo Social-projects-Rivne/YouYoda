@@ -1,7 +1,4 @@
-import React from "react";
-
 import { toast } from 'react-toastify';
-
 import { API } from './axiosConf';
 
 
@@ -14,7 +11,7 @@ async function registration(props) {
         "is_trainer": props.userteacher
     }
     try {
-        const response = await API.post('/user/register', datasend)
+        const response = await API.post('user/register', datasend)
         toast.success('Registration successfull');
     }
     catch (error) {
@@ -36,7 +33,7 @@ async function socialRegistration(props) {
         "avatar_url": props.picture
     }
     try {
-        const response = await API.post('/user/social/register', datasend)
+        const response = await API.post('user/social/register', datasend)
         toast.success('Registration successfull');
     }
     catch (error) {
