@@ -6,7 +6,6 @@ from rest_framework import permissions
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-
 from ..models import YouYodaUser
 from ..serializers.profile_edit_serializer import ProfileEditSerializer
 
@@ -15,8 +14,6 @@ class EditProfile(APIView):
     """Takes data from ProfileEditSerializer for fill/edit user profile."""
 
     permission_classes = [permissions.IsAuthenticated,]
-    # permission_classes = [permissions.AllowAny,]
-
 
     def get(self, request):
         """Receives and transmits user profile data"""

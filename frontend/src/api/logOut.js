@@ -5,6 +5,7 @@ async function logOut() {
         await API.get('user/logout')
             localStorage.removeItem('token');
     } catch (error) {
+    	localStorage.removeItem('token');
         throw TypeError('Error: ' + error.message);
     }
 }

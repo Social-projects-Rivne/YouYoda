@@ -1,12 +1,12 @@
 import React from 'react';
 
+import {API} from '../api/axiosConf';
 import Footer from '../Components/Footer';
-import {ProfileContext} from '../Components/profile-context';
 import PageHeader from '../Components/PageHeader';
+import {ProfileContext} from '../Components/profile-context';
 import ProfileInfo from '../Components/ProfileInfo';
 import ProfileMainInfo from '../Components/ProfileMainInfo';
 import UserCourses from '../Components/UserCourses';
-import {API} from '../api/axiosConf';
 
 
 export default class Profile extends React.Component{

@@ -1,13 +1,11 @@
 import React from 'react';
-import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import Button from "reactstrap/es/Button";
-import {countries, regions} from './Variables/location';
+import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
+import { countries, regions } from './Variables/location';
 import { toast } from 'react-toastify';
 
-import {editForm} from "../api/editForm";
-import {API} from '../api/axiosConf';
-
-
+import { API } from '../api/axiosConf';
+import { editForm } from "../api/editForm";
 
 
 class FillEditPage extends React.Component {
