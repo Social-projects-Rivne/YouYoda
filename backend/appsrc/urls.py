@@ -9,6 +9,7 @@ from .views.user_registration import UserRegistration
 from .views.user_to_trainer import UserToTrainer
 from .views.courses import TopCourses, SearchingCourses
 from .views.events import TopEvents
+from .views.categories import CategoriesList
 
 
 urlpatterns = [
@@ -23,4 +24,6 @@ urlpatterns = [
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
     # path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('categories/list', CategoriesList.as_view(), name='categories-list'),
+
 ]
