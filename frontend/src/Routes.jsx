@@ -1,6 +1,10 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
+
+import AdminDashboard from './Components/AdminDashboard';
+import AdminPage from "./Pages/AdminPage";
+import AdminPageInner from './Components/AdminPageInner';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
@@ -48,21 +52,27 @@ export default class Routes extends React.Component{
                 <Route exact path='/activate/user/:uid/:token'
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
                 />
+                <Route exact path='/course/detail'
+                   render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
+                />
                 <Route path="/courses/search"
                     render={()=><MainLayout><SearchingCourses/></MainLayout>}
                 />
                 <Route exact path="/events/search"
                     render={()=><MainLayout><SearchingEvents/></MainLayout>}
                 />
-                <Route exact path='/course/detail'
-                   render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
+               <Route exact path='/admin'
+                    render={()=><AdminPage><AdminDashboard/></AdminPage>}
                 />
-                
+                <Route exact path={'/admin/:option'}
+                    render={()=><AdminPage><AdminPageInner/></AdminPage>}
+                />
             </Route>
-            <Route path="*" component={NotFoundPage} />
+             <Route path="*" component={NotFoundPage} 
+                />
         </Switch>
         </Router>
-    </div>
+      </div>
   );
 }
 };
