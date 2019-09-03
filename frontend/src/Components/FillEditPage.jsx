@@ -6,9 +6,8 @@ import {editForm} from "../api/editForm";
 import LocationSearchInput from '../api/cityselector'
 import ChangePassword from "./ChangePassword";
 import {API} from '../api/axiosConf';
-
-
-
+import ImageUpload from './ImageUploadComponent'
+import Avatar from './Avatar'
 
 
 class FillEditPage extends React.Component {
@@ -27,10 +26,11 @@ class FillEditPage extends React.Component {
             birth_date: '',
             phone_number: '',
             avatar_url: '',
-            is_trainer: 'true'
+            is_trainer: '',
+            showUploadForm: false
         };
         this.handleClick = this.handleClick.bind(this)
-    }
+    };
 
     toggle = () => {
         this.setState(prevState => ({
@@ -40,7 +40,7 @@ class FillEditPage extends React.Component {
 
     async handleClick(event) {
         await editForm(this.state);
-    }
+    };
 
     getUser = async () => {
         try {
@@ -86,7 +86,11 @@ class FillEditPage extends React.Component {
     updateLocation = (location) => {
         this.setState({location: location.split(',')[0]});
         console.log(location);
-    }
+    };
+
+    updateAvatarUrl = (url) => {
+        this.setState({avatar_url: url});
+    };
 
     async componentDidMount() {
         let userData = await this.getUser();
@@ -95,7 +99,8 @@ class FillEditPage extends React.Component {
             test_dict[key] = userData[key]
         })
         this.setState(test_dict)
-    }
+    };
+
 
     becomeTrainer = async () => {
         let trainer = {is_trainer: this.state.is_trainer}
@@ -106,6 +111,12 @@ class FillEditPage extends React.Component {
         }
     };
 
+    showUpload = (event) =>{
+        event.preventDefault();
+        this.setState({showUploadForm: !this.state.showUploadForm})
+    };
+
+
     render() {
         const {header, main} = this.props;
         return (
@@ -115,14 +126,13 @@ class FillEditPage extends React.Component {
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
                                 <h2 className="top-text">Personal details</h2>
-                                <div className="edit-avatar">
-                                    <img src={require('../img/static/avatar.png')}
-                                         className="avatar"
-                                         href="#" alt="profile-photo"
-                                         onChange={(e) => this.updateField(e)}
-                                         value={this.state.avatar_url}
-                                         href={this.state.avatar_url}
-                                    />
+                                <button type='file' className='avatar-wrapper' onClick= {(event) => this.showUpload(event)}>
+                                    <div className="edit-avatar">
+                                        <Avatar avatar_url ={this.state.avatar_url}/>
+                                    </div>
+                                </button>
+                                <div>
+                                    {this.state.showUploadForm && <ImageUpload updateUrl={this.updateAvatarUrl}/>}
                                 </div>
                                 <Label for="login" className="login">Login*</Label>
                                 <Input

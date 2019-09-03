@@ -160,3 +160,10 @@
 .security-button{
     color: #710000;
 }
+.avatar-wrapper {
+    border: 0;
+    background-color: transparent;
+}
+.avatar-wrapper:focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}

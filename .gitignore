@@ -266,3 +266,4 @@ venv.bak/
 
 /content
 /node_modules/
+/backend/media/

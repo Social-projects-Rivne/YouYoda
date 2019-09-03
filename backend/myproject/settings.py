@@ -169,3 +169,6 @@ try:
 except ImportError:
     pass
 DEFAULT_FROM_EMAIL = 'youyoda.academy@gmail.com'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
