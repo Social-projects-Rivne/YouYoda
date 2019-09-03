@@ -71,10 +71,10 @@
     font-weight: bold;
     margin-left: 15px;
 }
-.tab-item:hover {
+/* .tab-item:hover {
     background-color: #ffd466;
     border-radius: 44px;
-}
+} */
 .tab-item {
     border: none;
     margin-top: 5px;
@@ -92,10 +92,10 @@
     color: black;
     justify-content: center;
 }
-.active {
+/* .active {
     background-color: #ffd466;
     border-radius: 44px;
-}
+} */
 .join-course,
 .join-course:hover {
     background-color: #ffd466;
@@ -109,15 +109,15 @@
     border: none;
 }
 .description-background {
-    height: 100px;
+    height: 80px;
     background-color: #2f2f2f;
     position: relative;
-    margin-top: -100px;
+    margin-top: -80px;
     opacity: 0.4;
 }
 .course-description {
     color: white;
-    margin-top: -90px;
+    margin-top: -70px;
     margin-left: 20px;
 }
 .join-course {
@@ -158,7 +158,50 @@
     position: relative;
     top: 20px;
 }
-
+.vr-line {
+    background-color: #707070;
+    opacity: 0.3;
+    width: 2px;
+    height: 390px;
+}
+.courses-numbers {
+    background-color: #707070;
+    width: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+.events-numbers {
+    background-color: #ffd466;
+    width: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+.user-courses-profile {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.user-courses-profile div {
+    font-weight: bold;
+    margin-left: 15px;
+}
+.course {
+    cursor: pointer;
+    width: 100px;
+}
+.show-hide {
+    display: flex;
+    justify-content: right;
+}
+.left-arrow {
+    width: 15px;
+    cursor: pointer;
+}
+.back {
+    display: inline-block;
+}
 @media screen and (max-width: 767px) {
     .profile-photo-container,
     .user-name,
@@ -179,5 +222,32 @@
     }
     .join-course-container {
         text-align: center;
+    }
+    .vr-line {
+        display: none;
+    }
+    .show-hide {
+        margin-right: -20px;
+    }
+    .event-and-courses {
+        display: inline-block;
+        position: relative;
+        left: 180px;
+        bottom: 115px;
+    }
+    .align {
+        position: relative;
+        bottom: 113px;
+        left: 100px;
+    }
+}
+@media screen and (max-width: 990px){
+    .show-hide {
+        margin-right: -20px;
+    }
+}
+@media screen and (max-width: 574px){
+    .show-hide {
+        margin-right: 0px;
     }
 }
