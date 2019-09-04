@@ -265,3 +265,5 @@ venv.bak/
 /frontend/yarn-error.log*
 
 /content
+/node_modules/
+/backend/media/

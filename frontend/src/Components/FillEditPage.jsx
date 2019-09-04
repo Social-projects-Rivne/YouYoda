@@ -1,11 +1,13 @@
 import React from 'react';
 import Button from "reactstrap/es/Button";
 import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
-import { countries, regions } from './Variables/location';
 import { toast } from 'react-toastify';
-
 import { API } from '../api/axiosConf';
 import { editForm } from "../api/editForm";
+import LocationSearchInput from '../api/cityselector'
+import ChangePassword from "./ChangePassword";
+import ImageUpload from './ImageUploadComponent'
+import Avatar from './Avatar'
 
 
 class FillEditPage extends React.Component {
@@ -23,7 +25,7 @@ class FillEditPage extends React.Component {
             i_like: '',
             birth_date: '',
             phone_number: '',
-            avatar_url: ''
+            avatar_url: '',
         };
         this.handleClick = this.handleClick.bind(this)
     }
@@ -67,6 +69,7 @@ class FillEditPage extends React.Component {
         payLoad.birth_date = this.state.birth_date;
         payLoad.phone_number = this.state.phone_number;
         payLoad.avatar_url = this.state.avatar_url;
+        payLoad.password = this.state.password;
         await this.postUser(payLoad)
     };
 
@@ -74,20 +77,26 @@ class FillEditPage extends React.Component {
         let fieldName = event.target.name;
         let newState = {};
         newState[fieldName] = event.target.value;
-        // this.setState({username: event.target.value})
         this.setState(newState);
         console.log(event.target.value, event.target.value);
     };
 
+    updateLocation = (location) => {
+        this.setState({location: location.split(',')[0]});
+        console.log(location);
+    };
+
+    updateAvatarUrl = (url) => {
+        this.setState({avatar_url: url});
+    };
+
     async componentDidMount() {
         let userData = await this.getUser();
-        // this.setState({username: userData.username,
-        // first_name: userData.first_name})
-        let test_dict = {}
+        let mount_dict = {}
         Object.keys(this.state).map(function (key) {
-            test_dict[key] = userData[key]
+            mount_dict[key] = userData[key]
         })
-        this.setState(test_dict)
+        this.setState(mount_dict)
     }
 
     becomeTrainer = async () => {
@@ -101,27 +110,28 @@ class FillEditPage extends React.Component {
         }
     };
 
+    showUpload = (event) =>{
+        event.preventDefault();
+        this.setState({showUploadForm: !this.state.showUploadForm})
+    };
+
+
     render() {
         const {header, main} = this.props;
         return (
             <div className="">
                 <Container>
-                    <Form
-                        // onSubmit={this.handleSubmit} method="Post"
-                        method="POST" className="form-group "
-                    >
+                    <Form method="POST" className="form-group ">
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
-
-                                <h2  className="top-text">Personal details</h2>
-                                <div className="edit-avatar">
-                                    <img src={require('../img/static/avatar.png')}
-                                         className="avatar"
-                                         href="#" alt="profile-photo"
-                                         onChange={(e) => this.updateField(e)}
-                                         value={this.state.avatar_url}
-                                         href={this.state.avatar_url}
-                                    />
+                                <h2 className="top-text">Personal details</h2>
+                                <button type='file' className='avatar-wrapper' onClick= {(event) => this.showUpload(event)}>
+                                    <div className="edit-avatar">
+                                        <Avatar avatar_url ={this.state.avatar_url}/>
+                                    </div>
+                                </button>
+                                <div>
+                                    {this.state.showUploadForm && <ImageUpload updateUrl={this.updateAvatarUrl}/>}
                                 </div>
                                 <Label for="login" className="login">Login*</Label>
                                 <Input
@@ -159,44 +169,14 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                 />
                                 <Row>
-                                    {/*<Col md={6}>*/}
-                                    {/*<FormGroup className="city-country">*/}
-                                    {/*    <Label for="state">City and country*</Label>*/}
-                                    {/*    <Input*/}
-                                    {/*        type="select"*/}
-                                    {/*        name="location"*/}
-                                    {/*        className="field-box">*/}
-                                    {/*        onChange={(e) => this.updateField(e)}*/}
-                                    {/*        {countries.map((country) => (*/}
-                                    {/*            <option>{country}</option>*/}
-                                    {/*        ))}*/}
-                                    {/*        value = {this.state.location}*/}
-                                    {/*    </Input>*/}
-                                    {/*</FormGroup>*/}
-                                    {/*</Col>*/}
                                     <Col md={12}>
                                         <FormGroup className="city-country-2">
-                                            {/*<Input*/}
-                                            {/*    type="select"*/}
-                                            {/*    name="location"*/}
-                                            {/*    className="field-box">*/}
-                                            {/*    {regions.map((region) => (*/}
-                                            {/*        <option>{region}</option>*/}
-                                            {/*    ))}*/}
-                                            {/*    onChange={(e) => this.updateField(e)}*/}
-                                            {/*    value = {this.state.location}*/}
-                                            {/*</Input>*/}
-                                            <select type="text"
-                                                    value={this.state.location}
-                                                    onChange={this.updateField}
-                                                    name={'location'}
-                                                    required
-                                                    className="field-box button-region">
-                                                >
-                                                {regions.map((region) => (
-                                                    <option value={region}>{region}</option>
-                                                ))}
-                                            </select>
+                                            <Label>Location</Label>
+                                            <LocationSearchInput
+                                                updateLocation={this.updateLocation}
+                                                city={this.state.location}
+                                                className="form-control"
+                                            />
                                         </FormGroup>
                                     </Col>
                                 </Row>
@@ -219,12 +199,9 @@ class FillEditPage extends React.Component {
                                     <Col md="9">
                                         In order to start using your account, <br/>you need to confirm your email
                                         address.
-                                        <hr/>
-                                    </Col>
-                                    <Col md="3">
-                                        {/*<Button className="button-verify-email">Verify Email</Button>*/}
                                     </Col>
                                 </Row>
+                                <hr/>
                             </Col>
 
                             <Col md="6" sm="12" className="top-text-2 fill-edit-collumn">
@@ -234,7 +211,6 @@ class FillEditPage extends React.Component {
                                     type="textarea"
                                     name="i_like"
                                     className="loginInputTextArea"
-                                    // onChange={() => this.updateField()}
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.i_like}
                                 />
@@ -255,38 +231,26 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.birth_date}
                                 />
-                                <h2 className="security-button">Security</h2>
-                                <Label>Change my password</Label>
-                                <div className="row justify-content-lg-start">
-                                    <div className="col-5 passwords-change">
-                                        <Input type="password"
-                                               name="password"
-                                               placeholder="New password"
-                                               className="field-box"
-                                               onChange={(e) => this.updateField(e)}
-                                               value={this.state.password}
-                                        />
-                                    </div>
-                                    <div className="col-5">
-                                        <Input type="password"
-                                               name="password"
-                                               className="passwordconf"
-                                               placeholder="Confirm password"
-                                               onChange={(e) => this.updateField(e)}
-                                               value={this.state.password}
-                                        />
-                                    </div>
-                                    <Button className="submit-button"
-                                            onClick={() => this.saveForm()}>Submit</Button>
+                                <h2 className="security-button">CAUTION ! DANGER ! You can change your password</h2>
+                                <div className="row justify-content-start">
+                                    <ChangePassword password="this.state.password"/>
                                 </div>
-                                <Button color="secondary" className="text-button-trainer" size="lg" block
+                                <Button color="secondary"
+                                        className="text-button-trainer"
+                                        size="lg"
+                                        block
                                         onClick={() => this.becomeTrainer()}>
                                     I want to become a trainer
                                 </Button>
                                 <div className="col-4">
-                                    <Button color="secondary" type size="lg" className="button-saveall" block
-                                            onClick={() => this.saveForm()}>Save
-                                        all</Button>
+                                    <Button color="secondary"
+                                            type="button"
+                                            size="lg"
+                                            className="button-saveall"
+                                            block
+                                            onClick={() => this.saveForm()}>
+                                        Save all
+                                    </Button>
                                 </div>
                             </Col>
                         </Row>
@@ -298,6 +262,3 @@ class FillEditPage extends React.Component {
 }
 
 export default FillEditPage;
-
-
-// onSubmit={() => {alert("test")}}

@@ -11,27 +11,27 @@ class ProfileEditSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-
         model = YouYodaUser
 
         fields = (
-		 	'first_name', 'last_name', 'location', 'username', 'about_me',
-            'birth_date', 'phone_number', 'i_like', 'email'
-            )
-
+            'first_name', 'last_name', 'location', 'username', 'about_me',
+            'birth_date', 'phone_number', 'i_like', 'email', 'avatar_url'
+        )
 
     def create(self, validated_data):
         """Create user profile"""
 
         user = YouYodaUser.objects.create(
-            first_name = validated_data.get('first_name'),
-            last_name = validated_data.get('last_name'),
-            location = validated_data.get('location'),
-            username = validated_data.get('username'),
-            about_me = validated_data.get('about_me'),
-            i_like = validated_data.get('i_like'),
-            birth_date = validated_data.get('birth_date'),
-            phone_number = validated_data.get('phone_number'))
+            first_name=validated_data.get('first_name'),
+            last_name=validated_data.get('last_name'),
+            location=validated_data.get('location').encode(),
+            username=validated_data.get('username'),
+            about_me=validated_data.get('about_me'),
+            i_like=validated_data.get('i_like'),
+            birth_date=validated_data.get('birth_date'),
+            phone_number=validated_data.get('phone_number'),
+            avatar_url=validated_data.get('avatar_url')
+        )
 
         user.save()
         return user
@@ -47,6 +47,7 @@ class ProfileEditSerializer(serializers.ModelSerializer):
         instance.i_like = validated_data.get('i_like', instance.i_like)
         instance.birth_date = validated_data.get('birth_date', instance.birth_date)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.avatar_url = validated_data.get('avatar_url', instance.avatar_url)
 
         instance.save()
         return instance
