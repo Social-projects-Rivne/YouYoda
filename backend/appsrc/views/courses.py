@@ -45,7 +45,7 @@ class SearchingCourses(APIView):
         #         courses = Courses.objects.filter(field=data_filter[field])
 
 
-        f = ProductFilter(request.GET)
+        f = CoursesFilter(request.GET)
 
         # courses = Courses.objects.filter(
 
@@ -66,7 +66,7 @@ class SearchingCourses(APIView):
         serializer = CoursesSerializator(f.qs, many=True)
         pages = Paginator(serializer.data, COURSES_ON_PAGE)
         num_of_pages = pages.num_pages
-        curent_page = pages.page(CURENT_PAGE).object_list
+        curent_page = pages.page(page).object_list
         response_data = {
             "num_of_pages":num_of_pages,
             "data":curent_page
