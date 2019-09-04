@@ -9,9 +9,9 @@ class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
 
     def post(self, request, *args, **kwargs):
-        myfile = request.FILES['file']
+        file_object = request.FILES['file']
         fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
+        filename = fs.save(file_object.name, file_object)
         uploaded_file_url = fs.url(filename)
 
         return Response({'avatar_url': uploaded_file_url}, status=status.HTTP_201_CREATED)
