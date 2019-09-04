@@ -9,7 +9,7 @@ from django.views.decorators.cache import cache_page
 
 from ..models import Courses
 from ..serializers.courses_serializer import CoursesSerializator
-from .filter_set import ProductFilter
+from ..filter import CoursesFilter
 
 NUMBER_OF_TOP = 6
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -36,7 +36,7 @@ class SearchingCourses(APIView):
     def get(self, request):
 
         data_filter=request.query_params
-        CURENT_PAGE = request.query_params.get('pagenumber')
+        page = request.query_params.get('page')
         regex_name = data_filter.get('coursename')
         regex_location = data_filter.get('location')
 
@@ -48,7 +48,7 @@ class SearchingCourses(APIView):
         f = ProductFilter(request.GET)
 
         # courses = Courses.objects.filter(
-            
+
         #     coursename__regex = r'(?i){name}'.format(name=regex_name),
         #     rate__gte=data_filter.get('rate'),
         #     status=data_filter.get('status'),
