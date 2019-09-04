@@ -7,7 +7,6 @@ import {API} from '../api/axiosConf';
 export default class ChangePassword extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             new_password: '',
             re_new_password: '',
