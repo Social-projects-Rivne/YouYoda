@@ -6,7 +6,7 @@ import {Container, Row, Col, CardTitle, CardText, CardImg, Card} from 'reactstra
 export default class Course extends React.Component {
     render() {
       return (
-          <Col md="6" xs="12" sm="12" lg={this.props.lg} className="course">
+          <Col md="12" xs="12" sm="12" lg={this.props.lg} className="course">
             <a href="#">
               <Card className="card" body>
                 <CardImg top width="100%" src={require('../img/static/course-image.png')}

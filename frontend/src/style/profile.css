@@ -251,3 +251,8 @@
         margin-right: 0px;
     }
 }
+@media screen and (max-width: 1198px){
+    .left-arrow {
+        margin-left: -15px;
+    }
+}

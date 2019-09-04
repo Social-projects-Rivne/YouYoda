@@ -133,20 +133,24 @@ export default class ProfileInfo extends React.Component {
     }
 
     toggleTab(tab) {
-      if (this.state.activeTab !== tab) {
+      if (this.state.activeTab != tab) {
         this.setState({
-          activeTab: tab
+          activeTab: tab,
+          hideButton: false
         });
       }
       else {
         this.setState({
-          activeTab: '1'
+          activeTab: '1',
+          hideButton: true
         });
       }
     }
 
     handleChange(event) {
-        this.setState({hideButton: !this.state.hideButton});
+        this.setState({
+          hideButton: true,
+        });
     }
 
     render() {
@@ -165,7 +169,7 @@ export default class ProfileInfo extends React.Component {
                           <NavItem className="tab-item">
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '2' })} tab-link
-                              onClick={() => { this.toggleTab('2'); this.handleChange()}}>
+                              onClick={() => { this.toggleTab('2') }}>
                                 <div className="user-courses-profile">Following
                                   <div id="number-following-courses" className="courses-numbers">17</div>
                                 </div>
@@ -174,7 +178,7 @@ export default class ProfileInfo extends React.Component {
                           <NavItem className="tab-item">
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '3' })} tab-link
-                              onClick={() => { this.toggleTab('3'); this.handleChange()}}>
+                              onClick={() => { this.toggleTab('3') }}>
                                 <div className="user-courses-profile" href="#">Completed
                                   <div id="number-completed-courses" className="events-numbers">20</div>
                                 </div>
@@ -183,7 +187,7 @@ export default class ProfileInfo extends React.Component {
                           <NavItem className="tab-item">
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '1' })} tab-link
-                              onClick={() => { this.toggleTab('1');}}>
+                              onClick={() => { this.toggleTab('1'); this.handleChange()}}>
                               <div style={style}>
                                 {this.backButton}
                               </div>
@@ -195,7 +199,7 @@ export default class ProfileInfo extends React.Component {
                           <NavItem className="tab-item">
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '4' })} tab-link
-                              onClick={() => { this.toggleTab('4'); this.handleChange()}}>
+                              onClick={() => { this.toggleTab('4') }}>
                                 <div className="user-courses-profile">Following
                                   <div id="number-following-courses" className="courses-numbers">17</div>
                                 </div>
@@ -204,7 +208,7 @@ export default class ProfileInfo extends React.Component {
                           <NavItem className="tab-item">
                             <NavLink
                             className={classnames({ active: this.state.activeTab === '5' })} tab-link
-                            onClick={() => { this.toggleTab('5'); this.handleChange()}}>
+                            onClick={() => { this.toggleTab('5') }}>
                               <div className="user-courses-profile" href="#">Completed
                                 <div id="number-completed-courses" className="events-numbers">20</div>
                               </div>
@@ -213,7 +217,7 @@ export default class ProfileInfo extends React.Component {
                           <NavItem className="tab-item">
                             <NavLink
                             className={classnames({ active: this.state.activeTab === '6' })} tab-link
-                            onClick={() => { this.toggleTab('6'); this.handleChange()}}>
+                            onClick={() => { this.toggleTab('6') }}>
                               <div className="user-courses-profile" href="#">Created
                                 <div id="number-completed-courses" className="courses-numbers">20</div>
                               </div>
