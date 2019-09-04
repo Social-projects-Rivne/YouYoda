@@ -9,41 +9,44 @@ export default class FilterSideBar extends React.Component {
       super(props);
 
       this.state = {
-          categoriesList: [],
+          categoriesList: [ {"name": "software"},
+                            {"name": "music"},
+                            {"name": "sport"},
+                            {"name": "music"},
+                            {"name": "other"} ],
       };
   };
 
-  async componentWillMount() {
-        let path = 'categories/list'
+  /*async componentWillMount() {
+        let path = '/categories/list'
         let listCategories = await axiosGet(path);
         this.setState({
                 categoriesList: listCategories,
             });
-    };
+    };*/
 
     renderCategories(category) {
         return (
-            <li>{category}</li>
+            <li>{category.name}</li>
         )
     }
 
-
-  render(category) {
+  render() {
       return (
           <Menu>
-              <a className="menu-item" href="/">
+              <a className="menu-item" href="#">
                 Category
-                  <ul >
+                  <ul>
                       {this.state.categoriesList.map( category => this.renderCategories(category) )}
                   </ul>
               </a>
-              <a className="menu-item" href="/burgers">
+              <a className="menu-item" href="#">
                 Cost
               </a>
-              <a className="menu-item" href="/pizzas">
+              <a className="menu-item" href="#">
                 Status
               </a>
-              <a className="menu-item" href="/desserts">
+              <a className="menu-item" href="#">
                 Rate
               </a>
           </Menu>
