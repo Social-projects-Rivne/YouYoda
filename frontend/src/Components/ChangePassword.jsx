@@ -17,7 +17,7 @@ export default class ChangePassword extends React.Component {
         };
     }
 
-    handlChangePassword = (e) => {
+    handleChangePassword = (e) => {
         let name = e.target.name;
         let value = e.target.value;
         this.setState({[name]: value},
@@ -26,7 +26,7 @@ export default class ChangePassword extends React.Component {
             }
         );
         console.log(this.state);
-    }
+    };
 
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
@@ -44,14 +44,14 @@ export default class ChangePassword extends React.Component {
             passwordValid: passwordValid,
             rePasswordValid: rePasswordValid,
         }, this.validateForm);
-    }
+    };
 
     validateForm() {
         this.setState({
             formValid: this.state.rePasswordValid &&
                 this.state.passwordValid
         });
-    }
+    };
 
     changePassword = async () => {
         try {
@@ -74,14 +74,14 @@ export default class ChangePassword extends React.Component {
                        className="form-control reset-pass-form input-for-password"
                        placeholder="Enter New Password"
                        value={this.state.new_password}
-                       onChange={this.handlChangePassword}
+                       onChange={this.handleChangePassword}
                        required/>
                 <input type="password"
                        name="re_new_password"
                        className="form-control reset-pass-form input-for-password"
                        placeholder="Retype New Password"
                        value={this.state.re_new_password}
-                       onChange={this.handlChangePassword}
+                       onChange={this.handleChangePassword}
                        required/>
                 <button type="button"
                         className="btn btn-warning reset-pass-form"

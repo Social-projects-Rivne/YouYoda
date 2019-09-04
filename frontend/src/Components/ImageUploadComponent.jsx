@@ -42,7 +42,7 @@ export default class ImageUpload extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
-                    <input type="file" name="image-document" onChange={this.handleImageChange}/>
+                    <input type="file" name="image-document" className="button-avatar-input" onChange={this.handleImageChange}/>
                     <button type="button" onClick={this.handleSubmit} className="button-avatar">Upload Image</button>
                 </form>
             </div>
