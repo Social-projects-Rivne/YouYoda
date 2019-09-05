@@ -45,14 +45,16 @@ class SearchingCourses(APIView):
         #         courses = Courses.objects.filter(field=data_filter[field])
 
 
-        f = CoursesFilter(request.GET)
+        f = CoursesFilter(request.GET, queryset=Courses.objects.filter(
+                coursename__regex = r'(?i){name}'.format(name=regex_name),
+                location__regex=r'(?i){location}'.format(location=regex_location)
+            ))
 
-        # courses = Courses.objects.filter(
+        # courses = Courses.objects
 
         #     coursename__regex = r'(?i){name}'.format(name=regex_name),
         #     rate__gte=data_filter.get('rate'),
         #     status=data_filter.get('status'),
-        #     location__regex=r'(?i){location}'.format(location=regex_location),
         #     categories=data_filter.get('categories'),
         #     cost__gte=data_filter.get('cost_gte'),
         #     cost__lte=data_filter.get('cost_lte')
