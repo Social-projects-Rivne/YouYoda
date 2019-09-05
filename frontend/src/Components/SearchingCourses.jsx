@@ -32,8 +32,18 @@ export default class SearchingCourses extends React.Component{
         try {
           let response = await API.get('/courses/search', {
             params: {
-                pagenumber:this.state.curentpage,
+                page:this.state.curentpage,
                 coursename: 'cour',
+                rate: 5,
+                status: "Open",
+                location: "",
+                categories: 1,
+                cost_gte: 0,
+                cost_lte: 10000,
+                sort_rate: "rate",
+                sort_duration: "duration",
+                sort_start_date: "start_date",
+                sort_cost: "cost"
             }
           })
 
@@ -86,14 +96,16 @@ export default class SearchingCourses extends React.Component{
                                 <InputGroup className="search-input">
                                     <InputGroupAddon addonType="prepend">
                                         <InputGroupText className="search-input-icon">
-                                            <FontAwesomeIcon icon="search"/>
+                                           {/*<FontAwesomeIcon icon="search"/>*/}
+                                            <FontAwesomeIcon icon="sort"/>
                                         </InputGroupText>
                                     </InputGroupAddon>
                                         {/*<Input placeholder="Search by trainer, events, tag" />*/}
                                     <InputGroupAddon addonType="append" className="search-input-select">
                                         <Input type="select" name="select" id="search-input-select">
                                             <option value="" selected>Sort by</option>
-                                            <option>Duration</option>
+                                            <option>Duration<FontAwesomeIcon icon="sort-amount-up"/>
+                                                            <FontAwesomeIcon icon="sort-amount-down-alt"/></option>
                                             <option>Start date</option>
                                             <option>Cost</option>
                                             <option>Rate</option>

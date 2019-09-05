@@ -14,7 +14,7 @@ export default class HomeEvent extends React.Component{
         this.state = {
             modal: false,
             eventsList: [{}],
-        };    
+        };
     }
 
     toggle = (event) => {
@@ -33,7 +33,7 @@ export default class HomeEvent extends React.Component{
     }
 
     renderEvents(event) {
-        
+
         if(!event.cover_url)
             event.cover_url = require("../img/static/event.png");
 
@@ -43,11 +43,11 @@ export default class HomeEvent extends React.Component{
                 <h3 className="secondary-header">{event.name}</h3>
                 <p className="main-text">{event.description}</p>
                 <div>
-                    <Button color="warning" 
-                            className="btn-yellow" 
+                    <Button color="warning"
+                            className="btn-yellow"
                             onClick={() => this.toggle(event)}>{this.props.buttonLabel}Details
                     </Button>
-                </div>    
+                </div>
             </div>
         )
     }
@@ -70,7 +70,7 @@ export default class HomeEvent extends React.Component{
             },
           ]
         };
-  
+
        const event = this.state.event || this.state.eventsList[0];
        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
        const eventDate = event.date;
@@ -108,12 +108,21 @@ export default class HomeEvent extends React.Component{
                                     <Button className={`btn-join ${isAuthenticated("show")}`} color="warning" onClick={this.toggle}>Join</Button>{' '}
                                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                                 </ModalFooter>
-                            </Modal>    
+                            </Modal>
                         </Col>
                     </Row>
+                    <Row className="d-flex justify-content-end">
+                        <div className="more-courses-events">
+                            <button className="learn-more">
+                                <div className="circle">
+                                <span className="icon arrow"></span>
+                                </div>
+                                <p className="button-text">More Events</p>
+                            </button>
+                        </div>
+                        </Row>
                 </Container>
             </div>
         )
     }
 };
-

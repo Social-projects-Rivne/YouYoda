@@ -68,9 +68,8 @@ export default class Routes extends React.Component{
                     render={()=><AdminPage><AdminPageInner/></AdminPage>}
                 />
             </Route>
-             <Route path="*" component={NotFoundPage} 
-                />
         </Switch>
+        {/* <Route path="*" component={NotFoundPage} /> */}
         </Router>
       </div>
   );

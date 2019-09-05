@@ -1,4 +1,5 @@
 Django==2.2.3
+django-filter==2.2.0
 django-templated-mail==1.1.1
 djangorestframework==3.10.2
 djangorestframework-jwt==1.8.0
