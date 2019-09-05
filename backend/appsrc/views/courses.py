@@ -9,7 +9,7 @@ from django.views.decorators.cache import cache_page
 
 from ..models import Courses
 from ..serializers.courses_serializer import CoursesSerializator
-
+from ..filter import CoursesFilter
 
 NUMBER_OF_TOP = 6
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -36,28 +36,37 @@ class SearchingCourses(APIView):
     def get(self, request):
 
         data_filter=request.query_params
-        data_sort=request.query_params
-        CURENT_PAGE = request.query_params.get('pagenumber')
-        regex_word = data_filter.get('coursename')
+        page = request.query_params.get('page')
+        regex_name = data_filter.get('coursename')
+        regex_location = data_filter.get('location')
 
-        courses = Courses.objects.filter(
-            coursename__regex = r'(?i){word}'.format(word=regex_word),
-            # rate__gte=data_filter.get('rate'),
-            # status=data_filter['status'],
-            # location=data_filter['location'],
-            # categories=data_filter['categories'],
-            # cost__gt=data_filter['cost']
-            )
-        # .order_by(
-        #         data_sort['duration'],
-        #         data_sort['start_date'],
-        #         data_sort['cost'],
-        #         data_sort['rate']
-        #         )
-        serializer = CoursesSerializator(courses, many=True)
+        # for field in data_filter:
+        #     if field:
+        #         courses = Courses.objects.filter(field=data_filter[field])
+
+
+        f = CoursesFilter(request.GET)
+
+        # courses = Courses.objects.filter(
+
+        #     coursename__regex = r'(?i){name}'.format(name=regex_name),
+        #     rate__gte=data_filter.get('rate'),
+        #     status=data_filter.get('status'),
+        #     location__regex=r'(?i){location}'.format(location=regex_location),
+        #     categories=data_filter.get('categories'),
+        #     cost__gte=data_filter.get('cost_gte'),
+        #     cost__lte=data_filter.get('cost_lte')
+        #     ).order_by(
+        #         data_filter.get('sort_rate'),
+        #         data_filter.get('sort_duration'),
+        #         data_filter.get('sort_start_date'),
+        #         data_filter.get('sort_cost')
+
+        #     )
+        serializer = CoursesSerializator(f.qs, many=True)
         pages = Paginator(serializer.data, COURSES_ON_PAGE)
         num_of_pages = pages.num_pages
-        curent_page = pages.page(CURENT_PAGE).object_list
+        curent_page = pages.page(page).object_list
         response_data = {
             "num_of_pages":num_of_pages,
             "data":curent_page

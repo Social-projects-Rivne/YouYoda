@@ -1,6 +1,7 @@
 from django.urls import include, path
 from django.conf.urls import include, url
 
+from .views.categories import CategoriesList
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
 from .views.courses import TopCourses, SearchingCourses
@@ -28,5 +29,6 @@ urlpatterns = [
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('users/getlist', UsersGetList.as_view()),
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
-    path('user/social/login', UserSocialLogin.as_view(), name='social_login')
+    path('user/social/login', UserSocialLogin.as_view(), name='social_login'),
+    path('categories/list', CategoriesList.as_view(), name='categories-list')
 ]
