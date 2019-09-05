@@ -32,17 +32,14 @@ export default class SearchingCourses extends React.Component{
           let response = await API.get('/courses/search', {
             params: {
                 page:this.state.curentpage,
-                coursename: '',
-                rate_gte: 5,
-                status_in: ["Open", "In Progres"],
-                location: '',
-                categories_in: [1, 2],
-                cost_gte: 0,
-                cost_lt: 10000,
-                sort_rate: "rate",
-                sort_duration: "duration",
-                sort_start_date: "start_date",
-                sort_cost: "cost"
+                coursename__icontains: '',
+                rate__gte: 5,
+                status__in: "Open,In Progres",
+                location__icontains: '',
+                categories__in: "1,2",
+                cost__gt: 0,
+                cost: 0,
+                order_by: "rate"
             }
           })
 

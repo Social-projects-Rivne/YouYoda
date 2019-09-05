@@ -13,13 +13,20 @@ class CharInFilter(django_filters.BaseInFilter, django_filters.CharFilter):
 #         return qs
 class CoursesFilter(django_filters.FilterSet):
 
-    cost = django_filters.NumberFilter()
-    cost_gte = django_filters.NumberFilter(field_name='cost', lookup_expr='gte')
-    cost_lt = django_filters.NumberFilter(field_name='cost', lookup_expr='lt')
-    rate_gte = django_filters.NumberFilter(field_name='rate', lookup_expr='gte')
-    status_in = CharInFilter(field_name='status', lookup_expr='in')
-    categories_in = NumberInFilter(field_name='categories', lookup_expr='in')
+    # cost = django_filters.NumberFilter()
+    # cost_gte = django_filters.NumberFilter(field_name='cost', lookup_expr='gte')
+    # cost_lt = django_filters.NumberFilter(field_name='cost', lookup_expr='lt')
+    # rate_gte = django_filters.NumberFilter(field_name='rate', lookup_expr='gte')
+    # status_in = django_filters.CharFilter(field_name='status', lookup_expr='in')
+    # categories_in = NumberInFilter(field_name='categories_id', lookup_expr='in')
+    # categories = django_filters.NumberFilter()
+    # status = django_filters.CharFilter(field_name='status')
+
 
     class Meta:
         model = Courses
-        fields = ['cost', 'rate', 'status', 'categories']
+        # fields = ['cost', 'rate', 'status', 'categories']
+        fields = {
+            'cost': ['lt', 'gte'],
+            'status': ['in'],
+        }

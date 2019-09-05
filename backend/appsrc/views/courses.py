@@ -9,12 +9,12 @@ from django.views.decorators.cache import cache_page
 
 from ..models import Courses
 from ..serializers.courses_serializer import CoursesSerializator
-from ..filter import CoursesFilter
+
 
 NUMBER_OF_TOP = 6
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
-PAGE_NUMBER = 1
 COURSES_ON_PAGE = 4
+SEARCH_FIELDS = ['status__in']
 
 class TopCourses(APIView):
     """Takes data from CoursesTopSerializator for view top rate courses"""
@@ -33,29 +33,34 @@ class SearchingCourses(APIView):
 
     permission_classes = [permissions.AllowAny,]
 
-    def get(self, request):
+    def post(self, request):
 
-        data_filter=request.query_params
+        data_filter=request.data
         page = request.query_params.get('page')
         regex_name = data_filter.get('coursename')
         regex_location = data_filter.get('location')
+        courses = Courses.objects.all()
 
-        # for field in data_filter:
-        #     if field:
-        #         courses = Courses.objects.filter(field=data_filter[field])
+        for field in data_filter:
+            if field and field in SEARCH_FIELDS and data_filter[field]:
+                if field.endswith("__in"): 
+                    value = data_filter[field].split(',').strip
+                else:
+                    value = data_filter[field]
+                courses = courses.filter(**{field: value})
+                
+        # courses= courses.order_by()
 
+        # f = CoursesFilter(request.GET, queryset=Courses.objects.filter(
+        #         coursename__regex = r'(?i){name}'.format(name=regex_name),
+        #         location__regex=r'(?i){location}'.format(location=regex_location)
+        #     ))
 
-        f = CoursesFilter(request.GET, queryset=Courses.objects.filter(
-                coursename__regex = r'(?i){name}'.format(name=regex_name),
-                location__regex=r'(?i){location}'.format(location=regex_location)
-            ))
-
-        # courses = Courses.objects
 
         #     coursename__regex = r'(?i){name}'.format(name=regex_name),
         #     rate__gte=data_filter.get('rate'),
         #     status=data_filter.get('status'),
-        #     categories=data_filter.get('categories'),
+        #     categories__in=data_filter.get('categories_in'),
         #     cost__gte=data_filter.get('cost_gte'),
         #     cost__lte=data_filter.get('cost_lte')
         #     ).order_by(
@@ -65,7 +70,7 @@ class SearchingCourses(APIView):
         #         data_filter.get('sort_cost')
 
         #     )
-        serializer = CoursesSerializator(f.qs, many=True)
+        serializer = CoursesSerializator(courses, many=True)
         pages = Paginator(serializer.data, COURSES_ON_PAGE)
         num_of_pages = pages.num_pages
         curent_page = pages.page(page).object_list
