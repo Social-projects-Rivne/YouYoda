@@ -6,6 +6,7 @@ from django.core.files.storage import FileSystemStorage
 
 
 class FileUploadView(APIView):
+    """Updates path of users avatar in DB"""
     parser_class = (FileUploadParser,)
 
     def post(self, request, *args, **kwargs):
