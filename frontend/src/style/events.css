@@ -9,23 +9,29 @@
 .btn-search-events-title {
 	font-family: Roboto Condensed;
 	font-weight: bold;
-	/*font-size: 20px;*/
 }
 
 .search-input-group {
-	margin-top: 10%;
-	margin-bottom: 10%;
+	margin-bottom: 3%;
+}
+
+.search-input {
+	justify-content: right;
+	margin-right: 20px;
+	padding-right: 12px;
+}
+
+.search-input-select {
+	width: 215px;
 }
 
 /* TITLE */
 .title-events {
 	text-align: center;
 	font-weight: bold;
-	margin-top: 5%;
-	margin-bottom: 10%;
+	margin-top: 8%;
 	font-family: Roboto Condensed;
-	font-size: 48px;
-	line-height: 56px;
+	font-size: 40px;
 }
 
 /* EVENTS */
