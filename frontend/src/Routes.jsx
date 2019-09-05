@@ -1,18 +1,22 @@
 import React from 'react';
-
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
-import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
-import Home from './Pages/Home';
-import MainLayout from './Pages/MainLayout';
-import EditPageProfile from "./Pages/EditPageProfile";
-import NotFoundPage from './Pages/NotFoundPage';
-import EnterNewPassword from './Components/EnterNewPassword';
-import SendActivationEmail from './Components/SendActivationEmail';
-import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
-import ResetPassword from './Components/ResetPassword';
-import Profile from './Pages/Profile';
 
+import AdminDashboard from './Components/AdminDashboard';
+import AdminPage from "./Pages/AdminPage";
+import AdminPageInner from './Components/AdminPageInner';
+import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
+import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
+import CourseDetail from './Components/CourseDetail';
+import Home from './Pages/Home';
+import HomeCourses from './Components/HomeCourses';
+import EditPageProfile from "./Pages/EditPageProfile";
+import EnterNewPassword from './Components/EnterNewPassword';
+import MainLayout from './Pages/MainLayout';
+import NotFoundPage from './Pages/NotFoundPage';
+import Profile from './Pages/Profile';
+import ResetPassword from './Components/ResetPassword';
+import SendActivationEmail from './Components/SendActivationEmail';
 
 
 export default class Routes extends React.Component{
@@ -44,13 +48,24 @@ export default class Routes extends React.Component{
                 <Route exact path='/activate/user/:uid/:token'
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
                 />
-                <Route path="*" component={NotFoundPage} />
+                <Route exact path='/course/detail'
+                   render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
+                />
+               <Route exact path='/admin'
+                    render={()=><AdminPage><AdminDashboard/></AdminPage>}
+                />
+                <Route exact path={'/admin/:option'}
+                    render={()=><AdminPage><AdminPageInner/></AdminPage>}
+                />
+                
             </Switch>
+            
             </Route>
-
+            <Route path="*" component={NotFoundPage} 
+                />
         </Switch>
         </Router>
-    </div>
+      </div>
   );
 }
 };
