@@ -71,6 +71,7 @@ class FillEditPage extends React.Component {
         payLoad.avatar_url = this.state.avatar_url;
         payLoad.password = this.state.password;
         await this.postUser(payLoad)
+        toast.success('Changes saved');
     };
 
     updateField = (event) => {

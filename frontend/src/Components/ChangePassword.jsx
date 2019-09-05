@@ -2,6 +2,7 @@ import React from 'react';
 
 import {FormErrors} from '../api/FormError';
 import {API} from '../api/axiosConf';
+import {toast} from "react-toastify";
 
 
 export default class ChangePassword extends React.Component {
@@ -57,6 +58,7 @@ export default class ChangePassword extends React.Component {
         try {
             const data = {email: this.props.email, password: this.state.new_password}
             await API.put('user/profile/change_password', data);
+            toast.success('Password changed!');
         } catch (error) {
             console.error(error);
         }
