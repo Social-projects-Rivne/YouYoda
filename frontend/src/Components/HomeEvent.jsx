@@ -111,6 +111,7 @@ export default class HomeEvent extends React.Component{
                             </Modal>
                         </Col>
                     </Row>
+
                     <Row className="d-flex justify-content-end">
                         <div className="more-courses-events">
                             <button className="learn-more">
@@ -120,7 +121,8 @@ export default class HomeEvent extends React.Component{
                                 <p className="button-text">More Events</p>
                             </button>
                         </div>
-                        </Row>
+                    </Row>
+
                 </Container>
             </div>
         )

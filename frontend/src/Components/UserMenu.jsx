@@ -4,9 +4,12 @@ import {Dropdown, DropdownToggle, DropdownMenu} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { isAuthenticated } from '../utils';
+import { isAuthenticated, isAdmin, isModerator } from '../utils';
 import { logOut } from '../api/logOut';
 
+
+const HOSTNAME_PORT = "http://localhost:8000";
+const DEFAULT_AVATAR_PATH = "/media/avatar.png";
 
 export class UserMenu extends React.Component{
     constructor(props) {
@@ -41,19 +44,31 @@ export class UserMenu extends React.Component{
             }
     }
   render () {
-      const { redirect } = this.state;
-      if (redirect) {
-         return <Redirect to='/'/>;
-      }
+    let alt_avatar;
+    if(!localStorage.getItem("avatar_url")){
+        alt_avatar = HOSTNAME_PORT + DEFAULT_AVATAR_PATH;
+    }else {
+        alt_avatar = HOSTNAME_PORT + localStorage.getItem("avatar_url")
+    }
+    const { redirect } = this.state;
+    if (redirect) {
+       return <Redirect to='/'/>;
+    }
+    let ManageDashboard;
+    if (isAdmin())
+        ManageDashboard = <Link to="/admin" className="dropdown-item">Admin Dashboard</Link>;
+    else if (isModerator())
+        ManageDashboard = <Link to="/moderator" className="dropdown-item">Moderator Dashboard</Link>;
     return (
       <div className={`header-user-menu ${isAuthenticated("show")}`}>
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropdowntoggle}>
             <DropdownToggle className="dropdown-button">
-              <img src={require('../img/content/profile_photo.png')}
+              <img src={alt_avatar}
                       className="profile-photo-dropdown" alt="profile"/>
             </DropdownToggle>
             <DropdownMenu right>
+                {ManageDashboard}
                 <Link to="/profile" className="dropdown-item">View profile</Link>
                 <Link to="/editprofile" className="dropdown-item">User settings</Link>
                 <Link to="" className="dropdown-item">Create course</Link>

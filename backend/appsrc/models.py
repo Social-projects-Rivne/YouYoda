@@ -36,7 +36,7 @@ class YouYodaUser(AbstractUser):
     i_like = models.TextField(blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     phone_number = models.CharField(max_length=13, blank=True, null=True)
-    avatar_url = models.CharField(max_length=80, blank=True, null=True)
+    avatar_url = models.CharField(max_length=255, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
 

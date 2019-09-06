@@ -373,6 +373,9 @@
     right: 0px;
     top: 5px;
 }
+.header-user-menu a {
+    cursor: pointer;
+}
 .auth-display-none {
     display: none;
 }

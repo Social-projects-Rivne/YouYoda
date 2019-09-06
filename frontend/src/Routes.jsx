@@ -1,6 +1,10 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
+
+import AdminDashboard from './Components/AdminDashboard';
+import AdminPage from "./Pages/AdminPage";
+import AdminPageInner from './Components/AdminPageInner';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
@@ -55,13 +59,21 @@ export default class Routes extends React.Component{
                 <Route exact path='/course/detail'
                    render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
                 />
-                
-            </Route>
 
+               <Route exact path='/admin'
+                    render={()=><AdminPage><AdminDashboard/></AdminPage>}
+                />
+                <Route exact path={'/admin/:option'}
+                    render={()=><AdminPage><AdminPageInner/></AdminPage>}
+                />
+                
+            
+
+            </Route>
         </Switch>
         {/* <Route path="*" component={NotFoundPage} /> */}
         </Router>
-    </div>
+      </div>
   );
 }
 };

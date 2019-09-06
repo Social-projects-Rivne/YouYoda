@@ -118,6 +118,13 @@ input.form-control.validate {
 .custom-title span {
     display: block;
 }
+.btnSocial {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 0px transparent;
+}
 
 button.close {
     position: absolute;
@@ -152,7 +159,10 @@ button.close {
 .btn-color-w:hover {
     color: #fff;
 }
-
+.social-networks {
+    position: relative;
+    right: 20px;
+}
 
 @media (min-width: 576px)
 {
