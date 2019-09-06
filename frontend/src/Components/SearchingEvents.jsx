@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-import {API} from '../api/axiosConf';
+import { API } from '../api/axiosConf';
 import Event from './event';
 import '../api/pagination';
 
@@ -29,12 +29,18 @@ export default class SearchingEvents extends React.Component{
 
     getData = async() => {
         try {
-          let response = await API.get('/events/search', {
-            params: {
-                pagenumber:this.state.curentpage,
-                name: 'vent',
-            }
-          })
+          let response = await API.post('/events/search', {
+                name__icontains: '',
+                location__icontains: '',
+                categories__in: '',
+                order_by: '-date'
+          },
+          {
+              params: {
+                  page:this.state.curentpage,
+              }
+          }
+      )
 
           this.setState({
               numberofpages:response.data.num_of_pages,
@@ -56,10 +62,11 @@ export default class SearchingEvents extends React.Component{
         await this.getData()
     }
 
+
   render(){
-      const PAGES = []
+      const pages = []
       for(let i=1; i<=this.state.numberofpages; i++){
-           PAGES.push(
+           pages.push(
                <a   href={`#!${i}`}
                     className="cdp_i"
                     key={i+1}
@@ -68,14 +75,18 @@ export default class SearchingEvents extends React.Component{
                {i}</a>
            )
        }
-
+       
+       let visibpag = 'visible';
+       if (this.state.numberofpages < 2) {
+           visibpag = 'hidden'
+       }
     return (
         <Router>
           <>
             <Container>
                 <Route
                     path='/events/search:page'
-                    render={() => <Event enentList={this.state.eventList}/>}
+                    render={() => <Event eventList={this.state.eventList}/>}
                 />
                 <Route
                     exact
@@ -83,13 +94,13 @@ export default class SearchingEvents extends React.Component{
                     render={() => <Event eventList={this.state.eventList}/>}
                   />
                 <Row>
-                    <Col>
+                    <Col style={{visibility:visibpag}}>
                         <div className="content_detail__pagination cdp" actpage="1">
                 			<a href="#!-1"
                                 className="cdp_i"
                                 onClick={(e) => this.changePrevNext(-1)}
                             >Prev</a>
-                                {PAGES}
+                                {pages}
                 			<a href="#!+1"
                                 className="cdp_i"
                                 onClick={(e) => this.changePrevNext(1)}

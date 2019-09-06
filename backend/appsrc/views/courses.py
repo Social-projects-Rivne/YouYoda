@@ -9,7 +9,7 @@ from django.views.decorators.cache import cache_page
 
 from ..models import Courses
 from ..serializers.courses_serializer import CoursesSerializator
-from ..filter import CoursesFilter
+
 
 NUMBER_OF_TOP = 6
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)

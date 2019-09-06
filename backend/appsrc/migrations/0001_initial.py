@@ -51,16 +51,16 @@ def insertData(apps, schema_editor):
 
     Categories = apps.get_model('appsrc', 'Categories')
     Categories.objects.create(
-        id=1, name="other"
+        id=1, name="Other"
     )
     Categories.objects.create(
-        id=2, name="sport"
+        id=2, name="Sport"
     )
     Categories.objects.create(
-        id=3, name="music"
+        id=3, name="Music"
     )
     Categories.objects.create(
-        id=4, name="software"
+        id=4, name="Software"
     )
 
     Courses = apps.get_model('appsrc', 'Courses')
@@ -159,7 +159,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('coursename', models.CharField(max_length=60)),
-                ('status', models.CharField(max_length=10)),
+                ('status', models.CharField(max_length=50)),
                 ('description', models.TextField(blank=True, null=True)),
                 ('is_public', models.BooleanField()),
                 ('start_date', models.DateTimeField()),

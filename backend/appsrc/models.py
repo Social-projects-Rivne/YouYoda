@@ -56,7 +56,7 @@ class TrainerCertificates(models.Model):
 class Courses(models.Model):
     coursename = models.CharField(max_length=60)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10)
+    status = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     is_public = models.BooleanField()
     start_date = models.DateTimeField(blank=False)

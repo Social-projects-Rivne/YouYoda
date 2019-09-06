@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-import {API} from '../api/axiosConf';
+import { API } from '../api/axiosConf';
 import Cours from './cours';
 import '../api/pagination';
 

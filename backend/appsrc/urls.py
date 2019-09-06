@@ -8,7 +8,7 @@ from .views.user_login_logout import UserLogin, UserLogout
 from .views.user_registration import UserRegistration
 from .views.user_to_trainer import UserToTrainer
 from .views.courses import TopCourses, SearchingCourses
-from .views.events import TopEvents
+from .views.events import TopEvents, SearchingEvents
 from .views.categories import CategoriesList
 
 
@@ -22,8 +22,7 @@ urlpatterns = [
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
     path('courses/top', TopCourses.as_view(), name='top-courses'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
-    # path('events/search', SearchingEvents.as_view(), name='search-events'),
+    path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('categories/list', CategoriesList.as_view(), name='categories-list'),
-
 ]
