@@ -3,7 +3,7 @@ import React from 'react';
 import { Container, Row, Col, Form, Input, Button, InputGroup, InputGroupText, InputGroupAddon } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import FilterSideBar from './FilterSideBar';
+import FilterCoursesSideBar from './FilterCoursesSideBar';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
@@ -19,7 +19,13 @@ export default class SearchingCourses extends React.Component{
         numberofpages: 0,
         curentpage: 1,
         coursesList:[],
-        orderBy: "",
+        orderBy: '',
+        rate__lte: '',       
+        rate__gte: '',
+        cost__gt: '',
+        cost: '',
+        status__in: '',
+        categories__in: '',
       };
     }
 
@@ -69,6 +75,30 @@ export default class SearchingCourses extends React.Component{
         await this.getData()
     }
 
+    handleCategoriesList = (value) => {
+        this.setState({categories__in: value});
+      }
+
+    handleStatusList = (value) => {
+        this.setState({status__in: value}); 
+      } 
+
+    handleFreeData = (value) => {
+        this.setState({cost: value});
+      }
+
+    handlePaidData = (value) => {
+        this.setState({cost__gt: value});
+      }
+
+    handleRateGteData = (value) => {
+        this.setState({rate__gte: value});
+      } 
+
+    handleRateLteData = (value) => {
+        this.setState({rate__lte: value});
+      }   
+
     render(){
         const PAGES = []
         for(let i=1; i<=this.state.numberofpages; i++){
@@ -81,10 +111,16 @@ export default class SearchingCourses extends React.Component{
                  {i}</a>
              )
          };
-     console.log(this.state.orderBy)   
+    console.log(this.state);
     return (
           <div id="SearchingCourses">
-              <FilterSideBar />
+              <FilterCoursesSideBar sendCategoriesData={this.handleCategoriesList}
+                                    sendStatusData={this.handleStatusList}
+                                    sendCostPaidData={this.handlePaidData}
+                                    sendCostFreeData={this.handleFreeData}
+                                    sendRateGteData={this.handleRateGteData}
+                                    sendRateLteData={this.handleRateLteData}
+              />
               <div id="page-wrap">
                   <Router>
                       <Container>
@@ -114,11 +150,6 @@ export default class SearchingCourses extends React.Component{
                                       </InputGroupAddon>              
                                   </InputGroup>
                               </Col>
-                                  {/*<Col xs="8" md="4">
-                                      <Button color="warning" className="btn-search-events">
-                                          <span className="btn-search-events-title">SEARCH</span>
-                                      </Button>  
-                                  </Col>*/}
                           </Row> 
                           <Route
                               path='/courses/search:page'
