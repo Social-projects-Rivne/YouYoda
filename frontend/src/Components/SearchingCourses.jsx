@@ -29,19 +29,23 @@ export default class SearchingCourses extends React.Component{
 
     getData = async() => {
         try {
-          let response = await API.get('/courses/search', {
-            params: {
-                page:this.state.curentpage,
+          let response = await API.post('/courses/search', {
                 coursename__icontains: '',
-                rate__gte: 5,
-                status__in: "Open,In Progres",
+                rate__lte: '',
+                rate__gte: '',
+                status__in: '',
                 location__icontains: '',
-                categories__in: "1,2",
-                cost__gt: 0,
-                cost: 0,
-                order_by: "rate"
-            }
-          })
+                categories__in: '',
+                cost__gt: '',
+                cost: '',
+                order_by: 'rate'
+          },
+          {
+              params: {
+                  page:this.state.curentpage,
+              }
+          }
+      )
 
           this.setState({
               numberofpages:response.data.num_of_pages,
@@ -64,9 +68,9 @@ export default class SearchingCourses extends React.Component{
     }
 
   render(){
-      const PAGES = []
+      let pages = []
       for(let i=1; i<=this.state.numberofpages; i++){
-           PAGES.push(
+           pages.push(
                <a   href={`#!${i}`}
                     className="cdp_i"
                     key={i+1}
@@ -75,7 +79,10 @@ export default class SearchingCourses extends React.Component{
                {i}</a>
            )
        }
-
+       let visibpag = 'visible';
+       if (this.state.numberofpages < 2) {
+           visibpag = 'hidden'
+       }
     return (
 
         <Router>
@@ -91,13 +98,13 @@ export default class SearchingCourses extends React.Component{
                     render={() => <Cours coursesList={this.state.coursesList}/>}
                   />
                 <Row>
-                    <Col>
+                    <Col style={{visibility:visibpag}}>
                         <div className="content_detail__pagination cdp" actpage="1">
                 			<a href="#!-1"
                                 className="cdp_i"
                                 onClick={(e) => this.changePrevNext(-1)}
                             >Prev</a>
-                                {PAGES}
+                                {pages}
                 			<a href="#!+1"
                                 className="cdp_i"
                                 onClick={(e) => this.changePrevNext(1)}
