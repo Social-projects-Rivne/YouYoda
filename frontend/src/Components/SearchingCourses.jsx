@@ -18,10 +18,10 @@ export default class SearchingCourses extends React.Component{
       this.state = {
         numberofpages: 0,
         curentpage: 1,
-        coursesList:[]
+        coursesList:[],
+        orderBy: "",
       };
     }
-
 
     changePages = async(index) => {
         await this.setState({curentpage:index})
@@ -34,7 +34,7 @@ export default class SearchingCourses extends React.Component{
             params: {
                 page:this.state.curentpage,
                 coursename: 'cour',
-                rate: 5,
+                rate__gte: 5,
                 status: "Open",
                 location: "",
                 categories: 1,
@@ -43,7 +43,9 @@ export default class SearchingCourses extends React.Component{
                 sort_rate: "rate",
                 sort_duration: "duration",
                 sort_start_date: "start_date",
-                sort_cost: "cost"
+                sort_cost: "cost",
+                orderBy: this.state.orderBy,
+                /*categories__in:this.props.categories_list.join(',')*/
             }
           })
 
@@ -67,89 +69,88 @@ export default class SearchingCourses extends React.Component{
         await this.getData()
     }
 
-  render(){
-      const PAGES = []
-      for(let i=1; i<=this.state.numberofpages; i++){
-           PAGES.push(
-               <a   href={`#!${i}`}
-                    className="cdp_i"
-                    key={i+1}
-                    onClick={() => this.changePages(i)}
-                >
-               {i}</a>
-           )
-       }
-
+    render(){
+        const PAGES = []
+        for(let i=1; i<=this.state.numberofpages; i++){
+             PAGES.push(
+                 <a   href={`#!${i}`}
+                      className="cdp_i"
+                      key={i+1}
+                      onClick={() => this.changePages(i)}
+                  >
+                 {i}</a>
+             )
+         };
+     console.log(this.state.orderBy)   
     return (
-        <div id="SearchingCourses">
-            <FilterSideBar />
-            <div id="page-wrap">
-                <Router>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <h1 className="title-events">Courses</h1>
-                            </Col>
-                        </Row>
-                        <Row className="search-input-group">
-                            <Col>
-                                <InputGroup className="search-input">
-                                    <InputGroupAddon addonType="prepend">
-                                        <InputGroupText className="search-input-icon">
-                                           {/*<FontAwesomeIcon icon="search"/>*/}
-                                            <FontAwesomeIcon icon="sort"/>
-                                        </InputGroupText>
-                                    </InputGroupAddon>
-                                        {/*<Input placeholder="Search by trainer, events, tag" />*/}
-                                    <InputGroupAddon addonType="append" className="search-input-select">
-                                        <Input type="select" name="select" id="search-input-select">
-                                            <option value="" selected>Sort by</option>
-                                            <option>Duration<FontAwesomeIcon icon="sort-amount-up"/>
-                                                            <FontAwesomeIcon icon="sort-amount-down-alt"/></option>
-                                            <option>Start date</option>
-                                            <option>Cost</option>
-                                            <option>Rate</option>
-                                        </Input>
-                                    </InputGroupAddon>              
-                                </InputGroup>
-                            </Col>
-                                {/*<Col xs="8" md="4">
-                                    <Button color="warning" className="btn-search-events">
-                                        <span className="btn-search-events-title">SEARCH</span>
-                                    </Button>  
-                                </Col>*/}
-                        </Row> 
-                        <Route
-                            path='/courses/search:page'
-                            render={() => <Cours coursesList={this.state.coursesList}/>}
-                        />
-                        <Route
-                            exact
-                            path='/courses/search'
-                            render={() => <Cours coursesList={this.state.coursesList}/>}
-                        />
-                        <Row>
-                            <Col>
-                                <div className="content_detail__pagination cdp" actpage="1">
-                                    <a href="#!-1"
-                                        className="cdp_i"
-                                        onClick={(e) => this.changePrevNext(-1)}
-                                        >Prev</a>
-                                        {PAGES}
-                                    <a href="#!+1"
-                                        className="cdp_i"
-                                        onClick={(e) => this.changePrevNext(1)}
-                                        >Next</a>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>  
-                </Router>
-            </div>
-        </div>
-   )
-  }
-};
+          <div id="SearchingCourses">
+              <FilterSideBar />
+              <div id="page-wrap">
+                  <Router>
+                      <Container>
+                          <Row>
+                              <Col>
+                                  <h1 className="title-events">Courses</h1>
+                              </Col>
+                          </Row>
+                          <Row className="search-input-group">
+                              <Col>
+                                  <InputGroup className="search-input">
+                                      <InputGroupAddon addonType="prepend">
+                                          <InputGroupText className="search-input-icon">
+                                             {/*<FontAwesomeIcon icon="search"/>*/}
+                                              <FontAwesomeIcon icon="sort"/>
+                                          </InputGroupText>
+                                      </InputGroupAddon>
+                                          {/*<Input placeholder="Search by trainer, events, tag" />*/}
+                                      <InputGroupAddon addonType="append" className="search-input-select">
+                                          <Input type="select" name="select" id="search-input-select">
+                                              <option value="" selected>Sort by</option>
+                                              <option onClick={() => this.setState({ orderBy: 'duration' })}>Duration</option>
+                                              <option onClick={() => this.setState({ orderBy: 'start_date'})}>Start date</option>
+                                              <option onClick={() => this.setState({ orderBy: 'cost'})}>Cost</option>
+                                              <option onClick={() => this.setState({ orderBy: 'rate'})}>Rate</option>
+                                          </Input>
+                                      </InputGroupAddon>              
+                                  </InputGroup>
+                              </Col>
+                                  {/*<Col xs="8" md="4">
+                                      <Button color="warning" className="btn-search-events">
+                                          <span className="btn-search-events-title">SEARCH</span>
+                                      </Button>  
+                                  </Col>*/}
+                          </Row> 
+                          <Route
+                              path='/courses/search:page'
+                              render={() => <Cours coursesList={this.state.coursesList}/>}
+                          />
+                          <Route
+                              exact
+                              path='/courses/search'
+                              render={() => <Cours coursesList={this.state.coursesList}/>}
+                          />
+                          <Row>
+                              <Col>
+                                  <div className="content_detail__pagination cdp" actpage="1">
+                                      <a href="#!-1"
+                                          className="cdp_i"
+                                          onClick={(e) => this.changePrevNext(-1)}
+                                          >Prev</a>
+                                          {PAGES}
+                                      <a href="#!+1"
+                                          className="cdp_i"
+                                          onClick={(e) => this.changePrevNext(1)}
+                                          >Next</a>
+                                  </div>
+                              </Col>
+                          </Row>
+                      </Container>  
+                  </Router>
+              </div>
+          </div>
+     )
+    }
+  };
 
 
         

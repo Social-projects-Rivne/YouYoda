@@ -14,4 +14,4 @@ class CategoriesSerializer(serializers.ModelSerializer):
 
 		 model = Categories
 
-		 fields = ("name",)
+		 fields = ("name", "id")
