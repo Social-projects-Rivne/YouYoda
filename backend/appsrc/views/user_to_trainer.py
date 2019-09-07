@@ -22,20 +22,28 @@ class UserToTrainer(APIView):
 	def patch(self, request):
 		"""Receives and updates user role"""
 		status_code = None
-		request_data = {
-			'id': request.data.get('id'),
-			'is_trainer': request.data.get('is_trainer')
+		comments_data = request.data.get('data_obj')
+		user_ids = request.data.get('id')
+		user_data = {
+			#'id': request.data.get('id'),
+			'is_trainer': request.data.get('is_trainer')#,'data_obj': request.data.get('data_obj')
 		}
 		if 'status_code' in request.data:
 			status_code = request.data.get('status_code')
-		if 'id' in request.data:
-			user = get_object_or_404(YouYodaUser, id=request_data['id'])
-			serializer = UserToTrainerSerializer(user, data=request_data, partial=True)
-			if serializer.is_valid():
-				serializer.save()
-				if status_code is not None and status_code in (STATUS_APPROVED, STATUS_REJECTED):
-					request_is = UserRequests.objects.select_related().filter(author_id=request_data['id'], status_code=STATUS_NEW).update(status_code=status_code)
-				return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+		if status_code is not None and status_code in (STATUS_APPROVED, STATUS_REJECTED):
+			for req_key in comments_data:
+				request_data = UserRequests.objects.get(id=comments_data[req_key]['id'], status_code=STATUS_NEW)
+				if request_data and request_data.author_id in user_ids: #if 'id' in request.data:
+					user_data['id'] = request_data.author_id
+					user = get_object_or_404(YouYodaUser, id=user_data['id'])
+					serializer = UserToTrainerSerializer(user, data=user_data, partial=True)
+					if serializer.is_valid():
+						serializer.save()
+						request_data.status_code = status_code
+						request_data.comment = comments_data[req_key]['comment']
+						request_data.save(update_fields=['status_code','comment'])
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserSendRequest(APIView):

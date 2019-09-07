@@ -2,9 +2,9 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Row, Col, Container } from 'reactstrap';
 
-import AdminUsers from './AdminUsers';
 import AdminLogs from './AdminLogs';
 import AdminRequests from './AdminRoleRequests';
+import AdminUsers from './AdminUsers';
 
 
 const PAGES = [
