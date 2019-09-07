@@ -31,7 +31,9 @@ class TopEvents(APIView):
 
 
 class SearchingEvents(APIView):
-
+    """Filtering events by different values and make pagination.
+        Takes request data like SEARCH_FIELDS and params current page.
+        Return number of pages and page of event data """
     permission_classes = [permissions.AllowAny,]
 
     def post(self, request):

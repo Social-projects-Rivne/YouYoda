@@ -51,7 +51,6 @@ export default class SearchingCourses extends React.Component{
               numberofpages:response.data.num_of_pages,
               coursesList:response.data.data
           })
-          toast.success("after" + this.state.curentpage)
         }
         catch (error) {
           toast.error(error.message)

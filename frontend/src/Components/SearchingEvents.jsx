@@ -46,7 +46,6 @@ export default class SearchingEvents extends React.Component{
               numberofpages:response.data.num_of_pages,
               eventList:response.data.data
           })
-          toast.success("after" + this.state.curentpage)
         }
         catch (error) {
           toast.error(error.message)
@@ -75,7 +74,7 @@ export default class SearchingEvents extends React.Component{
                {i}</a>
            )
        }
-       
+
        let visibpag = 'visible';
        if (this.state.numberofpages < 2) {
            visibpag = 'hidden'

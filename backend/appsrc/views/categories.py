@@ -13,14 +13,13 @@ from ..serializers.categories_serializer import CategoriesSerializer
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 class CategoriesList(APIView):
-    """Takes data from EventsTopSerializator for view latest events"""
+    """Takes data from CategoriesSerializer for view list of categories"""
 
     permission_classes = [permissions.AllowAny,]
 
     @method_decorator(cache_page(CACHE_TTL), name='categories_list')
     def get(self, request):
-        """First, check request data in cache, then pull data from db
-            and set to cache"""
+
         categories = Categories.objects.all()
         serializer = CategoriesSerializer(categories, many=True)
         return Response(serializer.data)

@@ -32,7 +32,9 @@ class TopCourses(APIView):
 
 
 class SearchingCourses(APIView):
-
+    """Filtering courses by different values and make pagination.
+        Takes request data like SEARCH_FIELDS and params current page.
+        Return number of pages and page of cours data """ 
     permission_classes = [permissions.AllowAny,]
 
     def post(self, request):
