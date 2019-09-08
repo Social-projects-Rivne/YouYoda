@@ -4,8 +4,7 @@ import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
 import { toast } from 'react-toastify';
 
-import { API } from '../api/axiosConf';
-import {getRequestsList} from '../api/getAdminRequests';
+import { getRequestsList, patchRequests } from '../api/getAdminRequests';
 
 
 class AdminRequests extends React.Component {
@@ -15,8 +14,7 @@ class AdminRequests extends React.Component {
         this.state = {
             dataList: [],
             checkedIds: [],
-            checkedComments: [],
-            readOnlyInputs: []
+            checkedComments: []
         };
     }
 
@@ -47,8 +45,12 @@ class AdminRequests extends React.Component {
         });
     }
 
+    /**
+     * filters and sets state for selected data item for ability to change comment input
+     * @param {number} indexVal - id of item
+     * @returns boolean
+    */
     checkReadOnly = (indexVal) => {
-        // filters and sets state for selected data item for ability to change comment input
         let fileredItems = this.state.checkedComments.filter((value) => value === indexVal);
         if(fileredItems.length > 0)
             return false; //can write
@@ -56,8 +58,12 @@ class AdminRequests extends React.Component {
             return true; //only read
     }
 
+    /**
+     * filters of data object which is changing and updates comment input value
+     * @param {string} newValue - new value for input
+     * @param {number} id - id of item
+    */
     onChangeCommentVal(newValue, id) {
-        // filters of data object which is changing and updates comment input value
         this.state.dataList.filter((value, index) => {
             if(value.id === id)
             {
@@ -67,8 +73,10 @@ class AdminRequests extends React.Component {
         });
     }
 
-    updateRequestTable = () => {
-        // update requests table    
+    /**
+     * updates requests table, clear selected items and update requests list
+    */
+    updateRequestTable = () => {   
         var requestList = getRequestsList('N');
         requestList.then( valueRequests => {
             this.setState({
@@ -79,8 +87,10 @@ class AdminRequests extends React.Component {
         this.setState({ checkedIds: [], checkedComments: [] });
     }
 
+    /**
+     * getting object of selected requests
+    */
     getArrayWithComments = () => {
-        // getting object of selected requests
         var itemIds = {};
         this.state.checkedComments.map(number => {
             var commentValue = document.getElementById('comment_'+number).value;
@@ -90,39 +100,43 @@ class AdminRequests extends React.Component {
     }
 
     approveRequest = async() => {
-        const URLPATH = 'user/totrainer';
         var objIdsComments = this.getArrayWithComments();
-        const USERDATA = {
+        var userData = {
             "status_code": 'A',
             "is_trainer": true,
             "id": this.state.checkedIds,
             "data_obj": objIdsComments
         };
-        try {
-            await API.patch(URLPATH, USERDATA);
-            toast.success('Requests successfully was approved.');
-            this.updateRequestTable();
-        } catch (error) {
-            toast.error('Request failed. Report to the admin of the system.');
-        }
+        var response = patchRequests(userData);
+        response.then( valueResponse => {
+            if(valueResponse === true)
+            {
+                this.updateRequestTable();
+                toast.success('Requests successfully was approved.');
+            }
+            else
+                toast.error('Request failed. Report to the admin of the system.');
+        });
     }
 
     rejectRequest = async() => {
-        const URLPATH = 'user/totrainer';
         var objIdsComments = this.getArrayWithComments();
-        const USERDATA = {
+        var userData = {
             "status_code": 'R',
             "is_trainer": false,
             "id": this.state.checkedIds,
             "data_obj": objIdsComments
         };
-        try {
-            await API.patch(URLPATH, USERDATA);
-            toast.success('Requests successfully was rejected.');
-            this.updateRequestTable();
-        } catch (error) {
-            toast.error('Request failed. Report to the admin of the system.');
-        }
+        var response = patchRequests(userData);
+        response.then( valueResponse => {
+            if(valueResponse === true)
+            {
+                this.updateRequestTable();
+                toast.success('Requests successfully was rejected.');
+            }
+            else
+                toast.error('Request failed. Report to the admin of the system.');
+        });
     }
 
     componentWillMount() {
