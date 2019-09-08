@@ -32,7 +32,7 @@ export default class ResetPassword extends React.Component{
             try {
                 await axiosPost(URLPATH, USERDATA);
                 this.setState({ redirect: true });
-                toast.success('Thank you, now can Sign In');
+                toast.success('Thank you, now you can Sign In');
             } catch (error){
                 toast.error('Activation was failed. Please, contact administrator or support system ;)');
                 console.log(error.message)

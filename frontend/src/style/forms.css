@@ -1,9 +1,45 @@
+/* Animate all button */
+.btn-color-w:hover {
+    color: #fff;
+}
 .btn {
+    border-radius: 20px;	
+    overflow: hidden;
+    transform: translateZ(0);
+    border: none;
+}
+.btn:before, .btn:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-radius: 20px;
+    border: 4px solid transparent;
+    will-change: transform;
+    transition: transform 0.5s ease;
+    transform: translateZ(0);
+    visibility: hidden;
 }
-.btn:hover {
-    opacity: 0.8;
+.btn:before {
+    border-color: #ffc107 transparent;
+    transform: skew(-81deg, 0);
 }
+.btn:after {
+    border-color: transparent #ffc107;
+    transform: skew(0, 45deg);
+    transition: transform 0.5s;
+}
+.btn:hover {	
+    color: #000;
+    background-color: transparent;
+}
+.btn:hover:before, .btn:hover:after {
+    transform: skew(0, 0);
+    visibility: visible;
+}
+
 .modal .btn {
     width: 260px;
 }
@@ -82,6 +118,13 @@ input.form-control.validate {
 .custom-title span {
     display: block;
 }
+.btnSocial {
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 0px transparent;
+}
 
 button.close {
     position: absolute;
@@ -113,6 +156,13 @@ button.close {
 .login .form-horizontal {
     padding-right: 10%;
 }
+.btn-color-w:hover {
+    color: #fff;
+}
+.social-networks {
+    position: relative;
+    right: 20px;
+}
 
 @media (min-width: 576px)
 {
@@ -130,3 +180,4 @@ button.close {
         margin-bottom: 20px;
     }
 }
+

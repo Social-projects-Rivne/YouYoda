@@ -10,13 +10,7 @@ async function isAuthorized(checkParam) {
     try {
         const response = await API.post(
             'user/check',
-            datasend,
-            {
-                crossdomain: true,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
+            datasend)
             .then(response => {
                 if(response.status === 200){
                     if(response.data['data_status'])
