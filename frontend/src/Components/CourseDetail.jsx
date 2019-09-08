@@ -36,25 +36,34 @@ export default class CourseDetail extends React.Component{
             <div >
             <Container className="home-event">
             <Row>
-                <Col>
+                <Col className="d-flex justify-content-between">
                     <h1 className="secondary-header">{this.props.course.coursename}</h1>
-                    <p className="main-text header-course-detail">{this.props.course.description}</p>
+                    <div className="main-text star d-flex flex-wrap "> 
+                        <StarRatingComponent starCount={10} className="course-star-rating"
+                                             value={this.props.course.rate} />
+                        <div className="rate-num">
+                            <span className="rate-big">{this.props.course.rate}/</span>
+                            <span className="rate-small">10</span>   
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <img style={{maxWidth: "100%", height: "auto", width: '100%'}} src={this.props.course.cover_url} alt={this.props.course.coursename} />
+                    <h4 className="course-detail-h4">About:</h4> 
+                    <p className="main-text">{this.props.course.description}</p>
                 </Col>
             </Row>
             <Row>
                 <Col md="6" xs="12" className="course-detail-first-col">
-                    <p className="main-text"> 
-                        <StarRatingComponent starCount={10} className="course-star-rating"
-                                             value={this.props.course.rate} />   
-                    </p>
-                    <img style={{maxWidth: "100%", height: "auto", width: '100%'}} src={this.props.course.cover_url} alt={this.props.course.coursename} />
                 </Col>
                 <Col md="6" xs="12" className="course-detail-second-col">
                     <p className="main-text"><span className="main-text-span">Category:</span>{'  '}{this.props.course.categories}</p>
                     <p className="main-text">Trainer:{'  '}{this.props.course.owner}</p>
                     <p className="main-text"><span className="main-text-span">Start:</span>{'  '}{newCourseDate}</p>
-                    <p className="main-text">Duration:{'  '}{newCourseDuration}</p>
-                    <p className="main-text"><span className="main-text-span">Cost:</span>{'  '}{this.props.course.cost}</p>
+                    <p className="main-text">Duration:{'  '}{newCourseDuration} days </p>
+                    <p className="main-text"><span className="main-text-span">Cost:</span>{'  '}{this.props.course.cost} $</p>
                     <p className="main-text">Location:{'  '}{this.props.course.location}</p>
                     <p className="main-text"><span className="main-text-span">Limit of members:</span>{'  '}{this.props.course.members_limit}</p>
                     <p className="main-text">Status:{'  '}{this.props.course.status}</p>

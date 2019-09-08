@@ -97,9 +97,9 @@ export default class SearchingCourses extends React.Component{
       }   
 
     render(){
-        const PAGES = []
+        let pages = []
         for(let i=1; i<=this.state.numberofpages; i++){
-             PAGES.push(
+             pages.push(
                  <a   href={`#!${i}`}
                       className="cdp_i"
                       key={i+1}
@@ -107,8 +107,12 @@ export default class SearchingCourses extends React.Component{
                   >
                  {i}</a>
              )
-         };
-    console.log(this.state);
+         }
+         let visibpag = 'visible';
+         if (this.state.numberofpages < 2) {
+             visibpag = 'hidden'
+         }
+        console.log(this.state);
     return (
           <div id="SearchingCourses">
               <FilterCoursesSideBar sendCategoriesData={this.handleCategoriesList}
@@ -158,13 +162,13 @@ export default class SearchingCourses extends React.Component{
                               render={() => <Cours coursesList={this.state.coursesList}/>}
                           />
                           <Row>
-                              <Col>
+                              <Col style={{visibility:visibpag}}>
                                   <div className="content_detail__pagination cdp" actpage="1">
                                       <a href="#!-1"
                                           className="cdp_i"
                                           onClick={(e) => this.changePrevNext(-1)}
                                           >Prev</a>
-                                          {PAGES}
+                                          {pages}
                                       <a href="#!+1"
                                           className="cdp_i"
                                           onClick={(e) => this.changePrevNext(1)}
@@ -182,4 +186,3 @@ export default class SearchingCourses extends React.Component{
 
 
         
-     

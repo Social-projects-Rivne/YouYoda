@@ -489,3 +489,24 @@
     }
   }
   
+  .star {
+    position: relative;
+    top: 50px;
+  }
+  .rate-big {
+    font-size: 2rem;
+    color: green;
+  }
+  .rate-small {
+    font-size: 1rem;
+    color: #4f4f4f;
+    font-weight: 700;
+  }
+  .rate-num {
+    position: relative;
+    bottom: 8px;
+    margin-left: 15px;
+  }
+  .course-detail-h4 {
+    margin: 15px 0 15px 0;
+  }

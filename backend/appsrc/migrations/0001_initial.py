@@ -51,23 +51,23 @@ def insertData(apps, schema_editor):
 
     Categories = apps.get_model('appsrc', 'Categories')
     Categories.objects.create(
-        id=1, name="other"
+        id=1, name="Other"
     )
     Categories.objects.create(
-        id=2, name="sport"
+        id=2, name="Sport"
     )
     Categories.objects.create(
-        id=3, name="music"
+        id=3, name="Music"
     )
     Categories.objects.create(
-        id=4, name="software"
+        id=4, name="Software"
     )
 
     Courses = apps.get_model('appsrc', 'Courses')
     Courses.objects.create(id=1, coursename="Course1", owner_id=5, status="Open", description="Perfect for people who never swam",
         is_public=True, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=20, hours=10), rate=8,
         members_limit=20, categories_id=2, location="Rivne, Ukraine", cover_url="", cost=0)
-    Courses.objects.create(id=2, coursename="Course2", owner_id=5, status="In Progres", description="React Redux bla bla the best",
+    Courses.objects.create(id=2, coursename="Course2", owner_id=5, status="In Progress", description="React Redux bla bla the best",
         is_public=True, start_date=datetime.datetime.now(), duration=datetime.timedelta(days=10, hours=10), rate=7,
         members_limit=40, categories_id=3, location="Kiev, Ukraine", cover_url="", cost=0.5)
     Courses.objects.create(id=3, coursename="Course3", owner_id=4, status="Closed", description="Perfect for people who never swam",
@@ -159,7 +159,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('coursename', models.CharField(max_length=60)),
-                ('status', models.CharField(max_length=10)),
+                ('status', models.CharField(max_length=50)),
                 ('description', models.TextField(blank=True, null=True)),
                 ('is_public', models.BooleanField()),
                 ('start_date', models.DateTimeField()),
