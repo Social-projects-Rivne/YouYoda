@@ -10,7 +10,6 @@ import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
-import Events from './Pages/Events';
 import Home from './Pages/Home';
 import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
@@ -31,7 +30,6 @@ export default class Routes extends React.Component{
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
-            <Route exact path='/events' component={Events}/>
             <Route component={MainLayout}>
 
                 <Route exact path='/reset/password'
