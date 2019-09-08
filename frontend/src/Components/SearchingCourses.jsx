@@ -35,36 +35,33 @@ export default class SearchingCourses extends React.Component{
     }
 
     getData = async() => {
-        try {
-          let response = await API.get('/courses/search', {
-            params: {
-                page:this.state.curentpage,
-                coursename: 'cour',
-                rate__gte: 5,
-                status: "Open",
-                location: "",
-                categories: 1,
-                cost_gte: 0,
-                cost_lte: 10000,
-                sort_rate: "rate",
-                sort_duration: "duration",
-                sort_start_date: "start_date",
-                sort_cost: "cost",
-                orderBy: this.state.orderBy,
-                /*categories__in:this.props.categories_list.join(',')*/
-            }
-          })
-
-          this.setState({
-              numberofpages:response.data.num_of_pages,
-              coursesList:response.data.data
-          })
-          toast.success("after" + this.state.curentpage)
-        }
-        catch (error) {
-          toast.error(error.message)
-        }
-    }
+       try {
+         let response = await API.post('/courses/search', {
+               coursename__icontains: '',
+               rate__lte: this.state.rate__lte,
+               rate__gte: this.state.rate__gte,
+               status__in: this.state.status__in,
+               location__icontains: '',
+               categories__in: this.state.categories__in,
+               cost__gt: this.state.cost__gt,
+               cost: this.state.cost,
+               order_by: this.state.orderBy
+         },
+         {
+             params: {
+                 page:this.state.curentpage,
+             }
+         }
+     )
+         this.setState({
+             numberofpages:response.data.num_of_pages,
+             coursesList:response.data.data
+         })
+       }
+       catch (error) {
+         toast.error(error.message)
+       }
+   }
 
     async componentDidMount () {
         await this.getData()
