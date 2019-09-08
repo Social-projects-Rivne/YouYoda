@@ -1,14 +1,11 @@
 import React from 'react';
 
-import { css } from '@emotion/core';
+import { Container, Row, Col, Card, CardTitle, CardText, CardHeader, CardFooter, CardBody } from 'reactstrap';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { Container, Row, Col, Form, Input, Button, Card, CardTitle, CardText, CardHeader, CardFooter, CardBody } from 'reactstrap';
+import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { toast } from 'react-toastify';
 
-import { API } from '../api/axiosConf';
 import '../api/pagination';
 
 
@@ -33,7 +30,7 @@ function renderCourses(course) {
                     <CardTitle className="event-card-header">{course.coursename}</CardTitle>
                     <CardText>
                         <p><span className="main-text-span">Category:</span>{'  '}{course.categories}</p>
-                        <p>Duration:{'  '}{newCourseDuration}</p>
+                        <p>Duration:{'  '}{newCourseDuration}{" "}days</p>
                         <p><span className="main-text-span">Trainer:</span>{'  '}{course.owner}</p>
                         <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p> 
                     </CardText>

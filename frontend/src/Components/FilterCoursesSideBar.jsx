@@ -72,7 +72,7 @@ export default class FilterCoursesSideBar extends React.Component {
           status_list.pop(value);
       }
       else {
-      status_list.push(value)
+          status_list.push(value)
       };
       this.setState({
          status_list: status_list

@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Container, Row, Col, Form, Input, Button, InputGroup, InputGroupText, InputGroupAddon } from 'reactstrap';
+import { BrowserRouter as Router, Route} from "react-router-dom";
+import { Container, Row, Col, Input, InputGroup, InputGroupText, InputGroupAddon } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import FilterCoursesSideBar from './FilterCoursesSideBar';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
 import Cours from './cours';
+import FilterCoursesSideBar from './FilterCoursesSideBar';
 import '../api/pagination';
 
 
@@ -19,7 +19,7 @@ export default class SearchingCourses extends React.Component{
         numberofpages: 0,
         curentpage: 1,
         coursesList:[],
-        orderBy: '',
+        order_by: 'rate',
         rate__lte: '',       
         rate__gte: '',
         cost__gt: '',
@@ -45,7 +45,7 @@ export default class SearchingCourses extends React.Component{
                categories__in: this.state.categories__in,
                cost__gt: this.state.cost__gt,
                cost: this.state.cost,
-               order_by: this.state.orderBy
+               order_by: this.state.order_by
          },
          {
              params: {
@@ -64,37 +64,48 @@ export default class SearchingCourses extends React.Component{
    }
 
     async componentDidMount () {
-        await this.getData()
+        await this.getData();
     }
 
     changePrevNext = async(param) => {
-        await this.setState({curentpage:(this.state.curentpage+param)})
-        await this.getData()
+        await this.setState({curentpage:(this.state.curentpage+param)});
+        await this.getData();
     }
 
-    handleCategoriesList = (value) => {
-        this.setState({categories__in: value});
+    handleCategoriesList = async (value) => {
+        await this.setState({categories__in: value});
+        await this.getData();
       }
 
-    handleStatusList = (value) => {
-        this.setState({status__in: value}); 
+    handleStatusList = async (value) => {
+        await this.setState({status__in: value});
+        await this.getData(); 
       } 
 
-    handleFreeData = (value) => {
-        this.setState({cost: value});
+    handleFreeData = async (value) => {
+        await this.setState({cost: value});
+        await this.getData(); 
       }
 
-    handlePaidData = (value) => {
-        this.setState({cost__gt: value});
+    handlePaidData = async (value) => {
+        await this.setState({cost__gt: value});
+        await this.getData(); 
       }
 
-    handleRateGteData = (value) => {
-        this.setState({rate__gte: value});
+    handleRateGteData = async (value) => {
+        await this.setState({rate__gte: value});
+        await this.getData(); 
       } 
 
-    handleRateLteData = (value) => {
-        this.setState({rate__lte: value});
-      }   
+    handleRateLteData = async (value) => {
+        await this.setState({rate__lte: value});
+        await this.getData(); 
+      }
+
+    handleSortData = async (value) => {
+        await this.setState({order_by: value});
+        await this.getData(); 
+      }
 
     render(){
         let pages = []
@@ -135,18 +146,16 @@ export default class SearchingCourses extends React.Component{
                                   <InputGroup className="search-input">
                                       <InputGroupAddon addonType="prepend">
                                           <InputGroupText className="search-input-icon">
-                                             {/*<FontAwesomeIcon icon="search"/>*/}
-                                              <FontAwesomeIcon icon="sort"/>
+                                              <FontAwesomeIcon icon="search"/>
                                           </InputGroupText>
                                       </InputGroupAddon>
-                                          {/*<Input placeholder="Search by trainer, events, tag" />*/}
                                       <InputGroupAddon addonType="append" className="search-input-select">
                                           <Input type="select" name="select" id="search-input-select">
                                               <option value="" selected>Sort by</option>
-                                              <option onClick={() => this.setState({ orderBy: 'duration' })}>Duration</option>
-                                              <option onClick={() => this.setState({ orderBy: 'start_date'})}>Start date</option>
-                                              <option onClick={() => this.setState({ orderBy: 'cost'})}>Cost</option>
-                                              <option onClick={() => this.setState({ orderBy: 'rate'})}>Rate</option>
+                                              <option onClick={() => this.handleSortData("duration")}>Duration</option>
+                                              <option onClick={() => this.handleSortData("start_date")}>Start date</option>
+                                              <option onClick={() => this.handleSortData("cost")}>Cost</option>
+                                              <option onClick={() => this.handleSortData("rate")}>Rate</option>
                                           </Input>
                                       </InputGroupAddon>              
                                   </InputGroup>
