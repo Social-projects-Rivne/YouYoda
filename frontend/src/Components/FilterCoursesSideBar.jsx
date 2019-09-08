@@ -69,7 +69,8 @@ export default class FilterCoursesSideBar extends React.Component {
       let value = event.target.value;
       let status_list = this.state.status_list;
       if (status_list.includes(value)) {
-          status_list.pop(value);
+          let index = status_list.indexOf(value);
+          status_list.splice(index, 1); 
       }
       else {
           status_list.push(value)
@@ -85,7 +86,8 @@ export default class FilterCoursesSideBar extends React.Component {
       let value = event.target.value;
       let categories_list = this.state.categories_list;
       if (categories_list.includes(value)) {
-          categories_list.pop(value);
+          let index = categories_list.indexOf(value);
+          categories_list.splice(index, 1); 
       }
       else {
           categories_list.push(value)

@@ -16,16 +16,16 @@ export default class SearchingCourses extends React.Component{
       super(props);
 
       this.state = {
-        numberofpages: 0,
-        curentpage: 1,
-        coursesList:[],
-        order_by: 'rate',
-        rate__lte: '',       
-        rate__gte: '',
-        cost__gt: '',
-        cost: '',
-        status__in: '',
-        categories__in: '',
+          numberofpages: 0,
+          curentpage: 1,
+          coursesList:[],
+          order_by: 'rate',
+          rate__lte: '',       
+          rate__gte: '',
+          cost__gt: '',
+          cost: '',
+          status__in: '',
+          categories__in: '',
       };
     }
 
