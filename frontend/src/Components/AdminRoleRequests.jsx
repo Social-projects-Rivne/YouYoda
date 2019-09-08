@@ -216,8 +216,8 @@ class AdminRequests extends React.Component {
                                 <p key={number}>item: {number}</p>
                             )}
                         </div>
-                        <Button type="button" onClick={this.approveRequest}>Approve</Button>
-                        <Button type="button" onClick={this.rejectRequest}>Reject</Button>
+                        <Button type="button" className="btn-yellow" onClick={this.approveRequest}>Approve</Button>
+                        <Button type="button" className="btn-grey" onClick={this.rejectRequest}>Reject</Button>
                         
                     </Col>
                 </Row>
