@@ -133,7 +133,7 @@ class Migration(migrations.Migration):
                 ('about_me', models.TextField(blank=True, null=True)),
                 ('birth_date', models.DateField(blank=True, null=True)),
                 ('phone_number', models.CharField(blank=True, max_length=13, null=True)),
-                ('avatar_url', models.CharField(blank=True, max_length=80, null=True)),
+                ('avatar_url', models.CharField(blank=True, max_length=255, null=True)),
                 ('is_trainer', models.BooleanField(default=False)),
                 ('role', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='owner', to='appsrc.Roles')),
             ],

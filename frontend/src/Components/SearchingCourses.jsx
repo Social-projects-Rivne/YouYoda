@@ -38,10 +38,10 @@ export default class SearchingCourses extends React.Component{
        try {
          let response = await API.post('/courses/search', {
                coursename__icontains: '',
+               location__icontains: '',
                rate__lte: this.state.rate__lte,
                rate__gte: this.state.rate__gte,
                status__in: this.state.status__in,
-               location__icontains: '',
                categories__in: this.state.categories__in,
                cost__gt: this.state.cost__gt,
                cost: this.state.cost,

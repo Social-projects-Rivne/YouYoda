@@ -120,7 +120,7 @@ export default class HomeEvent extends React.Component{
                                 <p className="button-text">More Events</p>
                             </button>
                         </div>
-                        </Row>
+                    </Row>
                 </Container>
             </div>
         )
