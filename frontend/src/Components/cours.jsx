@@ -5,6 +5,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import { Redirect, Link } from 'react-router-dom'
 
 import '../api/pagination';
 
@@ -20,7 +21,8 @@ export default class Cours extends React.Component{
       super(props);
 
       this.state = {
-          loading: true
+          loading: true,
+          redirect: false,
       }
     }
     componentWillMount(){
@@ -29,6 +31,12 @@ export default class Cours extends React.Component{
 
     componentDidMount(){
         this.setState({loading: false})
+    }
+
+    handleClick = async (course) => { 
+        await this.setState({ course });
+        await this.setState({ redirect: true });
+        window.location.reload();  
     }
 
     renderCourses(course) {
@@ -43,11 +51,13 @@ export default class Cours extends React.Component{
                 <Card className="event-card">
                     <CardHeader className="event-header">{newCourseDate}</CardHeader>
                     <CardBody className="event-body">
-                        <CardTitle className="event-card-header"><a href="">{course.coursename}</a></CardTitle>
+                        <CardTitle className="event-card-header">
+                            <Link onClick={() => this.handleClick(course)}>{course.coursename}</Link>
+                        </CardTitle>
                         <CardText>
-                            <p><span className="main-text-span">Category:</span>{'  '}{course.categories}</p>
-                            <p>Duration:{'  '}{newCourseDuration}{" "}days</p>
-                            <p><span className="main-text-span">Trainer:</span>{'  '}{course.owner}</p>
+                            <p><span className="main-text-span">Category: </span>{course.categories}</p>
+                            <p>Duration: {newCourseDuration} days</p>
+                            <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
                             <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p> 
                         </CardText>
                     </CardBody>
@@ -60,6 +70,11 @@ export default class Cours extends React.Component{
     }
       
     render(){
+        const { redirect } = this.state;
+        if (redirect) {
+           return <Redirect to={{pathname: '/course/detail', state: {course: this.state.course}}}/>;
+        }
+
         return (
             <Container>
                 <div className='sweet-loading'>
