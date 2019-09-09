@@ -43,7 +43,7 @@ export default class Cours extends React.Component{
                 <Card className="event-card">
                     <CardHeader className="event-header">{newCourseDate}</CardHeader>
                     <CardBody className="event-body">
-                        <CardTitle className="event-card-header">{course.coursename}</CardTitle>
+                        <CardTitle className="event-card-header"><a href="">{course.coursename}</a></CardTitle>
                         <CardText>
                             <p><span className="main-text-span">Category:</span>{'  '}{course.categories}</p>
                             <p>Duration:{'  '}{newCourseDuration}{" "}days</p>

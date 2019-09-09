@@ -89,7 +89,7 @@ export default class SearchingEvents extends React.Component{
          if (this.state.numberofpages < 2) {
              visibpag = 'hidden'
          }
-         console.log(this.state.categories__in);
+        
     return (
         <div id="SearchingCourses">
               <FilterEventsSideBar sendCategoriesData={this.handleCategoriesList}            
@@ -130,7 +130,7 @@ export default class SearchingEvents extends React.Component{
                               render={() => <Event eventList={this.state.eventList}/>}
                             />
                           <Row>
-                              <Col /*style={{visibility:visibpag}}*/>
+                              <Col style={{visibility:visibpag}}>
                                   <div className="content_detail__pagination cdp" actpage="1">
                                 			<a href="#!-1"
                                                 className="cdp_i"

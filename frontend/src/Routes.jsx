@@ -53,7 +53,7 @@ export default class Routes extends React.Component{
                 <Route exact path='/course/detail'
                    render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
                 />
-                <Route path="/courses/search"
+                <Route exact path="/courses/search"
                     render={()=><MainLayout><SearchingCourses/></MainLayout>}
                 />
                 <Route exact path="/events/search"

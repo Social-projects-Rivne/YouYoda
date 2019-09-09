@@ -1,16 +1,6 @@
-/*Styles for Events*/
+/*Styles for Events, Courses*/
 
 /* SEARCH */
-.btn-search-events {
-    width: 250px;
-    margin-left: 20px;
-}
-
-.btn-search-events-title {
-	font-family: Roboto Condensed;
-	font-weight: bold;
-}
-
 .search-input-group {
 	margin-bottom: 3%;
 }
@@ -34,7 +24,7 @@
 	font-size: 40px;
 }
 
-/* EVENTS */
+/* EVENTS, COURSES */
 .event-card {
 	margin-top: 20px;
 	margin-bottom: 20px;

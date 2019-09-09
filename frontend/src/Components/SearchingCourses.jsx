@@ -123,7 +123,7 @@ export default class SearchingCourses extends React.Component{
          if (this.state.numberofpages < 2) {
              visibpag = 'hidden'
          }
-        console.log(this.state);
+        
     return (
           <div id="SearchingCourses">
               <FilterCoursesSideBar sendCategoriesData={this.handleCategoriesList}
