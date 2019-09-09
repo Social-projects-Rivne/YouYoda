@@ -46,8 +46,7 @@ export default class SearchingEvents extends React.Component{
               numberofpages:response.data.num_of_pages,
               eventList:response.data.data
           })
-        }
-        catch (error) {
+        } catch (error) {
           toast.error(error.message)
         }
     }

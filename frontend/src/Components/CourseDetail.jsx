@@ -5,9 +5,11 @@ import moment from 'moment';
 import { Container,Row,Button,Col } from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom';
 import Calendar from '@lls/react-light-calendar'
+import { toast } from 'react-toastify';
 
 import { defaultPhoto, isAuthenticated } from '../utils';
-import { CommentList, CommentForm } from './CommentList'
+import { CommentList, CommentForm } from './CommentList';
+import { API } from '../api/axiosConf';
 
 export default class CourseDetail extends React.Component{
     constructor(props){
@@ -16,25 +18,28 @@ export default class CourseDetail extends React.Component{
           comments: []
       };
     }
-    // componentDidMount() {
-    //   fetch("http://localhost:7777")
-    //     .then(res => res.json())
-    //     .then(res => {
-    //       this.setState({
-    //         comments: res,
-    //         loading: false
-    //       });
-    //     })
-    //     .catch(err => {
-    //       this.setState({ loading: false });
-    //     });
-    // }
+    componentDidMount = async() => {
+        try {
+            let response = await API.get('/courses/comments', 
+                {
+                    params: {
+                        course_id: this.props.course.id,
+                }
+            }
+        )
+  
+            this.setState({
+                comments: response.data
+            })
+        } catch (error) {
+            toast.error(error.message)
+        }
+      }
     addComment = (comment) => {
         this.setState({
           comments: [comment, ...this.state.comments]
         });
     }
-
     render(){
         let defimg = "/media/car-racing-4394450_1920.jpg";
         let coverimg = defaultPhoto(defimg, this.props.course.cover_url);
@@ -98,7 +103,7 @@ export default class CourseDetail extends React.Component{
             <Row style={{marginTop:'100px'}}>
               <Col md="4"  className = "pt-3 border-right">
                 <h6>Say something about React</h6>
-                    <CommentForm addComment={this.addComment}/>
+                    <CommentForm addComment={this.addComment} course={this.props.course.id}/>
               </Col>
               <Col md="8"  className = "pt-3 bg-white">
                   <CommentList

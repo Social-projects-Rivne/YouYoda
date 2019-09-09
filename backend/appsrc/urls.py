@@ -6,6 +6,7 @@ from .views.edit_profile import EditProfile
 from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.courses import TopCourses, SearchingCourses
+from .views.comment import CourseComments
 from .views.events import TopEvents, SearchingEvents
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
@@ -25,6 +26,7 @@ urlpatterns = [
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
     path('courses/top', TopCourses.as_view(), name='top-courses'),
+    path('courses/comments', CourseComments.as_view(), name='comments-courses'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),

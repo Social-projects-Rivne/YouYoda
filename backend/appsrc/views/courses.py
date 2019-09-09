@@ -64,26 +64,3 @@ class SearchingCourses(APIView):
         return Response(response_data)
 
 
-class CoursesComments(APIView):
-    """Takes data from CoursesTopSerializator for view top rate courses"""
-
-    permission_classes = [permissions.AllowAny,]
-
-    @method_decorator(cache_page(CACHE_TTL), name='comments')
-    def get(self, request):
-
-        course_id = request.query_params.get('course_id')
-        comments = CoursesComments.objects.filter(course = course_id)
-        serializer = CCommentsSerializator(comments, many=True)
-        return Response(serializer.data)
-
-    def post(self, request):
-
-        data_comment=request.data
-        serializer = CCommentsSerializator(data=data_comment)
-
-        if serializer.is_valid():
-            comments = serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

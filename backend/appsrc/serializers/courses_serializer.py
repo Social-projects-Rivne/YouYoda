@@ -39,9 +39,10 @@ class CCommentsSerializator(serializers.ModelSerializer):
             )
 
 		def create(self, validated_data):
-	        comments = CoursesComments.objects.create(
-	            author=validated_data['author'],
-	            comment=validated_data['comment'])
-	        comments.save()
+			comments = CoursesComments.objects.create(
+				author=validated_data['author'],
+				comment=validated_data['comment']
+				)
+			comments.save()
 
-	        return comments
+			return comments

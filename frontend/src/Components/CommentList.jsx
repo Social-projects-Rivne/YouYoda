@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Container, Row, Button, Col } from 'reactstrap';
 import { toast } from 'react-toastify';
 
 import Comment from "./Comment";
 import { defaultPhoto, isAuthenticated } from '../utils';
+import { API } from '../api/axiosConf';
 
 
 export function CommentList(props) {
@@ -28,6 +28,7 @@ export function CommentList(props) {
   );
 }
 
+
 export class CommentForm extends React.Component {
   constructor(props) {
     super(props);
@@ -36,8 +37,9 @@ export class CommentForm extends React.Component {
       error: "",
 
       comment: {
-        name: "",
-        message: ""
+        course: this.props.course,
+        author: "",
+        comment: ""
       }
     };
   }
@@ -56,7 +58,7 @@ export class CommentForm extends React.Component {
   };
 
 
-  onSubmit = (e) => {
+  onSubmit = async(e) => {
 
     e.preventDefault();
 
@@ -64,39 +66,27 @@ export class CommentForm extends React.Component {
       this.setState({ error: "All fields are required." });
       return;
     }
-
-    // persist the comments on server
     let { comment } = this.state;
-    fetch("http://localhost:7777", {
-      method: "post",
-      body: JSON.stringify(comment)
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.error) {
-          this.setState({ loading: false, error: res.error });
-        } else {
-          // add time return from api and push comment to parent state
-          comment.time = res.time;
-          this.props.addComment(comment);
-
-          // clear the message box
-          this.setState({
-            loading: false,
-            comment: { ...comment, message: "" }
+    try {
+      let response = await API.post('/courses/comments', {
+            course: this.state.comment.course,
+            author: this.state.comment.author,
+            comment: this.state.comment.comment
+        },
+      )
+      this.props.addComment(comment);
+      this.setState({
+            comment: { ...comment, comment: "" }
           });
-        }
-      })
-      .catch(err => {
-        this.setState({
-          error: "Something went wrong while submitting form.",
-          loading: false
-        });
-      });
+    }
+    catch (error) {
+      toast.error(error.message)
+    }
+    
   }
 
   isFormValid = () => {
-    return this.state.comment.name !== "" && this.state.comment.message !== "";
+    return this.state.comment.author !== "" && this.state.comment.comment !== "";
   }
 
   renderError() {
@@ -110,10 +100,10 @@ export class CommentForm extends React.Component {
           <div className="form-group">
             <input
               onChange={this.handleFieldChange}
-              value={this.state.comment.name}
-              className="form-control"
+              value={this.state.comment.author}
+              classauthor="form-control"
               placeholder="😎 Your Name"
-              name="name"
+              name="author"
               type="text"
             />
           </div>
@@ -121,10 +111,10 @@ export class CommentForm extends React.Component {
           <div className="form-group">
             <textarea
               onChange={this.handleFieldChange}
-              value={this.state.comment.message}
+              value={this.state.comment.comment}
               className="form-control"
               placeholder="🤬 Your Comment"
-              name="message"
+              name="comment"
               rows="5"
             />
           </div>
