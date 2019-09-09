@@ -5,6 +5,15 @@
     .footer .soc li{
         margin: 0 20px;
     }
+    .course-cover-photo {
+        max-width: 100%;
+        max-height: 400px;
+    }
+    
+    .event-cover-photo {
+        max-width: 100%;
+        height: auto;
+    }
 }
 @media screen and (max-width: 767px) {
     .home-about div,

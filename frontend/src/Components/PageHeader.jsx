@@ -41,9 +41,9 @@ export default class Header extends React.Component {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/courses" className="nav-link" activeClass="active" >
-                        Courses
-                        </Link>
+                    <Link to="/events/search" className="nav-link" activeClass="active" >
+                    Events
+                    </Link>
                     </NavItem>
                     <NavItem>
                         <Link to="/trainers" className="nav-link" activeClass="active" >
@@ -51,9 +51,9 @@ export default class Header extends React.Component {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link to="/events" className="nav-link" activeClass="active" >
-                        Events
-                        </Link>
+                    <Link to="/courses/search" className="nav-link" activeClass="active" >
+                    Courses
+                    </Link>
                     </NavItem>
                 </Nav>
             </Collapse>

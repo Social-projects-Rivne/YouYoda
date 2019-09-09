@@ -4,12 +4,11 @@ import {Dropdown, DropdownToggle, DropdownMenu} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { isAuthenticated, isAdmin, isModerator } from '../utils';
+import { isAuthenticated, isAdmin, isModerator, defaultPhoto } from '../utils';
 import { logOut } from '../api/logOut';
 
 
-const HOSTNAME_PORT = "http://localhost:8000";
-const DEFAULT_AVATAR_PATH = "/media/avatar.png";
+
 
 export class UserMenu extends React.Component{
     constructor(props) {
@@ -44,12 +43,9 @@ export class UserMenu extends React.Component{
             }
     }
   render () {
-    let alt_avatar;
-    if(!localStorage.getItem("avatar_url")){
-        alt_avatar = HOSTNAME_PORT + DEFAULT_AVATAR_PATH;
-    }else {
-        alt_avatar = HOSTNAME_PORT + localStorage.getItem("avatar_url")
-    }
+    let defimg = "/media/avatar.png";
+    let coverimg = defaultPhoto(defimg, localStorage.getItem("avatar_url"));
+
     const { redirect } = this.state;
     if (redirect) {
        return <Redirect to='/'/>;
@@ -64,7 +60,7 @@ export class UserMenu extends React.Component{
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropdowntoggle}>
             <DropdownToggle className="dropdown-button">
-              <img src={alt_avatar}
+              <img src={coverimg}
                       className="profile-photo-dropdown" alt="profile"/>
             </DropdownToggle>
             <DropdownMenu right>

@@ -7,8 +7,8 @@ from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-from ..models import Courses
-from ..serializers.courses_serializer import CoursesSerializator
+from ..models import Courses, CoursesComments
+from ..serializers.courses_serializer import CoursesSerializator, CCommentsSerializator
 
 
 NUMBER_OF_TOP = 6
@@ -34,7 +34,7 @@ class TopCourses(APIView):
 class SearchingCourses(APIView):
     """Filtering courses by different values and make pagination.
         Takes request data like SEARCH_FIELDS and params current page.
-        Return number of pages and page of cours data """ 
+        Return number of pages and page of cours data """
     permission_classes = [permissions.AllowAny,]
 
     def post(self, request):
@@ -62,3 +62,28 @@ class SearchingCourses(APIView):
             "data":curent_page
         }
         return Response(response_data)
+
+
+class CoursesComments(APIView):
+    """Takes data from CoursesTopSerializator for view top rate courses"""
+
+    permission_classes = [permissions.AllowAny,]
+
+    @method_decorator(cache_page(CACHE_TTL), name='comments')
+    def get(self, request):
+
+        course_id = request.query_params.get('course_id')
+        comments = CoursesComments.objects.filter(course = course_id)
+        serializer = CCommentsSerializator(comments, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+
+        data_comment=request.data
+        serializer = CCommentsSerializator(data=data_comment)
+
+        if serializer.is_valid():
+            comments = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

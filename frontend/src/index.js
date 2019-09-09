@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-toastify/dist/ReactToastify.css';
+import '@lls/react-light-calendar/dist/index.css';
 import './api/notification';
 import './style/home.css';
 import './style/media.css';
