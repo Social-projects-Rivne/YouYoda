@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from ..models import Events, YouYodaUser
+from rest_framework import request
 
 from ..models import Events
 
