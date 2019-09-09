@@ -101,6 +101,24 @@ def insertData(apps, schema_editor):
     Events.objects.create(id=5, name="Event-5", owner_id=3, description="Perfect for people who never swam",
         date=datetime.datetime.now(), categories_id=2, location="Rivne, Ukraine", cover_url="")
 
+    CoursesSubscribers = apps.get_model('appsrc', 'CoursesSubscribers')
+    CoursesSubscribers.objects.create(id=1, completed=False, feedback="feedback for course 1", rate=5,
+        course_id_id=1, participant_id_id=8)
+    CoursesSubscribers.objects.create(id=2, completed=True, feedback="feedback for course 2", rate=2,
+        course_id_id=2, participant_id_id=8)
+    CoursesSubscribers.objects.create(id=3, completed=False, feedback="feedback for course 3", rate=1,
+        course_id_id=3, participant_id_id=8)
+    CoursesSubscribers.objects.create(id=4, completed=True, feedback="feedback for course 4", rate=6,
+        course_id_id=4, participant_id_id=8)
+    CoursesSubscribers.objects.create(id=5, completed=False, feedback="feedback for course 5", rate=7,
+        course_id_id=5, participant_id_id=8)
+    CoursesSubscribers.objects.create(id=6, completed=True, feedback="feedback for course 6", rate=8,
+        course_id_id=6, participant_id_id=8)
+    CoursesSubscribers.objects.create(id=7, completed=False, feedback="feedback for course 7", rate=9,
+        course_id_id=7, participant_id_id=8)
+    CoursesSubscribers.objects.create(id=8, completed=True, feedback="feedback for course 8", rate=3,
+        course_id_id=8, participant_id_id=8)
+
 
 class Migration(migrations.Migration):
 

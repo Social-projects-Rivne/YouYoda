@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 
 import {API} from '../api/axiosConf';
 import Footer from '../Components/Footer';
@@ -6,7 +7,6 @@ import PageHeader from '../Components/PageHeader';
 import {ProfileContext} from '../Components/profile-context';
 import ProfileInfo from '../Components/ProfileInfo';
 import ProfileMainInfo from '../Components/ProfileMainInfo';
-import UserCourses from '../Components/UserCourses';
 
 
 export default class Profile extends React.Component{
@@ -22,7 +22,7 @@ export default class Profile extends React.Component{
         return response.data;
       }
       catch (error) {
-        console.error(error);
+        toast.error("For some reason now you can not view your profile, please contact support")
       }
     };
     async componentDidMount() {
