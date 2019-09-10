@@ -4,6 +4,7 @@ import django.db.models.deletion
 import django.utils.timezone
 
 from django.conf import settings
+from django.contrib.auth.hashers import make_password
 from django.db import migrations, models
 
 
@@ -19,33 +20,47 @@ def insertData(apps, schema_editor):
         id=3, name="admin"
     )
 
+    UserStatuses = apps.get_model('appsrc', 'UserStatuses')
+    UserStatuses.objects.create(
+        id=1, name="active"
+    )
+    UserStatuses.objects.create(
+        id=2, name="banned"
+    )
+    UserStatuses.objects.create(
+        id=3, name="idle"
+    )
+    UserStatuses.objects.create(
+        id=4, name="muted"
+    )
+
     User = apps.get_model('appsrc', 'YouYodaUser')
     User.objects.create(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
-        location = 'Ukraine, Rivne', username = 'Yoda-admin', password = '$2y$12$UF3XjBwS3Oz6phT4WfXPkepcUuro.4BxotLKiY22QonRm2/cEYzBa',
+        location = 'Ukraine, Rivne', username = 'Yoda-admin', password = make_password('admin1111'),
         email = 'youyoda.academy@gmail.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
         is_active = True, avatar_url = '', is_trainer = True, role_id = 3)
     User.objects.create(id=2, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
-        location = 'Ukraine, Rivne', username = 'Yoda-moderator', password = '$2y$12$ce08PZUTOELFeDh3EewjsuhOBMxbp.lBQBQ0cODMtDJp13sXMRDk2',
+        location = 'Ukraine, Rivne', username = 'Yoda-moderator', password = make_password('moderator1111'),
         email = 'test@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
         is_active = True, avatar_url = '', is_trainer = True, role_id = 2)
     User.objects.create(id=3, hide_my_data = False, first_name = 'Yoda', last_name = 'Rivensky',
-        location = 'Ukraine, Rivne', username = 'Yoda-user', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        location = 'Ukraine, Rivne', username = 'Yoda-user', password = make_password('user1111'),
         email = 'test1@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "",
         is_active = True, avatar_url = '', is_trainer = False, role_id = 1)
     User.objects.create(id=4, hide_my_data = False, first_name = 'Sonya', last_name = 'Alcock',
-        location = 'Ukraine, Kyiv', username = 'Trainer1', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        location = 'Ukraine, Kyiv', username = 'Trainer1', password = make_password('123456'),
         email = 'trainer1@test.com', about_me = "Trainer1", birth_date = datetime.datetime.now(), phone_number = "0922221133",
         is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
     User.objects.create(id=5, hide_my_data = False, first_name = 'Gordon', last_name = 'Mason',
-        location = 'Ukraine, Lviv', username = 'Trainer2', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        location = 'Ukraine, Lviv', username = 'Trainer2', password = make_password('123456'),
         email = 'trainer2@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "09233322211",
         is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
     User.objects.create(id=6, hide_my_data = False, first_name = 'Aliya', last_name = 'Workman',
-        location = 'Ukraine, Rivne', username = 'Trainer3', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        location = 'Ukraine, Rivne', username = 'Trainer3', password = make_password('123456'),
         email = 'trainer3@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "0928885522",
         is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
     User.objects.create(id=7, hide_my_data = False, first_name = 'Kyran', last_name = 'Wills',
-        location = 'Ukraine, Harkiv', username = 'Trainer4', password = '$2y$12$bmih513m88oXDBMyHCzWF.dpm8jo/sfO2IffgVxrSPgTsx6iJFXYm',
+        location = 'Ukraine, Harkiv', username = 'Trainer4', password = make_password('123456'),
         email = 'trainer4@test.com', about_me = "", birth_date = datetime.datetime.now(), phone_number = "0928885533",
         is_active = True, avatar_url = '', is_trainer = True, role_id = 1)
 
@@ -136,6 +151,7 @@ class Migration(migrations.Migration):
                 ('avatar_url', models.CharField(blank=True, max_length=255, null=True)),
                 ('is_trainer', models.BooleanField(default=False)),
                 ('role', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Roles')),
+                ('status', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='appsrc.UserStatuses')),
             ],
             options={
                 'verbose_name': 'user',
@@ -199,7 +215,7 @@ class Migration(migrations.Migration):
             name='UserStatuses',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', models.CharField(max_length=40)),
+                ('name', models.CharField(max_length=40)),
             ],
         ),
         migrations.AddField(

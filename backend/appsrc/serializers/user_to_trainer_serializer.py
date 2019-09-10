@@ -24,9 +24,16 @@ class UserToTrainerSerializer(serializers.ModelSerializer):
         def update(self, instance, validated_data):
             """Update user role"""
 
-            instance.is_trainer = validated_data.get('is_trainer', instance.is_trainer)
-            instance.save()
-            return instance
+            users_id = validated_data.pop('id')
+            users_list = []
+
+            for user_id in users_id: 
+                user = YouYodaUser.objects.get(id = user_id)
+                user.update(is_trainer = validated_data['is_trainer'])
+                user.save()
+                users_list.append({'user': user['username']})
+                
+            return users_list
 
 class UserRequestsSerializer(serializers.ModelSerializer):
     """
