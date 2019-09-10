@@ -19,7 +19,7 @@ class CategoriesList(APIView):
 
     @method_decorator(cache_page(CACHE_TTL), name='categories_list')
     def get(self, request):
-
+        """First check request data in cache, then pull data from db"""
         categories = Categories.objects.all()
         serializer = CategoriesSerializer(categories, many=True)
         return Response(serializer.data)
