@@ -12,7 +12,7 @@ from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
-from .views.user_to_trainer import UserToTrainer
+from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
 from .views.view_profile import ViewProfile
 
@@ -24,6 +24,8 @@ urlpatterns = [
     path('courses/top', TopCourses.as_view(), name='top-courses'),
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('user/totrainer/getrequest', UserGetRequest.as_view()),
+    path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),
     path('user/login', UserLogin.as_view(), name='login'),
     path('user/logout', UserLogout.as_view(), name='logout'),
@@ -36,5 +38,4 @@ urlpatterns = [
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
     path('users/getlist', UsersGetList.as_view()),
-
 ]

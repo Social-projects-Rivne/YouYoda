@@ -13,6 +13,9 @@ import EnterNewPassword from './Components/EnterNewPassword';
 import Home from './Pages/Home';
 import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
+import ModeratorDashboard from './Components/ModeratorDashboard';
+import ModeratorPage from "./Pages/ModeratorPage";
+import ModeratorPageInner from './Components/ModeratorPageInner';
 import NotFoundPage from './Pages/NotFoundPage';
 import Profile from './Pages/Profile';
 import ResetPassword from './Components/ResetPassword';
@@ -31,7 +34,7 @@ export default class Routes extends React.Component{
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
             <Route component={MainLayout}>
-
+            <Switch>
                 <Route exact path='/reset/password'
                     render={()=><MainLayout><ResetPassword/></MainLayout>}
                 />
@@ -59,15 +62,20 @@ export default class Routes extends React.Component{
                 <Route exact path="/events/search"
                     render={()=><MainLayout><SearchingEvents/></MainLayout>}
                 />
-               <Route exact path='/admin'
+                <Route exact path='/admin'
                     render={()=><AdminPage><AdminDashboard/></AdminPage>}
                 />
                 <Route exact path={'/admin/:option'}
-                    render={()=><AdminPage><AdminPageInner/></AdminPage>}
-                />
-             </Route>
+                    render={()=><AdminPage><AdminPageInner/></AdminPage>}/>
+                <Route exact path='/moderator'
+                    render={()=><ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
+                <Route exact path={'/moderator/:option'}
+                    render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
+                <Route path="*" component={NotFoundPage} />
+            </Switch>
+            </Route>
+            <Route path="*" component={NotFoundPage} />
         </Switch>
-        {/* <Route path="*" component={NotFoundPage} /> */}
         </Router>
       </div>
   );
