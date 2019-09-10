@@ -102,13 +102,13 @@ export default class HomeEvent extends React.Component{
                             </Slider>
                             <Modal isOpen={this.state.modal} className={this.props.className}>
                                 <ModalHeader toggle={this.toggle} close={closeBtn}><h4 className="secondary-header">{event.name}</h4>
-                                    <p className="main-category">Category:{'  '}{event.categories}</p>
+                                    <p className="main-category">Category: {event.categories}</p>
                                     <p className="main-text-event-modal">{event.description}</p></ModalHeader>
                                 <ModalBody>
                                     <img src={coverimg} alt={event.name} className="event-modal-photo"/>
                                     <p className="main-text">{event.location}</p>
                                     <p className="main-text">{newEventDate}</p>
-                                    <p className="main-text">Event organizer:{'  '}{event.owner}</p>
+                                    <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button className={`btn-join ${isAuthenticated("show")}`} color="warning" onClick={this.toggle}>Join</Button>{' '}
