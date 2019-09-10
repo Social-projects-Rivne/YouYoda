@@ -36,7 +36,7 @@ class YouYodaUser(AbstractUser):
     i_like = models.TextField(blank=True, null=True)
     birth_date = models.DateField(blank=True, null=True)
     phone_number = models.CharField(max_length=13, blank=True, null=True)
-    avatar_url = models.CharField(max_length=80, blank=True, null=True)
+    avatar_url = models.CharField(max_length=255, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
 
@@ -48,6 +48,12 @@ class StatusHistory(models.Model):
     date = models.DateTimeField()
     user_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
 
+class UserRequests(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    status_code = models.CharField(max_length=3)
+    comment = models.TextField(blank=True, null=True)
+
 class TrainerCertificates(models.Model):
     user_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     description = models.TextField()
@@ -56,7 +62,7 @@ class TrainerCertificates(models.Model):
 class Courses(models.Model):
     coursename = models.CharField(max_length=60)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10)
+    status = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     is_public = models.BooleanField()
     start_date = models.DateTimeField(blank=False)
@@ -93,3 +99,9 @@ class Events(models.Model):
 class EventsSubscribers(models.Model):
     participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
+
+class CoursesComments(models.Model):
+    author = models.ForeignKey(YouYodaUser, related_name='user_details', on_delete=models.CASCADE)
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(blank=True, null=True)

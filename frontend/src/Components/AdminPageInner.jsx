@@ -2,13 +2,17 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Nav, NavItem, NavLink, Row, Col, Container } from 'reactstrap';
 
-import AdminUsers from './AdminUsers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import AdminLogs from './AdminLogs';
+import AdminRequests from './AdminRoleRequests';
+import AdminUsers from './AdminUsers';
 
 
 const PAGES = [
-  {option: 'users', name: "Users", title: "Users List"},
-  {option: 'logs', name: "Logs", title: "Last Logs"}
+  {option: 'users', name: "Manage users", title: "Users List", icon: <FontAwesomeIcon icon="users"/>},
+  {option: 'roles', name: "Role requests", title: "Roles", icon: <FontAwesomeIcon icon="user-graduate"/>},
+  {option: 'logs', name: "Log list", title: "Last Logs", icon: <FontAwesomeIcon icon="list-alt"/>}
 ];
 
 export default class AdminPageInner extends React.Component {
@@ -24,7 +28,7 @@ export default class AdminPageInner extends React.Component {
                       {
                         PAGES.map(function(item){
                             return <NavItem className="menu-item" key={item.option}>
-                                      <NavLink href={`/admin/${item.option}`} title={item.title}>{item.name}</NavLink>
+                                      <NavLink href={`/admin/${item.option}`} title={item.title}>{item.icon} {item.name}</NavLink>
                                    </NavItem>
                         })
                       }
@@ -34,6 +38,7 @@ export default class AdminPageInner extends React.Component {
                       <Switch>
                           <Route exact path='/admin/users' component={AdminUsers}/>
                           <Route exact path='/admin/logs' component={AdminLogs}/>
+                          <Route exact path='/admin/roles' component={AdminRequests}/>
                       </Switch>
                   </Col>
               </Row>

@@ -41,9 +41,9 @@ export default class Header extends React.Component {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/courses" className="nav-link" activeClass="active" to="home-course" spy={true} smooth={true} duration={500}>
-                        Courses
-                        </Link>
+                    <Link href="/events" className="nav-link" activeClass="active" to="home-event" spy={true} smooth={true} duration={500}>
+                    Events
+                    </Link>
                     </NavItem>
                     <NavItem>
                         <Link href="/trainers" className="nav-link" activeClass="active" to="home-trainer" spy={true} smooth={true} duration={500}>
@@ -51,9 +51,9 @@ export default class Header extends React.Component {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/events" className="nav-link" activeClass="active" to="home-event" spy={true} smooth={true} duration={500}>
-                        Events
-                        </Link>
+                    <Link href="/courses" className="nav-link" activeClass="active" to="home-course" spy={true} smooth={true} duration={500}>
+                    Courses
+                    </Link>
                     </NavItem>
                 </Nav>
             </Collapse>

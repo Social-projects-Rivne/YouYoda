@@ -2,15 +2,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-from rest_framework.permissions import IsAuthenticated
 
 from ..models import YouYodaUser
 from ..serializers.change_password_serializer import ChangePasswordSerializer
 
+
 class ChangePassword(APIView):
     """Takes data from ChangePasswordSerializer for edit user password."""
 
-    permission_classes = [permissions.IsAuthenticated,]
+    permission_classes = [permissions.IsAuthenticated, ]
 
     def put(self, request):
         """Receives and updates user password"""
