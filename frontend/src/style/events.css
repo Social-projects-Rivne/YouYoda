@@ -1,0 +1,129 @@
+/*Styles for Events, Courses*/
+
+/* SEARCH */
+.search-input-group {
+	margin-bottom: 3%;
+}
+
+.search-input {
+	justify-content: right;
+	margin-right: 20px;
+	padding-right: 12px;
+}
+
+.search-input-select {
+	width: 215px;
+}
+
+/* TITLE */
+.title-events {
+	text-align: center;
+	font-weight: bold;
+	margin-top: 8%;
+	font-family: Roboto Condensed;
+	font-size: 40px;
+}
+
+/* EVENTS, COURSES */
+.event-card {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	min-width: 260px;
+}
+
+.event-header {
+ 	background: white;
+	border: 1px solid #4F4F4F;
+	/*box-sizing: border-box;*/
+	min-height: 80px;
+	display: flex;
+	align-items: center;
+}
+
+.event-card-header {
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+
+.event-body {
+	border-left: 1px solid #4F4F4F;
+	border-right: 1px solid #4F4F4F;
+	height: 200px;
+}
+
+.event-body p {
+	line-height: 80%;
+}
+
+.event-card .card-footer{
+	padding: 0;
+}
+
+/* FILTERSIDEBAR */
+#page-wrap {
+  overflow: auto;
+}
+
+.bm-item {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+}
+
+.bm-item:hover {
+  color: white;
+}
+
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 90px;
+}
+
+.bm-burger-bars {
+  background: #373a47;
+}
+
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+.bm-cross {
+  background: #bdc3c7;
+}
+
+.bm-menu {
+  background: #4f4f4f;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.menu-item:focus {
+	outline: auto 0px;
+}
+.menu-filter {
+	position: absolute;
+	top: 100px;
+}
+.card-event-footer {
+	max-height: 165px;
+	overflow: hidden;
+}

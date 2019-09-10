@@ -3,7 +3,7 @@ from rest_framework import serializers
 from ..models import Events
 
 
-class EventsTopSerializator(serializers.ModelSerializer):
+class EventsSerializator(serializers.ModelSerializer):
 	"""Takes data from the events model for latest events component.
     Converts it to JSON format for transmission via the API.
 
