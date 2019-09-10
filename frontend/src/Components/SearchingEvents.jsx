@@ -49,7 +49,7 @@ export default class SearchingEvents extends React.Component{
           })
         }
         catch (error) {
-          toast.error(error.message);
+            toast.error(error.message);
         }
     }
 

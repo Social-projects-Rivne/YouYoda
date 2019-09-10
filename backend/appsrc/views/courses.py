@@ -7,8 +7,8 @@ from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-from ..models import Courses
-from ..serializers.courses_serializer import CoursesSerializator
+from ..models import Courses, CoursesComments
+from ..serializers.courses_serializer import CoursesSerializator, CCommentsSerializator
 
 
 NUMBER_OF_TOP = 6
@@ -34,7 +34,7 @@ class TopCourses(APIView):
 class SearchingCourses(APIView):
     """Filtering courses by different values and make pagination.
         Takes request data like SEARCH_FIELDS and params current page.
-        Return number of pages and page of cours data """ 
+        Return number of pages and page of cours data """
     permission_classes = [permissions.AllowAny,]
 
     def post(self, request):
@@ -62,3 +62,5 @@ class SearchingCourses(APIView):
             "data":curent_page
         }
         return Response(response_data)
+
+
