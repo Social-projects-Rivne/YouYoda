@@ -48,7 +48,7 @@ class AdminUsers extends React.Component {
 
     render() {
         return (
-            <div id="users-table">
+            <div id="users-table" className="admin-tables">
                 <Row>
                     <Col><h5>Users Table</h5></Col>
                 </Row>

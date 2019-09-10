@@ -8,7 +8,7 @@ from .views.courses import TopCourses
 from .views.events import TopEvents
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
-from .views.user_to_trainer import UserToTrainer
+from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
 from .views.view_profile import ViewProfile
 
@@ -27,5 +27,7 @@ urlpatterns = [
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('users/getlist', UsersGetList.as_view()),
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
-    path('user/social/login', UserSocialLogin.as_view(), name='social_login')
+    path('user/social/login', UserSocialLogin.as_view(), name='social_login'),
+    path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
+    path('user/totrainer/getrequest', UserGetRequest.as_view())
 ]

@@ -48,6 +48,12 @@ class StatusHistory(models.Model):
     date = models.DateTimeField()
     user_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
 
+class UserRequests(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    status_code = models.CharField(max_length=3)
+    comment = models.TextField(blank=True, null=True)
+
 class TrainerCertificates(models.Model):
     user_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     description = models.TextField()
