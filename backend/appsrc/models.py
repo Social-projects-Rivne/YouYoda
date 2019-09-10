@@ -94,7 +94,7 @@ class EventsSubscribers(models.Model):
     event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
 
 class CoursesComments(models.Model):
-    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(YouYodaUser, related_name='user_details', on_delete=models.CASCADE)
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(blank=True, null=True)

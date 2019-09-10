@@ -2,30 +2,53 @@ import React from 'react';
 
 import { toast } from 'react-toastify';
 
+import { API } from '../api/axiosConf';
 import Comment from "./Comment";
 import { defaultPhoto, isAuthenticated } from '../utils';
-import { API } from '../api/axiosConf';
+import { css } from '@emotion/core';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 
-export function CommentList(props) {
-  return (
-    <div className="commentList">
-      <h5 className="text-muted mb-4">
-        <span className="badge badge-success">{props.comments.length}</span>{" "}
-        Comment{props.comments.length > 0 ? "s" : ""}
-      </h5>
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: #FFD466;
+`;
 
-      {props.comments.length === 0 ? (
-        <div className="alert text-center alert-info">
-          Be the first to comment
+export class CommentList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render(){
+      return (
+        <div className="commentList">
+          <h5 className="text-muted mb-4">
+            <span className="badge badge-success">{this.props.comments.length}</span>{" "}
+            Comment{this.props.comments.length > 0 ? "s" : ""}
+          </h5>
+          {this.props.comments.length === 0 ? (
+            <div className="alert text-center alert-info">
+              Nobody leaved comments still
+            </div>
+          ) : null}
+
+              <div className='sweet-loading'>
+                  <ClipLoader
+                    css={override}
+                    sizeUnit={"px"}
+                    size={150}
+                    color={'#123abc'}
+                    loading={this.props.loading}
+                  />
+                </div>
+
+
+          {this.props.comments.map((comment, index) => (
+            <Comment key={index} comment={comment} />
+          ))}
         </div>
-      ) : null}
-
-      {props.comments.map((comment, index) => (
-        <Comment key={index} comment={comment} />
-      ))}
-    </div>
-  );
+      );
+    }
 }
 
 
@@ -33,17 +56,13 @@ export class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
       error: "",
-
       comment: {
         course: this.props.course,
-        author: "",
         comment: ""
       }
     };
   }
-
 
   handleFieldChange = event => {
     const { value, name } = event.target;
@@ -57,9 +76,7 @@ export class CommentForm extends React.Component {
     });
   };
 
-
   onSubmit = async(e) => {
-
     e.preventDefault();
 
     if (!this.isFormValid()) {
@@ -70,7 +87,6 @@ export class CommentForm extends React.Component {
     try {
       let response = await API.post('/courses/comments', {
             course: this.state.comment.course,
-            author: this.state.comment.author,
             comment: this.state.comment.comment
         },
       )
@@ -82,11 +98,10 @@ export class CommentForm extends React.Component {
     catch (error) {
       toast.error(error.message)
     }
-    
   }
 
   isFormValid = () => {
-    return this.state.comment.author !== "" && this.state.comment.comment !== "";
+    return this.state.comment.comment !== "";
   }
 
   renderError() {
@@ -94,18 +109,13 @@ export class CommentForm extends React.Component {
   }
 
   render() {
+      let defimg = "/media/avatar.png";
+      let coverimg = defaultPhoto(defimg, localStorage.getItem("avatar_url"));
     return (
       <>
         <form method="post" onSubmit={this.onSubmit}>
           <div className="form-group">
-            <input
-              onChange={this.handleFieldChange}
-              value={this.state.comment.author}
-              classauthor="form-control"
-              placeholder="😎 Your Name"
-              name="author"
-              type="text"
-            />
+            <img src={coverimg} alt="avatar" style={{width:"45px"}}/>
           </div>
 
           <div className="form-group">
@@ -113,16 +123,14 @@ export class CommentForm extends React.Component {
               onChange={this.handleFieldChange}
               value={this.state.comment.comment}
               className="form-control"
-              placeholder="🤬 Your Comment"
+              placeholder="Your Comment"
               name="comment"
               rows="5"
             />
           </div>
-
           {this.renderError()}
-
           <div className="form-group">
-            <button className="btn btn-primary">
+            <button className="btn btn-warning">
               Comment ➤
             </button>
           </div>

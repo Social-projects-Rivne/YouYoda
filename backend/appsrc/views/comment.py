@@ -6,7 +6,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-from ..models import CoursesComments
+from ..models import CoursesComments, YouYodaUser
 from ..serializers.comment_serializer import CommentsGetSerializator, CommentsPostSerializator
 
 
@@ -17,17 +17,18 @@ class CourseComments(APIView):
 
     permission_classes = [permissions.AllowAny,]
 
-    # @method_decorator(cache_page(CACHE_TTL), name='comments')
     def get(self, request):
-
+        """Get course_id as params and filter comments"""
         course_id = request.query_params.get('course_id')
         comments = CoursesComments.objects.filter(course = course_id)
         serializer = CommentsGetSerializator(comments, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-
+        """Push comment to db with CommentsPostSerializator"""
         data_comment=request.data
+        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
+        data_comment['author'] = user.id
         serializer = CommentsPostSerializator(data=data_comment)
 
         if serializer.is_valid():

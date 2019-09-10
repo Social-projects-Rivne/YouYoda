@@ -1,42 +1,49 @@
 import React from 'react';
 
-import StarRatingComponent from 'react-star-rating-component';
-import moment from 'moment';
-import { Container,Row,Button,Col } from 'reactstrap';
-import { Redirect, Link } from 'react-router-dom';
 import Calendar from '@lls/react-light-calendar'
+import { Container,Row,Button,Col } from 'reactstrap';
+import moment from 'moment';
+import { Redirect, Link } from 'react-router-dom';
+import StarRatingComponent from 'react-star-rating-component';
 import { toast } from 'react-toastify';
 
-import { defaultPhoto, isAuthenticated } from '../utils';
-import { CommentList, CommentForm } from './CommentList';
 import { API } from '../api/axiosConf';
+import { CommentList, CommentForm } from './CommentList';
+import { defaultPhoto, isAuthenticated } from '../utils';
 
 export default class CourseDetail extends React.Component{
     constructor(props){
       super(props);
       this.state = {
-          comments: []
+          comments: [],
+          loading: true
       };
     }
-    componentDidMount = async() => {
+    getCommnts = async() => {
         try {
-            let response = await API.get('/courses/comments', 
+            let response = await API.get('/courses/comments',
                 {
                     params: {
                         course_id: this.props.course.id,
                 }
             }
         )
-  
+
             this.setState({
-                comments: response.data
+                comments: response.data,
+                loading: false
             })
         } catch (error) {
             toast.error(error.message)
         }
+    }
+    componentWillMount = async() => {
+        await this.getCommnts();
       }
-    addComment = (comment) => {
-        this.setState({
+
+    addComment = async(comment) => {
+        await this.getCommnts()
+        await this.setState({
           comments: [comment, ...this.state.comments]
         });
     }
@@ -101,21 +108,29 @@ export default class CourseDetail extends React.Component{
                 </Col>
             </Row>
             <Row style={{marginTop:'100px'}}>
-              <Col md="4"  className = "pt-3 border-right">
-                <h6>Say something about React</h6>
-                    <CommentForm addComment={this.addComment} course={this.props.course.id}/>
+              <Col md="4"  className = {`pt-3 border-right ${isAuthenticated("show")}`}>
+                <h6>Say something about this course</h6>
+                    <CommentForm
+                        addComment = {this.addComment}
+                        course = {this.props.course.id}
+                        comments = {this.state.comments}
+                    />
               </Col>
-              <Col md="8"  className = "pt-3 bg-white">
+              <Col className = "pt-3 bg-white">
                   <CommentList
-                     comments={this.state.comments}
+                     comments = {this.state.comments}
+                     loading = {this.state.loading}
                     />
               </Col>
             </Row>
 
 
                 <Col xs="12" className="btn-group-course-detail d-flex justify-content-between">
-                    <Button className={`btn-sign ${isAuthenticated("show")}`} color="warning"
-                                        style={{marginRight:'33px'}}>Join</Button>
+                    <Button
+                        className={`btn-sign ${isAuthenticated("show")}`}
+                        color="warning"
+                        style={{marginRight:'33px'}}
+                    >Join</Button>
                     <Link to="/"><Button color="secondary" className="btn-sign">Cancel</Button></Link>
                 </Col>
             <Row>

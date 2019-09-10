@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
-import Event from './event';
 import '../api/pagination';
 
 
@@ -82,15 +81,7 @@ export default class SearchingEvents extends React.Component{
         <Router>
           <>
             <Container>
-                <Route
-                    path='/events/search:page'
-                    render={() => <Event eventList={this.state.eventList}/>}
-                />
-                <Route
-                    exact
-                    path='/events/search'
-                    render={() => <Event eventList={this.state.eventList}/>}
-                  />
+
                 <Row>
                     <Col style={{visibility:visibpag}}>
                         <div className="content_detail__pagination cdp" actpage="1">

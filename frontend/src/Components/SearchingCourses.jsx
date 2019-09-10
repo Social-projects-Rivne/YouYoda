@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
-import Cours from './cours';
 import '../api/pagination';
 
 
@@ -86,15 +85,7 @@ export default class SearchingCourses extends React.Component{
         <Router>
           <>
             <Container>
-                <Route
-                    path='/courses/search:page'
-                    render={() => <Cours coursesList={this.state.coursesList}/>}
-                />
-                <Route
-                    exact
-                    path='/courses/search'
-                    render={() => <Cours coursesList={this.state.coursesList}/>}
-                  />
+
                 <Row>
                     <Col style={{visibility:visibpag}}>
                         <div className="content_detail__pagination cdp" actpage="1">
