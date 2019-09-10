@@ -8,6 +8,7 @@ import AdminPageInner from './Components/AdminPageInner';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
+import CreateEventPage from "./Pages/CreateEventPage";
 import Home from './Pages/Home';
 import HomeCourses from './Components/HomeCourses';
 import EditPageProfile from "./Pages/EditPageProfile";
@@ -28,6 +29,7 @@ export default class Routes extends React.Component{
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
+            <Route path='/eventcreate' component={CreateEventPage}/>
             <Route component={MainLayout}>
             <Switch>
                 <Route exact path='/reset/password'

@@ -3,7 +3,6 @@ import Button from "reactstrap/es/Button";
 import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
 import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
-import { editForm } from "../api/editForm";
 import LocationSearchInput from '../api/cityselector'
 import ChangePassword from "./ChangePassword";
 import ImageUpload from './ImageUploadComponent'
@@ -27,7 +26,6 @@ class FillEditPage extends React.Component {
             phone_number: '',
             avatar_url: '',
         };
-        this.handleClick = this.handleClick.bind(this)
     }
 
     toggle = () => {
@@ -35,10 +33,6 @@ class FillEditPage extends React.Component {
             modal: !prevState.modal
         }));
     };
-
-    async handleClick(event) {
-        await editForm(this.state);
-    }
 
     getUser = async () => {
         try {
