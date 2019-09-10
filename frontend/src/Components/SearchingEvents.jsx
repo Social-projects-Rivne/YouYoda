@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
-import Event from './event';
+
 import FilterEventsSideBar from './FilterEventsSideBar';
+
 import '../api/pagination';
 
 

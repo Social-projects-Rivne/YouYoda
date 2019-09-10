@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
-import Cours from './cours';
+
 import FilterCoursesSideBar from './FilterCoursesSideBar';
+
 import '../api/pagination';
 
 
@@ -193,5 +194,3 @@ export default class SearchingCourses extends React.Component{
     }
   };
 
-
-        
