@@ -1,5 +1,7 @@
-#admin-dashboard{
+#admin-dashboard,
+#moderator-dashboard {
     width: 100%;
+    min-height: 500px;
     padding: 2rem 0;
 }
 .dashboard-menu {min-height: 400px;}
@@ -24,11 +26,17 @@
     color: #212529;
     opacity: 0.8;
 }
+.dashboard-menu svg {
+    color: grey;
+    margin: 1rem 0;
+}
 
 /* admin menu styles */
 .admin-left-menu {
     background-color: rgb(232, 232, 232);
     padding: 25px 0;
+    border-top: 3px solid #444;
+    min-height: 350px;
 }
 .admin-left-menu a,
 .admin-left-menu a:hover {
@@ -38,4 +46,15 @@
 .admin-left-menu li.active {
     background-color: #fff;
     opacity: 0.6;
+}
+.admin-left-menu svg {
+    margin-right: 5px;
+    max-width: 14px;
+    color: grey;
+}
+
+/* button styles */
+.admin-tables button {
+    margin: 5px 5px;
+    border-color: transparent;
 }

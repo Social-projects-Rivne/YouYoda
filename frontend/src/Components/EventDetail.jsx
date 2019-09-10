@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { Container,Row,Button,Col } from 'reactstrap';
+import { Container, Row, Button, Col } from 'reactstrap';
 import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
 import { defaultPhoto, isAuthenticated } from '../utils';

@@ -16,19 +16,14 @@ class CoursesSerializator(serializers.ModelSerializer):
 
 		 model = Courses
 
-		 fields = (
-			"id", "coursename", "description", "rate", "cover_url",
-			"owner", "status", "is_public", "start_date",
-			"duration", "cost", "members_limit", "categories", "location"
-            )
+		 fields = ('__all__')
 
 class CCommentsSerializator(serializers.ModelSerializer):
 	"""Takes data from the CoursesComponents model for create list of comments.
     Converts it to JSON format for transmission via the API.
+	"""
 
-    """
 	author = serializers.StringRelatedField()
-
 
 	class Meta:
 
