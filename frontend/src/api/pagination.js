@@ -1,9 +1,5 @@
 import $ from 'jquery';
-import jQuery from 'jquery';
 
-/*
-this javascript is only to change the "actpage" attribut on the .cdp div
-*/
 
 window.onload = function() {
   var paginationPage = parseInt($(".cdp").attr("actpage"), 10);

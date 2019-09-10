@@ -2,8 +2,8 @@ import React from 'react';
 import Button from "reactstrap/es/Button";
 import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
 import { toast } from 'react-toastify';
+
 import { API } from '../api/axiosConf';
-import { editForm } from "../api/editForm";
 import LocationSearchInput from '../api/cityselector'
 import ChangePassword from "./ChangePassword";
 import ImageUpload from './ImageUploadComponent'
@@ -27,7 +27,6 @@ class FillEditPage extends React.Component {
             phone_number: '',
             avatar_url: '',
         };
-        this.handleClick = this.handleClick.bind(this)
     }
 
     toggle = () => {
@@ -35,10 +34,6 @@ class FillEditPage extends React.Component {
             modal: !prevState.modal
         }));
     };
-
-    async handleClick(event) {
-        await editForm(this.state);
-    }
 
     getUser = async () => {
         try {
@@ -102,11 +97,18 @@ class FillEditPage extends React.Component {
     }
 
     becomeTrainer = async () => {
-        let trainer = {};
-        trainer.is_trainer = true;
-        trainer.email = this.state.email;
+        const URLPATH = 'user/totrainer/sendrequest';
+        const USERDATA = {
+            "email": this.state.email
+        };
         try {
-            const response = await API.patch('user/totrainer', trainer);
+            const response = await API.post(URLPATH, USERDATA);
+            if(response.status == 208)
+                toast.info(response.data);
+            else if(response.status == 201)
+                toast.success('Request was successfully sent. Please, wait for moderation results.');
+            else
+                toast.error(response.data);
         } catch (error) {
             toast.error('You cannot be a trainer. Contact administrator or support system.');
         }

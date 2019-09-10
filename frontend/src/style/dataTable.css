@@ -1,15 +1,16 @@
-#users-table table,
-#users-table tr {
+.admin-tables table,
+.admin-tables tr
+ {
   border-color: #d3d3d3;
 }
-#users-table tr:nth-of-type(2n+1) {
+.admin-tables tr:nth-of-type(2n+1) {
   background-color: #f6f7f8;
 }
-#users-table thead tr {
+.admin-tables thead tr {
   background-color: #4f4f4f!important;
   color: #fff;
 }
-#users-table th,
+.admin-tables th,
 .username-td,
 .date-td,
 .phone-td {
@@ -17,4 +18,12 @@
 }
 .users-table-wrap {
   overflow-x: scroll;
+}
+.admin-tables .comment-td input:read-only,
+.admin-tables .comment-td input:read-only:focus {
+  border: 0 none;
+  background-color: transparent;
+}
+.admin-tables .comment-td input:read-only:focus {
+  outline: none;
 }

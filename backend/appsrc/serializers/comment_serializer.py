@@ -6,7 +6,6 @@ from ..models import CoursesComments, YouYodaUser
 class CommentsPostSerializator(serializers.ModelSerializer):
 	"""Takes data and add comment to CoursesComments.
     Converts it to JSON format for transmission via the API.
-
     """
 
 	class Meta:
@@ -25,13 +24,10 @@ class CommentsPostSerializator(serializers.ModelSerializer):
 			return comments
 
 
-
 class CommentsGetSerializator(serializers.ModelSerializer):
 	"""Takes data from the CoursesComments model for create list of comments.
     Converts it to JSON format for transmission via the API.
-
     """
-
 
 	class Meta:
 		model = CoursesComments
