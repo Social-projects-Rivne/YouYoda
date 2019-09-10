@@ -5,6 +5,7 @@ import {Container, Row, Col, CardTitle, CardText, CardImg, Card, Collapse,
 import classnames from 'classnames';
 import {ProfileContext} from './profile-context';
 import Course from './Course'
+import CourseDetail from './CourseDetail'
 import Achievement from './Achievement'
 
 
@@ -242,9 +243,9 @@ export default class ProfileInfo extends React.Component {
                           <h6 className="contact-info">E-mail:</h6>
                         </Col>
                         <Col>
-                          <h6 className="contact-info">{profile.phone_number}</h6>
-                          <h6 className="contact-info">{profile.location}</h6>
-                          <h6 className="contact-info">{profile.email}</h6>
+                          <h6 className="contact-info">{profile.userInfo.phone_number}</h6>
+                          <h6 className="contact-info">{profile.userInfo.location}</h6>
+                          <h6 className="contact-info">{profile.userInfo.email}</h6>
                         </Col>
                       </Row>
                       <h6 className="main-info">Basic information</h6>
@@ -255,42 +256,42 @@ export default class ProfileInfo extends React.Component {
                           <h6 className="contact-info">I like:</h6>
                         </Col>
                         <Col>
-                          <h6 className="contact-info">{profile.birth_date}</h6>
-                          <h6 className="contact-info">{profile.i_like}</h6>
+                          <h6 className="contact-info">{profile.userInfo.birth_date}</h6>
+                          <h6 className="contact-info">{profile.userInfo.i_like}</h6>
                         </Col>
                       </Row>
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        {this.state.courses.slice(0, 3).map((course, i) => {
+                        {profile.userCourses.slice(0, 3).map((course, i) => {
                           return <Course key={i} description={course.description} id={i} lg={6} />;
                       })}
                       </Row>
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
-                        {this.state.courses.slice(0, 6).map((course, i) => {
+                        {profile.userCourses.slice(0, 6).map((course, i) => {
                           return <Course key={i} description={course.description} id={i} lg={6} />;
                       })}
                       </Row>
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        {this.state.courses.slice(0, 7).map((course, i) => {
+                        {profile.userCourses.slice(0, 7).map((course, i) => {
                           return <Course key={i} description={course.description} id={i} lg={6} />;
                       })}
                       </Row>
                     </TabPane>
                     <TabPane tabId="5">
                       <Row>
-                        {this.state.courses.slice(0, 5).map((course, i) => {
+                        {profile.userCourses.slice(0, 5).map((course, i) => {
                           return <Course key={i} description={course.description} id={i} lg={6} />;
                       })}
                       </Row>
                     </TabPane>
                     <TabPane tabId="6">
                       <Row>
-                        {this.state.courses.slice(0, 2).map((course, i) => {
+                        {profile.userCourses.slice(0, 2).map((course, i) => {
                           return <Course key={i} description={course.description} id={i} lg={6} />;
                       })}
                       </Row>
@@ -307,13 +308,13 @@ export default class ProfileInfo extends React.Component {
                 </Col>
               </Row>
               <Row>
-                {this.state.courses.slice(0, 3).map((course, i) => {
+                {profile.userCourses.slice(0, 3).map((course, i) => {
                   return <Course key={i} description={course.description} id={i} lg={4} />;
               })}
               </Row>
               <Collapse isOpen={this.state.collapse}>
                 <Row>
-                  {this.state.courses.slice(3, this.state.courses.length).map((course, i) => {
+                  {profile.userCourses.slice(3, profile.userCourses.length).map((course, i) => {
                     return <Course key={i} description={course.description} id={i} lg={4} />;
                 })}
                 </Row>

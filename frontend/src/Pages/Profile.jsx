@@ -14,8 +14,10 @@ export default class Profile extends React.Component{
       super(props);
       this.state = {
         userInfo: {},
+        userCourses: [],
       };
     }
+
     getInfo = async () => {
       try {
         const response = await API.get('user/profile/view');
@@ -25,14 +27,29 @@ export default class Profile extends React.Component{
         toast.error("For some reason now you can not view your profile, please contact support")
       }
     };
+
+    getCourses = async () => {
+      try {
+        const response = await API.get('user/profile/courses');
+        return response.data;
+      }
+      catch (error) {
+        toast.error("For some reason now you can not view your courses, please contact support")
+      }
+    };
+
     async componentDidMount() {
         let userData = await this.getInfo();
+        let userCourses = await this.getCourses();
         if (typeof userData !== 'undefined') {
           let userInfo = {}
           Object.keys(userData).map(function (key) {
               userInfo[key] = userData[key]
           })
-        this.setState(userInfo)
+        this.setState({
+          userInfo: userInfo,
+          userCourses: userCourses
+        })
       }
     }
 

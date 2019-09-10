@@ -36,7 +36,7 @@ export default class ProfileInfo extends React.Component {
                   <Col md="3" className="profile-photo-container">
                     <div>
                         <img src={require('../img/content/profile_photo.png')}
-                          className="profile-photo" href="#" alt="profile-photo" href={profile.avatar_url}/>
+                          className="profile-photo" href="#" alt="profile-photo" href={profile.userInfo.avatar_url}/>
                         <div className="edit-label">
                             {this.renderRedirect()}
                             <a onClick={this.setRedirect} href="#">Edit</a>
@@ -46,8 +46,8 @@ export default class ProfileInfo extends React.Component {
                   <Col className="profile-info">
                       <div className="user-name">
                           <div>
-                            <h2>{profile.first_name}</h2>
-                            <h2 style={{paddingLeft:"5px"}}>{profile.last_name}</h2>
+                            <h2>{profile.userInfo.first_name}</h2>
+                            <h2 style={{paddingLeft:"5px"}}>{profile.userInfo.last_name}</h2>
                           </div>
                           <div>
                             {this.renderRedirect()}
@@ -58,7 +58,7 @@ export default class ProfileInfo extends React.Component {
                           </div>
                       </div>
                       <div className="user-info">
-                        <h6>{profile.about_me}</h6>
+                        <h6>{profile.userInfo.about_me}</h6>
                       </div>
                   </Col>
               </Row>

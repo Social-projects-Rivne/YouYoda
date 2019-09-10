@@ -72,6 +72,7 @@ class CoursesSubscribers(models.Model):
     participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     course_id = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name="subscribed_course")
     completed = models.BooleanField()
+    is_favourite = models.BooleanField(default=False)
     feedback = models.TextField()
     rate = models.IntegerField()
 

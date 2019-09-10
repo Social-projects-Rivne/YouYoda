@@ -102,21 +102,21 @@ def insertData(apps, schema_editor):
         date=datetime.datetime.now(), categories_id=2, location="Rivne, Ukraine", cover_url="")
 
     CoursesSubscribers = apps.get_model('appsrc', 'CoursesSubscribers')
-    CoursesSubscribers.objects.create(id=1, completed=False, feedback="feedback for course 1", rate=5,
+    CoursesSubscribers.objects.create(id=1, completed=False, feedback="feedback for course 1", rate=5, is_favourite=True,
         course_id_id=1, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=2, completed=True, feedback="feedback for course 2", rate=2,
+    CoursesSubscribers.objects.create(id=2, completed=True, feedback="feedback for course 2", rate=2, is_favourite=False,
         course_id_id=2, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=3, completed=False, feedback="feedback for course 3", rate=1,
+    CoursesSubscribers.objects.create(id=3, completed=False, feedback="feedback for course 3", rate=1, is_favourite=True,
         course_id_id=3, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=4, completed=True, feedback="feedback for course 4", rate=6,
+    CoursesSubscribers.objects.create(id=4, completed=True, feedback="feedback for course 4", rate=6, is_favourite=False,
         course_id_id=4, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=5, completed=False, feedback="feedback for course 5", rate=7,
+    CoursesSubscribers.objects.create(id=5, completed=False, feedback="feedback for course 5", rate=7, is_favourite=True,
         course_id_id=5, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=6, completed=True, feedback="feedback for course 6", rate=8,
+    CoursesSubscribers.objects.create(id=6, completed=True, feedback="feedback for course 6", rate=8, is_favourite=False,
         course_id_id=6, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=7, completed=False, feedback="feedback for course 7", rate=9,
+    CoursesSubscribers.objects.create(id=7, completed=False, feedback="feedback for course 7", rate=9, is_favourite=True,
         course_id_id=7, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=8, completed=True, feedback="feedback for course 8", rate=3,
+    CoursesSubscribers.objects.create(id=8, completed=True, feedback="feedback for course 8", rate=3, is_favourite=False,
         course_id_id=8, participant_id_id=8)
 
 
@@ -276,11 +276,22 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('completed', models.BooleanField()),
+                ('is_favourite', models.BooleanField(default=False)),
                 ('feedback', models.TextField()),
                 ('rate', models.IntegerField()),
                 ('course_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Courses')),
                 ('participant_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
+        ),
+        migrations.AlterField(
+            model_name='coursessubscribers',
+            name='course_id',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subscribed_course', to='appsrc.Courses'),
+        ),
+        migrations.AlterField(
+            model_name='coursessubscribers',
+            name='course_id',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subscribed_course', to='appsrc.Courses'),
         ),
         migrations.CreateModel(
             name='Achievements',

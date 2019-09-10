@@ -6,7 +6,7 @@ from .views.check_user import CheckUser
 from .views.courses import TopCourses
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents
-from .views.view_profile import ViewProfile
+from .views.view_profile import ViewProfile, ViewCoursesProfile
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer
@@ -17,6 +17,7 @@ urlpatterns = [
     path('user/check', CheckUser.as_view(), name='check'),
     path('user/profile/edit', EditProfile.as_view()),
     path('user/profile/change_password', ChangePassword.as_view(), name='change_password'),
+    path('user/profile/courses', ViewCoursesProfile.as_view(), name='user_courses'),
     path('user/profile/view', ViewProfile.as_view()),
     path('user/register', UserRegistration.as_view(), name='register'),
     path('user/login', UserLogin.as_view(), name='login'),
