@@ -20,7 +20,7 @@ class CourseComments(APIView):
     def get(self, request):
         """Get course_id as params and filter comments"""
         course_id = request.query_params.get('course_id')
-        comments = CoursesComments.objects.filter(course = course_id)
+        comments = CoursesComments.objects.filter(course = course_id).order_by('-date')
         serializer = CommentsGetSerializator(comments, many=True)
         return Response(serializer.data)
 

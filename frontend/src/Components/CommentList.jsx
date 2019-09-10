@@ -90,7 +90,7 @@ export class CommentForm extends React.Component {
             comment: this.state.comment.comment
         },
       )
-      this.props.addComment(comment);
+      this.props.addComment();
       this.setState({
             comment: { ...comment, comment: "" }
           });

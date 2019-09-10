@@ -41,11 +41,8 @@ export default class CourseDetail extends React.Component{
         await this.getCommnts();
       }
 
-    addComment = async(comment) => {
+    addComment = async() => {
         await this.getCommnts()
-        await this.setState({
-          comments: [comment, ...this.state.comments]
-        });
     }
     render(){
         let defimg = "/media/car-racing-4394450_1920.jpg";
