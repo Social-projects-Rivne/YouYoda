@@ -5,10 +5,10 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
-import { isAuthenticated, defaultPhoto } from '../utils';
 import '../api/pagination';
+import { defaultPhoto } from '../utils';
 
 
 const override = css`
@@ -22,10 +22,10 @@ export default class Event extends React.Component{
       super(props);
 
       this.state = {
-          loading: true
+          loading: true,
+          redirect: false
       }
   }
-
   componentWillMount(){
       this.setState({loading: true})
   }
@@ -33,6 +33,12 @@ export default class Event extends React.Component{
   componentDidMount(){
       this.setState({loading: false})
   }
+
+  handleClick = async (event) => {
+        await this.setState({ event });
+        await this.setState({ redirect: true });
+        window.location.reload();
+    }
 
   renderEvents(event) {
       const eventDate = event.date;
@@ -45,17 +51,17 @@ export default class Event extends React.Component{
                   <CardHeader className="event-header">{newEventDate}</CardHeader>
                   <CardBody className="event-body">
                       <CardTitle className="event-card-header">
-                      <Link>{event.name}</Link>
+                          <Link onClick={() => this.handleClick(event)}>{event.name}</Link>
                       </CardTitle>
                       <CardText>
                           <p><span className="main-text-span">Category: </span>{event.categories}</p>
                           <p>Rate: {event.rate}</p>
                           <p><span className="main-text-span">Event organizer: </span>{event.owner}</p>
-                          <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p> 
+                          <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
                       </CardText>
                   </CardBody>
-                  <CardFooter>
-                      <img width="100%" src={coverimg} alt={event.name} className="event-cover-photo"/>
+                  <CardFooter className="card-event-footer">
+                      <img width="100%" src={coverimg} alt={event.name}/>
                   </CardFooter>
               </Card>
           </Col>
@@ -63,8 +69,10 @@ export default class Event extends React.Component{
   }
 
     render(){
-        let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
-        let coverimg = defaultPhoto(defimg, event.cover_url);
+        const { redirect } = this.state
+        if (redirect) {
+           return <Redirect to={{pathname: '/event/detail', state: {event: this.state.event}}}/>;
+        }
         return (
             <Container>
                 <div className='sweet-loading'>

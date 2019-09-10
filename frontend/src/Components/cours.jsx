@@ -39,8 +39,6 @@ export default class Cours extends React.Component{
     renderCourses(course) {
         let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
         let coverimg = defaultPhoto(defimg, course.cover_url);
-        if(!course.cover_url)
-            course.cover_url = require("../img/static/course.png");
         const courseDate = course.start_date;
         const newCourseDate = moment(courseDate).format('MMMM Do YYYY, h:mm:ss a');
         const courseDuration = course.duration;
@@ -73,7 +71,6 @@ export default class Cours extends React.Component{
         if (redirect) {
            return <Redirect to={{pathname: '/course/detail', state: {course: this.state.course}}}/>;
         }
-
         return (
             <Container>
                 <div className='sweet-loading'>
