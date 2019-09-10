@@ -5,6 +5,7 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import { Redirect, Link } from 'react-router-dom'
 
 import '../api/pagination';
 
@@ -41,11 +42,13 @@ export default class Event extends React.Component{
               <Card className="event-card">
                   <CardHeader className="event-header">{newEventDate}</CardHeader>
                   <CardBody className="event-body">
-                      <CardTitle className="event-card-header">{event.name}</CardTitle>
+                      <CardTitle className="event-card-header">
+                      <Link onClick={() => this.handleClick(event)}>{event.name}</Link>
+                      </CardTitle>
                       <CardText>
-                          <p><span className="main-text-span">Category:</span>{'  '}{event.categories}</p>
+                          <p><span className="main-text-span">Category: </span>{event.categories}</p>
                           <p>Rate:{'  '}{event.rate}</p>
-                          <p><span className="main-text-span">Event organizer::</span>{'  '}{event.owner}</p>
+                          <p><span className="main-text-span">Event organizer: </span>{event.owner}</p>
                           <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p> 
                       </CardText>
                   </CardBody>
