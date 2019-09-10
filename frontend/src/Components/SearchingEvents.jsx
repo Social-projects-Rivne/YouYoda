@@ -20,7 +20,8 @@ export default class SearchingEvents extends React.Component{
           curentpage: 1,
           eventList:[],
           categories__in: '',
-          order_by: '-date'
+          order_by: '-date',
+          loading: true
       };
     }
 
@@ -45,7 +46,8 @@ export default class SearchingEvents extends React.Component{
      )
           this.setState({
               numberofpages:response.data.num_of_pages,
-              eventList:response.data.data
+              eventList:response.data.data,
+              loading: false
           })
         }
         catch (error) {
@@ -69,7 +71,7 @@ export default class SearchingEvents extends React.Component{
 
     handleSortData = async (value) => {
         await this.setState({order_by: value});
-        await this.getData(); 
+        await this.getData();
       }
 
     render(){
@@ -89,10 +91,10 @@ export default class SearchingEvents extends React.Component{
          if (this.state.numberofpages < 2) {
              visibpag = 'hidden'
          }
-        
+
     return (
         <div id="SearchingCourses">
-              <FilterEventsSideBar sendCategoriesData={this.handleCategoriesList}            
+              <FilterEventsSideBar sendCategoriesData={this.handleCategoriesList}
               />
               <div id="page-wrap">
                   <Router>
@@ -116,18 +118,18 @@ export default class SearchingEvents extends React.Component{
                                               <option onClick={() => this.handleSortData("date")}>Date by ascending</option>
                                               <option onClick={() => this.handleSortData("-date")}>Date by descending</option>
                                           </Input>
-                                      </InputGroupAddon>              
+                                      </InputGroupAddon>
                                   </InputGroup>
                               </Col>
-                          </Row> 
+                          </Row>
                           <Route
                               path='/events/search:page'
-                              render={() => <Event eventList={this.state.eventList}/>}
+                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading}/>}
                           />
                           <Route
                               exact
                               path='/events/search'
-                              render={() => <Event eventList={this.state.eventList}/>}
+                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading}/>}
                             />
                           <Row>
                               <Col style={{visibility:visibpag}}>
@@ -147,7 +149,7 @@ export default class SearchingEvents extends React.Component{
                       </Container>
                 </Router>
             </div>
-        </div>    
+        </div>
     )
   }
 };

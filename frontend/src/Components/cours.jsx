@@ -8,6 +8,7 @@ import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom'
 
 import '../api/pagination';
+import { defaultPhoto } from '../utils';
 
 
 const override = css`
@@ -21,33 +22,31 @@ export default class Cours extends React.Component{
       super(props);
 
       this.state = {
-          loading: true,
           redirect: false,
       }
-    }
-    componentWillMount(){
-        this.setState({loading: true})
     }
 
     componentDidMount(){
         this.setState({loading: false})
     }
 
-    handleClick = async (course) => { 
+    handleClick = async (course) => {
         await this.setState({ course });
         await this.setState({ redirect: true });
-        window.location.reload();  
+        window.location.reload();
     }
 
     renderCourses(course) {
+        let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
+        let coverimg = defaultPhoto(defimg, course.cover_url);
         if(!course.cover_url)
             course.cover_url = require("../img/static/course.png");
         const courseDate = course.start_date;
         const newCourseDate = moment(courseDate).format('MMMM Do YYYY, h:mm:ss a');
         const courseDuration = course.duration;
         const newCourseDuration = moment.duration(courseDuration).days();
-        return (    
-            <Col xs="12" sm="6" md="3">
+        return (
+            <Col sm="12" md="6" lg="4" xl="3">
                 <Card className="event-card">
                     <CardHeader className="event-header">{newCourseDate}</CardHeader>
                     <CardBody className="event-body">
@@ -58,17 +57,17 @@ export default class Cours extends React.Component{
                             <p><span className="main-text-span">Category: </span>{course.categories}</p>
                             <p>Duration: {newCourseDuration} days</p>
                             <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
-                            <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p> 
+                            <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p>
                         </CardText>
                     </CardBody>
-                    <CardFooter>
-                        <img width="100%" src={course.cover_url} alt={course.coursename}/>
+                    <CardFooter className="card-event-footer">
+                        <img width="100%" src={coverimg} alt={course.coursename}/>
                     </CardFooter>
                 </Card>
             </Col>
         )
     }
-      
+
     render(){
         const { redirect } = this.state;
         if (redirect) {
@@ -83,12 +82,12 @@ export default class Cours extends React.Component{
                       sizeUnit={"px"}
                       size={150}
                       color={'#123abc'}
-                      loading={this.state.loading}
+                      loading={this.props.loading}
                     />
-                </div>   
+                </div>
                 <Row>
                     {this.props.coursesList.map( course => this.renderCourses(course) )}
-                </Row> 
+                </Row>
             </Container>
         )
     }

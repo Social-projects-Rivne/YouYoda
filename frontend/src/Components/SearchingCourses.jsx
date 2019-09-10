@@ -20,12 +20,13 @@ export default class SearchingCourses extends React.Component{
           curentpage: 1,
           coursesList:[],
           order_by: 'rate',
-          rate__lte: '',       
+          rate__lte: '',
           rate__gte: '',
           cost__gt: '',
           cost: '',
           status__in: '',
           categories__in: '',
+          loading: true
       };
     }
 
@@ -55,7 +56,8 @@ export default class SearchingCourses extends React.Component{
      )
          this.setState({
              numberofpages:response.data.num_of_pages,
-             coursesList:response.data.data
+             coursesList:response.data.data,
+             loading: false
          })
        }
        catch (error) {
@@ -79,32 +81,32 @@ export default class SearchingCourses extends React.Component{
 
     handleStatusList = async (value) => {
         await this.setState({status__in: value});
-        await this.getData(); 
-      } 
+        await this.getData();
+      }
 
     handleFreeData = async (value) => {
         await this.setState({cost: value});
-        await this.getData(); 
+        await this.getData();
       }
 
     handlePaidData = async (value) => {
         await this.setState({cost__gt: value});
-        await this.getData(); 
+        await this.getData();
       }
 
     handleRateGteData = async (value) => {
         await this.setState({rate__gte: value});
-        await this.getData(); 
-      } 
+        await this.getData();
+      }
 
     handleRateLteData = async (value) => {
         await this.setState({rate__lte: value});
-        await this.getData(); 
+        await this.getData();
       }
 
     handleSortData = async (value) => {
         await this.setState({order_by: value});
-        await this.getData(); 
+        await this.getData();
       }
 
     render(){
@@ -123,7 +125,7 @@ export default class SearchingCourses extends React.Component{
          if (this.state.numberofpages < 2) {
              visibpag = 'hidden'
          }
-        
+
     return (
           <div id="SearchingCourses">
               <FilterCoursesSideBar sendCategoriesData={this.handleCategoriesList}
@@ -157,18 +159,18 @@ export default class SearchingCourses extends React.Component{
                                               <option onClick={() => this.handleSortData("cost")}>Cost</option>
                                               <option onClick={() => this.handleSortData("rate")}>Rate</option>
                                           </Input>
-                                      </InputGroupAddon>              
+                                      </InputGroupAddon>
                                   </InputGroup>
                               </Col>
-                          </Row> 
+                          </Row>
                           <Route
                               path='/courses/search:page'
-                              render={() => <Cours coursesList={this.state.coursesList}/>}
+                              render={() => <Cours coursesList={this.state.coursesList} loading={this.state.loading}/>}
                           />
                           <Route
                               exact
                               path='/courses/search'
-                              render={() => <Cours coursesList={this.state.coursesList}/>}
+                              render={() => <Cours coursesList={this.state.coursesList} loading={this.state.loading}/>}
                           />
                           <Row>
                               <Col style={{visibility:visibpag}}>
@@ -185,13 +187,10 @@ export default class SearchingCourses extends React.Component{
                                   </div>
                               </Col>
                           </Row>
-                      </Container>  
+                      </Container>
                   </Router>
               </div>
           </div>
      )
     }
   };
-
-
-        

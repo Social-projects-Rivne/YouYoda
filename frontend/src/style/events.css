@@ -28,12 +28,16 @@
 .event-card {
 	margin-top: 20px;
 	margin-bottom: 20px;
+	min-width: 260px;
 }
 
 .event-header {
  	background: white;
 	border: 1px solid #4F4F4F;
 	/*box-sizing: border-box;*/
+	min-height: 80px;
+	display: flex;
+	align-items: center;
 }
 
 .event-card-header {
@@ -118,4 +122,8 @@
 .menu-filter {
 	position: absolute;
 	top: 100px;
+}
+.card-event-footer {
+	max-height: 165px;
+	overflow: hidden;
 }
