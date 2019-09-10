@@ -42,7 +42,8 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            const response = await API.get('user/profile/edit');
+            const response = await API.get('user/profile/edit')
+            localStorage.setItem('avatar_url', response.data.avatar_url)
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');

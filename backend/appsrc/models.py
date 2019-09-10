@@ -56,7 +56,7 @@ class TrainerCertificates(models.Model):
 class Courses(models.Model):
     coursename = models.CharField(max_length=60)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10)
+    status = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     is_public = models.BooleanField()
     start_date = models.DateTimeField(blank=False)
@@ -92,3 +92,9 @@ class Events(models.Model):
 class EventsSubscribers(models.Model):
     participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
+
+class CoursesComments(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(blank=True, null=True)

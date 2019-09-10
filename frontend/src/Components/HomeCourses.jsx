@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { Container,Row,Button,Col } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { axiosGet } from '../api/axiosGet';
+import { defaultPhoto } from '../utils'
 
 
 export default class HomeCourses extends React.Component{
@@ -30,14 +31,17 @@ export default class HomeCourses extends React.Component{
     };
 
     renderCourses(course) {
-        if(!course.cover_url)
-            course.cover_url = require("../img/static/course.png");
+        let defimg = "/media/car-racing-4394450_1920.jpg";
+        let coverimg = defaultPhoto(defimg, course.cover_url);
+
         return (
             <Col xl="4" lg="6" id={`course_${course.id}`} key={course.id}>
                   <div className="home-course">
-                    <img src={course.cover_url} alt={course.coursename} />
+                    <div className="course-cover-photo">
+                        <img src={coverimg} alt={course.coursename} />
+                    </div>
                     <h3 className="secondary-header">{course.coursename}</h3>
-                    <p className="main-text">{course.description}</p>
+                    <p className="main-text courses-description">{course.description}</p>
                     <p className="main-text">Rate:  {course.rate}</p>
                     <Button color="warning" className="btn-yellow" onClick={() => this.handleClick(course)}>Details</Button>
                   </div>
@@ -50,6 +54,7 @@ export default class HomeCourses extends React.Component{
         if (redirect) {
            return <Redirect to={{pathname: '/course/detail', state: {course: this.state.course}}}/>;
         }
+
 
         return(
             <div style={{backgroundColor:'#E8E8E8'}} id="home-course">
@@ -67,15 +72,17 @@ export default class HomeCourses extends React.Component{
             <Row>
                 {this.state.coursesList.map( course => this.renderCourses(course) )}
             </Row>
-            <Row className="d-flex justify-content-end"> 
-                <div className="more-courses-events">
-                    <button className="learn-more">
-                        <div className="circle">
-                        <span className="icon arrow"></span>
-                        </div>
-                        <p className="button-text">More Courses</p>
-                    </button>
-                </div>
+            <Row className="d-flex justify-content-end">
+                <Link to="/course/detail">
+                    <div className="more-courses-events">
+                        <button className="learn-more">
+                            <div className="circle">
+                            <span className="icon arrow"></span>
+                            </div>
+                            <p className="button-text">More Courses</p>
+                        </button>
+                    </div>
+                </Link>
                 </Row>
             </Container>
             </div>
