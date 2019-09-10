@@ -13,7 +13,7 @@ from ..serializers.courses_serializer import CoursesSerializator
 
 NUMBER_OF_TOP = 6
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
-COURSES_ON_PAGE = 6
+COURSES_ON_PAGE = 4
 SEARCH_FIELDS = ['status__in', 'coursename__icontains', 'rate__lte',
                  'rate__gte', 'location__icontains', 'categories__in',
                  'cost__gt', 'cost']

@@ -1,9 +1,11 @@
 from django.urls import include, path
 
+from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.categories import CategoriesList
+from .views.courses import TopCourses, SearchingCourses
+from .views.edit_profile import EditProfile
 from .views.comment import CourseComments
 from .views.courses import TopCourses, SearchingCourses
 from .views.edit_profile import EditProfile

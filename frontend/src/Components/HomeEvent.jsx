@@ -117,7 +117,6 @@ export default class HomeEvent extends React.Component{
                             </Modal>
                         </Col>
                     </Row>
-
                     <Row className="d-flex justify-content-end">
                         <Link to="/events/search">
                             <div className="more-courses-events">
@@ -130,7 +129,6 @@ export default class HomeEvent extends React.Component{
                             </div>
                         </Link>
                     </Row>
-
                 </Container>
             </div>
         )

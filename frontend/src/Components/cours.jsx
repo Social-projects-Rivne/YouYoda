@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { css } from '@emotion/core';
+import { Container, Row, Col, Card, CardTitle, CardText, CardHeader, CardFooter, CardBody } from 'reactstrap';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
+import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import moment from 'moment';
+import { Redirect, Link } from 'react-router-dom'
 
-import {API} from '../api/axiosConf';
 import '../api/pagination';
+import { defaultPhoto } from '../utils';
 
 
 const override = css`
@@ -17,51 +17,78 @@ const override = css`
     border-color: #FFD466;
 `;
 
-function renderCourses(course) {
-
-    return (
-        <Col xl="4" lg="6" id={`course_${course.id}`} key={course.id}>
-        <div className="home-course">
-        <h3 className="secondary-header">{course.coursename}</h3>
-        </div>
-        </Col>
-    )
-}
-
 export default class Cours extends React.Component{
     constructor(props) {
       super(props);
 
       this.state = {
-      loading: true
+          redirect: false,
+      }
     }
-  }
-  componentWillMount(){
-      this.setState({loading: true})
-  }
 
-  componentDidMount(){
-      this.setState({loading: false})
-  }
-      render(){
+    componentDidMount(){
+        this.setState({loading: false})
+    }
 
-    return (
-      <>
+    handleClick = async (course) => {
+        await this.setState({ course });
+        await this.setState({ redirect: true });
+        window.location.reload();
+    }
+
+    renderCourses(course) {
+        let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
+        let coverimg = defaultPhoto(defimg, course.cover_url);
+        if(!course.cover_url)
+            course.cover_url = require("../img/static/course.png");
+        const courseDate = course.start_date;
+        const newCourseDate = moment(courseDate).format('MMMM Do YYYY, h:mm:ss a');
+        const courseDuration = course.duration;
+        const newCourseDuration = moment.duration(courseDuration).days();
+        return (
+            <Col sm="12" md="6" lg="4" xl="3">
+                <Card className="event-card">
+                    <CardHeader className="event-header">{newCourseDate}</CardHeader>
+                    <CardBody className="event-body">
+                        <CardTitle className="event-card-header">
+                            <Link onClick={() => this.handleClick(course)}>{course.coursename}</Link>
+                        </CardTitle>
+                        <CardText>
+                            <p><span className="main-text-span">Category: </span>{course.categories}</p>
+                            <p>Duration: {newCourseDuration} days</p>
+                            <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
+                            <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p>
+                        </CardText>
+                    </CardBody>
+                    <CardFooter className="card-event-footer">
+                        <img width="100%" src={coverimg} alt={course.coursename}/>
+                    </CardFooter>
+                </Card>
+            </Col>
+        )
+    }
+
+    render(){
+        const { redirect } = this.state;
+        if (redirect) {
+           return <Redirect to={{pathname: '/course/detail', state: {course: this.state.course}}}/>;
+        }
+
+        return (
             <Container>
-            <div className='sweet-loading'>
-                <ClipLoader
-                  css={override}
-                  sizeUnit={"px"}
-                  size={150}
-                  color={'#123abc'}
-                  loading={this.state.loading}
-                />
-              </div>
-
-                {this.props.coursesList.map( course => renderCourses(course) )}
-
-        </Container>
-      </>
-      )
-  }
+                <div className='sweet-loading'>
+                    <ClipLoader
+                      css={override}
+                      sizeUnit={"px"}
+                      size={150}
+                      color={'#123abc'}
+                      loading={this.props.loading}
+                    />
+                </div>
+                <Row>
+                    {this.props.coursesList.map( course => this.renderCourses(course) )}
+                </Row>
+            </Container>
+        )
+    }
 }

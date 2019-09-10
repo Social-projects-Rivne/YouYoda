@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'corsheaders',
     'allauth',
     'django.contrib.sites',
+    'django_filters',
     'djoser',
 )
 
