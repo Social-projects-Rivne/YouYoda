@@ -20,6 +20,7 @@
 	text-align: center;
 	font-weight: bold;
 	margin-top: 8%;
+	margin-bottom: 5%;																				;
 	font-family: Roboto Condensed;
 	font-size: 40px;
 }
@@ -77,16 +78,24 @@
   color: white;
 }
 
+.bm-burger-bars {
+	background: transparent;
+}
+
 .bm-burger-button {
   position: fixed;
   width: 36px;
   height: 30px;
   left: 36px;
-  top: 90px;
+  top: 114px;
 }
 
-.bm-burger-bars {
-  background: #373a47;
+.bm-burger-button::after {
+	content: "\f0b0";
+	font-family: "FontAwesome"; 
+	font-weight: 900; 
+	font-size: 2rem;
+	color: #4f4f4f;					
 }
 
 .bm-cross-button {
