@@ -100,19 +100,26 @@ export default class HomeEvent extends React.Component{
                             <Slider {...settings}>
                                 {this.state.eventsList.map( event => this.renderEvents(event) )}
                             </Slider>
-                            <Modal isOpen={this.state.modal} className={this.props.className}>
+                            <Modal isOpen={this.state.modal} className={this.props.className} id="modal-event-content">
                                 <ModalHeader toggle={this.toggle} close={closeBtn}><h4 className="secondary-header">{event.name}</h4>
-                                    <p className="main-category">Category: {event.categories}</p>
+                                    <p className="main-category">Category:  {event.categories}</p>
                                     <p className="main-text-event-modal">{event.description}</p></ModalHeader>
                                 <ModalBody>
                                     <img src={coverimg} alt={event.name} className="event-modal-photo"/>
-                                    <p className="main-text">{event.location}</p>
-                                    <p className="main-text">{newEventDate}</p>
+                                    <p className="main-text">Location: {event.location}</p>
+                                    <p className="main-text">Date: {newEventDate}</p>
                                     <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button className={`btn-join ${isAuthenticated("show")}`} color="warning" onClick={this.toggle}>Join</Button>{' '}
-                                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                                    <Button className={`btn-join ${isAuthenticated("show")}`} 
+                                            color="warning"
+                                            style={{marginRight:'33px'}} 
+                                            onClick={this.toggle}>Join
+                                    </Button>
+                                    <Button color="secondary" 
+                                            className='btn-event-modal-cancel'
+                                            onClick={this.toggle}
+                                    >Cancel</Button>
                                 </ModalFooter>
                             </Modal>
                         </Col>
