@@ -99,4 +99,4 @@ class Events(models.Model):
 
 class EventsSubscribers(models.Model):
     participant = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)

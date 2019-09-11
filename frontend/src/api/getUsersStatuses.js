@@ -9,4 +9,4 @@ async function getUsersStatusesList() {
         return Promise.reject(error);
     }
 }
-export {getUsersList}
+export {getUsersStatusesList}

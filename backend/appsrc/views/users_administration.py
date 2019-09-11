@@ -37,7 +37,7 @@ class GetUsersStatuses(APIView):
         auth_token = request.headers['Authorization'].replace('Token ', '')
         user = User.objects.get(auth_token=auth_token)
         # if user is admin or moderator and active, let him to get data
-        col = ['id', 'email', 'role_id', 'status_id']
+        col = ['id', 'role_id', 'email', 'status_id']
         if((user.role_id == IS_ADMIN or user.role_id == IS_MODERATOR) and user.is_active and user.status_id == 1):
             users = User.objects.all().values(*col)
             user_list = list(users)

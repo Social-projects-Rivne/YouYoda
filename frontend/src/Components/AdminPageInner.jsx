@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdminLogs from './AdminLogs';
 import AdminRequests from './AdminRoleRequests';
 import AdminUsers from './AdminUsers';
-import AdminUsersStatuses from './AdminUsersStatuses';
+import UsersStatuses from './AdminUsersStatuses';
 
 
 const PAGES = [
@@ -39,7 +39,7 @@ export default class AdminPageInner extends React.Component {
                   <Col md="10">
                       <Switch>
                           <Route exact path='/admin/users' component={AdminUsers}/>
-                          <Route exact path='/admin/users/statuses' component={AdminUsersStatuses}/>
+                          <Route exact path='/admin/statuses' component={UsersStatuses}/>
                           <Route exact path='/admin/logs' component={AdminLogs}/>
                           <Route exact path='/admin/roles' component={AdminRequests}/>
                       </Switch>
