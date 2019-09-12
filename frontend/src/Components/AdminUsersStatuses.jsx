@@ -12,8 +12,7 @@ class UsersStatuses extends React.Component {
         super(props);
 
         this.state = {
-            dataList: [],
-            dropdownOpen: false
+            dataList: []
         };
     }
 
@@ -30,13 +29,31 @@ class UsersStatuses extends React.Component {
         return (
             <tr id={`user_${user.id}`} key={user.id}>
                 <td>{user.id}</td>
-                <td>{user.role_id}</td>
+                <td>
+                {(() => {
+                    var roleId = user.role_id
+                    switch (roleId) {
+                      case 1: return "User(1)";
+                      case 2: return "Moderator(2)";
+                      case 3: return "Admin(3)";
+                    }
+                })()}
+                </td>
                 <td>{user.email}</td>
                 <td align="center"><input type="checkbox" checked={user.is_active} /></td>
                 <td> 
                     <UncontrolledButtonDropdown>
-                    <DropdownToggle tag="button" type="button" caret>
-                            {user.status_id}
+                        <DropdownToggle tag="button" type="button" caret>
+                            {
+                                (() => {
+                                    var statusId = user.status_id
+                                    switch (statusId) {
+                                      case 1: return "Active";
+                                      case 2: return "Banned";
+                                      case 3: return "Muted";
+                                      case 4: return "Idle";
+                                    }
+                            })()}
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem>Active</DropdownItem>
