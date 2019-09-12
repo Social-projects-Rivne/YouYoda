@@ -527,24 +527,27 @@
     }
   }
 
+
+  /* Course detail */
 .course-det-header {
   font-size: 2.5rem;
   font-weight: 700;
   text-align: center;
-  margin: 50px 0 30px 0;
-  color: #353535;
+  margin: 30px 30px 30px 50px;
+  color: #fff;
 }
 .star {
     position: relative;
-    top: 50px;
+    top: 40px;
+    margin-right: 5%
 }
 .rate-big {
     font-size: 2rem;
-    color: green;
+    color: #cdffad;
 }
 .rate-small {
     font-size: 1rem;
-    color: #4f4f4f;
+    color: #fff;
     font-weight: 700;
 }
 .rate-num {
@@ -553,16 +556,8 @@
     margin-left: 15px;
 }
 .course-detail-h4 {
-    margin: 50px 0 15px 0;
+    margin-bottom: 15px;
     font-size: 2rem;
-}
-.course-detail-first-col {
-    margin-top: 100px;
-}
-.course-detail-second-col {
-    margin-top: 50px;
-    display: flex;
-    justify-content: flex-end;
 }
 .course-detail-status {
     position: relative;
@@ -571,4 +566,27 @@
     left: 10px;
     font-weight: 500;
     text-shadow: 1px 1px 1px;
+}
+.cd-info-block {
+    position: relative;
+    bottom: 58px;
+    background: #4f4f4f;
+    color: #fff;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.cd-info-block i { 
+    padding: 0 15px;
+}
+.cd-info-block div {
+    width: 25%;
+    text-align: center;
+}
+.cd-header {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    z-index: 3;
+    background: linear-gradient(180deg, rgba(79,79,79,1) 0%, rgba(0,0,0,0) 100%); 
 }
