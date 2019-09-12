@@ -16,7 +16,7 @@ export default class SearchingCourses extends React.Component{
       super(props);
 
       this.state = {
-          numberofpages: 0,
+          numberofpages: 2,
           curentpage: 1,
           coursesList:[],
           order_by: 'rate',
@@ -75,37 +75,51 @@ export default class SearchingCourses extends React.Component{
     }
 
     handleCategoriesList = async (value) => {
-        await this.setState({categories__in: value});
+        await this.setState({
+            categories__in: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleStatusList = async (value) => {
-        await this.setState({status__in: value});
+        await this.setState({
+            status__in: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleFreeData = async (value) => {
-        await this.setState({cost: value});
+        await this.setState({
+            cost: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handlePaidData = async (value) => {
-        await this.setState({cost__gt: value});
+        await this.setState({
+            cost__gt: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleRateGteData = async (value) => {
-        await this.setState({rate__gte: value});
+        await this.setState({
+            rate__gte: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleRateLteData = async (value) => {
-        await this.setState({rate__lte: value});
+        await this.setState({
+            rate__lte: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleSortData = async (value) => {
-        await this.setState({order_by: value});
+        await this.setState({
+            order_by: value,
+            curentpage: 1});
         await this.getData();
       }
 
@@ -127,7 +141,7 @@ export default class SearchingCourses extends React.Component{
          }
 
     return (
-          <div id="SearchingCourses">
+          <div id="SearchingCourses" style={{minHeight:"80vh"}}>
               <FilterCoursesSideBar sendCategoriesData={this.handleCategoriesList}
                                     sendStatusData={this.handleStatusList}
                                     sendCostPaidData={this.handlePaidData}

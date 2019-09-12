@@ -195,7 +195,7 @@
     margin-bottom: 30px;
 }
 .home-about img{
-    height: 130px;
+    max-width: 110px;
 }
 .home-about p{
     margin-bottom: 130px;
@@ -285,6 +285,18 @@
 
 .course-star-rating {
     font-size: 25px;
+}
+.home-course-star-rating{
+    font-size: 20px;
+    top:5px;
+}
+.home-rate {
+    position: relative;
+    top: -50px;
+    right: 5%;
+}
+.home-course .secondary-header {
+    margin-bottom: 0px;
 }
 
 /* Style for HomeCourses */

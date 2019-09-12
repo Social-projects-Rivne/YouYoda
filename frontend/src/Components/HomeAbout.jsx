@@ -19,7 +19,8 @@ export default class HomeAbout extends React.Component{
                 </Col>
             </Row>
             <Row>
-                <Col md="2"><img src={require("../img/static/about.svg")} alt="ico"/>
+                <Col md="2">
+                    <img src={require("../img/static/apple.png")} alt="ico"/>
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Choose what to learn</h3>
@@ -28,7 +29,8 @@ export default class HomeAbout extends React.Component{
                     so you can start selling your product to potential
                     customers.</p>
                 </Col>
-                <Col md="2"><img src={require("../img/static/about.svg")} alt="ico"/>
+                <Col md="2">
+                    <img src={require("../img/static/atom.png")} alt="ico"/>
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Find personal coach</h3>
@@ -39,7 +41,8 @@ export default class HomeAbout extends React.Component{
                 </Col>
             </Row>
             <Row>
-                <Col md="2"><img src={require("../img/static/about.svg")} alt="ico"/>
+                <Col md="2">
+                    <img src={require("../img/static/mk.png")} alt="ico"/>
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Learn by doing</h3>
@@ -48,7 +51,8 @@ export default class HomeAbout extends React.Component{
                     so you can start selling your product to potential
                     customers.</p>
                 </Col>
-                <Col md="2"><img src={require("../img/static/about.svg")} alt="ico"/>
+                <Col md="2">
+                    <img src={require("../img/static/idea.png")} alt="ico"/>
                 </Col>
                 <Col md="4">
                     <h3 className="secondary-header">Make own Events</h3>
