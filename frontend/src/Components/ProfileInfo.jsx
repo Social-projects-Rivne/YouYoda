@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Container, Row, Col} from 'reactstrap';
 import {Redirect} from 'react-router-dom'
+import { defaultPhoto } from '../utils';
 
 import {ProfileContext} from './profile-context';
 
@@ -33,10 +34,10 @@ export default class ProfileInfo extends React.Component {
             {profile => (
             <Container>
               <Row>
-                  <Col md="3" className="profile-photo-container">
+                  <Col onClick={this.setRedirect} md="3" className="profile-photo-container">
                     <div>
-                        <img src={require('../img/content/profile_photo.png')}
-                          className="profile-photo" href="#" alt="profile-photo" href={profile.userInfo.avatar_url}/>
+                        <img src={defaultPhoto("/media/avatar.png", profile.userInfo.avatar_url)}
+                          className="profile-photo" href="#" alt="profile-photo"/>
                         <div className="edit-label">
                             {this.renderRedirect()}
                             <a onClick={this.setRedirect} href="#">Edit</a>

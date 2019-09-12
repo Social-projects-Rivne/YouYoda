@@ -2,11 +2,20 @@ import React from 'react';
 
 import {Container, Row, Col, CardTitle, CardText, CardImg, Card, Collapse,
   Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
+import { css } from '@emotion/core';
+import { Resizable, ResizableBox } from 'react-resizable';
+import ClipLoader from 'react-spinners/ClipLoader';
 import classnames from 'classnames';
 import {ProfileContext} from './profile-context';
 import Course from './Course'
-import CourseDetail from './CourseDetail'
+import Cours from './cours'
 import Achievement from './Achievement'
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: #FFD466;
+`;
 
 
 export default class ProfileInfo extends React.Component {
@@ -172,7 +181,7 @@ export default class ProfileInfo extends React.Component {
                               className={classnames({ active: this.state.activeTab === '2' })} tab-link
                               onClick={() => { this.toggleTab('2') }}>
                                 <div className="user-courses-profile">Following
-                                  <div id="number-following-courses" className="courses-numbers">17</div>
+                                  <div id="number-following-courses" className="courses-numbers">{profile.userFollowingCourses.length}</div>
                                 </div>
                             </NavLink>
                           </NavItem>
@@ -181,7 +190,7 @@ export default class ProfileInfo extends React.Component {
                               className={classnames({ active: this.state.activeTab === '3' })} tab-link
                               onClick={() => { this.toggleTab('3') }}>
                                 <div className="user-courses-profile" href="#">Completed
-                                  <div id="number-completed-courses" className="events-numbers">20</div>
+                                  <div id="number-completed-courses" className="events-numbers">{profile.userCompletedCourses.length}</div>
                                 </div>
                             </NavLink>
                           </NavItem>
@@ -244,6 +253,15 @@ export default class ProfileInfo extends React.Component {
                         </Col>
                         <Col>
                           <h6 className="contact-info">{profile.userInfo.phone_number}</h6>
+                          <div className='sweet-loading' style={{marginLeft:"-200px"}}>
+                              <ClipLoader
+                                css={override}
+                                sizeUnit={"px"}
+                                size={150}
+                                color={'#123abc'}
+                                loading={profile.loading}
+                              />
+                          </div>
                           <h6 className="contact-info">{profile.userInfo.location}</h6>
                           <h6 className="contact-info">{profile.userInfo.email}</h6>
                         </Col>
@@ -263,36 +281,32 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        {profile.userCourses.slice(0, 3).map((course, i) => {
-                          return <Course key={i} description={course.description} id={i} lg={6} />;
-                      })}
+                          <Cours coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
                       </Row>
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
-                        {profile.userCourses.slice(0, 6).map((course, i) => {
-                          return <Course key={i} description={course.description} id={i} lg={6} />;
-                      })}
+                        <Cours coursesList={profile.userCompletedCourses} loading={profile.loading} lg={4}/>
                       </Row>
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        {profile.userCourses.slice(0, 7).map((course, i) => {
-                          return <Course key={i} description={course.description} id={i} lg={6} />;
+                        {this.state.courses.slice(0, 7).map((course, i) => {
+                          return <Course description={course.description} lg={6} />;
                       })}
                       </Row>
                     </TabPane>
                     <TabPane tabId="5">
                       <Row>
-                        {profile.userCourses.slice(0, 5).map((course, i) => {
-                          return <Course key={i} description={course.description} id={i} lg={6} />;
+                        {this.state.courses.slice(0, 5).map((course, i) => {
+                          return <Course description={course.description} lg={6} />;
                       })}
                       </Row>
                     </TabPane>
                     <TabPane tabId="6">
                       <Row>
-                        {profile.userCourses.slice(0, 2).map((course, i) => {
-                          return <Course key={i} description={course.description} id={i} lg={6} />;
+                        {this.state.courses.slice(0, 2).map((course, i) => {
+                          return <Course description={course.description} lg={6} />;
                       })}
                       </Row>
                     </TabPane>
@@ -308,15 +322,11 @@ export default class ProfileInfo extends React.Component {
                 </Col>
               </Row>
               <Row>
-                {profile.userCourses.slice(0, 3).map((course, i) => {
-                  return <Course key={i} description={course.description} id={i} lg={4} />;
-              })}
+                  <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3}/>
               </Row>
               <Collapse isOpen={this.state.collapse}>
                 <Row>
-                  {profile.userCourses.slice(3, profile.userCourses.length).map((course, i) => {
-                    return <Course key={i} description={course.description} id={i} lg={4} />;
-                })}
+                  <Cours coursesList={profile.userFavouritesCourses.slice(4, profile.userFavouritesCourses.length)} loading={profile.loading} lg={3}/>
                 </Row>
               </Collapse>
               <Row>

@@ -14,7 +14,10 @@ export default class Profile extends React.Component{
       super(props);
       this.state = {
         userInfo: {},
-        userCourses: [],
+        userCompletedCourses: [],
+        userFollowingCourses: [],
+        userFavouritesCourses: [],
+        loading: true,
       };
     }
 
@@ -41,16 +44,33 @@ export default class Profile extends React.Component{
     async componentDidMount() {
         let userData = await this.getInfo();
         let userCourses = await this.getCourses();
+        let userCompletedCourses = [];
+        let userFollowingCourses = [];
+        let userFavouritesCourses = [];
         if (typeof userData !== 'undefined') {
           let userInfo = {}
           Object.keys(userData).map(function (key) {
               userInfo[key] = userData[key]
           })
+          for(let i = 0; i < userCourses.length; i++)
+            for(let j = 0; j < userCourses[i].subscribed.length; j++)
+            {
+              if(userCourses[i].subscribed[j].completed)
+                userCompletedCourses.push(userCourses[i])
+              else
+                userFollowingCourses.push(userCourses[i])
+              if(userCourses[i].subscribed[j].is_favourite)
+                userFavouritesCourses.push(userCourses[i])
+            }
         this.setState({
           userInfo: userInfo,
-          userCourses: userCourses
+          userCompletedCourses: userCompletedCourses,
+          userFollowingCourses: userFollowingCourses,
+          userFavouritesCourses: userFavouritesCourses,
+          loading: false,
         })
       }
+      console.log(userCourses[0].subscribed[0].feedback);
     }
 
   render(){

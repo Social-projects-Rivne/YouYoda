@@ -46,7 +46,7 @@ export default class Cours extends React.Component{
         const courseDuration = course.duration;
         const newCourseDuration = moment.duration(courseDuration).days();
         return (
-            <Col sm="12" md="6" lg="4" xl="3">
+            <Col sm="12" md="6" lg="4" xl={this.props.lg}>
                 <Card className="event-card">
                     <CardHeader className="event-header">{newCourseDate}</CardHeader>
                     <CardBody className="event-body">
