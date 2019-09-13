@@ -18,15 +18,13 @@ export default class Home extends React.Component{
             isOpen: false,
             isOpenL: false
         }
-        this.handleClickReg = this.handleClickReg.bind(this);
-        this.handleClickLogin = this.handleClickLogin.bind(this);
      }
-    handleClickReg() {
+    handleClickReg = () => {
         this.setState(prevState => ({
             isOpen: !prevState.isOpen
         }));
     }
-    handleClickLogin() {
+    handleClickLogin = () => {
         this.setState(prevState => ({
             isOpenL: !prevState.isOpenL
         }));
@@ -34,6 +32,7 @@ export default class Home extends React.Component{
     render(){
         return(
             <>
+            
             <HomeHeader handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin}/>
             <HomeAbout/>
             <HomeEvent/>

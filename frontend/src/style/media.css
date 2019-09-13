@@ -46,4 +46,12 @@
     .star {
         top: 0;
     }
+    .home-rate .rate-num {
+        display: none;
+    }
+    .home-rate {
+        width: 100%;
+        top: 0;
+        flex-wrap: nowrap;
+    }
 }

@@ -38,12 +38,13 @@
     text-shadow: 1px 1px 1px;
 }
 .cd-info-block {
-    height: 80px;
+    min-height: 80px;
     position: relative;
     bottom: 80px;
     background: #4f4f4f;
     color: #fff;
     display: flex;
+    padding: 15px 0;
     justify-content: space-between;
     align-items: center;
     i { padding: 0 15px;}

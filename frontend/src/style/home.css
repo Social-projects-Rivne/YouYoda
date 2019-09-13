@@ -288,7 +288,7 @@
 }
 .home-rate {
     position: relative;
-    top: -50px;
+    top: -35px;
     right: 5%;
 }
 .home-course .secondary-header {
@@ -328,6 +328,9 @@
 .course-cover-photo img {
     /* width: 100%; */
     height: 100%;
+}
+.home-rate .rate-small {
+    color: #4f4f4f;
 }
 
 /* Styles for HomeLastBlock */
@@ -521,4 +524,11 @@
       align-self: center;
       justify-self: center;
     }
+  }
+  .sign-in-header {
+      color: #fff;
+      display: flex;
+      font-size: 1.25rem;
+      float: right;
+      cursor: pointer;
   }

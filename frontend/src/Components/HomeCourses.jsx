@@ -59,7 +59,7 @@ export default class HomeCourses extends React.Component{
                                     value={course.rate}
                                 />
                             <div className="rate-num">
-                                <span className="rate-big">{course.rate}/</span>
+                                <span className="rate-big" style={{color:"green"}}>{course.rate}/</span>
                                 <span className="rate-small">10</span>
                             </div>
                             </div>

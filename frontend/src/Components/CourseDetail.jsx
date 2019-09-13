@@ -45,6 +45,14 @@ export default class CourseDetail extends React.Component{
     addComment = async() => {
         await this.getCommnts()
     }
+    subscribeCourse = () => {
+        if(localStorage.getItem('token') == null){
+            toast.info('You must Sign Up or Sign In for subscribes course')
+
+        } else {
+
+        }
+    }
     render(){
         let defimg = "/media/car-racing-4394450_1920.jpg";
         let coverimg = defaultPhoto(defimg, this.props.course.cover_url);
@@ -61,7 +69,7 @@ export default class CourseDetail extends React.Component{
         } else if (this.props.course.status == "Closed") {
             statuscolor = "#FC5252"
         } else {
-            statuscolor = "#2E3192"
+            statuscolor = "#ffce54"
         }
         return(
 
@@ -92,7 +100,7 @@ export default class CourseDetail extends React.Component{
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'cover',
-                            minWidth:'100vw',
+                            minWidth:'98vw',
                             height: "94vh",
                             width: '100%'
                         }}
@@ -140,6 +148,21 @@ export default class CourseDetail extends React.Component{
                     <Calendar startDate={startDate} endDate={endDate} />
                 </Col>
             </Row>
+            <Row className="btn-group-course-detail d-flex justify-content-between">    
+               
+                    <Col>
+                        <Button
+                            className='btn-sign'
+                            color="warning"
+                            style={{margin:'0 33px 10px 33px'}}
+                            onClick={this.subscribeCourse}
+                        >Join</Button>
+                    </Col>
+                    <Col>
+                        <Link to="/"><Button color="secondary" className="btn-sign" style={{margin:'0 33px 10px 33px'}}>Cancel</Button></Link>
+                    </Col>
+                
+            </Row>
             <Row style={{marginTop:'100px'}}>
               <Col md="4"  className = {`pt-3 border-right ${isAuthenticated("show")}`}>
                 <h6>Say something about this course</h6>
@@ -158,16 +181,8 @@ export default class CourseDetail extends React.Component{
             </Row>
 
 
-                <Col xs="12" className="btn-group-course-detail d-flex justify-content-between">
-                    <Button
-                        className={`btn-sign ${isAuthenticated("show")}`}
-                        color="warning"
-                        style={{marginRight:'33px'}}
-                    >Join</Button>
-                    <Link to="/"><Button color="secondary" className="btn-sign">Cancel</Button></Link>
-                </Col>
-            <Row>
-            </Row>
+                
+            
             </Container>
             </div>
         
