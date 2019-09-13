@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom'
 
-import '../api/pagination';
 import { defaultPhoto } from '../utils';
 
 
@@ -61,7 +60,7 @@ export default class Event extends React.Component{
                       </CardText>
                   </CardBody>
                   <CardFooter className="card-event-footer">
-                      <img width="100%" src={coverimg} alt={event.name}/>
+                      <img src={coverimg} alt={event.name}/>
                   </CardFooter>
               </Card>
           </Col>

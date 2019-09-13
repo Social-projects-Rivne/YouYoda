@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
 import Cours from './cours';
 import FilterCoursesSideBar from './FilterCoursesSideBar';
-import '../api/pagination';
 
 
 export default class SearchingCourses extends React.Component{
@@ -188,7 +187,7 @@ export default class SearchingCourses extends React.Component{
                           />
                           <Row>
                               <Col style={{visibility:visibpag}}>
-                                  <div className="content_detail__pagination cdp" actpage="1">
+                                  <div className="content_detail__pagination cdp" actpage={this.state.curentpage}>
                                       <a href="#!-1"
                                           className="cdp_i"
                                           onClick={(e) => this.changePrevNext(-1)}

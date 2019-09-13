@@ -9,17 +9,18 @@ export default function Comment(props) {
   const { author, comment, date } = props.comment;
   let username = `${author.first_name} ${author.last_name}`
   let courseDate = date;
-  let newCourseDate = moment(courseDate).format('MMMM Do YYYY, h:mm:ss a');
+  let newCourseDate = moment(courseDate).format('MM Do YY, h:mm:ss a');
   let defimg = "/media/avatar.png";
   let coverimg = defaultPhoto(defimg, author.avatar_url);
   return (
-    <div className="media mb-3">
+    <div className="media mb-3 comment">
       <img
         className="mr-3 bg-light rounded"
         width="48"
         height="48"
         src={coverimg}
         alt={username}
+
       />
 
       <div className="media-body p-2 shadow-sm rounded bg-light border">

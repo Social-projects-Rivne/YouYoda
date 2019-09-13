@@ -18,7 +18,17 @@ const override = css`
 export class CommentList extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+        visible: 4,
+    };
   }
+  loadMore = () => {
+      this.setState((prev) => {
+        return {visible: prev.visible + 6};
+      });
+  }
+
   render(){
       return (
         <div className="commentList">
@@ -42,10 +52,12 @@ export class CommentList extends React.Component {
                   />
                 </div>
 
-
-          {this.props.comments.map((comment, index) => (
+          {this.props.comments.slice(0, this.state.visible).map((comment, index) => (
             <Comment key={index} comment={comment} />
           ))}
+          {this.state.visible < this.props.comments.length &&
+             <button onClick={this.loadMore} type="button" className="load-more-btn">Load more...</button>
+          }
         </div>
       );
     }
@@ -114,8 +126,8 @@ export class CommentForm extends React.Component {
     return (
       <>
         <form method="post" onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <img src={coverimg} alt="avatar" style={{width:"45px"}}/>
+          <div className="comment-avatar form-group">
+            <img src={coverimg} alt="avatar" style={{width:"45px",}}/>
           </div>
 
           <div className="form-group">
@@ -128,7 +140,6 @@ export class CommentForm extends React.Component {
               rows="5"
             />
           </div>
-          {this.renderError()}
           <div className="form-group">
             <button className="btn btn-warning">
               Comment ➤

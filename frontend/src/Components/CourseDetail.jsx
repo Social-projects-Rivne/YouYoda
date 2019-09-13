@@ -64,10 +64,10 @@ export default class CourseDetail extends React.Component{
             statuscolor = "#2E3192"
         }
         return(
-            <div>
+
             <div className="home-event ">
-            
-                <div className="d-flex justify-content-between flex-wrap cd-header">
+                <div className='cd-header'>
+                <div className="d-flex justify-content-between flex-wrap container">
                     <h1 className="course-det-header">
                         {this.props.course.coursename}
                         <span className="course-detail-status" style={{color:statuscolor}}>
@@ -83,45 +83,56 @@ export default class CourseDetail extends React.Component{
                         </div>
                     </div>
                 </div>
-            
-            
-            <Row>
-                <div>
-                    <img style={{maxWidth: "100%", height: "auto", width: '100%'}} src={coverimg} alt={this.props.course.coursename} />
+                </div>
+                <div >
+                    <div style={{
+                            minHeight: '510px',
+                            backgroundImage: `url(${coverimg})`,
+                            backgroundColor: '#000',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+                            minWidth:'100vw',
+                            height: "94vh",
+                            width: '100%'
+                        }}
+                         alt={this.props.course.coursename}></div>
+
                     <div className="cd-info-block">
-                        <div className="cd-trainer">
+                        <Container className="d-flex flex-wrap">
+                        <div className="cd cd-trainer">
                             <i className="fas fa-user-tie"/>
                             <span className="main-text">
                             <Link to="" style={{color:"#fff"}}>
                             {this.props.course.owner}</Link></span>
                         </div>
-                    <div className="cd-cost">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span className="main-text">
-                            {this.props.course.cost}</span>
-                    </div>
-                    <div className="cd-loc">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span className="main-text cd-loc"> 
-                            {this.props.course.location}</span>
-                    </div>
-                    <div className="cd-date">
-                        <i class="far fa-calendar-alt"></i>
-                        
-                        <span className="main-text cd-date">
-                            {newCourseDate}</span>
-                        
-                    </div>
+                        <div className="cd cd-cost">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span className="main-text">
+                                {this.props.course.cost}</span>
+                        </div>
+                        <div className="cd cd-loc">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span className="main-text cd-loc">
+                                {this.props.course.location}</span>
+                        </div>
+                        <div className="cd cd-date">
+                            <i class="far fa-calendar-alt"></i>
+
+                            <span className="main-text cd-date">
+                                {newCourseDate}</span>
+                        </div>
+                        </Container>
                     </div>
                 </div>
-            </Row>
+
             <Container>
             <Row>
                 <Col md="6" xs="12" className="course-detail-first-col">
                     <h4 className="course-detail-h4">About:</h4>
                     <p className="main-text">{this.props.course.description}</p>
                     <p className="main-text cd-limit" ><span className="main-text-span">Limit of members: </span> {this.props.course.members_limit}</p>
-             
+
                     <p className="main-text"><span className="main-text-span">Category: </span><Link to="" style={{color:"#000"}}>{this.props.course.categories}</Link></p>
                     <p className="main-text">Duration: {newCourseDuration} days </p>
                 </Col>
@@ -159,7 +170,7 @@ export default class CourseDetail extends React.Component{
             </Row>
             </Container>
             </div>
-            </div>
+        
         )
     }
 };
