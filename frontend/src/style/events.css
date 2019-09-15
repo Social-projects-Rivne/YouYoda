@@ -46,6 +46,7 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 	min-width: 260px;
+	min-height: 460px;
 }
 
 .event-header {
@@ -139,7 +140,6 @@
 .bm-overlay {
     background: rgba(0, 0, 0, 0.3);
 }
-
 .menu-item:focus {
 	outline: auto 0px;
 }
@@ -147,8 +147,12 @@
 	position: absolute;
 	top: 100px;
 }
+.card-event-footer img{
+	max-width: 100%;
+	/* height: 100%; */
+}
 .card-event-footer {
-	max-height: 165px;
+	max-height: 170px;
 	overflow: hidden;
 }
 

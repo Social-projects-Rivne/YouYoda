@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom'
 
-import '../api/pagination';
 import { defaultPhoto } from '../utils';
 
 

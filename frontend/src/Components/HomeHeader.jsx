@@ -24,7 +24,7 @@ export default class HomeHeader extends React.Component{
             <>
             <section className="header-img ">
             <div className="bg-yoda">
-            <Header/>
+            <Header handleClickLogin={this.props.handleClickLogin}/>
                 <Container>
                 <div className="col d-flex justify-content-end language">
 					<ul>
@@ -44,7 +44,9 @@ export default class HomeHeader extends React.Component{
                             onClick={this.props.handleClickReg}>
                         Sign Up
                     </Button>
-                    <Button color="secondary" className="btn-sign btn-color-w" onClick={this.props.handleClickLogin}>
+                    <Button color="secondary" 
+                        className="btn-sign btn-color-w" 
+                        onClick={this.props.handleClickLogin}>
                         Sign In
                     </Button>
                 </div>

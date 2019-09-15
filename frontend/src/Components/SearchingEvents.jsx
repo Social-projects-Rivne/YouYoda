@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
 import Event from './event';
 import FilterEventsSideBar from './FilterEventsSideBar';
-import '../api/pagination';
 
 
 export default class SearchingEvents extends React.Component{
@@ -16,7 +15,7 @@ export default class SearchingEvents extends React.Component{
       super(props);
 
       this.state = {
-          numberofpages: 0,
+          numberofpages: 2,
           curentpage: 1,
           eventList:[],
           categories__in: '',
@@ -65,12 +64,12 @@ export default class SearchingEvents extends React.Component{
     }
 
     handleCategoriesList = async (value) => {
-        await this.setState({categories__in: value});
+        await this.setState({categories__in: value, curentpage:1});
         await this.getData();
       }
 
     handleSortData = async (value) => {
-        await this.setState({order_by: value});
+        await this.setState({order_by: value, curentpage:1});
         await this.getData();
       }
 
@@ -139,7 +138,7 @@ export default class SearchingEvents extends React.Component{
                             />
                           <Row>
                               <Col style={{visibility:visibpag}}>
-                                  <div className="content_detail__pagination cdp" actpage="1">
+                                  <div className="content_detail__pagination cdp" actpage={this.state.curentpage}>
                                 			<a href="#!-1"
                                                 className="cdp_i"
                                                 onClick={(e) => this.changePrevNext(-1)}

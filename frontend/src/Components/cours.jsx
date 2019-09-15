@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom'
 
-import '../api/pagination';
 import { defaultPhoto } from '../utils';
 
 
@@ -67,8 +66,7 @@ export default class Cours extends React.Component{
                             <img width="100%" src={coverImg} alt={course.coursename}/>
                         </CardFooter>
                     </Card>
-                </Link
-                        >
+                </Link>
             </Col>
         )
     }
