@@ -276,7 +276,7 @@ class Registration extends React.Component{
                                            checked={this.state.isagreed}
                                            onChange = {(event) => {this.onChangeInputs(event)}}
                                            required/>
-                                    <label className="form-check-label" htmlFor="isagreed">I Accept terms and conditions & privacy policy</label>
+                                    <label className="form-check-label" htmlFor="isagreed">I Accept <a href="/terms-and-conditions">terms and conditions & privacy policy</a></label>
                                 </div>
                             </div>
                             <Row className="form-group text-right">
