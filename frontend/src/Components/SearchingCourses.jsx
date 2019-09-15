@@ -138,6 +138,12 @@ export default class SearchingCourses extends React.Component{
               <div id="page-wrap">
                   <Router>
                       <Container>
+                          <div id="wrap">
+                              <form action="" autocomplete="on">
+                                  <input id="search" name="search" type="text" placeholder="What're you looking for?"/>
+                                  <input id="search_submit" value="Rechercher" type="submit"/>
+                              </form>
+                          </div>
                           <Row>
                               <Col>
                                   <h1 className="title-events">Courses</h1>
@@ -146,9 +152,9 @@ export default class SearchingCourses extends React.Component{
                           <Row className="search-input-group">
                               <Col>
                                   <InputGroup className="search-input">
-                                      <InputGroupAddon addonType="prepend">
+                                       <InputGroupAddon addonType="prepend">
                                           <InputGroupText className="search-input-icon">
-                                              <FontAwesomeIcon icon="search"/>
+                                              <FontAwesomeIcon icon="sort-amount-up"/>
                                           </InputGroupText>
                                       </InputGroupAddon>
                                       <InputGroupAddon addonType="append" className="search-input-select">

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { axiosGet } from '../api/axiosGet';
 import { isAuthenticated, defaultPhoto } from '../utils';
+import { toast } from 'react-toastify';
 
 
 export default class HomeEvent extends React.Component{
@@ -32,6 +33,15 @@ export default class HomeEvent extends React.Component{
         this.setState({
                 eventsList: listEvents,
                 });
+    }
+
+    subscribeEvent = () => {
+        if(localStorage.getItem('token') == null){
+            toast.info('You must Sign Up or Sign In for subscribes event')
+
+        } else {
+
+        }
     }
 
     renderEvents(event) {
@@ -111,10 +121,11 @@ export default class HomeEvent extends React.Component{
                                     <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button className={`btn-join ${isAuthenticated("show")}`} 
+                                    <Button className="btn-join" 
                                             color="warning"
                                             style={{marginRight:'33px'}} 
-                                            onClick={this.toggle}>Join
+                                            onClick={this.toggle}
+                                            onClick={this.subscribeEvent}>Join
                                     </Button>
                                     <Button color="secondary" 
                                             className='btn-event-modal-cancel'
