@@ -46,13 +46,13 @@ export default class HomeEvent extends React.Component{
 
     renderEvents(event) {
 
-        let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
-        let coverimg = defaultPhoto(defimg, event.cover_url);
+        let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
+        let coverImg = defaultPhoto(defImg, event.cover_url);
 
         return (
             <div className="sl-slide" id={`event_${event.id}`} key={event.id}>
                 <div className="event-cover-photo">
-                    <img src={coverimg} alt={event.name} className="event-cover-photo"/>
+                    <img src={coverImg} alt={event.name} className="event-cover-photo"/>
                 </div>
                 <h3 className="secondary-header">{event.name}</h3>
                 <p className="main-text event-description">{event.description}</p>
@@ -89,8 +89,8 @@ export default class HomeEvent extends React.Component{
        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
        const eventDate = event.date;
        const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');
-       let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
-       let coverimg = defaultPhoto(defimg, event.cover_url);
+       let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
+       let coverImg = defaultPhoto(defImg, event.cover_url);
 
         return(
             <div style={{backgroundColor:'#E8E8E8'}} id="home-event">
@@ -115,7 +115,7 @@ export default class HomeEvent extends React.Component{
                                     <p className="main-category">Category:  {event.categories}</p>
                                     <p className="main-text-event-modal">{event.description}</p></ModalHeader>
                                 <ModalBody>
-                                    <img src={coverimg} alt={event.name} className="event-modal-photo"/>
+                                    <img src={coverImg} alt={event.name} className="event-modal-photo"/>
                                     <p className="main-text">Location: {event.location}</p>
                                     <p className="main-text">Date: {newEventDate}</p>
                                     <p className="main-text">Event organizer: {event.owner}</p>

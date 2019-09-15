@@ -13,8 +13,8 @@ export default class EventDetail extends React.Component{
     }
     
     render(){
-        let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
-        let coverimg = defaultPhoto(defimg, this.props.event.cover_url);
+        let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
+        let coverImg = defaultPhoto(defImg, this.props.event.cover_url);
         let eventDate = this.props.event.date;
         let newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');
         
@@ -30,7 +30,7 @@ export default class EventDetail extends React.Component{
             </Row>
             <Row>
                 <Col>
-                    <img style={{maxWidth: "100%", height: "auto", width: '100%'}} src={coverimg} alt={this.props.event.name} />
+                    <img style={{maxWidth: "100%", height: "auto", width: '100%'}} src={coverImg} alt={this.props.event.name} />
                     <h4 className="course-detail-h4">About:</h4>
                     <p className="main-text">{this.props.event.description}</p>
                 </Col>
