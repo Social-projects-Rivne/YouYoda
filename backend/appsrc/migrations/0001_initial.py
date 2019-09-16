@@ -106,20 +106,82 @@ def insertData(apps, schema_editor):
     CoursesSubscribers = apps.get_model('appsrc', 'CoursesSubscribers')
     CoursesSubscribers.objects.create(id=1, completed=False, feedback="feedback for course 1", rate=5, is_favourite=True,
         course_id_id=1, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=2, completed=True, feedback="feedback for course 2", rate=2, is_favourite=False,
+    CoursesSubscribers.objects.create(id=2, completed=True, feedback="feedback for course 2", rate=2, is_favourite=True,
         course_id_id=2, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=3, completed=False, feedback="feedback for course 3", rate=1, is_favourite=True,
+    CoursesSubscribers.objects.create(id=3, completed=False, feedback="feedback for course 3", rate=1, is_favourite=False,
         course_id_id=3, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=4, completed=True, feedback="feedback for course 4", rate=6, is_favourite=False,
+    CoursesSubscribers.objects.create(id=4, completed=True, feedback="feedback for course 4", rate=6, is_favourite=True,
         course_id_id=4, participant_id_id=8)
     CoursesSubscribers.objects.create(id=5, completed=False, feedback="feedback for course 5", rate=7, is_favourite=True,
         course_id_id=5, participant_id_id=8)
-    CoursesSubscribers.objects.create(id=6, completed=True, feedback="feedback for course 6", rate=8, is_favourite=False,
+    CoursesSubscribers.objects.create(id=6, completed=True, feedback="feedback for course 6", rate=8, is_favourite=True,
         course_id_id=6, participant_id_id=8)
     CoursesSubscribers.objects.create(id=7, completed=False, feedback="feedback for course 7", rate=9, is_favourite=True,
         course_id_id=7, participant_id_id=8)
     CoursesSubscribers.objects.create(id=8, completed=True, feedback="feedback for course 8", rate=3, is_favourite=False,
         course_id_id=8, participant_id_id=8)
+
+    EventsSubscribers = apps.get_model('appsrc', 'EventsSubscribers')
+    EventsSubscribers.objects.create(
+        id=1, participant_id_id=8, event_id_id=1, completed=True
+    )
+    EventsSubscribers.objects.create(
+        id=2, participant_id_id=8, event_id_id=2, completed=False)
+    EventsSubscribers.objects.create(id=3, participant_id_id=8, event_id_id=3, completed=True
+    )
+    EventsSubscribers.objects.create(
+        id=4, participant_id_id=8, event_id_id=4, completed=False
+    )
+    EventsSubscribers.objects.create(
+        id=5, participant_id_id=8, event_id_id=5, completed=True
+    )
+
+    Achievements = apps.get_model('appsrc', 'Achievements')
+    Achievements.objects.create(
+        id=1, course_id_id=1, image_url="/media/achievement.png", name='Achievement 1'
+    )
+    Achievements.objects.create(
+        id=2, course_id_id=2, image_url="/media/achievement.png", name='Achievement 2'
+    )
+    Achievements.objects.create(
+        id=3, course_id_id=7, image_url="/media/achievement.png", name='Achievement 3'
+    )
+    Achievements.objects.create(
+        id=4, course_id_id=3, image_url="/media/achievement.png", name='Achievement 4'
+    )
+    Achievements.objects.create(
+        id=5, course_id_id=4, image_url="/media/achievement.png", name='Achievement 5'
+    )
+    Achievements.objects.create(
+        id=6, course_id_id=5, image_url="/media/achievement.png", name='Achievement 6'
+    )
+    Achievements.objects.create(
+        id=7, course_id_id=6, image_url="/media/achievement.png", name='Achievement 7'
+    )
+
+    UsersAchievements = apps.get_model('appsrc', 'UsersAchievements')
+    UsersAchievements.objects.create(
+        id=1, participant_id_id=8, achievement_id_id=1
+    )
+    UsersAchievements.objects.create(
+        id=2, participant_id_id=8, achievement_id_id=2
+    )
+    UsersAchievements.objects.create(
+        id=3, participant_id_id=8, achievement_id_id=3
+    )
+    UsersAchievements.objects.create(
+        id=4, participant_id_id=8, achievement_id_id=4
+    )
+    UsersAchievements.objects.create(
+        id=5, participant_id_id=8, achievement_id_id=5
+    )
+    UsersAchievements.objects.create(
+        id=6, participant_id_id=8, achievement_id_id=6
+    )
+    UsersAchievements.objects.create(
+        id=7, participant_id_id=8, achievement_id_id=7
+    )
+
 
 
 class Migration(migrations.Migration):
@@ -281,7 +343,13 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('event_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Events')),
                 ('participant_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('completed', models.BooleanField(default=False)),
             ],
+        ),
+        migrations.AlterField(
+            model_name='eventssubscribers',
+            name='event_id',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subscribed_event', to='appsrc.Events'),
         ),
         migrations.CreateModel(
             name='CoursesSubscribers',
@@ -300,11 +368,6 @@ class Migration(migrations.Migration):
             name='course_id',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subscribed_course', to='appsrc.Courses'),
         ),
-        migrations.AlterField(
-            model_name='coursessubscribers',
-            name='course_id',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='subscribed_course', to='appsrc.Courses'),
-        ),
         migrations.CreateModel(
             name='Achievements',
             fields=[
@@ -312,6 +375,14 @@ class Migration(migrations.Migration):
                 ('image_url', models.CharField(max_length=80)),
                 ('name', models.CharField(max_length=20)),
                 ('course_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Courses')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='UsersAchievements',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('participant_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('achievement_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,  related_name='user_achievements', to='appsrc.Achievements')),
             ],
         ),
         migrations.CreateModel(

@@ -1,21 +1,21 @@
 import React from 'react';
 
-import {Container, Row, Col, CardTitle, CardText, CardImg, Card, UncontrolledTooltip} from 'reactstrap';
+import {Container, Row, Col, Card, UncontrolledTooltip} from 'reactstrap';
+
+const URL = 'http://localhost:8000'
 
 
 export default class Achievement extends React.Component {
     render() {
       return (
         <Col xs="4" md="2">
-          <div className="course" id={"Tooltip-" + this.props.id}>
-            <a href="#">
-              <Card className="card" body>
-                <CardImg top width="100%" src={require('../img/content/achievement.png')}
-                      className="achievement-image" alt="course-image"/>
-              </Card>
-            </a>
-            <UncontrolledTooltip placement="right" target={'Tooltip-' + this.props.id}>
-              Achievement name
+          <div className="course achievement-image" id={"Tooltip-" + this.props.achievement.course_id}>
+            <Card className="card" body>
+              <img width="100%" src={URL + this.props.achievement.image_url}
+                    className="achievement-image" alt={this.props.achievement.name}/>
+            </Card>
+            <UncontrolledTooltip placement="right" target={"Tooltip-" + this.props.achievement.course_id}>
+              {this.props.achievement.name}
             </UncontrolledTooltip>
           </div>
         </Col>

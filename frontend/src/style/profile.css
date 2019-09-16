@@ -72,10 +72,6 @@
     font-weight: bold;
     margin-left: 15px;
 }
-/* .tab-item:hover {
-    background-color: #ffd466;
-    border-radius: 44px;
-} */
 .tab-item {
     border: none;
     margin-top: 5px;
@@ -93,10 +89,6 @@
     color: black;
     justify-content: center;
 }
-/* .active {
-    background-color: #ffd466;
-    border-radius: 44px;
-} */
 .join-course,
 .join-course:hover {
     background-color: #ffd466;
@@ -203,6 +195,23 @@
 .back {
     display: inline-block;
 }
+.achievement {
+     -webkit-transition: padding 0.7s;
+}
+.achievement-image:hover {
+    transform: scale(1.1);
+    opacity: 1;
+    cursor: pointer;
+    margin-bottom: 10px;
+    border-radius: 40px;
+    -webkit-transition: border-radius 0.7s;
+}
+
+/*Styles for NoCoursesOrEvents*/
+.back-no-info {
+    margin-top: 100px;
+}
+
 @media screen and (max-width: 767px) {
     .profile-photo-container,
     .user-name,
@@ -240,6 +249,9 @@
         position: relative;
         bottom: 113px;
         left: 100px;
+    }
+    .back-no-info {
+        margin-top: -20px;
     }
 }
 @media screen and (max-width: 990px){

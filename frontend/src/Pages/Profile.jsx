@@ -17,6 +17,10 @@ export default class Profile extends React.Component{
         userCompletedCourses: [],
         userFollowingCourses: [],
         userFavouritesCourses: [],
+        userFollowingEvents: [],
+        userCompletedEvents: [],
+        userCreatedEvents: [],
+        userAchievements: [],
         loading: true,
       };
     }
@@ -41,36 +45,74 @@ export default class Profile extends React.Component{
       }
     };
 
+    getEvents = async () => {
+      try {
+        const response = await API.get('user/profile/events');
+        return response.data;
+      }
+      catch (error) {
+        toast.error("For some reason now you can not view your events, please contact support")
+      }
+    };
+
+    getAchievements = async () => {
+      try {
+        const response = await API.get('user/profile/achievements');
+        return response.data;
+      }
+      catch (error) {
+        toast.error("For some reason now you can not view your achievements, please contact support")
+      }
+    };
+
     async componentDidMount() {
         let userData = await this.getInfo();
         let userCourses = await this.getCourses();
+        let userEvents = await this.getEvents();
+        let userAchievements = await this.getAchievements();
         let userCompletedCourses = [];
         let userFollowingCourses = [];
         let userFavouritesCourses = [];
+        let userCompletedEvents = [];
+        let userFollowingEvents = [];
+        let userCreatedEvents = [];
         if (typeof userData !== 'undefined') {
           let userInfo = {}
           Object.keys(userData).map(function (key) {
               userInfo[key] = userData[key]
           })
-          for(let i = 0; i < userCourses.length; i++)
-            for(let j = 0; j < userCourses[i].subscribed.length; j++)
+          for(let course in userCourses)
+            for(let subscribed in userCourses[course].subscribed)
             {
-              if(userCourses[i].subscribed[j].completed)
-                userCompletedCourses.push(userCourses[i])
+              if(userCourses[course].subscribed[subscribed].completed)
+                userCompletedCourses.push(userCourses[course])
               else
-                userFollowingCourses.push(userCourses[i])
-              if(userCourses[i].subscribed[j].is_favourite)
-                userFavouritesCourses.push(userCourses[i])
+                userFollowingCourses.push(userCourses[course])
+              if(userCourses[course].subscribed[subscribed].is_favourite)
+                userFavouritesCourses.push(userCourses[course])
+            }
+          for(let event in userEvents)
+            for(let subscribed in userEvents[event].subscribed)
+            {
+              if(userEvents[event].subscribed[subscribed].completed)
+                userCompletedEvents.push(userEvents[event])
+              else
+                userFollowingEvents.push(userEvents[event])
+              if(userEvents[event].owner == userData.first_name + ' ' + userData.last_name)
+                userCreatedEvents.push(userEvents[event])
             }
         this.setState({
           userInfo: userInfo,
           userCompletedCourses: userCompletedCourses,
           userFollowingCourses: userFollowingCourses,
           userFavouritesCourses: userFavouritesCourses,
+          userCompletedEvents: userCompletedEvents,
+          userFollowingEvents: userFollowingEvents,
+          userCreatedEvents: userCreatedEvents,
+          userAchievements: userAchievements,
           loading: false,
         })
       }
-      console.log(userCourses[0].subscribed[0].feedback);
     }
 
   render(){

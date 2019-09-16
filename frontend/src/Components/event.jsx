@@ -38,7 +38,7 @@ export default class Event extends React.Component{
       let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
       let coverimg = defaultPhoto(defimg, event.cover_url);
       return (
-          <Col sm="12" md="6" lg="4" xl="3">
+          <Col sm="12" md="6" lg="4" xl={this.props.lg}>
               <Card className="event-card">
                   <CardHeader className="event-header">{newEventDate}</CardHeader>
                   <CardBody className="event-body">

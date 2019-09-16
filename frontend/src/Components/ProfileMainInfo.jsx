@@ -7,8 +7,9 @@ import { Resizable, ResizableBox } from 'react-resizable';
 import ClipLoader from 'react-spinners/ClipLoader';
 import classnames from 'classnames';
 import {ProfileContext} from './profile-context';
-import Course from './Course'
+import NoCoursesOrEvents from './NoCoursesOrEvents';
 import Cours from './cours'
+import Event from './event'
 import Achievement from './Achievement'
 
 const override = css`
@@ -39,82 +40,6 @@ export default class ProfileInfo extends React.Component {
          toggleName: 'Show all',
          achievementToggleName: 'Show all',
          hideButton: true,
-         achievements: [
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-           {
-             text: 'Achievement name',
-           },
-        ],
-        courses: [
-            {
-              description: 'Course 1 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 2 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 3 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 4 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 5 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 6 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 7 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 8 With supporting text below as a natural lead-in to additional content.'
-            },
-            {
-              description: 'Course 9 With supporting text below as a natural lead-in to additional content.'
-            },
-        ]
       };
     }
 
@@ -211,7 +136,7 @@ export default class ProfileInfo extends React.Component {
                               className={classnames({ active: this.state.activeTab === '4' })} tab-link
                               onClick={() => { this.toggleTab('4') }}>
                                 <div className="user-courses-profile">Following
-                                  <div id="number-following-courses" className="courses-numbers">17</div>
+                                  <div id="number-following-courses" className="courses-numbers">{profile.userFollowingEvents.length}</div>
                                 </div>
                             </NavLink>
                           </NavItem>
@@ -220,7 +145,7 @@ export default class ProfileInfo extends React.Component {
                             className={classnames({ active: this.state.activeTab === '5' })} tab-link
                             onClick={() => { this.toggleTab('5') }}>
                               <div className="user-courses-profile" href="#">Completed
-                                <div id="number-completed-courses" className="events-numbers">20</div>
+                                <div id="number-completed-courses" className="events-numbers">{profile.userCompletedEvents.length}</div>
                               </div>
                             </NavLink>
                           </NavItem>
@@ -229,7 +154,7 @@ export default class ProfileInfo extends React.Component {
                             className={classnames({ active: this.state.activeTab === '6' })} tab-link
                             onClick={() => { this.toggleTab('6') }}>
                               <div className="user-courses-profile" href="#">Created
-                                <div id="number-completed-courses" className="courses-numbers">20</div>
+                                <div id="number-completed-courses" className="courses-numbers">{profile.userCreatedEvents.length}</div>
                               </div>
                             </NavLink>
                           </NavItem>
@@ -281,33 +206,52 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                          <Cours coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
+                        <Cours coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
+                        {profile.userFollowingCourses.length || profile.loading ? (
+                          null
+                        ) : (
+                          <NoCoursesOrEvents message={'You have not yet followed to courses'}/>
+                        )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
                         <Cours coursesList={profile.userCompletedCourses} loading={profile.loading} lg={4}/>
+                        {profile.userFollowingCourses.length || profile.loading ? (
+                          null
+                        ) : (
+                          <NoCoursesOrEvents message={'You have not completed any courses yet'}/>
+                        )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        {this.state.courses.slice(0, 7).map((course, i) => {
-                          return <Course description={course.description} lg={6} />;
-                      })}
+                        <Event eventList={profile.userFollowingEvents} loading={profile.loading} lg={4}/>
+                        {profile.userCompletedEvents.length || profile.loading ? (
+                          null
+                        ) : (
+                          <NoCoursesOrEvents message={'You have not yet followed to events'}/>
+                        )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="5">
                       <Row>
-                        {this.state.courses.slice(0, 5).map((course, i) => {
-                          return <Course description={course.description} lg={6} />;
-                      })}
+                        <Event eventList={profile.userCompletedEvents} loading={profile.loading} lg={4}/>
+                        {profile.userCompletedEvents.length || profile.loading ? (
+                          null
+                        ) : (
+                          <NoCoursesOrEvents message={'You have not completed any events yet'}/>
+                        )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="6">
                       <Row>
-                        {this.state.courses.slice(0, 2).map((course, i) => {
-                          return <Course description={course.description} lg={6} />;
-                      })}
+                        <Event eventList={profile.userCreatedEvents} loading={profile.loading} lg={4}/>
+                        {profile.userCreatedEvents.length || profile.loading ? (
+                          null
+                        ) : (
+                          <NoCoursesOrEvents message={'You have not created any events yet'}/>
+                        )}
                       </Row>
                     </TabPane>
                   </TabContent>
@@ -322,11 +266,20 @@ export default class ProfileInfo extends React.Component {
                 </Col>
               </Row>
               <Row>
-                  <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3}/>
+                <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3}/>
+                {profile.userFavouritesCourses.length || profile.loading ? (
+                  null
+                ) : (
+                  <NoCoursesOrEvents message={'You have not selected your favourite courses yet'} style={{marginTop:"0px"}}/>
+                )}
               </Row>
               <Collapse isOpen={this.state.collapse}>
                 <Row>
-                  <Cours coursesList={profile.userFavouritesCourses.slice(4, profile.userFavouritesCourses.length)} loading={profile.loading} lg={3}/>
+                  {profile.userFavouritesCourses.length ? (
+                    <Cours coursesList={profile.userFavouritesCourses.slice(4, profile.userFavouritesCourses.length)} loading={profile.loading} lg={3}/>
+                  ) : (
+                    <div></div>
+                  )}
                 </Row>
               </Collapse>
               <Row>
@@ -338,14 +291,24 @@ export default class ProfileInfo extends React.Component {
               </Col>
               </Row>
               <Row>
-                {this.state.achievements.slice(0, 6).map((tooltip, i) => {
-                  return <Achievement key={i} item={tooltip} id={i} />;
-              })}
+                {!profile.loading ? (
+                  profile.userAchievements.slice(0, 6).map((item, i) => {
+                    return <Achievement achievement={item} id={i} />;
+                  })
+                ) : (
+                  <ClipLoader
+                    css={override}
+                    sizeUnit={"px"}
+                    size={150}
+                    color={'#123abc'}
+                    loading={profile.loading}
+                  />
+                )}
               </Row>
               <Collapse isOpen={this.state.achievementCollapse}>
                 <Row>
-                  {this.state.achievements.slice(6, this.state.achievements.length).map((tooltip, i) => {
-                    return <Achievement key={i} item={tooltip} id={i} />;
+                  {profile.userAchievements.slice(6, profile.userAchievements.length).map((item, i) => {
+                    return <Achievement achievement={item} id={i} />;
                 })}
                 </Row>
               </Collapse>

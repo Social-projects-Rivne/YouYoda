@@ -87,6 +87,10 @@ class Achievements(models.Model):
     image_url = models.CharField(max_length=80)
     name = models.CharField(max_length=20)
 
+class UsersAchievements(models.Model):
+    participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    achievement_id = models.ForeignKey(Achievements, on_delete=models.CASCADE, related_name="user_achievements")
+
 class Events(models.Model):
     categories = models.ForeignKey(Categories, on_delete=models.SET_DEFAULT, default=DEFAULT_CATEGORIES_ID)
     name = models.CharField(max_length=60)
@@ -98,7 +102,8 @@ class Events(models.Model):
 
 class EventsSubscribers(models.Model):
     participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    event_id = models.ForeignKey(Events, on_delete=models.CASCADE)
+    event_id = models.ForeignKey(Events, on_delete=models.CASCADE, related_name="subscribed_event")
+    completed = models.BooleanField(default=False)
 
 class CoursesComments(models.Model):
     author = models.ForeignKey(YouYodaUser, related_name='user_details', on_delete=models.CASCADE)
