@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Courses, CoursesComments
+from ..models import Courses, CoursesComments, CourseSchedule
 
 
 class CoursesSerializator(serializers.ModelSerializer):
@@ -41,3 +41,17 @@ class CCommentsSerializator(serializers.ModelSerializer):
 			comments.save()
 
 			return comments
+
+
+class CourseScheduleSerializer(serializers.ModelSerializer):
+	"""Takes data from the categories model for categories list component.
+    Converts it to JSON format for transmission via the API.
+
+    """
+
+
+	class Meta:
+
+		 model = CourseSchedule
+
+		 fields = ("date", "course")

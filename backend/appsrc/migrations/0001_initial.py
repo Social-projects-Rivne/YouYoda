@@ -103,6 +103,56 @@ def insertData(apps, schema_editor):
     Events.objects.create(id=5, name="Event-5", owner_id=3, description= description13,
         date=datetime.datetime.strptime("10/10/19 16:30", "%d/%m/%y %H:%M"), categories_id=2, location="Rivne, Ukraine", cover_url="/media/hot-air-balloons-4381674_1920.jpg")
 
+    CourseSchedule = apps.get_model('appsrc', 'CourseSchedule')
+    CourseSchedule.objects.create(id=1, course_id=1, date=datetime.datetime.strptime("19/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=2, course_id=1, date=datetime.datetime.strptime("11/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=3, course_id=1, date=datetime.datetime.strptime("12/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=4, course_id=1, date=datetime.datetime.strptime("13/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=5, course_id=1, date=datetime.datetime.strptime("14/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=6, course_id=1, date=datetime.datetime.strptime("15/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=7, course_id=2, date=datetime.datetime.strptime("22/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=8, course_id=2, date=datetime.datetime.strptime("26/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=9, course_id=2, date=datetime.datetime.strptime("12/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=10, course_id=2, date=datetime.datetime.strptime("25/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=11, course_id=2, date=datetime.datetime.strptime("23/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=12, course_id=2, date=datetime.datetime.strptime("21/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=13, course_id=3, date=datetime.datetime.strptime("26/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=14, course_id=3, date=datetime.datetime.strptime("24/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=15, course_id=3, date=datetime.datetime.strptime("13/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=16, course_id=3, date=datetime.datetime.strptime("11/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=17, course_id=3, date=datetime.datetime.strptime("17/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=18, course_id=3, date=datetime.datetime.strptime("22/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=19, course_id=4, date=datetime.datetime.strptime("19/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=20, course_id=4, date=datetime.datetime.strptime("20/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=21, course_id=4, date=datetime.datetime.strptime("21/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=22, course_id=4, date=datetime.datetime.strptime("25/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=23, course_id=4, date=datetime.datetime.strptime("10/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=24, course_id=4, date=datetime.datetime.strptime("9/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=25, course_id=5, date=datetime.datetime.strptime("1/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=26, course_id=5, date=datetime.datetime.strptime("3/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=27, course_id=5, date=datetime.datetime.strptime("30/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=28, course_id=5, date=datetime.datetime.strptime("5/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=29, course_id=5, date=datetime.datetime.strptime("6/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=30, course_id=5, date=datetime.datetime.strptime("7/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=31, course_id=6, date=datetime.datetime.strptime("9/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=32, course_id=6, date=datetime.datetime.strptime("10/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=33, course_id=6, date=datetime.datetime.strptime("12/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=34, course_id=6, date=datetime.datetime.strptime("11/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=35, course_id=6, date=datetime.datetime.strptime("23/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=36, course_id=6, date=datetime.datetime.strptime("6/10/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=37, course_id=7, date=datetime.datetime.strptime("7/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=38, course_id=7, date=datetime.datetime.strptime("15/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=39, course_id=7, date=datetime.datetime.strptime("16/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=40, course_id=7, date=datetime.datetime.strptime("25/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=41, course_id=7, date=datetime.datetime.strptime("13/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=42, course_id=7, date=datetime.datetime.strptime("14/9/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=43, course_id=8, date=datetime.datetime.strptime("12/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=44, course_id=8, date=datetime.datetime.strptime("18/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=45, course_id=8, date=datetime.datetime.strptime("19/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=46, course_id=8, date=datetime.datetime.strptime("17/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=47, course_id=8, date=datetime.datetime.strptime("25/11/19 16:30", "%d/%m/%y %H:%M"))
+    CourseSchedule.objects.create(id=48, course_id=8, date=datetime.datetime.strptime("6/11/19 16:30", "%d/%m/%y %H:%M"))
+
 
 class Migration(migrations.Migration):
 
@@ -303,6 +353,14 @@ class Migration(migrations.Migration):
                 ('comment', models.TextField(blank=True, null=True)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
                 ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Events'))
+            ],
+        ),
+        migrations.CreateModel(
+            name='CourseSchedule',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('date', models.DateTimeField()),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='course_schedule', to='appsrc.Courses')),
             ],
         ),
 

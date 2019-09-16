@@ -110,3 +110,7 @@ class EventsComments(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(blank=True, null=True)
+
+class CourseSchedule(models.Model):
+    course = models.ForeignKey(Courses, related_name='course_schedule', on_delete=models.CASCADE)
+    date = models.DateTimeField(blank=False)

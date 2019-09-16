@@ -2,11 +2,11 @@ import React from 'react';
 
 import Calendar from '@lls/react-light-calendar'
 import { Container,Row,Button,Col } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import { toast } from 'react-toastify';
+import DayPicker from 'react-day-picker';
 
 import { API } from '../api/axiosConf';
 import { CommentList, CommentForm } from './CommentList';
@@ -132,7 +132,6 @@ export default class CourseDetail extends React.Component{
                         </div>
                         <div className="cd cd-date">
                             <i class="far fa-calendar-alt"></i>
-
                             <span className="main-text cd-date">
                                 {newCourseDate}</span>
                         </div>
@@ -149,8 +148,18 @@ export default class CourseDetail extends React.Component{
                     <p className="main-text">Duration: {newCourseDuration} days </p>
                     <p className="main-text"><span className="main-text-span">Category: </span><Link to="" style={{color:"#000"}}>{this.props.course.categories}</Link></p>
                 </Col>
-                <Col md="6" xs="12" className="course-detail-second-col" style={{maxHeight:'500px'}}>
-                    <Calendar startDate={startDate} endDate={endDate} />
+                <Col md="6" xs="12" className="course-detail-second-col" >
+                    <DayPicker
+                        initialMonth={new Date(startDate)}
+                        selectedDays={[
+                            new Date(2019, 9, 12),
+                            new Date(2019, 9, 2),
+                            {
+                                after: new Date(startDate),
+                                before: new Date(endDate),
+                            },
+                        ]}
+                    />
                 </Col>
             </Row>
 
