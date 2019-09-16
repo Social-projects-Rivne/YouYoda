@@ -25,6 +25,7 @@ export default class SearchingCourses extends React.Component{
           cost: '',
           status__in: '',
           categories__in: '',
+          coursename__icontains: '',
           loading: true
       };
     }
@@ -37,7 +38,7 @@ export default class SearchingCourses extends React.Component{
     getData = async() => {
        try {
          let response = await API.post('/courses/search', {
-               coursename__icontains: '',
+               coursename__icontains: this.state.coursename__icontains,
                location__icontains: '',
                rate__lte: this.state.rate__lte,
                rate__gte: this.state.rate__gte,
@@ -122,6 +123,14 @@ export default class SearchingCourses extends React.Component{
         await this.getData();
       }
 
+    handleSearchData = async (event) => {
+        const value = event.target.value;
+        await this.setState({
+            coursename__icontains: value,
+            curentpage: 1});
+        await this.getData();
+      }
+
     render(){
         let pages = []
         for(let i=1; i<=this.state.numberofpages; i++){
@@ -153,8 +162,16 @@ export default class SearchingCourses extends React.Component{
                       <Container>
                           <div id="wrap">
                               <form action="" autocomplete="on">
-                                  <input id="search" name="search" type="text" placeholder="What're you looking for?"/>
-                                  <input id="search_submit" value="Rechercher" type="submit"/>
+                                  <input id="search" 
+                                         name="search" 
+                                         type="text" 
+                                         placeholder="What're you looking for?"
+                                         onChange = {(event) => {this.handleSearchData(event)}}
+                                  />
+                                  <input id="search_submit" 
+                                         value="Rechercher" 
+                                         type="submit"
+                                  />
                               </form>
                           </div>
                           <Row>
