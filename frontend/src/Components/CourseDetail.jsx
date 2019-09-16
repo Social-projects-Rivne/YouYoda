@@ -24,10 +24,8 @@ export default class CourseDetail extends React.Component{
         try {
             let response = await API.get('/courses/comments',
                 {
-                    params: {
                         course_id: this.props.course.id,
                 }
-            }
         )
 
             this.setState({
@@ -45,12 +43,26 @@ export default class CourseDetail extends React.Component{
     addComment = async() => {
         await this.getCommnts()
     }
+
+    addToCourse = async() => {
+        const URLPATH = 'user/course/add';
+        const USERDATA = { "course_id": this.props.course.id};
+        try {
+            const response = await API.post(URLPATH, USERDATA);
+            if(response.status === 208) 
+                toast.info(response.data);
+            if(response.status === 201)
+                toast.success('You subscribe to ' + this.props.course.coursename);
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     subscribeCourse = () => {
-        if(localStorage.getItem('token') == null){
+        if(localStorage.getItem('token') === null){
             toast.info('You must Sign Up or Sign In for subscribes course')
-
         } else {
-
+            this.addToCourse()
         }
     }
     render(){

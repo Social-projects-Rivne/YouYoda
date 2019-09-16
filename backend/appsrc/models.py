@@ -77,9 +77,9 @@ class Courses(models.Model):
 class CoursesSubscribers(models.Model):
     participant_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
-    completed = models.BooleanField()
-    feedback = models.TextField()
-    rate = models.IntegerField()
+    completed = models.BooleanField(default=False)
+    feedback = models.TextField(blank=True, null=True)
+    rate = models.IntegerField(default=DEFAULT_RATE)
 
 class Achievements(models.Model):
     course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
