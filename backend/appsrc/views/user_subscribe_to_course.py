@@ -1,16 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
-from django.conf import settings
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
 
 from ..models import CoursesSubscribers, YouYodaUser, Courses
 from ..serializers.courses_subscribers_serializer import CoursesSubscribersSerializator
 
-
-CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 class UserSubscribeToCourse(APIView):
     """Takes data from CoursesSubscribersSerializator for add user to course"""
