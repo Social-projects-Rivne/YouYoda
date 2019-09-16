@@ -9,4 +9,14 @@ async function getUsersStatusesList() {
         return Promise.reject(error);
     }
 }
-export {getUsersStatusesList}
+
+async function patchRequests(dataSend) {
+    try {
+        await API.patch('user/totrainer', dataSend);
+        return true;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
+
+export {getUsersStatusesList, patchRequests}
