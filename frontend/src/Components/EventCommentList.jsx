@@ -70,7 +70,7 @@ export class CommentForm extends React.Component {
     this.state = {
       error: "",
       comment: {
-        course: this.props.course,
+        event: this.props.event,
         comment: ""
       }
     };
@@ -97,8 +97,8 @@ export class CommentForm extends React.Component {
     }
     let { comment } = this.state;
     try {
-      let response = await API.post('/courses/comments', {
-            course: this.state.comment.course,
+      let response = await API.post('/events/comments', {
+            event: this.state.comment.event,
             comment: this.state.comment.comment
         },
       )
@@ -142,7 +142,7 @@ export class CommentForm extends React.Component {
           </div>
           <div className="form-group">
             <button className="btn btn-warning">
-              Comment <i class="fas fa-chevron-right" style={{marginLeft: '5px'}}></i>
+              Comment ➤
             </button>
           </div>
         </form>

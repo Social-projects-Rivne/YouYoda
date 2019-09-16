@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
 import Cours from './cours';
 import FilterCoursesSideBar from './FilterCoursesSideBar';
-import '../api/pagination';
 
 
 export default class SearchingCourses extends React.Component{
@@ -16,7 +15,7 @@ export default class SearchingCourses extends React.Component{
       super(props);
 
       this.state = {
-          numberofpages: 0,
+          numberofpages: 2,
           curentpage: 1,
           coursesList:[],
           order_by: 'rate',
@@ -26,6 +25,7 @@ export default class SearchingCourses extends React.Component{
           cost: '',
           status__in: '',
           categories__in: '',
+          coursename__icontains: '',
           loading: true
       };
     }
@@ -38,7 +38,7 @@ export default class SearchingCourses extends React.Component{
     getData = async() => {
        try {
          let response = await API.post('/courses/search', {
-               coursename__icontains: '',
+               coursename__icontains: this.state.coursename__icontains,
                location__icontains: '',
                rate__lte: this.state.rate__lte,
                rate__gte: this.state.rate__gte,
@@ -75,37 +75,59 @@ export default class SearchingCourses extends React.Component{
     }
 
     handleCategoriesList = async (value) => {
-        await this.setState({categories__in: value});
+        await this.setState({
+            categories__in: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleStatusList = async (value) => {
-        await this.setState({status__in: value});
+        await this.setState({
+            status__in: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleFreeData = async (value) => {
-        await this.setState({cost: value});
+        await this.setState({
+            cost: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handlePaidData = async (value) => {
-        await this.setState({cost__gt: value});
+        await this.setState({
+            cost__gt: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleRateGteData = async (value) => {
-        await this.setState({rate__gte: value});
+        await this.setState({
+            rate__gte: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleRateLteData = async (value) => {
-        await this.setState({rate__lte: value});
+        await this.setState({
+            rate__lte: value,
+            curentpage: 1});
         await this.getData();
       }
 
     handleSortData = async (value) => {
-        await this.setState({order_by: value});
+        await this.setState({
+            order_by: value,
+            curentpage: 1});
+        await this.getData();
+      }
+
+    handleSearchData = async (event) => {
+        const value = event.target.value;
+        await this.setState({
+            coursename__icontains: value,
+            curentpage: 1});
         await this.getData();
       }
 
@@ -127,7 +149,7 @@ export default class SearchingCourses extends React.Component{
          }
 
     return (
-          <div id="SearchingCourses">
+          <div id="SearchingCourses" style={{minHeight:"80vh"}}>
               <FilterCoursesSideBar sendCategoriesData={this.handleCategoriesList}
                                     sendStatusData={this.handleStatusList}
                                     sendCostPaidData={this.handlePaidData}
@@ -138,6 +160,20 @@ export default class SearchingCourses extends React.Component{
               <div id="page-wrap">
                   <Router>
                       <Container>
+                          <div id="wrap">
+                              <form action="" autocomplete="on">
+                                  <input id="search" 
+                                         name="search" 
+                                         type="text" 
+                                         placeholder="What're you looking for?"
+                                         onChange = {(event) => {this.handleSearchData(event)}}
+                                  />
+                                  <input id="search_submit" 
+                                         value="Rechercher" 
+                                         type="submit"
+                                  />
+                              </form>
+                          </div>
                           <Row>
                               <Col>
                                   <h1 className="title-events">Courses</h1>
@@ -146,9 +182,9 @@ export default class SearchingCourses extends React.Component{
                           <Row className="search-input-group">
                               <Col>
                                   <InputGroup className="search-input">
-                                      <InputGroupAddon addonType="prepend">
+                                       <InputGroupAddon addonType="prepend">
                                           <InputGroupText className="search-input-icon">
-                                              <FontAwesomeIcon icon="search"/>
+                                              <FontAwesomeIcon icon="sort-amount-up"/>
                                           </InputGroupText>
                                       </InputGroupAddon>
                                       <InputGroupAddon addonType="append" className="search-input-select">
@@ -174,7 +210,7 @@ export default class SearchingCourses extends React.Component{
                           />
                           <Row>
                               <Col style={{visibility:visibpag}}>
-                                  <div className="content_detail__pagination cdp" actpage="1">
+                                  <div className="content_detail__pagination cdp" actpage={this.state.curentpage}>
                                       <a href="#!-1"
                                           className="cdp_i"
                                           onClick={(e) => this.changePrevNext(-1)}

@@ -5,8 +5,8 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import { Redirect, Link } from 'react-router-dom'
 
-import '../api/pagination';
 import { defaultPhoto } from '../utils';
 
 
@@ -21,7 +21,8 @@ export default class Event extends React.Component{
       super(props);
 
       this.state = {
-          loading: true
+          loading: true,
+          redirect: false
       }
   }
   componentWillMount(){
@@ -32,33 +33,47 @@ export default class Event extends React.Component{
       this.setState({loading: false})
   }
 
+  handleClick = async (event) => {
+        await this.setState({ event });
+        await this.setState({ redirect: true });
+        window.location.reload();
+    }
+
   renderEvents(event) {
       const eventDate = event.date;
       const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');
-      let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
-      let coverimg = defaultPhoto(defimg, event.cover_url);
+      let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
+      let coverImg = defaultPhoto(defImg, event.cover_url);
       return (
           <Col sm="12" md="6" lg="4" xl="3">
-              <Card className="event-card">
-                  <CardHeader className="event-header">{newEventDate}</CardHeader>
-                  <CardBody className="event-body">
-                      <CardTitle className="event-card-header">{event.name}</CardTitle>
-                      <CardText>
-                          <p><span className="main-text-span">Category:</span>{'  '}{event.categories}</p>
-                          <p>Rate:{'  '}{event.rate}</p>
-                          <p><span className="main-text-span">Event organizer:</span>{'  '}{event.owner}</p>
-                          <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
-                      </CardText>
-                  </CardBody>
-                  <CardFooter className="card-event-footer">
-                      <img width="100%" src={coverimg} alt={event.name}/>
-                  </CardFooter>
-              </Card>
+              <Link className="card-link" onClick={() => this.handleClick(event)} >
+                  <Card className="event-card">
+                      <CardHeader className="event-header">{newEventDate}</CardHeader>
+                      <CardBody className="event-body">
+                          <CardTitle className="event-card-header">
+                              <Link>{event.name}</Link>
+                          </CardTitle>
+                          <CardText>
+                              <p><span className="main-text-span">Category: </span>{event.categories}</p>
+                              <p>Rate: {event.rate}</p>
+                              <p><span className="main-text-span">Event organizer: </span>{event.owner}</p>
+                              <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
+                          </CardText>
+                      </CardBody>
+                      <CardFooter className="card-event-footer">
+                          <img width="100%" src={coverImg} alt={event.name}/>
+                      </CardFooter>
+                  </Card>
+              </Link>    
           </Col>
      )
   }
 
     render(){
+        const { redirect } = this.state
+        if (redirect) {
+           return <Redirect to={{pathname: '/event/detail', state: {event: this.state.event}}}/>;
+        }
         return (
             <Container>
                 <div className='sweet-loading'>

@@ -15,7 +15,4 @@ class EventsSerializator(serializers.ModelSerializer):
 
 		 model = Events
 
-		 fields = (
-			"name", "description", "date", "cover_url", "location",
-			"categories", "owner"
-            )
+		 fields = ("__all__")
