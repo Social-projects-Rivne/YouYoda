@@ -92,7 +92,7 @@ export default class SearchingEvents extends React.Component{
          }
 
     return (
-        <div id="SearchingCourses">
+        <div id="SearchingCourses" style={{minHeight:'80vh'}}>
               <FilterEventsSideBar sendCategoriesData={this.handleCategoriesList}
               />
               <div id="page-wrap">

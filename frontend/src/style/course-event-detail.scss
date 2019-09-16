@@ -85,3 +85,24 @@
         border: 1px solid #dee2e6;
     }
 }
+.ed-info-block {
+    min-height: 80px;
+    position: relative;
+    bottom: 80px;
+    background: #4f4f4f;
+    color: #fff;
+    display: flex;
+    padding: 15px 0;
+    justify-content: space-between;
+    align-items: center;
+    i { padding: 0 15px;}
+    div.ed {
+        width: 33%;
+        text-align: center;
+    }
+}
+.course-detail-second-col {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}

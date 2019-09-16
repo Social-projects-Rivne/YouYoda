@@ -4,6 +4,7 @@ import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
     Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import LoginForm from '../Components/LoginForm';
+import Registration from '../Components/Registration';
 import { UserMenu } from './UserMenu';
 import { isAuthenticated } from '../utils';
 
@@ -14,13 +15,19 @@ export default class Header extends React.Component {
         super(props);
 
         this.state = {
-            isOpen: false,
-            isOpenL: false
+            isOpenM: false,
+            isOpenL: false,
+            isOpen: false
         };
+    }
+    handleClickReg = () => {
+        this.setState(prevState => ({
+            isOpen: !prevState.isOpen
+        }));
     }
     toggle = () => {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpenM: !this.state.isOpenM
         });
     }
     handleClickLogin = () => {
@@ -65,7 +72,7 @@ export default class Header extends React.Component {
                     </Link>
                     </NavItem>
                     <NavItem className={isAuthenticated("hide")}>
-                        <i className="fas fa-sign-in-alt sign-in-header nav-link" 
+                        <i className="fas fa-sign-in-alt sign-in-header nav-link"
                             onClick={this.handleClickLogin}
                             ></i>
                     </NavItem>
@@ -77,7 +84,9 @@ export default class Header extends React.Component {
             </Row>
             </Container>
             </header>
-            <LoginForm handleClickLogin={this.handleClickLogin} handleClickReg={this.handleClickReg} isOpenL={this.state.isOpenL} />
+                <LoginForm handleClickLogin={this.handleClickLogin} handleClickReg={this.handleClickReg} isOpenL={this.state.isOpenL} />
+                <Registration handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin} isOpen={this.state.isOpen} />
+
             </div>
     );
   }
