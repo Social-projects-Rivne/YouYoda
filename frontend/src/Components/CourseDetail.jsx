@@ -89,6 +89,12 @@ export default class CourseDetail extends React.Component{
                 <div className='cd-header'>
                 <div className="d-flex justify-content-between flex-wrap container">
                     <h1 className="course-det-header">
+                        <Button
+                            className='btn'
+                            color="warning"
+                            style={{margin:'0 15px 10px 0'}}
+                            onClick={this.subscribeCourse}
+                        >Join</Button>
                         {this.props.course.coursename}
                         <span className="course-detail-status" style={{color:statuscolor}}>
                             {this.props.course.status}
@@ -152,29 +158,14 @@ export default class CourseDetail extends React.Component{
                     <h4 className="course-detail-h4">About:</h4>
                     <p className="main-text">{this.props.course.description}</p>
                     <p className="main-text cd-limit" ><span className="main-text-span">Limit of members: </span> {this.props.course.members_limit}</p>
-
-                    <p className="main-text"><span className="main-text-span">Category: </span><Link to="" style={{color:"#000"}}>{this.props.course.categories}</Link></p>
                     <p className="main-text">Duration: {newCourseDuration} days </p>
+                    <p className="main-text"><span className="main-text-span">Category: </span><Link to="" style={{color:"#000"}}>{this.props.course.categories}</Link></p>
                 </Col>
-                <Col md="6" xs="12" className="course-detail-second-col">
+                <Col md="6" xs="12" className="course-detail-second-col" style={{maxHeight:'500px'}}>
                     <Calendar startDate={startDate} endDate={endDate} />
                 </Col>
             </Row>
-            <Row className="btn-group-course-detail d-flex justify-content-between">    
-               
-                    <Col>
-                        <Button
-                            className='btn-sign'
-                            color="warning"
-                            style={{margin:'0 33px 10px 33px'}}
-                            onClick={this.subscribeCourse}
-                        >Join</Button>
-                    </Col>
-                    <Col>
-                        <Link to="/"><Button color="secondary" className="btn-sign" style={{margin:'0 33px 10px 33px'}}>Cancel</Button></Link>
-                    </Col>
-                
-            </Row>
+
             <Row style={{marginTop:'100px'}}>
               <Col md="4"  className = {`pt-3 border-right ${isAuthenticated("show")}`}>
                 <h6>Say something about this course</h6>
@@ -191,13 +182,23 @@ export default class CourseDetail extends React.Component{
                     />
               </Col>
             </Row>
+            <Row className="btn-group-course-detail d-flex justify-content-between">
+                <Col>
+                </Col>
+                <Col lg='8' md='12' className='d-flex'>
+                    <Button
+                    className='btn-sign'
+                    color="warning"
+                    style={{margin:'0 33px 10px 33px'}}
+                    onClick={this.subscribeCourse}
+                    >Subscribe</Button>
+                    <Link to="/"><Button color="secondary" className="btn-sign" style={{margin:'0 33px 10px 33px'}}>Back</Button></Link>
+                </Col>
+            </Row>
 
-
-                
-            
             </Container>
             </div>
-        
+
         )
     }
 };
