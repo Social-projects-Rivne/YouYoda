@@ -54,8 +54,8 @@ export default class CourseDetail extends React.Component{
         }
     }
     render(){
-        let defimg = "/media/car-racing-4394450_1920.jpg";
-        let coverimg = defaultPhoto(defimg, this.props.course.cover_url);
+        let defImg = "/media/car-racing-4394450_1920.jpg";
+        let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
         let courseDate = this.props.course.start_date;
         let newCourseDate = moment(courseDate).format('Do MM, h:mm a');
         let courseDuration = this.props.course.duration;
@@ -101,7 +101,7 @@ export default class CourseDetail extends React.Component{
                 <div >
                     <div style={{
                             minHeight: '510px',
-                            backgroundImage: `url(${coverimg})`,
+                            backgroundImage: `url(${coverImg})`,
                             backgroundColor: '#000',
                             backgroundPosition: 'center',
                             backgroundRepeat: 'no-repeat',

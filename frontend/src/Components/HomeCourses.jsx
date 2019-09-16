@@ -33,8 +33,8 @@ export default class HomeCourses extends React.Component{
     };
 
     renderCourses(course) {
-        let defimg = "/media/car-racing-4394450_1920.jpg";
-        let coverimg = defaultPhoto(defimg, course.cover_url);
+        let defImg = "/media/car-racing-4394450_1920.jpg";
+        let coverImg = defaultPhoto(defImg, course.cover_url);
 
         return (
             <Col
@@ -46,7 +46,7 @@ export default class HomeCourses extends React.Component{
             >
                   <div className="home-course">
                     <div className="course-cover-photo">
-                        <img src={coverimg} alt={course.coursename} />
+                        <img src={coverImg} alt={course.coursename} />
                     </div>
                         <h3 className="secondary-header">
                             {course.coursename}

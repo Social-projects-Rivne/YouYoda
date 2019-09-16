@@ -21,9 +21,8 @@ import './index.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey, faUserTie} from '@fortawesome/free-solid-svg-icons';
-library.add(fab, faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey, faUserTie);
-
+import { faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey, faUserTie, faFilter} from '@fortawesome/free-solid-svg-icons';
+library.add(fab, faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey, faUserTie, faFilter);
 
 ReactDOM.render(<Routes/>, document.getElementById('root'))
 

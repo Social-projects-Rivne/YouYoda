@@ -54,8 +54,8 @@ export default class EventDetail extends React.Component{
     }
 
     render(){
-        let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
-        let coverimg = defaultPhoto(defimg, this.props.event.cover_url);
+        let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
+        let coverImg = defaultPhoto(defImg, this.props.event.cover_url);
         let eventDate = this.props.event.date;
         let newEventDate = moment(eventDate).format('MM Do YY, h:mm a');
 
@@ -65,7 +65,7 @@ export default class EventDetail extends React.Component{
             <div>
                 <div style={{
                         minHeight: '510px',
-                        backgroundImage: `url(${coverimg})`,
+                        backgroundImage: `url(${coverImg})`,
                         backgroundColor: '#000',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
