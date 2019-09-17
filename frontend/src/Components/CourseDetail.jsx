@@ -12,12 +12,14 @@ import { API } from '../api/axiosConf';
 import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
 
+
 export default class CourseDetail extends React.Component{
     constructor(props){
       super(props);
       this.state = {
           comments: [],
           schedule: [],
+          firstDate: Date.now(),
           loading: true
       };
     }
@@ -30,10 +32,11 @@ export default class CourseDetail extends React.Component{
                 }
             }
         )
-
             this.setState({
                 schedule: response.data,
+                firstDate: moment.unix(response.data[0].date).format("YYYY, MM")
             })
+            console.log(this.state.firstDate)
         } catch (error) {
             toast.error(error.message)
         }
@@ -68,7 +71,6 @@ export default class CourseDetail extends React.Component{
     subscribeCourse = () => {
         if(localStorage.getItem('token') == null){
             toast.info('You must Sign Up or Sign In for subscribes course')
-
         } else {
 
         }
@@ -76,16 +78,15 @@ export default class CourseDetail extends React.Component{
     render(){
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
-        let courseDate = this.props.course.start_date;
+        const courseDate = this.props.course.start_date;
         let newCourseDate = moment(courseDate).format('Do MM, h:mm a');
         let courseDuration = this.props.course.duration;
         let newCourseDuration = moment.duration(courseDuration).days();
         let date = new Date(courseDate);
         let startDate = date.getTime()
-        let endDate = new Date(startDate).setDate(date.getDate() + newCourseDuration)
-
+        
         let scheduleList = this.state.schedule.map((item) => {
-            new Date(item.date)
+            return new Date(moment.unix(item.date).format("MM/DD/YYYY"))
         })
 
 
@@ -176,12 +177,10 @@ export default class CourseDetail extends React.Component{
                 </Col>
                 <Col md="6" xs="12" className="course-detail-second-col" >
                     <DayPicker
-
-                        selectedDays={this.state.schedule.map((item) => {
-                            new Date(item.date)
-                        })}
+                        initialMonth = {new Date(this.state.firstDate)} 
+                        selectedDays={scheduleList}
                     />
-                    <p>s {this.state.scheduleList}</p>
+                    
                 </Col>
             </Row>
 

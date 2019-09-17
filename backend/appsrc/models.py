@@ -113,4 +113,4 @@ class EventsComments(models.Model):
 
 class CourseSchedule(models.Model):
     course = models.ForeignKey(Courses, related_name='course_schedule', on_delete=models.CASCADE)
-    date = models.DateTimeField(blank=False)
+    date = models.IntegerField(blank=False)
