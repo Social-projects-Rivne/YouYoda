@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from ..models import YouYodaUser as User
 from ..serializers.profile_view_serializer import ProfileViewSerializer
+from ..serializers.moderation_serializer import ManageUsersStatusesSerializer
 
 
 IS_ADMIN = 3
@@ -13,7 +14,7 @@ IS_MODERATOR = 2
 
 class UsersGetList(APIView):
     """ Manage users data by admins and moderators """
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = [permissions.IsAuthenticated,]
 
     def get(self, request, format=None):
         """ Get users data by token and role access """
@@ -30,7 +31,7 @@ class UsersGetList(APIView):
 
 class GetUsersStatuses(APIView):
     """ Manage users data by admins and moderators """
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = [permissions.IsAuthenticated,]
 
     def get(self, request, format=None):
         """ Get users statuses by their id and role access """
@@ -43,3 +44,18 @@ class GetUsersStatuses(APIView):
             user_list = list(users)
             return Response(user_list, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UpdateUsersStatuses(APIView):
+    """ Manage users data by admins and moderators """
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def patch(self, request):
+        """ Post request to database """
+        users = request.data['users']
+        a = User.objects.get(id=users['id'][0])
+        serializer = ManageUsersStatusesSerializer(a, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        

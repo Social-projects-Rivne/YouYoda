@@ -12,7 +12,7 @@ async function getUsersStatusesList() {
 
 async function patchRequests(dataSend) {
     try {
-        await API.patch('user/totrainer', dataSend);
+        await API.patch('users/updatestatuses', dataSend);
         return true;
     } catch (error) {
         return Promise.reject(error);

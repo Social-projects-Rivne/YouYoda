@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models.user import YouYodaUser
+from ..models import YouYodaUser
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -13,5 +13,5 @@ class UserSerializer(serializers.ModelSerializer):
             'role_id', 'hide_my_data', 'first_name', 'last_name',
             'location', 'username', 'password', 'email', 'about_me',
             'birth_date', 'phone_number', 'is_active', 'avatar_url',
-            'is_trainer'
+            'is_trainer', 'status_id'
             )

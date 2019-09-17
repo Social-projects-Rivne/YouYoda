@@ -14,7 +14,8 @@ class UsersStatuses extends React.Component {
 
         this.state = {
             dataList: [],
-            selected: {"users": '', "status": ''}
+            ids: [],
+            status_ids: []
         };
     }
 
@@ -28,75 +29,36 @@ class UsersStatuses extends React.Component {
     }
 
     handleChange=(sv, uv) => {
-        switch(sv){
-            case "Active": sv = 1;
-            case "Banned": sv = 2;
-            case "Muted": sv = 3;
-            case "Idle": sv = 4;
-        }
-        this.state.selected.status = sv;
-        this.state.selected.users = uv;
+        var ids = this.state.ids;
+        var status_ids = this.state.status_ids;
 
+        ids.push(uv);
+        status_ids.push(sv);
+
+        this.setState({
+            ids: ids,
+            status_ids: status_ids
+        });
+
+        document.getElementById(uv).textContent = sv;
         toast.error('user_id: ' + uv + '; status_id: ' + sv);
     }
 
-    getEditedUsers = () => {
-        var itemIds = {};
-        this.state.checkedComments.map(number => {
-            var commentValue = document.getElementById('comment_'+number).value;
-             itemIds[number] = {'id':number, 'comment':commentValue};
-        });
-        return itemIds;
-    }
-
-    getArrayWithComments = () => {
-        var itemIds = {};
-        this.state.checkedComments.map(number => {
-            var commentValue = document.getElementById('comment_'+number).value;
-             itemIds[number] = {'id':number, 'comment':commentValue};
-        });
-        return itemIds;
-    }
-
     saveEditedData = async() => {
-        var objIdsComments = this.getArrayWithComments();
-        var objIdsComments = this.getArrayWithComments();
         var userData = {
-            "users": 'A',
-            "is_trainer": true,
-            "id": this.state.checkedIds,
-            "data_obj": objIdsComments
+            "users": {
+                "id": this.state.ids,
+                "status_id": this.state.status_ids
+            }
         };
         var response = patchRequests(userData);
         response.then( valueResponse => {
             if(valueResponse === true)
             {
-                this.updateRequestTable();
-                toast.success('Requests successfully was approved.');
+                toast.success('Users \' statuses successfully saved');
             }
             else
-                toast.error('Request failed. Report to the admin of the system.');
-        });
-    }
-
-    updateStatusHistory = async() => {
-        var objIdsComments = this.getArrayWithComments();
-        var objIdsComments = this.getArrayWithComments();
-        var userData = {
-            "users": 'A',
-            "is_trainer": true,
-            "id": this.state.checkedIds,
-            "data_obj": objIdsComments
-        };
-        var response = patchRequests(userData);
-        response.then( valueResponse => {
-            if(valueResponse === true)
-            {
-                this.updateRequestTable();
-                toast.success('Requests successfully was approved.');
-            }
-            else
-                toast.error('Request failed. Report to the admin of the system.');
+                toast.error('Data saving is failed');
         });
     }
 
@@ -118,7 +80,7 @@ class UsersStatuses extends React.Component {
                 <td align="center"><input type="checkbox" checked={user.is_active} /></td>
                 <td> 
                     <UncontrolledButtonDropdown>
-                        <DropdownToggle id={user.id} tag="button" type="button" value={this.state.selected.status} caret>
+                        <DropdownToggle id={user.id} tag="button" type="button" caret>
                             {
                                 (() => {
                                     var statusId = user.status_id
@@ -131,10 +93,10 @@ class UsersStatuses extends React.Component {
                             })()}
                         </DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem onClick={this.handleChange("Active", user.id)}>Active</DropdownItem>
-                            <DropdownItem onClick={this.handleChange("Banned", user.id)}>Banned</DropdownItem>
-                            <DropdownItem onClick={this.handleChange("Muted", user.id)}>Muted</DropdownItem>
-                            <DropdownItem onClick={this.handleChange("Idle", user.id)}>Idle</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange("Active", user.id)}}>Active</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange("Banned", user.id)}}>Banned</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange("Muted", user.id)}}>Muted</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange("Idle", user.id)}}>Idle</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledButtonDropdown> 
                 </td>
@@ -169,7 +131,7 @@ class UsersStatuses extends React.Component {
                 </Row>
                 <Row className="table-actions mt-3">
                     <Col>
-                        <Button type="button">Apply edited data</Button>
+                        <Button type="button" onClick={  () => { this.saveEditedData()}}>Apply edited data</Button>
                     </Col>
                 </Row>
             </div>
