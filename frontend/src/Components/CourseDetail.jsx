@@ -17,8 +17,26 @@ export default class CourseDetail extends React.Component{
       super(props);
       this.state = {
           comments: [],
+          schedule: [],
           loading: true
       };
+    }
+    getSchedule = async() => {
+        try {
+            let response = await API.get('/courses/schedule',
+                {
+                    params: {
+                        course_id: this.props.course.id,
+                }
+            }
+        )
+
+            this.setState({
+                schedule: response.data,
+            })
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
     getCommnts = async() => {
         try {
@@ -38,7 +56,9 @@ export default class CourseDetail extends React.Component{
             toast.error(error.message)
         }
     }
+
     componentWillMount = async() => {
+        await this.getSchedule();
         await this.getCommnts();
       }
 
@@ -63,6 +83,12 @@ export default class CourseDetail extends React.Component{
         let date = new Date(courseDate);
         let startDate = date.getTime()
         let endDate = new Date(startDate).setDate(date.getDate() + newCourseDuration)
+
+        let scheduleList = this.state.schedule.map((item) => {
+            new Date(item.date)
+        })
+
+
         let statuscolor;
         if(this.props.course.status == "Open"){
             statuscolor = "#54DB63"
@@ -150,16 +176,12 @@ export default class CourseDetail extends React.Component{
                 </Col>
                 <Col md="6" xs="12" className="course-detail-second-col" >
                     <DayPicker
-                        initialMonth={new Date(startDate)}
-                        selectedDays={[
-                            new Date(2019, 9, 12),
-                            new Date(2019, 9, 2),
-                            {
-                                after: new Date(startDate),
-                                before: new Date(endDate),
-                            },
-                        ]}
+
+                        selectedDays={this.state.schedule.map((item) => {
+                            new Date(item.date)
+                        })}
                     />
+                    <p>s {this.state.scheduleList}</p>
                 </Col>
             </Row>
 

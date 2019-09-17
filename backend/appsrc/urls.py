@@ -4,7 +4,7 @@ from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.courses import TopCourses, SearchingCourses
+from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
 from .views.comment import CourseComments, EventComments
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
@@ -18,6 +18,7 @@ from .views.view_profile import ViewProfile
 urlpatterns = [
     path('categories/list', CategoriesList.as_view(), name='categories-list'),
     path('courses/comments', CourseComments.as_view(), name='comments-courses'),
+    path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
     path('courses/top', TopCourses.as_view(), name='top-courses'),
     path('events/search', SearchingEvents.as_view(), name='search-events'),

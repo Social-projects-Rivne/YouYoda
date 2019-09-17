@@ -7,8 +7,8 @@ from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-from ..models import Courses, CoursesComments
-from ..serializers.courses_serializer import CoursesSerializator
+from ..models import Courses, CourseSchedule
+from ..serializers.courses_serializer import CourseScheduleSerializer, CoursesSerializator
 
 
 NUMBER_OF_TOP = 6
@@ -62,3 +62,16 @@ class SearchingCourses(APIView):
             "data":curent_page
         }
         return Response(response_data)
+
+
+class CourseScheduleView(APIView):
+    """Takes data from CoursesTopSerializator for view top rate courses"""
+
+    permission_classes = [permissions.AllowAny,]
+
+    def get(self, request):
+        """First check request data in cache, then pull data from db"""
+        course_id = request.query_params.get('course_id')
+        course_schedule = CourseSchedule.objects.filter(course = course_id).order_by('date')
+        serializer = CourseScheduleSerializer(course_schedule, many=True)
+        return Response(serializer.data)
