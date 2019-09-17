@@ -114,7 +114,7 @@ export default class ProfileInfo extends React.Component {
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '3' })} tab-link
                               onClick={() => { this.toggleTab('3') }}>
-                                <div className="user-courses-profile" href="#">Completed
+                                <div className="user-courses-profile">Completed
                                   <div id="number-completed-courses" className="events-numbers">{profile.userCompletedCourses.length}</div>
                                 </div>
                             </NavLink>
@@ -144,7 +144,7 @@ export default class ProfileInfo extends React.Component {
                             <NavLink
                             className={classnames({ active: this.state.activeTab === '5' })} tab-link
                             onClick={() => { this.toggleTab('5') }}>
-                              <div className="user-courses-profile" href="#">Completed
+                              <div className="user-courses-profile">Completed
                                 <div id="number-completed-courses" className="events-numbers">{profile.userCompletedEvents.length}</div>
                               </div>
                             </NavLink>
@@ -153,7 +153,7 @@ export default class ProfileInfo extends React.Component {
                             <NavLink
                             className={classnames({ active: this.state.activeTab === '6' })} tab-link
                             onClick={() => { this.toggleTab('6') }}>
-                              <div className="user-courses-profile" href="#">Created
+                              <div className="user-courses-profile">Created
                                 <div id="number-completed-courses" className="courses-numbers">{profile.userCreatedEvents.length}</div>
                               </div>
                             </NavLink>

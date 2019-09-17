@@ -37,7 +37,7 @@ export default class ProfileInfo extends React.Component {
                   <Col onClick={this.setRedirect} md="3" className="profile-photo-container">
                     <div>
                         <img src={defaultPhoto("/media/avatar.png", profile.userInfo.avatar_url)}
-                          className="profile-photo" href="#" alt="profile-photo"/>
+                          className="profile-photo" alt="profile-photo"/>
                         <div className="edit-label">
                             {this.renderRedirect()}
                             <a onClick={this.setRedirect} href="#">Edit</a>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Container, Row, Col, Card, UncontrolledTooltip} from 'reactstrap';
+import {Col, Card, UncontrolledTooltip} from 'reactstrap';
 
 const URL = 'http://localhost:8000'
 

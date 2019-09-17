@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row} from 'reactstrap';
 
 
 export default class NoCoursesOrEvents extends React.Component {
