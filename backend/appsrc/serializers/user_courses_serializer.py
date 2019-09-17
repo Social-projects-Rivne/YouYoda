@@ -17,8 +17,8 @@ class SubscribedSerializer(serializers.ModelSerializer):
 
 class UserCoursesSerializer(serializers.ModelSerializer):
     """Takes data from the Courses model for view information about user courses.
-    Converts it to JSON format for transmission via the API.
 
+    Converts it to JSON format for transmission via the API.
     """
 
     subscribed = SubscribedSerializer(source="subscribed_course", many="True")
