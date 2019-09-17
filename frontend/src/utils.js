@@ -6,11 +6,11 @@ export const HOSTNAME_PORT = "http://localhost:8000";
 export const isAuthenticated = (dosmth) => {
     let show = "auth-display-none";
     if (localStorage.getItem('token')){
-        if (dosmth == "show"){
+        if (dosmth === "show"){
             show = ""
         }
     } else {
-        if (dosmth == "hide"){
+        if (dosmth === "hide"){
             show = ""
         }
     }

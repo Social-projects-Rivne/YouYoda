@@ -1,0 +1,108 @@
+  /* Course detail */
+.course-det-header {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 30px 0 30px 20px;
+  color: #fff;
+}
+.star {
+    position: relative;
+    top: 40px;
+    margin-right: 5%
+}
+.rate-big {
+    font-size: 2rem;
+    color: #cdffad;
+}
+.rate-small {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 700;
+}
+.rate-num {
+    position: relative;
+    bottom: 8px;
+    margin-left: 15px;
+}
+.course-detail-h4 {
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+.course-detail-status {
+    position: relative;
+    font-size: 1.25rem;
+    bottom: 25px;
+    left: 10px;
+    font-weight: 500;
+    text-shadow: 1px 1px 1px;
+}
+.cd-info-block {
+    min-height: 80px;
+    position: relative;
+    bottom: 80px;
+    background: #4f4f4f;
+    color: #fff;
+    display: flex;
+    padding: 15px 0;
+    justify-content: space-between;
+    align-items: center;
+    i { padding: 0 15px;}
+    div.cd {
+        width: 25%;
+        text-align: center;
+    }
+}
+.cd-header {
+    width: 100%;
+    height: 200px;
+    position: absolute;
+    z-index: 3;
+    background: linear-gradient(180deg, rgba(79,79,79,1) 0%, rgba(0,0,0,0) 100%);
+}
+.comment-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    img{
+        height: 100%;
+        min-width: 100%;
+    }
+}
+.comment {
+    margin-right: 15px;
+}
+.commentList {
+    max-height: 450px;
+    overflow-y: scroll;
+    .load-more-btn {
+        border-radius: 0.5rem;
+        margin: 0 auto;
+        width: 96%;
+        height: 40px;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+    }
+}
+.ed-info-block {
+    min-height: 80px;
+    position: relative;
+    bottom: 80px;
+    background: #4f4f4f;
+    color: #fff;
+    display: flex;
+    padding: 15px 0;
+    justify-content: space-between;
+    align-items: center;
+    i { padding: 0 15px;}
+    div.ed {
+        width: 33%;
+        text-align: center;
+    }
+}
+.course-detail-second-col {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}

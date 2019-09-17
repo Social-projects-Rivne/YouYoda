@@ -10,6 +10,7 @@ import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
+import EventDetail from './Components/EventDetail';
 import Home from './Pages/Home';
 import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
@@ -62,7 +63,10 @@ export default class Routes extends React.Component{
                 <Route exact path="/events/search"
                     render={()=><MainLayout><SearchingEvents/></MainLayout>}
                 />
-                <Route exact path='/admin'
+                <Route exact path='/event/detail'
+                    render={(props)=><MainLayout><EventDetail event = {props.location.state.event}/></MainLayout>}
+                />
+               <Route exact path='/admin'
                     render={()=><AdminPage><AdminDashboard/></AdminPage>}
                 />
                 <Route exact path={'/admin/:option'}

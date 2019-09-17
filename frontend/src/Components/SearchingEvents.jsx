@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
 import Event from './event';
 import FilterEventsSideBar from './FilterEventsSideBar';
-import '../api/pagination';
 
 
 export default class SearchingEvents extends React.Component{
@@ -16,11 +15,12 @@ export default class SearchingEvents extends React.Component{
       super(props);
 
       this.state = {
-          numberofpages: 0,
+          numberofpages: 2,
           curentpage: 1,
           eventList:[],
           categories__in: '',
           order_by: '-date',
+          name__icontains: '',
           loading: true
       };
     }
@@ -33,7 +33,7 @@ export default class SearchingEvents extends React.Component{
     getData = async() => {
         try {
           let response = await API.post('/events/search', {
-               name__icontains: '',
+               name__icontains: this.state.name__icontains,
                location__icontains: '',
                categories__in: this.state.categories__in,
                order_by: this.state.order_by
@@ -65,12 +65,20 @@ export default class SearchingEvents extends React.Component{
     }
 
     handleCategoriesList = async (value) => {
-        await this.setState({categories__in: value});
+        await this.setState({categories__in: value, curentpage:1});
         await this.getData();
       }
 
     handleSortData = async (value) => {
-        await this.setState({order_by: value});
+        await this.setState({order_by: value, curentpage:1});
+        await this.getData();
+      }
+
+    handleSearchData = async (event) => {
+        const value = event.target.value;
+        await this.setState({
+            name__icontains: value,
+            curentpage: 1});
         await this.getData();
       }
 
@@ -93,12 +101,23 @@ export default class SearchingEvents extends React.Component{
          }
 
     return (
-        <div id="SearchingCourses">
+        <div id="SearchingCourses" style={{minHeight:'80vh'}}>
               <FilterEventsSideBar sendCategoriesData={this.handleCategoriesList}
               />
               <div id="page-wrap">
                   <Router>
                       <Container>
+                          <div id="wrap">
+                              <form action="" autocomplete="on">
+                                  <input id="search" 
+                                         name="search" 
+                                         type="text" 
+                                         placeholder="What're you looking for?"
+                                         onChange = {(event) => {this.handleSearchData(event)}}
+                                  />
+                                  <input id="search_submit" value="Rechercher" type="submit"/>
+                              </form>
+                          </div>
                           <Row>
                               <Col>
                                   <h1 className="title-events">Events</h1>
@@ -109,7 +128,7 @@ export default class SearchingEvents extends React.Component{
                                   <InputGroup className="search-input">
                                       <InputGroupAddon addonType="prepend">
                                           <InputGroupText className="search-input-icon">
-                                              <FontAwesomeIcon icon="search"/>
+                                              <FontAwesomeIcon icon="sort-amount-up"/>
                                           </InputGroupText>
                                       </InputGroupAddon>
                                       <InputGroupAddon addonType="append" className="search-input-select">
@@ -133,7 +152,7 @@ export default class SearchingEvents extends React.Component{
                             />
                           <Row>
                               <Col style={{visibility:visibpag}}>
-                                  <div className="content_detail__pagination cdp" actpage="1">
+                                  <div className="content_detail__pagination cdp" actpage={this.state.curentpage}>
                                 			<a href="#!-1"
                                                 className="cdp_i"
                                                 onClick={(e) => this.changePrevNext(-1)}

@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { Redirect, Link } from 'react-router-dom'
 
-import '../api/pagination';
 import { defaultPhoto } from '../utils';
 
 
@@ -26,6 +25,10 @@ export default class Cours extends React.Component{
       }
     }
 
+    componentWillMount(){
+      this.setState({loading: true})
+  }
+
     componentDidMount(){
         this.setState({loading: false})
     }
@@ -37,33 +40,33 @@ export default class Cours extends React.Component{
     }
 
     renderCourses(course) {
-        let defimg = "/media/beautiful-crowd-cute-2869374.jpg";
-        let coverimg = defaultPhoto(defimg, course.cover_url);
-        if(!course.cover_url)
-            course.cover_url = require("../img/static/course.png");
+        let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
+        let coverImg = defaultPhoto(defImg, course.cover_url);
         const courseDate = course.start_date;
         const newCourseDate = moment(courseDate).format('MMMM Do YYYY, h:mm:ss a');
         const courseDuration = course.duration;
         const newCourseDuration = moment.duration(courseDuration).days();
         return (
             <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-                <Card className="event-card">
-                    <CardHeader className="event-header">{newCourseDate}</CardHeader>
-                    <CardBody className="event-body">
-                        <CardTitle className="event-card-header">
-                            <Link onClick={() => this.handleClick(course)}>{course.coursename}</Link>
-                        </CardTitle>
-                        <CardText>
-                            <p><span className="main-text-span">Category: </span>{course.categories}</p>
-                            <p>Duration: {newCourseDuration} days</p>
-                            <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
-                            <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p>
-                        </CardText>
-                    </CardBody>
-                    <CardFooter className="card-event-footer">
-                        <img width="100%" src={coverimg} alt={course.coursename}/>
-                    </CardFooter>
-                </Card>
+                <Link className="card-link" onClick={() => this.handleClick(course)} >
+                    <Card className="event-card">
+                        <CardHeader className="event-header">{newCourseDate}</CardHeader>
+                        <CardBody className="event-body">
+                            <CardTitle className="event-card-header">
+                                <Link>{course.coursename}</Link>
+                            </CardTitle>
+                            <CardText>
+                                <p><span className="main-text-span">Category: </span>{course.categories}</p>
+                                <p>Duration: {newCourseDuration} days</p>
+                                <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
+                                <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p>
+                            </CardText>
+                        </CardBody>
+                        <CardFooter className="card-event-footer">
+                            <img width="100%" src={coverImg} alt={course.coursename}/>
+                        </CardFooter>
+                    </Card>
+                </Link>
             </Col>
         )
     }
@@ -73,7 +76,6 @@ export default class Cours extends React.Component{
         if (redirect) {
            return <Redirect to={{pathname: '/course/detail', state: {course: this.state.course}}}/>;
         }
-
         return (
             <Container>
                 <div className='sweet-loading'>

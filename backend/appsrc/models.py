@@ -110,3 +110,9 @@ class CoursesComments(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(blank=True, null=True)
+
+class EventsComments(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(blank=True, null=True)
