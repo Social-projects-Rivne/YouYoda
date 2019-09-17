@@ -269,9 +269,9 @@ class Migration(migrations.Migration):
             name='CoursesSubscribers',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('completed', models.BooleanField()),
-                ('feedback', models.TextField()),
-                ('rate', models.IntegerField()),
+                ('completed', models.BooleanField(default=False)),
+                ('feedback', models.TextField(blank=True, null=True)),
+                ('rate', models.IntegerField(default=0)),
                 ('course_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appsrc.Courses')),
                 ('participant_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
