@@ -1,4 +1,7 @@
+from django.core import mail
+from django.conf import settings
 from django.shortcuts import get_object_or_404
+from djoser.compat import get_user_email
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework.response import Response
@@ -39,8 +42,24 @@ class UserToTrainer(APIView):
 						request_data.status_code = status_code
 						request_data.comment = comments_data[req_key]['comment']
 						request_data.save(update_fields=['status_code','comment'])
+						with mail.get_connection() as connection:
+							status_text = 'changed'
+							if status_code == STATUS_APPROVED:
+								status_text = 'approved'
+							elif status_code == STATUS_REJECTED:
+								status_text = 'rejected'
+							subject = 'Results of reviewing your request'
+							body_text = 'Your request to become a trainer was '+str(status_text)+'.\n'
+							if len(comments_data[req_key]['comment']) > 0:
+								body_text += '\n'+str(comments_data[req_key]['comment'])
+							to_email = [get_user_email(user)]
+							mail.EmailMessage(
+								subject, body_text, settings.DEFAULT_FROM_EMAIL, to_email,
+								connection=connection,
+							).send()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserSendRequest(APIView):
 	"""Add data to UserRequestsSerializer for moderation user role."""
@@ -61,6 +80,7 @@ class UserSendRequest(APIView):
 				return Response(serializer.data, status=status.HTTP_201_CREATED)
 			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class UserGetRequest(APIView):
 	"""Get data for moderator and admin"""
 
@@ -75,11 +95,11 @@ class UserGetRequest(APIView):
 			status_code = request.GET['status_code']
 		# if user is admin or moderator and active, let him to get data
 		if((user.role_id == IS_ADMIN or user.role_id == IS_MODERATOR) and user.is_active):
-			col = ['id', 'author_id', 'date', 'status_code', 'comment']
+			col = ['id', 'author_id', 'date', 'status_code', 'comment', 'author__first_name', 'author__last_name']
 			if status_code is not None and status_code in (STATUS_NEW, STATUS_APPROVED, STATUS_REJECTED):
-				requests = UserRequests.objects.filter(status_code=status_code).values(*col)
+				requests = UserRequests.objects.select_related('author').filter(status_code=status_code).values(*col)
 			else:
-				requests = UserRequests.objects.all().values(*col)
+				requests = UserRequests.objects.select_related('author').all().values(*col)
 			requests_list = list(requests)
 			return Response(requests_list, status=status.HTTP_200_OK)
 		return Response('Access error', status=status.HTTP_400_BAD_REQUEST)
