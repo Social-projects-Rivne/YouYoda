@@ -31,12 +31,6 @@ class UsersStatuses extends React.Component {
 
     handleChange=(sv, uv) => {
         this.state.selected[uv] = sv;
-        /*
-        this.setState({
-            ids: ids,
-            status_ids: status_ids
-        });
-        */
         document.getElementById(uv).textContent = this.state.statuses[sv];
         toast.error('user_id: ' + uv + '; status_id: ' + this.state.statuses[sv]);
     }
@@ -64,7 +58,7 @@ class UsersStatuses extends React.Component {
                 <td> 
                     <UncontrolledButtonDropdown>
                         <DropdownToggle id={user.id} tag="button" type="button" caret>
-                        { this.state.statuses[user.status_id] }
+                            { this.state.statuses[user.status_id] }
                         </DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={ () => { this.handleChange(1, user.id)}}>Active</DropdownItem>
