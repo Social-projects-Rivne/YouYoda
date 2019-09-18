@@ -110,3 +110,9 @@ class EventsComments(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(blank=True, null=True)
+
+class PDP(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    note = models.TextField(blank=False)
+    date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=50)
