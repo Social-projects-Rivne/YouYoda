@@ -22,10 +22,6 @@ const override = css`
 export default class ProfileInfo extends React.Component {
     constructor(props) {
       super(props);
-      this.toggle = this.toggle.bind(this);
-      this.toggleAchievement = this.toggleAchievement.bind(this);
-      this.toggleTab = this.toggleTab.bind(this);
-      this.handleChange = this.handleChange.bind(this);
       this.backButton = (
         <div onClick={this.handleChange}>
           <img src={require("../img/content/left-arrow.png")}
@@ -43,7 +39,7 @@ export default class ProfileInfo extends React.Component {
       };
     }
 
-    toggle() {
+    toggle = () => {
     let name = ''
     if (this.state.collapse)
       name = 'Show all'
@@ -55,7 +51,7 @@ export default class ProfileInfo extends React.Component {
      }));
     }
 
-    toggleAchievement() {
+    toggleAchievement = () => {
     let name = ''
     if (this.state.achievementCollapse)
       name = 'Show all'
@@ -67,7 +63,7 @@ export default class ProfileInfo extends React.Component {
      }));
     }
 
-    toggleTab(tab) {
+    toggleTab = (tab) => {
       if (this.state.activeTab != tab) {
         this.setState({
           activeTab: tab,
@@ -82,7 +78,7 @@ export default class ProfileInfo extends React.Component {
       }
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({
           hideButton: true,
         });

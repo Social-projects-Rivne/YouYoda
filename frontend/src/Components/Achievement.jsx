@@ -12,7 +12,7 @@ export default class Achievement extends React.Component {
           <div className="course achievement-image" id={"Tooltip-" + this.props.achievement.course_id}>
             <Card className="card" body>
               <img width="100%" src={URL + this.props.achievement.image_url}
-                    className="achievement-image" alt={this.props.achievement.name}/>
+                    className="achievement-image" alt={require('../img/content/achievement.png')}/>
             </Card>
             <UncontrolledTooltip placement="right" target={"Tooltip-" + this.props.achievement.course_id}>
               {this.props.achievement.name}

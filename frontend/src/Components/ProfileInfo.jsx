@@ -2,8 +2,8 @@ import React from 'react';
 
 import {Container, Row, Col} from 'reactstrap';
 import {Redirect} from 'react-router-dom'
-import { defaultPhoto } from '../utils';
 
+import { defaultPhoto } from '../utils';
 import {ProfileContext} from './profile-context';
 
 

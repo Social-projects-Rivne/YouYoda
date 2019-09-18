@@ -12,7 +12,7 @@ class SubscribedSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = CoursesSubscribers
-        fields = ('completed','feedback','rate', 'is_favourite')
+        fields = ('completed', 'rate', 'is_favourite')
 
 
 class UserCoursesSerializer(serializers.ModelSerializer):
