@@ -77,9 +77,9 @@ class Courses(models.Model):
 class CoursesSubscribers(models.Model):
     participant = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     course = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name="subscribed_course")
-    completed = models.BooleanField()
-    is_favourite = models.BooleanField()
-    rate = models.IntegerField()
+    completed = models.BooleanField(default=False)
+    is_favourite = models.BooleanField(default=False)
+    rate = models.IntegerField(default=DEFAULT_RATE)
 
 class Achievements(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
