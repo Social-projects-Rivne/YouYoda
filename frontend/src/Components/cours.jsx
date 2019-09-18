@@ -43,9 +43,9 @@ export default class Cours extends React.Component{
         let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
         let coverImg = defaultPhoto(defImg, course.cover_url);
         const courseDate = course.start_date;
-        const newCourseDate = moment(courseDate).format('MMMM Do YYYY, h:mm:ss a');
+        const newCourseDate = moment.unix(courseDate).format('MMMM Do YYYY, h:mm a');
         const courseDuration = course.duration;
-        const newCourseDuration = moment.duration(courseDuration).days();
+        const newCourseDuration = moment.duration(courseDuration).hours();
         return (
             <Col sm="12" md="6" lg="4" xl="3">
                 <Link className="card-link" onClick={() => this.handleClick(course)} >
@@ -57,7 +57,7 @@ export default class Cours extends React.Component{
                             </CardTitle>
                             <CardText>
                                 <p><span className="main-text-span">Category: </span>{course.categories}</p>
-                                <p>Duration: {newCourseDuration} days</p>
+                                <p>Duration: {newCourseDuration} hours</p>
                                 <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
                                 <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p>
                             </CardText>

@@ -21,6 +21,7 @@
     "places.js": "^1.16.4",
     "react": "^16.9.0",
     "react-autocomplete": "^1.8.1",
+    "react-big-calendar": "^0.22.1",
     "react-burger-menu": "^2.6.11",
     "react-day-picker": "^7.3.2",
     "react-dom": "^16.9.0",

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Calendar from '@lls/react-light-calendar'
 import { Container,Row,Button,Col } from 'reactstrap';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
@@ -19,7 +18,7 @@ export default class CourseDetail extends React.Component{
       this.state = {
           comments: [],
           schedule: [],
-          firstDate: Date.now(),
+          firstDate: '2019, 8',
           loading: true
       };
     }
@@ -34,7 +33,7 @@ export default class CourseDetail extends React.Component{
         )
             this.setState({
                 schedule: response.data,
-                firstDate: moment.unix(response.data[0].date).format("YYYY, MM")
+                firstDate: moment.unix(response.data[0].date).format("YYYY, M")
             })
             console.log(this.state.firstDate)
         } catch (error) {
@@ -50,7 +49,6 @@ export default class CourseDetail extends React.Component{
                 }
             }
         )
-
             this.setState({
                 comments: response.data,
                 loading: false
@@ -60,9 +58,9 @@ export default class CourseDetail extends React.Component{
         }
     }
 
-    componentWillMount = async() => {
-        await this.getSchedule();
-        await this.getCommnts();
+    componentWillMount = () => {
+        this.getSchedule();
+        this.getCommnts();
       }
 
     addComment = async() => {
@@ -79,15 +77,17 @@ export default class CourseDetail extends React.Component{
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
         const courseDate = this.props.course.start_date;
-        let newCourseDate = moment(courseDate).format('Do MM, h:mm a');
+        let newCourseDate = moment.unix(courseDate).format('Do MM, h:mm a');
         let courseDuration = this.props.course.duration;
-        let newCourseDuration = moment.duration(courseDuration).days();
+        let newCourseDuration = moment.duration(courseDuration).hours();
         let date = new Date(courseDate);
         let startDate = date.getTime()
-        
+
         let scheduleList = this.state.schedule.map((item) => {
             return new Date(moment.unix(item.date).format("MM/DD/YYYY"))
         })
+
+        console.log(this.state.firstDate)
 
 
         let statuscolor;
@@ -172,15 +172,15 @@ export default class CourseDetail extends React.Component{
                     <h4 className="course-detail-h4">About:</h4>
                     <p className="main-text">{this.props.course.description}</p>
                     <p className="main-text cd-limit" ><span className="main-text-span">Limit of members: </span> {this.props.course.members_limit}</p>
-                    <p className="main-text">Duration: {newCourseDuration} days </p>
+                    <p className="main-text">Duration: {newCourseDuration} hours</p>
                     <p className="main-text"><span className="main-text-span">Category: </span><Link to="" style={{color:"#000"}}>{this.props.course.categories}</Link></p>
                 </Col>
                 <Col md="6" xs="12" className="course-detail-second-col" >
                     <DayPicker
-                        initialMonth = {new Date(this.state.firstDate)} 
+                        month = {new Date(this.state.firstDate)}
                         selectedDays={scheduleList}
                     />
-                    
+
                 </Col>
             </Row>
 

@@ -65,7 +65,7 @@ class Courses(models.Model):
     status = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     is_public = models.BooleanField()
-    start_date = models.DateTimeField(blank=False)
+    start_date = models.IntegerField(blank=False)
     duration = models.DurationField(blank=False)
     rate = models.IntegerField(default=DEFAULT_RATE)
     cost = models.IntegerField(default=DEFAULT_COST)

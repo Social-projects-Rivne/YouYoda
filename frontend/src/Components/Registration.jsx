@@ -53,7 +53,7 @@ class Registration extends React.Component{
             passwordValid = value.length >= 6;
             fieldValidationErrors.password = passwordValid ? '': ' is too short';
             var passwordValidSym = false;
-            passwordValidSym = value.match(/[0-9a-zA-Z!@#$%^&*]{6,}/g);
+            passwordValidSym = value.match(/[\w+!@#$%^&*]{6,}/g);
             if(!passwordValid && !passwordValidSym)
                 fieldValidationErrors.password += passwordValidSym ? '': ' and has not allowed symbols';
             else
@@ -245,6 +245,9 @@ class Registration extends React.Component{
                                 <input type="password" id="password" name="password" className="form-control"
                                        onChange = {(event) => {this.onChangeInputs(event)}}
                                        required/>
+                                <div id="anim">
+                                    <span className="tooltip-pass" data-tooltip="Password must be atleast 6 symbols and can contain !@#$%^&*">?</span>
+                                </div>
                             </div>
                             <div className={this.state.formErrors.confirmpass ? 'form-group is-error': 'form-group'}>
                                 <label htmlFor="confirmpass" className="mb-1">Confirm Password</label>
