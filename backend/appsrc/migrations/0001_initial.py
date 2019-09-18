@@ -105,37 +105,29 @@ def insertData(apps, schema_editor):
 
     CoursesSubscribers = apps.get_model('appsrc', 'CoursesSubscribers')
     CoursesSubscribers.objects.create(id=1, completed=False, rate=5, is_favourite=True,
-        course_id=1, participant_id=8)
+        course_id=1, participant_id=1)
     CoursesSubscribers.objects.create(id=2, completed=True, rate=2, is_favourite=True,
-        course_id=2, participant_id=8)
+        course_id=2, participant_id=1)
     CoursesSubscribers.objects.create(id=3, completed=False, rate=1, is_favourite=False,
-        course_id=3, participant_id=8)
+        course_id=3, participant_id=1)
     CoursesSubscribers.objects.create(id=4, completed=True, rate=6, is_favourite=True,
-        course_id=4, participant_id=8)
-    CoursesSubscribers.objects.create(id=5, completed=False, rate=7, is_favourite=True,
-        course_id=5, participant_id=8)
-    CoursesSubscribers.objects.create(id=6, completed=True, rate=8, is_favourite=True,
-        course_id=6, participant_id=8)
-    CoursesSubscribers.objects.create(id=7, completed=False, rate=9, is_favourite=True,
-        course_id=7, participant_id=8)
-    CoursesSubscribers.objects.create(id=8, completed=True, rate=3, is_favourite=False,
-        course_id=8, participant_id=8)
+        course_id=4, participant_id=1)
 
     EventsSubscribers = apps.get_model('appsrc', 'EventsSubscribers')
     EventsSubscribers.objects.create(
-        id=1, participant_id=8, event_id=1, completed=True
+        id=1, participant_id=1, event_id=1, completed=True
     )
     EventsSubscribers.objects.create(
-        id=2, participant_id=8, event_id=2, completed=False
+        id=2, participant_id=1, event_id=2, completed=False
     )
     EventsSubscribers.objects.create(
-        id=3, participant_id=8, event_id=3, completed=True
+        id=3, participant_id=1, event_id=3, completed=True
     )
     EventsSubscribers.objects.create(
-        id=4, participant_id=8, event_id=4, completed=False
+        id=4, participant_id=1, event_id=4, completed=False
     )
     EventsSubscribers.objects.create(
-        id=5, participant_id=8, event_id=5, completed=True
+        id=5, participant_id=1, event_id=5, completed=True
     )
 
     Achievements = apps.get_model('appsrc', 'Achievements')
@@ -163,25 +155,25 @@ def insertData(apps, schema_editor):
 
     UsersAchievements = apps.get_model('appsrc', 'UsersAchievements')
     UsersAchievements.objects.create(
-        id=1, participant_id=8, achievement_id=1
+        id=1, participant_id=1, achievement_id=1
     )
     UsersAchievements.objects.create(
-        id=2, participant_id=8, achievement_id=2
+        id=2, participant_id=1, achievement_id=2
     )
     UsersAchievements.objects.create(
-        id=3, participant_id=8, achievement_id=3
+        id=3, participant_id=1, achievement_id=3
     )
     UsersAchievements.objects.create(
-        id=4, participant_id=8, achievement_id=4
+        id=4, participant_id=1, achievement_id=4
     )
     UsersAchievements.objects.create(
-        id=5, participant_id=8, achievement_id=5
+        id=5, participant_id=1, achievement_id=5
     )
     UsersAchievements.objects.create(
-        id=6, participant_id=8, achievement_id=6
+        id=6, participant_id=1, achievement_id=6
     )
     UsersAchievements.objects.create(
-        id=7, participant_id=8, achievement_id=7
+        id=7, participant_id=1, achievement_id=7
     )
 
 

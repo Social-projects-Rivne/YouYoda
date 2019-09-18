@@ -6,6 +6,7 @@ import { css } from '@emotion/core';
 import { Resizable, ResizableBox } from 'react-resizable';
 import ClipLoader from 'react-spinners/ClipLoader';
 import classnames from 'classnames';
+
 import {ProfileContext} from './profile-context';
 import NoCoursesOrEvents from './NoCoursesOrEvents';
 import Cours from './cours'
@@ -22,13 +23,6 @@ const override = css`
 export default class ProfileInfo extends React.Component {
     constructor(props) {
       super(props);
-      this.backButton = (
-        <div onClick={this.handleChange}>
-          <img src={require("../img/content/left-arrow.png")}
-          alt="left-arrow" className="left-arrow back"/>
-          <div className="user-courses-profile back" href="#" style={{marginLeft:"5px"}}>Back to profile</div>
-        </div>
-      );
       this.state = {
          activeTab: '1',
          collapse: false,
@@ -86,6 +80,11 @@ export default class ProfileInfo extends React.Component {
 
     render() {
       const style = this.state.hideButton ? {display: 'none'} : {};
+      const backButton =  <div onClick={this.handleChange}>
+          <img src={require("../img/content/left-arrow.png")}
+          alt="left-arrow" className="left-arrow back"/>
+          <div className="user-courses-profile back" href="#" style={{marginLeft:"5px"}}>Back to profile</div>
+        </div>
       return (
         <div>
           <ProfileContext.Consumer>
@@ -120,7 +119,7 @@ export default class ProfileInfo extends React.Component {
                               className={classnames({ active: this.state.activeTab === '1' })} tab-link
                               onClick={() => { this.toggleTab('1'); this.handleChange()}}>
                               <div style={style}>
-                                {this.backButton}
+                                {backButton}
                               </div>
                             </NavLink>
                           </NavItem>
@@ -274,24 +273,27 @@ export default class ProfileInfo extends React.Component {
                   {profile.userFavouritesCourses.length ? (
                     <Cours coursesList={profile.userFavouritesCourses.slice(4, profile.userFavouritesCourses.length)} loading={profile.loading} lg={3}/>
                   ) : (
-                    <div></div>
+                    null
                   )}
                 </Row>
               </Collapse>
               <Row>
               <Col>
-                  <div>Achievemetns:</div>
+                  <div>Achievements:</div>
               </Col>
               <Col className="show-hide">
                 <a onClick={this.toggleAchievement} style={{cursor:"pointer"}}>{this.state.achievementToggleName}</a>
               </Col>
               </Row>
               <Row>
-                {!profile.loading ? (
-                  profile.userAchievements.slice(0, 6).map((item, i) => {
-                    return <Achievement achievement={item} id={i} />;
-                  })
+                {profile.userAchievements.slice(0, 6).map((item) => {
+                  return <Achievement achievement={item} />;
+                })}
+                {profile.userAchievements.length || profile.loading ? (
+                  null
                 ) : (
+                  <NoCoursesOrEvents message={'You have not got any achievements'} style={{marginTop:"0px"}}/>
+                )}
                   <ClipLoader
                     css={override}
                     sizeUnit={"px"}
@@ -299,13 +301,16 @@ export default class ProfileInfo extends React.Component {
                     color={'#123abc'}
                     loading={profile.loading}
                   />
-                )}
               </Row>
               <Collapse isOpen={this.state.achievementCollapse}>
                 <Row>
-                  {profile.userAchievements.slice(6, profile.userAchievements.length).map((item, i) => {
-                    return <Achievement achievement={item} id={i} />;
-                })}
+                  {profile.userFavouritesCourses.length ? (
+                    profile.userAchievements.slice(6, profile.userAchievements.length).map((item) => {
+                      return <Achievement achievement={item} />;
+                    })
+                  ):(
+                    null
+                  )}
                 </Row>
               </Collapse>
             </Container>
