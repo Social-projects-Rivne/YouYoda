@@ -18,7 +18,7 @@ export default class CourseDetail extends React.Component{
       this.state = {
           comments: [],
           schedule: [],
-          firstDate: '2019, 8',
+          firstDate: 1569936600,
           loading: true
       };
     }
@@ -33,7 +33,7 @@ export default class CourseDetail extends React.Component{
         )
             this.setState({
                 schedule: response.data,
-                firstDate: moment.unix(response.data[0].date).format("YYYY, M")
+                firstDate: response.data[0].date
             })
             console.log(this.state.firstDate)
         } catch (error) {
@@ -80,11 +80,9 @@ export default class CourseDetail extends React.Component{
         let newCourseDate = moment.unix(courseDate).format('Do MM, h:mm a');
         let courseDuration = this.props.course.duration;
         let newCourseDuration = moment.duration(courseDuration).hours();
-        let date = new Date(courseDate);
-        let startDate = date.getTime()
-
+        
         let scheduleList = this.state.schedule.map((item) => {
-            return new Date(moment.unix(item.date).format("MM/DD/YYYY"))
+            return new Date(moment.unix(item.date).format("MM, DD, YYYY"))
         })
 
         console.log(this.state.firstDate)
@@ -177,7 +175,7 @@ export default class CourseDetail extends React.Component{
                 </Col>
                 <Col md="6" xs="12" className="course-detail-second-col" >
                     <DayPicker
-                        month = {new Date(this.state.firstDate)}
+                        month = {new Date(moment.unix(this.state.firstDate))}
                         selectedDays={scheduleList}
                     />
 

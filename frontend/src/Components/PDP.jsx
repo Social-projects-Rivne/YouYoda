@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Container,Row,Button,Col } from 'reactstrap';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
+
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
@@ -12,7 +13,7 @@ import { API } from '../api/axiosConf';
 import { defaultPhoto, isAuthenticated } from '../utils';
 
 
-const localizer = Calendar.momentLocalizer(moment)
+const localizer = momentLocalizer(moment)
 const now = new Date()
 const events = [
   {
@@ -151,15 +152,14 @@ export default class Selectable extends React.Component{
   }
 
   render() {
-    const { localizer } = this.props
+    
     return (
       <>
-
         <Calendar
           selectable
           localizer={localizer}
           events={this.state.events}
-          defaultView={Views.WEEK}
+          defaultView={Views.MONTH}
           scrollToTime={new Date(1970, 1, 1, 6)}
           defaultDate={new Date(2015, 3, 12)}
           onSelectEvent={event => alert(event.title)}
