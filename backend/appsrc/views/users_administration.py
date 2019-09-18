@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 
 from ..models import YouYodaUser as User
+from ..models import UserStatuses
 from ..serializers.profile_view_serializer import ProfileViewSerializer
 from ..serializers.moderation_serializer import ManageUsersStatusesSerializer
 
@@ -51,11 +52,14 @@ class UpdateUsersStatuses(APIView):
 
     def patch(self, request):
         """ Post request to database """
-        users = request.data['users']
-        a = User.objects.get(id=users['id'][0])
-        serializer = ManageUsersStatusesSerializer(a, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
+        users = request.data
+        if users is not None:
+            for u, s in users.items():
+                user = User.objects.get(id=u)
+                serializer = ManageUsersStatusesSerializer(user, data={'status_id': s}, partial=True)
+                if serializer.is_valid():
+                    serializer.save()
+            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         

@@ -14,8 +14,9 @@ class UsersStatuses extends React.Component {
 
         this.state = {
             dataList: [],
-            ids: [],
-            status_ids: []
+            roles: {1: "User", 2: "Moderator", 3: "Admin"},
+            statuses: {1: "Active", 2: "Banned", 3: "Muted", 4: "Idle"},
+            selected: {}
         };
     }
 
@@ -29,28 +30,19 @@ class UsersStatuses extends React.Component {
     }
 
     handleChange=(sv, uv) => {
-        var ids = this.state.ids;
-        var status_ids = this.state.status_ids;
-
-        ids.push(uv);
-        status_ids.push(sv);
-
+        this.state.selected[uv] = sv;
+        /*
         this.setState({
             ids: ids,
             status_ids: status_ids
         });
-
-        document.getElementById(uv).textContent = sv;
-        toast.error('user_id: ' + uv + '; status_id: ' + sv);
+        */
+        document.getElementById(uv).textContent = this.state.statuses[sv];
+        toast.error('user_id: ' + uv + '; status_id: ' + this.state.statuses[sv]);
     }
 
     saveEditedData = async() => {
-        var userData = {
-            "users": {
-                "id": this.state.ids,
-                "status_id": this.state.status_ids
-            }
-        };
+        var userData = this.state.selected;
         var response = patchRequests(userData);
         response.then( valueResponse => {
             if(valueResponse === true)
@@ -66,37 +58,19 @@ class UsersStatuses extends React.Component {
         return (
             <tr id={`user_${user.id}`} key={user.id}>
                 <td>{user.id}</td>
-                <td>
-                {(() => {
-                    var roleId = user.role_id
-                    switch (roleId) {
-                      case 1: return "User(1)";
-                      case 2: return "Moderator(2)";
-                      case 3: return "Admin(3)";
-                    }
-                })()}
-                </td>
+                <td>{ this.state.roles[user.role_id] }</td>
                 <td>{user.email}</td>
                 <td align="center"><input type="checkbox" checked={user.is_active} /></td>
                 <td> 
                     <UncontrolledButtonDropdown>
                         <DropdownToggle id={user.id} tag="button" type="button" caret>
-                            {
-                                (() => {
-                                    var statusId = user.status_id
-                                    switch (statusId) {
-                                      case 1: return "Active";
-                                      case 2: return "Banned";
-                                      case 3: return "Muted";
-                                      case 4: return "Idle";
-                                    }
-                            })()}
+                        { this.state.statuses[user.status_id] }
                         </DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem onClick={ () => { this.handleChange("Active", user.id)}}>Active</DropdownItem>
-                            <DropdownItem onClick={ () => { this.handleChange("Banned", user.id)}}>Banned</DropdownItem>
-                            <DropdownItem onClick={ () => { this.handleChange("Muted", user.id)}}>Muted</DropdownItem>
-                            <DropdownItem onClick={ () => { this.handleChange("Idle", user.id)}}>Idle</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange(1, user.id)}}>Active</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange(2, user.id)}}>Banned</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange(3, user.id)}}>Muted</DropdownItem>
+                            <DropdownItem onClick={ () => { this.handleChange(4, user.id)}}>Idle</DropdownItem>
                         </DropdownMenu>
                     </UncontrolledButtonDropdown> 
                 </td>
