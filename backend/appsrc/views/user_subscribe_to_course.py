@@ -20,8 +20,8 @@ class UserSubscribeToCourse(APIView):
         data_course['participant'] = user.id
         data_course['course'] = course.id
         course_add = CoursesSubscribers.objects.filter(
-                            participant_id = data_course['participant'],
-                            course_id = data_course['course'])
+                            participant = data_course['participant'],
+                            course = data_course['course'])
 
         if course_add:
             msg = "You have already subscribed to this course!"

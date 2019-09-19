@@ -33,9 +33,19 @@ class ViewCoursesProfile(APIView):
     def get(self, request):
         """Receives and transmits user courses data"""
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
-        user_courses = Courses.objects.filter(subscribed_course__participant_id=user.id)
-        courses_serializer = UserCoursesSerializer(user_courses, many=True)
-        return Response(courses_serializer.data)
+        user_completed_courses = Courses.objects.filter(subscribed_course__participant_id=user.id).filter(subscribed_course__completed=True)
+        user_following_courses = Courses.objects.filter(subscribed_course__participant_id=user.id).filter(subscribed_course__completed=False)
+        user_favourites_courses = Courses.objects.filter(subscribed_course__participant_id=user.id).filter(subscribed_course__is_favourite=True)
+
+        completed_courses_serializer = UserCoursesSerializer(user_completed_courses, many=True)
+        following_courses_serializer = UserCoursesSerializer(user_following_courses, many=True)
+        favourites_courses_serializer = UserCoursesSerializer(user_favourites_courses, many=True)
+
+        response = {}
+        response['completed'] = completed_courses_serializer.data
+        response['following'] = following_courses_serializer.data
+        response['favourites'] = favourites_courses_serializer.data
+        return Response(response)
 
 
 class ViewEventsProfile(APIView):
@@ -46,9 +56,20 @@ class ViewEventsProfile(APIView):
     def get(self, request):
         """Receives and transmits user courses data"""
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
-        user_events = Events.objects.filter(subscribed_event__participant_id=user.id)
-        events_serializer = UserEventsSerializer(user_events, many=True)
-        return Response(events_serializer.data)
+        user_following_events = Events.objects.filter(subscribed_event__participant_id=user.id).filter(subscribed_event__completed=False)
+        user_completed_events = Events.objects.filter(subscribed_event__participant_id=user.id).filter(subscribed_event__completed=True)
+        user_created_events = Events.objects.filter(subscribed_event__participant_id=user.id).filter(owner_id=user.id)
+
+        following_events_serializer = UserEventsSerializer(user_following_events, many=True)
+        completed_events_serializer = UserEventsSerializer(user_completed_events, many=True)
+        created_events_serializer = UserEventsSerializer(user_created_events, many=True)
+
+        response = {}
+        response['completed'] = completed_events_serializer.data
+        response['following'] = following_events_serializer.data
+        response['created'] = created_events_serializer.data
+        
+        return Response(response)
 
 
 class ViewAchievementsProfile(APIView):

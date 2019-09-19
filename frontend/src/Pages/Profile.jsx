@@ -70,50 +70,19 @@ export default class Profile extends React.Component{
         let userCourses = await this.getCourses();
         let userEvents = await this.getEvents();
         let userAchievements = await this.getAchievements();
-        let userCompletedCourses = [];
-        let userFollowingCourses = [];
-        let userFavouritesCourses = [];
-        let userCompletedEvents = [];
-        let userFollowingEvents = [];
-        let userCreatedEvents = [];
-        if (typeof userData !== 'undefined') {
-          let userInfo = {}
-          Object.keys(userData).map(function (key) {
-              userInfo[key] = userData[key]
-          })
-          for(let course in userCourses)
-            for(let subscribed in userCourses[course].subscribed)
-            {
-              if(userCourses[course].subscribed[subscribed].completed)
-                userCompletedCourses.push(userCourses[course])
-              else
-                userFollowingCourses.push(userCourses[course])
-              if(userCourses[course].subscribed[subscribed].is_favourite)
-                userFavouritesCourses.push(userCourses[course])
-            }
-          for(let event in userEvents)
-            for(let subscribed in userEvents[event].subscribed)
-            {
-              if(userEvents[event].subscribed[subscribed].completed)
-                userCompletedEvents.push(userEvents[event])
-              else
-                userFollowingEvents.push(userEvents[event])
-              if(userEvents[event].owner == userData.first_name + ' ' + userData.last_name)
-                userCreatedEvents.push(userEvents[event])
-            }
+
         this.setState({
-          userInfo: userInfo,
-          userCompletedCourses: userCompletedCourses,
-          userFollowingCourses: userFollowingCourses,
-          userFavouritesCourses: userFavouritesCourses,
-          userCompletedEvents: userCompletedEvents,
-          userFollowingEvents: userFollowingEvents,
-          userCreatedEvents: userCreatedEvents,
+          userInfo: userData,
+          userCompletedCourses: userCourses['completed'],
+          userFollowingCourses: userCourses['following'],
+          userFavouritesCourses: userCourses['favourites'],
+          userCompletedEvents: userEvents['completed'],
+          userFollowingEvents: userEvents['following'],
+          userCreatedEvents: userEvents['created'],
           userAchievements: userAchievements,
           loading: false,
         })
       }
-    }
 
   render(){
       return(

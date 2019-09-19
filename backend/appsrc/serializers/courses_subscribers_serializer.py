@@ -17,8 +17,8 @@ class CoursesSubscribersSerializator(serializers.ModelSerializer):
 
 		def create(self, validated_data):
 			course_add = CoursesSubscribers.objects.create(
-					participant_id = validated_data['participant'],
-					course_id = validated_data['course'],
+					participant = validated_data['participant'],
+					course = validated_data['course'],
 					)
 			course_add.save()
 			return course_add
