@@ -24,6 +24,7 @@
 .admin-tables .comment-td input:read-only:focus {
   border: 0 none;
   background-color: transparent;
+  width: 100%;
 }
 .admin-tables .comment-td input:read-only:focus {
   outline: none;

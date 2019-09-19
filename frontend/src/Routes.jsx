@@ -8,10 +8,11 @@ import AdminPageInner from './Components/AdminPageInner';
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
-import Home from './Pages/Home';
-import HomeCourses from './Components/HomeCourses';
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
+import EventDetail from './Components/EventDetail';
+import Home from './Pages/Home';
+import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
 import ModeratorDashboard from './Components/ModeratorDashboard';
 import ModeratorPage from "./Pages/ModeratorPage";
@@ -20,6 +21,8 @@ import NotFoundPage from './Pages/NotFoundPage';
 import Profile from './Pages/Profile';
 import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
+import SearchingCourses from './Components/SearchingCourses';
+import SearchingEvents from './Components/SearchingEvents';
 
 
 export default class Routes extends React.Component{
@@ -52,10 +55,20 @@ export default class Routes extends React.Component{
                     render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
                 />
                 <Route exact path='/course/detail'
-                    render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
+                   render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
                 />
-                <Route exact path='/admin'
-                    render={()=><AdminPage><AdminDashboard/></AdminPage>}/>
+                <Route exact path="/courses/search"
+                    render={()=><MainLayout><SearchingCourses/></MainLayout>}
+                />
+                <Route exact path="/events/search"
+                    render={()=><MainLayout><SearchingEvents/></MainLayout>}
+                />
+                <Route exact path='/event/detail'
+                    render={(props)=><MainLayout><EventDetail event = {props.location.state.event}/></MainLayout>}
+                />
+               <Route exact path='/admin'
+                    render={()=><AdminPage><AdminDashboard/></AdminPage>}
+                />
                 <Route exact path={'/admin/:option'}
                     render={()=><AdminPage><AdminPageInner/></AdminPage>}/>
                 <Route exact path='/moderator'

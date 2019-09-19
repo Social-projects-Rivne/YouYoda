@@ -17,7 +17,7 @@ class Roles(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.id
+        return self.name
 
 class UserStatuses(models.Model):
     name = models.CharField(max_length=40)
@@ -64,7 +64,7 @@ class TrainerCertificates(models.Model):
 class Courses(models.Model):
     coursename = models.CharField(max_length=60)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10)
+    status = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     is_public = models.BooleanField()
     start_date = models.DateTimeField(blank=False)
@@ -79,9 +79,9 @@ class Courses(models.Model):
 class CoursesSubscribers(models.Model):
     participant = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
-    completed = models.BooleanField()
-    feedback = models.TextField()
-    rate = models.IntegerField()
+    completed = models.BooleanField(default=False)
+    feedback = models.TextField(blank=True, null=True)
+    rate = models.IntegerField(default=DEFAULT_RATE)
 
 class Achievements(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
@@ -100,3 +100,15 @@ class Events(models.Model):
 class EventsSubscribers(models.Model):
     participant = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
+
+class CoursesComments(models.Model):
+    author = models.ForeignKey(YouYodaUser, related_name='user_details', on_delete=models.CASCADE)
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(blank=True, null=True)
+
+class EventsComments(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    event = models.ForeignKey(Events, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(blank=True, null=True)

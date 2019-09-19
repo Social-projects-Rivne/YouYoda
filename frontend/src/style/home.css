@@ -108,16 +108,12 @@
     bottom: -25px;
 }
 
-
-
-
 /* Styles for HomeHeader */
 
 .header-img {
       height: 100vh;
       min-height: 510px;
       background-image: url("../img/static/headerimg.png");
-      /* background-image: url("../img/static/yodahome.png"); */
       background-color: #000;
       background-position: center;
       background-repeat: no-repeat;
@@ -178,7 +174,7 @@
 .header-block h1{
     margin-top: 95px;
     margin-bottom: 31px;
-    font-size: 48px;
+    font-size: 3rem;
     font-weight: 700;
     text-align: center;
 }
@@ -187,7 +183,7 @@
     margin-bottom: 130px;
 }
 .main-text {
-    font-size: 18px;
+    font-size: 1.2rem;
 }
 .secondary-header {
     font-weight: 700;
@@ -195,7 +191,7 @@
     margin-bottom: 30px;
 }
 .home-about img{
-    height: 130px;
+    max-width: 110px;
 }
 .home-about p{
     margin-bottom: 130px;
@@ -225,24 +221,48 @@
     left: -50px;
 }
 .sl-slide img{
+    width: 100%;
+    height: auto;
     margin: 0 auto;
+}
+.event-cover-photo {
+    max-width: 530px;
+    height: 350px;
+    overflow: hidden;
     display: flex;
-    align-items: center;
     justify-content: center;
+}
+.event-description {
+    max-height: 3.5rem;
+    overflow: hidden;
+    margin: 0 15px 15px 15px;
 }
 .sl-slide {
     text-align: center;
+}
+.event-modal-photo {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
 }
 
 .btn-join {
     background-color: #FFD466;
 }
 
+.btn-event-modal-cancel {
+    margin-right: 82px;
+}
+
 .main-text-event-modal {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 1.2rem;
     padding: 0;
     margin: 0;
+}
+
+#modal-event-content {
+    max-width: 750px;
 }
 
 /* Styles for HomeTrainers */
@@ -272,19 +292,30 @@
 .course-star-rating {
     font-size: 25px;
 }
+.home-course-star-rating{
+    font-size: 20px;
+    top:5px;
+}
+.home-rate {
+    position: relative;
+    top: -35px;
+    right: 5%;
+}
+.home-course .secondary-header {
+    margin-bottom: 0px;
+}
 
 /* Style for HomeCourses */
 .home-course {
     margin-bottom: 50px;
 }
-
+.courses-description {
+    max-height: 3.5rem;
+    overflow: hidden;
+}
 .btn-group-course-detail {
     margin-top: 100px;
     text-align: center;
-}
-
-.course-detail-second-col {
-    padding-left: 70px;
 }
 
 .header-course-detail {
@@ -294,6 +325,18 @@
 
 .main-text-span {
     color: grey;
+}
+.course-cover-photo{
+    max-width: 400px;
+    height: 266px;
+    overflow: hidden;
+}
+.course-cover-photo img {
+    /* width: 100%; */
+    height: 100%;
+}
+.home-rate .rate-small {
+    color: #4f4f4f;
 }
 
 /* Styles for HomeLastBlock */
@@ -473,7 +516,7 @@
   .more-courses-events button:hover .button-text {
     color: #fff;
   }
-  
+
   @supports (display: grid) {
     .more-courses-events body {
       display: grid;
@@ -481,11 +524,17 @@
       grid-gap: 0.625rem;
       grid-template-areas: ". main main ." ". main main .";
     }
-  
+
     .more-courses-events {
       grid-area: main;
       align-self: center;
       justify-self: center;
     }
   }
-  
+  .sign-in-header {
+      color: #fff;
+      display: flex;
+      font-size: 1.25rem;
+      float: right;
+      cursor: pointer;
+  }

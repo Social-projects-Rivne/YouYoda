@@ -4,8 +4,10 @@ import {Dropdown, DropdownToggle, DropdownMenu} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { isAuthenticated, isAdmin, isModerator } from '../utils';
+import { isAuthenticated, isAdmin, isModerator, defaultPhoto } from '../utils';
 import { logOut } from '../api/logOut';
+
+
 
 
 export class UserMenu extends React.Component{
@@ -41,21 +43,24 @@ export class UserMenu extends React.Component{
             }
     }
   render () {
-      const { redirect } = this.state;
-      if (redirect) {
-         return <Redirect to='/'/>;
-      }
-      let ManageDashboard;
-      if (isAdmin())
-          ManageDashboard = <Link to="/admin" className="dropdown-item">Admin Dashboard</Link>;
-      else if (isModerator())
-          ManageDashboard = <Link to="/moderator" className="dropdown-item">Moderator Dashboard</Link>;
+    let defimg = "/media/avatar.png";
+    let coverimg = defaultPhoto(defimg, localStorage.getItem("avatar_url"));
+
+    const { redirect } = this.state;
+    if (redirect) {
+       return <Redirect to='/'/>;
+    }
+    let ManageDashboard;
+    if (isAdmin())
+        ManageDashboard = <Link to="/admin" className="dropdown-item">Admin Dashboard</Link>;
+    else if (isModerator())
+        ManageDashboard = <Link to="/moderator" className="dropdown-item">Moderator Dashboard</Link>;
     return (
       <div className={`header-user-menu ${isAuthenticated("show")}`}>
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropdowntoggle}>
             <DropdownToggle className="dropdown-button">
-              <img src={require('../img/content/profile_photo.png')}
+              <img src={coverimg}
                       className="profile-photo-dropdown" alt="profile"/>
             </DropdownToggle>
             <DropdownMenu right>

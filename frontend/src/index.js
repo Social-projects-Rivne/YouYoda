@@ -7,18 +7,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-toastify/dist/ReactToastify.css';
+import '@lls/react-light-calendar/dist/index.css';
 import './api/notification';
 import './style/home.css';
-import './style/media.css';
 import './style/profile.css';
 import './style/forms.css';
 import './style/fillEditPage.css';
+import './style/events.css';
+import './style/filter.scss';
+import './style/course-event-detail.scss'
+import './style/media.css';
 import './index.css';
+
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey} from '@fortawesome/free-solid-svg-icons';
-library.add(fab, faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey);
-
+import { faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey, faUserTie, faFilter} from '@fortawesome/free-solid-svg-icons';
+library.add(fab, faSearch, faCoffee, fas, faCamera, faPaperPlane, faEnvelope, faKey, faUserTie, faFilter);
 
 ReactDOM.render(<Routes/>, document.getElementById('root'))
 

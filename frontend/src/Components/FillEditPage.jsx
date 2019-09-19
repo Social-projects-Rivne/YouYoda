@@ -4,7 +4,6 @@ import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
-import { editForm } from "../api/editForm";
 import LocationSearchInput from '../api/cityselector'
 import ChangePassword from "./ChangePassword";
 import ImageUpload from './ImageUploadComponent'
@@ -28,7 +27,6 @@ class FillEditPage extends React.Component {
             phone_number: '',
             avatar_url: '',
         };
-        this.handleClick = this.handleClick.bind(this)
     }
 
     toggle = () => {
@@ -37,13 +35,10 @@ class FillEditPage extends React.Component {
         }));
     };
 
-    async handleClick(event) {
-        await editForm(this.state);
-    }
-
     getUser = async () => {
         try {
-            const response = await API.get('user/profile/edit');
+            const response = await API.get('user/profile/edit')
+            localStorage.setItem('avatar_url', response.data.avatar_url)
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');

@@ -4,6 +4,8 @@ import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
     Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-scroll';
 import { UserMenu } from './UserMenu';
+import { isAuthenticated } from '../utils';
+
 
 
 export default class Header extends React.Component {
@@ -41,9 +43,9 @@ export default class Header extends React.Component {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/courses" className="nav-link" activeClass="active" to="home-course" spy={true} smooth={true} duration={500}>
-                        Courses
-                        </Link>
+                    <Link href="/events" className="nav-link" activeClass="active" to="home-event" spy={true} smooth={true} duration={500}>
+                    Events
+                    </Link>
                     </NavItem>
                     <NavItem>
                         <Link href="/trainers" className="nav-link" activeClass="active" to="home-trainer" spy={true} smooth={true} duration={500}>
@@ -51,9 +53,14 @@ export default class Header extends React.Component {
                         </Link>
                     </NavItem>
                     <NavItem>
-                        <Link href="/events" className="nav-link" activeClass="active" to="home-event" spy={true} smooth={true} duration={500}>
-                        Events
-                        </Link>
+                    <Link href="/courses" className="nav-link" activeClass="active" to="home-course" spy={true} smooth={true} duration={500}>
+                    Courses
+                    </Link>
+                    </NavItem>
+                    <NavItem className={isAuthenticated("hide")}>
+                        <i className="fas fa-sign-in-alt sign-in-header nav-link" 
+                            onClick={this.props.handleClickLogin}
+                            ></i>
                     </NavItem>
                 </Nav>
             </Collapse>
