@@ -83,7 +83,7 @@ class CoursesSubscribers(models.Model):
 
 class Achievements(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
-    image_url = models.CharField(max_length=80)
+    image_url = models.CharField(max_length=80, blank=False)
     name = models.CharField(max_length=20)
 
 class UsersAchievements(models.Model):
