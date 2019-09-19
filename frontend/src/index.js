@@ -18,6 +18,7 @@ import './style/events.css';
 import './style/filter.scss';
 import './style/animation.scss';
 import './style/course-event-detail.scss'
+import './style/pdp.scss'
 import './style/media.css';
 import './index.css';
 

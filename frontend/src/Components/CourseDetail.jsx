@@ -80,7 +80,7 @@ export default class CourseDetail extends React.Component{
         let newCourseDate = moment.unix(courseDate).format('Do MM, h:mm a');
         let courseDuration = this.props.course.duration;
         let newCourseDuration = moment.duration(courseDuration).hours();
-        
+
         let scheduleList = this.state.schedule.map((item) => {
             return new Date(moment.unix(item.date).format("MM, DD, YYYY"))
         })
@@ -89,9 +89,9 @@ export default class CourseDetail extends React.Component{
 
 
         let statuscolor;
-        if(this.props.course.status == "Open"){
+        if(this.props.course.status === "Open"){
             statuscolor = "#54DB63"
-        } else if (this.props.course.status == "Closed") {
+        } else if (this.props.course.status === "Closed") {
             statuscolor = "#FC5252"
         } else {
             statuscolor = "#ffce54"

@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 
 import { axiosGet } from '../api/axiosGet';
-import { isAuthenticated, defaultPhoto } from '../utils';
+import { defaultPhoto } from '../utils';
 import { toast } from 'react-toastify';
 
 
@@ -121,13 +121,13 @@ export default class HomeEvent extends React.Component{
                                     <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button className="btn-join" 
+                                    <Button className="btn-join"
                                             color="warning"
-                                            style={{marginRight:'33px'}} 
+                                            style={{marginRight:'33px'}}
                                             onClick={this.toggle}
                                             onClick={this.subscribeEvent}>Join
                                     </Button>
-                                    <Button color="secondary" 
+                                    <Button color="secondary"
                                             className='btn-event-modal-cancel'
                                             onClick={this.toggle}
                                     >Cancel</Button>
