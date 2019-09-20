@@ -4,19 +4,6 @@ from .user_serializer import UserSerializer
 from rest_framework import serializers
 
 
-class ManageUsersSerializer(serializers.Serializer):
-    users = UserSerializer(many=True)
-
-    def create(self, validated_data):
-        
-
-        return users_list
-
-    def update(self, instance, validated_data):
-        
-
-        return users_list
-
 class ManageUsersStatusesSerializer(serializers.Serializer):
     """
     Takes or updates data from the YouYodaUser model for change user role.

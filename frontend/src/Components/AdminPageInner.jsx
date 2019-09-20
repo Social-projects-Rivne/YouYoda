@@ -21,7 +21,7 @@ const PAGES = [
 export default class AdminPageInner extends React.Component {
     render() {
       return (
-          <div>
+          <div className="left-menu-id">
                 <Menu className="admin-left-menu">
                   {
                     PAGES.map(function(item){
@@ -31,7 +31,6 @@ export default class AdminPageInner extends React.Component {
                     })
                   }
                   </Menu>
-                
             <Container id="admin-dashboard">
                 <Row>
                     <Col md="10">
