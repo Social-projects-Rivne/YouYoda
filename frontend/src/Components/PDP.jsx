@@ -11,7 +11,8 @@ import DayPicker from 'react-day-picker';
 
 import { API } from '../api/axiosConf';
 import { defaultPhoto, isAuthenticated } from '../utils';
-
+import PdpTooltip from './PdpTooltip';
+import ToolTip from 'react-portal-tooltip'
 
 const localizer = momentLocalizer(moment)
 const now = new Date()
@@ -129,13 +130,46 @@ const events = [
 ]
 const propTypes = {}
 
-export default class Selectable extends React.Component{
-    constructor(...args) {
-    super(...args)
 
-    this.state = { events }
+export default class Selectable extends React.Component{
+    constructor(props) {
+    super(props)
+
+    this.state = { events,
+      tooltipToggle: false,
+      event: {id:''},
+      tooltip: {x: 0, y:0}
+    }
   }
 
+ 
+
+  onSelectEvents = (event ,e) => {
+    let tooltip = {x:e.clientX, y:e.clientY-40}
+    
+    this.setState({
+      event, 
+      tooltip,
+      tooltipToggle: true
+
+    })
+  
+               
+  }
+  hideTooltip = () => {
+    this.setState({
+      tooltipToggle: false
+
+    })
+  }
+  tooltipArrow = () => {
+    return (
+          <div>
+                        <p>{this.state.event.id}</p>
+                        <img src="image.png"/>
+                    </div>
+    )
+  }
   handleSelect = ({ start, end }) => {
     const title = window.prompt('New Event name')
     if (title)
@@ -152,9 +186,10 @@ export default class Selectable extends React.Component{
   }
 
   render() {
-
+    console.log(this.state.tooltipToggle)
+    let tooltip = this.state.tooltip
     return (
-      <>
+      <div className="pdp">
         <Calendar
             popup
             selectable
@@ -163,10 +198,23 @@ export default class Selectable extends React.Component{
             defaultView={Views.MONTH}
             scrollToTime={new Date(1970, 1, 1, 6)}
             defaultDate={new Date(2019, 3, 12)}
-            onSelectEvent={event => alert(event.title)}
+            tooltipAccessor={this.tooltipArrow}
+            onSelectEvent={(event, e) => {
+               
+              this.onSelectEvents(event, e)}}
             onSelectSlot={this.handleSelect}
         />
-      </>
+        <div id="tooltip-calendar" style={{position:'absolute', top:tooltip.y, left:tooltip.x}}>
+        <ToolTip active={this.state.tooltipToggle}  position="bottom" parent="#tooltip-calendar">
+                    
+                    <div onMouseLeave={this.hideTooltip}>
+                        <p>{this.state.event.id}</p>
+                        <img src="image.png"/>
+                    </div>
+                </ToolTip>
+          
+        </div>
+      </div>
     )
   }
 };
