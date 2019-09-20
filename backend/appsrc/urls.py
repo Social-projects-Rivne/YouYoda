@@ -12,8 +12,8 @@ from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
+from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
 from .views.user_subscribe_to_course import UserSubscribeToCourse
-from .views.view_profile import ViewProfile
 
 
 urlpatterns = [
@@ -27,6 +27,9 @@ urlpatterns = [
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),
+    path('user/profile/courses', ViewCoursesProfile.as_view(), name='user_courses'),
+    path('user/profile/events', ViewEventsProfile.as_view(), name='user_events'),
+    path('user/profile/achievements', ViewAchievementsProfile.as_view(), name='user_achievements'),
     path('user/login', UserLogin.as_view(), name='login'),
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/profile/change_avatar', FileUploadView.as_view(), name='change_avatar'),

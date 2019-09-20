@@ -143,12 +143,12 @@ export default class SearchingEvents extends React.Component{
                           </Row>
                           <Route
                               path='/events/search:page'
-                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading}/>}
+                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading} lg={3}/>}
                           />
                           <Route
                               exact
                               path='/events/search'
-                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading}/>}
+                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading} lg={3}/>}
                             />
                           <Row>
                               <Col style={{visibility:visibpag}}>
