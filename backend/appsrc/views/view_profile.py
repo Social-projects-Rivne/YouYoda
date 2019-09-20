@@ -68,7 +68,6 @@ class ViewEventsProfile(APIView):
         response['completed'] = completed_events_serializer.data
         response['following'] = following_events_serializer.data
         response['created'] = created_events_serializer.data
-
         return Response(response)
 
 
