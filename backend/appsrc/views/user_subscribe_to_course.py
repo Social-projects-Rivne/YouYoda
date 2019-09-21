@@ -38,7 +38,7 @@ class UserSubscribeToCourse(APIView):
         """Receives and transmits user course data"""
         auth_token = request.headers['Authorization'].replace('Token ', '')
         user = YouYodaUser.objects.get(auth_token=auth_token)
-        courses = CoursesSubscribers.objects.filter(participant_id = user.id)
+        courses = CoursesSubscribers.objects.filter(participant = user.id)
         serializer = CoursesSubscribersGetSerializator(courses, many=True)
         return Response(serializer.data)
 

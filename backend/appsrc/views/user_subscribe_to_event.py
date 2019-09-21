@@ -17,11 +17,11 @@ class UserSubscribeToEvent(APIView):
         auth_token = request.headers['Authorization'].replace('Token ', '')
         user = YouYodaUser.objects.get(auth_token=auth_token)
         event = Events.objects.get(id = data_event['event_id'])
-        data_event['participant_id'] = user.id
-        data_event['event_id'] = event.id
+        data_event['participant'] = user.id
+        data_event['event'] = event.id
         event_add = EventsSubscribers.objects.filter(
-                            participant_id = data_event['participant_id'], 
-                            event_id = data_event['event_id'])
+                            participant = data_event['participant'], 
+                            event = data_event['event'])
 
         if event_add:
             msg = "You have already subscribed to this event!"
@@ -38,7 +38,7 @@ class UserSubscribeToEvent(APIView):
         """Receives and transmits user event data"""
         auth_token = request.headers['Authorization'].replace('Token ', '')
         user = YouYodaUser.objects.get(auth_token=auth_token)
-        events = EventsSubscribers.objects.filter(participant_id = user.id)
+        events = EventsSubscribers.objects.filter(participant = user.id)
         serializer = EventsSubscribersGetSerializator(events, many=True)
         return Response(serializer.data)
 
