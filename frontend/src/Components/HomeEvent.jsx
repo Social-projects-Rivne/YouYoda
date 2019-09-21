@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import { Link } from 'react-router-dom';
 
 import { axiosGet } from '../api/axiosGet';
+import { API } from '../api/axiosConf';
 import { isAuthenticated, defaultPhoto } from '../utils';
 import { toast } from 'react-toastify';
 
@@ -35,12 +36,26 @@ export default class HomeEvent extends React.Component{
                 });
     }
 
+    addToEvent = async() => {
+        const URLPATH = 'user/event/add';
+        const USERDATA = { "event_id": this.state.event.id};
+        try {
+            const response = await API.post(URLPATH, USERDATA);
+            if(response.status === 208) 
+                toast.info(response.data);
+            if(response.status === 201)
+                toast.success('You subscribe to ' + this.state.event.name);
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     subscribeEvent = () => {
         if(localStorage.getItem('token') == null){
             toast.info('You must Sign Up or Sign In for subscribes event')
 
         } else {
-
+            this.addToEvent()
         }
     }
 
