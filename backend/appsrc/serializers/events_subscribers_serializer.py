@@ -15,8 +15,8 @@ class EventsSubscribersPostSerializator(serializers.ModelSerializer):
 
 		def create(self, validated_data):
 			event_add = EventsSubscribers.objects.create(
-					participant_id = validated_data['participant_id'],
-					event_id = validated_data['event_id'],
+					participant = validated_data['participant'],
+					event = validated_data['event'],
 					)
 			event_add.save()
 			return event_add
@@ -31,6 +31,6 @@ class EventsSubscribersGetSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = EventsSubscribers
 		depth = 1
-		fields = ('event_id',)
+		fields = ('event',)
 
 		

@@ -12,13 +12,13 @@ class CoursesSubscribersPostSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = CoursesSubscribers
 		fields = (
-			'participant_id', 'course_id'
+			'participant', 'course'
             )
 
 		def create(self, validated_data):
 			course_add = CoursesSubscribers.objects.create(
-					participant_id = validated_data['participant_id'],
-					course_id = validated_data['course_id'],
+					participant = validated_data['participant'],
+					course = validated_data['course'],
 					)
 			course_add.save()
 			return course_add
@@ -33,6 +33,6 @@ class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = CoursesSubscribers
 		depth = 1
-		fields = ('course_id',)
+		fields = ('course',)
 
 
