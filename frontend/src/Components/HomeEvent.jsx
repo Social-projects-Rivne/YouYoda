@@ -88,7 +88,7 @@ export default class HomeEvent extends React.Component{
        const event = this.state.event || this.state.eventsList[0];
        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
        const eventDate = event.date;
-       const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');
+       const newEventDate = moment.unix(eventDate).format('MMMM Do YYYY, h:mm a');
        let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
        let coverImg = defaultPhoto(defImg, event.cover_url);
 

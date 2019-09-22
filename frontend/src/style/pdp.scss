@@ -3,15 +3,83 @@
 }
 .rbc-event{
     background-color: #FFD466;
-    color: #000;
+    color: #fff;
+    border-radius: 10px;
 }
 .rbc-event.rbc-selected {
     background-color: #f7bc25;
 }
 .rbc-toolbar button {
     padding: 0.2rem;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 .rbc-calendar {
     width: 95%;
+}
+.pdp-tooltip {
+    background-position: center;
+    background-size: cover ;
+    background-repeat: no-repeat;
+    width: 400px;
+    height: 250px;
+    p {
+        padding-left: 15px;
+        height: 4rem;
+        font-size: 1.5rem;
+        background: linear-gradient(180deg, rgba(79,79,79,0.8) 0%, rgba(0,0,0,0) 100%);
+        color: #fff;
+        font-weight: 700;
+        button{
+            position: absolute;
+            right: 0;
+        }
+    }
+    div {
+        position: absolute;
+        bottom: 5px;
+        background-color: #4f4f4f;
+        width: 97.5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    span {
+        margin: 5px 10px;
+        color: #fff;
+        font-size: 1.25rem;
+    }
+    i {
+        margin-right: 10px;
+    }
+    button {
+        color: #fff;
+        margin: 5px 10px;
+    }
+
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+#pdp-own-event-desc {
+    border-radius: 20px;
 }

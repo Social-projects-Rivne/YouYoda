@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Container,Row,Button,Col } from 'reactstrap';
+import { Container, Row, Button,Col, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import { toast } from 'react-toastify';
 import DayPicker from 'react-day-picker';
@@ -13,209 +13,253 @@ import { API } from '../api/axiosConf';
 import { defaultPhoto, isAuthenticated } from '../utils';
 import PdpTooltip from './PdpTooltip';
 import ToolTip from 'react-portal-tooltip'
+import { axiosGet } from '../api/axiosGet';
 
 const localizer = momentLocalizer(moment)
-const now = new Date()
-const events = [
-  {
-    id: 0,
-    title: 'All Day Event very long title',
-    allDay: true,
-    start: new Date(2019, 3, 0),
-    end: new Date(2019, 3, 1),
-  },
-  {
-    id: 1,
-    title: 'Long Event',
-    start: new Date(2019, 3, 7, 2, 30),
-    end: new Date(2019, 3, 10, 14, 30),
-  },
 
-  {
-    id: 2,
-    title: 'DTS STARTS',
-    start: new Date(2019, 2, 13, 0, 0, 0),
-    end: new Date(2019, 2, 20, 0, 0, 0),
-  },
-
-  {
-    id: 3,
-    title: 'DTS ENDS',
-    start: new Date(2019, 10, 6, 0, 0, 0),
-    end: new Date(2019, 10, 13, 0, 0, 0),
-  },
-
-  {
-    id: 4,
-    title: 'Some Event',
-    start: new Date(2019, 3, 9, 0, 0, 0),
-    end: new Date(2019, 3, 10, 0, 0, 0),
-  },
-  {
-    id: 5,
-    title: 'Conference',
-    start: new Date(2019, 3, 11),
-    end: new Date(2019, 3, 13),
-    desc: 'Big conference for important people',
-  },
-  {
-    id: 6,
-    title: 'Meeting',
-    start: new Date(2019, 3, 12, 10, 30, 0, 0),
-    end: new Date(2019, 3, 12, 12, 30, 0, 0),
-    desc: 'Pre-meeting meeting, to prepare for the meeting',
-  },
-  {
-    id: 7,
-    title: 'Lunch',
-    start: new Date(2019, 3, 12, 12, 0, 0, 0),
-    end: new Date(2019, 3, 12, 13, 0, 0, 0),
-    desc: 'Power lunch',
-  },
-  {
-    id: 8,
-    title: 'Meeting',
-    start: new Date(2019, 3, 12, 14, 0, 0, 0),
-    end: new Date(2019, 3, 12, 15, 0, 0, 0),
-  },
-  {
-    id: 9,
-    title: 'Happy Hour',
-    start: new Date(2019, 3, 12, 17, 0, 0, 0),
-    end: new Date(2019, 3, 12, 17, 30, 0, 0),
-    desc: 'Most important meal of the day',
-  },
-  {
-    id: 10,
-    title: 'Dinner',
-    start: new Date(2019, 3, 12, 20, 0, 0, 0),
-    end: new Date(2019, 3, 12, 21, 0, 0, 0),
-  },
-  {
-    id: 11,
-    title: 'Birthday Party',
-    start: new Date(2019, 3, 13, 7, 0, 0),
-    end: new Date(2019, 3, 13, 10, 30, 0),
-  },
-  {
-    id: 12,
-    title: 'Late Night Event',
-    start: new Date(2019, 3, 17, 19, 30, 0),
-    end: new Date(2019, 3, 18, 2, 0, 0),
-  },
-  {
-    id: 12.5,
-    title: 'Late Same Night Event',
-    start: new Date(2019, 3, 17, 19, 30, 0),
-    end: new Date(2019, 3, 17, 23, 30, 0),
-  },
-  {
-    id: 13,
-    title: 'Multi-day Event',
-    start: new Date(2019, 3, 20, 19, 30, 0),
-    end: new Date(2019, 3, 22, 2, 0, 0),
-  },
-  {
-    id: 14,
-    title: 'Today',
-    start: new Date(new Date().setHours(new Date().getHours() - 3)),
-    end: new Date(new Date().setHours(new Date().getHours() + 3)),
-  },
-  {
-    id: 15,
-    title: 'Point in Time Event',
-    start: now,
-    end: now,
-  },
-]
 const propTypes = {}
 
 
-export default class Selectable extends React.Component{
+export default class PDP extends React.Component{
     constructor(props) {
     super(props)
 
-    this.state = { events,
+    this.state = {
       tooltipToggle: false,
+      redirect: false,
+      modal: false,
       event: {id:''},
-      tooltip: {x: 0, y:0}
+      tooltip: {x: 0, y:0},
+      mainEventsList: [],
+      yodaEventList: [],
+      yodaCourseList: [],
+      userEventList: [],
+      ownEventDesc: '',
+      title: '',
     }
   }
 
- 
-
   onSelectEvents = (event ,e) => {
     let tooltip = {x:e.clientX, y:e.clientY-40}
-    
     this.setState({
-      event, 
+      event,
       tooltip,
       tooltipToggle: true
-
     })
-  
-               
   }
+
   hideTooltip = () => {
     this.setState({
       tooltipToggle: false
-
     })
   }
-  tooltipArrow = () => {
-    return (
-          <div>
-                        <p>{this.state.event.id}</p>
-                        <img src="image.png"/>
-                    </div>
-    )
+  async componentWillMount() {
+      let listCourses = await axiosGet('courses/top')
+      let listEvents = await axiosGet('events/top')
+      await this.setState({
+          yodaCourseList: listCourses.map(
+              item => {
+                  item.title = item.coursename;
+                  item.start = moment.unix(item.start_date).toDate()
+                  item.end = moment.unix(item.start_date).add(
+                      moment.duration(item.duration).hours(), 'hours').toDate()
+                  item.type = '#FFD466'
+                  item.display = 'inline'
+                return item
+              }
+          ),
+          yodaEventList: listEvents.map(
+              item => {
+                  item.title = item.name;
+                  item.start = moment.unix(item.date).toDate()
+                  item.end = moment.unix(item.date).add(5, 'hours').toDate()
+                  item.type = '#80c5f6'
+                  item.display = 'inline'
+                      return item
+                  }
+              ),
+
+      })
+      this.setState({
+          mainEventsList: [
+              ...this.state.yodaEventList,
+              ...this.state.yodaCourseList,
+              ...this.state.userEventList
+          ]
+      })
   }
+
+
   handleSelect = ({ start, end }) => {
-    const title = window.prompt('New Event name')
+    const title = 'New Event name'
+    this.toggle()
+
     if (title)
       this.setState({
-        events: [
-          ...this.state.events,
-          {
-            start,
-            end,
-            title,
+        mainEventsList: [
+            ...this.state.mainEventsList,
+            {
+                start,
+                end,
+                title,
+                type: '#800080',
+                display: 'none'
+            },
+        ],
+        userEventList: [
+              ...this.state.userEventList,
+              {
+                start,
+                end,
+                title,
+                type: '#800080',
+                display: 'none'
           },
         ],
       })
   }
 
+  customEventStyle = (event) => {
+      return {style:{background: event.type}}
+  }
+
+  eventInformation = () => {
+     this.setState({ redirect: true });
+  };
+
+  toggle = () => {
+   this.setState(prevState => ({
+     modal: !prevState.modal
+   }));
+ }
+
+ handleCreateNote = (e) => {
+     let name = e.target.name;
+     let value = e.target.value;
+     this.setState({[name]: value},
+                     () => { this.validateField(name, value) }
+                 );
+ }
+
+
+
   render() {
-    console.log(this.state.tooltipToggle)
     let tooltip = this.state.tooltip
+    let defImg = "/media/event.png";
+    let coverImg = defaultPhoto(defImg, this.state.event.cover_url);
+    let start = moment.unix(this.state.event.start).format("H:mm a")
+    let end = moment.unix(this.state.event.end).format("H:mm a")
+    let { redirect } = this.state;
+    if (redirect) {
+       if( this.state.event.coursename ){
+            return <Redirect to={{
+                        pathname: '/course/detail',
+                        state: {course: this.state.event}}}
+                    />;
+        } else {
+            return <Redirect to={{
+                        pathname: '/event/detail',
+                        state: {event: this.state.event}}}
+                    />;
+        }
+    }
+
     return (
       <div className="pdp">
         <Calendar
             popup
             selectable
-            localizer={localizer}
-            events={this.state.events}
-            defaultView={Views.MONTH}
-            scrollToTime={new Date(1970, 1, 1, 6)}
-            defaultDate={new Date(2019, 3, 12)}
-            tooltipAccessor={this.tooltipArrow}
-            onSelectEvent={(event, e) => {
-               
-              this.onSelectEvents(event, e)}}
-            onSelectSlot={this.handleSelect}
+            localizer = {localizer}
+            events = {this.state.mainEventsList}
+            views={['month', 'week', 'day']}
+            eventPropGetter = {(event) => this.customEventStyle(event)}
+            defaultView = {Views.MONTH}
+            scrollToTime = {new Date(1970, 1, 1, 6)}
+            defaultDate = {new Date()}
+            onSelectEvent = {(event, e) => this.onSelectEvents(event, e)}
+            onSelectSlot = {this.handleSelect}
         />
-        <div id="tooltip-calendar" style={{position:'absolute', top:tooltip.y, left:tooltip.x}}>
-        <ToolTip active={this.state.tooltipToggle}  position="bottom" parent="#tooltip-calendar">
-                    
-                    <div onMouseLeave={this.hideTooltip}>
-                        <p>{this.state.event.id}</p>
-                        <img src="image.png"/>
+        <div
+            id="tooltip-calendar"
+            style={{position:'absolute', top:tooltip.y, left:tooltip.x}}
+        >
+        <ToolTip
+            active={this.state.tooltipToggle}
+            position="bottom"
+            parent="#tooltip-calendar"
+        >
+                    <div
+                        onMouseLeave={this.hideTooltip}
+                        className="pdp-tooltip"
+                        style={{backgroundImage:`url(${coverImg})`}}
+                    >
+                        <p>
+                            {this.state.event.title}
+                            <button
+                                className="btn btn-warning"
+                                style={{display:this.state.event.display}}
+                                onClick={() => this.eventInformation()}
+                            >Information</button>
+
+                        </p>
+                        <div>
+                            <button
+                                className="btn btn-danger"
+                                style={{display:this.state.event.display}}
+                            >Unsubscribe</button>
+                            <button
+                                className="btn btn-danger"
+                                style={{display: this.state.event.display === 'none' ? 'inline' : 'none' }}
+                            >Delete</button>
+                            <span>
+                                <i className="far fa-clock"></i>{start} - {end}
+                            </span>
+                        </div>
+
                     </div>
                 </ToolTip>
-          
+
         </div>
+        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+              <ModalHeader toggle={this.toggle}>Create new note</ModalHeader>
+              <ModalBody className="pdp-form">
+                <div className="form-group">
+                    <label for="pdp-own-event-title">Title of new note:</label>
+                    <input className="form-control"
+                            id="pdp-own-event-title"
+                            placeholder="Title"
+                            name="title"
+                            value={this.state.title}
+                            onChange = {this.handleCreateNote}
+							required
+                    />
+                </div>
+                <div className="form-group">
+                    <label for="pdp-own-event-desc">Short description:</label>
+                    <textarea className="form-control"
+                            id="pdp-own-event-desc"
+                            rows="3"
+                            name="ownEventDesc"
+                            value={this.state.ownEventDesc}
+                            onChange = {this.handleCreateNote}
+                    ></textarea>
+                </div>
+                <div className="upload-btn-wrapper">
+                    <button className="upload-btn" id="pdp-own-event-img" >Upload a image</button>
+                    <input type="file"
+                            name="myfile"
+
+                    />
+                </div>
+
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.toggle}>Create</Button>{' '}
+                <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+              </ModalFooter>
+        </Modal>
       </div>
     )
   }
 };
-Selectable.propTypes = propTypes
+PDP.propTypes = propTypes

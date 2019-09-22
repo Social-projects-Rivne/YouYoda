@@ -57,7 +57,7 @@ export default class EventDetail extends React.Component{
         let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
         let coverImg = defaultPhoto(defImg, this.props.event.cover_url);
         let eventDate = this.props.event.date;
-        let newEventDate = moment(eventDate).format('MM Do YY, h:mm a');
+        let newEventDate = moment.unix(eventDate).format('MMMM Do YYYY, h:mm a');
 
         return(
             <div className="home-event">

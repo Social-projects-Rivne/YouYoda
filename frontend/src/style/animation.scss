@@ -1,70 +1,71 @@
+
 $yellow: #FFD466;
 
 .tooltip-pass {
-  position: absolute;
-  right: 7%;
-  top: 33.5%;
-  background: $yellow;
-  padding: 5px 12px;
-  margin: 5px;
-  font-size: 15px;
-  border-radius: 100%;
-  color: #000;
+    position: absolute;
+    right: 7%;
+    top: 33.5%;
+    background: $yellow;
+    padding: 5px 12px;
+    margin: 5px;
+    font-size: 15px;
+    border-radius: 100%;
+    color: #000;
 
 }
 
 .tooltip-pass::before,
 .tooltip-pass::after {
-  position: absolute;
-  content: '';
-  opacity: 0;
-  transition: all 0.4s ease;
+    position: absolute;
+    content: '';
+    opacity: 0;
+    transition: all 0.4s ease;
 }
 
 .tooltip-pass::before {
-  border-width: 10px 8px 0 8px;
-  border-style: solid;
-  border-color: $yellow transparent transparent transparent;
-  top: -15px;
-   transform: translateY(20px);
+    border-width: 10px 8px 0 8px;
+    border-style: solid;
+    border-color: $yellow transparent transparent transparent;
+    top: -15px;
+    transform: translateY(20px);
 }
 
 .tooltip-pass::after {
-  content: attr(data-tooltip);
-  background: $yellow;
-  width: 160px;
-  height: auto;
-  font-size: 13px;
-  font-weight: 300;
-  top: -80px;
-  left: -10px;
-  padding: 10px;
-  border-radius: 5px;
-  letter-spacing: 1px;
-  transform: translateY(20px);
+    content: attr(data-tooltip);
+    background: $yellow;
+    width: 160px;
+    height: auto;
+    font-size: 13px;
+    font-weight: 300;
+    top: -80px;
+    left: -10px;
+    padding: 10px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    transform: translateY(20px);
 }
 
 .tooltip-pass:hover::before,
 .tooltip-pass:hover::after {
 
-  opacity: 1;
-  transform: translateY(-2px);
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 @keyframes shake {
-  0% {
-    transform: rotate(2deg);
-  }
-  50% {
-   transform: rotate(-3deg);
-  }
-  70% {
-    transform: rotate(3deg);
-  }
+    0% {
+        transform: rotate(2deg);
+    }
+    50% {
+        transform: rotate(-3deg);
+    }
+    70% {
+        transform: rotate(3deg);
+    }
 
-  100% {
-    transform: rotate(0deg);
-  }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 #anim:hover {

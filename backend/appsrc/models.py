@@ -91,7 +91,7 @@ class Events(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(blank=False)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    date = models.DateTimeField(blank=False)
+    date = models.IntegerField(blank=False)
     location = models.TextField(blank=False)
     cover_url = models.CharField(max_length=80)
 
