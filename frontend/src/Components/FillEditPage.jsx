@@ -37,8 +37,9 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            const response = await API.get('user/profile/edit')
-            localStorage.setItem('avatar_url', response.data.avatar_url)
+            const response = await API.get('user/profile/edit');
+            localStorage.setItem('avatar_url', response.data.avatar_url);
+            this.props.avatarIcoFunc(response.data.avatar_url); // send avatar ico to header of page
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');
@@ -47,7 +48,9 @@ class FillEditPage extends React.Component {
 
     postUser = async (formData) => {
         try {
-            const response = await API.patch('user/profile/edit', formData);
+            await API.patch('user/profile/edit', formData);
+            this.props.avatarIcoFunc(formData.avatar_url); // send avatar ico to header of page
+            setTimeout(window.location.reload(), 2000);
         } catch (error) {
             toast.error('You cannot update your profile. Contact administrator or support system.');
         }
@@ -66,7 +69,7 @@ class FillEditPage extends React.Component {
         payLoad.phone_number = this.state.phone_number;
         payLoad.avatar_url = this.state.avatar_url;
         payLoad.password = this.state.password;
-        await this.postUser(payLoad)
+        await this.postUser(payLoad);
         toast.success('Changes saved');
     };
 
@@ -75,7 +78,6 @@ class FillEditPage extends React.Component {
         let newState = {};
         newState[fieldName] = event.target.value;
         this.setState(newState);
-        console.log(event.target.value, event.target.value);
     };
 
     updateLocation = (location) => {
@@ -92,8 +94,8 @@ class FillEditPage extends React.Component {
         let mount_dict = {}
         Object.keys(this.state).map(function (key) {
             mount_dict[key] = userData[key]
-        })
-        this.setState(mount_dict)
+        });
+        this.setState(mount_dict);
     }
 
     becomeTrainer = async () => {
@@ -103,9 +105,9 @@ class FillEditPage extends React.Component {
         };
         try {
             const response = await API.post(URLPATH, USERDATA);
-            if(response.status == 208)
+            if(parseInt(response.status) === 208)
                 toast.info(response.data);
-            else if(response.status == 201)
+            else if(parseInt(response.status) === 201)
                 toast.success('Request was successfully sent. Please, wait for moderation results.');
             else
                 toast.error(response.data);
@@ -121,23 +123,22 @@ class FillEditPage extends React.Component {
 
 
     render() {
-        const {header, main} = this.props;
         return (
             <div className="">
                 <Container>
-                    <Form method="POST" className="form-group ">
+                    <Form method="POST" className="form-group">
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
                                 <h2 className="top-text">Personal details</h2>
-                                <button type='file' className='avatar-wrapper' onClick= {(event) => this.showUpload(event)}>
+                                <button type='file' className='avatar-wrapper' onClick={(event) => this.showUpload(event)}>
                                     <div className="edit-avatar">
-                                        <Avatar avatar_url ={this.state.avatar_url}/>
+                                        <Avatar avatar_url={this.state.avatar_url}/>
                                     </div>
                                 </button>
                                 <div>
                                     {this.state.showUploadForm && <ImageUpload updateUrl={this.updateAvatarUrl}/>}
                                 </div>
-                                <Label for="login" className="login">Login*</Label>
+                                <Label for="username">Login*</Label>
                                 <Input
                                     type="login"
                                     name="username"
@@ -146,7 +147,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.username}
                                 />
-                                <Label for="name" className="name">Name*</Label>
+                                <Label for="first_name">Name*</Label>
                                 <Input
                                     name="first_name"
                                     className="field-box"
@@ -154,7 +155,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.first_name}
                                 />
-                                <Label for="surname" className="surname">Surname*</Label>
+                                <Label for="last_name">Surname*</Label>
                                 <Input
                                     name="last_name"
                                     className="field-box"
@@ -168,7 +169,7 @@ class FillEditPage extends React.Component {
                                     name="email"
                                     required
                                     placeholder="example@email.com"
-                                    className="row-email"
+                                    className="field-box"
                                     value={this.state.email}
                                     onChange={(e) => this.updateField(e)}
                                 />

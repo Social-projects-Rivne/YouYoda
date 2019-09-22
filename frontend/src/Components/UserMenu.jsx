@@ -29,7 +29,7 @@ export class UserMenu extends React.Component{
             dropdownOpen: !prevState.dropdownOpen
         }));
     }
-    handleSubmitLogOut = async (event) => {
+    handleSubmitLogOut = async () => {
             try {
                 await logOut();
                 this.setState({ redirect: true });
@@ -57,7 +57,7 @@ export class UserMenu extends React.Component{
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropdowntoggle}>
             <DropdownToggle className="dropdown-button">
-              <img src={coverimg}
+              <img src={(typeof this.props.avatarIco !== 'undefined')?this.props.avatarIco:coverimg}
                       className="profile-photo-dropdown" alt="profile"/>
             </DropdownToggle>
             <DropdownMenu right>

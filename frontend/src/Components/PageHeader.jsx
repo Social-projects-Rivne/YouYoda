@@ -1,13 +1,12 @@
 import React from 'react';
 
-import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
+import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem,
     Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import LoginForm from '../Components/LoginForm';
 import Registration from '../Components/Registration';
 import { UserMenu } from './UserMenu';
 import { isAuthenticated } from '../utils';
-
 
 
 export default class Header extends React.Component {
@@ -80,13 +79,12 @@ export default class Header extends React.Component {
             </Collapse>
             </Navbar>
             </Col>
-            <UserMenu/>
+            <UserMenu avatarIcoFunc={this.props.avatarIcoFunc} avatarIco={this.props.avatarIco}/>
             </Row>
             </Container>
             </header>
                 <LoginForm handleClickLogin={this.handleClickLogin} handleClickReg={this.handleClickReg} isOpenL={this.state.isOpenL} />
                 <Registration handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin} isOpen={this.state.isOpen} />
-
             </div>
     );
   }

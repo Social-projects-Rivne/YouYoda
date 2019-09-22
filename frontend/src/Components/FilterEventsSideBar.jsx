@@ -32,7 +32,7 @@ export default class FilterEventsSideBar extends React.Component {
       this.props.sendCategoriesData(categories); 
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
         let path = '/categories/list'
         let listCategories = await axiosGet(path);
         this.setState({
@@ -42,7 +42,7 @@ export default class FilterEventsSideBar extends React.Component {
 
   renderCategories(category) {
       return (
-          <li >
+          <li key={category.id}>
               <CustomInput type="checkbox" id={category.name} label={category.name} value={category.id}
                            onClick={(event) => this.handleClickCategories(event)}
               />
@@ -53,12 +53,12 @@ export default class FilterEventsSideBar extends React.Component {
   render() {
       return (
           <Menu >
-              <a className="menu-item" href="#">
+              <span className="menu-item">
                   Category
                   <ul>
                       {this.state.categoriesList.map( category => this.renderCategories(category) )}
                   </ul>
-              </a>
+              </span>
           </Menu>
   );
 }

@@ -99,7 +99,7 @@ export default class FilterCoursesSideBar extends React.Component {
       this.props.sendCategoriesData(categories); 
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
         let path = '/categories/list'
         let listCategories = await axiosGet(path);
         this.setState({
@@ -119,14 +119,14 @@ export default class FilterCoursesSideBar extends React.Component {
 
   render() {
       return (
-          <Menu >
-              <a className="menu-item" href="#">
+          <Menu>
+              <span className="menu-item">
                   Category
                   <ul>
                       {this.state.categoriesList.map( category => this.renderCategories(category) )}
                   </ul>
-              </a>
-              <a className="menu-item" href="#">
+              </span>
+              <span className="menu-item">
                   Cost
                   <ul>
                       <li>
@@ -140,8 +140,8 @@ export default class FilterCoursesSideBar extends React.Component {
                           />
                       </li> 
                   </ul>
-              </a>
-              <a className="menu-item" href="#">
+              </span>
+              <span className="menu-item">
                   Status
                   <ul>
                       <li>
@@ -152,7 +152,7 @@ export default class FilterCoursesSideBar extends React.Component {
                       <li>
                           <CustomInput type="checkbox" id="closedCustomCheckbox" label="Closed" value="Closed" 
                                        onClick={(event) => this.handleClickStatus(event)}
-                          />                        
+                          />
                       </li> 
                       <li>
                           <CustomInput type="checkbox" id="inProgressCustomCheckbox" label="In Progress" value="In Progress" 
@@ -165,8 +165,8 @@ export default class FilterCoursesSideBar extends React.Component {
                           />
                       </li> 
                   </ul>
-              </a>
-              <a className="menu-item" href="#">
+              </span>
+              <span className="menu-item">
                   Rate
                   <ul>
                       <li>
@@ -185,7 +185,7 @@ export default class FilterCoursesSideBar extends React.Component {
                           />                         
                       </li>  
                   </ul>
-              </a>
+              </span>
           </Menu>
   );
 }
