@@ -3,9 +3,6 @@ import {API} from "../api/axiosConf";
 import {toast} from "react-toastify";
 
 export default class ImageUpload extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     uploadAvatar = async (url) => {
         await this.props.updateUrl(url);
@@ -16,10 +13,10 @@ export default class ImageUpload extends React.Component {
 
         try {
             data.append('file', this.state.file);
-            const response = await API.post('user/profile/change_avatar', data)
+            const response = await API.post('user/profile/change_avatar', data);
             this.props.updateUrl(response.data.avatar_url);
             this.uploadAvatar(response.data.avatar_url);
-            toast.success('Success');
+            toast.success('Success uploading. Now you can save changes by pressing button "Save all".');
         } catch (error) {
             toast.error('error \n choose avatar');
         }
@@ -35,7 +32,7 @@ export default class ImageUpload extends React.Component {
                 imagePreviewUrl: reader.result,
             });
         };
-        let url = reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
     };
 
     render() {

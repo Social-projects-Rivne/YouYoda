@@ -8,8 +8,6 @@ import { isAuthenticated, isAdmin, isModerator, defaultPhoto } from '../utils';
 import { logOut } from '../api/logOut';
 
 
-
-
 export class UserMenu extends React.Component{
     constructor(props) {
         super(props);
@@ -32,7 +30,6 @@ export class UserMenu extends React.Component{
         }));
     }
     handleSubmitLogOut = async (event) => {
-
             try {
                 await logOut();
                 this.setState({ redirect: true });
@@ -67,10 +64,10 @@ export class UserMenu extends React.Component{
                 {ManageDashboard}
                 <Link to="/profile" className="dropdown-item">View profile</Link>
                 <Link to="/editprofile" className="dropdown-item">User settings</Link>
-                <Link to="" className="dropdown-item">Create course</Link>
-                <Link to="" className="dropdown-item">Create event</Link>
-                <Link to="" className="dropdown-item">Help</Link>
-                 <a className="dropdown-item" onClick={this.handleSubmitLogOut}>Logout</a>
+                <Link to="/profile/create-course" className="dropdown-item">Create course</Link>
+                <Link to="/profile/create-event" className="dropdown-item">Create event</Link>
+                <Link to="/info" className="dropdown-item">Help</Link>
+                <span className="dropdown-item a-dropdown-item" onClick={this.handleSubmitLogOut}>Logout</span>
             </DropdownMenu>
         </Dropdown>
 

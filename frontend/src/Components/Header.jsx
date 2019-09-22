@@ -1,11 +1,10 @@
 import React from 'react';
 
-import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
+import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem,
     Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-scroll';
 import { UserMenu } from './UserMenu';
 import { isAuthenticated } from '../utils';
-
 
 
 export default class Header extends React.Component {

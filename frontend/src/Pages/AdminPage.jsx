@@ -27,14 +27,14 @@ export default class AdminPage extends React.Component{
         if(typeof response === 'object') {
             if(response.data_status === 'role' && response.role > 0) {
                 /** response correct - user is admin */
-                if(response.role == ROLE_ADMIN) {
+                if(parseInt(response.role) === ROLE_ADMIN) {
                     this.setState({
                         displayDashboard: 'block'
                     });    
                 }
                 else {
                     /** user is moderator or simple user */
-                    if(response.role == ROLE_MODERATOR)
+                    if(parseInt(response.role) === ROLE_MODERATOR)
                         urlRedirect = '/moderator';
                     this.setState({ 
                         redirect: true,

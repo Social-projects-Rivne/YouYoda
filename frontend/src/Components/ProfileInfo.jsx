@@ -37,10 +37,9 @@ export default class ProfileInfo extends React.Component {
                   <Col onClick={this.setRedirect} md="3" className="profile-photo-container">
                     <div>
                         <img src={defaultPhoto("/media/avatar.png", profile.userInfo.avatar_url)}
-                          className="profile-photo" alt="profile-photo"/>
+                          className="profile-photo" alt="profile-photoimg"/>
                         <div className="edit-label">
-                            {this.renderRedirect()}
-                            <a onClick={this.setRedirect} href="#">Edit</a>
+                            <a href="/editprofile">Edit profile</a>
                         </div>
                     </div>
                   </Col>
@@ -51,8 +50,7 @@ export default class ProfileInfo extends React.Component {
                             <h2 style={{paddingLeft:"5px"}}>{profile.userInfo.last_name}</h2>
                           </div>
                           <div>
-                            {this.renderRedirect()}
-                            <a onClick={this.setRedirect} href="#">
+                            <a href="/editprofile" title="Edit profile">
                               <img src={require('../img/static/edit_tool.svg')}
                                 className="edit-tool" alt="edit-tool"/>
                             </a>

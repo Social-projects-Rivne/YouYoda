@@ -1,9 +1,8 @@
 import React from 'react';
 
-import {Container, Row, Col, CardTitle, CardText, CardImg, Card, Collapse,
-  Nav, NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
+import {Container, Row, Col, Collapse,
+  NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
 import { css } from '@emotion/core';
-import { Resizable, ResizableBox } from 'react-resizable';
 import ClipLoader from 'react-spinners/ClipLoader';
 import classnames from 'classnames';
 
@@ -58,7 +57,7 @@ export default class ProfileInfo extends React.Component {
     }
 
     toggleTab = (tab) => {
-      if (this.state.activeTab != tab) {
+      if (this.state.activeTab !== tab) {
         this.setState({
           activeTab: tab,
           hideButton: false
@@ -89,8 +88,9 @@ export default class ProfileInfo extends React.Component {
         <div>
           <ProfileContext.Consumer>
             {(profile) => (
+            <div>
             <Container>
-              <Row>
+              <Row style={{minHeight: "525px"}}>
                 <Col md="2" xs="12">
                   <Row>
                     <Col>
@@ -114,18 +114,9 @@ export default class ProfileInfo extends React.Component {
                                 </div>
                             </NavLink>
                           </NavItem>
-                          <NavItem className="tab-item">
-                            <NavLink
-                              className={classnames({ active: this.state.activeTab === '1' })} tab-link
-                              onClick={() => { this.toggleTab('1'); this.handleChange()}}>
-                              <div style={style}>
-                                {backButton}
-                              </div>
-                            </NavLink>
-                          </NavItem>
                       </div>
                       <div className="event-and-courses">
-                        <div className="user-courses" style={{paddingTop:"100px"}}>Events</div>
+                        <div className="user-courses">Events</div>
                           <NavItem className="tab-item">
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '4' })} tab-link
@@ -161,18 +152,24 @@ export default class ProfileInfo extends React.Component {
                   <div className="vr-line"></div>
                 </Col>
                 <Col>
+                    <div className={classnames({ active: this.state.activeTab === '1' })} tab-link
+                      onClick={() => { this.toggleTab('1'); this.handleChange()}}>
+                      <div style={style}>
+                        {backButton}
+                      </div>
+                    </div>
+
                   <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                      <h6 className="main-info">Contact information</h6>
+                      <h6 className="main-info"><b>Contact information</b></h6>
                       <hr className="horz-line"/>
-                      <Row>
-                        <Col>
-                          <h6 className="contact-info">Phone:</h6>
-                          <h6 className="contact-info">Address:</h6>
-                          <h6 className="contact-info">E-mail:</h6>
-                        </Col>
-                        <Col>
-                          <h6 className="contact-info">{profile.userInfo.phone_number}</h6>
+                      <Row className="contact-info">
+                        <Col>Phone:</Col>
+                        <Col>{profile.userInfo.phone_number}</Col>
+                      </Row>
+                      <Row className="contact-info">
+                        <Col>Address:</Col>
+                        <Col>{profile.userInfo.location}
                           <div className='sweet-loading' style={{marginLeft:"-200px"}}>
                               <ClipLoader
                                 css={override}
@@ -182,21 +179,22 @@ export default class ProfileInfo extends React.Component {
                                 loading={profile.loading}
                               />
                           </div>
-                          <h6 className="contact-info">{profile.userInfo.location}</h6>
-                          <h6 className="contact-info">{profile.userInfo.email}</h6>
                         </Col>
                       </Row>
-                      <h6 className="main-info">Basic information</h6>
+                      <Row className="contact-info">
+                        <Col>E-mail:</Col>
+                        <Col>{profile.userInfo.email}</Col>
+                      </Row>
+                      <Row className="contact-info">&nbsp;</Row>
+                      <h6 className="main-info"><b>Basic information</b></h6>
                       <hr className="horz-line"/>
-                      <Row>
-                        <Col>
-                          <h6 className="contact-info">Birthday:</h6>
-                          <h6 className="contact-info">I like:</h6>
-                        </Col>
-                        <Col>
-                          <h6 className="contact-info">{profile.userInfo.birth_date}</h6>
-                          <h6 className="contact-info">{profile.userInfo.i_like}</h6>
-                        </Col>
+                      <Row className="contact-info">
+                        <Col>Birthday:</Col>
+                        <Col>{profile.userInfo.birth_date}</Col>
+                      </Row>
+                      <Row className="contact-info">
+                        <Col>I like:</Col>
+                        <Col>{profile.userInfo.i_like}</Col>
                       </Row>
                     </TabPane>
                     <TabPane tabId="2">
@@ -252,38 +250,40 @@ export default class ProfileInfo extends React.Component {
                   </TabContent>
                 </Col>
               </Row>
-              <Row>
-                <Col>
-                  <div style={{marginTop:"20px"}}>Favourite courses:</div>
-                </Col>
-                <Col className="show-hide" style={{marginTop:"20px"}}>
-                  <a onClick={this.toggle} style={{cursor:"pointer"}}>{this.state.toggleName}</a>
-                </Col>
-              </Row>
-              <Row>
-                <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3}/>
-                {profile.userFavouritesCourses.length || profile.loading ? (
-                  null
-                ) : (
-                  <NoCoursesOrEvents message={'You have not selected your favourite courses yet'} style={{marginTop:"0px"}}/>
-                )}
-              </Row>
-              <Collapse isOpen={this.state.collapse}>
+            </Container>
+            <div className="favorites-profile-block">
+              <Container>
                 <Row>
-                  {profile.userFavouritesCourses.length ? (
-                    <Cours coursesList={profile.userFavouritesCourses.slice(4, profile.userFavouritesCourses.length)} loading={profile.loading} lg={3}/>
-                  ) : (
+                  <Col className="profile-info-title">Favourite courses:</Col>
+                  <Col className="show-hide">
+                    <a onClick={this.toggle}>{this.state.toggleName}</a>
+                  </Col>
+                </Row>
+                <Row>
+                  <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3}/>
+                  {profile.userFavouritesCourses.length || profile.loading ? (
                     null
+                  ) : (
+                    <NoCoursesOrEvents message={'You have not selected your favourite courses yet'} style={{marginTop:"0px"}}/>
                   )}
                 </Row>
-              </Collapse>
+                <Collapse isOpen={this.state.collapse}>
+                  <Row>
+                    {profile.userFavouritesCourses.length ? (
+                      <Cours coursesList={profile.userFavouritesCourses.slice(4, profile.userFavouritesCourses.length)} loading={profile.loading} lg={3}/>
+                    ) : (
+                      null
+                    )}
+                  </Row>
+                </Collapse>
+              </Container>
+            </div>
+            <Container>
               <Row>
-              <Col>
-                  <div>Achievements:</div>
-              </Col>
-              <Col className="show-hide">
-                <a onClick={this.toggleAchievement} style={{cursor:"pointer"}}>{this.state.achievementToggleName}</a>
-              </Col>
+                <Col className="profile-info-title">Achievements:</Col>
+                <Col className="show-hide">
+                  <a onClick={this.toggleAchievement} style={{cursor:"pointer"}}>{this.state.achievementToggleName}</a>
+                </Col>
               </Row>
               <Row>
                 {profile.userAchievements.slice(0, 6).map((item) => {
@@ -314,6 +314,7 @@ export default class ProfileInfo extends React.Component {
                 </Row>
               </Collapse>
             </Container>
+            </div>
           )
         }
         </ProfileContext.Consumer>

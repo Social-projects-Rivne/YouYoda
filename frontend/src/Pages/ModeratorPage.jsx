@@ -26,7 +26,7 @@ export default class ModeratorPage extends React.Component{
         if(typeof response === 'object') {
             if(response.data_status === 'role' && response.role > 0) {
                 /** response correct - user is admin or moderator */
-                if(response.role == ROLE_ADMIN || response.role == ROLE_MODERATOR) {
+                if(parseInt(response.role) === ROLE_ADMIN || parseInt(response.role) === ROLE_MODERATOR) {
                     this.setState({
                         displayDashboard: 'block'
                     });    

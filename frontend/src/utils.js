@@ -18,20 +18,20 @@ export const isAuthenticated = (dosmth) => {
 }
 
 export const isAdmin = () => {
-    if (localStorage.getItem('role') == ROLE_ADMIN)
+    if (parseInt(localStorage.getItem('role')) === ROLE_ADMIN)
         return true;
     return false;
 }
 
 export const isModerator = () => {
-    if (localStorage.getItem('role') == ROLE_MODERATOR)
+    if (parseInt(localStorage.getItem('role')) === ROLE_MODERATOR)
         return true;
     return false;
 }
 
 export const defaultPhoto = (defurlphoto, coverurl) => {
     let urlphoto;
-    if(!coverurl || coverurl == "null"){
+    if(!coverurl || coverurl === "null"){
         urlphoto = HOSTNAME_PORT + defurlphoto;
     } else {
         urlphoto = HOSTNAME_PORT + coverurl
