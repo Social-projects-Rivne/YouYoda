@@ -13,10 +13,14 @@ export default class NotFoundPage extends React.Component{
             <>
             <PageHeader/>
             <div className="page-404">
-                <h1>404 Page Not Found</h1>
+                <h1>Occurred, a 404 Error Has...</h1>
+                <div>Yoda Doing Yoga, and Do You?</div>
                 <h2>
-                    <div className="dragon-div"><FontAwesomeIcon icon="dragon" size="10x"/></div>
-                    <Link to="/">Go to Home </Link>
+                    <div className="dragon-div">
+                        <img src={require('../img/static/yodayoga.jpg')}
+                            className="img404" alt="YouYoda 404 Page"/>
+                    </div>
+                    <Link to="/courses/search">Go To Search Courses</Link>
                 </h2>
             </div>
             <Footer/>

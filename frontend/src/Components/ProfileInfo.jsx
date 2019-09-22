@@ -29,7 +29,7 @@ export default class ProfileInfo extends React.Component {
 
     render() {
       return (
-        <div>
+        <div className="title-profile-block">
           <ProfileContext.Consumer>
             {profile => (
             <Container>
@@ -60,11 +60,6 @@ export default class ProfileInfo extends React.Component {
                         <h6>{profile.userInfo.about_me}</h6>
                       </div>
                   </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <hr className="hr-line"/>
-                </Col>
               </Row>
             </Container>
           )}

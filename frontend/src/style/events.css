@@ -108,18 +108,21 @@
 
 .bm-burger-button {
 	position: fixed;
-    width: 36px;
+	width: 36px;
 	height: 30px;
 	top: 107px;
-	left: 100px;
- }
+	left: 8%;
+}
 
 .bm-burger-button::after {
 	content: "\f0b0";
 	font-family: "FontAwesome"; 
 	font-weight: 900; 
 	font-size: 1.5rem;
-	color: #4f4f4f;					
+	color: #4f4f4f;
+	background-color: #fff;
+	padding: 8px;
+	border-radius: 12px;
 }
 
 .bm-cross-button {

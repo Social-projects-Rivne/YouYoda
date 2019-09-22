@@ -9,7 +9,7 @@ import { UserMenu } from './UserMenu';
 import { isAuthenticated } from '../utils';
 
 
-export default class Header extends React.Component {
+export default class PageHeader extends React.Component {
     constructor(props) {
         super(props);
 
@@ -48,7 +48,7 @@ export default class Header extends React.Component {
                             className="logo" alt="YouYoda"/>
                 </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
+            <Collapse isOpen={this.state.isOpenM} navbar>
                 <Nav className="ml-auto" navbar>
                     <NavItem>
                         <Link to="/about" className="nav-link" activeClass="active" >

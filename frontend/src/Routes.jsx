@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 
 import AdminDashboard from './Components/AdminDashboard';
@@ -12,7 +12,6 @@ import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
 import EventDetail from './Components/EventDetail';
 import Home from './Pages/Home';
-import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
 import ModeratorDashboard from './Components/ModeratorDashboard';
 import ModeratorPage from "./Pages/ModeratorPage";
@@ -34,8 +33,6 @@ export default class Routes extends React.Component{
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
-            <Route component={MainLayout}>
-            <Switch>
                 <Route exact path='/reset/password'
                     render={()=><MainLayout><ResetPassword/></MainLayout>}
                 />
@@ -76,9 +73,6 @@ export default class Routes extends React.Component{
                 <Route exact path={'/moderator/:option'}
                     render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
                 <Route path="*" component={NotFoundPage} />
-            </Switch>
-            </Route>
-            <Route path="*" component={NotFoundPage} />
         </Switch>
         </Router>
       </div>

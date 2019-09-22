@@ -151,6 +151,12 @@
   top: 30%;
   text-align: right;
   color: #fff;
+  transform: scale(1) rotate(0deg) translate(0%, 0px);
+  transition: .4s cubic-bezier(0.4, 0, 1, 1), width 1s, height 1s, transform 1s;
+}
+.header-img:hover .middle_bar {
+    transition: .4s cubic-bezier(0.4, 0, 1, 1), width 1s, height 1s, transform 1s;
+    transform: scale(1.4) rotate(360deg) translate(-10%, 10px);
 }
 .header-img .middle_bar p { font-size: 48px; }
 .header-img .middle_bar cite { font-size: 36px; }
@@ -425,19 +431,19 @@
 /* Styles for 404 page */
 .page-404 {
     text-align: center;
-    background-image: url("../img/static/patternfon.png");
-    background-position: center;
-    background-repeat: repeat;
+    background-color: #fff;
     padding-top: 25px;
     padding-bottom: 25px;
 }
-
 .page-404 .dragon-div {
-    margin: 5rem;
-    opacity: 0.6;
+    margin: 1rem;
+    opacity: 1;
 }
 .page-404 a {
     color: #343a40;
+}
+.img404 {
+    max-width: 100%;
 }
 
 /* Styles for button more */
