@@ -20,6 +20,7 @@ export default class SearchingEvents extends React.Component{
           eventList:[],
           categories__in: '',
           order_by: '-date',
+          name__icontains: '',
           loading: true
       };
     }
@@ -32,7 +33,7 @@ export default class SearchingEvents extends React.Component{
     getData = async() => {
         try {
           let response = await API.post('/events/search', {
-               name__icontains: '',
+               name__icontains: this.state.name__icontains,
                location__icontains: '',
                categories__in: this.state.categories__in,
                order_by: this.state.order_by
@@ -73,6 +74,14 @@ export default class SearchingEvents extends React.Component{
         await this.getData();
       }
 
+    handleSearchData = async (event) => {
+        const value = event.target.value;
+        await this.setState({
+            name__icontains: value,
+            curentpage: 1});
+        await this.getData();
+      }
+
     render(){
         const pages = []
         for(let i=1; i<=this.state.numberofpages; i++){
@@ -100,7 +109,12 @@ export default class SearchingEvents extends React.Component{
                       <Container>
                           <div id="wrap">
                               <form action="" autocomplete="on">
-                                  <input id="search" name="search" type="text" placeholder="What're you looking for?"/>
+                                  <input id="search" 
+                                         name="search" 
+                                         type="text" 
+                                         placeholder="What're you looking for?"
+                                         onChange = {(event) => {this.handleSearchData(event)}}
+                                  />
                                   <input id="search_submit" value="Rechercher" type="submit"/>
                               </form>
                           </div>
@@ -129,12 +143,12 @@ export default class SearchingEvents extends React.Component{
                           </Row>
                           <Route
                               path='/events/search:page'
-                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading}/>}
+                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading} lg={3}/>}
                           />
                           <Route
                               exact
                               path='/events/search'
-                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading}/>}
+                              render={() => <Event eventList={this.state.eventList} loading={this.state.loading} lg={3}/>}
                             />
                           <Row>
                               <Col style={{visibility:visibpag}}>
