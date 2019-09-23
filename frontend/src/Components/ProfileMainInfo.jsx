@@ -65,7 +65,7 @@ export default class ProfileInfo extends React.Component {
     }
 
     toggleTab = (tab) => {
-      if (this.state.activeTab !== tab) {
+      if (this.state.activeTab !== tab && tab !== '1') {
         this.setState({
           activeTab: tab,
           hideButton: false
@@ -79,7 +79,7 @@ export default class ProfileInfo extends React.Component {
       }
     }
 
-    handleChange = (event) => {
+    handleChange = () => {
         this.setState({
           hideButton: true,
         });
