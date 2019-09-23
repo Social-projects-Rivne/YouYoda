@@ -15,6 +15,7 @@ from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.view_profile import ViewProfile
 
+
 urlpatterns = [
     path('categories/list', CategoriesList.as_view(), name='categories-list'),
     path('courses/comments', CourseComments.as_view(), name='comments-courses'),

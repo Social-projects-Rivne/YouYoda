@@ -11,6 +11,7 @@ import CourseDetail from './Components/CourseDetail';
 import CreateEventPage from "./Pages/CreateEventPage";
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
+import HomeCourses from './Components/HomeCourses';
 import Home from './Pages/Home';
 import MainLayout from './Pages/MainLayout';
 import ModeratorDashboard from './Components/ModeratorDashboard';
