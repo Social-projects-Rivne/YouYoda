@@ -14,6 +14,7 @@ import { defaultPhoto, isAuthenticated } from '../utils';
 import PdpTooltip from './PdpTooltip';
 import ToolTip from 'react-portal-tooltip'
 import { axiosGet } from '../api/axiosGet';
+import { FormErrors } from '../api/FormError';
 
 const localizer = momentLocalizer(moment)
 
@@ -34,8 +35,15 @@ export default class PDP extends React.Component{
       yodaEventList: [],
       yodaCourseList: [],
       userEventList: [],
-      ownEventDesc: '',
       title: '',
+      ownEventDesc: '',
+      start:'',
+      end:'',
+      cover_url: '',
+      formErrors: {image: ''},
+      imageValid: false,
+      formValid: false,
+      img: ''
     }
   }
 
@@ -89,36 +97,34 @@ export default class PDP extends React.Component{
       })
   }
 
-
   handleSelect = ({ start, end }) => {
-    const title = 'New Event name'
-    this.toggle()
+      this.toggle()
+      this.setState({
+          start: start,
+          end: end
+      })
+  }
 
-    if (title)
+
+  handleSubmit = () => {
+    if (this.state.imageValid){
       this.setState({
         mainEventsList: [
             ...this.state.mainEventsList,
             {
-                start,
-                end,
-                title,
+                start: this.state.start,
+                end: this.state.end,
+                title: this.state.title,
+                ownEventDesc: this.state.ownEventDesc,
+                cover_url: this.state.cover_url,
                 type: '#800080',
                 display: 'none'
             },
         ],
-        userEventList: [
-              ...this.state.userEventList,
-              {
-                start,
-                end,
-                title,
-                type: '#800080',
-                display: 'none'
-          },
-        ],
       })
-  }
-
+    }
+    this.toggle()
+    }
   customEventStyle = (event) => {
       return {style:{background: event.type}}
   }
@@ -136,11 +142,39 @@ export default class PDP extends React.Component{
  handleCreateNote = (e) => {
      let name = e.target.name;
      let value = e.target.value;
-     this.setState({[name]: value},
-                     () => { this.validateField(name, value) }
-                 );
+     this.setState({[name]: value});
+ }
+ handleUploadImage = (e) => {
+     e.preventDefault();
+     let image = e.target.files[0];
+     let reader = new FileReader();
+     reader.onloadend = () => {
+         this.setState({
+             img: image,
+             imagePreviewUrl: reader.result,
+         }, () => { this.validateImage(image)}
+        );
+     };
+     let url = reader.readAsDataURL(image);
+     this.setState({cover_url: url});
+ };
+
+ validateImage(image) {
+       let fieldValidationErrors = this.state.formErrors;
+       let {imageValid, img} = this.state;
+       let imageSize = image.size / 1024 / 1024;
+
+       imageValid = imageSize < 1
+       fieldValidationErrors.image = imageValid ? '': 'Your cover image must be less then 1MB';
+
+       this.setState({formErrors: fieldValidationErrors,
+                     imageValid: imageValid,
+                     }, this.validateForm);
  }
 
+ validateForm() {
+   this.setState({formValid: this.state.imageValid});
+ }
 
 
   render() {
@@ -223,38 +257,43 @@ export default class PDP extends React.Component{
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
               <ModalHeader toggle={this.toggle}>Create new note</ModalHeader>
               <ModalBody className="pdp-form">
-                <div className="form-group">
-                    <label for="pdp-own-event-title">Title of new note:</label>
-                    <input className="form-control"
-                            id="pdp-own-event-title"
-                            placeholder="Title"
-                            name="title"
-                            value={this.state.title}
-                            onChange = {this.handleCreateNote}
-							required
-                    />
-                </div>
-                <div className="form-group">
-                    <label for="pdp-own-event-desc">Short description:</label>
-                    <textarea className="form-control"
-                            id="pdp-own-event-desc"
-                            rows="3"
-                            name="ownEventDesc"
-                            value={this.state.ownEventDesc}
-                            onChange = {this.handleCreateNote}
-                    ></textarea>
-                </div>
-                <div className="upload-btn-wrapper">
-                    <button className="upload-btn" id="pdp-own-event-img" >Upload a image</button>
-                    <input type="file"
-                            name="myfile"
-
-                    />
-                </div>
-
+                <form>
+                    <div className="form-group">
+                        <label for="pdp-own-event-title">Title of new note:</label>
+                        <input className="form-control"
+                                id="pdp-own-event-title"
+                                placeholder="Title"
+                                name="title"
+                                value={this.state.title}
+                                onChange = {this.handleCreateNote}
+    							required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label for="pdp-own-event-desc">Short description:</label>
+                        <textarea className="form-control"
+                                id="pdp-own-event-desc"
+                                rows="3"
+                                name="ownEventDesc"
+                                value={this.state.ownEventDesc}
+                                onChange = {this.handleCreateNote}
+                        ></textarea>
+                    </div>
+                    <div className="form-error">
+                         <FormErrors formErrors={this.state.formErrors} />
+                    </div>
+                    <div className="upload-btn-wrapper">
+                        <button className="upload-btn" id="pdp-own-event-img" >Upload a image</button>
+                        <input type="file"
+                                name="image"
+                                accept="image/*"
+                                onChange = {this.handleUploadImage}
+                        />
+                    </div>
+                </form>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onClick={this.toggle}>Create</Button>{' '}
+                <Button color="primary" onClick={this.handleSubmit}>Create</Button>{' '}
                 <Button color="secondary" onClick={this.toggle}>Cancel</Button>
               </ModalFooter>
         </Modal>

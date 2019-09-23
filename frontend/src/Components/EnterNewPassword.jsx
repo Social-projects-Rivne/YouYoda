@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {Container} from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import { Container } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
-import {axiosPost} from '../api/axiosPost';
-import {FormErrors} from '../api/FormError';
+import { axiosPost } from '../api/axiosPost';
+import { FormErrors } from '../api/FormError';
 import { toast } from 'react-toastify';
 
 
