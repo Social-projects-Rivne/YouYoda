@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
-from ..models import YouYodaUser, Courses, Categories
+from ..models import YouYodaUser, Courses, Categories, CoursesSubscribers
 from ..serializers.courses_serializer import CoursesSerializator
 from ..serializers.manage_course_serializer import ManageCourseSerializer
 
@@ -26,12 +26,13 @@ class ManageCourse(APIView):
     def patch(self, request):
         """Receives and updates course"""
         course_data = request.data
-        course = get_object_or_404(Courses, id=request.data.get('id'))
+        course = get_object_or_404(Courses, id=course_data['id'])
         category = Categories.objects.get(name=course_data['categories'])
-        trainer = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
         course_data['categories'] = category.id
-        course_data['owner'] = trainer.id
-        course_serializer = ManageCourseSerializer(course, data=request.data, partial=True)
+        course_serializer = ManageCourseSerializer(course, data=course_data, partial=True)
+
+        if course_data['status'] == 'Closed':
+            subscribers = CoursesSubscribers.objects.filter(course_id=course_data['id']).update(completed=True)
 
         if course_serializer.is_valid():
             course_serializer.save()
