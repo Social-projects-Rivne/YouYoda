@@ -2,9 +2,13 @@ import React from 'react'
 import {API} from "../api/axiosConf";
 import {toast} from "react-toastify";
 
+
 export default class ImageUpload extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            file: ''
+        }
     }
 
     uploadAvatar = async (url) => {
@@ -19,9 +23,8 @@ export default class ImageUpload extends React.Component {
             const response = await API.post('user/profile/change_avatar', data)
             this.props.updateUrl(response.data.avatar_url);
             this.uploadAvatar(response.data.avatar_url);
-            toast.success('Success');
         } catch (error) {
-            toast.error('error \n choose avatar');
+            toast.error('error \n you can`t choose this file');
         }
     };
 
@@ -42,10 +45,12 @@ export default class ImageUpload extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
-                    <input type="file" name="image-document" className="button-avatar-input" onChange={this.handleImageChange}/>
+                    <input type="file" accept="image/*" name="image-document" className="button-avatar-input"
+                           onChange={this.handleImageChange}/>
                     <button type="button" onClick={this.handleSubmit} className="button-avatar">Upload Image</button>
                 </form>
             </div>
         )
     }
 }
+

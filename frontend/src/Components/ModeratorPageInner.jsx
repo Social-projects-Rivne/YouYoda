@@ -4,23 +4,21 @@ import { Nav, NavItem, NavLink, Row, Col, Container } from 'reactstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import AdminLogs from './AdminLogs';
 import AdminRequests from './AdminRoleRequests';
 import AdminUsers from './AdminUsers';
 
 
 const PAGES = [
-  {option: 'users', name: "Manage users", title: "Users List", icon: <FontAwesomeIcon icon="users"/>},
-  {option: 'roles', name: "Role requests", title: "Roles", icon: <FontAwesomeIcon icon="user-graduate"/>},
-  {option: 'logs', name: "Log list", title: "Last Logs", icon: <FontAwesomeIcon icon="list-alt"/>}
+  {option: 'users', name: "Manage users", title: "Users List", icon: <FontAwesomeIcon icon="users"/> },
+  {option: 'roles', name: "Role requests", title: "Roles", icon: <FontAwesomeIcon icon="user-graduate"/>}
 ];
 
-export default class AdminPageInner extends React.Component {
+export default class ModeratorPageInner extends React.Component {
   render() {
       return (
-          <Container id="admin-dashboard">
+          <Container id="moderator-dashboard">
               <Row>
-                  <Col md="12"><h2>Admin Dashboard</h2></Col>
+                  <Col md="12"><h2>Moderator Dashboard</h2></Col>
               </Row>
               <Row>
                   <Col md="2">
@@ -28,7 +26,7 @@ export default class AdminPageInner extends React.Component {
                       {
                         PAGES.map(function(item){
                             return <NavItem className="menu-item" key={item.option}>
-                                      <NavLink href={`/admin/${item.option}`} title={item.title}>{item.icon} {item.name}</NavLink>
+                                      <NavLink href={`/moderator/${item.option}`} title={item.title}>{item.icon} {item.name}</NavLink>
                                    </NavItem>
                         })
                       }
@@ -36,9 +34,8 @@ export default class AdminPageInner extends React.Component {
                   </Col>
                   <Col md="10">
                       <Switch>
-                          <Route exact path='/admin/users' component={AdminUsers}/>
-                          <Route exact path='/admin/logs' component={AdminLogs}/>
-                          <Route exact path='/admin/roles' component={AdminRequests}/>
+                          <Route exact path='/moderator/users' component={AdminUsers}/>
+                          <Route exact path='/moderator/roles' component={AdminRequests}/>
                       </Switch>
                   </Col>
               </Row>

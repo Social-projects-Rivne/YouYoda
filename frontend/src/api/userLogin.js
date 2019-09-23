@@ -12,8 +12,6 @@ async function userLogin(props) {
     };
 }
 
-export { userLogin};
-
 async function userSocialLogin(props) {
     const { email, access_token, network_name } = props;
     try {
@@ -25,4 +23,5 @@ async function userSocialLogin(props) {
     }
 }
 
-export { userSocialLogin};
+export { userLogin, userSocialLogin };
+

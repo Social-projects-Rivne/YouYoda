@@ -9,13 +9,14 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
     """Takes or updates data from the Event model for organize events user profile.
     Converts it to JSON format for transmission via the API.
     """
+    category_name = serializers.StringRelatedField()
 
     class Meta:
         model = Events
 
         fields = (
             'categories', 'name', 'description', 'owner',
-            'date', 'location', 'cover_url'
+            'date', 'location', 'cover_url', 'category_name',
         )
 
     def create(self, validated_data):

@@ -19,6 +19,12 @@
     border-radius: 50%;
     width: 165px;
     height: 165px;
+    overflow: hidden;
+}
+
+.avatar img {
+    height: 100%;
+    min-width: 100%;
 }
 
 .city-country-2 input {

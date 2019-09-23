@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from "reactstrap/es/Button";
-import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
-import { toast } from 'react-toastify';
-import { API } from '../api/axiosConf';
+import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
+import {toast} from 'react-toastify';
+
+import {API} from '../api/axiosConf';
 import LocationSearchInput from '../api/cityselector'
 import ChangePassword from "./ChangePassword";
 import ImageUpload from './ImageUploadComponent'
@@ -36,7 +37,8 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            const response = await API.get('user/profile/edit');
+            const response = await API.get('user/profile/edit')
+            localStorage.setItem('avatar_url', response.data.avatar_url)
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');
@@ -46,26 +48,30 @@ class FillEditPage extends React.Component {
     postUser = async (formData) => {
         try {
             const response = await API.patch('user/profile/edit', formData);
+            toast.success('Profile updated')
         } catch (error) {
             toast.error('You cannot update your profile. Contact administrator or support system.');
         }
     };
 
     saveForm = async () => {
-        let payLoad = {};
-        payLoad.username = this.state.username;
-        payLoad.first_name = this.state.first_name;
-        payLoad.last_name = this.state.last_name;
-        payLoad.location = this.state.location;
-        payLoad.about_me = this.state.about_me;
-        payLoad.i_like = this.state.i_like;
-        payLoad.email = this.state.email;
-        payLoad.birth_date = this.state.birth_date;
-        payLoad.phone_number = this.state.phone_number;
-        payLoad.avatar_url = this.state.avatar_url;
-        payLoad.password = this.state.password;
-        await this.postUser(payLoad)
-        toast.success('Changes saved');
+        try {
+            let payLoad = {};
+            payLoad.username = this.state.username;
+            payLoad.first_name = this.state.first_name;
+            payLoad.last_name = this.state.last_name;
+            payLoad.location = this.state.location;
+            payLoad.about_me = this.state.about_me;
+            payLoad.i_like = this.state.i_like;
+            payLoad.email = this.state.email;
+            payLoad.birth_date = this.state.birth_date;
+            payLoad.phone_number = this.state.phone_number;
+            payLoad.avatar_url = this.state.avatar_url;
+            payLoad.password = this.state.password;
+            await this.postUser(payLoad)
+        } catch (error) {
+            toast.error('error')
+        }
     };
 
     updateField = (event) => {
@@ -73,7 +79,7 @@ class FillEditPage extends React.Component {
         let newState = {};
         newState[fieldName] = event.target.value;
         this.setState(newState);
-        console.log(event.target.value, event.target.value);
+        console.log(event.target.name, event.target.value);
     };
 
     updateLocation = (location) => {
@@ -95,21 +101,27 @@ class FillEditPage extends React.Component {
     }
 
     becomeTrainer = async () => {
-        let trainer = {};
-        trainer.is_trainer = true;
-        trainer.email = this.state.email;
+        const URLPATH = 'user/totrainer/sendrequest';
+        const USERDATA = {
+            "email": this.state.email
+        };
         try {
-            const response = await API.patch('user/totrainer', trainer);
+            const response = await API.post(URLPATH, USERDATA);
+            if (response.status == 208)
+                toast.info(response.data);
+            else if (response.status == 201)
+                toast.success('Request was successfully sent. Please, wait for moderation results.');
+            else
+                toast.error(response.data);
         } catch (error) {
             toast.error('You cannot be a trainer. Contact administrator or support system.');
         }
     };
 
-    showUpload = (event) =>{
+    showUpload = (event) => {
         event.preventDefault();
         this.setState({showUploadForm: !this.state.showUploadForm})
     };
-
 
     render() {
         const {header, main} = this.props;
@@ -120,15 +132,16 @@ class FillEditPage extends React.Component {
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
                                 <h2 className="top-text">Personal details</h2>
-                                <button type='file' className='avatar-wrapper' onClick= {(event) => this.showUpload(event)}>
+                                <button type='file' className='avatar-wrapper'
+                                        onClick={(event) => this.showUpload(event)}>
                                     <div className="edit-avatar">
-                                        <Avatar avatar_url ={this.state.avatar_url}/>
+                                        <Avatar avatar_url={this.state.avatar_url}/>
                                     </div>
                                 </button>
                                 <div>
                                     {this.state.showUploadForm && <ImageUpload updateUrl={this.updateAvatarUrl}/>}
                                 </div>
-                                <Label for="login" className="login">Login*</Label>
+                                <Label for="login" className="login">User Name*</Label>
                                 <Input
                                     type="login"
                                     name="username"
@@ -153,7 +166,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.last_name}
                                 />
-                                <Label>Your email*</Label>
+                                <Label>Your email</Label>
                                 <Input
                                     type="email"
                                     name="email"
@@ -161,7 +174,7 @@ class FillEditPage extends React.Component {
                                     placeholder="example@email.com"
                                     className="row-email"
                                     value={this.state.email}
-                                    onChange={(e) => this.updateField(e)}
+                                    disabled
                                 />
                                 <Row>
                                     <Col md={12}>
@@ -178,11 +191,9 @@ class FillEditPage extends React.Component {
                                 <h2 className="top-text-contact">Contacts</h2>
                                 <Label for="number">Mobile phone</Label>
                                 <Input
-                                    onSubmit={() => {
-                                        console.log("test")
-                                    }}
-                                    type="number"
+                                    type="tel"
                                     name="phone_number"
+                                    maxLength="13"
                                     required
                                     className="field-box"
                                     placeholder="(0__)-___-__-__"
@@ -217,7 +228,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.about_me}
                                 />
-                                <Label for="exampleDate" className="marg-top">Date of birth</Label>
+                                <Label className="marg-top">Date of birth</Label>
                                 <Input
                                     type="date"
                                     name="birth_date"
@@ -255,5 +266,6 @@ class FillEditPage extends React.Component {
         )
     }
 }
+
 
 export default FillEditPage;
