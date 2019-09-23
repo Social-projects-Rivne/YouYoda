@@ -1,16 +1,24 @@
 import React from 'react';
 
-import {Container, Row, Col, Collapse,
-  NavItem, NavLink, TabContent, TabPane} from 'reactstrap';
-import { css } from '@emotion/core';
-import ClipLoader from 'react-spinners/ClipLoader';
+import {
+  Col,
+  Collapse,
+  Container,
+  NavItem,
+  NavLink,
+  Row,
+  TabContent,
+  TabPane
+} from 'reactstrap';
 import classnames from 'classnames';
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/core';
 
-import {ProfileContext} from './profile-context';
+import { ProfileContext } from './profile-context';
 import NoCoursesOrEvents from './NoCoursesOrEvents';
-import Cours from './cours'
-import Event from './event'
-import Achievement from './Achievement'
+import Cours from './cours';
+import Event from './event';
+import Achievement from './Achievement';
 
 const override = css`
     display: block;
@@ -153,7 +161,7 @@ export default class ProfileInfo extends React.Component {
                 </Col>
                 <Col>
                     <div className={classnames({ active: this.state.activeTab === '1' })} tab-link
-                      onClick={() => { this.toggleTab('1'); this.handleChange()}}>
+                      onClick={() => { this.toggleTab('1') }}>
                       <div style={style}>
                         {backButton}
                       </div>
