@@ -13,7 +13,8 @@ from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
-from .views.view_profile import ViewProfile
+from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
+from .views.user_subscribe_to_course import UserSubscribeToCourse
 
 
 urlpatterns = [
@@ -27,6 +28,9 @@ urlpatterns = [
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),
+    path('user/profile/courses', ViewCoursesProfile.as_view(), name='user_courses'),
+    path('user/profile/events', ViewEventsProfile.as_view(), name='user_events'),
+    path('user/profile/achievements', ViewAchievementsProfile.as_view(), name='user_achievements'),
     path('user/login', UserLogin.as_view(), name='login'),
     path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/profile/change_avatar', FileUploadView.as_view(), name='change_avatar'),
@@ -37,6 +41,7 @@ urlpatterns = [
     path('user/social/login', UserSocialLogin.as_view(), name='social_login'),
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
+    path('user/course/add', UserSubscribeToCourse.as_view(), name='subscribe_course'),
     path('users/getlist', UsersGetList.as_view()),
     path('trainer/courses', ManageCourse.as_view(), name='manage_courses'),
 ]
