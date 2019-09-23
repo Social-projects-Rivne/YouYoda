@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Row, Button,Col, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Container, Row, Button,Col, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 
 import moment from 'moment';
@@ -41,9 +41,8 @@ export default class PDP extends React.Component{
       end:'',
       cover_url: '',
       formErrors: {image: ''},
-      imageValid: false,
+      imageValid: true,
       formValid: false,
-      img: ''
     }
   }
 
@@ -61,12 +60,15 @@ export default class PDP extends React.Component{
       tooltipToggle: false
     })
   }
+
   async componentWillMount() {
-      let listCourses = await axiosGet('courses/top')
-      let listEvents = await axiosGet('events/top')
-      await this.setState({
-          yodaCourseList: listCourses.map(
-              item => {
+    try{  
+        let listCourses = await axiosGet('courses/top')
+        let listEvents = await axiosGet('events/top')
+        /* let listNote = await axiosGet('note/list') */
+        await this.setState({
+            yodaCourseList: listCourses.map(
+                  item => {
                   item.title = item.coursename;
                   item.start = moment.unix(item.start_date).toDate()
                   item.end = moment.unix(item.start_date).add(
@@ -75,26 +77,39 @@ export default class PDP extends React.Component{
                   item.display = 'inline'
                 return item
               }
-          ),
-          yodaEventList: listEvents.map(
-              item => {
-                  item.title = item.name;
-                  item.start = moment.unix(item.date).toDate()
-                  item.end = moment.unix(item.date).add(5, 'hours').toDate()
-                  item.type = '#80c5f6'
-                  item.display = 'inline'
-                      return item
-                  }
-              ),
+            ),
+            yodaEventList: listEvents.map(
+                item => {
+                    item.title = item.name;
+                    item.start = moment.unix(item.date).toDate()
+                    item.end = moment.unix(item.date).add(5, 'hours').toDate()
+                    item.type = '#80c5f6'
+                    item.display = 'inline'
+                        return item
+                }
+            ),
+            /*userEventList: listNote.map(
+                item => {
+                    item.title = item.name;
+                    item.start = moment.unix(item.start).toDate()
+                    item.end = moment.unix(item.end).toDate()
+                    item.type = '#800080'
+                    item.display = 'none'
+                        return item
+                }
+            ),*/
 
-      })
-      this.setState({
-          mainEventsList: [
-              ...this.state.yodaEventList,
-              ...this.state.yodaCourseList,
-              ...this.state.userEventList
-          ]
-      })
+        })
+        this.setState({
+            mainEventsList: [
+                ...this.state.yodaEventList,
+                ...this.state.yodaCourseList,
+                ...this.state.userEventList
+            ]
+        })
+    } catch (error) {
+        toast.error(error.message + 'Please, сontact the administration for more information');
+    }
   }
 
   handleSelect = ({ start, end }) => {
@@ -105,10 +120,27 @@ export default class PDP extends React.Component{
       })
   }
 
-
-  handleSubmit = () => {
-    if (this.state.imageValid){
-      this.setState({
+  handleSubmit = async() => {
+    if (this.state.title){
+      
+        let data = new FormData();
+        try {
+            data.append('img', this.state.img);
+            let cover_img_url = await API.post('note/image/add', data)
+            let note_add = {
+                title: this.state,
+                ownEventDesc: this.state.title,
+                start: moment(this.state.start).unix(),
+                end: moment(this.state.end).unix(),
+                cover_url: cover_img_url.data,
+                status:'New'
+            }
+            await API.post('note/add', note_add)
+            toast.success('Success');
+        } catch (error) {
+            toast.error(error.message + 'Please, try later');
+        }
+        this.setState({
         mainEventsList: [
             ...this.state.mainEventsList,
             {
@@ -122,9 +154,10 @@ export default class PDP extends React.Component{
             },
         ],
       })
+      this.toggle()
     }
-    this.toggle()
-    }
+  }
+
   customEventStyle = (event) => {
       return {style:{background: event.type}}
   }
@@ -144,6 +177,7 @@ export default class PDP extends React.Component{
      let value = e.target.value;
      this.setState({[name]: value});
  }
+
  handleUploadImage = (e) => {
      e.preventDefault();
      let image = e.target.files[0];
@@ -151,7 +185,6 @@ export default class PDP extends React.Component{
      reader.onloadend = () => {
          this.setState({
              img: image,
-             imagePreviewUrl: reader.result,
          }, () => { this.validateImage(image)}
         );
      };
@@ -159,9 +192,9 @@ export default class PDP extends React.Component{
      this.setState({cover_url: url});
  };
 
- validateImage(image) {
+ validateImage = (image) => {
        let fieldValidationErrors = this.state.formErrors;
-       let {imageValid, img} = this.state;
+       let {imageValid} = this.state;
        let imageSize = image.size / 1024 / 1024;
 
        imageValid = imageSize < 1
@@ -172,10 +205,19 @@ export default class PDP extends React.Component{
                      }, this.validateForm);
  }
 
- validateForm() {
+ validateForm = () => {
    this.setState({formValid: this.state.imageValid});
  }
 
+ handleDeleteNote = async() => {
+    try {
+        await API.delete('', {
+            data:this.state.event
+        })
+    } catch (error) {
+        toast.error(error.message + 'Please, try later');
+    }
+ }
 
   render() {
     let tooltip = this.state.tooltip
@@ -197,7 +239,7 @@ export default class PDP extends React.Component{
                     />;
         }
     }
-
+    
     return (
       <div className="pdp">
         <Calendar
@@ -231,7 +273,7 @@ export default class PDP extends React.Component{
                             {this.state.event.title}
                             <button
                                 className="btn btn-warning"
-                                style={{display:this.state.event.display}}
+                                style={{display:this.state.event.display, color:'#fff'}}
                                 onClick={() => this.eventInformation()}
                             >Information</button>
 
@@ -239,11 +281,12 @@ export default class PDP extends React.Component{
                         <div>
                             <button
                                 className="btn btn-danger"
-                                style={{display:this.state.event.display}}
+                                style={{display:this.state.event.display, color:'#fff'}}
                             >Unsubscribe</button>
                             <button
                                 className="btn btn-danger"
-                                style={{display: this.state.event.display === 'none' ? 'inline' : 'none' }}
+                                style={{display: this.state.event.display === 'none' ? 'inline' : 'none', color:'#fff'}}
+                                onClick={() => this.handleDeleteNote()}
                             >Delete</button>
                             <span>
                                 <i className="far fa-clock"></i>{start} - {end}
@@ -259,10 +302,9 @@ export default class PDP extends React.Component{
               <ModalBody className="pdp-form">
                 <form>
                     <div className="form-group">
-                        <label for="pdp-own-event-title">Title of new note:</label>
-                        <input className="form-control"
+                        <label for="pdp-own-event-title">Title of new note <span style={{color:'red'}}>*</span> :</label>
+                        <Input className="form-control"
                                 id="pdp-own-event-title"
-                                placeholder="Title"
                                 name="title"
                                 value={this.state.title}
                                 onChange = {this.handleCreateNote}
@@ -293,7 +335,7 @@ export default class PDP extends React.Component{
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button color="primary" onClick={this.handleSubmit}>Create</Button>{' '}
+                <Button color="warning" onClick={this.handleSubmit} disabled={!this.state.imageValid}>Create</Button>{' '}
                 <Button color="secondary" onClick={this.toggle}>Cancel</Button>
               </ModalFooter>
         </Modal>
