@@ -12,7 +12,7 @@ class SubscribedSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = CoursesSubscribers
-        fields = ('completed', 'rate', 'is_favourite')
+        fields = ('completed', 'rate', 'is_favourite',)
 
 
 class UserCoursesSerializer(serializers.ModelSerializer):
@@ -28,4 +28,4 @@ class UserCoursesSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = Courses
-        exclude = ('id',)
+        fields = ("__all__")#exclude = ('id',)

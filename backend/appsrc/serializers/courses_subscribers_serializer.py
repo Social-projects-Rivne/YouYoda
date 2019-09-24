@@ -13,7 +13,7 @@ class CoursesSubscribersSerializator(serializers.ModelSerializer):
 		model = CoursesSubscribers
 		fields = (
 			'participant', 'course'
-            )
+		)
 
 		def create(self, validated_data):
 			course_add = CoursesSubscribers.objects.create(

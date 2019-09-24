@@ -199,7 +199,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        <Cours coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
+                        <Cours manage="True" coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
                         {profile.userFollowingCourses.length || profile.loading ? (
                           null
                         ) : (

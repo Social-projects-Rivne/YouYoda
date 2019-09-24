@@ -33,3 +33,22 @@ class UserSubscribeToCourse(APIView):
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserUnsubscribeCourse(APIView):
+    """Method for user unsubscription to courses"""
+
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def delete(self, request):
+        """Gets data from request, searches in database and deletes user subscribes to courses"""
+        auth_token = request.headers['Authorization'].replace('Token ', '')
+        user = YouYodaUser.objects.get(auth_token=auth_token)
+        course_delete = CoursesSubscribers.objects.filter(
+            participant = user.id,
+            course = int(request.GET['course']),
+        )
+        if course_delete:
+            course_delete.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

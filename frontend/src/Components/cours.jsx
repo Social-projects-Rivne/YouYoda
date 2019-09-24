@@ -5,9 +5,10 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom';
 
 import { defaultPhoto } from '../utils';
+import ManageButtons from './CoursManageButtons';
 
 
 const override = css`
@@ -46,8 +47,11 @@ export default class Cours extends React.Component{
         const newCourseDate = moment(courseDate).format('MMMM Do YYYY, h:mm:ss a');
         const courseDuration = course.duration;
         const newCourseDuration = moment.duration(courseDuration).days();
+        let classManage = (this.props.manage)? 'class-manage-course' : '';
+    console.log(course);    
         return (
             <Col sm="12" md="6" lg="4" xl={this.props.lg}>
+                <div className={`event-card-wrap ${classManage}`}>
                 <Link className="card-link" onClick={() => this.handleClick(course)} >
                     <Card className="event-card">
                         <CardHeader className="event-header">{newCourseDate}</CardHeader>
@@ -67,6 +71,8 @@ export default class Cours extends React.Component{
                         </CardFooter>
                     </Card>
                 </Link>
+                {(this.props.manage)? <ManageButtons course={course} /> : null}
+                </div>
             </Col>
         )
     }
