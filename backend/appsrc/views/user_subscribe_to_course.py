@@ -41,7 +41,7 @@ class UserSubscribeToCourse(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @method_decorator(cache_page(CACHE_TTL), name='subscribe_course')
+    # @method_decorator(cache_page(CACHE_TTL), name='subscribe-course')
     def get(self, request):
         """Receives and transmits user course data and schedule data"""
         auth_token = request.headers['Authorization'].replace('Token ', '')

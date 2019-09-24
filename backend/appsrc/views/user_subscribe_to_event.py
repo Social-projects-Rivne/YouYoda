@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
-# from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
@@ -22,7 +21,7 @@ class UserSubscribeToEvent(APIView):
     def post(self, request):
         """Push user, event to db with EventsSubscribersPostSerializator"""
         data_event=request.data
-        auth_token = request.headers['Authorization'].replace('Token ', '')
+        auth_token = request.headers['Authorization'][6:]
         user = YouYodaUser.objects.get(auth_token=auth_token)
         event = Events.objects.get(id = data_event['event_id'])
         data_event['participant'] = user.id
@@ -42,10 +41,10 @@ class UserSubscribeToEvent(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @method_decorator(cache_page(CACHE_TTL), name='subscribe_event')
+    # @method_decorator(cache_page(CACHE_TTL), name='subscribe-event-{}'.format(user.id))
     def get(self, request):
         """Receives and transmits user event data"""
-        auth_token = request.headers['Authorization'].replace('Token ', '')
+        auth_token = request.headers['Authorization'][6:]
         user = YouYodaUser.objects.get(auth_token=auth_token)
         events = EventsSubscribers.objects.filter(participant = user.id)
         serializer = EventsSubscribersGetSerializator(events, many=True)
