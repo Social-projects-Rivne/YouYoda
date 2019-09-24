@@ -27,12 +27,12 @@ class CoursesSubscribersPostSerializator(serializers.ModelSerializer):
 class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
 	"""Takes data about courses from CoursesSubscribers, Courses.
 
-    Converts it to JSON format for transmission via the API.
-    """
+	Converts it to JSON format for transmission via the API.
+	"""
 
 	class Meta:
+
 		model = CoursesSubscribers
-		depth = 1
 		fields = ('course',)
 
 
