@@ -4,10 +4,10 @@ import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
-import LocationSearchInput from '../api/cityselector'
+import LocationSearchInput from '../api/cityselector';
 import ChangePassword from "./ChangePassword";
-import ImageUpload from './ImageUploadComponent'
-import Avatar from './Avatar'
+import ImageUpload from './ImageUploadComponent';
+import Avatar from './Avatar';
 
 
 class FillEditPage extends React.Component {
@@ -142,31 +142,35 @@ class FillEditPage extends React.Component {
                                 <Input
                                     type="login"
                                     name="username"
+                                    id="username"
                                     className="field-box"
                                     required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.username}
                                 />
-                                <Label for="first_name">Name*</Label>
+                                <Label for="firstname">Name*</Label>
                                 <Input
                                     name="first_name"
+                                    id="firstname"
                                     className="field-box"
                                     required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.first_name}
                                 />
-                                <Label for="last_name">Surname*</Label>
+                                <Label for="lastname">Surname*</Label>
                                 <Input
                                     name="last_name"
+                                    id="lastname"
                                     className="field-box"
                                     required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.last_name}
                                 />
-                                <Label>Your email*</Label>
+                                <Label for="email">Your email*</Label>
                                 <Input
                                     type="email"
                                     name="email"
+                                    id="email"
                                     required
                                     placeholder="example@email.com"
                                     className="field-box"
@@ -186,13 +190,14 @@ class FillEditPage extends React.Component {
                                     </Col>
                                 </Row>
                                 <h2 className="top-text-contact">Contacts</h2>
-                                <Label for="number">Mobile phone</Label>
+                                <Label for="phonenumber">Mobile phone</Label>
                                 <Input
                                     onSubmit={() => {
                                         console.log("test")
                                     }}
                                     type="number"
                                     name="phone_number"
+                                    id="phonenumber"
                                     required
                                     className="field-box"
                                     placeholder="(0__)-___-__-__"
@@ -211,26 +216,29 @@ class FillEditPage extends React.Component {
 
                             <Col md="6" sm="12" className="top-text-2 fill-edit-collumn">
                                 <h2>About me</h2>
-                                <Label className="marg-top">I like</Label>
+                                <Label for="ilike" className="marg-top">I like</Label>
                                 <Input
                                     type="textarea"
                                     name="i_like"
+                                    id="ilike"
                                     className="loginInputTextArea"
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.i_like}
                                 />
-                                <Label className="marg-top">Something about me</Label>
+                                <Label for="aboutme" className="marg-top">Something about me</Label>
                                 <Input
                                     type="textarea"
                                     name="about_me"
+                                    id="aboutme"
                                     className="loginInputTextArea-2"
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.about_me}
                                 />
-                                <Label for="exampleDate" className="marg-top">Date of birth</Label>
+                                <Label for="birthdate" className="marg-top">Date of birth</Label>
                                 <Input
                                     type="date"
                                     name="birth_date"
+                                    id="birthdate"
                                     className="field-box"
                                     placeholder="date placeholder"
                                     onChange={(e) => this.updateField(e)}

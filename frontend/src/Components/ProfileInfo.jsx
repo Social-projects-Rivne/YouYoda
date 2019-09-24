@@ -1,32 +1,12 @@
 import React from 'react';
 
 import {Container, Row, Col} from 'reactstrap';
-import {Redirect} from 'react-router-dom'
 
 import { DEFAULT_AVATAR_URL, defaultPhoto } from '../utils';
 import {ProfileContext} from './profile-context';
 
 
 export default class ProfileInfo extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        redirect: false,
-      };
-    }
-
-    setRedirect = () => {
-      this.setState({
-        redirect: true
-      })
-    }
-
-    renderRedirect = () => {
-      if (this.state.redirect) {
-        return <Redirect to='/editprofile' />
-      }
-    }
-
     render() {
       return (
         <div className="title-profile-block">
@@ -34,7 +14,7 @@ export default class ProfileInfo extends React.Component {
             {profile => (
             <Container>
               <Row>
-                  <Col onClick={this.setRedirect} md="3" className="profile-photo-container">
+                  <Col md="3" className="profile-photo-container">
                     <div>
                         <img src={defaultPhoto(DEFAULT_AVATAR_URL, profile.userInfo.avatar_url)}
                           className="profile-photo" alt="profile-photoimg"/>
