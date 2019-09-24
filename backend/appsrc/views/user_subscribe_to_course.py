@@ -1,10 +1,17 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
-from ..models import CoursesSubscribers, YouYodaUser, Courses
-from ..serializers.courses_subscribers_serializer import CoursesSubscribersPostSerializator, CoursesSubscribersGetSerializator
+from ..models import CoursesSubscribers, YouYodaUser, Courses, CourseSchedule
+from ..serializers.courses_subscribers_serializer import CoursesSubscribersPostSerializator
+from ..serializers.courses_serializer import CourseScheduleSerializer
 
+
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 class UserSubscribeToCourse(APIView):
     """Takes data from CoursesSubscribersPostSerializator for add user to course"""
@@ -34,11 +41,15 @@ class UserSubscribeToCourse(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @method_decorator(cache_page(CACHE_TTL), name='subscribe_course')
     def get(self, request):
-        """Receives and transmits user course data"""
+        """Receives and transmits user course data and schedule data"""
         auth_token = request.headers['Authorization'].replace('Token ', '')
         user = YouYodaUser.objects.get(auth_token=auth_token)
-        courses = CoursesSubscribers.objects.filter(participant = user.id)
-        serializer = CoursesSubscribersGetSerializator(courses, many=True)
+        user_courses = CoursesSubscribers.objects.filter(participant = user.id)
+        schedule_courses = CourseSchedule.objects.filter(course__id__in=user_courses).order_by('date')
+        serializer = CourseScheduleSerializer(schedule_courses, many=True)
+
         return Response(serializer.data)
 
+        

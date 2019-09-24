@@ -62,3 +62,17 @@ class SearchingCourses(APIView):
             "data":curent_page
         }
         return Response(response_data)
+
+
+class CourseScheduleView(APIView):
+    """Takes data from CoursesTopSerializator for view top rate courses"""
+
+    permission_classes = [permissions.AllowAny,]
+
+    @method_decorator(cache_page(CACHE_TTL), name='course_schedule')
+    def get(self, request):
+        """First check request data in cache, then pull data from db"""
+        course_id = request.query_params.get('course_id')
+        course_schedule = CourseSchedule.objects.filter(course = course_id).order_by('date')
+        serializer = CourseScheduleSerializer(course_schedule, many=True)
+        return Response(serializer.data)
