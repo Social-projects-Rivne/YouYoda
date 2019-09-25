@@ -119,10 +119,10 @@ class EventsComments(models.Model):
 class PDPNotes(models.Model):
     author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     title = models.CharField(max_length=60)
-    description = models.TextField(blank=False)
+    description = models.TextField(blank=True, null=True)
     start = models.IntegerField(blank=False)
     end = models.IntegerField(blank=False)
-    cover_url = models.CharField(max_length=80)
+    cover_url = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50)
 
 class CourseSchedule(models.Model):

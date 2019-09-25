@@ -504,22 +504,19 @@ class Migration(migrations.Migration):
                 ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='course_schedule', to='appsrc.Courses')),
             ],
         ),
-<<<<<<< HEAD
         migrations.CreateModel(
             name='PDPNotes',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=60)),
-                ('description', models.TextField()),
+                ('description', models.TextField(blank=True, null=True)),
                 ('start', models.IntegerField()),
                 ('end', models.IntegerField()),
-                ('cover_url', models.CharField(max_length=80)),
+                ('cover_url', models.TextField(blank=True, null=True)),
                 ('status', models.CharField(max_length=50)),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
-=======
->>>>>>> origin/pdp-course-schedule
 
         migrations.RunPython(insertData),
 

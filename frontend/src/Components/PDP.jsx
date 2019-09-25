@@ -34,6 +34,7 @@ export default class PDP extends React.Component{
       ownEventDesc: '',
       start:'',
       end:'',
+      img: '',
       cover_url: '',
       formErrors: {image: ''},
       imageValid: true,
@@ -67,7 +68,7 @@ export default class PDP extends React.Component{
                   item.title = item.course.coursename;
                   item.cover_url = item.course.cover_url;
                   item.start = moment.unix(item.date).toDate()
-                  item.end = moment.unix(item.course.start_date).add(
+                  item.end = moment.unix(item.date).add(
                       moment.duration(item.course.duration).hours(), 'hours').toDate()
                   item.type = '#FFD466'
                   item.display = 'inline'
@@ -79,7 +80,7 @@ export default class PDP extends React.Component{
                     item.title = item.event.name;
                     item.cover_url = item.event.cover_url;
                     item.start = moment.unix(item.event.date).toDate()
-                    item.end = moment.unix(item.event.date).add(5, 'hours').toDate()
+                    item.end = moment.unix(item.event.date).add(4, 'hours').toDate()
                     item.type = '#80c5f6'
                     item.display = 'inline'
                         return item
@@ -87,7 +88,7 @@ export default class PDP extends React.Component{
             ),
             userEventList: listNote.map(
                 item => {
-                    item.title = item.name;
+                    item.title = item.title;
                     item.start = moment.unix(item.start).toDate()
                     item.end = moment.unix(item.end).toDate()
                     item.type = '#800080'
@@ -113,6 +114,13 @@ export default class PDP extends React.Component{
           await API.delete('user/pdp', {
               data:this.state.event
           })
+          let list = this.state.mainEventsList
+          for( let i = 0; i < list.length; i++){ 
+            if ( list[i] == this.state.event) {
+                list.splice(i, 1); 
+              i--;
+            }
+         }
       } catch (error) {
           toast.error(error.message + ' Please, try later');
       }
@@ -126,23 +134,34 @@ export default class PDP extends React.Component{
       })
   }
 
+  uploadCoverImg = async() => {
+    if (this.state.img){
+        if(this.state.imageValid) {
+            let data = new FormData();
+            try {
+                data.append('file', this.state.img);
+                let cover_img_url = await API.post('user/profile/change_avatar', data)
+                    this.setState({cover_url:cover_img_url.data.avatar_url})
+            } catch(error) {
+                toast.error(error.message + ' Please, try later');
+            }
+        }
+    }
+  }
+
   handleSubmit = async() => {
     if (this.state.title){
-
-        let data = new FormData();
+        await this.uploadCoverImg()
+        let noteAdd = {
+            title: this.state.title,
+            ownEventDesc: this.state.ownEventDesc,
+            start: moment(this.state.start).unix(),
+            end: moment(this.state.end).unix(),
+            cover_url: this.state.cover_url,
+            status:'New'
+        }
         try {
-            data.append('file', this.state.img);
-            let cover_img_url = await API.post('user/profile/change_avatar', data)
-            let note_add = {
-                title: this.state,
-                ownEventDesc: this.state.title,
-                start: moment(this.state.start).unix(),
-                end: moment(this.state.end).unix(),
-                cover_url: cover_img_url.data.avatar_url,
-                status:'New'
-            }
-            this.setState({cover_url:cover_img_url.data.avatar_url})
-            await API.post('user/pdp', note_add)
+            let response = await API.post('user/pdp', noteAdd)
                 this.setState({
                     mainEventsList: [
                         ...this.state.mainEventsList,
@@ -153,9 +172,10 @@ export default class PDP extends React.Component{
                             ownEventDesc: this.state.ownEventDesc,
                             cover_url: this.state.cover_url,
                             type: '#800080',
-                            display: 'none'
-                        },
-                    ],
+                            display: 'none',
+                            id: response.data.id
+                        }
+                    ], 
                 })
             toast.success('Success');
         } catch (error) {
@@ -226,15 +246,15 @@ export default class PDP extends React.Component{
     let end = moment.unix(this.state.event.end).format("H:mm a")
     let { redirect } = this.state;
     if (redirect) {
-       if( this.state.event.coursename ){
-            return <Redirect to={{
-                        pathname: '/course/detail',
-                        state: {course: this.state.event.course}}}
-                    />;
-        } else {
+       if( this.state.event.name ){
             return <Redirect to={{
                         pathname: '/event/detail',
                         state: {event: this.state.event.event}}}
+                    />;
+        } else {
+            return <Redirect to={{
+                        pathname: '/course/detail',
+                        state: {course: this.state.event.course}}}
                     />;
         }
     }
@@ -256,7 +276,7 @@ export default class PDP extends React.Component{
         />
         <div
             id="tooltip-calendar"
-            style={{position:'absolute', top:tooltip.y, left:tooltip.x}}
+            style={{position:'fixed', top:tooltip.y, left:tooltip.x}}
         >
         <ToolTip
             active={this.state.tooltipToggle}
@@ -275,7 +295,6 @@ export default class PDP extends React.Component{
                                 style={{display:this.state.event.display, color:'#fff'}}
                                 onClick={() => this.eventInformation()}
                             >Information</button>
-
                         </p>
                         <div>
                             <button
