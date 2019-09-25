@@ -51,4 +51,4 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
 
 		model = CourseSchedule
 		depth = 1
-		fields = ("date", 'course')
+		fields = ('date', 'course')

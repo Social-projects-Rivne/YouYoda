@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {Container} from 'reactstrap';
-import {Redirect} from 'react-router-dom';
+import { Container } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
-import {axiosPost} from '../api/axiosPost';
-import {FormErrors} from '../api/FormError';
+import { axiosPost } from '../api/axiosPost';
+import { FormErrors } from '../api/FormError';
 import { toast } from 'react-toastify';
 
 
@@ -32,16 +32,15 @@ export default class EnterNewPassword extends React.Component{
         this.setState({[name]: value},
                         () => { this.validateField(name, value) }
                     );
-        console.log(this.state);
     }
 
     validateField(fieldName, value) {
           let fieldValidationErrors = this.state.formErrors;
           let {passwordValid, rePasswordValid, new_password, re_new_password} = this.state;
-          let passregex = RegExp(/^(\w+){6,80}$/g);
+          let passregex = RegExp(/^([\w+!@#$%^&*]){6,80}$/g);
 
           passwordValid = passregex.test(value);
-          fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain at least 6 characters';
+          fieldValidationErrors.fieldName = passwordValid ? '': 'Password must to contain 6-80 characters and can contain A-Z a-z 0-9 !@#$%^&*';
           (new_password !== re_new_password) ?
               fieldValidationErrors.fieldName= "Password and password confirm do not match" :
               rePasswordValid = true;

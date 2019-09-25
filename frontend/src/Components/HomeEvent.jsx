@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 import { axiosGet } from '../api/axiosGet';
 import { API } from '../api/axiosConf';
-import { isAuthenticated, defaultPhoto } from '../utils';
+import { defaultPhoto } from '../utils';
 import { toast } from 'react-toastify';
 
 
@@ -41,7 +41,7 @@ export default class HomeEvent extends React.Component{
         const USERDATA = { "event_id": this.state.event.id};
         try {
             const response = await API.post(URLPATH, USERDATA);
-            if(response.status === 208) 
+            if(response.status === 208)
                 toast.info(response.data);
             if(response.status === 201)
                 toast.success('You subscribe to ' + this.state.event.name);
@@ -103,7 +103,7 @@ export default class HomeEvent extends React.Component{
        const event = this.state.event || this.state.eventsList[0];
        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
        const eventDate = event.date;
-       const newEventDate = moment(eventDate).format('MMMM Do YYYY, h:mm:ss a');
+       const newEventDate = moment.unix(eventDate).format('MMMM Do YYYY, h:mm a');
        let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
        let coverImg = defaultPhoto(defImg, event.cover_url);
 
@@ -136,13 +136,13 @@ export default class HomeEvent extends React.Component{
                                     <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter>
-                                    <Button className="btn-join" 
+                                    <Button className="btn-join"
                                             color="warning"
-                                            style={{marginRight:'33px'}} 
+                                            style={{marginRight:'33px'}}
                                             onClick={this.toggle}
                                             onClick={this.subscribeEvent}>Join
                                     </Button>
-                                    <Button color="secondary" 
+                                    <Button color="secondary"
                                             className='btn-event-modal-cancel'
                                             onClick={this.toggle}
                                     >Cancel</Button>
