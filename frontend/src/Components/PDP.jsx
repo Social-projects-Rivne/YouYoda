@@ -1,25 +1,20 @@
 import React from 'react';
 
-import { Container, Row, Button,Col, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
-
 import moment from 'moment';
-import { Link, Redirect } from 'react-router-dom';
-import StarRatingComponent from 'react-star-rating-component';
+import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import DayPicker from 'react-day-picker';
+import ToolTip from 'react-portal-tooltip'
 
 import { API } from '../api/axiosConf';
-import { defaultPhoto, isAuthenticated } from '../utils';
-import PdpTooltip from './PdpTooltip';
-import ToolTip from 'react-portal-tooltip'
 import { axiosGet } from '../api/axiosGet';
+import { defaultPhoto } from '../utils';
 import { FormErrors } from '../api/FormError';
 
+
 const localizer = momentLocalizer(moment)
-
 const propTypes = {}
-
 
 export default class PDP extends React.Component{
     constructor(props) {
@@ -62,17 +57,18 @@ export default class PDP extends React.Component{
   }
 
   async componentWillMount() {
-    try{  
+    try{
         let listCourses = await axiosGet('courses/top')
         let listEvents = await axiosGet('events/top')
-        /* let listNote = await axiosGet('note/list') */
+        let listNote = await axiosGet('note/list')
         await this.setState({
             yodaCourseList: listCourses.map(
                   item => {
-                  item.title = item.coursename;
-                  item.start = moment.unix(item.start_date).toDate()
-                  item.end = moment.unix(item.start_date).add(
-                      moment.duration(item.duration).hours(), 'hours').toDate()
+                  item.title = item.course.coursename;
+                  item.cover_url = item.course.cover_url;
+                  item.start = moment.unix(item.date).toDate()
+                  item.end = moment.unix(item.course.start_date).add(
+                      moment.duration(item.course.duration).hours(), 'hours').toDate()
                   item.type = '#FFD466'
                   item.display = 'inline'
                 return item
@@ -80,15 +76,16 @@ export default class PDP extends React.Component{
             ),
             yodaEventList: listEvents.map(
                 item => {
-                    item.title = item.name;
-                    item.start = moment.unix(item.date).toDate()
-                    item.end = moment.unix(item.date).add(5, 'hours').toDate()
+                    item.title = item.event.name;
+                    item.cover_url = item.event.cover_url;
+                    item.start = moment.unix(item.event.date).toDate()
+                    item.end = moment.unix(item.event.date).add(5, 'hours').toDate()
                     item.type = '#80c5f6'
                     item.display = 'inline'
                         return item
                 }
             ),
-            /*userEventList: listNote.map(
+            userEventList: listNote.map(
                 item => {
                     item.title = item.name;
                     item.start = moment.unix(item.start).toDate()
@@ -97,7 +94,7 @@ export default class PDP extends React.Component{
                     item.display = 'none'
                         return item
                 }
-            ),*/
+            ),
 
         })
         this.setState({
@@ -108,8 +105,17 @@ export default class PDP extends React.Component{
             ]
         })
     } catch (error) {
-        toast.error(error.message + 'Please, сontact the administration for more information');
+        toast.error(error.message + ' Please, сontact the administration for more information');
     }
+  }
+  handleDeleteNote = async() => {
+      try {
+          await API.delete('', {
+              data:this.state.event
+          })
+      } catch (error) {
+          toast.error(error.message + ' Please, try later');
+      }
   }
 
   handleSelect = ({ start, end }) => {
@@ -122,38 +128,39 @@ export default class PDP extends React.Component{
 
   handleSubmit = async() => {
     if (this.state.title){
-      
+
         let data = new FormData();
         try {
-            data.append('img', this.state.img);
-            let cover_img_url = await API.post('note/image/add', data)
+            data.append('file', this.state.img);
+            let cover_img_url = await API.post('user/profile/change_avatar', data)
             let note_add = {
                 title: this.state,
                 ownEventDesc: this.state.title,
                 start: moment(this.state.start).unix(),
                 end: moment(this.state.end).unix(),
-                cover_url: cover_img_url.data,
+                cover_url: cover_img_url.data.avatar_url,
                 status:'New'
             }
+            this.setState({cover_url:cover_img_url.data.avatar_url})
             await API.post('note/add', note_add)
+                this.setState({
+                    mainEventsList: [
+                        ...this.state.mainEventsList,
+                        {
+                            start: this.state.start,
+                            end: this.state.end,
+                            title: this.state.title,
+                            ownEventDesc: this.state.ownEventDesc,
+                            cover_url: this.state.cover_url,
+                            type: '#800080',
+                            display: 'none'
+                        },
+                    ],
+                })
             toast.success('Success');
         } catch (error) {
-            toast.error(error.message + 'Please, try later');
+            toast.error(error.message + ' Please, try later');
         }
-        this.setState({
-        mainEventsList: [
-            ...this.state.mainEventsList,
-            {
-                start: this.state.start,
-                end: this.state.end,
-                title: this.state.title,
-                ownEventDesc: this.state.ownEventDesc,
-                cover_url: this.state.cover_url,
-                type: '#800080',
-                display: 'none'
-            },
-        ],
-      })
       this.toggle()
     }
   }
@@ -209,15 +216,6 @@ export default class PDP extends React.Component{
    this.setState({formValid: this.state.imageValid});
  }
 
- handleDeleteNote = async() => {
-    try {
-        await API.delete('', {
-            data:this.state.event
-        })
-    } catch (error) {
-        toast.error(error.message + 'Please, try later');
-    }
- }
 
   render() {
     let tooltip = this.state.tooltip
@@ -230,16 +228,16 @@ export default class PDP extends React.Component{
        if( this.state.event.coursename ){
             return <Redirect to={{
                         pathname: '/course/detail',
-                        state: {course: this.state.event}}}
+                        state: {course: this.state.event.course}}}
                     />;
         } else {
             return <Redirect to={{
                         pathname: '/event/detail',
-                        state: {event: this.state.event}}}
+                        state: {event: this.state.event.event}}}
                     />;
         }
     }
-    
+
     return (
       <div className="pdp">
         <Calendar
@@ -303,7 +301,8 @@ export default class PDP extends React.Component{
                 <form>
                     <div className="form-group">
                         <label for="pdp-own-event-title">Title of new note <span style={{color:'red'}}>*</span> :</label>
-                        <Input className="form-control"
+                        <input
+                                className="form-control"
                                 id="pdp-own-event-title"
                                 name="title"
                                 value={this.state.title}

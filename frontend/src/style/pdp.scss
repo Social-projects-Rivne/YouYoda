@@ -1,5 +1,9 @@
-.rbc-month-row {
-    min-height: 15vh;
+.pdp {
+    width: 100%;
+    height: 700px;
+    min-height: 770px;
+    margin-bottom: 50px;
+
 }
 .rbc-event{
     background-color: #FFD466;
@@ -10,11 +14,11 @@
     background-color: #f7bc25;
 }
 .rbc-toolbar button {
-    padding: 0.2rem;
+    padding: 0.3rem 0.7rem;
     margin-top: 10px;
 }
 .rbc-calendar {
-    width: 95%;
+    width: 100%;
 }
 .pdp-tooltip {
     background-position: center;
@@ -82,4 +86,9 @@
 }
 #pdp-own-event-desc {
     border-radius: 20px;
+}
+.pdp-cap-letter {
+    color: #FFD466;
+    font-weight: 700;
+    padding-right: 2px;
 }

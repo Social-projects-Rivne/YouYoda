@@ -7,7 +7,8 @@ import { Resizable, ResizableBox } from 'react-resizable';
 import ClipLoader from 'react-spinners/ClipLoader';
 import classnames from 'classnames';
 
-import {ProfileContext} from './profile-context';
+import { ProfileContext } from './profile-context';
+import PDP from './PDP'
 import NoCoursesOrEvents from './NoCoursesOrEvents';
 import Cours from './cours'
 import Event from './event'
@@ -95,6 +96,16 @@ export default class ProfileInfo extends React.Component {
                   <Row>
                     <Col>
                       <div className="event-and-courses align">
+                          <div
+                                className="user-courses tab-item"
+                                tab-link
+                                onClick={() => { this.toggleTab('7') }}
+                                style={{cursor:'pointer', marginBottom:'15px'}}
+                            >
+                                <span >
+                                    <span className="pdp-cap-letter">P</span>ersonal <span className="pdp-cap-letter">D</span>evelopment <span className="pdp-cap-letter">P</span>lan
+                                </span>
+                          </div>
                         <div className="user-courses">Courses</div>
                           <NavItem className="tab-item">
                             <NavLink
@@ -125,7 +136,7 @@ export default class ProfileInfo extends React.Component {
                           </NavItem>
                       </div>
                       <div className="event-and-courses">
-                        <div className="user-courses" style={{paddingTop:"100px"}}>Events</div>
+                        <div className="user-courses" style={{marginTop:"10px"}}>Events</div>
                           <NavItem className="tab-item">
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '4' })} tab-link
@@ -247,6 +258,11 @@ export default class ProfileInfo extends React.Component {
                         ) : (
                           <NoCoursesOrEvents message={'You have not created any events yet'}/>
                         )}
+                      </Row>
+                    </TabPane>
+                    <TabPane tabId="7">
+                      <Row>
+                        <PDP/>
                       </Row>
                     </TabPane>
                   </TabContent>
