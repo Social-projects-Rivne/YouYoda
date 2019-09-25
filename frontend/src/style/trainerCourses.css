@@ -1,0 +1,25 @@
+/* Styles for MyCourses */
+
+.trainer-tabs {
+    cursor: pointer;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+}
+.active .trainer-tabs {
+    font-weight: bold;
+    cursor: pointer;
+    color: #4f4f4f;
+    border-bottom: 5px solid #4f4f4f;
+}
+.h-line {
+    margin-top: -17px;
+}
+.page-title {
+    margin-top: 40px;
+}
+.btn-new-course {
+    border-radius: 5px;
+    text-transform: uppercase;
+    margin-top: 14px;
+}

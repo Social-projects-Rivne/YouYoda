@@ -16,6 +16,7 @@ import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
 import ModeratorDashboard from './Components/ModeratorDashboard';
 import ModeratorPage from "./Pages/ModeratorPage";
+import MyCourses from "./Components/MyCourses";
 import ModeratorPageInner from './Components/ModeratorPageInner';
 import NotFoundPage from './Pages/NotFoundPage';
 import Profile from './Pages/Profile';
@@ -66,9 +67,12 @@ export default class Routes extends React.Component{
                 <Route exact path='/event/detail'
                     render={(props)=><MainLayout><EventDetail event = {props.location.state.event}/></MainLayout>}
                 />
-               <Route exact path='/admin'
+                <Route exact path='/admin'
                     render={()=><AdminPage><AdminDashboard/></AdminPage>}
                 />
+              <Route exact path='/trainer/courses'
+                     render={()=><MainLayout><MyCourses/></MainLayout>}
+                 />
                 <Route exact path={'/admin/:option'}
                     render={()=><AdminPage><AdminPageInner/></AdminPage>}/>
                 <Route exact path='/moderator'

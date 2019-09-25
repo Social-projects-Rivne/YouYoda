@@ -29,6 +29,12 @@ export const isModerator = () => {
     return false;
 }
 
+export const isTrainer = () => {
+    if (localStorage.getItem('is_trainer') == 'true')
+        return true;
+    return false;
+}
+
 export const defaultPhoto = (defurlphoto, coverurl) => {
     let urlphoto;
     if(!coverurl || coverurl == "null"){

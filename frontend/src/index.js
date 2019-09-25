@@ -17,6 +17,7 @@ import './style/events.css';
 import './style/filter.scss';
 import './style/course-event-detail.scss'
 import './style/media.css';
+import './style/trainerCourses.css';
 import './index.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';

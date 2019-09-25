@@ -4,7 +4,7 @@ import {Dropdown, DropdownToggle, DropdownMenu} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { isAuthenticated, isAdmin, isModerator, defaultPhoto } from '../utils';
+import { isAuthenticated, isAdmin, isModerator, defaultPhoto, isTrainer } from '../utils';
 import { logOut } from '../api/logOut';
 
 
@@ -50,11 +50,13 @@ export class UserMenu extends React.Component{
     if (redirect) {
        return <Redirect to='/'/>;
     }
-    let ManageDashboard;
+    let ManageDashboard, MyCourses;
     if (isAdmin())
         ManageDashboard = <Link to="/admin" className="dropdown-item">Admin Dashboard</Link>;
     else if (isModerator())
         ManageDashboard = <Link to="/moderator" className="dropdown-item">Moderator Dashboard</Link>;
+    if (isTrainer())
+        MyCourses = <Link to="/trainer/courses" className="dropdown-item">My courses</Link>
     return (
       <div className={`header-user-menu ${isAuthenticated("show")}`}>
 
@@ -67,7 +69,7 @@ export class UserMenu extends React.Component{
                 {ManageDashboard}
                 <Link to="/profile" className="dropdown-item">View profile</Link>
                 <Link to="/editprofile" className="dropdown-item">User settings</Link>
-                <Link to="" className="dropdown-item">Create course</Link>
+                {MyCourses}
                 <Link to="" className="dropdown-item">Create event</Link>
                 <Link to="" className="dropdown-item">Help</Link>
                  <a className="dropdown-item" onClick={this.handleSubmitLogOut}>Logout</a>

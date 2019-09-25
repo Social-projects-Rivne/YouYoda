@@ -19,7 +19,8 @@ async function isAuthorized(checkParam) {
                             return true;
                         if(response.data['data_status'] == 'role' && checkParam == 'role')
                             return response.data;
-                        
+                        if(response.data['data_status'] == 'is_trainer' && checkParam == 'is_trainer')
+                            return response.data;
                     }
                     else
                         console.log(response.data);
