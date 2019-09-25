@@ -58,9 +58,9 @@ export default class PDP extends React.Component{
 
   async componentWillMount() {
     try{
-        let listCourses = await axiosGet('courses/top')
-        let listEvents = await axiosGet('events/top')
-        let listNote = await axiosGet('note/list')
+        let listCourses = await axiosGet('user/course/add')
+        let listEvents = await axiosGet('user/event/add')
+        let listNote = await axiosGet('user/pdp')
         await this.setState({
             yodaCourseList: listCourses.map(
                   item => {
@@ -110,7 +110,7 @@ export default class PDP extends React.Component{
   }
   handleDeleteNote = async() => {
       try {
-          await API.delete('', {
+          await API.delete('user/pdp', {
               data:this.state.event
           })
       } catch (error) {
@@ -142,7 +142,7 @@ export default class PDP extends React.Component{
                 status:'New'
             }
             this.setState({cover_url:cover_img_url.data.avatar_url})
-            await API.post('note/add', note_add)
+            await API.post('user/pdp', note_add)
                 this.setState({
                     mainEventsList: [
                         ...this.state.mainEventsList,
