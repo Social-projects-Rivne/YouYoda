@@ -245,8 +245,10 @@ class Registration extends React.Component{
                                 <input type="password" id="password" name="password" className="form-control"
                                        onChange = {(event) => {this.onChangeInputs(event)}}
                                        required/>
-                                <div id="anim">
-                                    <span className="tooltip-pass" data-tooltip="Password must be atleast 6 symbols and can contain !@#$%^&*">?</span>
+                                <div className="tooltip-password">
+                                    <div id="anim">
+                                        <span className="tooltip-pass" data-tooltip="Password must be atleast 6 symbols and can contain !@#$%^&*">?</span>
+                                    </div>
                                 </div>
                             </div>
                             <div className={this.state.formErrors.confirmpass ? 'form-group is-error': 'form-group'}>

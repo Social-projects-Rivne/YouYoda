@@ -1,18 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions, status
-from django.conf import settings
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_headers
 
 from ..models import CoursesSubscribers, YouYodaUser, Courses, CourseSchedule
 from ..serializers.courses_subscribers_serializer import CoursesSubscribersPostSerializator
 from ..serializers.courses_serializer import CourseScheduleSerializer
 
-
-CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 class UserSubscribeToCourse(APIView):
     """Takes data from CoursesSubscribersPostSerializator for add user to course"""
@@ -42,8 +35,6 @@ class UserSubscribeToCourse(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # @method_decorator(cache_page(CACHE_TTL), name='subscribe-course')
-    # @vary_on_headers('Authorization')
     def get(self, request):
         """Receives and transmits user course data and schedule data about these courses"""
         auth_token = request.headers['Authorization'][6:]

@@ -1,17 +1,18 @@
 
 $yellow: #FFD466;
-
+.tooltip-password{
+    position: relative;
+    left: 92%;
+    bottom: 32px;
+    width: 200px;
+}
 .tooltip-pass {
-    position: absolute;
-    right: 7%;
-    top: 33.5%;
     background: $yellow;
     padding: 5px 12px;
     margin: 5px;
     font-size: 15px;
     border-radius: 100%;
     color: #000;
-
 }
 
 .tooltip-pass::before,
@@ -37,8 +38,8 @@ $yellow: #FFD466;
     height: auto;
     font-size: 13px;
     font-weight: 300;
-    top: -80px;
-    left: -10px;
+    top: -92px;
+    left: -90px;
     padding: 10px;
     border-radius: 5px;
     letter-spacing: 1px;
@@ -69,8 +70,5 @@ $yellow: #FFD466;
 }
 
 #anim:hover {
-    position: absolute;
-    right: 7%;
-    top: 33.5%;
     animation: shake 500ms ease-in-out forwards;
 }
