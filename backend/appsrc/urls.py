@@ -13,7 +13,7 @@ from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
 from .views.user_subscribe_to_event import UserSubscribeToEvent
-from .views.user_subscribe_to_course import UserSubscribeToCourse
+from .views.user_subscribe_to_course import UserSubscribeToCourse, ListUserSubscribeToCourse
 from .views.pdp import PDP
 from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
 
@@ -26,7 +26,7 @@ urlpatterns = [
     path('courses/top', TopCourses.as_view(), name='top-courses'),
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/comments', EventComments.as_view(), name='comments-events'),
-    path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
+    path('course/list/users', ListUserSubscribeToCourse.as_view(), name='course-list-users'),
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
