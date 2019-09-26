@@ -69,7 +69,6 @@ class CourseScheduleView(APIView):
 
     permission_classes = [permissions.AllowAny,]
 
-    @method_decorator(cache_page(CACHE_TTL), name='course_schedule')
     def get(self, request):
         """First check request data in cache, then pull data from db"""
         course_id = request.query_params.get('course_id')

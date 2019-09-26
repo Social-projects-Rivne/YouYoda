@@ -310,6 +310,7 @@ class Migration(migrations.Migration):
                 ('avatar_url', models.CharField(blank=True, max_length=255, null=True)),
                 ('is_trainer', models.BooleanField(default=False)),
                 ('role', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, related_name='owner', to='appsrc.Roles')),
+                ('cover_url', models.TextField(blank=True, null=True)),
             ],
             options={
                 'verbose_name': 'user',

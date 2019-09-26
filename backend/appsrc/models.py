@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 DEFAULT_ROLE_ID = 1
 DEFAULT_CATEGORIES_ID = 1
 DEFAULT_RATE=0
@@ -39,6 +40,7 @@ class YouYodaUser(AbstractUser):
     avatar_url = models.CharField(max_length=255, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
+    cover_url = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)

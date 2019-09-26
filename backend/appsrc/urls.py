@@ -8,6 +8,7 @@ from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
 from .views.comment import CourseComments, EventComments
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
+from .views.trainer import TrainerPage
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
@@ -23,11 +24,8 @@ urlpatterns = [
     path('courses/comments', CourseComments.as_view(), name='comments-courses'),
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
-    path('courses/top', TopCourses.as_view(), name='top-courses'),
-    path('events/search', SearchingEvents.as_view(), name='search-events'),
-    path('events/comments', EventComments.as_view(), name='comments-events'),
-    path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),
