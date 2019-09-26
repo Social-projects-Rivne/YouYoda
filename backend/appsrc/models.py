@@ -55,9 +55,9 @@ class UserRequests(models.Model):
     comment = models.TextField(blank=True, null=True)
 
 class TrainerCertificates(models.Model):
-    user_id = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    description = models.TextField()
-    image_url = models.CharField(max_length=80)
+    user = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+    image_url = models.CharField(blank=False, max_length=80)
 
 class Courses(models.Model):
     coursename = models.CharField(max_length=60)
