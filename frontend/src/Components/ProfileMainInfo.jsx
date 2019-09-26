@@ -98,7 +98,7 @@ export default class ProfileInfo extends React.Component {
             {(profile) => (
             <div>
             <Container>
-              <Row style={{minHeight: "525px"}}>
+              <Row style={{minHeight: "80vh"}}>
                 <Col md="2" xs="12">
                   <Row>
                     <Col>

@@ -292,7 +292,10 @@
         left: 100px;
     }
     .back-no-info {
-        margin-top: -20px;
+        margin-top: 0px;
+    }
+    .vr-line-wrap {
+        display: none;
     }
 }
 @media screen and (max-width: 990px){
