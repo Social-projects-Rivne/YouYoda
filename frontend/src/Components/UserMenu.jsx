@@ -4,10 +4,8 @@ import {Dropdown, DropdownToggle, DropdownMenu} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { isAuthenticated, isAdmin, isModerator, defaultPhoto } from '../utils';
+import { isAuthenticated, isAdmin, isModerator, defaultPhoto, DEFAULT_AVATAR_URL } from '../utils';
 import { logOut } from '../api/logOut';
-
-
 
 
 export class UserMenu extends React.Component{
@@ -31,8 +29,7 @@ export class UserMenu extends React.Component{
             dropdownOpen: !prevState.dropdownOpen
         }));
     }
-    handleSubmitLogOut = async (event) => {
-
+    handleSubmitLogOut = async () => {
             try {
                 await logOut();
                 this.setState({ redirect: true });
@@ -43,8 +40,7 @@ export class UserMenu extends React.Component{
             }
     }
   render () {
-    let defimg = "/media/avatar.png";
-    let coverimg = defaultPhoto(defimg, localStorage.getItem("avatar_url"));
+    let coverimg = defaultPhoto(DEFAULT_AVATAR_URL, localStorage.getItem("avatar_url"));
 
     const { redirect } = this.state;
     if (redirect) {
@@ -60,17 +56,17 @@ export class UserMenu extends React.Component{
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropdowntoggle}>
             <DropdownToggle className="dropdown-button">
-              <img src={coverimg}
-                      className="profile-photo-dropdown" alt="profile"/>
+              <img src={(this.props.avatarIco)?this.props.avatarIco:coverimg}
+                   className="profile-photo-dropdown" alt="profile"/>
             </DropdownToggle>
             <DropdownMenu right>
                 {ManageDashboard}
                 <Link to="/profile" className="dropdown-item">View profile</Link>
                 <Link to="/editprofile" className="dropdown-item">User settings</Link>
-                <Link to="" className="dropdown-item">Create course</Link>
-                <Link to="" className="dropdown-item">Create event</Link>
-                <Link to="" className="dropdown-item">Help</Link>
-                 <a className="dropdown-item" onClick={this.handleSubmitLogOut}>Logout</a>
+                <Link to="/profile/create-course" className="dropdown-item">Create course</Link>
+                <Link to="/profile/create-event" className="dropdown-item">Create event</Link>
+                <Link to="/info" className="dropdown-item">Help</Link>
+                <span className="dropdown-item a-dropdown-item" onClick={this.handleSubmitLogOut}>Logout</span>
             </DropdownMenu>
         </Dropdown>
 
