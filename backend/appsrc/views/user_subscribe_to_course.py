@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 
 from ..models import CoursesSubscribers, YouYodaUser, Courses
-from ..serializers.courses_subscribers_serializer import CoursesSubscribersSerializator
+from ..serializers.courses_subscribers_serializer import CoursesSubscribersSerializator, FavoriteCoursesSerializator
 
 
 class UserSubscribeToCourse(APIView):
@@ -50,5 +50,25 @@ class UserUnsubscribeCourse(APIView):
         if course_delete:
             course_delete.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ManageFavoriteCoursesProfile(APIView):
+ 
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def patch(self, request):
+        """ """
+        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
+        data_to_update = request.data
+        subscribed_course = CoursesSubscribers.objects.get(course_id=data_to_update['course'], participant_id=user.id)
+        #data_to_update['participant'] = user.id
+        if subscribed_course:
+            #data_to_update['id'] = subscribed_course.id
+            serializer = FavoriteCoursesSerializator(subscribed_course, data=data_to_update, partial=True)
+            if serializer.is_valid():
+                subscribe = serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -2,11 +2,9 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
-import { axiosPost } from '../api/axiosPost';
 
 const URL_UNSUBSCRIBE = 'user/course/delete',
-      URL_ADD_FAVORITE = 'user/course/addfavorite',
-      URL_DEL_FAVORITE = 'user/course/delfavorite';
+      URL_FAVORITE = 'user/course/managefavorite';
 
 
 export default class ManageButtons extends React.Component{
@@ -25,18 +23,21 @@ export default class ManageButtons extends React.Component{
         }
     }
 
-    addToFavoriteClick = (courseData, addOrRemove) => {
-        console.log(courseData);
-        let dataSend = {"course": courseData.id};
-
-        if(addOrRemove) {
-            let resRequest = await axiosPost(URL_ADD_FAVORITE, dataSend);
-            console.log('add Favorite');
-            console.log(resRequest);
-        } else {
-            let resRequest = await axiosPost(URL_DEL_FAVORITE, dataSend);
-            console.log('remove Favorite');
-            console.log(resRequest);
+    addToFavoriteClick = async(courseData, addOrRemove) => {
+        let dataSend = {
+            "course": courseData.id,
+            "is_favourite": addOrRemove
+        };
+        try {
+            const resRequest = await API.patch(URL_FAVORITE, dataSend);
+            if(resRequest.status === 201) {
+                let mess = " was added to your favorite list.";
+                if(!addOrRemove)
+                    mess = " was removed from your favorite list.";
+                toast.success('Course "' + courseData.coursename + '"' + mess);
+            }
+        } catch (error) {
+            toast.error(error.message);
         }
         
     }

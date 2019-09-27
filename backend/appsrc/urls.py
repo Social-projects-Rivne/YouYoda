@@ -13,7 +13,7 @@ from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
 from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
-from .views.user_subscribe_to_course import UserSubscribeToCourse, UserUnsubscribeCourse
+from .views.user_subscribe_to_course import UserSubscribeToCourse, UserUnsubscribeCourse, ManageFavoriteCoursesProfile
 
 
 urlpatterns = [
@@ -42,5 +42,6 @@ urlpatterns = [
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
     path('user/course/add', UserSubscribeToCourse.as_view(), name='subscribe_course'),
     path('user/course/delete', UserUnsubscribeCourse.as_view(), name='unsubscribe-course'),
+    path('user/course/managefavorite', ManageFavoriteCoursesProfile.as_view(), name='add-favorite-course'),
     path('users/getlist', UsersGetList.as_view()),
 ]
