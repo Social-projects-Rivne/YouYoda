@@ -16,61 +16,56 @@ export default class TrainerPage extends React.Component{
     constructor(props){
       super(props);
       this.state = {
-          
+          cover_url: ""
       };
     }
-    
+
     render(){
-        
+        let defImg = "/media/aircraft-2795557_1920.jpg";
+        let coverImg = defaultPhoto(defImg, this.state.cover_url);
         return(
 
-            <div className=" ">
-                <div className='cd-header'>
-                <div className="d-flex justify-content-between flex-wrap container">
-                    <h1 className="course-det-header">
-                        <Button
-                            className='btn'
-                            color="warning"
-                            style={{margin:'0 15px 10px 0'}}
-                            onClick={this.subscribeCourse}
-                        >Join</Button>
-                        {this.props.course.coursename}
-                        <span className="course-detail-status" style={{color:statuscolor}}>
-                            {this.props.course.status}
-                        </span>
-                    </h1>
-                    <div className="main-text star d-flex">
-                        <StarRatingComponent starCount={10} className="course-star-rating"
-                                             value={this.props.course.rate} />
-                        <div className="rate-num">
-                            <span className="rate-big">{this.props.course.rate}/</span>
-                            <span className="rate-small">10</span>
+            <div className="trainer-page">
+                <div style={{
+                        backgroundImage: `url(${coverImg})`,
+                        backgroundColor: '#000',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                        minWidth:'98vw',
+                        height: "40vh",
+                        width: '100%'
+                    }}
+                ></div>
+                <Container>
+                    <Row className="d-flex trainer-page-header">
+                        <div className="trainer-avatar">
+                            <img src={coverImg} alt="trainer avatar"/>
                         </div>
-                    </div>
-                </div>
-                </div>
-                <div >
-                    <div style={{
-                            minHeight: '510px',
-                            backgroundImage: `url(${coverImg})`,
-                            backgroundColor: '#000',
-                            backgroundPosition: 'center',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'cover',
-                            minWidth:'98vw',
-                            height: "94vh",
-                            width: '100%'
-                        }}
-                         alt={this.props.course.coursename}></div>
+                        <h1>Name + lastname</h1>
+                        <div className="status-offline col">
+                            <ul>
+                            <li>Offline</li>
+                            <li>
+                                <i className="far fa-clock"></i>
+                                10 hours ago
+                            </li>
+                            </ul>
 
-                    
-                </div>
+                        </div>
+                        <div className="funny-icon">
+                            <i class="fas fa-business-time"><span> 2 Years with YouYoda</span></i>
+                            <i class="fas fa-hand-spock"><span> 4 Created Courses</span></i>
+                            <i class="fas fa-glass-cheers"><span> 3 Organized Events</span></i>
+                            <i class="fas fa-hanukiah"><span></span></i>
 
-            <Container>
-                <Row>
+                        </div>
+                    </Row>
+                </Container>
 
-                </Row>
-            </Container>
+
+
+
             </div>
 
         )

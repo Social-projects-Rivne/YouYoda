@@ -25,6 +25,7 @@ urlpatterns = [
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('courses/top', TopCourses.as_view(), name='top-courses'),
     path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),

@@ -9,7 +9,7 @@ export default class MainLayout extends React.Component{
         return(
             <>
             <PageHeader/>
-                <main>{this.props.children}</main>
+                <main style={{minHeight:"80vh"}}>{this.props.children}</main>
             <Footer/>
             </>
         )
