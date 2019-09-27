@@ -27,7 +27,7 @@
         margin-top: 1.25rem;
         li:first-child {
             font-size: 1.25rem;
-            background: red;
+            background: #FFD466;
             color: white;
             height: 1.8rem;
             border-radius: 10px;
@@ -43,6 +43,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        flex-wrap: wrap;
         margin-bottom: 15px;
         i {
             font-size: 1.5rem;
@@ -50,7 +51,51 @@
             span {
                 font-size: 1.25rem;
                 color: #1f1f1f;
+                font-weight: 500;
             }
         }
+    }
+    h2{
+        margin-top: 50px; 
+        margin-bottom: 20px; 
+        width: 100%;
+        font-weight: 600;
+        color: #4f4f4f;
+    }
+    .trainer-general-information{
+        border-bottom: 1px solid #4f4f4f;
+        padding-bottom: 15px;
+       
+        ul {
+            width: 100%;
+            padding: 0;
+            li {
+                font-size: 1.2rem;
+                margin: 10px 0;
+            }
+            i {
+                margin-right: 10px; 
+            }
+        }
+        h4 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        p {
+            text-indent: 20px;
+        }
+        
+    }
+    .trainer-courses-list {
+        border-bottom: 1px solid #4f4f4f;
+        padding-bottom: 15px;
+    }
+    .trainer-events-list {
+        border-bottom: 1px solid #4f4f4f;
+        padding-bottom: 15px;
+    }
+    .trainer-certificates-list {
+        border-bottom: 1px solid #4f4f4f;
+        padding-bottom: 15px;
     }
 }

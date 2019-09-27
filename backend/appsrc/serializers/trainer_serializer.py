@@ -14,7 +14,7 @@ class TrainerInfoSerializer(serializers.ModelSerializer):
 		 model = YouYodaUser
 		 fields = (
 			 		"first_name", "last_name", "about_me", "phone_number",
-					"avatar_url", "cover_url", "birth_date", "birth_date",
+					"avatar_url", "cover_url", "birth_date",
 					"last_login", "location")
 
 
