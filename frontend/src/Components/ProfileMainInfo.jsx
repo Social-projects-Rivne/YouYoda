@@ -87,7 +87,16 @@ export default class ProfileInfo extends React.Component {
       return (
         <div>
           <ProfileContext.Consumer>
-            {(profile) => (
+            {({userInfo,
+              userCompletedCourses,
+              userFollowingCourses,
+              userFavouritesCourses,
+              userCompletedEvents,
+              userFollowingEvents,
+              userCreatedEvents,
+              userAchievements,
+              loading,
+              updateProfile}) => (
             <div>
             <Container>
               <Row style={{minHeight: "525px"}}>
@@ -101,7 +110,7 @@ export default class ProfileInfo extends React.Component {
                               className={classnames({ active: this.state.activeTab === '2' })} tab-link
                               onClick={() => { this.toggleTab('2') }}>
                                 <div className="user-courses-profile"><span>Following</span>
-                                  <div id="number-following-courses" className="courses-numbers">{profile.userFollowingCourses.length}</div>
+                                  <div id="number-following-courses" className="courses-numbers">{userFollowingCourses.length}</div>
                                 </div>
                             </NavLink>
                           </NavItem>
@@ -110,7 +119,7 @@ export default class ProfileInfo extends React.Component {
                               className={classnames({ active: this.state.activeTab === '3' })} tab-link
                               onClick={() => { this.toggleTab('3') }}>
                                 <div className="user-courses-profile"><span>Completed</span>
-                                  <div id="number-completed-courses" className="events-numbers">{profile.userCompletedCourses.length}</div>
+                                  <div id="number-completed-courses" className="events-numbers">{userCompletedCourses.length}</div>
                                 </div>
                             </NavLink>
                           </NavItem>
@@ -122,7 +131,7 @@ export default class ProfileInfo extends React.Component {
                               className={classnames({ active: this.state.activeTab === '4' })} tab-link
                               onClick={() => { this.toggleTab('4') }}>
                                 <div className="user-courses-profile"><span>Following</span>
-                                  <div id="number-following-courses" className="courses-numbers">{profile.userFollowingEvents.length}</div>
+                                  <div id="number-following-courses" className="courses-numbers">{userFollowingEvents.length}</div>
                                 </div>
                             </NavLink>
                           </NavItem>
@@ -131,7 +140,7 @@ export default class ProfileInfo extends React.Component {
                             className={classnames({ active: this.state.activeTab === '5' })} tab-link
                             onClick={() => { this.toggleTab('5') }}>
                               <div className="user-courses-profile"><span>Completed</span>
-                                <div id="number-completed-courses" className="events-numbers">{profile.userCompletedEvents.length}</div>
+                                <div id="number-completed-courses" className="events-numbers">{userCompletedEvents.length}</div>
                               </div>
                             </NavLink>
                           </NavItem>
@@ -140,7 +149,7 @@ export default class ProfileInfo extends React.Component {
                             className={classnames({ active: this.state.activeTab === '6' })} tab-link
                             onClick={() => { this.toggleTab('6') }}>
                               <div className="user-courses-profile"><span>Created</span>
-                                <div id="number-completed-courses" className="courses-numbers">{profile.userCreatedEvents.length}</div>
+                                <div id="number-completed-courses" className="courses-numbers">{userCreatedEvents.length}</div>
                               </div>
                             </NavLink>
                           </NavItem>
@@ -165,42 +174,42 @@ export default class ProfileInfo extends React.Component {
                       <hr className="horz-line"/>
                       <Row className="contact-info">
                         <Col>Phone:</Col>
-                        <Col>{profile.userInfo.phone_number}</Col>
+                        <Col>{userInfo.phone_number}</Col>
                       </Row>
                       <Row className="contact-info">
                         <Col>Address:</Col>
-                        <Col>{profile.userInfo.location}
+                        <Col>{userInfo.location}
                           <div className='sweet-loading' style={{marginLeft:"-200px"}}>
                               <ClipLoader
                                 css={override}
                                 sizeUnit={"px"}
                                 size={150}
                                 color={'#123abc'}
-                                loading={profile.loading}
+                                loading={loading}
                               />
                           </div>
                         </Col>
                       </Row>
                       <Row className="contact-info">
                         <Col>E-mail:</Col>
-                        <Col>{profile.userInfo.email}</Col>
+                        <Col>{userInfo.email}</Col>
                       </Row>
                       <Row className="contact-info">&nbsp;</Row>
                       <h6 className="main-info"><b>Basic information</b></h6>
                       <hr className="horz-line"/>
                       <Row className="contact-info">
                         <Col>Birthday:</Col>
-                        <Col>{profile.userInfo.birth_date}</Col>
+                        <Col>{userInfo.birth_date}</Col>
                       </Row>
                       <Row className="contact-info">
                         <Col>I like:</Col>
-                        <Col>{profile.userInfo.i_like}</Col>
+                        <Col>{userInfo.i_like}</Col>
                       </Row>
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        <Cours manage="True" coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
-                        {profile.userFollowingCourses.length || profile.loading ? (
+                        <Cours manage="True" changeProfile={updateProfile} coursesList={userFollowingCourses} loading={loading} lg={4}/>
+                        {userFollowingCourses.length || loading ? (
                           null
                         ) : (
                           <NoCoursesOrEvents message={'You have not yet followed to courses'}/>
@@ -209,8 +218,8 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
-                        <Cours coursesList={profile.userCompletedCourses} loading={profile.loading} lg={4}/>
-                        {profile.userFollowingCourses.length || profile.loading ? (
+                        <Cours coursesList={userCompletedCourses} loading={loading} lg={4}/>
+                        {userFollowingCourses.length || loading ? (
                           null
                         ) : (
                           <NoCoursesOrEvents message={'You have not completed any courses yet'}/>
@@ -219,8 +228,8 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        <Event eventList={profile.userFollowingEvents} loading={profile.loading} lg={4}/>
-                        {profile.userCompletedEvents.length || profile.loading ? (
+                        <Event eventList={userFollowingEvents} loading={loading} lg={4}/>
+                        {userCompletedEvents.length || loading ? (
                           null
                         ) : (
                           <NoCoursesOrEvents message={'You have not yet followed to events'}/>
@@ -229,8 +238,8 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="5">
                       <Row>
-                        <Event eventList={profile.userCompletedEvents} loading={profile.loading} lg={4}/>
-                        {profile.userCompletedEvents.length || profile.loading ? (
+                        <Event eventList={userCompletedEvents} loading={loading} lg={4}/>
+                        {userCompletedEvents.length || loading ? (
                           null
                         ) : (
                           <NoCoursesOrEvents message={'You have not completed any events yet'}/>
@@ -239,8 +248,8 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="6">
                       <Row>
-                        <Event eventList={profile.userCreatedEvents} loading={profile.loading} lg={4}/>
-                        {profile.userCreatedEvents.length || profile.loading ? (
+                        <Event eventList={userCreatedEvents} loading={loading} lg={4}/>
+                        {userCreatedEvents.length || loading ? (
                           null
                         ) : (
                           <NoCoursesOrEvents message={'You have not created any events yet'}/>
@@ -260,8 +269,8 @@ export default class ProfileInfo extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3}/>
-                  {profile.userFavouritesCourses.length || profile.loading ? (
+                  <Cours coursesList={userFavouritesCourses.slice(0, 4)} loading={loading} lg={3}/>
+                  {userFavouritesCourses.length || loading ? (
                     null
                   ) : (
                     <NoCoursesOrEvents message={'You have not selected your favourite courses yet'} style={{marginTop:"0px"}}/>
@@ -269,8 +278,8 @@ export default class ProfileInfo extends React.Component {
                 </Row>
                 <Collapse isOpen={this.state.collapse}>
                   <Row>
-                    {profile.userFavouritesCourses.length ? (
-                      <Cours coursesList={profile.userFavouritesCourses.slice(4, profile.userFavouritesCourses.length)} loading={profile.loading} lg={3}/>
+                    {userFavouritesCourses.length ? (
+                      <Cours coursesList={userFavouritesCourses.slice(4, userFavouritesCourses.length)} loading={loading} lg={3}/>
                     ) : (
                       null
                     )}
@@ -286,11 +295,10 @@ export default class ProfileInfo extends React.Component {
                 </Col>
               </Row>
               <Row className="achievement-row">
-                {profile.userAchievements.slice(0, 6).map((item) => {
-                  return <Achievement achievement={item} />;
-                })}
-                {profile.userAchievements.length || profile.loading ? (
-                  null
+                {userAchievements.length ? (
+                  userAchievements.slice(0, 6).map((item) => {
+                    return <Achievement achievement={item} />;
+                  })
                 ) : (
                   <NoCoursesOrEvents message={'You have not got any achievements'} style={{marginTop:"0px"}}/>
                 )}
@@ -299,13 +307,13 @@ export default class ProfileInfo extends React.Component {
                     sizeUnit={"px"}
                     size={150}
                     color={'#123abc'}
-                    loading={profile.loading}
+                    loading={loading}
                   />
               </Row>
               <Collapse isOpen={this.state.achievementCollapse}>
                 <Row className="achievement-row">
-                  {profile.userFavouritesCourses.length ? (
-                    profile.userAchievements.slice(6, profile.userAchievements.length).map((item) => {
+                  {userFavouritesCourses.length ? (
+                    userAchievements.slice(6, userAchievements.length).map((item) => {
                       return <Achievement achievement={item} />;
                     })
                   ):(

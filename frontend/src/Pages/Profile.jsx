@@ -12,17 +12,37 @@ import ProfileMainInfo from '../Components/ProfileMainInfo';
 export default class Profile extends React.Component{
     constructor(props) {
       super(props);
+
+      this.updateProfile = async() => {
+        //let userData = await this.getInfo();
+        let userCourses = await this.getCourses();
+        let userEvents = await this.getEvents();
+        this.setState(state => ({
+          //userInfo: userData,
+          userCompletedCourses: userCourses['completed'],
+          userFollowingCourses: userCourses['following'],
+          userFavouritesCourses: userCourses['favourites'],
+          userCompletedEvents: userEvents['completed'],
+          userFollowingEvents: userEvents['following'],
+          //userCreatedEvents: userEvents['created'],
+          //userAchievements: state.userAchievements,
+          loading: state.loading,
+        }));
+      };
+
       this.state = {
         userInfo: {},
         userCompletedCourses: [],
         userFollowingCourses: [],
         userFavouritesCourses: [],
-        userFollowingEvents: [],
         userCompletedEvents: [],
+        userFollowingEvents: [],
         userCreatedEvents: [],
-        userAchievements: [],
+        userAchievements: {},
         loading: true,
-      };
+        updateProfile: this.updateProfile,
+      }
+
     }
 
     getInfo = async () => {
@@ -86,14 +106,12 @@ export default class Profile extends React.Component{
 
   render(){
       return(
-          <>
           <ProfileContext.Provider value={this.state}>
             <PageHeader/>
             <ProfileInfo/>
             <ProfileMainInfo/>
             <Footer/>
           </ProfileContext.Provider>
-          </>
       )
   }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
+import { ProfileContext } from './profile-context';
 
 const URL_UNSUBSCRIBE = 'user/course/delete',
       URL_FAVORITE = 'user/course/managefavorite';
@@ -21,6 +22,7 @@ export default class ManageButtons extends React.Component{
         } catch (error) {
             toast.error(error.message);
         }
+        this.props.changeProfile();
     }
 
     addToFavoriteClick = async(courseData, addOrRemove) => {
@@ -39,7 +41,7 @@ export default class ManageButtons extends React.Component{
         } catch (error) {
             toast.error(error.message);
         }
-        
+        this.props.changeProfile();
     }
 
     render(){

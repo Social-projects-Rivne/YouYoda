@@ -48,9 +48,8 @@ export default class Cours extends React.Component{
         const courseDuration = course.duration;
         const newCourseDuration = moment.duration(courseDuration).days();
         let classManage = (this.props.manage)? 'class-manage-course' : '';
-    console.log(course);    
         return (
-            <Col sm="12" md="6" lg="4" xl={this.props.lg}>
+            <Col sm="12" md="6" lg="4" xl={this.props.lg} className="wrap-manage-course">
                 <div className={`event-card-wrap ${classManage}`}>
                 <Link className="card-link" onClick={() => this.handleClick(course)} >
                     <Card className="event-card">
@@ -71,7 +70,7 @@ export default class Cours extends React.Component{
                         </CardFooter>
                     </Card>
                 </Link>
-                {(this.props.manage)? <ManageButtons course={course} /> : null}
+                {(this.props.manage && this.props.changeProfile)? <ManageButtons changeProfile={this.props.changeProfile} course={course} /> : null}
                 </div>
             </Col>
         )
