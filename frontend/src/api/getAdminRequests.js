@@ -25,7 +25,7 @@ async function getRequestsList(status) {
 */
 async function patchRequests(dataSend) {
     const STATUS_CODES = ['N','A','R'];
-    if(STATUS_CODES.indexOf(dataSend.status_code) == -1)
+    if(STATUS_CODES.indexOf(dataSend.status_code) === -1)
         return false;
     try {
         await API.patch('user/totrainer', dataSend);
