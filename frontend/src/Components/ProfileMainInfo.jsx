@@ -13,6 +13,7 @@ import NoCoursesOrEvents from './NoCoursesOrEvents';
 import Cours from './cours'
 import Event from './event'
 import Achievement from './Achievement'
+import TrainerCourses from './TrainerCourses'
 
 const override = css`
     display: block;
@@ -20,6 +21,16 @@ const override = css`
     border-color: #FFD466;
 `;
 
+const isTrainer = (data) => {
+    let show = "";
+    if (data){
+            show = "user-courses";
+           }
+    else {
+          show = "auth-display-none";
+        }   
+    return show;
+}
 
 export default class ProfileInfo extends React.Component {
     constructor(props) {
@@ -96,6 +107,16 @@ export default class ProfileInfo extends React.Component {
                   <Row>
                     <Col>
                       <div className="event-and-courses align">
+                          <div
+                                className={`tab-item ${isTrainer(profile.userInfo.is_trainer)}`}
+                                tab-link
+                                onClick={() => { this.toggleTab('8') }}
+                                style={{cursor:'pointer', marginBottom:'15px'}}
+                            >
+                                <span >
+                                    Own courses
+                                </span>
+                          </div>
                           <div
                                 className="user-courses tab-item"
                                 tab-link
@@ -263,6 +284,11 @@ export default class ProfileInfo extends React.Component {
                     <TabPane tabId="7">
                       <Row>
                         <PDP/>
+                      </Row>
+                    </TabPane>
+                     <TabPane tabId="8">
+                      <Row>
+                        <TrainerCourses/>
                       </Row>
                     </TabPane>
                   </TabContent>
