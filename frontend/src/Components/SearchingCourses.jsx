@@ -161,10 +161,10 @@ export default class SearchingCourses extends React.Component{
                   <Router>
                       <Container>
                           <div id="wrap">
-                              <form action="" autocomplete="on">
+                              <form action="" autoComplete="on">
                                   <input id="search"
                                          name="search"
-                                         type="text"
+                                         type="text" 
                                          placeholder="What're you looking for?"
                                          onChange = {(event) => {this.handleSearchData(event)}}
                                   />

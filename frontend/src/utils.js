@@ -1,7 +1,9 @@
-const ROLE_ADMIN = 3,
+const DEFAULT_AVATAR_URL = "/media/avatar.png",
+      HOSTNAME_PORT = "http://localhost:8000",
+      ROLE_ADMIN = 3,
       ROLE_MODERATOR = 2;
 
-export const HOSTNAME_PORT = "http://localhost:8000";
+export { DEFAULT_AVATAR_URL, HOSTNAME_PORT, ROLE_ADMIN, ROLE_MODERATOR }
 
 export const isAuthenticated = (dosmth) => {
     let show = "auth-display-none";
@@ -18,15 +20,11 @@ export const isAuthenticated = (dosmth) => {
 }
 
 export const isAdmin = () => {
-    if (localStorage.getItem('role') == ROLE_ADMIN)
-        return true;
-    return false;
+    return parseInt(localStorage.getItem('role')) === ROLE_ADMIN;
 }
 
 export const isModerator = () => {
-    if (localStorage.getItem('role') == ROLE_MODERATOR)
-        return true;
-    return false;
+    return parseInt(localStorage.getItem('role')) === ROLE_MODERATOR;
 }
 
 export const isTrainer = () => {
@@ -35,12 +33,12 @@ export const isTrainer = () => {
     return false;
 }
 
-export const defaultPhoto = (defurlphoto, coverurl) => {
+export const defaultPhoto = (defaultPhotoUrl, coverUrl) => {
     let urlphoto;
-    if(!coverurl || coverurl == "null"){
-        urlphoto = HOSTNAME_PORT + defurlphoto;
+    if(!coverUrl || coverUrl === ""){
+        urlphoto = HOSTNAME_PORT + defaultPhotoUrl;
     } else {
-        urlphoto = HOSTNAME_PORT + coverurl
+        urlphoto = HOSTNAME_PORT + coverUrl;
     }
     return urlphoto;
 }

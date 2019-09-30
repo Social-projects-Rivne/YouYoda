@@ -15,9 +15,9 @@ async function isAuthorized(checkParam) {
                 if(response.status === 200){
                     if(response.data['data_status'])
                     {
-                        if(response.data['data_status'] == 'authorized' && checkParam == 'authorized')
+                        if(response.data['data_status'] === 'authorized' && checkParam === 'authorized')
                             return true;
-                        if(response.data['data_status'] == 'role' && checkParam == 'role')
+                        if(response.data['data_status'] === 'role' && checkParam === 'role')
                             return response.data;
                         if(response.data['data_status'] == 'is_trainer' && checkParam == 'is_trainer')
                             return response.data;

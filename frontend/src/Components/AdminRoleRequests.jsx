@@ -71,6 +71,7 @@ class AdminRequests extends React.Component {
                 this.state.dataList[index].comment = newValue;
                 this.forceUpdate();
             }
+            return true;
         });
     }
 
@@ -95,7 +96,7 @@ class AdminRequests extends React.Component {
         var itemIds = {};
         this.state.checkedComments.map(number => {
             var commentValue = document.getElementById('comment_'+number).value;
-             itemIds[number] = {'id':number, 'comment':commentValue};
+            itemIds[number] = {'id':number, 'comment':commentValue};
         });
         return itemIds;
     }
@@ -158,7 +159,7 @@ class AdminRequests extends React.Component {
 
     renderRequestItem(item) {
         var read_only = '';
-        if(item.status_code == 'N')
+        if(item.status_code === 'N')
             read_only = <input type="checkbox" value={item.author_id} data-item_id={item.id} onChange={this.onChange.bind(this)} />;
         var dateItem = new Intl.DateTimeFormat('en-GB', {
             year: 'numeric',
@@ -202,28 +203,28 @@ class AdminRequests extends React.Component {
                         <Col>
                             <input className="form-check-input" type="radio"
                                    name="statusNew" value="N"
-                                   checked={(this.state.requestsStatus=='N')?true:false}
+                                   checked={(this.state.requestsStatus==='N')?true:false}
                                    onChange={(event) => {this.radioGetStatus(event)}}/>
                             <label className="form-check-label" htmlFor="statusNew">New</label>
                         </Col>
                         <Col>
                             <input className="form-check-input" type="radio"
                                    name="statusApproved" value="A"
-                                   checked={(this.state.requestsStatus=='A')?true:false}
+                                   checked={(this.state.requestsStatus==='A')?true:false}
                                    onChange={(event) => {this.radioGetStatus(event)}}/>
                             <label className="form-check-label" htmlFor="statusApproved">Approved</label>
                         </Col>
                         <Col>
                             <input className="form-check-input" type="radio"
                                    name="statusRejected" value="R"
-                                   checked={(this.state.requestsStatus=='R')?true:false}
+                                   checked={(this.state.requestsStatus==='R')?true:false}
                                    onChange={(event) => {this.radioGetStatus(event)}}/>
                             <label className="form-check-label" htmlFor="statusRejected">Rejected</label>
                         </Col>
                         <Col>
                             <input className="form-check-input" type="radio"
                                    name="statusAll" value="all"
-                                   checked={(this.state.requestsStatus=='all')?true:false}
+                                   checked={(this.state.requestsStatus==='all')?true:false}
                                    onChange={(event) => {this.radioGetStatus(event)}}/>
                             <label className="form-check-label" htmlFor="statusAll">All</label>
                         </Col>
