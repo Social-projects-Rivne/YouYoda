@@ -49,7 +49,7 @@ export default class CourseDetail extends React.Component{
         const USERDATA = { "course_id": this.props.course.id};
         try {
             const response = await API.post(URLPATH, USERDATA);
-            if(response.status === 208) 
+            if(response.status === 208)
                 toast.info(response.data);
             if(response.status === 201)
                 toast.success('You subscribe to ' + this.props.course.coursename);
