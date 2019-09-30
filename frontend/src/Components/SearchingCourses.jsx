@@ -161,7 +161,7 @@ export default class SearchingCourses extends React.Component{
                   <Router>
                       <Container>
                           <div id="wrap">
-                              <form action="" autocomplete="on">
+                              <form action="" autoComplete="on">
                                   <input id="search" 
                                          name="search" 
                                          type="text" 
@@ -201,12 +201,12 @@ export default class SearchingCourses extends React.Component{
                           </Row>
                           <Route
                               path='/courses/search:page'
-                              render={() => <Cours coursesList={this.state.coursesList} loading={this.state.loading}/>}
+                              render={() => <Cours coursesList={this.state.coursesList} loading={this.state.loading} lg={3}/>}
                           />
                           <Route
                               exact
                               path='/courses/search'
-                              render={() => <Cours coursesList={this.state.coursesList} loading={this.state.loading}/>}
+                              render={() => <Cours coursesList={this.state.coursesList} loading={this.state.loading} lg={3}/>}
                           />
                           <Row>
                               <Col style={{visibility:visibpag}}>

@@ -21,7 +21,7 @@ export default class Footer extends React.Component{
                     </Link>
                   </li>
                   <li>
-                    <Link to="/courses" >
+                    <Link to="/courses/search" >
                         Courses
                     </Link>
                   </li>
@@ -31,7 +31,7 @@ export default class Footer extends React.Component{
                     </Link>
                   </li>
                   <li>
-                    <Link to="/events" >
+                    <Link to="/events/search" >
                         Events
                     </Link>
                   </li>
@@ -47,22 +47,22 @@ export default class Footer extends React.Component{
               <Col>
                   <ul className="soc">
                    <li className="facebook">
-                      <a href="#">
+                      <a href="/">
                         <FontAwesomeIcon icon={['fab', 'facebook']}/>
                       </a>
                     </li>
                     <li className="twitter">
-                      <a href="#">
+                      <a href="/">
                         <FontAwesomeIcon icon={['fab', 'twitter']}/>
                       </a>
                     </li>
                     <li className="instagram">
-                      <a href="#">
+                      <a href="/">
                         <FontAwesomeIcon icon={['fab', 'instagram']}/>
                       </a>
                     </li>
                     <li className="whatsapp">
-                      <a href="#">
+                      <a href="/">
                         <FontAwesomeIcon icon={['fab', 'whatsapp']}/>
                       </a>
                     </li>
