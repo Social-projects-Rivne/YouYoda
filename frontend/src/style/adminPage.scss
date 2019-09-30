@@ -61,6 +61,7 @@
 }
 
 
+#wrapper, .wrapper {
 /* FILTERSIDEBAR */
 .bm-burger-button {
     position: absolute;
@@ -75,6 +76,7 @@
   background: #373a47;
 }
 .bm-menu {
+  background: rgb(232, 232, 232);
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
@@ -96,6 +98,19 @@
 .bm-burger-bars {
     background: #373a47;
   }
+
+.bm-burger-button {
+  position: fixed;
+  width: 40px;
+  height: 30px;
+  top: 107px;
+  left: 100px;
+ }
+
+ .bm-burger-button::after {
+	content: "";				
+}
+   
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
@@ -119,4 +134,5 @@
 .bm-menu-wrap {
   bottom: 0;
   left: 0;
+}
 }

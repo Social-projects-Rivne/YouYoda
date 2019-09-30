@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom';
 import Footer from '../Components/Footer';
 import {isAuthorized} from '../api/isAuthorized';
 import PageHeader from '../Components/PageHeader';
-import '../style/adminPage.css';
+import '../style/adminPage.scss';
 import '../style/dataTable.css';
 
 
