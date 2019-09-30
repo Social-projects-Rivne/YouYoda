@@ -46,13 +46,13 @@ export class UserMenu extends React.Component{
     if (redirect) {
        return <Redirect to='/'/>;
     }
-    let ManageDashboard, MyCourses;
+    let ManageDashboard, CreateCourse;
     if (isAdmin())
         ManageDashboard = <Link to="/admin" className="dropdown-item">Admin Dashboard</Link>;
     else if (isModerator())
         ManageDashboard = <Link to="/moderator" className="dropdown-item">Moderator Dashboard</Link>;
     if (isTrainer())
-        MyCourses = <Link to="/profile/create-course" className="dropdown-item">Create course</Link>
+        CreateCourse = <Link to="/profile/create-course" className="dropdown-item">Create course</Link>
     return (
       <div className={`header-user-menu ${isAuthenticated("show")}`}>
 
