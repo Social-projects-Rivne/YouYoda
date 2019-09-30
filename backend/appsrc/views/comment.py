@@ -62,3 +62,28 @@ class EventComments(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class TrainerComments(APIView):
+    """Takes data from TrainerSerializator for view top rate courses"""
+
+    permission_classes = [permissions.AllowAny,]
+
+    def get(self, request):
+        """Get trainer_id as params and filter comments"""
+        trainer_id = request.query_params.get('trainer_id')
+        comments = TrainerComments.objects.filter(trainer = trainer_id).order_by('-date')
+        serializer = TrainerCommentsGetSerializator(comments, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        """Push comment to db with CommentsPostSerializator"""
+        data_comment=request.data
+        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
+        data_comment['author'] = user.id
+        serializer = TrainerCommentsPostSerializator(data=data_comment)
+
+        if serializer.is_valid():
+            comments = serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -130,3 +130,9 @@ class PDPNotes(models.Model):
 class CourseSchedule(models.Model):
     course = models.ForeignKey(Courses, related_name='course_schedule', on_delete=models.CASCADE)
     date = models.IntegerField(blank=False)
+
+class TrainerComments(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE, related_name='comment_author')
+    trainer = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE, related_name='comment_trainer')
+    date = models.DateTimeField(auto_now_add=True)
+    comment = models.TextField(blank=True, null=True)

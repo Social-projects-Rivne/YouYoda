@@ -1,22 +1,16 @@
 import React from 'react';
 
-import { Container,Row,Button,Col } from 'reactstrap';
+import { Container, Row, Col, Collapse } from 'reactstrap';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
-import StarRatingComponent from 'react-star-rating-component';
+import { Link } from 'react-scroll';
 import { toast } from 'react-toastify';
-import DayPicker from 'react-day-picker';
 
 import { API } from '../api/axiosConf';
-import { CommentList, CommentForm } from './CommentList';
-import { defaultPhoto, isAuthenticated } from '../utils';
-import Cours from './cours';
-import { axiosGet } from '../api/axiosGet';
-import Event from './event';
 import Certificate from './Certificate';
-
-
-
+import { CommentList, CommentForm } from './TrainerCommentList';
+import Cours from './cours';
+import { defaultPhoto, isAuthenticated } from '../utils';
+import Event from './event';
 
 
 export default class TrainerPage extends React.Component{
@@ -24,18 +18,24 @@ export default class TrainerPage extends React.Component{
       super(props);
       this.state = {
           cover_url: "",
+          comments: [],
           coursesList: [],
           eventsList: [],
           certificateList: [],
           loading: true,
-          trainer: {}
+          trainer: {},
+          courseCollapse: true,
+          eventCollapse: true,
+          certificatesCollapse: true,
+          generalInfoCollapse: true
+
       };
     }
     async componentWillMount() {
         try{
             let response = await API.get('trainer/page', {
                 params:{
-                    "id":4
+                    "id":this.props.trainer_id
                 }
             })
             this.setState({
@@ -49,6 +49,7 @@ export default class TrainerPage extends React.Component{
         } catch (error) {
             toast.error(error.message + ' Please, сontact the administration for more information');
         }
+        this.getComments();
       }
       lastLogin = () => {
         let today = new Date();
@@ -65,8 +66,45 @@ export default class TrainerPage extends React.Component{
         } else {
             return `${mins} minutes`;
         }
+    }
 
+    getComments = async() => {
+        try {
+            let response = await API.get('/trainer/comments',
+                {
+                        trainer_id: this.props.trainer_id,
+                }
+        )
+            this.setState({
+                comments: response.data,
+                loading: false
+            })
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
+    addComment = async() => {
+        await this.getComments()
+    }
+    toggleCourseCollapse = () => {
+        this.setState(state => ({ courseCollapse: !state.courseCollapse }));
+    }
+    toggleEventCollapse = () => {
+        this.setState(state => ({ eventCollapse: !state.eventCollapse }));
+    }
+    toggleCertCollapse = () => {
+        this.setState(state => ({ certificatesCollapse: !state.certificatesCollapse }));
+    }
+    toggleGeneralCollapse = () => {
+        this.setState(state => ({ generalInfoCollapse: !state.generalInfoCollapse }));
+    }
+
+    arrowAnimate = (collapse) => {
+        if (collapse) {
+            return {transform:'rotate(180deg)',
+            transition: '.3s transform ease-in-out'};
+        }
     }
 
     render(){
@@ -74,7 +112,7 @@ export default class TrainerPage extends React.Component{
         let coverImg = defaultPhoto(defImg, this.state.trainer.cover_url);
         let coverAvatar = defaultPhoto(defImg, this.state.trainer.avatar_url)
         let birthDay = moment(this.state.trainer.birth_date).format('Do MMMM YYYY');
-
+        
         return(
 
             <div className="trainer-page">
@@ -86,7 +124,9 @@ export default class TrainerPage extends React.Component{
                         backgroundSize: 'cover',
                         minWidth:'98vw',
                         height: "40vh",
-                        width: '100%'
+                        width: '100%',
+                        
+
                     }}
                 ></div>
                 <Container>
@@ -107,55 +147,101 @@ export default class TrainerPage extends React.Component{
                         </div>
                         <div className="funny-icon">
                             <i className="fas fa-business-time"><span> 2 Years with YouYoda</span></i>
-                            <i className="fas fa-hand-spock"><span> {this.state.coursesList.length} Created Courses</span></i>
-                            <i className="fas fa-glass-cheers"><span> {this.state.eventsList.length} Organized Events</span></i>
+                            <Link href="/about" className="nav-link" activeClass="active" to="trainer-courses" spy={true} smooth={true} duration={500}>
+                                <i className="fas fa-hand-spock"><span> {this.state.coursesList.length} Created Courses</span></i>
+                            </Link>
+                            <Link href="/about" className="nav-link" activeClass="active" to="trainer-events" spy={true} smooth={true} duration={500}>                            
+                                <i className="fas fa-glass-cheers"><span> {this.state.eventsList.length} Organized Events</span></i>
+                            </Link>
 
                         </div>
                     </Row>
                     <Row className="trainer-general-information">
-                        <h2>General Information:</h2>
-                        <ul>
-                            <li>
-                                <i className="fas fa-globe-africa"></i>
-                                <span> {this.state.trainer.location}</span>
-                            </li>
-                            <li>
-                                <i className="fas fa-birthday-cake"></i>
-                                <span> {birthDay}</span>
-                            </li>
-                            <li>
-                                <i className="fas fa-phone-alt"></i>
-                                <span> {this.state.trainer.phone_number} </span>
-                            </li>
-                        </ul>
-                        <div>
-                            <h4><i className="far fa-address-card"></i> About me:</h4>
-                            <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections.
-
-    The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me? " he thought. It wasn't a dream.
-
-    His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops </p>
+                        <div className="trainer-collapse-header" 
+                            type="button" 
+                            onClick={this.toggleGeneralCollapse}
+                        >
+                            <h2>General Information:</h2>
+                            <i className="fas fa-chevron-down arrow-collapse" style={this.arrowAnimate(this.state.generalInfoCollapse)}></i>
                         </div>
+                        <Collapse isOpen={this.state.generalInfoCollapse} id="coursesCollaps">
+                            <ul>
+                                <li>
+                                    <i className="fas fa-globe-africa"></i>
+                                    <span> {this.state.trainer.location}</span>
+                                </li>
+                                <li>
+                                    <i className="fas fa-birthday-cake"></i>
+                                    <span> {birthDay}</span>
+                                </li>
+                                <li>
+                                    <i className="fas fa-phone-alt"></i>
+                                    <span> {this.state.trainer.phone_number} </span>
+                                </li>
+                            </ul>
+                            <div>
+                                <h4><i className="far fa-address-card"></i> About me:</h4>
+                                <p>this.state.trainer.about_me</p>
+                            </div>
+                        </Collapse>
                     </Row>
                     <Row className="trainer-courses-list">
-                        <h2>Courses:</h2>
-                        <Cours coursesList = {this.state.coursesList} loading = {this.state.loading}/>
+                        <div className="trainer-collapse-header" 
+                            type="button" 
+                            onClick={this.toggleCourseCollapse}
+                            id = "trainer-courses"
+                        >
+                            <h2>Courses:</h2>
+                            <i className="fas fa-chevron-down arrow-collapse" style={this.arrowAnimate(this.state.courseCollapse)}></i>
+                        </div>
+                        <Collapse isOpen={this.state.courseCollapse} id="coursesCollaps">
+                            <Cours coursesList = {this.state.coursesList} loading = {this.state.loading}/>
+                        </Collapse>
                     </Row>
                     <Row className="trainer-events-list">
-                        <h2>Events:</h2>
-                        <Event eventList = {this.state.eventsList} loading = {this.state.loading}/>
+                        <div className="trainer-collapse-header" 
+                                type="button" 
+                                onClick={this.toggleEventCollapse}
+                                id = "trainer-events"
+                        >
+                            <h2>Events:</h2>
+                            <i className="fas fa-chevron-down arrow-collapse" style={this.arrowAnimate(this.state.eventCollapse)}></i>
+                        </div>
+                        <Collapse isOpen={this.state.eventCollapse} id="coursesCollaps">
+                            <Event eventList = {this.state.eventsList} loading = {this.state.loading}/>
+                        </Collapse>
+
                     </Row>
                     <Row className="trainer-certificates-list">
-                        <h2>Certificates:</h2>
-                        <Certificate certificateList = {this.state.certificateList} loading = {this.state.loading}/>
+                        <div className="trainer-collapse-header" 
+                                type="button" 
+                                onClick={this.toggleCertCollapse}
+                        >
+                            <h2>Certificates:</h2>
+                            <i className="fas fa-chevron-down arrow-collapse" style={this.arrowAnimate(this.state.certificatesCollapse)}></i>
+                        </div>
+                        <Collapse isOpen={this.state.certificatesCollapse} id="coursesCollaps">
+                            <Certificate certificateList = {this.state.certificateList} loading = {this.state.loading}/>
+                        </Collapse>
+                    </Row>
+                    <Row style={{marginTop:'100px', marginBottom:'100px'}}>
+                    <Col md="4"  className = {`pt-3 border-right ${isAuthenticated("show")}`}>
+                        <h6>Say something about this course</h6>
+                            <CommentForm
+                                addComment = {this.addComment}
+                                trainer = {this.props.trainer_id}
+                                comments = {this.state.comments}
+                            />
+                    </Col>
+                    <Col className = "pt-3 bg-white">
+                        <CommentList
+                            comments = {this.state.comments}
+                            loading = {this.state.loading}
+                            />
+                    </Col>
                     </Row>
                 </Container>
-
-
-
-
             </div>
-
         )
     }
 };

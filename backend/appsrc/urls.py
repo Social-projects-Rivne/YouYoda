@@ -5,7 +5,7 @@ from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
 from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
-from .views.comment import CourseComments, EventComments
+from .views.comment import CourseComments, EventComments, TrainerComments
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
 from .views.trainer import TrainerPage
@@ -29,7 +29,8 @@ urlpatterns = [
     path('events/comments', EventComments.as_view(), name='comments-events'),
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('events/top', TopEvents.as_view(), name='top-events'),
-    path('trainer/page', TrainerPage.as_view(), name='top-events'),
+    path('trainer/comments', TrainerComments.as_view(), name='trainer-comment'),
+    path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),

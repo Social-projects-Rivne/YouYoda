@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import CoursesComments, YouYodaUser, EventsComments
+from ..models import CoursesComments, YouYodaUser, EventsComments, TrainerComments
 
 
 class CourseCommentsPostSerializator(serializers.ModelSerializer):
@@ -38,7 +38,7 @@ class CourseCommentsGetSerializator(serializers.ModelSerializer):
 
 
 class EventCommentsPostSerializator(serializers.ModelSerializer):
-	"""Takes data and add comment to CoursesComments.
+	"""Takes data and add comment to EventsComments.
     Converts it to JSON format for transmission via the API.
     """
 
@@ -59,7 +59,7 @@ class EventCommentsPostSerializator(serializers.ModelSerializer):
 
 
 class EventCommentsGetSerializator(serializers.ModelSerializer):
-	"""Takes data from the CoursesComments model for create list of comments.
+	"""Takes data from the EventsComments model for create list of comments.
     Converts it to JSON format for transmission via the API.
     """
 
@@ -68,4 +68,37 @@ class EventCommentsGetSerializator(serializers.ModelSerializer):
 		depth = 1
 		fields = [
 			'author', 'event', 'date',	'comment',
+            ]
+
+class TrainerCommentsPostSerializator(serializers.ModelSerializer):
+	"""Takes data and add comment to TrainerComments.
+    Converts it to JSON format for transmission via the API.
+    """
+
+	class Meta:
+		model = TrainerComments
+		fields = (
+			'author', 'trainer', 'date', 'comment'
+            )
+
+		def create(self, validated_data):
+			comments = TrainerComments.objects.create(
+				author = validated_data['author'],
+				comment = validated_data['comment'],
+				trainer = validated_data['trainer']
+				)
+			comments.save()
+			return comments
+
+
+class TrainerCommentsGetSerializator(serializers.ModelSerializer):
+	"""Takes data from the TrainerComments model for create list of comments.
+    Converts it to JSON format for transmission via the API.
+    """
+
+	class Meta:
+		model = TrainerComments
+		depth = 1
+		fields = [
+			'author', 'trainer', 'date',	'comment',
             ]
