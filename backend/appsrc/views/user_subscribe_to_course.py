@@ -57,9 +57,8 @@ class ListUserSubscribeToCourse(APIView):
 
     def get(self, request):
         """Receives and transmits a list of subscribers to the course for trainer"""
-        course_data = request.data
-        course = Courses.objects.get(id = course_data['id'])
-        course_subscribers = CoursesSubscribers.objects.filter(course = course.id)
+        course_id = request.query_params.get('course_id')
+        course_subscribers = CoursesSubscribers.objects.filter(course = course_id)
         serializer = CoursesSubscribersListSerializator(course_subscribers, many=True)
        
         return Response(serializer.data)
