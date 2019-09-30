@@ -10,6 +10,7 @@ import DayPicker from 'react-day-picker';
 import { API } from '../api/axiosConf';
 import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
+import TrainerListUsers from './TrainerListUsers';
 
 
 export default class CourseDetail extends React.Component{
@@ -19,7 +20,8 @@ export default class CourseDetail extends React.Component{
           comments: [],
           schedule: [],
           firstDate: 1569936600,
-          loading: true
+          loading: true,
+          trainer: false
       };
     }
     getSchedule = async() => {
@@ -35,7 +37,6 @@ export default class CourseDetail extends React.Component{
                 schedule: response.data,
                 firstDate: response.data[0].date
             })
-            console.log(this.state.firstDate)
         } catch (error) {
             toast.error(error.message)
         }
@@ -44,8 +45,10 @@ export default class CourseDetail extends React.Component{
         try {
             let response = await API.get('/courses/comments',
                 {
+                    params: {
                         course_id: this.props.course.id,
                 }
+            }
         )
             this.setState({
                 comments: response.data,
@@ -59,6 +62,7 @@ export default class CourseDetail extends React.Component{
     componentWillMount = () => {
         this.getSchedule();
         this.getCommnts();
+        this.checkIfTrainer();
       }
 
     addComment = async() => {
@@ -86,6 +90,23 @@ export default class CourseDetail extends React.Component{
             this.addToCourse()
         }
     }
+
+    checkIfTrainer = async() => {
+        const URLPATH = 'course/trainer/check';
+        try {
+            let response = await API.get(URLPATH,
+                {
+                    params: {
+                        course_id: this.props.course.id,
+                }
+            }
+        )
+                toast.info("You are trainer!");
+                this.setState({trainer: true});
+        } catch (error) {
+        }
+    }
+
     render(){
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
@@ -98,9 +119,6 @@ export default class CourseDetail extends React.Component{
             return new Date(moment.unix(item.date).format("MM, DD, YYYY"))
         })
 
-        console.log(this.state.firstDate)
-
-
         let statuscolor;
         if(this.props.course.status === "Open"){
             statuscolor = "#54DB63"
@@ -109,8 +127,14 @@ export default class CourseDetail extends React.Component{
         } else {
             statuscolor = "#ffce54"
         }
-        return(
 
+        let show = "auth-display-none";
+        let hide = ""
+        if (this.state.trainer) {
+            show = "";
+            hide = "auth-display-none"
+        }
+        return(
             <div className="home-event ">
                 <div className='cd-header'>
                 <div className="d-flex justify-content-between flex-wrap container">
@@ -211,12 +235,19 @@ export default class CourseDetail extends React.Component{
                     />
               </Col>
             </Row>
+            <Row>
+                <Col className= {show}>
+                    <TrainerListUsers
+                    course = {this.props.course.id}
+                    />
+                </Col>
+            </Row>
             <Row className="btn-group-course-detail d-flex justify-content-between">
                 <Col>
                 </Col>
                 <Col lg='8' md='12' className='d-flex'>
                     <Button
-                    className='btn-sign'
+                    className={`btn-sign ${hide}`}
                     color="warning"
                     style={{margin:'0 33px 10px 33px'}}
                     onClick={this.subscribeCourse}

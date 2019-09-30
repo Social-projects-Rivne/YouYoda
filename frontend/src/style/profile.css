@@ -275,3 +275,11 @@
         margin-left: -15px;
     }
 }
+
+/*Styles for TrainerDetailCourse*/
+.title-table-list-subscribers {
+    margin-top: 10%;
+    margin-bottom: 8%;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+}
