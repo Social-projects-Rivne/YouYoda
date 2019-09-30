@@ -45,7 +45,7 @@ export default class TrainerPage extends React.Component{
                 certificateList: response.data.certificates,
                 loading: false
             })
-            
+
         } catch (error) {
             toast.error(error.message + ' Please, сontact the administration for more information');
         }
@@ -55,27 +55,25 @@ export default class TrainerPage extends React.Component{
         let mins = moment(today).diff(this.state.trainer.last_login, "minute")
         let d = 0;
         let h = 0;
-        let m = 0;
+
         if(mins >= 60*24){
             d = mins / (60*24);
-            return moment.utc().days(d).format("D");
+            return `${d} days`;
         } else if(mins >= 60){
             h = mins / 60;
-            return moment.utc().hours(h).format("H");
+            return `${h} hours`;
         } else {
-            return moment.utc().minutes(mins).format("M");
+            return `${mins} minutes`;
         }
 
-       
+
     }
-    
 
     render(){
         let defImg = "/media/aircraft-2795557_1920.jpg";
-        let coverImg = defaultPhoto(defImg, this.state.cover_url);
-        let today = new Date();
+        let coverImg = defaultPhoto(defImg, this.state.trainer.cover_url);
+        let coverAvatar = defaultPhoto(defImg, this.state.trainer.avatar_url)
         let birthDay = moment(this.state.trainer.birth_date).format('Do MMMM YYYY');
-        let lastLogin = moment(today).diff(this.state.trainer.last_login, "minute")
 
         return(
 
@@ -94,7 +92,7 @@ export default class TrainerPage extends React.Component{
                 <Container>
                     <Row className="d-flex trainer-page-header">
                         <div className="trainer-avatar">
-                            <img src={coverImg} alt="trainer avatar"/>
+                            <img src={coverAvatar} alt="trainer avatar"/>
                         </div>
                         <h1>{`${this.state.trainer.first_name} ${this.state.trainer.last_name}`}</h1>
                         <div className="status-offline col">
@@ -102,7 +100,7 @@ export default class TrainerPage extends React.Component{
                             <li>Last Login</li>
                             <li>
                                 <i className="far fa-clock"></i>
-                                {lastLogin} hours ago
+                                {this.lastLogin()} ago
                             </li>
                             </ul>
 
