@@ -1,13 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import permissions
+from rest_framework import permissions, status
 from django.conf import settings
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.core.paginator import Paginator
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-from ..models import Courses, CourseSchedule
+from ..models import Courses, CourseSchedule, YouYodaUser
 from ..serializers.courses_serializer import CourseScheduleSerializer, CoursesSerializator
 
 
@@ -76,3 +76,33 @@ class CourseScheduleView(APIView):
         course_schedule = CourseSchedule.objects.filter(course = course_id).order_by('date')
         serializer = CourseScheduleSerializer(course_schedule, many=True)
         return Response(serializer.data)
+
+
+class TrainerCoursesView(APIView):
+    """Takes data from CoursesSerializator for trainer view own courses"""
+
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def get(self, request):
+        """First check request data in cache, then pull data from db"""
+        auth_token = request.headers['Authorization'][6:]
+        user = YouYodaUser.objects.get(auth_token=auth_token)
+        trainer_courses = Courses.objects.filter(owner = user.id).order_by('start_date')
+        serializer = CoursesSerializator(trainer_courses, many=True)
+        return Response(serializer.data)
+
+
+class CourseIfTrainerView(APIView):
+    """Takes data from model Courses and check if user is trainer for this course"""
+
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def get(self, request):
+        """First check request data in cache, then pull data from db"""
+        auth_token = request.headers['Authorization'][6:]
+        user = YouYodaUser.objects.get(auth_token=auth_token)
+        course_id = request.query_params.get('course_id')
+        trainer = Courses.objects.filter(owner = user.id, id = course_id)
+        if trainer:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_404_NOT_FOUND)
