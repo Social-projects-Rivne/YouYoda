@@ -31,8 +31,5 @@ class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
 	"""
 
 	class Meta:
-
 		model = CoursesSubscribers
 		fields = ('course',)
-
-

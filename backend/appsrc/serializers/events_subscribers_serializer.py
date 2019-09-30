@@ -18,7 +18,6 @@ class EventsSubscribersPostSerializator(serializers.ModelSerializer):
 					participant = validated_data['participant'],
 					event = validated_data['event'],
 					)
-			event_add.save()
 			return event_add
 
 

@@ -35,17 +35,18 @@ export default class CourseDetail extends React.Component{
                 schedule: response.data,
                 firstDate: response.data[0].date
             })
-            console.log(this.state.firstDate)
         } catch (error) {
             toast.error(error.message)
         }
     }
-    getCommnts = async() => {
+    getComments = async() => {
         try {
             let response = await API.get('/courses/comments',
                 {
+                    params: {
                         course_id: this.props.course.id,
                 }
+            }
         )
             this.setState({
                 comments: response.data,
@@ -58,11 +59,11 @@ export default class CourseDetail extends React.Component{
 
     componentWillMount = () => {
         this.getSchedule();
-        this.getCommnts();
+        this.getComments();
       }
 
     addComment = async() => {
-        await this.getCommnts()
+        await this.getComments()
     }
 
     addToCourse = async() => {
@@ -97,9 +98,6 @@ export default class CourseDetail extends React.Component{
         let scheduleList = this.state.schedule.map((item) => {
             return new Date(moment.unix(item.date).format("MM, DD, YYYY"))
         })
-
-        console.log(this.state.firstDate)
-
 
         let statuscolor;
         if(this.props.course.status === "Open"){
