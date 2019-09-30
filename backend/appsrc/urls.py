@@ -4,7 +4,8 @@ from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
+from .views.courses import (CourseScheduleView, TopCourses, SearchingCourses, 
+                            TrainerCoursesView, CourseIfTrainerView)
 from .views.comment import CourseComments, EventComments
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
@@ -24,10 +25,12 @@ urlpatterns = [
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
     path('courses/top', TopCourses.as_view(), name='top-courses'),
+    path('course/trainer/check', CourseIfTrainerView.as_view(), name='if-trainer-course'),
+    path('course/list/users', ListUserSubscribeToCourse.as_view(), name='course-list-users'),
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/comments', EventComments.as_view(), name='comments-events'),
-    path('course/list/users', ListUserSubscribeToCourse.as_view(), name='course-list-users'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('trainer/courses', TrainerCoursesView.as_view(), name='trainer-courses'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),
