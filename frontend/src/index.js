@@ -15,7 +15,7 @@ import './style/forms.css';
 import './style/fillEditPage.css';
 import './style/events.css';
 import './style/filter.scss';
-import './style/course-event-detail.scss'
+import './style/course-event-detail.scss';
 import './style/media.css';
 import './index.css';
 
