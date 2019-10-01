@@ -3,7 +3,11 @@ import React from 'react';
 import {Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink,
     Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import LoginForm from '../Components/LoginForm';
+import Registration from '../Components/Registration';
 import { UserMenu } from './UserMenu';
+import { isAuthenticated } from '../utils';
+
 
 
 export default class Header extends React.Component {
@@ -11,13 +15,25 @@ export default class Header extends React.Component {
         super(props);
 
         this.state = {
+            isOpenM: false,
+            isOpenL: false,
             isOpen: false
         };
     }
+    handleClickReg = () => {
+        this.setState(prevState => ({
+            isOpen: !prevState.isOpen
+        }));
+    }
     toggle = () => {
         this.setState({
-            isOpen: !this.state.isOpen
+            isOpenM: !this.state.isOpenM
         });
+    }
+    handleClickLogin = () => {
+        this.setState(prevState => ({
+            isOpenL: !prevState.isOpenL
+        }));
     }
 
     render() {
@@ -55,6 +71,11 @@ export default class Header extends React.Component {
                     Courses
                     </Link>
                     </NavItem>
+                    <NavItem className={isAuthenticated("hide")}>
+                        <i className="fas fa-sign-in-alt sign-in-header nav-link"
+                            onClick={this.handleClickLogin}
+                            ></i>
+                    </NavItem>
                 </Nav>
             </Collapse>
             </Navbar>
@@ -63,6 +84,9 @@ export default class Header extends React.Component {
             </Row>
             </Container>
             </header>
+                <LoginForm handleClickLogin={this.handleClickLogin} handleClickReg={this.handleClickReg} isOpenL={this.state.isOpenL} />
+                <Registration handleClickReg={this.handleClickReg} handleClickLogin={this.handleClickLogin} isOpen={this.state.isOpen} />
+
             </div>
     );
   }

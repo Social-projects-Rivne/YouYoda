@@ -28,6 +28,10 @@
     .footer span {
         bottom: 0;
     }
+    .cd-info-block i {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -38,5 +42,16 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+    }
+    .star {
+        top: 0;
+    }
+    .home-rate .rate-num {
+        display: none;
+    }
+    .home-rate {
+        width: 100%;
+        top: 0;
+        flex-wrap: nowrap;
     }
 }

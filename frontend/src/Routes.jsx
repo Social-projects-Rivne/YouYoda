@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 
 
 import AdminDashboard from './Components/AdminDashboard';
@@ -11,8 +11,9 @@ import CourseDetail from './Components/CourseDetail';
 import CreateEventPage from "./Pages/CreateEventPage";
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
-import HomeCourses from './Components/HomeCourses';
+import EventDetail from './Components/EventDetail';
 import Home from './Pages/Home';
+import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
 import ModeratorDashboard from './Components/ModeratorDashboard';
 import ModeratorPage from "./Pages/ModeratorPage";
@@ -65,7 +66,10 @@ export default class Routes extends React.Component {
                                 <Route exact path="/events/search"
                                        render={() => <MainLayout><SearchingEvents/></MainLayout>}
                                 />
-                                <Route exact path='/admin'
+                                <Route exact path='/event/detail'
+                    render={(props)=><MainLayout><EventDetail event = {props.location.state.event}/></MainLayout>}
+                />
+               <Route exact path='/admin'
                                        render={() => <AdminPage><AdminDashboard/></AdminPage>}
                                 />
                                 <Route exact path={'/admin/:option'}

@@ -14,7 +14,8 @@ class AdminRequests extends React.Component {
         this.state = {
             dataList: [],
             checkedIds: [],
-            checkedComments: []
+            checkedComments: [],
+            requestsStatus: 'N'
         };
     }
 
@@ -76,8 +77,8 @@ class AdminRequests extends React.Component {
     /**
      * updates requests table, clear selected items and update requests list
     */
-    updateRequestTable = () => {   
-        var requestList = getRequestsList('N');
+    updateRequestTable = () => {
+        var requestList = getRequestsList(this.state.requestsStatus);
         requestList.then( valueRequests => {
             this.setState({
                 dataList: valueRequests
@@ -139,9 +140,15 @@ class AdminRequests extends React.Component {
         });
     }
 
-    componentWillMount() {
+    radioGetStatus = (event) => {
+        this.state.requestsStatus = event.target.value;
+        this.forceUpdate();
+        this.updateRequestTable();
+    }
+
+    componentDidMount() {
         // view list of requests in status New
-        var requestList = getRequestsList('N');
+        var requestList = getRequestsList(this.state.requestsStatus);
         requestList.then( valueRequests => {
             this.setState({
                 dataList: valueRequests,
@@ -161,6 +168,7 @@ class AdminRequests extends React.Component {
             minute: 'numeric',
             second: 'numeric'
         }).format(new Date(item.date));
+        let username = `${item.author__first_name} ${item.author__last_name}`
         // value property can not be Null
         var comment = '';
         if(item.comment)
@@ -171,7 +179,7 @@ class AdminRequests extends React.Component {
                 <td>{item.id}</td>
                 <td>{item.status_code}</td>
                 <td className="date-td">{dateItem}</td>
-                <td>{item.author_id}</td>
+                <td>{username} ({item.author_id})</td>
                 <td className="comment-td">
                     <input type="text"
                            id={`comment_${item.id}`}
@@ -188,6 +196,37 @@ class AdminRequests extends React.Component {
             <div id="requests-table" className="admin-tables">
                 <Row>
                     <Col><h5>Requests to Become Trainers Table</h5></Col>
+                </Row>
+                <Row className="form-group text-center">
+                        <Col className="text-nowrap">Show Requests in status:</Col>
+                        <Col>
+                            <input className="form-check-input" type="radio"
+                                   name="statusNew" value="N"
+                                   checked={(this.state.requestsStatus=='N')?true:false}
+                                   onChange={(event) => {this.radioGetStatus(event)}}/>
+                            <label className="form-check-label" htmlFor="statusNew">New</label>
+                        </Col>
+                        <Col>
+                            <input className="form-check-input" type="radio"
+                                   name="statusApproved" value="A"
+                                   checked={(this.state.requestsStatus=='A')?true:false}
+                                   onChange={(event) => {this.radioGetStatus(event)}}/>
+                            <label className="form-check-label" htmlFor="statusApproved">Approved</label>
+                        </Col>
+                        <Col>
+                            <input className="form-check-input" type="radio"
+                                   name="statusRejected" value="R"
+                                   checked={(this.state.requestsStatus=='R')?true:false}
+                                   onChange={(event) => {this.radioGetStatus(event)}}/>
+                            <label className="form-check-label" htmlFor="statusRejected">Rejected</label>
+                        </Col>
+                        <Col>
+                            <input className="form-check-input" type="radio"
+                                   name="statusAll" value="all"
+                                   checked={(this.state.requestsStatus=='all')?true:false}
+                                   onChange={(event) => {this.radioGetStatus(event)}}/>
+                            <label className="form-check-label" htmlFor="statusAll">All</label>
+                        </Col>
                 </Row>
                 <Row className="requests-table">
                     <Col className="requests-table-wrap">
