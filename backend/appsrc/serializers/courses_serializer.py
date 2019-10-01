@@ -1,22 +1,32 @@
 from rest_framework import serializers
 
-from ..models import Courses, CoursesComments, CourseSchedule
+from ..models import Courses, CoursesComments, CourseSchedule, YouYodaUser
 
+
+class TrainerIdSerializator(serializers.ModelSerializer):
+	"""Takes id, first_name and last_name from the YouYodaUser model"""
+
+	class Meta:
+
+		 model = YouYodaUser
+		 fields = ('id', 'first_name', 'last_name')
 
 class CoursesSerializator(serializers.ModelSerializer):
 	"""Takes data from the Courses model for Top Courses component.
     Converts it to JSON format for transmission via the API.
 
     """
-	owner = serializers.StringRelatedField()
-	categories = serializers.StringRelatedField()
 
+	categories = serializers.StringRelatedField()
+	owner = TrainerIdSerializator()
 
 	class Meta:
 
 		 model = Courses
 
-		 fields = ('__all__')
+		 fields = ('coursename', 'owner', 'status', 'description', 'is_public',
+		  			'start_date', 'duration', 'rate', 'cost', 'members_limit',
+					'categories', 'location', 'cover_url', 'id')
 
 class CCommentsSerializator(serializers.ModelSerializer):
 	"""Takes data from the CoursesComponents model for create list of comments.
@@ -50,5 +60,4 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
 	class Meta:
 
 		model = CourseSchedule
-		depth = 1
 		fields = ('date', 'course')

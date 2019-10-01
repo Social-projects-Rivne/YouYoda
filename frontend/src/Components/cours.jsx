@@ -58,7 +58,7 @@ export default class Cours extends React.Component{
                             <CardText>
                                 <p><span className="main-text-span">Category: </span>{course.categories}</p>
                                 <p>Duration: {newCourseDuration} hours</p>
-                                <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
+                                <p><span className="main-text-span">Trainer: </span>{`${course.owner.first_name} ${course.owner.last_name}`}</p>
                                 <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p>
                             </CardText>
                         </CardBody>

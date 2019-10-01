@@ -112,7 +112,7 @@ export default class TrainerPage extends React.Component{
         let coverImg = defaultPhoto(defImg, this.state.trainer.cover_url);
         let coverAvatar = defaultPhoto(defImg, this.state.trainer.avatar_url)
         let birthDay = moment(this.state.trainer.birth_date).format('Do MMMM YYYY');
-        
+
         return(
 
             <div className="trainer-page">
@@ -125,7 +125,7 @@ export default class TrainerPage extends React.Component{
                         minWidth:'98vw',
                         height: "40vh",
                         width: '100%',
-                        
+
 
                     }}
                 ></div>
@@ -150,15 +150,14 @@ export default class TrainerPage extends React.Component{
                             <Link href="/about" className="nav-link" activeClass="active" to="trainer-courses" spy={true} smooth={true} duration={500}>
                                 <i className="fas fa-hand-spock"><span> {this.state.coursesList.length} Created Courses</span></i>
                             </Link>
-                            <Link href="/about" className="nav-link" activeClass="active" to="trainer-events" spy={true} smooth={true} duration={500}>                            
+                            <Link href="/about" className="nav-link" activeClass="active" to="trainer-events" spy={true} smooth={true} duration={500}>
                                 <i className="fas fa-glass-cheers"><span> {this.state.eventsList.length} Organized Events</span></i>
                             </Link>
 
                         </div>
                     </Row>
                     <Row className="trainer-general-information">
-                        <div className="trainer-collapse-header" 
-                            type="button" 
+                        <div className="trainer-collapse-header"
                             onClick={this.toggleGeneralCollapse}
                         >
                             <h2>General Information:</h2>
@@ -186,8 +185,7 @@ export default class TrainerPage extends React.Component{
                         </Collapse>
                     </Row>
                     <Row className="trainer-courses-list">
-                        <div className="trainer-collapse-header" 
-                            type="button" 
+                        <div className="trainer-collapse-header"
                             onClick={this.toggleCourseCollapse}
                             id = "trainer-courses"
                         >
@@ -199,8 +197,7 @@ export default class TrainerPage extends React.Component{
                         </Collapse>
                     </Row>
                     <Row className="trainer-events-list">
-                        <div className="trainer-collapse-header" 
-                                type="button" 
+                        <div className="trainer-collapse-header"
                                 onClick={this.toggleEventCollapse}
                                 id = "trainer-events"
                         >
@@ -213,8 +210,7 @@ export default class TrainerPage extends React.Component{
 
                     </Row>
                     <Row className="trainer-certificates-list">
-                        <div className="trainer-collapse-header" 
-                                type="button" 
+                        <div className="trainer-collapse-header"
                                 onClick={this.toggleCertCollapse}
                         >
                             <h2>Certificates:</h2>

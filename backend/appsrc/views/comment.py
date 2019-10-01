@@ -6,8 +6,13 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
-from ..models import CoursesComments, YouYodaUser, EventsComments
-from ..serializers.comment_serializer import CourseCommentsGetSerializator, CourseCommentsPostSerializator, EventCommentsGetSerializator, EventCommentsPostSerializator
+from ..models import CoursesComments, YouYodaUser, EventsComments, TrainerComments
+from ..serializers.comment_serializer import (CourseCommentsGetSerializator,
+                                              CourseCommentsPostSerializator,
+                                              EventCommentsGetSerializator,
+                                              EventCommentsPostSerializator,
+                                              TrainerCommentsGetSerializator,
+                                              TrainerCommentsPostSerializator)
 
 
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
@@ -63,7 +68,7 @@ class EventComments(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class TrainerComments(APIView):
+class TrainerComment(APIView):
     """Takes data from TrainerSerializator for view top rate courses"""
 
     permission_classes = [permissions.AllowAny,]

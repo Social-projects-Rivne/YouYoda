@@ -8,7 +8,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
 from ..models import Courses, CourseSchedule
-from ..serializers.courses_serializer import CourseScheduleSerializer, CoursesSerializator
+from ..serializers.courses_serializer import (CourseScheduleSerializer,
+                                              CoursesSerializator)
 
 
 NUMBER_OF_TOP = 6

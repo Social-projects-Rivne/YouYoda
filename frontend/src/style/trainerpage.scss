@@ -56,16 +56,16 @@
         }
     }
     h2{
-        margin-top: 15px; 
-        margin-bottom: 15px; 
-        padding-left: 5px; 
+        margin-top: 15px;
+        margin-bottom: 15px;
+        padding-left: 5px;
         width: 100%;
         font-weight: 600;
         color: #4f4f4f;
     }
     .trainer-general-information{
         border-bottom: 1px solid #4f4f4f;
-       
+
         ul {
             width: 100%;
             padding: 0;
@@ -74,7 +74,7 @@
                 margin: 10px 0;
             }
             i {
-                margin-right: 10px; 
+                margin-right: 10px;
             }
         }
         h4 {
@@ -84,7 +84,7 @@
         p {
             text-indent: 20px;
         }
-        
+
     }
     .trainer-courses-list {
         border-bottom: 1px solid #4f4f4f;
@@ -92,11 +92,11 @@
     }
     .trainer-events-list {
         border-bottom: 1px solid #4f4f4f;
-        
+
     }
     .trainer-certificates-list {
         border-bottom: 1px solid #4f4f4f;
-        
+
     }
     .trainer-collapse-header {
         width: 100%;
@@ -104,8 +104,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
-        margin-bottom: 3px; 
+        margin-bottom: 3px;
         i {
             margin-right: 15px;
             font-size: 1.5rem;
@@ -115,5 +114,5 @@
     #coursesCollaps {
         margin: 15px 0;
     }
-    
+
 }
