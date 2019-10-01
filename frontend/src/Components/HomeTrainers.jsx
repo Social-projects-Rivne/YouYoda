@@ -20,32 +20,30 @@ export default class HomeTrainers extends React.Component{
             </Row>
             <Row>
                 <Col lg="3" md="6">
-                    <a href="#"><img src={require("../img/static/toptrainers/SonyaAlcock.png")}
-                    alt="trainer-photo" className="trainer-photo"/></a>
+                    <a href="/"><img src={require("../img/static/toptrainers/SonyaAlcock.png")}
+                    alt="ico" className="trainer-photo"/></a>
                     <p className="trainer-name">Sonya Alcock</p>
                     <p className="trainer-title">Self-Develop</p>
                 </Col>
                 <Col lg="3" md="6">
-                    <a href="#"><img src={require("../img/static//toptrainers/GordonMason.png")}
+                    <a href="/"><img src={require("../img/static/toptrainers/GordonMason.png")}
                     alt="ico" className="trainer-photo"/></a>
                     <p className="trainer-name">Gordon Mason</p>
                     <p className="trainer-title">Cheef</p>
                 </Col>
                 <Col lg="3" md="6">
-                    <a href="#"><img src={require("../img/static/toptrainers/AliyaWorkman.png")}
+                    <a href="/"><img src={require("../img/static/toptrainers/AliyaWorkman.png")}
                     alt="ico" className="trainer-photo"/></a>
                     <p className="trainer-name">Aliya Workman</p>
                     <p className="trainer-title">Motivation</p>
                 </Col>
                 <Col lg="3" md="6">
-                    <a href="#"><img src={require("../img/static/toptrainers/KyranWills.png")}
+                    <a href="/"><img src={require("../img/static/toptrainers/KyranWills.png")}
                     alt="ico" className="trainer-photo"/></a>
                     <p className="trainer-name">Kyran Wills</p>
                     <p className="trainer-title">Piano</p>
                 </Col>
-
             </Row>
-
             </Container>
             </div>
         )

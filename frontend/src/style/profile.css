@@ -9,11 +9,12 @@
     backface-visibility: hidden;
 }
 .profile-info {
-    margin-top: 40px;
-    margin-left: -30px;
+    margin-top: 5%;
 }
 .user-name div {
     display: inline-block;
+    line-height: 1.2;
+    font-size: 2rem;
 }
 .user-name h2 {
     font-weight: bold;
@@ -62,15 +63,33 @@
     border: 1px solid #707070;
     opacity: 0.3;
 }
+.profile-info-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.title-profile-block {
+    background-color: #f6f7f8;
+    padding-top: 0px;
+    margin: 0 0 20px;
+}
 
 /*Styles for UserCourses*/
+.favorites-profile-block {
+    background-color: #f6f7f8;
+    padding-top: 20px;
+    margin: 20px 0;
+}
+.favorites-profile-block a {
+    cursor: pointer;
+}
 .user-courses {
     display: flex;
-    font-size: 1.25rem;
-    background: #4f4f4f;
-    color: #fff;
-    padding-left: 15px;
-    border-radius: 16px;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 .user-courses div {
     font-weight: bold;
@@ -155,11 +174,17 @@
     position: relative;
     top: 20px;
 }
+.vr-line-wrap {
+    max-width: 10px;
+    padding-left: 0px;
+}
 .vr-line {
     background-color: #707070;
     opacity: 0.3;
     width: 2px;
-    height: 390px;
+    min-height: 390px;
+    height: 100%;
+    margin: 0 5px;
 }
 .courses-numbers {
     background-color: #707070;
@@ -177,6 +202,9 @@
     display: flex;
     justify-content: center;
 }
+.event-and-courses .nav-link {
+    padding: .5rem 0rem;
+}
 .user-courses-profile {
     display: flex;
     justify-content: space-between;
@@ -184,15 +212,23 @@
 }
 .user-courses-profile div {
     font-weight: bold;
-    margin-left: 15px;
+}
+.user-courses-profile span {
+    display: inline-block;
+    padding-right: 5px;
 }
 .course {
     cursor: pointer;
     width: 100px;
 }
 .show-hide {
-    display: flex;
-    justify-content: right;
+    display: block;
+    text-align: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+.show-hide:hover {
+    opacity: 0.8;
 }
 .left-arrow {
     width: 15px;
@@ -201,15 +237,19 @@
 .back {
     display: inline-block;
 }
+.achievement-row {
+    margin-bottom: 15px;
+}
 .achievement {
-     -webkit-transition: padding 0.7s;
+    transition: padding 0.7s;
+    -webkit-transition: padding 0.7s;
 }
 .achievement-image:hover {
     transform: scale(1.1);
     opacity: 1;
     cursor: pointer;
-    margin-bottom: 10px;
     border-radius: 40px;
+    transition: border-radius 0.7s;
     -webkit-transition: border-radius 0.7s;
 }
 
@@ -225,15 +265,13 @@
         display: flex;
         justify-content: center;
     }
-    .user-name,
     .user-info {
         margin-left: 80px;
     }
-    .user-name {
-        margin-top: -20px;
+    .profile-info {
+        margin-top: 0px;
     }
     .profile-photo-container {
-        margin-top: 20px;
         margin-left: -10px;
     }
     .join-course-container {
@@ -249,15 +287,17 @@
         display: inline-block;
         position: relative;
         left: 180px;
-        bottom: 115px;
+        vertical-align: top;
     }
     .align {
         position: relative;
-        bottom: 113px;
         left: 100px;
     }
     .back-no-info {
-        margin-top: -20px;
+        margin-top: 0px;
+    }
+    .vr-line-wrap {
+        display: none;
     }
 }
 @media screen and (max-width: 990px){

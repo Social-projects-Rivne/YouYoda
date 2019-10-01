@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container,Row,Button,Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 
@@ -19,7 +19,7 @@ export default class HomeCourses extends React.Component{
         };
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         let path = 'courses/top'
         let listCourses = await axiosGet(path);
         this.setState({
