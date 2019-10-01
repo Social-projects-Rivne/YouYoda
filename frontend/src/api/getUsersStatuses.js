@@ -12,8 +12,8 @@ async function getUsersStatusesList() {
 
 async function patchRequests(dataSend) {
     try {
-        await API.patch('users/updatestatuses', dataSend);
-        return true;
+        const response = await API.patch('users/updatestatuses', dataSend);
+        return response;
     } catch (error) {
         return Promise.reject(error);
     }
