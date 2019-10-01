@@ -1,15 +1,13 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import Footer from '../Components/Footer';
-import {isAuthorized} from '../api/isAuthorized';
+import { isAuthorized } from '../api/isAuthorized';
 import PageHeader from '../Components/PageHeader';
 import '../style/adminPage.css';
 import '../style/dataTable.css';
+import { ROLE_ADMIN, ROLE_MODERATOR } from '../utils';
 
-
-const ROLE_ADMIN = 3,
-      ROLE_MODERATOR = 2;
 
 export default class AdminPage extends React.Component{
     constructor(props){

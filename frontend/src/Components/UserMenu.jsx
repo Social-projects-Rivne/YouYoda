@@ -4,7 +4,7 @@ import {Dropdown, DropdownToggle, DropdownMenu} from 'reactstrap';
 import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { isAuthenticated, isAdmin, isModerator, defaultPhoto } from '../utils';
+import { isAuthenticated, isAdmin, isModerator, defaultPhoto, DEFAULT_AVATAR_URL } from '../utils';
 import { logOut } from '../api/logOut';
 
 
@@ -40,8 +40,7 @@ export class UserMenu extends React.Component{
             }
     }
   render () {
-    let defimg = "/media/avatar.png";
-    let coverimg = defaultPhoto(defimg, localStorage.getItem("avatar_url"));
+    let coverimg = defaultPhoto(DEFAULT_AVATAR_URL, localStorage.getItem("avatar_url"));
 
     const { redirect } = this.state;
     if (redirect) {
@@ -57,8 +56,8 @@ export class UserMenu extends React.Component{
 
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.dropdowntoggle}>
             <DropdownToggle className="dropdown-button">
-              <img src={(typeof this.props.avatarIco !== 'undefined')?this.props.avatarIco:coverimg}
-                      className="profile-photo-dropdown" alt="profile"/>
+              <img src={(this.props.avatarIco)?this.props.avatarIco:coverimg}
+                   className="profile-photo-dropdown" alt="profile"/>
             </DropdownToggle>
             <DropdownMenu right>
                 {ManageDashboard}

@@ -4,6 +4,8 @@ import { slide as Menu } from 'react-burger-menu';
 
 import { axiosGet } from '../api/axiosGet';
 
+const PATH_CATEGORIES = '/categories/list';
+
 
 export default class FilterCoursesSideBar extends React.Component {
   constructor(props) {
@@ -100,12 +102,11 @@ export default class FilterCoursesSideBar extends React.Component {
   }
 
   async componentDidMount() {
-        let path = '/categories/list'
-        let listCategories = await axiosGet(path);
-        this.setState({
-                categoriesList: listCategories,
-            });
-    };
+      let listCategories = await axiosGet(PATH_CATEGORIES);
+      this.setState({
+          categoriesList: listCategories,
+      });
+  };
 
   renderCategories(category) {
       return (

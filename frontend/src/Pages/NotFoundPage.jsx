@@ -11,7 +11,7 @@ export default class NotFoundPage extends React.Component{
             <>
             <PageHeader/>
             <div className="page-404">
-                <h1>Occurred, a 404 Error Has...</h1>
+                <h1>Occurred, a <b style={{color:'green'}}>404</b> Error Has...</h1>
                 <div>Yoda Doing Yoga, and Do You?</div>
                 <h2>
                     <div className="dragon-div">
