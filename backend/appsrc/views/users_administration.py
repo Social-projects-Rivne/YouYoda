@@ -54,12 +54,11 @@ class UpdateUsersStatuses(APIView):
         """ Post request to database """
         users = request.data
         if users is not None:
-            for u, s in users.items():
-                user = User.objects.get(id=u)
-                serializer = ManageUsersStatusesSerializer(user, data={'status_id': s}, partial=True)
+            for user_id, status_id in users.items():
+                user = User.objects.get(id=user_id)
+                serializer = ManageUsersStatusesSerializer(user, data={'status_id': status_id}, partial=True)
                 if serializer.is_valid():
                     serializer.save()
-            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
