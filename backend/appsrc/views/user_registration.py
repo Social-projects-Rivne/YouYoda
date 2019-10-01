@@ -1,11 +1,10 @@
-from ..serializers.user_registration_serializer import RegistrationSerializer
-
 from djoser.compat import get_user_email
 from djoser.conf import settings
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from ..models import YouYodaUser
 from ..serializers.user_registration_serializer import RegistrationSerializer, SocialRegistrationSerializer
 
 
@@ -14,6 +13,12 @@ class UserRegistration(APIView):
 
     def post(self, request, format='json'):
         data_request=request.data
+        username = request.data.get('username')
+        user = YouYodaUser.objects.filter(username=username)
+        if user:
+            msg = "You can not use this email. Try another or login."
+            return Response(msg, status=status.HTTP_208_ALREADY_REPORTED)
+
         serializer = RegistrationSerializer(data=data_request)
         if serializer.is_valid():
             user = serializer.save()
