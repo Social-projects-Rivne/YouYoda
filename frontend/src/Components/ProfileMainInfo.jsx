@@ -17,6 +17,8 @@ const override = css`
     margin: 0 auto;
     border-color: #FFD466;
 `;
+const BTN_ALL = 'ALL',
+      BTN_FAV = 'FAVORITE';
 
 
 export default class ProfileInfo extends React.Component {
@@ -208,7 +210,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        <Cours manage="True" changeProfile={updateProfile} coursesList={userFollowingCourses} loading={loading} lg={4}/>
+                        <Cours manage="True" manageButtons={BTN_ALL} changeProfile={updateProfile} coursesList={userFollowingCourses} loading={loading} lg={4}/>
                         {userFollowingCourses.length || loading ? (
                           null
                         ) : (
@@ -218,7 +220,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
-                        <Cours coursesList={userCompletedCourses} loading={loading} lg={4}/>
+                        <Cours manage="True" manageButtons={BTN_FAV} changeProfile={updateProfile} coursesList={userCompletedCourses} loading={loading} lg={4}/>
                         {userFollowingCourses.length || loading ? (
                           null
                         ) : (
@@ -228,7 +230,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        <Event eventList={userFollowingEvents} loading={loading} lg={4}/>
+                        <Event manage="True" manageButtons={BTN_ALL} changeProfile={updateProfile} eventList={userFollowingEvents} loading={loading} lg={4}/>
                         {userCompletedEvents.length || loading ? (
                           null
                         ) : (
@@ -269,7 +271,7 @@ export default class ProfileInfo extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Cours coursesList={userFavouritesCourses.slice(0, 4)} loading={loading} lg={3}/>
+                  <Cours manage="True" manageButtons={BTN_FAV} changeProfile={updateProfile} coursesList={userFavouritesCourses.slice(0, 4)} loading={loading} lg={3}/>
                   {userFavouritesCourses.length || loading ? (
                     null
                   ) : (
@@ -279,7 +281,7 @@ export default class ProfileInfo extends React.Component {
                 <Collapse isOpen={this.state.collapse}>
                   <Row>
                     {userFavouritesCourses.length ? (
-                      <Cours coursesList={userFavouritesCourses.slice(4, userFavouritesCourses.length)} loading={loading} lg={3}/>
+                      <Cours manage="True" manageButtons={BTN_FAV} changeProfile={updateProfile} coursesList={userFavouritesCourses.slice(4, userFavouritesCourses.length)} loading={loading} lg={3}/>
                     ) : (
                       null
                     )}

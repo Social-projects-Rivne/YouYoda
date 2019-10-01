@@ -70,7 +70,7 @@ export default class Cours extends React.Component{
                         </CardFooter>
                     </Card>
                 </Link>
-                {(this.props.manage && this.props.changeProfile)? <ManageButtons changeProfile={this.props.changeProfile} course={course} /> : null}
+                {(this.props.manage && this.props.changeProfile)? <ManageButtons manageButtons={this.props.manageButtons} changeProfile={this.props.changeProfile} course={course} /> : null}
                 </div>
             </Col>
         )

@@ -43,5 +43,6 @@ urlpatterns = [
     path('user/course/add', UserSubscribeToCourse.as_view(), name='subscribe_course'),
     path('user/course/delete', UserUnsubscribeCourse.as_view(), name='unsubscribe-course'),
     path('user/course/managefavorite', ManageFavoriteCoursesProfile.as_view(), name='add-favorite-course'),
+    #path('user/event/delete', UserUnsubscribeEvent.as_view(), name='unsubscribe-event'),
     path('users/getlist', UsersGetList.as_view()),
 ]
