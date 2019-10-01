@@ -8,7 +8,7 @@ from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
 from .views.comment import CourseComments, EventComments, TrainerComment
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
-from .views.trainer import TrainerPage
+from .views.trainer import TrainerPage, TopTrainers
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
@@ -31,6 +31,7 @@ urlpatterns = [
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('trainer/comments', TrainerComment.as_view(), name='trainer-comment'),
     path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
+    path('trainer/top', TopTrainers.as_view(), name='top-trainers'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),

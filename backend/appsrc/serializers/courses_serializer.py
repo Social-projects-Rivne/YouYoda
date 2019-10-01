@@ -57,6 +57,8 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
     """
 
+	course = CoursesSerializator()
+
 	class Meta:
 
 		model = CourseSchedule

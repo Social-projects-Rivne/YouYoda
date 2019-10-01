@@ -104,7 +104,7 @@ export default class EventDetail extends React.Component{
                             <i className="fas fa-user-tie"/>
                             <span className="main-text">
                             <Link to="" style={{color:"#fff"}}>
-                            {this.props.event.owner}</Link></span>
+                            {`${this.props.event.owner.first_name} ${this.props.event.owner.last_name}`}</Link></span>
                         </div>
 
                         <div className="ed cd-loc">

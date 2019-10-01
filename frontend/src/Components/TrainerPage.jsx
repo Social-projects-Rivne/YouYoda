@@ -70,9 +70,11 @@ export default class TrainerPage extends React.Component{
 
     getComments = async() => {
         try {
-            let response = await API.get('/trainer/comments',
+            let response = await API.get('/trainer/comments', 
                 {
+                    params: {
                         trainer_id: this.props.trainer_id,
+                    }
                 }
         )
             this.setState({
@@ -180,7 +182,7 @@ export default class TrainerPage extends React.Component{
                             </ul>
                             <div>
                                 <h4><i className="far fa-address-card"></i> About me:</h4>
-                                <p>this.state.trainer.about_me</p>
+                                <p>{this.state.trainer.about_me}</p>
                             </div>
                         </Collapse>
                     </Row>

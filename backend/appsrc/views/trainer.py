@@ -1,13 +1,37 @@
+from django.db.models import Count
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 from ..models import YouYodaUser, Courses, Events, TrainerCertificates
 from ..serializers.trainer_serializer import (
                                                 TrainerInfoSerializer,
                                                 TrainerCoursesSerializer,
                                                 TrainerEventsSerializer,
-                                                TrainerCertificatesSerializer)
+                                                TrainerCertificatesSerializer,
+                                                TopTrainerSerializer)
+
+
+NUMBER_OF_TOP = 4
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
+class TopTrainers(APIView):
+    """Takes data from CoursesTopSerializator for view top rate courses"""
+
+    permission_classes = [permissions.AllowAny,]
+
+    @method_decorator(cache_page(CACHE_TTL), name='top_trainers')
+    def get(self, request):
+        """First check request data in cache, then pull data from db"""
+        owners_courses = Courses.objects.values('owner').annotate(count=Count('owner')).order_by('-count')[:NUMBER_OF_TOP]
+        id_owners = [owner_courses['owner'] for owner_courses in owners_courses]
+        trainers = YouYodaUser.objects.filter(id__in = id_owners)
+        serializer = TopTrainerSerializer(trainers, many=True)
+        return Response(serializer.data)
 
 
 class TrainerPage(APIView):

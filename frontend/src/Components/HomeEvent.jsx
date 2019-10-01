@@ -133,7 +133,6 @@ export default class HomeEvent extends React.Component{
                                     <img src={coverImg} alt={event.name} className="event-modal-photo"/>
                                     <p className="main-text">Location: {event.location}</p>
                                     <p className="main-text">Date: {newEventDate}</p>
-                                    <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button className="btn-join"

@@ -273,6 +273,11 @@ def insertData(apps, schema_editor):
     UsersAchievements.objects.create(
         id=7, participant_id=1, achievement_id=7
     )
+    
+    TrainerCertificates = apps.get_model('appsrc', 'TrainerCertificates')
+    TrainerCertificates.objects.create(
+        id=1, user_id=4, description=description1, image_url='/media/LT04027254.png'
+    )
 
 
 

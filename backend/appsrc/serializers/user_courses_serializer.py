@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
+from .courses_serializer import TrainerIdSerializator
 from ..models import CoursesSubscribers, Courses
+
 
 
 class SubscribedSerializer(serializers.ModelSerializer):
@@ -22,10 +24,10 @@ class UserCoursesSerializer(serializers.ModelSerializer):
     """
 
     subscribed = SubscribedSerializer(source="subscribed_course", many="True")
-    owner = serializers.StringRelatedField()
+    owner = TrainerIdSerializator()
     categories = serializers.StringRelatedField()
 
     class Meta:
 
         model = Courses
-        exclude = ('id',)
+        exclude = ('id', )

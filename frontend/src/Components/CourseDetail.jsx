@@ -44,7 +44,9 @@ export default class CourseDetail extends React.Component{
         try {
             let response = await API.get('/courses/comments',
                 {
+                    params: {
                         course_id: this.props.course.id,
+                    }
                 }
         )
             this.setState({
@@ -156,7 +158,7 @@ export default class CourseDetail extends React.Component{
                             <i className="fas fa-user-tie"/>
                             <span className="main-text">
                             <Link to={{
-                                    pathname: '/p',
+                                    pathname: '/trainer/page',
                                     state: {'trainer_id':this.props.course.owner.id}
                                 }} style={{color:"#fff"}}>
                             {`${this.props.course.owner.first_name} ${this.props.course.owner.last_name}`}</Link></span>

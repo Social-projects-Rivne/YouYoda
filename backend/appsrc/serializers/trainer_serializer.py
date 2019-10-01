@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import YouYodaUser, Courses, Events, TrainerCertificates
+from ..models import Courses, Events, TrainerCertificates, YouYodaUser
 
 
 class TrainerInfoSerializer(serializers.ModelSerializer):
@@ -52,3 +52,15 @@ class TrainerCertificatesSerializer(serializers.ModelSerializer):
 
 		 model = TrainerCertificates
 		 fields = ("description", "image_url")
+
+
+class TopTrainerSerializer(serializers.ModelSerializer):
+	"""Takes data from the YouYodaUser model for top trainer on home page.
+    Converts it to JSON format for transmission via the API.
+
+    """
+
+	class Meta:
+
+		 model = YouYodaUser
+		 fields = ("id", "username", "first_name", "last_name", "avatar_url")

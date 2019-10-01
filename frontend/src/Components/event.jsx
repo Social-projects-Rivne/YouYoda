@@ -56,7 +56,7 @@ export default class Event extends React.Component{
                           <CardText>
                               <p><span className="main-text-span">Category: </span>{event.categories}</p>
                               <p>Rate: {event.rate}</p>
-                              <p><span className="main-text-span">Event organizer: </span>{event.owner}</p>
+                              <p><span className="main-text-span">Event organizer: </span>{`${event.owner.first_name} ${event.owner.last_name}`}</p>
                               <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
                           </CardText>
                       </CardBody>

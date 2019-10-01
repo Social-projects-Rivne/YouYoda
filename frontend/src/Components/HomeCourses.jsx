@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container,Row,Button,Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 
