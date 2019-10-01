@@ -20,12 +20,13 @@ class OrganizeEvent(APIView):
         serializer = OrganizeEventSerializer(event, many=True)
         return Response(serializer.data)
 
-    def patch(self, request):
-        """Receives and updates user event data"""
+    def patch(self, request, *args, **kwargs):
+        """Receives and updates user profile data"""
         data_request = request.data
+        event = get_object_or_404(Events, id=request.data.get('id'))
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
         data_request['owner'] = user.id
-        serializer = OrganizeEventSerializer(data=request.data, partial=True)
+        serializer = OrganizeEventSerializer(event, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -37,6 +38,6 @@ class OrganizeEvent(APIView):
         data_request['owner'] = user.id
         serializer = OrganizeEventSerializer(data=request.data)
         if serializer.is_valid():
-            event = serializer.save()
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,236 +1,236 @@
-/*Styles for Events, Courses*/
+/*!*Styles for Events, Courses*!*/
 
-/* SORT */
-.search-input-group {
-	margin-bottom: 1%;
-}
+/*!* SORT *!*/
+/*.search-input-group {*/
+/*	margin-bottom: 1%;*/
+/*}*/
 
-.search-input {
-	justify-content: right;
-	margin-right: 40px;
-}
+/*.search-input {*/
+/*	justify-content: right;*/
+/*	margin-right: 40px;*/
+/*}*/
 
-#search-input-select:hover {
-	cursor: pointer;
-	color: #1c0909db;
-}
+/*#search-input-select:hover {*/
+/*	cursor: pointer;*/
+/*	color: #1c0909db;*/
+/*}*/
 
-.search-input-group:hover {
-	cursor: pointer;
-}
+/*.search-input-group:hover {*/
+/*	cursor: pointer;*/
+/*}*/
 
-.search-input-select {
-	width: 232px;
-}
+/*.search-input-select {*/
+/*	width: 232px;*/
+/*}*/
 
-/* TITLE */
-.title-events {
-	text-align: center;
-	font-weight: bold;
-	margin-top: 15%;
-	margin-bottom: 3%;																				;
-	font-family: Roboto Condensed;
-	font-size: 40px;
-}
+/*!* TITLE *!*/
+/*.title-events {*/
+/*	text-align: center;*/
+/*	font-weight: bold;*/
+/*	margin-top: 15%;*/
+/*	margin-bottom: 3%;																				;*/
+/*	font-family: Roboto Condensed;*/
+/*	font-size: 40px;*/
+/*}*/
 
-/* EVENTS, COURSES */
-.card-link {
-	color: black;
-}
+/*!* EVENTS, COURSES *!*/
+/*.card-link {*/
+/*	color: black;*/
+/*}*/
 
-.card-link:hover {
-	color: #1c0909db;
-}
+/*.card-link:hover {*/
+/*	color: #1c0909db;*/
+/*}*/
 
-.event-card {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	min-width: 260px;
-	min-height: 460px;
-}
+/*.event-card {*/
+/*	margin-top: 20px;*/
+/*	margin-bottom: 20px;*/
+/*	min-width: 260px;*/
+/*	min-height: 460px;*/
+/*}*/
 
-.event-header {
- 	background: white;
-	border: 1px solid #4F4F4F;
-	min-height: 80px;
-	display: flex;
-	align-items: center;
-}
+/*.event-header {*/
+/* 	background: white;*/
+/*	border: 1px solid #4F4F4F;*/
+/*	min-height: 80px;*/
+/*	display: flex;*/
+/*	align-items: center;*/
+/*}*/
 
-.event-card-header {
-	font-weight: bold;
-	font-size: 20px;
-	margin-bottom: 20px;
-}
+/*.event-card-header {*/
+/*	font-weight: bold;*/
+/*	font-size: 20px;*/
+/*	margin-bottom: 20px;*/
+/*}*/
 
-.event-body {
-	border-left: 1px solid #4F4F4F;
-	border-right: 1px solid #4F4F4F;
-	height: 200px;
-}
+/*.event-body {*/
+/*	border-left: 1px solid #4F4F4F;*/
+/*	border-right: 1px solid #4F4F4F;*/
+/*	height: 200px;*/
+/*}*/
 
-.event-body p {
-	line-height: 80%;
-}
+/*.event-body p {*/
+/*	line-height: 80%;*/
+/*}*/
 
-.event-card .card-footer{
-	padding: 0;
-}
+/*.event-card .card-footer{*/
+/*	padding: 0;*/
+/*}*/
 
-/* FILTERSIDEBAR */
-#page-wrap {
-    overflow: auto;
-}
+/*!* FILTERSIDEBAR *!*/
+/*#page-wrap {*/
+/*    overflow: auto;*/
+/*}*/
 
-.bm-item {
-    display: inline-block;
-    text-decoration: none;
-    margin-bottom: 10px;
-    color: #d1d1d1;
-    transition: color 0.2s;
-}
+/*.bm-item {*/
+/*    display: inline-block;*/
+/*    text-decoration: none;*/
+/*    margin-bottom: 10px;*/
+/*    color: #d1d1d1;*/
+/*    transition: color 0.2s;*/
+/*}*/
 
-.bm-item:hover {
-    color: white;
-}
+/*.bm-item:hover {*/
+/*    color: white;*/
+/*}*/
 
-.bm-burger-bars {
-	background: transparent;
-}
+/*.bm-burger-bars {*/
+/*	background: transparent;*/
+/*}*/
 
-.bm-burger-button {
-	position: fixed;
-    width: 36px;
-	height: 30px;
-	top: 107px;
-	left: 100px;
- }
+/*.bm-burger-button {*/
+/*	position: fixed;*/
+/*    width: 36px;*/
+/*	height: 30px;*/
+/*	top: 107px;*/
+/*	left: 100px;*/
+/* }*/
 
-.bm-burger-button::after {
-	content: "\f0b0";
-	font-family: "FontAwesome"; 
-	font-weight: 900; 
-	font-size: 1.5rem;
-	color: #4f4f4f;					
-}
+/*.bm-burger-button::after {*/
+/*	content: "\f0b0";*/
+/*	font-family: "FontAwesome";*/
+/*	font-weight: 900;*/
+/*	font-size: 1.5rem;*/
+/*	color: #4f4f4f;*/
+/*}*/
 
-.bm-cross-button {
-  height: 24px;
-  width: 24px;
-}
+/*.bm-cross-button {*/
+/*  height: 24px;*/
+/*  width: 24px;*/
+/*}*/
 
-.bm-cross {
-    background: #bdc3c7;
-}
+/*.bm-cross {*/
+/*    background: #bdc3c7;*/
+/*}*/
 
-.bm-menu {
-    background: #4f4f4f;
-    padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
-}
+/*.bm-menu {*/
+/*    background: #4f4f4f;*/
+/*    padding: 2.5em 1.5em 0;*/
+/*    font-size: 1.15em;*/
+/*}*/
 
-.bm-morph-shape {
-    fill: #373a47;
-}
+/*.bm-morph-shape {*/
+/*    fill: #373a47;*/
+/*}*/
 
-.bm-item-list {
-    color: #b8b7ad;
-}
+/*.bm-item-list {*/
+/*    color: #b8b7ad;*/
+/*}*/
 
-.bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-}
-.menu-item:focus {
-	outline: auto 0px;
-}
-.menu-filter {
-	position: absolute;
-	top: 100px;
-}
-.card-event-footer img{
-	max-width: 100%;
-	/* height: 100%; */
-}
-.card-event-footer {
-	max-height: 170px;
-	overflow: hidden;
-}
+/*.bm-overlay {*/
+/*    background: rgba(0, 0, 0, 0.3);*/
+/*}*/
+/*.menu-item:focus {*/
+/*	outline: auto 0px;*/
+/*}*/
+/*.menu-filter {*/
+/*	position: absolute;*/
+/*	top: 100px;*/
+/*}*/
+/*.card-event-footer img{*/
+/*	max-width: 100%;*/
+/*	!* height: 100%; *!*/
+/*}*/
+/*.card-event-footer {*/
+/*	max-height: 170px;*/
+/*	overflow: hidden;*/
+/*}*/
 
-.card-event-footer img {	
-	-webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out; 
-}
+/*.card-event-footer img {*/
+/*	-webkit-transform: scale(1);*/
+/*	transform: scale(1);*/
+/*	-webkit-transition: .3s ease-in-out;*/
+/*	transition: .3s ease-in-out;*/
+/*}*/
 
-.card-event-footer:hover img {
-	-webkit-transform: scale(1.3);
-	transform: scale(1.3);
-}
+/*.card-event-footer:hover img {*/
+/*	-webkit-transform: scale(1.3);*/
+/*	transform: scale(1.3);*/
+/*}*/
 
-/* SEARCH */
-#wrap {
-	margin: 50px 10px;
-	display: inline-block;
-	position: relative;
-	height: 60px;
-	float: right;
-	padding: 0;
-	position: relative;
-}
+/*!* SEARCH *!*/
+/*#wrap {*/
+/*	margin: 50px 10px;*/
+/*	display: inline-block;*/
+/*	position: relative;*/
+/*	height: 60px;*/
+/*	float: right;*/
+/*	padding: 0;*/
+/*	position: relative;*/
+/*}*/
 
-input[type="text"] {
-	height: 40px;
-	font-size: 35px;
-    display: inline-block;
-	font-family: "Roboto Condensed";
-	font-weight: 100;
-	border: none;
-	outline: none;
-	color: #555;
-	padding: 3px;
-	padding-right: 60px;
-	width: 0px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	background: none;
-	z-index: 3;
-	transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
-	cursor: pointer;
-}
+/*input[type="text"] {*/
+/*	height: 40px;*/
+/*	font-size: 35px;*/
+/*    display: inline-block;*/
+/*	font-family: "Roboto Condensed";*/
+/*	font-weight: 100;*/
+/*	border: none;*/
+/*	outline: none;*/
+/*	color: #555;*/
+/*	padding: 3px;*/
+/*	padding-right: 60px;*/
+/*	width: 0px;*/
+/*	position: absolute;*/
+/*	top: 0;*/
+/*	right: 0;*/
+/*	background: none;*/
+/*	z-index: 3;*/
+/*	transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);*/
+/*	cursor: pointer;*/
+/*}*/
 
-input[type="text"]:focus:hover {
-  	border-bottom: 1px solid #BBB;
-}
+/*input[type="text"]:focus:hover {*/
+/*  	border-bottom: 1px solid #BBB;*/
+/*}*/
 
-input[type="text"]:focus {
-	min-width: max-content;
-	/*width: 700px;*/
-	z-index: 1;
-	border-bottom: 1px solid #BBB;
-	cursor: text;
-}
-input[type="submit"] {
-  	height: 40px;
-  	width: 56px;
-  	display: inline-block;
-  	color:red;
-  	float: right;
-  	background: url(http://www.clker.com/cliparts/9/g/p/H/1/F/search-icon-dark-grey-md.png) center center no-repeat;
-  	text-indent: -10000px;
-  	border: none;
-  	position: absolute;
-  	top: 0;
-  	right: 0;
-  	z-index: 2;
-  	cursor: pointer;
-  	opacity: 0.85;
-    cursor: pointer;
-    transition: opacity .4s ease;
-    background-size: 33px
-}
+/*input[type="text"]:focus {*/
+/*	min-width: max-content;*/
+/*	!*width: 700px;*!*/
+/*	z-index: 1;*/
+/*	border-bottom: 1px solid #BBB;*/
+/*	cursor: text;*/
+/*}*/
+/*input[type="submit"] {*/
+/*  	height: 40px;*/
+/*  	width: 56px;*/
+/*  	display: inline-block;*/
+/*  	color:red;*/
+/*  	float: right;*/
+/*  	background: url(http://www.clker.com/cliparts/9/g/p/H/1/F/search-icon-dark-grey-md.png) center center no-repeat;*/
+/*  	text-indent: -10000px;*/
+/*  	border: none;*/
+/*  	position: absolute;*/
+/*  	top: 0;*/
+/*  	right: 0;*/
+/*  	z-index: 2;*/
+/*  	cursor: pointer;*/
+/*  	opacity: 0.85;*/
+/*    cursor: pointer;*/
+/*    transition: opacity .4s ease;*/
+/*    background-size: 33px*/
+/*}*/
 
-input[type="submit"]:hover {
-    opacity: 0.5;
-}
+/*input[type="submit"]:hover {*/
+/*    opacity: 0.5;*/
+/*}*/

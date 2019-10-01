@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import {Route, BrowserRouter as Router, Switch} from 'react-router-dom'
 
 
 import AdminDashboard from './Components/AdminDashboard';
@@ -9,6 +9,7 @@ import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
 import CreateEventPage from "./Pages/CreateEventPage";
+import YourEvents from "./Components/YourEvents";
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
 import EventDetail from './Components/EventDetail';
@@ -24,6 +25,7 @@ import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
+
 
 
 export default class Routes extends React.Component {
@@ -67,9 +69,9 @@ export default class Routes extends React.Component {
                                        render={() => <MainLayout><SearchingEvents/></MainLayout>}
                                 />
                                 <Route exact path='/event/detail'
-                    render={(props)=><MainLayout><EventDetail event = {props.location.state.event}/></MainLayout>}
-                />
-               <Route exact path='/admin'
+                                       render={(props) => <MainLayout><EventDetail event={props.location.state.event}/></MainLayout>}
+                                />
+                                <Route exact path='/admin'
                                        render={() => <AdminPage><AdminDashboard/></AdminPage>}
                                 />
                                 <Route exact path={'/admin/:option'}
@@ -78,6 +80,9 @@ export default class Routes extends React.Component {
                                        render={() => <ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
                                 <Route exact path={'/moderator/:option'}
                                        render={() => <ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
+                                <Route exact path='/eventedit'
+                                       render={(props) => <MainLayout><YourEvents event={props.location.state.event}/></MainLayout>}
+                                />
                                 <Route path="*" component={NotFoundPage}/>
                             </Switch>
                         </Route>

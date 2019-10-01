@@ -17,6 +17,7 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
         fields = (
             'categories', 'name', 'description', 'owner',
             'date', 'location', 'cover_url', 'category_name',
+            'id',
         )
 
     def create(self, validated_data):
@@ -29,9 +30,9 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
             owner=validated_data.get('owner'),
             date=validated_data.get('date'),
             location=validated_data.get('location'),
-            cover_url=validated_data.get('cover_url')
+            cover_url=validated_data.get('cover_url'),
+            id=validated_data.get('id')
         )
-
         event.save()
         return event
 
@@ -45,6 +46,7 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
         instance.date = validated_data.get('date', instance.date)
         instance.location = validated_data.get('location', instance.location)
         instance.cover_url = validated_data.get('cover_url', instance.cover_url)
+        instance.id = validated_data.get('id', instance.id)
 
         instance.save()
         return instance

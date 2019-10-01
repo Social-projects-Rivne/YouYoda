@@ -19,6 +19,7 @@ import './style/course-event-detail.scss'
 import './style/media.css';
 import './index.css';
 import './style/createEvent.css'
+import './style/yourEvents.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
