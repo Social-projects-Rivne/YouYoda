@@ -51,7 +51,7 @@ class UpdateUsersStatuses(APIView):
     permission_classes = [permissions.IsAuthenticated,]
 
     def patch(self, request):
-        """ Post request to database """
+        """ Patch request to database """
         users = request.data
         if users is not None:
             for user_id, status_id in users.items():
