@@ -31,14 +31,14 @@ export default class HomeTrainers extends React.Component{
         let defImg = "/media/avatar.png";
         let coverImg = defaultPhoto(defImg, trainer.avatar_url);
         return (
-            <Col lg="3" md="6">
+            <Col xl="3" lg="6" md="12">
                 <Link to={{
                         pathname: '/trainer/page',
                         state: {'trainer_id':trainer.id}
-                    }} 
+                    }}
                 >
-                    <div className="trainer-photo">
-                        <img src={coverImg} alt="trainer-photo" />
+                    <div >
+                        <img src={coverImg} alt="trainer-photo" className="trainer-photo"/>
                     </div>
                     <p className="trainer-name">{`${trainer.first_name} ${trainer.last_name}`}</p>
                     <p className="trainer-title">{trainer.username}</p>

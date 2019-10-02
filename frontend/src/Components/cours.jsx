@@ -38,6 +38,18 @@ export default class Cours extends React.Component{
         await this.setState({ redirect: true });
         window.location.reload();
     }
+    notResults = () => {
+        if (this.props.coursesList.length == 0) {
+            return (
+                <Col className="d-flex align-items-center justify-content-center" style={{margin:'35px 15px', color:'#FFD466'}}>
+                    <h2>Do, or do not. There is no results :(</h2>
+                </Col>
+            )
+        }
+        else {
+            return this.props.coursesList.map( course => this.renderCourses(course) )
+        }
+    }
 
     renderCourses(course) {
         let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
@@ -88,7 +100,7 @@ export default class Cours extends React.Component{
                     />
                 </div>
                 <Row>
-                    {this.props.coursesList.map( course => this.renderCourses(course) )}
+                    {this.notResults()}
                 </Row>
             </Container>
         )

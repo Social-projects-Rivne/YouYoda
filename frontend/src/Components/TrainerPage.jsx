@@ -51,9 +51,9 @@ export default class TrainerPage extends React.Component{
         }
         this.getComments();
       }
-      lastLogin = () => {
+      lastLogin = (date) => {
         let today = new Date();
-        let mins = moment(today).diff(this.state.trainer.last_login, "minute")
+        let mins = moment(today).diff(date, "minute")
         let d = 0;
         let h = 0;
 
@@ -70,7 +70,7 @@ export default class TrainerPage extends React.Component{
 
     getComments = async() => {
         try {
-            let response = await API.get('/trainer/comments', 
+            let response = await API.get('/trainer/comments',
                 {
                     params: {
                         trainer_id: this.props.trainer_id,
@@ -110,7 +110,7 @@ export default class TrainerPage extends React.Component{
     }
 
     render(){
-        let defImg = "/media/aircraft-2795557_1920.jpg";
+        let defImg = "/media/hot-air-balloons-4381674_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.state.trainer.cover_url);
         let coverAvatar = defaultPhoto(defImg, this.state.trainer.avatar_url)
         let birthDay = moment(this.state.trainer.birth_date).format('Do MMMM YYYY');
@@ -127,9 +127,7 @@ export default class TrainerPage extends React.Component{
                         minWidth:'98vw',
                         height: "40vh",
                         width: '100%',
-
-
-                    }}
+            }}
                 ></div>
                 <Container>
                     <Row className="d-flex trainer-page-header">
@@ -142,13 +140,13 @@ export default class TrainerPage extends React.Component{
                             <li>Last Login</li>
                             <li>
                                 <i className="far fa-clock"></i>
-                                {this.lastLogin()} ago
+                                {this.lastLogin(this.state.trainer.last_login)} ago
                             </li>
                             </ul>
 
                         </div>
                         <div className="funny-icon">
-                            <i className="fas fa-business-time"><span> 2 Years with YouYoda</span></i>
+                            <i className="fas fa-business-time"><span> {this.lastLogin(this.state.trainer.date_joined)} with YouYoda</span></i>
                             <Link href="/about" className="nav-link" activeClass="active" to="trainer-courses" spy={true} smooth={true} duration={500}>
                                 <i className="fas fa-hand-spock"><span> {this.state.coursesList.length} Created Courses</span></i>
                             </Link>

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from ..models import Courses, Events, TrainerCertificates, YouYodaUser
+from .courses_serializer import TrainerIdSerializator
 
 
 class TrainerInfoSerializer(serializers.ModelSerializer):
@@ -15,7 +16,7 @@ class TrainerInfoSerializer(serializers.ModelSerializer):
 		 fields = (
 			 		"first_name", "last_name", "about_me", "phone_number",
 					"avatar_url", "cover_url", "birth_date",
-					"last_login", "location")
+					"last_login", "location", "date_joined")
 
 
 class TrainerCoursesSerializer(serializers.ModelSerializer):
@@ -24,6 +25,8 @@ class TrainerCoursesSerializer(serializers.ModelSerializer):
 
     """
 
+	owner = TrainerIdSerializator()
+	categories = serializers.StringRelatedField()
 	class Meta:
 
 		 model = Courses
@@ -36,6 +39,8 @@ class TrainerEventsSerializer(serializers.ModelSerializer):
 
     """
 
+	owner = TrainerIdSerializator()
+	categories = serializers.StringRelatedField()
 	class Meta:
 
 		 model = Events

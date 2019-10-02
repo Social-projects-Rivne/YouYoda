@@ -39,6 +39,19 @@ export default class Event extends React.Component{
         window.location.reload();
     }
 
+    notResults = () => {
+        if (this.props.eventList.length == 0) {
+            return (
+                <Col className="d-flex align-items-center justify-content-center" style={{margin:'35px 15px', color:'#FFD466'}}>
+                    <h2>Do, or do not. There is no results :(</h2>
+                </Col>
+            )
+        }
+        else {
+            return this.props.eventList.map( event => this.renderEvents(event) )
+        }
+    }
+
   renderEvents(event) {
       const eventDate = event.date;
       const newEventDate = moment.unix(eventDate).format('MMMM Do YYYY, h:mm a');
@@ -55,7 +68,6 @@ export default class Event extends React.Component{
                           </CardTitle>
                           <CardText>
                               <p><span className="main-text-span">Category: </span>{event.categories}</p>
-                              <p>Rate: {event.rate}</p>
                               <p><span className="main-text-span">Event organizer: </span>{`${event.owner.first_name} ${event.owner.last_name}`}</p>
                               <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
                           </CardText>
@@ -72,7 +84,10 @@ export default class Event extends React.Component{
     render(){
         const { redirect } = this.state
         if (redirect) {
-           return <Redirect to={{pathname: '/event/detail', state: {event: this.state.event}}}/>;
+           return <Redirect to={{
+               pathname: '/event/detail',
+               state: {event: this.state.event}
+           }}/>;
         }
         return (
             <Container>
@@ -86,7 +101,7 @@ export default class Event extends React.Component{
                 />
                 </div>
                 <Row>
-                    {this.props.eventList.map( event => this.renderEvents(event) )}
+                    {this.notResults()}
                 </Row>
             </Container>
         )

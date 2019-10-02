@@ -1,7 +1,4 @@
 .trainer-page {
-    .trainer-page-header{
-        border-bottom: 1px solid #4f4f4f;
-    }
     .trainer-avatar {
         position: relative;
         top: -100px;
@@ -30,8 +27,9 @@
             background: #FFD466;
             color: white;
             height: 1.8rem;
-            border-radius: 10px;
-            padding: 0 5px;
+            border-radius: 5px;
+            padding: 0 10px;
+            margin-bottom: 10px;
         }
         i {
             margin-top: 5px;
@@ -40,6 +38,7 @@
         }
     }
     .funny-icon {
+        padding: 0 15px;
         width: 100%;
         display: flex;
         justify-content: space-between;
@@ -58,17 +57,17 @@
     h2{
         margin-top: 15px;
         margin-bottom: 15px;
-        padding-left: 5px;
+        padding-left: 15px;
         width: 100%;
-        font-weight: 600;
-        color: #4f4f4f;
+        font-weight: 500;
+        color: #fff;
     }
     .trainer-general-information{
-        border-bottom: 1px solid #4f4f4f;
 
         ul {
             width: 100%;
-            padding: 0;
+            padding: 0 15px;
+
             li {
                 font-size: 1.2rem;
                 margin: 10px 0;
@@ -79,36 +78,28 @@
         }
         h4 {
             margin-top: 30px;
+            padding: 0 15px;
             margin-bottom: 20px;
         }
         p {
+            padding: 0 15px;
+
             text-indent: 20px;
         }
 
     }
-    .trainer-courses-list {
-        border-bottom: 1px solid #4f4f4f;
-
-    }
-    .trainer-events-list {
-        border-bottom: 1px solid #4f4f4f;
-
-    }
-    .trainer-certificates-list {
-        border-bottom: 1px solid #4f4f4f;
-
-    }
     .trainer-collapse-header {
         width: 100%;
-        background: linear-gradient(180deg, rgb(230, 230, 230) 0%, rgba(255, 255, 255, 0) 100%);
+        background: #FFD466;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 3px;
+        border-radius: 5px;
         i {
             margin-right: 15px;
             font-size: 1.5rem;
-            color: #4f4f4f;
+            color: #fff;
         }
     }
     #coursesCollaps {
