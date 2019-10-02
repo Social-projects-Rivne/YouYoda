@@ -20,13 +20,13 @@ NUMBER_OF_TOP = 4
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
 class TopTrainers(APIView):
-    """Takes data from CoursesTopSerializator for view top rate courses"""
+    """Takes data from CoursesTopTrainer for view top trainers by amount courses"""
 
     permission_classes = [permissions.AllowAny,]
 
     @method_decorator(cache_page(CACHE_TTL), name='top_trainers')
     def get(self, request):
-        """First check request data in cache, then pull data from db"""
+        """Count courses and group by owner, return top trainers"""
         owners_courses = Courses.objects.values('owner').annotate(count=Count('owner')).order_by('-count')[:NUMBER_OF_TOP]
         id_owners = [owner_courses['owner'] for owner_courses in owners_courses]
         trainers = YouYodaUser.objects.filter(id__in = id_owners)

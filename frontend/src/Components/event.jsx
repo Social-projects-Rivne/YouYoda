@@ -33,7 +33,8 @@ export default class Event extends React.Component{
       this.setState({loading: false})
   }
 
-  handleClick = async (event) => {
+  handleClick = async (e, event) => {
+        e.preventDefault();
         await this.setState({ event });
         await this.setState({ redirect: true });
         window.location.reload();
@@ -59,7 +60,7 @@ export default class Event extends React.Component{
       let coverImg = defaultPhoto(defImg, event.cover_url);
       return (
           <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-              <Link className="card-link" onClick={() => this.handleClick(event)} >
+              <Link className="card-link" onClick={(e) => this.handleClick(e, event)} >
                   <Card className="event-card">
                       <CardHeader className="event-header">{newEventDate}</CardHeader>
                       <CardBody className="event-body">

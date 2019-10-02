@@ -58,10 +58,10 @@ export default class TrainerPage extends React.Component{
         let h = 0;
 
         if(mins >= 60*24){
-            d = mins / (60*24);
+            d = Math.floor(mins / (60*24));
             return `${d} days`;
         } else if(mins >= 60){
-            h = mins / 60;
+            h = Math.floor(mins / 60);
             return `${h} hours`;
         } else {
             return `${mins} minutes`;
@@ -193,7 +193,7 @@ export default class TrainerPage extends React.Component{
                             <i className="fas fa-chevron-down arrow-collapse" style={this.arrowAnimate(this.state.courseCollapse)}></i>
                         </div>
                         <Collapse isOpen={this.state.courseCollapse} id="coursesCollaps">
-                            <Cours coursesList = {this.state.coursesList} loading = {this.state.loading}/>
+                            <Cours coursesList = {this.state.coursesList} loading = {this.state.loading} />
                         </Collapse>
                     </Row>
                     <Row className="trainer-events-list">
@@ -241,3 +241,4 @@ export default class TrainerPage extends React.Component{
         )
     }
 };
+

@@ -12,7 +12,6 @@ import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
 import EventDetail from './Components/EventDetail';
 import Home from './Pages/Home';
-import HomeCourses from './Components/HomeCourses';
 import MainLayout from './Pages/MainLayout';
 import ModeratorDashboard from './Components/ModeratorDashboard';
 import ModeratorPage from "./Pages/ModeratorPage";

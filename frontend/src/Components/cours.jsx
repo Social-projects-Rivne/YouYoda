@@ -33,7 +33,8 @@ export default class Cours extends React.Component{
         this.setState({loading: false})
     }
 
-    handleClick = async (course) => {
+    handleClick = async (event, course) => {
+        event.preventDefault();
         await this.setState({ course });
         await this.setState({ redirect: true });
         window.location.reload();
@@ -60,7 +61,7 @@ export default class Cours extends React.Component{
         const newCourseDuration = moment.duration(courseDuration).hours();
         return (
             <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-                <Link className="card-link" onClick={() => this.handleClick(course)} >
+                <Link className="card-link" onClick={(event) => this.handleClick(event, course)} >
                     <Card className="event-card">
                         <CardHeader className="event-header">{newCourseDate}</CardHeader>
                         <CardBody className="event-body">
@@ -106,3 +107,4 @@ export default class Cours extends React.Component{
         )
     }
 }
+

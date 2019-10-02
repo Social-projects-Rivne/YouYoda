@@ -28,4 +28,4 @@ class UserEventsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Events
-        exclude = ('id',)
+        fields = ("__all__")
