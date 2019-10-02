@@ -22,6 +22,7 @@ import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
+import About from './Pages/About';
 
 
 export default class Routes extends React.Component{
@@ -32,6 +33,7 @@ export default class Routes extends React.Component{
         <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
+            <Route path='/about' component={About}/>
             <Route path='/editprofile' component={EditPageProfile}/>
                 <Route exact path='/reset/password'
                     render={()=><MainLayout><ResetPassword/></MainLayout>}
