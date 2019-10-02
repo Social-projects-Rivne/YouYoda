@@ -13,7 +13,7 @@ class UserRegistration(APIView):
 
     def post(self, request, format='json'):
         data_request=request.data
-        username = request.data.get('username')
+        username = data_request.get('username')
         user = YouYodaUser.objects.filter(username=username)
         if user:
             msg = "You can not use this email. Try another or login."
