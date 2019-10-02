@@ -68,7 +68,7 @@ export class UserMenu extends React.Component{
                 <Link to="/profile" className="dropdown-item">View profile</Link>
                 <Link to="/editprofile" className="dropdown-item">User settings</Link>
                 <Link to="" className="dropdown-item">Create course</Link>
-                <Link to="" className="dropdown-item">Create event</Link>
+                <Link to="/eventcreate" className="dropdown-item">Create event</Link>
                 <Link to="" className="dropdown-item">Help</Link>
                  <a className="dropdown-item" onClick={this.handleSubmitLogOut}>Logout</a>
             </DropdownMenu>

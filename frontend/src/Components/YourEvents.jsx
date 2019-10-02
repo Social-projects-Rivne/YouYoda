@@ -1,31 +1,13 @@
 import React from 'react';
 import Button from "reactstrap/es/Button";
-import {
-    Container,
-    Row,
-    Col,
-    FormGroup,
-    Label,
-    Input,
-    Form,
-    CustomInput,
-    CardFooter,
-    Card,
-    CardHeader, CardBody, CardTitle, CardText
-} from "reactstrap";
+import {Row, Col, FormGroup, Label, Input, Form, CustomInput} from "reactstrap";
 import {toast} from 'react-toastify';
 import {API} from '../api/axiosConf';
 import LocationSearchInput from '../api/cityselector'
-import FilterEventsSideBar from './FilterEventsSideBar'
-import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import ImageUpload from "./ImageUploadComponent";
 import {axiosGet} from "../api/axiosGet";
 import moment, {unix} from "moment";
-import OwnEvent from "./OwnEvent";
 import {defaultPhoto} from "../utils";
-import {Link} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
 
 class YourEvents extends React.Component {
     constructor(props) {
@@ -35,7 +17,7 @@ class YourEvents extends React.Component {
             category: '',
             eventsData: [],
             categories: [],
-            name: '',
+            name: new Date(),
             description: '',
             owner: '',
             date: '',
@@ -43,7 +25,7 @@ class YourEvents extends React.Component {
             cover_url: '',
             selectedEvent: '',
             id: '',
-            // activeCategory: 'Other',
+            validDate: true,
         };
     }
 
@@ -53,32 +35,30 @@ class YourEvents extends React.Component {
         }));
     };
 
-    // getEvent = async () => {
-    //     try {
-    //         const response = await API.get('user/profile/event_organize');
-    //         toast.success('get your page');
-    //         return response.data;
-    //     } catch (error) {
-    //         toast.error('You cannot view your profile. Contact administrator or support system.');
-    //     }
-    // };
-
     patchEvent = async (formData) => {
-        try {
-            const response = await API.patch('user/profile/event_organize', formData);
-            toast.success('Changes saved');
-        } catch (error) {
-            toast.error('You cannot update your profile. ' +
-                '\b Please fill all fields');
+        if (this.state.validDate) {
+            try {
+                const response = await API.patch('user/profile/event_organize', formData);
+                toast.success('Changes saved');
+            } catch (error) {
+                toast.error('You cannot update your profile. ' +
+                    '\b Please fill all fields');
+            }
+        } else {
+            toast.error("Date is invalid")
         }
     };
     postEvent = async (formData) => {
-        try {
-            const response = await API.post('user/profile/event_organize', formData);
-            toast.success('Changes saved');
-        } catch (error) {
-            toast.error('You cannot update your profile. ' +
-                '\b Please fill all fields');
+        if (this.state.validDate) {
+            try {
+                const response = await API.post('user/profile/event_organize', formData);
+                toast.success('Changes saved');
+            } catch (error) {
+                toast.error('You cannot update your profile. ' +
+                    '\b Please fill all fields');
+            }
+        } else {
+            toast.error("Date is invalid")
         }
     };
 
@@ -86,31 +66,21 @@ class YourEvents extends React.Component {
         try {
             let categoryId = this.state.categories.filter(category => category.name == this.state.activeCategory)[0][`id`];
             let date = moment(this.state.date).unix()
-            console.log('1', this.state.activeCategory)
             let payLoad = {};
+            payLoad.categories = categoryId;
+            payLoad.name = this.state.name;
+            payLoad.description = this.state.description;
+            payLoad.location = this.state.location;
+            payLoad.owner = this.state.owner;
+            payLoad.date = date.toString();
+            payLoad.cover_url = this.state.cover_url;
             if (this.state.id) {
-                payLoad.categories = categoryId;
-                payLoad.name = this.state.name;
-                payLoad.description = this.state.description;
-                payLoad.location = this.state.location;
-                payLoad.owner = this.state.owner;
-                payLoad.date = date.toString();
-                payLoad.cover_url = this.state.cover_url;
                 payLoad.id = this.state.id;
                 await this.patchEvent(payLoad)
             } else {
-                payLoad.categories = categoryId;
-                payLoad.name = this.state.name;
-                payLoad.description = this.state.description;
-                payLoad.location = this.state.location;
-                payLoad.owner = this.state.owner;
-                payLoad.date = date.toString();
-                payLoad.cover_url = this.state.cover_url;
                 await this.postEvent(payLoad)
             }
         } catch (error) {
-            toast.error('error, select all fields, please')
-            console.log('2', this.state.categories.filter(category => category.name == this.state.activeCategory))
         }
     };
 
@@ -131,21 +101,16 @@ class YourEvents extends React.Component {
         this.setState({
             activeCategory: category.target.value,
         });
-        console.log('active category', this.state.activeCategory)
-        console.log('category.target.value', category.target.value)
     };
-
-
-    // selectEvent = (event) => {
-    //     this.setState({
-    //         eventIndex: 0,
-    //     });
-    // };
 
     upDate = (event) => {
         event.preventDefault();
+        let now = moment()
+        let chosen = moment(event.target.value);
+        let isafter = moment(chosen).isAfter(now)
         this.setState({
-            date: event.target.value
+            date: event.target.value,
+            validDate: isafter
         });
     };
 
@@ -160,14 +125,11 @@ class YourEvents extends React.Component {
     async componentDidMount() {
         let path = '/categories/list'
         let listCategories = await axiosGet(path);
-        let eventsData = this.props.event;
         try {
             let eventsData = this.props.event;
-            let activeCategory = listCategories.filter(category => category.id == eventsData.categories)[0][`name`];
-            let date = moment.unix(eventsData.date).format("YYYY-MM-DDThh:mm:ss");
+            let date = moment.unix(eventsData.date).format("YYYY-MM-DDTHH:mm:ss");
             this.setState({
                 activeCategory: eventsData.categories,
-                // activeCategory: activeCategory.categories,
                 eventsData: eventsData,
                 categories: listCategories,
                 date: date,
@@ -178,13 +140,8 @@ class YourEvents extends React.Component {
                 name: eventsData.name,
                 id: eventsData.id
             });
-            console.log('active category', activeCategory)
-            console.log('eventsdata success', eventsData)
-        console.log('eventsdata props success', this.props.event)
-
         } catch (e) {
-            console.log(e)
-            // console.log(this.eventsData[0])
+            toast.error(e)
             this.setState({
                 categories: listCategories,
                 date: '2019-09-20 14:12:12',
@@ -194,10 +151,7 @@ class YourEvents extends React.Component {
                 description: 'write description of your event',
                 name: 'Type name of your event'
             });
-            console.log('eventsdata error', eventsData)
-        console.log('eventsdata props error', this.props.event)
         }
-
     };
 
     renderCategories = (category) => {
@@ -210,19 +164,17 @@ class YourEvents extends React.Component {
             </option>
         )
     };
+
     render() {
-        // console.log('image',this.state.cover_url)
-        // console.log('image22',this.state.eventsData.cover_url)
-        // console.log('--',this.props.event.cover_url)
         const DEFAULT_AVATAR_PATH = "/media/avatar.png";
         let alt_avatar = defaultPhoto(DEFAULT_AVATAR_PATH, this.state.cover_url)
         const {name, categories, description, date, time} = this.state;
         return (
-            <Form method="POST" className="form-event">
-                <Col sm="10" xs="auto" md={{size: 8, offset: 3}}>
+            <Form method="POST" className="form-event" style={{paddingBottom: "100px"}}>
+                <Col sm="10" xs="auto" md={{size: 7, offset: 3}}>
                     <FormGroup className="">
                         <Row>
-                            <Col sm="8" md="8">
+                            <Col sm="10" md="10">
                                 <Label className="event-name">Event Name*</Label>
                                 <Input
                                     type="textarea"
@@ -240,16 +192,14 @@ class YourEvents extends React.Component {
                                        value={this.state.activeCategory}
                                        onChange={(e) => this.upCategories(e)}
                                 >
-                                    <option> </option>
+                                    <option></option>
                                     {this.state.categories.map((category, index) => <option key={index}
                                                                                             value={category.name}> {category.name} </option>)}
-
                                 </Input>
-
                             </Col>
                         </Row>
                         <Row>
-                            <Col>
+                            <Col md="10">
                                 <Label className="course-name">Event description*</Label>
                                 <Input
                                     type="textarea"
@@ -262,32 +212,21 @@ class YourEvents extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col md="9">
+                            <Col md="5">
                                 <Label className="label-date-event">Date of event</Label>
+                                {!this.state.validDate && <span className="text-validate-date">
+                                     .  Date of event must to be after current date
+                                </span>}
                                 <Input
                                     type="datetime-local"
                                     name="event_date"
                                     className="field-box-event-date"
                                     placeholder=""
                                     onChange={this.upDate}
-                                    value={moment(date).format("YYYY-MM-DDThh:mm:ss")}
+                                    value={moment(date).format("YYYY-MM-DDTHH:mm:ss")}
                                 />
                             </Col>
-                            {/*<Col md="3">*/}
-                            {/*    <Label className="label-date-event">Time of event</Label>*/}
-                            {/*    <Input*/}
-                            {/*        type="time"*/}
-                            {/*        name="event_time"*/}
-                            {/*        className="field-box-event-date"*/}
-                            {/*        placeholder=""*/}
-                            {/*        onChange={this.upTime}*/}
-                            {/*        // value={moment(time).format("HH:mm:ss")}*/}
-                            {/*        value={time}*/}
-                            {/*    />*/}
-                            {/*</Col>*/}
-                        </Row>
-                        <Row>
-                            <Col md="9">
+                            <Col md={{size: 4, offset: 1}}>
                                 <FormGroup className="location-formgroup-event ">
                                     <Label>Location</Label>
                                     <LocationSearchInput
@@ -302,37 +241,31 @@ class YourEvents extends React.Component {
                         <Row>
                             <Col md="12" sm="12">
                                 <ImageUpload updateUrl={this.updateEventImage}/>
-
                             </Col>
                         </Row>
                         <Row>
-                            <div className="card-event-footer card-footer">
+                            <div className="card-event-footer card-footer your-image">
                                 <img width="100%"
-                                     // src={this.state.cover_url}
-                                    // src={(`${this.state.cover_url}`)}
-                                    src={alt_avatar}
-                                    // src="/media/beautiful-crowd-cute-2869374.jpg"
+                                     height="250px"
+                                     src={alt_avatar}
                                      alt="2"
                                 />
                             </div>
-
                         </Row>
                         <Row>
-                            <Col md="4" sm="6">
+                            <Col sm="6" md={{size: 4, offset: 6}}>
                                 <Button color="secondary"
                                         type="button"
                                         size="lg"
-                                        className="button-create-event"
+                                        className="button-create-event button-event-save-changes"
                                         block
                                         onClick={() => this.saveForm()}>
                                     Save changes
                                 </Button>
                             </Col>
                         </Row>
-
                     </FormGroup>
                 </Col>
-                {/*<OwnEvent eventsData={this.state.eventsData}/>*/}
             </Form>
         )
     }

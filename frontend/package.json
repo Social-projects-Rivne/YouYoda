@@ -23,6 +23,7 @@
     "react": "^16.9.0",
     "react-autocomplete": "^1.8.1",
     "react-burger-menu": "^2.6.11",
+    "react-datetime-picker": "^2.7.1",
     "react-dom": "^16.9.0",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.0.5",
@@ -30,6 +31,7 @@
     "react-instantsearch-dom": "^5.7.0",
     "react-leaflet": "^2.4.0",
     "react-places-autocomplete": "^7.2.1",
+    "react-resizable": "^1.8.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-scroll": "^1.7.13",
@@ -37,7 +39,6 @@
     "react-spinners": "^0.6.1",
     "react-star-rating-component": "^1.4.1",
     "react-toastify": "^5.3.2",
-    "react-resizable": "^1.8.0",
     "reactstrap": "^8.0.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^4.3.2"

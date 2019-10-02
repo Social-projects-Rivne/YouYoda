@@ -17,17 +17,8 @@ class CreateEvent extends React.Component {
         super(props);
         this.state = {
             modal: false,
-            // category: '',
             eventsData: [],
-            // categories: [],
-            // name: '',
-            // description: '',
-            // owner: '',
             date: '',
-            // location: '',
-            // cover_url: '',
-            // selectedEvent: '',
-            // redirect: false,
         };
     }
 
@@ -38,21 +29,11 @@ class CreateEvent extends React.Component {
     getEvent = async () => {
         try {
             const response = await API.get('user/profile/event_organize');
-            toast.success('get your page');
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');
         }
     };
-
-    // postEvent = async (formData) => {
-    //     try {
-    //         const response = await API.patch('user/profile/event_organize', formData);
-    //         toast.success('Changes saved');
-    //     } catch (error) {
-    //         toast.error('You cannot update your profile. Contact administrator or support system.');
-    //     }
-    // };
 
     handleClick = async (event) => {
         await this.setState({event});
@@ -68,13 +49,16 @@ class CreateEvent extends React.Component {
     };
 
     render(event) {
-        const {redirect} = this.state
+        const {redirect} = this.state;
         if (redirect) {
             return <Redirect to={{pathname: '/eventedit', state: {event: this.state.event}}}/>;
         }
         return (
-            <Form>
-                <Col Col sm="10" xs="auto" md={{size: 8, offset: 2}}>
+            <div className="form-event-own">
+                <Col Col sm={{size: 8, offset: 2}}
+                     xs={{size: 8, offset: 2}}
+                     md={{size: 6, offset: 3}}
+                >
                     <Link className="card-link" onClick={() => this.handleClick(event)}>
                         <Button color="secondary"
                                 type="button"
@@ -86,8 +70,10 @@ class CreateEvent extends React.Component {
                         </Button>
                     </Link>
                 </Col>
-                <OwnEvent eventsData={this.state.eventsData}/>
-            </Form>
+                <Col style={{marginTop: "100px"}}>
+                    <OwnEvent eventsData={this.state.eventsData}/>
+                </Col>
+            </div>
         )
     }
 }

@@ -1,22 +1,43 @@
 from rest_framework import serializers
-from ..models import Events, YouYodaUser
+from ..models import Events, YouYodaUser, Categories
 from rest_framework import request
 
 from ..models import Events
+
+# category_to_id = {
+#     1: 'Other',
+#     2: 'Sport',
+#     3: 'Music',
+#     4: 'Software'
+# }
+
+
+class CategoriesField(serializers.Field):
+    """
+    Color objects are serialized into 'rgb(#, #, #)' notation.
+    """
+    def to_representation(self, value):
+        return value.name
+
+    def to_internal_value(self, data):
+        return Categories.objects.get(id=data)
 
 
 class OrganizeEventSerializer(serializers.ModelSerializer):
     """Takes or updates data from the Event model for organize events user profile.
     Converts it to JSON format for transmission via the API.
     """
-    category_name = serializers.StringRelatedField()
+    categories = CategoriesField()
+
+    def get_categories(self, value):
+        return self.category_to_id[value.categories.id]
 
     class Meta:
         model = Events
 
         fields = (
             'categories', 'name', 'description', 'owner',
-            'date', 'location', 'cover_url', 'category_name',
+            'date', 'location', 'cover_url',
             'id',
         )
 

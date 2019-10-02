@@ -1,5 +1,32 @@
-
-.button-create-new-event{
+.button-create-new-event {
     background-color: #ffc107;
-    margin: 20px 0 20px 0;
+    position: relative;
+    top: 50px;
+}
+
+.card-event {
+    margin-bottom: 10px;
+}
+
+.your-image {
+    max-height: 100%;
+    max-width: 100%;
+    width: 500px;
+    height: 260px;
+    padding-top: 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+}
+
+.form-event {
+    background-color: beige;
+    min-height: 100%;
+}
+
+.form-event-own {
+    background-color: beige;
+}
+
+.text-validate-date {
+    color: red;
 }
