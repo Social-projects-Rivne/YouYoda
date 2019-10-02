@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
@@ -13,6 +14,10 @@ const URL_UNSUBSCRIBE = 'user/course/delete',
 export default class ManageButtons extends React.Component{
     constructor(props) {
       super(props);
+
+      this.state = {
+        redirectToPage: false,
+      }
     }
 
     unsubscribeClickCourse = async(courseData) => {
@@ -58,6 +63,10 @@ export default class ManageButtons extends React.Component{
         this.props.changeProfile();
     }
 
+    gotoPageLink = () => {
+        this.setState({ redirectToPage: true });
+    }
+
     render(){
         let courseData = {},
             typeItem = '';
@@ -70,9 +79,20 @@ export default class ManageButtons extends React.Component{
             typeItem = 'event';
         }
 
+        const { redirectToPage } = this.state;
+        if (redirectToPage) {
+            if(typeItem === 'course')
+                return <Redirect to={{pathname: '/course/detail', state: {course: this.props.course}}}/>;
+            else if(typeItem === 'event')
+                return <Redirect to={{pathname: '/event/detail', state: {event: this.props.event}}}/>;
+        }
+
         return (
         <div className="manage-buttons-wrap">
             <div className="buttons-wrap-inner">
+                <div className="button-manage" onClick={this.gotoPageLink}>
+                    Go to {typeItem} page
+                </div>
                 {(this.props.manageButtons === BTN_ALL) ? (
                     <div className="button-manage"
                         onClick={() => {(typeItem === 'course') ? 
