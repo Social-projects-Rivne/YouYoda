@@ -18,6 +18,11 @@ class ModeratorDashboard extends React.Component {
                         </a>
                     </Col>
                     <Col md="6" className="pb-3">
+                        <a href="/moderator/statuses">
+                            <div>Users' statuses<div><FontAwesomeIcon icon="user-slash" size="5x"/></div></div>
+                        </a>
+                    </Col>
+                    <Col md="6" className="pb-3">
                         <a href="/moderator/roles">
                             <div>Role requests<div><FontAwesomeIcon icon="user-graduate" size="5x"/></div></div>
                         </a>

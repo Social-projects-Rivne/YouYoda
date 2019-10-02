@@ -45,6 +45,7 @@
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "@types/reactstrap": "^8.0.4",
     "faker": "^4.1.0"
   },
   "scripts": {
