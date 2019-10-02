@@ -108,7 +108,7 @@ export default class SearchingEvents extends React.Component{
                   <Router>
                       <Container>
                           <div id="wrap">
-                              <form action="" autocomplete="on">
+                              <form action="" autoComplete="on">
                                   <input id="search" 
                                          name="search" 
                                          type="text" 
@@ -133,7 +133,7 @@ export default class SearchingEvents extends React.Component{
                                       </InputGroupAddon>
                                       <InputGroupAddon addonType="append" className="search-input-select">
                                           <Input type="select" name="select" id="search-input-select">
-                                              <option value="" selected>Sort by</option>
+                                              <option value="no" selected>Sort by</option>
                                               <option onClick={() => this.handleSortData("date")}>Date by ascending</option>
                                               <option onClick={() => this.handleSortData("-date")}>Date by descending</option>
                                           </Input>

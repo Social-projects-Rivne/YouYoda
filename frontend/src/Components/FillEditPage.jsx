@@ -3,11 +3,11 @@ import Button from "reactstrap/es/Button";
 import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
 import {toast} from 'react-toastify';
 
-import {API} from '../api/axiosConf';
-import LocationSearchInput from '../api/cityselector'
+import { API } from '../api/axiosConf';
+import LocationSearchInput from '../api/cityselector';
 import ChangePassword from "./ChangePassword";
-import ImageUpload from './ImageUploadComponent'
-import Avatar from './Avatar'
+import ImageUpload from './ImageUploadComponent';
+import Avatar from './Avatar';
 
 
 class FillEditPage extends React.Component {
@@ -69,8 +69,9 @@ class FillEditPage extends React.Component {
             payLoad.avatar_url = this.state.avatar_url;
             payLoad.password = this.state.password;
             await this.postUser(payLoad)
+            toast.success('Changes saved');
         } catch (error) {
-            toast.error('error')
+            toast.error('Can\'t save changes' )
         }
     };
 
@@ -96,8 +97,8 @@ class FillEditPage extends React.Component {
         let mount_dict = {}
         Object.keys(this.state).map(function (key) {
             mount_dict[key] = userData[key]
-        })
-        this.setState(mount_dict)
+        });
+        this.setState(mount_dict);
     }
 
     becomeTrainer = async () => {
@@ -107,9 +108,9 @@ class FillEditPage extends React.Component {
         };
         try {
             const response = await API.post(URLPATH, USERDATA);
-            if (response.status == 208)
+            if (parseInt(response.status) === 208)
                 toast.info(response.data);
-            else if (response.status == 201)
+            else if (parseInt(response.status) === 201)
                 toast.success('Request was successfully sent. Please, wait for moderation results.');
             else
                 toast.error(response.data);
@@ -124,7 +125,6 @@ class FillEditPage extends React.Component {
     };
 
     render() {
-        const {header, main} = this.props;
         return (
             <div className="">
                 <Container>
@@ -141,7 +141,7 @@ class FillEditPage extends React.Component {
                                 <div>
                                     {this.state.showUploadForm && <ImageUpload updateUrl={this.updateAvatarUrl}/>}
                                 </div>
-                                <Label for="login" className="login">User Name*</Label>
+                                <Label for="username">User Name*</Label>
                                 <Input
                                     type="login"
                                     name="username"
