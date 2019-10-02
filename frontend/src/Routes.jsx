@@ -24,70 +24,65 @@ import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
+import PDP from './Components/PDP';
 
 
-
-export default class Routes extends React.Component {
-    render() {
-        return (
-            <div>
-                <Router>
-                    <Switch>
-                        <Route exact path='/' component={Home}/>
-                        <Route path='/profile' component={Profile}/>
-                        <Route path='/editprofile' component={EditPageProfile}/>
-                        <Route path='/eventcreate' component={CreateEventPage}/>
-                        <Route component={MainLayout}>
-                            <Switch>
-                                <Route exact path='/reset/password'
-                                       render={() => <MainLayout><ResetPassword/></MainLayout>}
-                                />
-                                <Route exact path='/reset/password/confirm'
-                                       render={() => <MainLayout><ConfirmSendingEmail/></MainLayout>}
-                                />
-                                <Route exact path={'/reset/password/new/:uid/:token'}
-                                       render={() => <MainLayout><EnterNewPassword/></MainLayout>}
-                                />
-                                <Route exact path='/activation/send/email'
-                                       render={(props) =>
-                                           <MainLayout>
-                                               <SendActivationEmail email={props.location.state.email}/>
-                                           </MainLayout>}
-                                />
-                                <Route exact path='/activate/user/:uid/:token'
-                                       render={() => <MainLayout><ConfirmActivationEmail/></MainLayout>}
-                                />
-                                <Route exact path='/course/detail'
-                                       render={(props) => <MainLayout><CourseDetail
-                                           course={props.location.state.course}/></MainLayout>}
-                                />
-                                <Route exact path="/courses/search"
-                                       render={() => <MainLayout><SearchingCourses/></MainLayout>}
-                                />
-                                <Route exact path="/events/search"
-                                       render={() => <MainLayout><SearchingEvents/></MainLayout>}
-                                />
-                                <Route exact path='/event/detail'
-                                       render={(props) => <MainLayout><EventDetail event={props.location.state.event}/></MainLayout>}
-                                />
-                                <Route exact path='/admin'
-                                       render={() => <AdminPage><AdminDashboard/></AdminPage>}
-                                />
-                                <Route exact path={'/admin/:option'}
-                                       render={() => <AdminPage><AdminPageInner/></AdminPage>}/>
-                                <Route exact path='/moderator'
-                                       render={() => <ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
-                                <Route exact path={'/moderator/:option'}
-                                       render={() => <ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
-                                <Route exact path='/eventedit'
-                                       render={(props) => <MainLayout><YourEvents event={props.location.state.event}/></MainLayout>}/>
-                                <Route path="*" component={NotFoundPage}/>
-                            </Switch>
-                        </Route>
-                        <Route path="*" component={NotFoundPage}/>
-                    </Switch>
-                </Router>
-            </div>
-        );
-    }
+export default class Routes extends React.Component{
+  render(){
+    return (
+      <div>
+        <Router>
+        <Switch>
+            <Route exact path='/' component={Home}/>
+            <Route path='/profile' component={Profile}/>
+            <Route path='/editprofile' component={EditPageProfile}/>
+            <Route path='/eventcreate' component={CreateEventPage}/>
+                <Route exact path='/reset/password'
+                    render={()=><MainLayout><ResetPassword/></MainLayout>}
+                />
+                <Route exact path='/reset/password/confirm'
+                    render={()=><MainLayout><ConfirmSendingEmail/></MainLayout>}
+                />
+                <Route exact path={'/reset/password/new/:uid/:token'}
+                    render={()=><MainLayout><EnterNewPassword/></MainLayout>}
+                />
+                <Route exact path='/activation/send/email'
+                    render={ (props) =>
+                        <MainLayout>
+                            <SendActivationEmail email = {props.location.state.email}/>
+                        </MainLayout>}
+                />
+                <Route exact path='/activate/user/:uid/:token'
+                    render={()=><MainLayout><ConfirmActivationEmail/></MainLayout>}
+                />
+                <Route exact path='/course/detail'
+                   render={(props)=><MainLayout><CourseDetail course = {props.location.state.course}/></MainLayout>}
+                />
+                <Route exact path="/courses/search"
+                    render={()=><MainLayout><SearchingCourses/></MainLayout>}
+                />
+                <Route exact path="/events/search"
+                    render={()=><MainLayout><SearchingEvents/></MainLayout>}
+                />
+                <Route exact path='/event/detail'
+                    render={(props)=><MainLayout><EventDetail event = {props.location.state.event}/></MainLayout>}
+                />
+               <Route exact path='/admin'
+                    render={()=><AdminPage><AdminDashboard/></AdminPage>}
+                />
+                <Route exact path={'/admin/:option'}
+                    render={()=><AdminPage><AdminPageInner/></AdminPage>}/>
+                <Route exact path='/moderator'
+                    render={()=><ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
+                <Route exact path={'/moderator/:option'}
+                    render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
+                <Route exact path='/eventedit'
+                       render={(props) => <MainLayout><YourEvents event={props.location.state.event}/></MainLayout>}/>
+                <Route exact path='/pdp' component={PDP}/>
+                <Route path="*" component={NotFoundPage} />
+        </Switch>
+        </Router>
+      </div>
+  );
+}
 };
