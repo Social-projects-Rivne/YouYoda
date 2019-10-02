@@ -57,14 +57,18 @@ export default class TrainerPage extends React.Component{
         let d = 0;
         let h = 0;
 
-        if(mins >= 60*24){
-            d = Math.floor(mins / (60*24));
-            return `${d} days`;
-        } else if(mins >= 60){
-            h = Math.floor(mins / 60);
-            return `${h} hours`;
+        if (mins) {
+            if(mins >= 60*24){
+                d = Math.floor(mins / (60*24));
+                return `${d} days`;
+            } else if(mins >= 60){
+                h = Math.floor(mins / 60);
+                return `${h} hours`;
+            } else {
+                return `${mins} minutes`;
+            }
         } else {
-            return `${mins} minutes`;
+            return "User not logined still"
         }
     }
 
