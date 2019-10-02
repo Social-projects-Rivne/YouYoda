@@ -32,10 +32,10 @@ export default class ChangePassword extends React.Component {
     validateField(fieldName, value) {
         let fieldValidationErrors = this.state.formErrors;
         let {passwordValid, rePasswordValid, new_password, re_new_password} = this.state;
-        let passregex = RegExp(/^(\w+){6,80}$/g);
+        let passregex = RegExp(/^([\w+!@#$%^&*]){6,80}$/g);
 
         passwordValid = passregex.test(value);
-        fieldValidationErrors.fieldName = passwordValid ? '' : 'Password must to contain 6-80 characters';
+        fieldValidationErrors.fieldName = passwordValid ? '' : 'Password must to contain 6-80 characters \n Can contain A-Z a-z 0-9 !@#$%^&*';
         (new_password !== re_new_password) ?
             fieldValidationErrors.fieldName = "Passwords don't match" :
             rePasswordValid = true;
@@ -94,4 +94,3 @@ export default class ChangePassword extends React.Component {
         )
     }
 }
-
