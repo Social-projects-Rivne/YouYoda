@@ -80,12 +80,10 @@ class FillEditPage extends React.Component {
         let newState = {};
         newState[fieldName] = event.target.value;
         this.setState(newState);
-        console.log(event.target.name, event.target.value);
     };
 
     updateLocation = (location) => {
         this.setState({location: location.split(',')[0]});
-        console.log(location);
     };
 
     updateAvatarUrl = (url) => {

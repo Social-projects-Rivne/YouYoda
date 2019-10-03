@@ -1,12 +1,13 @@
 import React from 'react';
 
-import {Container, Row, Col, Card, CardTitle, CardText, CardHeader, CardFooter, CardBody} from 'reactstrap';
+import {Card, CardText, CardTitle, Container, Col,  CardHeader, CardFooter, CardBody, Row} from 'reactstrap';
 import {css} from '@emotion/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import {Redirect, Link} from 'react-router-dom'
-import {defaultPhoto} from '../utils';
+
 import {API} from "../api/axiosConf";
+import {defaultPhoto} from '../utils';
 import {toast} from "react-toastify";
 
 
@@ -68,7 +69,6 @@ export default class OwnEvent extends React.Component {
                             </CardTitle>
                             <CardText>
                                 <p><span className="main-text-span">Category: </span>{event.categories}</p>
-                                <p>Rate: {event.rate}</p>
                                 <p><span className="main-text-span">Event organizer: </span>{event.owner}</p>
                                 <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
                             </CardText>

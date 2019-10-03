@@ -1,16 +1,12 @@
 import React from 'react';
-import Button from "reactstrap/es/Button";
-import {Container, Row, Col, FormGroup, Label, Input, Form, CustomInput} from "reactstrap";
-import {toast} from 'react-toastify';
-import {API} from '../api/axiosConf';
-import LocationSearchInput from '../api/cityselector'
-import FilterEventsSideBar from './FilterEventsSideBar'
-import {ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import ImageUpload from "./ImageUploadComponent";
-import {axiosGet} from "../api/axiosGet";
-import moment, {unix} from "moment";
-import OwnEvent from "./OwnEvent";
+
+import {Col} from "reactstrap";
 import {Link, Redirect} from "react-router-dom";
+import Button from "reactstrap/es/Button";
+import {toast} from 'react-toastify';
+
+import {API} from '../api/axiosConf';
+import OwnEvent from "./OwnEvent";
 
 class CreateEvent extends React.Component {
     constructor(props) {
@@ -57,15 +53,13 @@ class CreateEvent extends React.Component {
             <div className="form-event-own">
                 <Col Col sm={{size: 8, offset: 2}}
                      xs={{size: 8, offset: 2}}
-                     md={{size: 6, offset: 3}}
-                >
+                     md={{size: 6, offset: 3}}>
                     <Link className="card-link" onClick={() => this.handleClick(event)}>
                         <Button color="secondary"
                                 type="button"
                                 size="lg"
                                 className="button-create-new-event"
-                                block
-                        >
+                                block>
                             Create new event
                         </Button>
                     </Link>

@@ -1,20 +1,10 @@
 from rest_framework import serializers
-from ..models import Events, YouYodaUser, Categories
-from rest_framework import request
-
-from ..models import Events
-
-# category_to_id = {
-#     1: 'Other',
-#     2: 'Sport',
-#     3: 'Music',
-#     4: 'Software'
-# }
+from ..models import Events, Categories
 
 
 class CategoriesField(serializers.Field):
     """
-    Color objects are serialized into 'rgb(#, #, #)' notation.
+    Taking id and name of categories from data
     """
     def to_representation(self, value):
         return value.name
@@ -42,7 +32,6 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        """Create user event"""
 
         event = Events.objects.create(
             categories=validated_data.get('categories'),
@@ -58,7 +47,6 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
         return event
 
     def update(self, instance, validated_data):
-        """Updades event"""
 
         instance.categories = validated_data.get('categories', instance.categories)
         instance.name = validated_data.get('name', instance.name)

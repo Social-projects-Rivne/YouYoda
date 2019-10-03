@@ -9,7 +9,6 @@ import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
 import CreateEventPage from "./Pages/CreateEventPage";
-import YourEvents from "./Components/YourEvents";
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
 import EventDetail from './Components/EventDetail';
@@ -19,12 +18,13 @@ import ModeratorDashboard from './Components/ModeratorDashboard';
 import ModeratorPage from "./Pages/ModeratorPage";
 import ModeratorPageInner from './Components/ModeratorPageInner';
 import NotFoundPage from './Pages/NotFoundPage';
+import PDP from './Components/PDP';
 import Profile from './Pages/Profile';
 import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
-import PDP from './Components/PDP';
+import YourEvents from "./Components/YourEvents";
 
 
 export default class Routes extends React.Component{
