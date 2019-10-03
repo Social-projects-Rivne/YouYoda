@@ -18,11 +18,11 @@ class UserSubscribeToCourse(APIView):
         auth_token = request.headers['Authorization'][6:]
         user = YouYodaUser.objects.get(auth_token=auth_token)
         course = Courses.objects.get(id = data_course['course_id'])
-        data_course['participant'] = user.id
-        data_course['course'] = course.id
+        data_course['participant_id'] = user.id
+        data_course['course_id'] = course.id
         course_add = CoursesSubscribers.objects.filter(
-                            participant = data_course['participant'],
-                            course = data_course['course'])
+                            participant = data_course['participant_id'],
+                            course = data_course['course_id'])
 
         if course_add:
             msg = "You have already subscribed to this course!"
