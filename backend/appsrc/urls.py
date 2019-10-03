@@ -41,8 +41,10 @@ urlpatterns = [
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
     path('user/course/add', UserSubscribeToCourse.as_view(), name='subscribe_course'),
+    #path('user/course/checksubscribe', CheckSubscribeToCourse.as_view(), name='check-subscribe-course'),
     path('user/course/delete', UserUnsubscribeCourse.as_view(), name='unsubscribe-course'),
     path('user/course/managefavorite', ManageFavoriteCoursesProfile.as_view(), name='add-favorite-course'),
+    #path('user/event/checksubscribe', CheckSubscribeEvent.as_view(), name='check-subscribe-event'),
     #path('user/event/delete', UserUnsubscribeEvent.as_view(), name='unsubscribe-event'),
     path('users/getlist', UsersGetList.as_view()),
 ]

@@ -11,15 +11,18 @@ import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
 import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
+import { getUserSubscribeData } from '../api/getUserSubscribeData';
 
 export default class CourseDetail extends React.Component{
     constructor(props){
       super(props);
       this.state = {
           comments: [],
+          userCourseData: [],
           loading: true
       };
     }
+
     getCommnts = async() => {
         try {
             let response = await API.get('/courses/comments',
@@ -38,7 +41,10 @@ export default class CourseDetail extends React.Component{
     }
     componentWillMount = async() => {
         await this.getCommnts();
-      }
+        const course_id = this.props.course.id;
+        let courseSubscribeData = getUserSubscribeData('course', course_id);
+        console.log(courseSubscribeData);
+    }
 
     addComment = async() => {
         await this.getCommnts()
@@ -65,7 +71,7 @@ export default class CourseDetail extends React.Component{
             this.addToCourse()
         }
     }
-    render(){
+    render(){console.log(this.props.course);
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
         let courseDate = this.props.course.start_date;

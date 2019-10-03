@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
 
 
-const URL_UNSUBSCRIBE = 'user/course/delete',
+const URL_UNSUBSCRIBE_COURSE = 'user/course/delete',
       URL_UNSUBSCRIBE_EVENT = 'user/event/delete',
       URL_FAVORITE = 'user/course/managefavorite',
       BTN_ALL = 'ALL';
@@ -23,7 +23,7 @@ export default class ManageButtons extends React.Component{
     unsubscribeClickCourse = async(courseData) => {
         const USERDATA = {"params": {"course": courseData.id}};
         try {
-            const response = await API.delete(URL_UNSUBSCRIBE, USERDATA);
+            const response = await API.delete(URL_UNSUBSCRIBE_COURSE, USERDATA);
             if(response.status === 201)
                 toast.success('You unsubscribed from "' + courseData.coursename + '"');
         } catch (error) {
