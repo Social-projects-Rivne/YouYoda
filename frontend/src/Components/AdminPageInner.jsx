@@ -34,7 +34,7 @@ export default class AdminPageInner extends React.Component {
                   </Menu>
             <Container id="admin-dashboard">
                 <Row>
-                    <Col md="10">
+                    <Col md="16">
                         <Switch>
                             <Route exact path='/admin/users' component={AdminUsers}/>
                             <Route exact path='/admin/statuses' component={UsersStatuses}/>
