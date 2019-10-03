@@ -27,7 +27,8 @@ export default class TrainerPage extends React.Component{
           courseCollapse: true,
           eventCollapse: true,
           certificatesCollapse: true,
-          generalInfoCollapse: true
+          generalInfoCollapse: true,
+          lastSeen: 0
 
       };
     }
@@ -38,12 +39,18 @@ export default class TrainerPage extends React.Component{
                     "id":this.props.trainer_id
                 }
             })
+            let lastSeen = await API.get('last/seen', {
+                params:{
+                    "trainer_id":this.props.trainer_id
+                }
+            })
             this.setState({
                 trainer: response.data.trainer,
                 coursesList: response.data.courses,
                 eventsList: response.data.events,
                 certificateList: response.data.certificates,
-                loading: false
+                lastSeen: moment.unix(lastSeen.data.last_seen),                
+                loading: false,
             })
 
         } catch (error) {
@@ -56,7 +63,7 @@ export default class TrainerPage extends React.Component{
         let mins = moment(today).diff(date, "minute")
         let d = 0;
         let h = 0;
-
+        
         if (mins) {
             if(mins >= 60*24){
                 d = Math.floor(mins / (60*24));
@@ -112,6 +119,28 @@ export default class TrainerPage extends React.Component{
             transition: '.3s transform ease-in-out'};
         }
     }
+    onlineOffline = () => {
+        let today = new Date();    
+        let lastActive = moment(today).diff(this.state.lastSeen, "minute")
+        if(lastActive < 2){
+            return (
+                <ul>
+                    <li style={{background:"#3BD16F"}}>Online</li>
+                </ul>
+            )
+        } else {
+            return (
+                <ul>
+                    <li style={{background:"red"}}>Offline</li>
+                    <li>
+                        <i className="far fa-clock"></i>
+                        {this.lastLogin(this.state.lastSeen)} ago
+                    </li>
+                </ul>
+            )
+            
+        }
+    }
 
     render(){
         let defImg = "/media/hot-air-balloons-4381674_1920.jpg";
@@ -140,14 +169,7 @@ export default class TrainerPage extends React.Component{
                         </div>
                         <h1>{`${this.state.trainer.first_name} ${this.state.trainer.last_name}`}</h1>
                         <div className="status-offline col">
-                            <ul>
-                            <li>Last Login</li>
-                            <li>
-                                <i className="far fa-clock"></i>
-                                {this.lastLogin(this.state.trainer.last_login)} ago
-                            </li>
-                            </ul>
-
+                            {this.onlineOffline()}
                         </div>
                         <div className="funny-icon">
                             <i className="fas fa-business-time"><span> {this.lastLogin(this.state.trainer.date_joined)} with YouYoda</span></i>

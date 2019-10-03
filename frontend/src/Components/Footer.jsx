@@ -4,26 +4,28 @@ import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+
 import { API } from '../api/axiosConf';
 
-export default class Footer extends React.Component{
 
-    sendStatusOnline = () => {
+export default class Footer extends React.Component{
+  sendStatusOnline = async(timenow) => { 
+      let timestamp =  moment(timenow).unix();
+      await API.patch('last/seen', {last_seen:timestamp})
+      console.log("Sending online status" + timestamp)
+  }
+    setIntervalSending = () => {
         if(localStorage.getItem('token')){
             let timenow = new Date()
-            let timestamp =  moment(timenow).unix();
-            API.patch('last/seen', {last_seen:timestamp})
-            console.log("Sending online status" + timestamp)
+            this.sendStatusOnline(timenow)
             setInterval(()=>{
                 let timenow = new Date()
-                let timestamp =  moment(timenow).unix();
-                API.patch('last/seen', {last_seen:timestamp})
-                console.log("Sending online status" + timestamp)
+                this.sendStatusOnline(timenow)
             }, 1000*60)
         }
     }
     componentDidMount () {
-        this.sendStatusOnline()
+        this.setIntervalSending()
     }
   render(){
     return (

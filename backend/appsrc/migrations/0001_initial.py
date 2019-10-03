@@ -25,31 +25,31 @@ def insertData(apps, schema_editor):
     User.objects.create(id=1, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
         location = 'Ukraine, Rivne', username = 'Yoda-admin', password = 'bcrypt_sha256$$2b$12$Bi7qCDjwi6zB9E1fUd8ly.YvLq7L9NJm.CrCqirhx7pKTPiZaGEp2',
         email = 'youyoda.academy@gmail.com', about_me = about, birth_date = datetime.datetime.now(), phone_number = "",
-        is_active = True, avatar_url = '', is_trainer = True, role_id = 3, last_seen = 1571146200)
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 3, last_seen = 1571046200)
     User.objects.create(id=2, hide_my_data = True, first_name = 'Yoda', last_name = 'Rivensky',
         location = 'Ukraine, Rivne', username = 'Yoda-moderator', password = 'bcrypt_sha256$$2b$12$Bi7qCDjwi6zB9E1fUd8ly.YvLq7L9NJm.CrCqirhx7pKTPiZaGEp2',
         email = 'test@test.com', about_me = about, birth_date = datetime.datetime.now(), phone_number = "",
-        is_active = True, avatar_url = '', is_trainer = True, role_id = 2, last_seen = 1571146200)
+        is_active = True, avatar_url = '', is_trainer = True, role_id = 2, last_seen = 1571046200)
     User.objects.create(id=3, hide_my_data = False, first_name = 'Yoda', last_name = 'Rivensky',
         location = 'Ukraine, Rivne', username = 'Yoda-user', password = 'bcrypt_sha256$$2b$12$Bi7qCDjwi6zB9E1fUd8ly.YvLq7L9NJm.CrCqirhx7pKTPiZaGEp2',
         email = 'test1@test.com', about_me = about, birth_date = datetime.datetime.now(), phone_number = "",
-        is_active = True, avatar_url = '', is_trainer = False, role_id = 1, last_seen = 1571146200)
+        is_active = True, avatar_url = '', is_trainer = False, role_id = 1, last_seen = 1571046200)
     User.objects.create(id=4, hide_my_data = False, first_name = 'Sonya', last_name = 'Alcock',
         location = 'Ukraine, Kyiv', username = 'Trainer1', password = 'bcrypt_sha256$$2b$12$Bi7qCDjwi6zB9E1fUd8ly.YvLq7L9NJm.CrCqirhx7pKTPiZaGEp2',
         email = 'trainer1@test.com', about_me = about, birth_date = datetime.datetime.now(), phone_number = "0922221133",
-        is_active = True, avatar_url = '/media/Trainer.jpg', is_trainer = True, role_id = 1, last_seen = 1571146200)
+        is_active = True, avatar_url = '/media/Trainer.jpg', is_trainer = True, role_id = 1, last_seen = 1570046200)
     User.objects.create(id=5, hide_my_data = False, first_name = 'Gordon', last_name = 'Mason',
         location = 'Ukraine, Lviv', username = 'Trainer2', password = 'bcrypt_sha256$$2b$12$Bi7qCDjwi6zB9E1fUd8ly.YvLq7L9NJm.CrCqirhx7pKTPiZaGEp2',
         email = 'trainer2@test.com', about_me = about, birth_date = datetime.datetime.now(), phone_number = "09233322211",
-        is_active = True, avatar_url = '/media/Trainer-1.jpg', is_trainer = True, role_id = 1, last_seen = 1571146200)
+        is_active = True, avatar_url = '/media/Trainer-1.jpg', is_trainer = True, role_id = 1, last_seen = 1570046200)
     User.objects.create(id=6, hide_my_data = False, first_name = 'Aliya', last_name = 'Workman',
         location = 'Ukraine, Rivne', username = 'Trainer3', password = 'bcrypt_sha256$$2b$12$Bi7qCDjwi6zB9E1fUd8ly.YvLq7L9NJm.CrCqirhx7pKTPiZaGEp2',
         email = 'trainer3@test.com', about_me = about, birth_date = datetime.datetime.now(), phone_number = "0928885522",
-        is_active = True, avatar_url = '/media/Trainer-2.jpg', is_trainer = True, role_id = 1, last_seen = 1571146200)
+        is_active = True, avatar_url = '/media/Trainer-2.jpg', is_trainer = True, role_id = 1, last_seen = 1570046200)
     User.objects.create(id=7, hide_my_data = False, first_name = 'Kyran', last_name = 'Wills',
         location = 'Ukraine, Harkiv', username = 'Trainer4', password = 'bcrypt_sha256$$2b$12$Bi7qCDjwi6zB9E1fUd8ly.YvLq7L9NJm.CrCqirhx7pKTPiZaGEp2',
         email = 'trainer4@test.com', about_me = about, birth_date = datetime.datetime.now(), phone_number = "0928885533",
-        is_active = True, avatar_url = '/media/Trainer-3.jpg', is_trainer = True, role_id = 1, last_seen = 1571146200)
+        is_active = True, avatar_url = '/media/Trainer-3.jpg', is_trainer = True, role_id = 1, last_seen = 1570046200)
 
     Categories = apps.get_model('appsrc', 'Categories')
     Categories.objects.create(
