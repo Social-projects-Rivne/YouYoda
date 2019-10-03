@@ -39,7 +39,10 @@ class FillEditPage extends React.Component {
         try {
             const response = await API.get('user/profile/edit');
             localStorage.setItem('avatar_url', response.data.avatar_url);
-            this.props.avatarIcoFunc(response.data.avatar_url); // send avatar ico to header of page
+            let dataAvatarUrl = '';
+            if(response.data.avatar_url)
+                dataAvatarUrl = response.data.avatar_url;
+            this.props.avatarIcoFunc(dataAvatarUrl); // send avatar ico to header of page
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');
@@ -91,9 +94,9 @@ class FillEditPage extends React.Component {
 
     async componentDidMount() {
         let userData = await this.getUser();
-        let mount_dict = {}
-        Object.keys(this.state).map(function (key) {
-            mount_dict[key] = userData[key]
+        let mount_dict = {};
+        Object.keys(this.state).map(function(key) {
+            mount_dict[key] = userData[key];
         });
         this.setState(mount_dict);
     }

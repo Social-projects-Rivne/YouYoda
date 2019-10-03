@@ -116,7 +116,7 @@ class Registration extends React.Component{
                           () => { this.validateField(idParam, valueParam) });
     }
 
-    radioGetter = (event) => {
+    radioGetter = () => {
         this.setState({
             userteacher:!this.state.userteacher,
             userstudent:!this.state.userstudent
@@ -126,7 +126,12 @@ class Registration extends React.Component{
     async handleClick(event){
         event.preventDefault();
         await registration(this.state)
-            .then(() => this.setState({ redirect: true }));
+            .then(
+                result => {
+                    if(result === 201)
+                        this.setState({ redirect: true })
+                } 
+            );
         return false;
     }
 
