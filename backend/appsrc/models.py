@@ -65,7 +65,7 @@ class Courses(models.Model):
     status = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
     is_public = models.BooleanField()
-    start_date = models.DateTimeField(blank=False)
+    start_date = models.IntegerField(blank=False)
     duration = models.DurationField(blank=False)
     rate = models.IntegerField(default=DEFAULT_RATE)
     cost = models.IntegerField(default=DEFAULT_COST)
@@ -95,7 +95,7 @@ class Events(models.Model):
     name = models.CharField(max_length=60)
     description = models.TextField(blank=False)
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    date = models.DateTimeField(blank=False)
+    date = models.IntegerField(blank=False)
     location = models.TextField(blank=False)
     cover_url = models.CharField(max_length=80)
 
@@ -115,3 +115,16 @@ class EventsComments(models.Model):
     event = models.ForeignKey(Events, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     comment = models.TextField(blank=True, null=True)
+
+class PDPNotes(models.Model):
+    author = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
+    title = models.CharField(max_length=60)
+    description = models.TextField(blank=True, null=True)
+    start = models.IntegerField(blank=False)
+    end = models.IntegerField(blank=False)
+    cover_url = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=50)
+
+class CourseSchedule(models.Model):
+    course = models.ForeignKey(Courses, related_name='course_schedule', on_delete=models.CASCADE)
+    date = models.IntegerField(blank=False)
