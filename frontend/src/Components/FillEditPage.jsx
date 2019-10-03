@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "reactstrap/es/Button";
-import {Container, Row, Col, FormGroup, Label, Input, Form} from "reactstrap";
-import {toast} from 'react-toastify';
+import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
+import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
 import LocationSearchInput from '../api/cityselector';
@@ -37,8 +37,12 @@ class FillEditPage extends React.Component {
 
     getUser = async () => {
         try {
-            const response = await API.get('user/profile/edit')
-            localStorage.setItem('avatar_url', response.data.avatar_url)
+            const response = await API.get('user/profile/edit');
+            localStorage.setItem('avatar_url', response.data.avatar_url);
+            let dataAvatarUrl = '';
+            if(response.data.avatar_url)
+                dataAvatarUrl = response.data.avatar_url;
+            this.props.avatarIcoFunc(dataAvatarUrl);
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');
@@ -47,8 +51,10 @@ class FillEditPage extends React.Component {
 
     postUser = async (formData) => {
         try {
-            const response = await API.patch('user/profile/edit', formData);
-            toast.success('Profile updated')
+            await API.patch('user/profile/edit', formData);
+            this.props.avatarIcoFunc(formData.avatar_url);
+            toast.success('Profile updated');
+            setTimeout(window.location.reload(), 2000);
         } catch (error) {
             toast.error('You cannot update your profile. Contact administrator or support system.');
         }
@@ -92,9 +98,9 @@ class FillEditPage extends React.Component {
 
     async componentDidMount() {
         let userData = await this.getUser();
-        let mount_dict = {}
-        Object.keys(this.state).map(function (key) {
-            mount_dict[key] = userData[key]
+        let mount_dict = {};
+        Object.keys(this.state).map(function(key) {
+            mount_dict[key] = userData[key];
         });
         this.setState(mount_dict);
     }
@@ -122,6 +128,7 @@ class FillEditPage extends React.Component {
         this.setState({showUploadForm: !this.state.showUploadForm})
     };
 
+
     render() {
         return (
             <div className="">
@@ -148,7 +155,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.username}
                                 />
-                                <Label for="name" className="name">Name*</Label>
+                                <Label className="name">Name*</Label>
                                 <Input
                                     name="first_name"
                                     className="field-box"
@@ -156,7 +163,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.first_name}
                                 />
-                                <Label for="surname" className="surname">Surname*</Label>
+                                <Label className="surname">Surname*</Label>
                                 <Input
                                     name="last_name"
                                     className="field-box"
