@@ -21,7 +21,6 @@ class CoursesSerializator(serializers.ModelSerializer):
 	owner = TrainerIdSerializator()
 
 	class Meta:
-
 		 model = Courses
 
 		 fields = ('coursename', 'owner', 'status', 'description', 'is_public',
@@ -36,9 +35,7 @@ class CCommentsSerializator(serializers.ModelSerializer):
 	author = serializers.StringRelatedField()
 
 	class Meta:
-
 		model = CoursesComments
-
 		fields = (
 			'author', 'course', 'date',	'comment'
             )
@@ -60,6 +57,5 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
 	course = CoursesSerializator()
 
 	class Meta:
-
 		model = CourseSchedule
 		fields = ('date', 'course')

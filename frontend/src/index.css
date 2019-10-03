@@ -17,3 +17,6 @@ a {
 li {
     list-style: none !important;
 }
+.a-dropdown-item {
+  cursor: pointer;
+}

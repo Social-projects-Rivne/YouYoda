@@ -67,7 +67,6 @@ export default class HomeTrainers extends React.Component{
             <Row>
                 {this.state.trainerList.map( trainer => this.renderTrainers(trainer) )}
             </Row>
-
             </Container>
             </div>
         )

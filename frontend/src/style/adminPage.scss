@@ -3,6 +3,7 @@
     width: 100%;
     min-height: 500px;
     padding: 2rem 0;
+    padding-left: 6rem;
 }
 .dashboard-menu {min-height: 400px;}
 .dashboard-menu > [class*="col-"] > a > div {
@@ -57,5 +58,81 @@
 .admin-tables button {
     margin: 5px 5px;
     border-color: transparent;
-    color: #212529;
+}
+
+
+#wrapper, .wrapper {
+/* FILTERSIDEBAR */
+.bm-burger-button {
+    position: absolute;
+    width: 40px;
+    height: 32px;
+    left: 36px;
+    top: 96px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+.bm-menu {
+  background: rgb(232, 232, 232);
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+.bm-morph-shape {
+    fill: #373a47;
+}
+.bm-item {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+}
+
+.bm-item:hover {
+  color: white;
+}
+
+.bm-burger-bars {
+    background: #373a47;
+  }
+
+.bm-burger-button {
+  position: fixed;
+  width: 40px;
+  height: 30px;
+  top: 107px;
+  left: 100px;
+ }
+
+ .bm-burger-button::after {
+	content: "";				
+}
+   
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  font-size: 20px;
+  padding: 1em;
+}
+
+/* Styling of overlay */
+.bm-menu-wrap {
+  bottom: 0;
+  left: 0;
+}
 }

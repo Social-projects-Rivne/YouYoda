@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 
 import AdminDashboard from './Components/AdminDashboard';
@@ -34,8 +34,6 @@ export default class Routes extends React.Component{
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
-            <Route component={MainLayout}>
-            <Switch>
                 <Route exact path='/reset/password'
                     render={()=><MainLayout><ResetPassword/></MainLayout>}
                 />
@@ -79,9 +77,6 @@ export default class Routes extends React.Component{
                     render={(props)=><MainLayout><TrainerPage trainer_id = {props.location.state.trainer_id}/></MainLayout>}
                 />
                 <Route path="*" component={NotFoundPage} />
-            </Switch>
-            </Route>
-            <Route path="*" component={NotFoundPage} />
         </Switch>
         </Router>
       </div>

@@ -6,10 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import AdminRequests from './AdminRoleRequests';
 import AdminUsers from './AdminUsers';
+import UsersStatuses from './AdminUsersStatuses';
 
 
 const PAGES = [
   {option: 'users', name: "Manage users", title: "Users List", icon: <FontAwesomeIcon icon="users"/> },
+  {option: 'statuses', name: "Users' statuses", title: "Statuses", icon: <FontAwesomeIcon icon="user-slash"/>},
   {option: 'roles', name: "Role requests", title: "Roles", icon: <FontAwesomeIcon icon="user-graduate"/>}
 ];
 
@@ -35,6 +37,7 @@ export default class ModeratorPageInner extends React.Component {
                   <Col md="10">
                       <Switch>
                           <Route exact path='/moderator/users' component={AdminUsers}/>
+                          <Route exact path='/moderator/statuses' component={UsersStatuses}/>
                           <Route exact path='/moderator/roles' component={AdminRequests}/>
                       </Switch>
                   </Col>

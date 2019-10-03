@@ -32,7 +32,16 @@ class AdminUsers extends React.Component {
                 <td align="center"><input type="checkbox" /></td>
                 <td align="center"><input type="checkbox" checked={user.is_active} /></td>
                 <td align="center"><input type="checkbox" checked={user.is_trainer} /></td>
-                <td>{user.role_id}</td>
+                <td>
+                {(() => {
+                    var roleId = user.role_id
+                    switch (roleId) {
+                      case 1: return "User(1)";
+                      case 2: return "Moderator(2)";
+                      case 3: return "Admin(3)";
+                    }
+                })()}
+                </td>
                 <td>{user.id}</td>
                 <td>{user.email}</td>
                 <td>{user.firstName}</td>

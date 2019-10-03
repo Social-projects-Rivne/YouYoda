@@ -19,7 +19,7 @@ export default class HomeCourses extends React.Component{
         };
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         let path = 'courses/top'
         let listCourses = await axiosGet(path);
         this.setState({

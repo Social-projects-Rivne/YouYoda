@@ -35,7 +35,6 @@ export default class CourseDetail extends React.Component{
                 schedule: response.data,
                 firstDate: response.data[0].date
             })
-            console.log(this.state.firstDate)
         } catch (error) {
             toast.error(error.message)
         }
@@ -48,7 +47,7 @@ export default class CourseDetail extends React.Component{
                         course_id: this.props.course.id,
                     }
                 }
-        )
+            )   
             this.setState({
                 comments: response.data,
                 loading: false
@@ -99,9 +98,6 @@ export default class CourseDetail extends React.Component{
         let scheduleList = this.state.schedule.map((item) => {
             return new Date(moment.unix(item.date).format("MM, DD, YYYY"))
         })
-
-        console.log(this.state.firstDate)
-
 
         let statuscolor;
         if(this.props.course.status === "Open"){
