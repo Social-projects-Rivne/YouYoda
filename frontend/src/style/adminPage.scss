@@ -108,7 +108,8 @@
  }
 
  .bm-burger-button::after {
-	content: "";				
+  content: "";
+  display: none;
 }
    
 
