@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, Row, Button, Col } from 'reactstrap';
 import moment from 'moment';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
@@ -44,12 +44,27 @@ export default class EventDetail extends React.Component{
     addComment = async() => {
         await this.getCommnts()
     }
+
+    addToEvent = async() => {
+        const URLPATH = 'user/event/add';
+        const USERDATA = { "event_id": this.props.event.id};
+        try {
+            const response = await API.post(URLPATH, USERDATA);
+            if(response.status === 208) 
+                toast.info(response.data);
+            if(response.status === 201)
+                toast.success('You subscribe to ' + this.props.event.name);
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
     subscribeEvent = () => {
         if(localStorage.getItem('token') == null){
             toast.info('You must Sign Up or Sign In for subscribes event')
 
         } else {
-
+            this.addToEvent()
         }
     }
 
@@ -57,7 +72,7 @@ export default class EventDetail extends React.Component{
         let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
         let coverImg = defaultPhoto(defImg, this.props.event.cover_url);
         let eventDate = this.props.event.date;
-        let newEventDate = moment(eventDate).format('MM Do YY, h:mm a');
+        let newEventDate = moment.unix(eventDate).format('MMMM Do YYYY, h:mm a');
 
         return(
             <div className="home-event">

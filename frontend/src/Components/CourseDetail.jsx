@@ -1,17 +1,17 @@
 import React from 'react';
 
-import Calendar from '@lls/react-light-calendar'
 import { Container,Row,Button,Col } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import StarRatingComponent from 'react-star-rating-component';
 import { toast } from 'react-toastify';
+import DayPicker from 'react-day-picker';
 
 import { API } from '../api/axiosConf';
 import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
 import { getUserSubscribeData } from '../api/getUserSubscribeData';
+
 
 export default class CourseDetail extends React.Component{
     constructor(props){
@@ -19,18 +19,37 @@ export default class CourseDetail extends React.Component{
       this.state = {
           comments: [],
           userCourseData: [],
+          schedule: [],
+          firstDate: 1569936600,
           loading: true
       };
     }
-
-    getCommnts = async() => {
+    getSchedule = async() => {
+        try {
+            let response = await API.get('/courses/schedule',
+                {
+                    params: {
+                        course_id: this.props.course.id,
+                }
+            }
+        )
+            this.setState({
+                schedule: response.data,
+                firstDate: response.data[0].date
+            })
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+    getComments = async() => {
         try {
             let response = await API.get('/courses/comments',
                 {
+                    params: {
                         course_id: this.props.course.id,
                 }
+            }
         )
-
             this.setState({
                 comments: response.data,
                 loading: false
@@ -39,15 +58,17 @@ export default class CourseDetail extends React.Component{
             toast.error(error.message)
         }
     }
-    componentWillMount = async() => {
-        await this.getCommnts();
+
+    componentWillMount = () => {
+        this.getSchedule();
+        this.getComments();
         const course_id = this.props.course.id;
         let courseSubscribeData = getUserSubscribeData('course', course_id);
         console.log(courseSubscribeData);
     }
 
     addComment = async() => {
-        await this.getCommnts()
+        await this.getComments()
     }
 
     addToCourse = async() => {
@@ -71,20 +92,22 @@ export default class CourseDetail extends React.Component{
             this.addToCourse()
         }
     }
-    render(){console.log(this.props.course);
+    render(){
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
-        let courseDate = this.props.course.start_date;
-        let newCourseDate = moment(courseDate).format('Do MM, h:mm a');
+        const courseDate = this.props.course.start_date;
+        let newCourseDate = moment.unix(courseDate).format('Do MM, h:mm a');
         let courseDuration = this.props.course.duration;
-        let newCourseDuration = moment.duration(courseDuration).days();
-        let date = new Date(courseDate);
-        let startDate = date.getTime()
-        let endDate = new Date(startDate).setDate(date.getDate() + newCourseDuration)
+        let newCourseDuration = moment.duration(courseDuration).hours();
+
+        let scheduleList = this.state.schedule.map((item) => {
+            return new Date(moment.unix(item.date).format("MM, DD, YYYY"))
+        })
+
         let statuscolor;
-        if(this.props.course.status == "Open"){
+        if(this.props.course.status === "Open"){
             statuscolor = "#54DB63"
-        } else if (this.props.course.status == "Closed") {
+        } else if (this.props.course.status === "Closed") {
             statuscolor = "#FC5252"
         } else {
             statuscolor = "#ffce54"
@@ -150,7 +173,6 @@ export default class CourseDetail extends React.Component{
                         </div>
                         <div className="cd cd-date">
                             <i class="far fa-calendar-alt"></i>
-
                             <span className="main-text cd-date">
                                 {newCourseDate}</span>
                         </div>
@@ -164,11 +186,15 @@ export default class CourseDetail extends React.Component{
                     <h4 className="course-detail-h4">About:</h4>
                     <p className="main-text">{this.props.course.description}</p>
                     <p className="main-text cd-limit" ><span className="main-text-span">Limit of members: </span> {this.props.course.members_limit}</p>
-                    <p className="main-text">Duration: {newCourseDuration} days </p>
+                    <p className="main-text">Duration: {newCourseDuration} hours</p>
                     <p className="main-text"><span className="main-text-span">Category: </span><Link to="" style={{color:"#000"}}>{this.props.course.categories}</Link></p>
                 </Col>
-                <Col md="6" xs="12" className="course-detail-second-col" style={{maxHeight:'500px'}}>
-                    <Calendar startDate={startDate} endDate={endDate} />
+                <Col md="6" xs="12" className="course-detail-second-col" >
+                    <DayPicker
+                        month = {new Date(moment.unix(this.state.firstDate))}
+                        selectedDays={scheduleList}
+                    />
+
                 </Col>
             </Row>
 

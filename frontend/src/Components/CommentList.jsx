@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
 import Comment from "./Comment";
-import { defaultPhoto, isAuthenticated } from '../utils';
+import { defaultPhoto } from '../utils';
 
 
 const override = css`
@@ -97,7 +97,7 @@ export class CommentForm extends React.Component {
     }
     let { comment } = this.state;
     try {
-      let response = await API.post('/courses/comments', {
+      await API.post('/courses/comments', {
             course: this.state.comment.course,
             comment: this.state.comment.comment
         },
