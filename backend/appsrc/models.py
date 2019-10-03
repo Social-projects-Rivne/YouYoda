@@ -4,8 +4,9 @@ from django.db import models
 
 DEFAULT_ROLE_ID = 1
 DEFAULT_CATEGORIES_ID = 1
-DEFAULT_RATE=0
-DEFAULT_COST=0
+DEFAULT_RATE = 0
+DEFAULT_COST = 0
+DEFAULT_LAST_SEEN = 0
 
 class Categories(models.Model):
     name = models.CharField(max_length=20)
@@ -41,6 +42,7 @@ class YouYodaUser(AbstractUser):
     is_trainer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
     cover_url = models.TextField(blank=True, null=True)
+    last_seen = models.IntegerField(blank=False, default = DEFAULT_LAST_SEEN)
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)

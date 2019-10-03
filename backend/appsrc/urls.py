@@ -6,16 +6,17 @@ from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
 from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
 from .views.comment import CourseComments, EventComments, TrainerComment
+from .views.last_seen import LastSeen
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
 from .views.trainer import TrainerPage, TopTrainers
+from .views.pdp import PDP
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
 from .views.user_subscribe_to_event import UserSubscribeToEvent
 from .views.user_subscribe_to_course import UserSubscribeToCourse
-from .views.pdp import PDP
 from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
 
 
@@ -29,6 +30,7 @@ urlpatterns = [
     path('events/comments', EventComments.as_view(), name='comments-events'),
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('last/seen', LastSeen.as_view(), name='last_seen'),
     path('trainer/comments', TrainerComment.as_view(), name='trainer-comment'),
     path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
     path('trainer/top', TopTrainers.as_view(), name='top-trainers'),

@@ -3,9 +3,28 @@ import React from 'react';
 import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-
+import moment from 'moment';
+import { API } from '../api/axiosConf';
 
 export default class Footer extends React.Component{
+
+    sendStatusOnline = () => {
+        if(localStorage.getItem('token')){
+            let timenow = new Date()
+            let timestamp =  moment(timenow).unix();
+            API.patch('last/seen', {last_seen:timestamp})
+            console.log("Sending online status" + timestamp)
+            setInterval(()=>{
+                let timenow = new Date()
+                let timestamp =  moment(timenow).unix();
+                API.patch('last/seen', {last_seen:timestamp})
+                console.log("Sending online status" + timestamp)
+            }, 1000*60)
+        }
+    }
+    componentDidMount () {
+        this.sendStatusOnline()
+    }
   render(){
     return (
       <>
