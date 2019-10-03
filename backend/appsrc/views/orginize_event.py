@@ -36,7 +36,8 @@ class OrganizeEvent(APIView):
         data_request = request.data
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
         data_request['owner'] = user.id
-        serializer = OrganizeEventSerializer(data=request.data)
+        # serializer = OrganizeEventSerializer(data=request.data)
+        serializer = OrganizeEventSerializer(data=data_request)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

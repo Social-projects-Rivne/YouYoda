@@ -18,9 +18,7 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
     """
     categories = CategoriesField()
-
-    def get_categories(self, value):
-        return self.category_to_id[value.categories.id]
+    # owner = serializers.StringRelatedField()
 
     class Meta:
         model = Events
@@ -41,9 +39,8 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
             date=validated_data.get('date'),
             location=validated_data.get('location'),
             cover_url=validated_data.get('cover_url'),
-            id=validated_data.get('id')
+            # id=validated_data.get('id')
         )
-        event.save()
         return event
 
     def update(self, instance, validated_data):

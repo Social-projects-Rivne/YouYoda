@@ -4,9 +4,9 @@ import {Col} from "reactstrap";
 import {Link, Redirect} from "react-router-dom";
 import Button from "reactstrap/es/Button";
 import {toast} from 'react-toastify';
+import OwnEvent from "./OwnEvent";
 
 import {API} from '../api/axiosConf';
-import OwnEvent from "./OwnEvent";
 
 class CreateEvent extends React.Component {
     constructor(props) {

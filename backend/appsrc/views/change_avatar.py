@@ -8,7 +8,6 @@ from django.core.files.storage import FileSystemStorage
 from PIL import Image
 
 
-
 class FileUploadView(APIView):
     """Updates path of users avatar in DB"""
     parser_class = (FileUploadParser,)
@@ -16,12 +15,12 @@ class FileUploadView(APIView):
     def post(self, request, *args, **kwargs):
 
         file_object = request.FILES['file']
-        fs = FileSystemStorage()
-        filename = fs.save(file_object.name, file_object)
-        uploaded_file_url = fs.url(filename)
-        pa = (os.path.abspath(uploaded_file_url[1:]))
+        file_storage = FileSystemStorage()
+        filename = file_storage.save(file_object.name, file_object)
+        uploaded_file_url = file_storage.url(filename)
+        path = (os.path.abspath(uploaded_file_url[1:]))
         try:
-            img = Image.open(pa)
+            img = Image.open(path)
         except (IOError, SyntaxError) as e:
-            return Response('Bad file motherFu*ker:', status=status.HTTP_400_BAD_REQUEST)
+            return Response('Bad file :', status=status.HTTP_400_BAD_REQUEST)
         return Response({'avatar_url': uploaded_file_url}, status=status.HTTP_201_CREATED)

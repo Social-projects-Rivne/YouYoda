@@ -126,7 +126,7 @@ class FillEditPage extends React.Component {
         return (
             <div className="">
                 <Container>
-                    <Form method="POST" className="form-group ">
+                    <Form method="POST" className="form-group">
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
                                 <h2 className="top-text">Personal details</h2>

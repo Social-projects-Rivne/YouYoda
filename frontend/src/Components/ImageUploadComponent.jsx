@@ -24,7 +24,7 @@ export default class ImageUpload extends React.Component {
             this.uploadAvatar(response.data.avatar_url);
             toast.success('Success uploading. Now you can save changes by pressing button "Save all".');
         } catch (error) {
-            toast.error('error \n you can`t choose this file');
+            toast.error('Error. \n You can`t choose this file.');
         }
     };
 
@@ -45,9 +45,16 @@ export default class ImageUpload extends React.Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
-                    <input type="file" accept="image/*" name="image-document" className="button-avatar-input"
+                    <input type="file"
+                           accept="image/*"
+                           name="image-document"
+                           className="button-avatar-input"
                            onChange={this.handleImageChange}/>
-                    <button type="button" onClick={this.handleSubmit} className="button-avatar">Upload Image</button>
+                    <button type="button"
+                            onClick={this.handleSubmit}
+                            className="button-avatar">
+                        Upload Image
+                    </button>
                 </form>
             </div>
         )

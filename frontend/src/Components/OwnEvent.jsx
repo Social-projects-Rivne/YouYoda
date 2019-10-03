@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Card, CardText, CardTitle, Container, Col,  CardHeader, CardFooter, CardBody, Row} from 'reactstrap';
+import {Card, CardText, CardTitle, Container, Col, CardHeader, CardFooter, CardBody, Row} from 'reactstrap';
 import {css} from '@emotion/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import moment from 'moment';
@@ -48,8 +48,10 @@ export default class OwnEvent extends React.Component {
     }
 
     handleClick = async (event) => {
-        await this.setState({event});
-        await this.setState({redirect: true});
+        await this.setState({
+            event,
+            redirect: true
+        });
         window.location.reload();
     }
 
@@ -60,21 +62,23 @@ export default class OwnEvent extends React.Component {
         let coverImg = defaultPhoto(defImg, event.cover_url);
         return (
             <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-                <Link className="card-link" onClick={() => this.handleClick(event)}>
+                <Link className="card-link card-event-whole " onClick={() => this.handleClick(event)}>
                     <Card className="event-card card-event">
                         <CardHeader className="event-header">{newEventDate}</CardHeader>
-                        <CardBody className="event-body">
+                        <CardBody className="event-body event-body-2">
                             <CardTitle className="event-card-header">
                                 <Link>{event.name}</Link>
                             </CardTitle>
                             <CardText>
                                 <p><span className="main-text-span">Category: </span>{event.categories}</p>
-                                <p><span className="main-text-span">Event organizer: </span>{event.owner}</p>
+                                <p className="text-span-description-event">
+                                    <span className="main-text-span">Description: </span>{event.description}
+                                </p>
                                 <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
                             </CardText>
                         </CardBody>
-                        <CardFooter className="card-event-footer">
-                            <img width="100%" src={coverImg} alt={event.name}/>
+                        <CardFooter className="card-own-event">
+                            <img width="100%" height="100%" src={coverImg} alt={event.name}/>
                         </CardFooter>
                     </Card>
                 </Link>

@@ -12,11 +12,24 @@
     max-height: 100%;
     max-width: 100%;
     width: 500px;
-    height: 260px;
+    height: 300px;
     padding-top: 20px;
     background-color: rgba(0, 0, 0, 0);
     border: 0;
 }
+
+.your-image img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.your-image:hover img {
+    -webkit-transform: scale(10.3);
+    transform: scale(1.2);
+}
+
 
 .form-event {
     background-color: beige;
@@ -30,3 +43,22 @@
 .text-validate-date {
     color: red;
 }
+
+.card-own-event {
+    max-height: 280px;
+    height: 280px;
+    overflow: hidden;
+}
+
+.text-span-description-event{
+    max-height: 35px;
+    overflow: hidden;
+    padding: 1px 0 5px 0;
+}
+
+.card-event-whole{
+    color: #710000;
+}
+
+
+

@@ -3,7 +3,7 @@ import React from 'react';
 import Button from "reactstrap/es/Button";
 import {Row, Col, FormGroup, Label, Input, Form, CustomInput} from "reactstrap";
 import {toast} from 'react-toastify';
-import moment, {unix} from "moment";
+import moment from "moment";
 
 import {API} from '../api/axiosConf';
 import {axiosGet} from "../api/axiosGet";
@@ -19,10 +19,10 @@ class YourEvents extends React.Component {
             category: '',
             eventsData: [],
             categories: [],
-            name: new Date(),
+            name: '',
             description: '',
             owner: '',
-            date: '',
+            date: new Date(),
             location: '',
             cover_url: '',
             selectedEvent: '',
@@ -43,8 +43,7 @@ class YourEvents extends React.Component {
                 const response = await API.patch('user/profile/event_organize', formData);
                 toast.success('Changes saved');
             } catch (error) {
-                toast.error('You cannot update your profile. ' +
-                    '\b Please fill all fields');
+                toast.error('You cannot update your profile. ' + '\b Please fill all fields');
             }
         } else {
             toast.error("Date is invalid")
@@ -56,8 +55,7 @@ class YourEvents extends React.Component {
                 const response = await API.post('user/profile/event_organize', formData);
                 toast.success('Changes saved');
             } catch (error) {
-                toast.error('You cannot update your profile. ' +
-                    '\b Please fill all fields');
+                toast.error('You cannot update your profile. ' + '\b Please fill all fields');
             }
         } else {
             toast.error("Date is invalid")
@@ -83,6 +81,7 @@ class YourEvents extends React.Component {
                 await this.postEvent(payLoad)
             }
         } catch (error) {
+            toast.error(error)
         }
     };
 
@@ -93,7 +92,7 @@ class YourEvents extends React.Component {
         });
     };
 
-    upDescription = (event) => {
+    updateDescription = (event) => {
         this.setState({
             description: event.target.value,
         });
@@ -125,8 +124,14 @@ class YourEvents extends React.Component {
     };
 
     async componentDidMount() {
-        let path = '/categories/list'
+        let path = '/categories/list';
         let listCategories = await axiosGet(path);
+        let defaultCategory = listCategories;
+        let defaultDate = '2020-09-20 14:12:12';
+        let defaultUrl = '/media/beautiful-crowd-cute-2869374.jpg';
+        let defaultLocation = 'Rivne';
+        let defaultDescription = 'Here could be your description';
+        let defaultName = 'N event';
         try {
             let eventsData = this.props.event;
             let date = moment.unix(eventsData.date).format("YYYY-MM-DDTHH:mm:ss");
@@ -136,7 +141,6 @@ class YourEvents extends React.Component {
                 categories: listCategories,
                 date: date,
                 cover_url: eventsData.cover_url,
-                owner: eventsData.owner,
                 location: eventsData.location,
                 description: eventsData.description,
                 name: eventsData.name,
@@ -145,13 +149,12 @@ class YourEvents extends React.Component {
         } catch (e) {
             toast.error(e)
             this.setState({
-                categories: listCategories,
-                date: '2019-09-20 14:12:12',
-                cover_url: '/media/beautiful-crowd-cute-2869374.jpg',
-                owner: '8',
-                location: 'Rivne',
-                description: 'write description of your event',
-                name: 'Type name of your event'
+                categories: defaultCategory,
+                date: defaultDate,
+                cover_url: defaultUrl,
+                location: defaultLocation,
+                description: defaultDescription,
+                name: defaultName,
             });
         }
     };
@@ -159,18 +162,19 @@ class YourEvents extends React.Component {
     renderCategories = (category) => {
         return (
             <option key={category.index}>
-                <CustomInput type="checkbox" id={category.name} label={category.name} value={category.id}
-                             onClick={(event) => this.handleClickCategories(event)}
-                />
+                <CustomInput type="checkbox"
+                             id={category.name}
+                             label={category.name} value={category.id}
+                             onClick={(event) => this.handleClickCategories(event)}/>
                 {category.name}
             </option>
         )
     };
 
     render() {
-        const DEFAULT_AVATAR_PATH = "/media/avatar.png";
-        let alt_avatar = defaultPhoto(DEFAULT_AVATAR_PATH, this.state.cover_url)
-        const {name, categories, description, date, time} = this.state;
+        let default_avatar_path = "/media/avatar.png";
+        let alt_avatar = defaultPhoto(default_avatar_path, this.state.cover_url)
+        let {name, description, date} = this.state;
         return (
             <Form method="POST" className="form-event" style={{paddingBottom: "100px"}}>
                 <Col sm="10" xs="auto" md={{size: 7, offset: 3}}>
@@ -193,10 +197,10 @@ class YourEvents extends React.Component {
                                        name="categories"
                                        value={this.state.activeCategory}
                                        onChange={(e) => this.upCategories(e)}
-                                >
+                                       required>
                                     <option></option>
-                                    {this.state.categories.map((category, index) => <option key={index}
-                                                                                            value={category.name}> {category.name} </option>)}
+                                    {this.state.categories.map((category, index) =>
+                                        <option key={index} value={category.name}> {category.name} </option>)}
                                 </Input>
                             </Col>
                         </Row>
@@ -208,7 +212,7 @@ class YourEvents extends React.Component {
                                     name="event-description"
                                     className="field-box-event-description"
                                     required
-                                    onChange={(e) => this.upDescription(e)}
+                                    onChange={(e) => this.updateDescription(e)}
                                     value={description}
                                 />
                             </Col>
@@ -246,7 +250,7 @@ class YourEvents extends React.Component {
                             </Col>
                         </Row>
                         <Row>
-                            <div className="card-event-footer card-footer your-image">
+                            <div className=" card-footer your-image">
                                 <img width="100%"
                                      height="250px"
                                      src={alt_avatar}
