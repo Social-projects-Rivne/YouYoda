@@ -3,7 +3,7 @@ from rest_framework import serializers
 from ..models import CoursesSubscribers
 
 
-class CoursesSubscribersSerializator(serializers.Serializer):
+class CoursesSubscribersPostSerializator(serializers.Serializer):
 	"""Takes data and add course, user to CoursesSubscribers.
 
     Converts it to JSON format for transmission via the API.
@@ -19,3 +19,13 @@ class CoursesSubscribersSerializator(serializers.Serializer):
 		course_add.save()
 		return course_add
 
+
+class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
+	"""Takes data about courses from CoursesSubscribers, Courses.
+
+	Converts it to JSON format for transmission via the API.
+	"""
+
+	class Meta:
+		model = CoursesSubscribers
+		fields = ('course',)

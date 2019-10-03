@@ -84,12 +84,11 @@
 }
 .user-courses {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
+    font-size: 1.25rem;
+    background: #4f4f4f;
+    color: #fff;
+    padding-left: 15px;
+    border-radius: 16px;
 }
 .user-courses div {
     font-weight: bold;
@@ -189,6 +188,7 @@
 .courses-numbers {
     background-color: #707070;
     width: 30px;
+    min-width: 20px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -196,6 +196,7 @@
 .events-numbers {
     background-color: #ffd466;
     width: 30px;
+    min-width: 20px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
@@ -205,7 +206,7 @@
 }
 .user-courses-profile {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     cursor: pointer;
 }
 .user-courses-profile div {

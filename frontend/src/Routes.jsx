@@ -74,6 +74,7 @@ export default class Routes extends React.Component{
                     render={()=><ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
                 <Route exact path={'/moderator/:option'}
                     render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
+                <Route exact path='/pdp' component={PDP}/>
                 <Route path="*" component={NotFoundPage} />
         </Switch>
         </Router>

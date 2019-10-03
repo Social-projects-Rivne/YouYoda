@@ -7,7 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import 'react-toastify/dist/ReactToastify.css';
-import '@lls/react-light-calendar/dist/index.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-day-picker/lib/style.css';
 import './api/notification';
 import './style/home.css';
 import './style/profile.css';
@@ -15,7 +16,9 @@ import './style/forms.css';
 import './style/fillEditPage.css';
 import './style/events.css';
 import './style/filter.scss';
-import './style/course-event-detail.scss';
+import './style/animation.scss';
+import './style/course-event-detail.scss'
+import './style/pdp.scss'
 import './style/media.css';
 import './index.css';
 
