@@ -26,5 +26,4 @@ class PDPSerializator(serializers.ModelSerializer):
 			status=validated_data.get('status')
 		)
 
-		user.save()
 		return user

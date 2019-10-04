@@ -13,7 +13,7 @@ from .views.manage_course import ManageCourse
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
-from .views.users_administration import UsersGetList
+from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses
 from .views.user_subscribe_to_event import UserSubscribeToEvent
 from .views.user_subscribe_to_course import UserSubscribeToCourse, ListUserSubscribeToCourse
 from .views.pdp import PDP
@@ -53,4 +53,6 @@ urlpatterns = [
     path('user/event/add', UserSubscribeToEvent.as_view(), name='subscribe_event'),
     path('user/pdp', PDP.as_view(), name='pdp'),
     path('users/getlist', UsersGetList.as_view()),
+    path('users/getstatuses', GetUsersStatuses.as_view()),
+    path('users/updatestatuses', UpdateUsersStatuses.as_view())
 ]

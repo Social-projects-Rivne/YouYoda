@@ -41,7 +41,7 @@ export default class CourseDetail extends React.Component{
             toast.error(error.message)
         }
     }
-    getCommnts = async() => {
+    getComments = async() => {
         try {
             let response = await API.get('/courses/comments',
                 {
@@ -61,12 +61,12 @@ export default class CourseDetail extends React.Component{
 
     componentWillMount = () => {
         this.getSchedule();
-        this.getCommnts();
         this.checkIfTrainer();
+        this.getComments();
       }
 
     addComment = async() => {
-        await this.getCommnts()
+        await this.getComments()
     }
 
     addToCourse = async() => {

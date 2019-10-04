@@ -32,7 +32,6 @@ class ManageCourseSerializer(serializers.ModelSerializer):
             cover_url=validated_data.get('cover_url')
         )
 
-        course.save()
         return course
 
     def update(self, instance, validated_data):

@@ -4,25 +4,21 @@ from ..models import CoursesSubscribers, YouYodaUser
 from .user_serializer import UserShowSerializer
 
 
-class CoursesSubscribersPostSerializator(serializers.ModelSerializer):
+class CoursesSubscribersPostSerializator(serializers.Serializer):
 	"""Takes data and add course, user to CoursesSubscribers.
 
     Converts it to JSON format for transmission via the API.
     """
+	participant_id = serializers.IntegerField()
+	course_id = serializers.IntegerField()
 
-	class Meta:
-		model = CoursesSubscribers
-		fields = (
-			'participant', 'course'
-            )
-
-		def create(self, validated_data):
-			course_add = CoursesSubscribers.objects.create(
-					participant = validated_data['participant'],
-					course = validated_data['course'],
-					)
-			course_add.save()
-			return course_add
+	def create(self, validated_data):
+		course_add = CoursesSubscribers.objects.create(
+				participant_id = validated_data['participant_id'],
+				course_id = validated_data['course_id'],
+				)
+		course_add.save()
+		return course_add
 
 
 class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
@@ -32,7 +28,6 @@ class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
 	"""
 
 	class Meta:
-
 		model = CoursesSubscribers
 		fields = ('course',)
 

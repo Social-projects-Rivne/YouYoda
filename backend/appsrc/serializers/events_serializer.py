@@ -12,7 +12,5 @@ class EventsSerializator(serializers.ModelSerializer):
 	categories = serializers.StringRelatedField()
 
 	class Meta:
-
 		 model = Events
-
 		 fields = ("__all__")
