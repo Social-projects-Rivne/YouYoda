@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
@@ -24,7 +25,7 @@ export default class ManageButtons extends React.Component{
         const USERDATA = {"params": {"course": courseData.id}};
         try {
             const response = await API.delete(URL_UNSUBSCRIBE_COURSE, USERDATA);
-            if(response.status === 201)
+            if(response.status === 204)
                 toast.success('You unsubscribed from "' + courseData.coursename + '"');
         } catch (error) {
             toast.error(error.message);
@@ -91,23 +92,26 @@ export default class ManageButtons extends React.Component{
         <div className="manage-buttons-wrap">
             <div className="buttons-wrap-inner">
                 <div className="button-manage" onClick={this.gotoPageLink}>
-                    Go to {typeItem} page
+                    <FontAwesomeIcon icon="arrow-left"/>&nbsp;Go to {typeItem} page
                 </div>
-                {(this.props.manageButtons === BTN_ALL) ? (
-                    <div className="button-manage"
-                        onClick={() => {(typeItem === 'course') ? 
-                            this.unsubscribeClickCourse(courseData) : this.unsubscribeClickEvent(courseData)}}>Unsubscribe
-                    </div>
-                ) : ''}
                 {(courseData.subscribed[0].is_favourite && this.props.course) ? (
                     <div className="button-manage"
-                        onClick={() => {this.addToFavoriteClick(courseData, false)}}>Remove from Favorite
+                        onClick={() => {this.addToFavoriteClick(courseData, false)}}>
+                        <FontAwesomeIcon icon="heartbeat"/>&nbsp;Remove from Favorite
                     </div>
                 ) : ((this.props.course)?(
                     <div className="button-manage"
-                        onClick={() => {this.addToFavoriteClick(courseData, true)}}>Add to Favorite
+                        onClick={() => {this.addToFavoriteClick(courseData, true)}}>
+                        <FontAwesomeIcon icon="heart"/>&nbsp;Add to Favorite
                     </div>
                 ):'')}
+                {(this.props.manageButtons === BTN_ALL) ? (
+                    <div className="button-manage"
+                        onClick={() => {(typeItem === 'course') ? 
+                            this.unsubscribeClickCourse(courseData) : this.unsubscribeClickEvent(courseData)}}>
+                        <FontAwesomeIcon icon="times"/>&nbsp;&nbsp;Unsubscribe
+                    </div>
+                ) : ''}
             </div>
         </div>
         )

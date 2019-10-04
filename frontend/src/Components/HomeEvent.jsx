@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { axiosGet } from '../api/axiosGet';
 import { API } from '../api/axiosConf';
 import { defaultPhoto } from '../utils';
+import { getUserSubscribeData } from '../api/getUserSubscribeData';
 import { toast } from 'react-toastify';
 
 
@@ -18,10 +19,17 @@ export default class HomeEvent extends React.Component{
         this.state = {
             modal: false,
             eventsList: [{}],
+            isSubscribed: false,
         };
     }
 
     toggle = (event) => {
+        const event_id = event.id;
+        getUserSubscribeData('event', event_id).then(isUserSubscribed => {
+            this.setState({
+                isSubscribed: isUserSubscribed
+            });
+        });
         this.setState(prevState => ({
             modal: !prevState.modal,
             event
@@ -32,8 +40,8 @@ export default class HomeEvent extends React.Component{
         let path = 'events/top'
         let listEvents = await axiosGet(path);
         this.setState({
-                eventsList: listEvents,
-                });
+            eventsList: listEvents,
+        });
     }
 
     addToEvent = async() => {
@@ -43,8 +51,12 @@ export default class HomeEvent extends React.Component{
             const response = await API.post(URLPATH, USERDATA);
             if(response.status === 208)
                 toast.info(response.data);
-            if(response.status === 201)
-                toast.success('You subscribe to ' + this.state.event.name);
+            if(response.status === 201) {
+                toast.success('You subscribed to "' + this.state.event.name + '"');
+                this.setState({
+                    isSubscribed: true
+                });
+            }
         } catch (error) {
             toast.error(error.message)
         }
@@ -126,26 +138,42 @@ export default class HomeEvent extends React.Component{
                                 {this.state.eventsList.map( event => this.renderEvents(event) )}
                             </Slider>
                             <Modal isOpen={this.state.modal} className={this.props.className} id="modal-event-content">
-                                <ModalHeader toggle={this.toggle} close={closeBtn}><h4 className="secondary-header">{event.name}</h4>
+                                <ModalHeader toggle={this.toggle} close={closeBtn}>
+                                    <h4 className="secondary-header">
+                                        {(this.state.isSubscribed === 'completed') ? (
+                                            <span style={{color:'#54DB63'}} title="This event has been finished">
+                                                <i className="fas fa-flag-checkered"></i>&nbsp;
+                                            </span>
+                                        ) : (
+                                            (this.state.isSubscribed) ? (
+                                                <span style={{color:'#54DB63'}} title="You have already joined">
+                                                    <i className="fas fa-check"></i>&nbsp;
+                                                </span>
+                                            ) : ''
+                                        )}
+                                        {event.name}
+                                    </h4>
                                     <p className="main-category">Category:  {event.categories}</p>
-                                    <p className="main-text-event-modal">{event.description}</p></ModalHeader>
+                                    <p className="main-text-event-modal">{event.description}</p>
+                                </ModalHeader>
                                 <ModalBody>
                                     <img src={coverImg} alt={event.name} className="event-modal-photo"/>
                                     <p className="main-text">Location: {event.location}</p>
                                     <p className="main-text">Date: {newEventDate}</p>
                                     <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
-                                <ModalFooter>
-                                    <Button className="btn-join"
-                                            color="warning"
-                                            style={{marginRight:'33px'}}
-                                            onClick={this.toggle}
-                                            onClick={this.subscribeEvent}>Join
-                                    </Button>
+                                <ModalFooter className="event-footer-centered">
+                                    {(!this.state.isSubscribed) ? (
+                                        <Button className="btn-join"
+                                                color="warning"
+                                                style={{marginRight:'33px'}}
+                                                onClick={this.subscribeEvent}>Join to event
+                                        </Button>
+                                    ) : ''}
                                     <Button color="secondary"
                                             className='btn-event-modal-cancel'
-                                            onClick={this.toggle}
-                                    >Cancel</Button>
+                                            onClick={this.toggle}>Close window
+                                    </Button>
                                 </ModalFooter>
                             </Modal>
                         </Col>

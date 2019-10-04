@@ -12,8 +12,8 @@ from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses
-from .views.user_subscribe_to_course import UserSubscribeToCourse, UserUnsubscribeCourse, ManageFavoriteCoursesProfile
-from .views.user_subscribe_to_event import UserSubscribeToEvent
+from .views.user_subscribe_to_course import CheckSubscribeToCourse, UserSubscribeToCourse, UserUnsubscribeCourse, ManageFavoriteCoursesProfile
+from .views.user_subscribe_to_event import CheckSubscribeEvent, UserSubscribeToEvent, UserUnsubscribeEvent
 from .views.pdp import PDP
 from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
 
@@ -44,12 +44,12 @@ urlpatterns = [
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/course/add', UserSubscribeToCourse.as_view(), name='subscribe_course'),
-    #path('user/course/checksubscribe', CheckSubscribeToCourse.as_view(), name='check-subscribe-course'),
+    path('user/course/checksubscribe', CheckSubscribeToCourse.as_view(), name='check-subscribe-course'),
     path('user/course/delete', UserUnsubscribeCourse.as_view(), name='unsubscribe-course'),
     path('user/course/managefavorite', ManageFavoriteCoursesProfile.as_view(), name='add-favorite-course'),
     path('user/event/add', UserSubscribeToEvent.as_view(), name='subscribe_event'),
-    #path('user/event/checksubscribe', CheckSubscribeEvent.as_view(), name='check-subscribe-event'),
-    #path('user/event/delete', UserUnsubscribeEvent.as_view(), name='unsubscribe-event'),
+    path('user/event/checksubscribe', CheckSubscribeEvent.as_view(), name='check-subscribe-event'),
+    path('user/event/delete', UserUnsubscribeEvent.as_view(), name='unsubscribe-event'),
     path('user/pdp', PDP.as_view(), name='pdp'),
     path('users/getlist', UsersGetList.as_view()),
     path('users/getstatuses', GetUsersStatuses.as_view()),

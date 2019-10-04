@@ -44,4 +44,47 @@ class UserSubscribeToEvent(APIView):
         serializer = EventsSubscribersGetSerializator(events, many=True)
         return Response(serializer.data)
 
+
+class CheckSubscribeEvent(APIView):
+    """Checking user subscription to event"""
+
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def get(self, request):
+        """Method for checking status user subscription to event by event ID"""
+        event_id = request.query_params.get('event_id')
+        auth_token = request.headers['Authorization'].replace('Token ', '')
+        user = YouYodaUser.objects.get(auth_token=auth_token)
+        event_data = EventsSubscribers.objects.get(
+            participant = user.id,
+            event = int(event_id),
+        )
+        if event_data:
+            if event_data.completed is True:
+                return Response('completed', status=status.HTTP_208_ALREADY_REPORTED)
+            else:
+                return Response(True, status=status.HTTP_208_ALREADY_REPORTED)
+        else:
+            return Response(False, status=status.HTTP_204_NO_CONTENT)
         
+        return Response(False, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserUnsubscribeEvent(APIView):
+    """Method for user unsubscription to events"""
+
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def delete(self, request):
+        """Gets data from request, searches in database and deletes user subscribes to events"""
+        auth_token = request.headers['Authorization'].replace('Token ', '')
+        user = YouYodaUser.objects.get(auth_token=auth_token)
+        event_delete = EventsSubscribers.objects.filter(
+            participant = user.id,
+            event = int(request.GET['event']),
+        )
+        if event_delete:
+            event_delete.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        return Response(False, status=status.HTTP_400_BAD_REQUEST)

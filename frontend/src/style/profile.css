@@ -286,6 +286,12 @@
     margin: 20px auto;
     bottom: 0;
 }
+.manage-buttons-wrap .svg-inline--fa {
+    color: #4A90E2;
+}
+.manage-buttons-wrap .button-manage:hover .svg-inline--fa {
+    color: #ffd466;
+}
 .buttons-wrap-inner {
     display: block;
     position: relative;
@@ -303,7 +309,7 @@
     background: #fff;
     border-radius: 20px;
     padding: 5px 15px;
-    margin: 10px auto;
+    margin: 15px auto;
     width: 80%;
     display: block;
     text-align: center;
