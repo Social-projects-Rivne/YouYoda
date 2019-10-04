@@ -3,10 +3,6 @@ import {API} from "../api/axiosConf";
 import {toast} from "react-toastify";
 
 export default class CourseImage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     uploadAvatar = async (url) => {
         await this.props.updateUrl(url);
     };
@@ -16,10 +12,9 @@ export default class CourseImage extends React.Component {
 
         try {
             data.append('file', this.state.file);
-            // const response = await API.post('user/profile/change_avatar', data)
+            await API.post('user/profile/change_avatar', data)
             this.props.updateUrl(this.state.file.name);
             this.uploadAvatar(this.state.file.name);
-            toast.success('Success');
         } catch (error) {
             toast.error('error \n choose avatar');
         }
@@ -36,7 +31,7 @@ export default class CourseImage extends React.Component {
             });
             this.handleSubmit();
         };
-        let url = reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
     };
 
     render() {

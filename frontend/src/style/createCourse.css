@@ -45,48 +45,6 @@
     border-color: transparent;
     box-shadow: inset 0 0 2px #ffd466;
 }
-.field-course-price, .field-course-price:focus {
-    margin: auto;
-    margin-top: -12px;
-    box-shadow: inset 0 0 0px transparent;
-    border: none;
-    font-size: 1.2rem;
-    background: transparent;
-    color: white;
-    width: auto;
-    text-align:center;
-}
-.field-course-price::placeholder {
-    color: white;
-}
-.field-course-location, .field-course-location:focus {
-    margin: auto;
-    margin-top: -12px;
-    box-shadow: inset 0 0 0px transparent;
-    border: none;
-    font-size: 1.2rem;
-    background: transparent;
-    color: white;
-    width: auto;
-    text-align:center;
-}
-.field-course-location::placeholder {
-    color: white;
-}
-.field-course-start-date, .field-course-start-date:focus {
-    margin: auto;
-    margin-top: -12px;
-    box-shadow: inset 0 0 0px transparent;
-    border: none;
-    font-size: 1.2rem;
-    background: transparent;
-    color: white;
-    width: auto;
-    text-align:center;
-}
-.field-course-start-date::placeholder {
-    color: white;
-}
 .course-about-area {
     min-height: 120px;
     border-radius: 25px;
@@ -96,6 +54,9 @@
 }
 .field-courseduration {
     margin-top: -10px;
+}
+.location-field {
+    border-radius: 40px;
 }
 .select-categody {
     background-image:
@@ -146,4 +107,20 @@
 }
 .save-btn {
     margin-top: 50px;
+}
+.daypicker {
+    display: flex;
+    justify-content: center;
+}
+.daypicker-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 990px){
+    .field-course-start-date, .field-course-price, .field-course-location{
+        display: flex;
+        justify-content: flex-start;
+    }
 }

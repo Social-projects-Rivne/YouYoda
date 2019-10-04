@@ -28,7 +28,7 @@ export const isModerator = () => {
 }
 
 export const isTrainer = () => {
-    if (localStorage.getItem('is_trainer') == 'true')
+    if (localStorage.getItem('is_trainer') === 'true')
         return true;
     return false;
 }

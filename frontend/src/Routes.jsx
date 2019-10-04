@@ -68,7 +68,7 @@ export default class Routes extends React.Component{
                 <Route exact path='/admin'
                     render={()=><AdminPage><AdminDashboard/></AdminPage>}
                 />
-              <Route exact path='/profile/create-course'
+              <Route exact path='/create-course'
                      render={()=><MainLayout><CreateCourse/></MainLayout>}
                  />
                 <Route exact path={'/admin/:option'}

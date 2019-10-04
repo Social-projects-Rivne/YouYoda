@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework import status
@@ -9,6 +11,7 @@ from rest_framework.views import APIView
 from ..models import YouYodaUser, Courses, Categories, CoursesSubscribers
 from ..serializers.courses_serializer import CoursesSerializator
 from ..serializers.manage_course_serializer import ManageCourseSerializer
+from ..serializers.courses_serializer import PostCourseScheduleSerializer
 
 
 class ManageCourse(APIView):
@@ -44,14 +47,17 @@ class ManageCourse(APIView):
         """Receives and create new course"""
         course_data = request.data
         trainer = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
-        category = Categories.objects.get(name=course_data['categories'])
-        course_data['categories'] = category.id
+        course_data['duration'] = datetime.timedelta(hours=int(request.data['duration']))
         course_data['owner'] = trainer.id
         course_serializer = ManageCourseSerializer(data=course_data)
 
         if course_serializer.is_valid():
             course_serializer.save()
-            return Response(course_serializer.data, status=status.HTTP_201_CREATED)
+            date_list = [{"date": course_date, "course": course_serializer.data['id']} for course_date in course_data['course_schedule']]
+            scheduled_serializer = PostCourseScheduleSerializer(data=date_list, many=True, partial=True)
+            if scheduled_serializer.is_valid():
+                scheduled_serializer.save()
+                return Response(course_serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(course_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

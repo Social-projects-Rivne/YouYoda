@@ -1,36 +1,49 @@
 import React from 'react';
 
-import Calendar from '@lls/react-light-calendar'
-import { Container, Row, Button, Col, Label, Input, Form} from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import moment from 'moment';
+import { Container, Row, Button, Col, Input, Form, FormGroup} from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom';
-import StarRatingComponent from 'react-star-rating-component';
 import { toast } from 'react-toastify';
+import DayPicker, { DateUtils } from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 import LocationSearchInput from '../api/cityselector'
 import { API } from '../api/axiosConf';
-import { CommentList, CommentForm } from './CommentList';
-import { defaultPhoto, isAuthenticated } from '../utils';
-import { HOSTNAME_PORT } from '../utils';
+import { defaultPhoto } from '../utils';
 import CourseImage from './CourseImage';
+
 
 export default class CreateCourse extends React.Component{
     constructor(props){
       super(props);
       this.state = {
+          selectedDays: [],
           coursename: '',
-          cost: '',
-          location: '',
-          start_date: '',
+          cost: 'Set price',
+          location: 'Set location',
+          start_date: 'Set start date',
+          start_time: '',
           description: '',
           members_limit: '',
           duration: '',
           category: '',
+          is_public: true,
           cover_url: '/media/',
           categories: [],
           status: 'Open',
+          redirect: false,
       };
+    }
+    handleDayClick = (day, { selected }) => {
+      const { selectedDays } = this.state;
+       if (selected) {
+         const selectedIndex = selectedDays.findIndex(selectedDay =>
+           DateUtils.isSameDay(selectedDay, day)
+         );
+         selectedDays.splice(selectedIndex, 1);
+       } else {
+         selectedDays.push(day);
+       }
+       this.setState({ selectedDays });
     }
     updateField = async(event) => {
         let fieldName = event.target.name;
@@ -38,8 +51,8 @@ export default class CreateCourse extends React.Component{
         newState[fieldName] = event.target.value;
         await this.setState(newState);
     }
-    updateCategory = async(event) => {
-        await this.setState({category: event.target.value});
+    updateCategory = async(category) => {
+        await this.setState({category: category.id});
     }
     updateStatus = async(event) => {
         await this.setState({status: event.target.value});
@@ -56,7 +69,7 @@ export default class CreateCourse extends React.Component{
             let response = await API.get("categories/list")
         this.setState({
             categories: response.data,
-            category:response.data[0].name
+            category:response.data[0].id
             })
         }
         catch (error) {
@@ -83,25 +96,87 @@ export default class CreateCourse extends React.Component{
     updateAvatarUrl = async(url) => {
         await this.setState({course_img: this.state.cover_url + url});
     };
-    saveFomm = () => {
+    saveForm = async () => {
+        const data = new FormData();
+        let payLoad = {};
 
-    }
+        if (this.state.coursename &&
+           this.state.cost &&
+           this.state.location &&
+           this.state.start_date &&
+           this.state.description &&
+           this.state.members_limit &&
+           this.state.duration &&
+           this.state.category &&
+           this.state.status &&
+           this.state.start_time)
+        {
+        if (this.state.cost > -1 &&
+           this.state.members_limit > -1 &&
+           this.state.duration > -1)
+        {
+        if (this.state.course_img)
+        {
+          let formatedDays = [];
+          for (let index = 0; index < this.state.selectedDays.length; index++)
+          {
+
+            let date = new Date(this.state.selectedDays[index]);
+            let selected_day = date.getTime();
+            formatedDays.push(selected_day / 1000);
+          }
+
+          let day = new Date(this.state.start_date);
+          day.setHours(this.state.start_time.substring(0,2));
+          day.setMinutes(this.state.start_time.substring(3,5));
+          let start_day = day.getTime()
+
+          await this.setState({start_date: start_day / 1000});
+
+          payLoad.coursename = this.state.coursename;
+          payLoad.cost = this.state.cost;
+          payLoad.location = this.state.location;
+          payLoad.start_date = this.state.start_date;
+          payLoad.description = this.state.description;
+          payLoad.members_limit = this.state.members_limit;
+          payLoad.duration = this.state.duration;
+          payLoad.categories = this.state.category;
+          payLoad.status = this.state.status;
+          payLoad.is_public = this.state.is_public;
+          payLoad.cover_url = this.state.course_img;
+          payLoad.course_schedule = formatedDays;
+
+          try {
+              data.append('file', this.state.file);
+              await this.postCourse(payLoad);
+              await this.setState({redirect: true});
+              } catch (error) {
+                  toast.error('You can not create course. Please contact support');
+              }
+        }
+        else
+          toast.error('You didnt choose image for course')
+        }
+        else
+          toast.error('Fields duration, member limits and price can not be negative or string');;
+        }
+        else
+          toast.error('You didnt enter all information about course. Please fill in the fields.');
+    };
+    postCourse = async (formData) => {
+        try {
+            await API.post('trainer/courses', formData);
+            // this.props.avatarIcoFunc(formData.avatar_url); // send avatar ico to header of page
+            // setTimeout(window.location.reload(), 2000);
+        } catch (error) {
+            toast.error('You cannot create course. Contact administrator or support system.');
+        }
+    };
+
     render(){
         let courseImg = defaultPhoto("/media/geometry-1023846_1920.jpg", this.state.course_img);
-        let courseDate = "2019-10-05 13:30:00.000000";
-        // let newCourseDate = moment(courseDate).format('Do MM, h:mm a');
-        let courseDuration = 468000000000;
-        let newCourseDuration = moment.duration(courseDuration).days();
-        let date = new Date(courseDate);
-        let startDate = date.getTime()
-        let endDate = new Date(startDate).setDate(date.getDate() + newCourseDuration)
-        let statuscolor;
-        if(this.state.status == "Open"){
-            statuscolor = "#54DB63"
-        } else if (this.state.status == "Closed") {
-            statuscolor = "#FC5252"
-        } else {
-            statuscolor = "#ffce54"
+        if (this.state.redirect) {
+            return <Redirect to='/courses/search' />
         }
         return(
             <Form method="POST">
@@ -138,53 +213,28 @@ export default class CreateCourse extends React.Component{
                     <div className="cd-info-block">
                         <Container className="d-flex flex-wrap">
                         <div className="cd cd-trainer">
-                            <i className="fas fa-user-tie" style={{marginTop:"8px"}}/>
-                            <span className="main-text" style={{display:"block"}}>
+                            <i className="fas fa-user-tie"/>
+                            <span className="main-text">
                             <Link to="" style={{color:"#fff"}}>{this.state.owner_name}
                             </Link></span>
                         </div>
                         <div className="cd cd-cost">
                             <i class="fas fa-dollar-sign"></i>
                             <span className="main-text">
-                            <Input
-                                type="cost"
-                                name="cost"
-                                className="field-course-price"
-                                required
-                                onChange={(e) => this.updateField(e)}
-                                placeholder="Set price"
-                                value={this.state.cost}
-                            />
+                            {this.state.cost}
                             </span>
                         </div>
                         <div className="cd cd-loc">
                             <i class="fas fa-map-marker-alt"></i>
                             <span className="main-text cd-loc">
-                              <Input
-                                    type="location"
-                                    name="location"
-                                    className="field-course-location"
-                                    required
-                                    onChange={(e) => this.updateField(e)}
-                                    placeholder="Set location"
-                                    value={this.state.location}
-                              />
+                            {this.state.location}
                           </span>
                         </div>
                         <div className="cd cd-date">
                             <i class="far fa-calendar-alt"></i>
 
                             <span className="main-text cd-date">
-                              <Input
-                                type="input"
-                                name="start_date"
-                                className="field-course-start-date"
-                                required
-                                onFocus = {this._onFocus}
-                                onChange={(e) => this.updateField(e)}
-                                placeholder="Set start date"
-                                value={this.state.start_date}
-                              />
+                            {this.state.start_date}
                             </span>
                         </div>
                         </Container>
@@ -227,35 +277,44 @@ export default class CreateCourse extends React.Component{
                     <Input
                       type="date"
                       name="start_date"
-                      required
                       className="field-courseduration"
                       onChange={(e) => this.updateField(e)}
                       placeholder="Set start date"
                       value={this.state.start_date}
                     />
+                  <p className="main-text">Start time: </p>
+                      <Input
+                        type="time"
+                        name="start_time"
+                        required
+                        className="field-courseduration"
+                        onChange={(e) => this.updateField(e)}
+                        placeholder="Set start time"
+                        value={this.state.start_time}
+                      />
                    <p className="main-text">Price: </p>
                       <Input
                           type="number"
                           name="cost"
-                          required
                           className="field-courseduration"
                           onChange={(e) => this.updateField(e)}
                           placeholder="Set price"
                           value={this.state.cost}
                       />
                     <p className="main-text">Location: </p>
-                    <LocationSearchInput
-                        updateLocation={this.updateLocation}
-                        city={this.state.location}
-                        className="form-control"
-                    />
+                    <FormGroup className="city-country-2">
+                      <LocationSearchInput
+                          updateLocation={this.updateLocation}
+                          city={this.state.location}
+                      />
+                    </FormGroup>
                    <p className="main-text" style={{marginTop:"10px"}}>Category:</p>
                     <Input
                       type="select"
                       name="category"
                       className="select-categody">
                       {this.state.categories.map((item) => {
-                        return <option onClick={(e) => this.updateCategory(e)}>{item.name}</option>;
+                        return <option onClick={(e) => this.updateCategory(item)}>{item.name}</option>;
                       })}
                     </Input>
                     <p className="main-text" style={{marginTop:"10px"}}>Status:</p>
@@ -277,9 +336,13 @@ export default class CreateCourse extends React.Component{
                          Create Course
                      </Button>
                 </Col>
-                <Col md="6" xs="12" className="create-course-calendar" style={{maxHeight:'500px'}}>
-                    <p className="main-text">Specify the days you want to take course</p>
-                    <Calendar startDate={startDate} endDate={endDate} />
+                <Col md="6" xs="12" className="course-detail-second-col" style={{display:"block"}}>
+                    <p className="main-text daypicker-title">Specify the days you want to take course</p>
+                      <DayPicker
+                        className="daypicker"
+                        selectedDays={this.state.selectedDays}
+                        onDayClick={this.handleDayClick}
+                      />
                 </Col>
             </Row>
             </Container>

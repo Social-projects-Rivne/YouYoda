@@ -222,27 +222,27 @@ export default class ProfileInfo extends React.Component {
                         {profile.userFollowingCourses.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not yet followed to courses'}/>
+                          <NoCoursesOrEvents message={'You have not yet followed to courses'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
                         <Cours coursesList={profile.userCompletedCourses} loading={profile.loading} lg={4}/>
-                        {profile.userFollowingCourses.length || profile.loading ? (
+                        {profile.userCompletedCourses.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not completed any courses yet'}/>
+                          <NoCoursesOrEvents message={'You have not completed any courses yet'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
                         <Event eventList={profile.userFollowingEvents} loading={profile.loading} lg={4}/>
-                        {profile.userCompletedEvents.length || profile.loading ? (
+                        {profile.userFollowingEvents.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not yet followed to events'}/>
+                          <NoCoursesOrEvents message={'You have not yet followed to events'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
@@ -252,7 +252,7 @@ export default class ProfileInfo extends React.Component {
                         {profile.userCompletedEvents.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not completed any events yet'}/>
+                          <NoCoursesOrEvents message={'You have not completed any events yet'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
@@ -262,7 +262,7 @@ export default class ProfileInfo extends React.Component {
                         {profile.userCreatedEvents.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not created any events yet'}/>
+                          <NoCoursesOrEvents message={'You have not created any events yet'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>

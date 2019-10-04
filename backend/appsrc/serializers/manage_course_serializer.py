@@ -12,7 +12,7 @@ class ManageCourseSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = Courses
-        exclude = ('id',)
+        fields = ("__all__")
 
     def create(self, validated_data):
         """Create new course"""
@@ -25,11 +25,10 @@ class ManageCourseSerializer(serializers.ModelSerializer):
             is_public=validated_data.get('is_public'),
             start_date=validated_data.get('start_date'),
             duration=validated_data.get('duration'),
-            rate=validated_data.get('rate'),
             cost=validated_data.get('cost'),
             members_limit=validated_data.get('members_limit'),
             categories=validated_data.get('categories'),
-            location=validated_data.get('location').encode(),
+            location=validated_data.get('location'),
             cover_url=validated_data.get('cover_url')
         )
 
@@ -37,7 +36,7 @@ class ManageCourseSerializer(serializers.ModelSerializer):
         return course
 
     def update(self, instance, validated_data):
-        """Update course"""
+        """Update existing course"""
 
         instance.coursename = validated_data.get('coursename', instance.coursename)
         instance.owner = validated_data.get('owner', instance.owner)
@@ -46,7 +45,6 @@ class ManageCourseSerializer(serializers.ModelSerializer):
         instance.is_public = validated_data.get('is_public', instance.is_public)
         instance.start_date = validated_data.get('start_date', instance.start_date)
         instance.duration = validated_data.get('duration', instance.duration)
-        instance.rate = validated_data.get('rate', instance.rate)
         instance.cost = validated_data.get('cost', instance.cost)
         instance.members_limit = validated_data.get('members_limit', instance.members_limit)
         instance.categories = validated_data.get('categories', instance.categories)
