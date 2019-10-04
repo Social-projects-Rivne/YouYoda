@@ -33,6 +33,7 @@ export default class CreateCourse extends React.Component{
           redirect: false,
       };
     }
+
     handleDayClick = (day, { selected }) => {
       const { selectedDays } = this.state;
        if (selected) {
@@ -45,25 +46,31 @@ export default class CreateCourse extends React.Component{
        }
        this.setState({ selectedDays });
     }
+
     updateField = async(event) => {
         let fieldName = event.target.name;
         let newState = {};
         newState[fieldName] = event.target.value;
         await this.setState(newState);
     }
+
     updateCategory = async(category) => {
         await this.setState({category: category.id});
     }
+
     updateStatus = async(event) => {
         await this.setState({status: event.target.value});
     }
+
     _onFocus = (e) => {
     e.currentTarget.type = "date";
     e.currentTarget.style.marginLeft = "70px"
     }
+
     updateLocation = (location) => {
         this.setState({location: location.split(',')[0]});
     };
+
     getCategories = async() => {
         try {
             let response = await API.get("categories/list")
@@ -77,6 +84,7 @@ export default class CreateCourse extends React.Component{
         }
 
     }
+
     getOwnerName = async() => {
         try {
             let response = await API.get("user/profile/view")
@@ -89,13 +97,16 @@ export default class CreateCourse extends React.Component{
         }
 
     }
+
     componentWillMount = async() => {
         await this.getCategories();
         await this.getOwnerName();
     }
+
     updateAvatarUrl = async(url) => {
         await this.setState({course_img: this.state.cover_url + url});
     };
+
     saveForm = async () => {
         const data = new FormData();
         let payLoad = {};
@@ -163,11 +174,10 @@ export default class CreateCourse extends React.Component{
         else
           toast.error('You didnt enter all information about course. Please fill in the fields.');
     };
+    
     postCourse = async (formData) => {
         try {
-            await API.post('trainer/courses', formData);
-            // this.props.avatarIcoFunc(formData.avatar_url); // send avatar ico to header of page
-            // setTimeout(window.location.reload(), 2000);
+            await API.post('trainer/create-course', formData);
         } catch (error) {
             toast.error('You cannot create course. Contact administrator or support system.');
         }

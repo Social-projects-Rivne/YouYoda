@@ -4,7 +4,8 @@ from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
+from .views.courses import (CourseScheduleView, TopCourses, SearchingCourses,
+                            TrainerCoursesView, CourseIfTrainerView)
 from .views.comment import CourseComments, EventComments
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
@@ -14,7 +15,7 @@ from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import UsersGetList
 from .views.user_subscribe_to_event import UserSubscribeToEvent
-from .views.user_subscribe_to_course import UserSubscribeToCourse
+from .views.user_subscribe_to_course import UserSubscribeToCourse, ListUserSubscribeToCourse
 from .views.pdp import PDP
 from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
 
@@ -25,10 +26,13 @@ urlpatterns = [
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
     path('courses/top', TopCourses.as_view(), name='top-courses'),
+    path('course/trainer/check', CourseIfTrainerView.as_view(), name='if-trainer-course'),
+    path('course/list/users', ListUserSubscribeToCourse.as_view(), name='course-list-users'),
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/comments', EventComments.as_view(), name='comments-events'),
-    path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('trainer/courses', TrainerCoursesView.as_view(), name='trainer-courses'),
+    path('trainer/create-course', ManageCourse.as_view(), name='manage_courses'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),
@@ -49,5 +53,4 @@ urlpatterns = [
     path('user/event/add', UserSubscribeToEvent.as_view(), name='subscribe_event'),
     path('user/pdp', PDP.as_view(), name='pdp'),
     path('users/getlist', UsersGetList.as_view()),
-    path('trainer/courses', ManageCourse.as_view(), name='manage_courses'),
 ]

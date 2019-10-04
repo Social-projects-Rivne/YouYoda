@@ -22,7 +22,7 @@ import Profile from './Pages/Profile';
 import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
-import SearchingEvents from './Components/SearchingEvents';
+import SearchingEvents from './Components/SearchingEvents'; 
 import PDP from './Components/PDP';
 
 
