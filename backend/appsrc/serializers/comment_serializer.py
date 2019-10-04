@@ -10,9 +10,7 @@ class CourseCommentsPostSerializator(serializers.ModelSerializer):
 
 	class Meta:
 		model = CoursesComments
-		fields = (
-			'author', 'course', 'date',	'comment'
-            )
+		fields = ['author', 'course', 'date', 'comment']
 
 		def create(self, validated_data):
 			comments = CoursesComments.objects.create(
@@ -32,9 +30,7 @@ class CourseCommentsGetSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = CoursesComments
 		depth = 1
-		fields = [
-			'author', 'course', 'date',	'comment',
-            ]
+		fields = ['author', 'course', 'date', 'comment']
 
 
 class EventCommentsPostSerializator(serializers.ModelSerializer):
@@ -44,9 +40,9 @@ class EventCommentsPostSerializator(serializers.ModelSerializer):
 
 	class Meta:
 		model = EventsComments
-		fields = (
+		fields = [
 			'author', 'event', 'date',	'comment'
-            )
+		]
 
 		def create(self, validated_data):
 			comments = EventsComments.objects.create(
@@ -66,9 +62,7 @@ class EventCommentsGetSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = EventsComments
 		depth = 1
-		fields = [
-			'author', 'event', 'date',	'comment',
-            ]
+		fields = ['author', 'event', 'date', 'comment']
 
 class TrainerCommentsPostSerializator(serializers.ModelSerializer):
 	"""Takes data and add comment to TrainerComments.
@@ -77,9 +71,7 @@ class TrainerCommentsPostSerializator(serializers.ModelSerializer):
 
 	class Meta:
 		model = TrainerComments
-		fields = (
-			'author', 'trainer', 'date', 'comment'
-            )
+		fields = ['author', 'trainer', 'date', 'comment']
 
 		def create(self, validated_data):
 			comments = TrainerComments.objects.create(
@@ -87,7 +79,6 @@ class TrainerCommentsPostSerializator(serializers.ModelSerializer):
 				comment = validated_data['comment'],
 				trainer = validated_data['trainer']
 				)
-			comments.save()
 			return comments
 
 
@@ -99,6 +90,4 @@ class TrainerCommentsGetSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = TrainerComments
 		depth = 1
-		fields = [
-			'author', 'trainer', 'date',	'comment',
-            ]
+		fields = ['author', 'trainer', 'date', 'comment']

@@ -8,16 +8,16 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
 from ..models import YouYodaUser, Courses, Events, TrainerCertificates
-from ..serializers.trainer_serializer import (
-                                                TrainerInfoSerializer,
-                                                TrainerCoursesSerializer,
-                                                TrainerEventsSerializer,
-                                                TrainerCertificatesSerializer,
-                                                TopTrainerSerializer)
+from ..serializers.trainer_serializer import (TopTrainerSerializer,
+                                              TrainerCertificatesSerializer,
+                                              TrainerCoursesSerializer,
+                                              TrainerEventsSerializer,
+                                              TrainerInfoSerializer)
 
 
 NUMBER_OF_TOP = 4
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
+
 
 class TopTrainers(APIView):
     """Takes data from CoursesTopTrainer for view top trainers by amount courses"""
@@ -29,7 +29,7 @@ class TopTrainers(APIView):
         """Count courses and group by owner, return top trainers"""
         owners_courses = Courses.objects.values('owner').annotate(count=Count('owner')).order_by('-count')[:NUMBER_OF_TOP]
         id_owners = [owner_courses['owner'] for owner_courses in owners_courses]
-        trainers = YouYodaUser.objects.filter(id__in = id_owners)
+        trainers = YouYodaUser.objects.filter(id__in=id_owners)
         serializer = TopTrainerSerializer(trainers, many=True)
         return Response(serializer.data)
 
@@ -42,10 +42,10 @@ class TrainerPage(APIView):
     def get(self, request):
         """Get id of trainer in params and return info about trainer"""
         trainer_id = request.query_params.get('id')
-        trainer = YouYodaUser.objects.get(id = trainer_id)
-        courses = Courses.objects.filter(owner = trainer_id)
-        events = Events.objects.filter(owner = trainer_id)
-        certificates = TrainerCertificates.objects.filter(user = trainer_id)
+        trainer = YouYodaUser.objects.get(id=trainer_id)
+        courses = Courses.objects.filter(owner=trainer_id)
+        events = Events.objects.filter(owner=trainer_id)
+        certificates = TrainerCertificates.objects.filter(user=trainer_id)
         serializer_trainer_info = TrainerInfoSerializer(trainer)
         serializer_trainer_courses = TrainerCoursesSerializer(courses, many=True)
         serializer_trainer_events = TrainerEventsSerializer(events, many=True)

@@ -13,6 +13,8 @@ import { defaultPhoto, isAuthenticated } from '../utils';
 import Event from './event';
 
 
+const DEFIMG = "/media/hot-air-balloons-4381674_1920.jpg";
+
 export default class TrainerPage extends React.Component{
     constructor(props){
       super(props);
@@ -29,9 +31,9 @@ export default class TrainerPage extends React.Component{
           certificatesCollapse: true,
           generalInfoCollapse: true,
           lastSeen: 0
-
       };
     }
+
     async componentWillMount() {
         try{
             let response = await API.get('trainer/page', {
@@ -58,19 +60,17 @@ export default class TrainerPage extends React.Component{
         }
         this.getComments();
       }
+
       lastLogin = (date) => {
-        let today = new Date();
-        let mins = moment(today).diff(date, "minute")
-        let d = 0;
-        let h = 0;
+        let mins = moment().diff(date, "minutes")
+        let days = moment().diff(date, "days");
+        let hours = moment().diff(date, "hours");
         
         if (mins) {
-            if(mins >= 60*24){
-                d = Math.floor(mins / (60*24));
-                return `${d} days`;
-            } else if(mins >= 60){
-                h = Math.floor(mins / 60);
-                return `${h} hours`;
+            if(days >= 1){
+                return `${days} days`;
+            } else if(hours >= 1){
+                return `${hours} hours`;
             } else {
                 return `${mins} minutes`;
             }
@@ -81,13 +81,12 @@ export default class TrainerPage extends React.Component{
 
     getComments = async() => {
         try {
-            let response = await API.get('/trainer/comments',
-                {
+            let response = await API.get('/trainer/comments', {
                     params: {
                         trainer_id: this.props.trainer_id,
                     }
                 }
-        )
+            )
             this.setState({
                 comments: response.data,
                 loading: false
@@ -100,15 +99,19 @@ export default class TrainerPage extends React.Component{
     addComment = async() => {
         await this.getComments()
     }
+
     toggleCourseCollapse = () => {
         this.setState(state => ({ courseCollapse: !state.courseCollapse }));
     }
+
     toggleEventCollapse = () => {
         this.setState(state => ({ eventCollapse: !state.eventCollapse }));
     }
+
     toggleCertCollapse = () => {
         this.setState(state => ({ certificatesCollapse: !state.certificatesCollapse }));
     }
+
     toggleGeneralCollapse = () => {
         this.setState(state => ({ generalInfoCollapse: !state.generalInfoCollapse }));
     }
@@ -119,9 +122,10 @@ export default class TrainerPage extends React.Component{
             transition: '.3s transform ease-in-out'};
         }
     }
+
     onlineOffline = () => {
-        let today = new Date();    
-        let lastActive = moment(today).diff(this.state.lastSeen, "minute")
+        let lastActive = moment().diff(this.state.lastSeen, "minute")
+        
         if(lastActive < 2){
             return (
                 <ul>
@@ -143,9 +147,8 @@ export default class TrainerPage extends React.Component{
     }
 
     render(){
-        let defImg = "/media/hot-air-balloons-4381674_1920.jpg";
-        let coverImg = defaultPhoto(defImg, this.state.trainer.cover_url);
-        let coverAvatar = defaultPhoto(defImg, this.state.trainer.avatar_url)
+        let coverImg = defaultPhoto(DEFIMG, this.state.trainer.cover_url);
+        let coverAvatar = defaultPhoto(DEFIMG, this.state.trainer.avatar_url)
         let birthDay = moment(this.state.trainer.birth_date).format('Do MMMM YYYY');
 
         return(
@@ -249,16 +252,14 @@ export default class TrainerPage extends React.Component{
                     <Row style={{marginTop:'100px', marginBottom:'100px'}}>
                     <Col md="4"  className = {`pt-3 border-right ${isAuthenticated("show")}`}>
                         <h6>Say something about this course</h6>
-                            <CommentForm
-                                addComment = {this.addComment}
-                                trainer = {this.props.trainer_id}
-                                comments = {this.state.comments}
+                            <CommentForm addComment = {this.addComment}
+                                         trainer = {this.props.trainer_id}
+                                         comments = {this.state.comments}
                             />
                     </Col>
                     <Col className = "pt-3 bg-white">
-                        <CommentList
-                            comments = {this.state.comments}
-                            loading = {this.state.loading}
+                        <CommentList comments = {this.state.comments}
+                                     loading = {this.state.loading}
                             />
                     </Col>
                     </Row>

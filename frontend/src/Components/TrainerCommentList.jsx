@@ -77,10 +77,9 @@ export class CommentForm extends React.Component {
   }
 
   handleFieldChange = event => {
-    const { value, name } = event.target;
+    let { value, name } = event.target;
 
     this.setState({
-      ...this.state,
       comment: {
         ...this.state.comment,
         [name]: value

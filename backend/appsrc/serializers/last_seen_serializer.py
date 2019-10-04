@@ -4,14 +4,12 @@ from ..models import YouYodaUser
 
 
 class LastSeenSerializator(serializers.ModelSerializer):
-    """Takes or updates data from the User model for fill/edit user profile.
+    """Takes or updates data from the YouYodaUser model for chech trainer online.
 
     Converts it to JSON format for transmission via the API.
-
     """
 
     class Meta:
-
         model = YouYodaUser
         fields = ('last_seen', )
 

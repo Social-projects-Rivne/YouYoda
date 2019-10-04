@@ -9,18 +9,16 @@ import { API } from '../api/axiosConf';
 
 
 export default class Footer extends React.Component{
-  sendStatusOnline = async(timenow) => { 
-      let timestamp =  moment(timenow).unix();
+  sendStatusOnline = async() => { 
+      let timestamp =  moment().unix();
       await API.patch('last/seen', {last_seen:timestamp})
-      console.log("Sending online status" + timestamp)
+      console.log("Sending online status")
   }
     setIntervalSending = () => {
         if(localStorage.getItem('token')){
-            let timenow = new Date()
-            this.sendStatusOnline(timenow)
+            this.sendStatusOnline()
             setInterval(()=>{
-                let timenow = new Date()
-                this.sendStatusOnline(timenow)
+                this.sendStatusOnline()
             }, 1000*60)
         }
     }

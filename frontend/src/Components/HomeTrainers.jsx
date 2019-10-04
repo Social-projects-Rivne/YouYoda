@@ -27,6 +27,7 @@ export default class HomeTrainers extends React.Component{
        this.setState({ redirect: true });
        this.setState({ trainer });
     };
+    
     renderTrainers = (trainer) => {
         let defImg = "/media/avatar.png";
         let coverImg = defaultPhoto(defImg, trainer.avatar_url);

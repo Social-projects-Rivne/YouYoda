@@ -25,7 +25,7 @@ class CourseComments(APIView):
     def get(self, request):
         """Get course_id as params and filter comments"""
         course_id = request.query_params.get('course_id')
-        comments = CoursesComments.objects.filter(course = course_id).order_by('-date')
+        comments = CoursesComments.objects.filter(course=course_id).order_by('-date')
         serializer = CourseCommentsGetSerializator(comments, many=True)
         return Response(serializer.data)
 
@@ -37,7 +37,7 @@ class CourseComments(APIView):
         serializer = CourseCommentsPostSerializator(data=data_comment)
 
         if serializer.is_valid():
-            comments = serializer.save()
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -51,7 +51,7 @@ class EventComments(APIView):
     def get(self, request):
         """Get event_id as params and filter comments"""
         event_id = request.query_params.get('event_id')
-        comments = EventsComments.objects.filter(event = event_id).order_by('-date')
+        comments = EventsComments.objects.filter(event=event_id).order_by('-date')
         serializer = EventCommentsGetSerializator(comments, many=True)
         return Response(serializer.data)
 
@@ -63,7 +63,7 @@ class EventComments(APIView):
         serializer = EventCommentsPostSerializator(data=data_comment)
 
         if serializer.is_valid():
-            comments = serializer.save()
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -76,7 +76,7 @@ class TrainerComment(APIView):
     def get(self, request):
         """Get trainer_id as params and filter comments"""
         trainer_id = request.query_params.get('trainer_id')
-        comments = TrainerComments.objects.filter(trainer = trainer_id).order_by('-date')
+        comments = TrainerComments.objects.filter(trainer=trainer_id).order_by('-date')
         serializer = TrainerCommentsGetSerializator(comments, many=True)
         return Response(serializer.data)
 
@@ -88,7 +88,7 @@ class TrainerComment(APIView):
         serializer = TrainerCommentsPostSerializator(data=data_comment)
 
         if serializer.is_valid():
-            comments = serializer.save()
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

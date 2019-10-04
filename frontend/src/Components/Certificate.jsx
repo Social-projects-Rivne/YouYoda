@@ -31,8 +31,10 @@ export default class Certificate extends React.Component{
     }
 
     handleClick = async (certificate) => {
-        await this.setState({ certificate });
-        await this.setState({ redirect: true });
+        await this.setState({
+            certificate,
+            redirect: true 
+        });
         window.location.reload();
     }
     notResults = () => {
@@ -54,16 +56,14 @@ export default class Certificate extends React.Component{
 
         return (
             <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-
-                    <Card className="event-card">
-                        <CardBody className="event-body">
-                            <img width="100%" src={coverImg} alt={certificate.certificatename}/>
-                        </CardBody>
-                        <CardFooter className="card-event-footer">
-                            <p>{certificate.description}</p>
-                        </CardFooter>
-                    </Card>
-
+                <Card className="event-card">
+                    <CardBody className="event-body">
+                        <img width="100%" src={coverImg} alt={certificate.certificatename}/>
+                    </CardBody>
+                    <CardFooter className="card-event-footer">
+                        <p>{certificate.description}</p>
+                    </CardFooter>
+                </Card>
             </Col>
         )
     }

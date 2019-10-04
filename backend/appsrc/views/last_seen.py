@@ -18,7 +18,7 @@ class LastSeen(APIView):
     def get(self, request):
         """Receives and transmits date when user was seen"""
         trainer_id = request.query_params.get('trainer_id')
-        trainer = YouYodaUser.objects.get(id = trainer_id)
+        trainer = YouYodaUser.objects.get(id=trainer_id)
         serializer = LastSeenSerializator(trainer)
         return Response(serializer.data)
 

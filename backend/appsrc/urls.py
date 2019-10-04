@@ -1,19 +1,19 @@
 from django.urls import include, path
 
 from .views.categories import CategoriesList
-from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
 from .views.comment import CourseComments, EventComments, TrainerComment
-from .views.last_seen import LastSeen
+from .views.courses import CourseScheduleView, SearchingCourses, TopCourses
 from .views.edit_profile import EditProfile
-from .views.events import TopEvents, SearchingEvents
-from .views.trainer import TrainerPage, TopTrainers
+from .views.change_avatar import FileUploadView
+from .views.last_seen import LastSeen
 from .views.pdp import PDP
+from .views.events import SearchingEvents, TopEvents 
+from .views.trainer import TopTrainers, TrainerPage 
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
-from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
+from .views.user_to_trainer import UserGetRequest, UserSendRequest, UserToTrainer
 from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses
 from .views.user_subscribe_to_event import UserSubscribeToEvent
 from .views.user_subscribe_to_course import UserSubscribeToCourse
