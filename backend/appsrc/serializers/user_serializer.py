@@ -26,7 +26,6 @@ class UserShowSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = YouYodaUser
-
         fields = (
             'first_name', 'last_name', 'username',
             'email', 'avatar_url',

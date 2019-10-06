@@ -1,6 +1,9 @@
 import React from 'react'
-import {API} from "../api/axiosConf";
+
 import {toast} from "react-toastify";
+
+import {API} from "../api/axiosConf";
+
 
 export default class CourseImage extends React.Component {
     uploadAvatar = async (url) => {

@@ -14,13 +14,13 @@ import classnames from 'classnames';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 
-import { ProfileContext } from './profile-context';
-import PDP from './PDP'
-import NoCoursesOrEvents from './NoCoursesOrEvents';
+import Achievement from './Achievement'
 import Cours from './cours'
 import Event from './event'
-import Achievement from './Achievement'
+import NoCoursesOrEvents from './NoCoursesOrEvents';
+import PDP from './PDP'
 import TrainerCourses from './TrainerCourses'
+import { ProfileContext } from './profile-context';
 
 
 const override = css`

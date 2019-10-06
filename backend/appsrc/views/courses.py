@@ -73,7 +73,7 @@ class CourseScheduleView(APIView):
     def get(self, request):
         """First check request data in cache, then pull data from db"""
         course_id = request.query_params.get('course_id')
-        course_schedule = CourseSchedule.objects.filter(course = course_id).order_by('date')
+        course_schedule = CourseSchedule.objects.filter(course=course_id).order_by('date')
         serializer = CourseScheduleSerializer(course_schedule, many=True)
         return Response(serializer.data)
 
@@ -83,11 +83,12 @@ class TrainerCoursesView(APIView):
 
     permission_classes = [permissions.IsAuthenticated,]
 
+    @method_decorator(cache_page(CACHE_TTL), name='trainer_courses')
     def get(self, request):
         """First check request data in cache, then pull data from db"""
         auth_token = request.headers['Authorization'][6:]
         user = YouYodaUser.objects.get(auth_token=auth_token)
-        trainer_courses = Courses.objects.filter(owner = user.id).order_by('start_date')
+        trainer_courses = Courses.objects.filter(owner=user.id).order_by('start_date')
         serializer = CoursesSerializator(trainer_courses, many=True)
         return Response(serializer.data)
 
@@ -97,12 +98,13 @@ class CourseIfTrainerView(APIView):
 
     permission_classes = [permissions.IsAuthenticated,]
 
+    @method_decorator(cache_page(CACHE_TTL), name='trainer')
     def get(self, request):
         """First check request data in cache, then pull data from db"""
         auth_token = request.headers['Authorization'][6:]
         user = YouYodaUser.objects.get(auth_token=auth_token)
         course_id = request.query_params.get('course_id')
-        trainer = Courses.objects.filter(owner = user.id, id = course_id)
+        trainer = Courses.objects.filter(owner=user.id, id=course_id)
         if trainer:
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_404_NOT_FOUND)

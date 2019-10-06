@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
-import LocationSearchInput from '../api/cityselector'
 import { API } from '../api/axiosConf';
 import { defaultPhoto } from '../utils';
 import CourseImage from './CourseImage';
+import LocationSearchInput from '../api/cityselector'
 
 
 export default class CreateCourse extends React.Component{

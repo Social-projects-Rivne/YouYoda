@@ -4,9 +4,9 @@ from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.courses import (CourseScheduleView, TopCourses, SearchingCourses,
-                            TrainerCoursesView, CourseIfTrainerView)
 from .views.comment import CourseComments, EventComments
+from .views.courses import (CourseIfTrainerView, CourseScheduleView, SearchingCourses,
+                            TopCourses, TrainerCoursesView)
 from .views.edit_profile import EditProfile
 from .views.events import TopEvents, SearchingEvents
 from .views.manage_course import ManageCourse

@@ -12,6 +12,8 @@ import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
 import TrainerListUsers from './TrainerListUsers';
 
+const URLPATH = 'course/trainer/check';
+
 
 export default class CourseDetail extends React.Component{
     constructor(props){
@@ -92,7 +94,6 @@ export default class CourseDetail extends React.Component{
     }
 
     checkIfTrainer = async() => {
-        const URLPATH = 'course/trainer/check';
         try {
             await API.get(URLPATH,
                 {
