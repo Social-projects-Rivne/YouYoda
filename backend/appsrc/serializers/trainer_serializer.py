@@ -10,7 +10,6 @@ class TrainerInfoSerializer(serializers.ModelSerializer):
     """
 
 	class Meta:
-
 		model = YouYodaUser
 		fields = ("first_name", "last_name", "about_me", "phone_number",
 					"avatar_url", "cover_url", "birth_date",

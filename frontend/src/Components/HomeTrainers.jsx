@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 import { Redirect, Link } from 'react-router-dom';
 
 import { axiosGet } from '../api/axiosGet';
-import { defaultPhoto } from '../utils'
+import { defaultPhoto, DEFAULT_AVATAR_URL } from '../utils'
 
 
 export default class HomeTrainers extends React.Component{
@@ -24,13 +24,11 @@ export default class HomeTrainers extends React.Component{
     }
 
     handleClick = (trainer) => {
-       this.setState({ redirect: true });
-       this.setState({ trainer });
+       this.setState({ redirect: true, trainer });
     };
-    
+
     renderTrainers = (trainer) => {
-        let defImg = "/media/avatar.png";
-        let coverImg = defaultPhoto(defImg, trainer.avatar_url);
+        let coverImg = defaultPhoto(DEFAULT_AVATAR_URL, trainer.avatar_url);
         return (
             <Col xl="3" lg="6" md="12">
                 <Link to={{

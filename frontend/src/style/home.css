@@ -151,12 +151,6 @@
   top: 30%;
   text-align: right;
   color: #fff;
-  transform: scale(1) rotate(0deg) translate(0%, 0px);
-  transition: .4s cubic-bezier(0.4, 0, 1, 1), width 1s, height 1s, transform 1s;
-}
-.header-img:hover .middle_bar {
-    transition: .4s cubic-bezier(0.4, 0, 1, 1), width 1s, height 1s, transform 1s;
-    transform: scale(1.4) rotate(360deg) translate(-10%, 10px);
 }
 .header-img .middle_bar p { font-size: 48px; }
 .header-img .middle_bar cite { font-size: 36px; }

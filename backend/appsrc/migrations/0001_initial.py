@@ -326,7 +326,7 @@ class Migration(migrations.Migration):
                 ('phone_number', models.CharField(blank=True, max_length=13, null=True)),
                 ('avatar_url', models.CharField(blank=True, max_length=255, null=True)),
                 ('is_trainer', models.BooleanField(default=False)),
-                ('cover_url', models.TextField(blank=True, null=True)),
+                ('cover_url', models.TextField(blank=True, default='')),
                 ('last_seen', models.IntegerField(default=0)),
                 ('is_active', models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
@@ -407,7 +407,7 @@ class Migration(migrations.Migration):
             name='TrainerCertificates',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField(blank=True, null=True)),
+                ('description', models.TextField(blank=True, default='')),
                 ('image_url', models.CharField(max_length=80)),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
@@ -483,7 +483,7 @@ class Migration(migrations.Migration):
             name='user_permissions',
             field=models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions'),
         ),
-        
+
         migrations.CreateModel(
             name='CoursesComments',
             fields=[

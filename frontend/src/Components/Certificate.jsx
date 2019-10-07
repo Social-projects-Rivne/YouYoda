@@ -12,6 +12,7 @@ const override = css`
     margin: 0 auto;
     border-color: #FFD466;
 `;
+const defImg = "/media/beautiful-crowd-cute-2869374.jpg";
 
 export default class Certificate extends React.Component{
     constructor(props) {
@@ -33,7 +34,7 @@ export default class Certificate extends React.Component{
     handleClick = async (certificate) => {
         await this.setState({
             certificate,
-            redirect: true 
+            redirect: true
         });
         window.location.reload();
     }
@@ -51,7 +52,6 @@ export default class Certificate extends React.Component{
     }
 
     renderCertificate (certificate) {
-        let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
         let coverImg = defaultPhoto(defImg, certificate.image_url);
 
         return (

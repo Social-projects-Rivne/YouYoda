@@ -8,6 +8,7 @@ DEFAULT_RATE = 0
 DEFAULT_COST = 0
 DEFAULT_LAST_SEEN = 0
 DEFAULT_STATUS_ID = 1
+EMPTY_STRING = ""
 
 class Categories(models.Model):
     name = models.CharField(max_length=20)
@@ -43,7 +44,7 @@ class YouYodaUser(AbstractUser):
     avatar_url = models.CharField(max_length=255, blank=True, null=True)
     is_trainer = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')
-    cover_url = models.TextField(blank=True, null=True)
+    cover_url = models.TextField(blank=True, default=EMPTY_STRING)
     last_seen = models.IntegerField(blank=False, default=DEFAULT_LAST_SEEN)
 
     def __str__(self):
@@ -62,7 +63,7 @@ class UserRequests(models.Model):
 
 class TrainerCertificates(models.Model):
     user = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, default=EMPTY_STRING)
     image_url = models.CharField(blank=False, max_length=80)
 
 class Courses(models.Model):

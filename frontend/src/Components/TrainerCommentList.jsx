@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
 import Comment from "./Comment";
-import { defaultPhoto } from '../utils';
+import { defaultPhoto, DEFAULT_AVATAR_URL } from '../utils';
 
 
 const override = css`
@@ -120,8 +120,7 @@ export class CommentForm extends React.Component {
   }
 
   render() {
-      let defimg = "/media/avatar.png";
-      let coverimg = defaultPhoto(defimg, localStorage.getItem("avatar_url"));
+    let coverimg = defaultPhoto(DEFAULT_AVATAR_URL, localStorage.getItem("avatar_url"));
     return (
       <>
         <form method="post" onSubmit={this.onSubmit}>
