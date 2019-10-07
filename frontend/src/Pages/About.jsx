@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container, Row, Col } from 'reactstrap';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import '../style/about.css';
+import '../style/about.scss';
 
 
 export default class About extends React.Component {
@@ -24,30 +24,48 @@ export default class About extends React.Component {
                     </div>
                 </div>
 
+
                 <Container>
                     <Row className="team">
-                        <Col xl="4" md="6">
-                            <img src={require("../img/static/avatar.png")} alt="ico"/>
+                        <Col className="column-team" xl="4" md="6">
+                            <img src={require("../img/static/avatar.png")} alt="ico" />
+                            <div className="circle" />
                             <h1>NAZAR BOIAR</h1>
                             <h3>Software Engineer</h3>
                         </Col>
-                        <Col xl="4" md="6">
-                            <img src={require("../img/static/avatar.png")} alt="ico"/>
+                        <Col className="column-team" xl="4" md="6">
+                            <img src={require("../img/static/avatar.png")} alt="ico" />
+                            <div className="circle" />
+                            <h1>OLEKSANDR HAVRYLCHYK</h1>
+                            <h3>Software Engineer</h3>
                         </Col>
-                        <Col xl="4" md="6">
-                            <img src={require("../img/static/avatar.png")} alt="ico"/>
+                        <Col className="column-team" xl="4" md="6">
+                            <img src={require("../img/static/avatar.png")} alt="ico" />
+                            <div className="circle" />
+                            <h1>HRYHORII KUCHERCHUK</h1>
+                            <h3>Software Engineer</h3>
                         </Col>
-                        <Col xl="4" md="6">
-                            <img src={require("../img/static/avatar.png")} alt="ico"/>
+                        <Col className="column-team" xl="4" md="6">
+                            <img src={require("../img/static/avatar.png")} alt="ico" />
+                            <div className="circle" />
+                            <h1>OLENA PODRANETSKA</h1>
+                            <h3>Software Engineer</h3>
                         </Col>
-                        <Col xl="4" md="6">
-                            <img src={require("../img/static/avatar.png")} alt="ico"/>
+                        <Col className="column-team" xl="4" md="6">
+                            <img src={require("../img/static/avatar.png")} alt="ico" />
+                            <div className="circle" />
+                            <h1>MARYNA POPRUZHUK</h1>
+                            <h3>Software Engineer</h3>
                         </Col>
-                        <Col xl="4" md="6">
-                            <img src={require("../img/static/avatar.png")} alt="ico"/>
+                        <Col className="column-team" xl="4" md="6">
+                            <img src={require("../img/static/avatar.png")} alt="ico" />
+                            <div className="circle" />
+                            <h1>RUSYN ROMAN</h1>
+                            <h3>Software Engineer</h3>
                         </Col>
                     </Row>
                 </Container>
+
 
                 <div className="possibilities">
                     <Container>
