@@ -102,8 +102,7 @@ export default class CourseDetail extends React.Component{
                 }
             }
         )
-                toast.info("You are trainer!");
-                this.setState({trainer: true});
+            this.setState({trainer: true});
         } catch (error) {
         }
     }

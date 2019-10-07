@@ -174,7 +174,7 @@ export default class CreateCourse extends React.Component{
         else
           toast.error('You didnt enter all information about course. Please fill in the fields.');
     };
-    
+
     postCourse = async (formData) => {
         try {
             await API.post('trainer/create-course', formData);
@@ -254,7 +254,8 @@ export default class CreateCourse extends React.Component{
             <Container>
             <Row>
                 <Col md="6" xs="12" className="course-detail-first-col">
-                    <h4 className="course-detail-h4">About:</h4>
+                    <h4 className="course-detail-h4">About<span className="required-fields"> *</span></h4>
+                    <span className="required-fields"> *</span><span> - required fields</span>
                     <Input
                         type="textarea"
                         name="description"
@@ -263,7 +264,7 @@ export default class CreateCourse extends React.Component{
                         onChange={(e) => this.updateField(e)}
                         value={this.state.description}
                     />
-                  <p className="main-text cd-limit">Limit of members</p>
+                  <p className="main-text cd-limit">Limit of members<span className="required-fields"> *</span></p>
                     <Input
                         type="number"
                         name="members_limit"
@@ -273,7 +274,7 @@ export default class CreateCourse extends React.Component{
                         onChange={(e) => this.updateField(e)}
                         value={this.state.members_limit}
                     />
-                    <p className="main-text">Duration: </p>
+                    <p className="main-text">Duration<span className="required-fields"> *</span></p>
                     <Input
                         type="number"
                         name="duration"
@@ -283,7 +284,7 @@ export default class CreateCourse extends React.Component{
                         onChange={(e) => this.updateField(e)}
                         value={this.state.duration}
                     />
-                  <p className="main-text">Start date: </p>
+                  <p className="main-text">Start date<span className="required-fields"> *</span></p>
                     <Input
                       type="date"
                       name="start_date"
@@ -292,7 +293,7 @@ export default class CreateCourse extends React.Component{
                       placeholder="Set start date"
                       value={this.state.start_date}
                     />
-                  <p className="main-text">Start time: </p>
+                  <p className="main-text">Start time<span className="required-fields"> *</span></p>
                       <Input
                         type="time"
                         name="start_time"
@@ -302,7 +303,7 @@ export default class CreateCourse extends React.Component{
                         placeholder="Set start time"
                         value={this.state.start_time}
                       />
-                   <p className="main-text">Price: </p>
+                   <p className="main-text">Price<span className="required-fields"> *</span></p>
                       <Input
                           type="number"
                           name="cost"
@@ -311,14 +312,14 @@ export default class CreateCourse extends React.Component{
                           placeholder="Set price"
                           value={this.state.cost}
                       />
-                    <p className="main-text">Location: </p>
+                    <p className="main-text">Location<span className="required-fields"> *</span></p>
                     <FormGroup className="city-country-2">
                       <LocationSearchInput
                           updateLocation={this.updateLocation}
                           city={this.state.location}
                       />
                     </FormGroup>
-                   <p className="main-text" style={{marginTop:"10px"}}>Category:</p>
+                   <p className="main-text" style={{marginTop:"10px"}}>Category<span className="required-fields"> *</span></p>
                     <Input
                       type="select"
                       name="category"
@@ -327,7 +328,7 @@ export default class CreateCourse extends React.Component{
                         return <option onClick={(e) => this.updateCategory(item)}>{item.name}</option>;
                       })}
                     </Input>
-                    <p className="main-text" style={{marginTop:"10px"}}>Status:</p>
+                    <p className="main-text" style={{marginTop:"10px"}}>Status<span className="required-fields"> *</span></p>
                      <Input
                        type="select"
                        name="category"
@@ -347,7 +348,7 @@ export default class CreateCourse extends React.Component{
                      </Button>
                 </Col>
                 <Col md="6" xs="12" className="course-detail-second-col" style={{display:"block"}}>
-                    <p className="main-text daypicker-title">Specify the days you want to take course</p>
+                    <p className="main-text daypicker-title">Specify the days you want to take course<span className="required-fields"> *</span></p>
                       <DayPicker
                         className="daypicker"
                         selectedDays={this.state.selectedDays}

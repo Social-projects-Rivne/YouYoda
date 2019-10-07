@@ -83,7 +83,6 @@ class TrainerCoursesView(APIView):
 
     permission_classes = [permissions.IsAuthenticated,]
 
-    @method_decorator(cache_page(CACHE_TTL), name='trainer_courses')
     def get(self, request):
         """First check request data in cache, then pull data from db"""
         auth_token = request.headers['Authorization'][6:]

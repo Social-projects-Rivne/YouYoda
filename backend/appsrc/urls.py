@@ -32,7 +32,7 @@ urlpatterns = [
     path('events/comments', EventComments.as_view(), name='comments-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('trainer/courses', TrainerCoursesView.as_view(), name='trainer-courses'),
-    path('trainer/create-course', ManageCourse.as_view(), name='manage_courses'),
+    path('trainer/create-course', ManageCourse.as_view(), name='create-course'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),

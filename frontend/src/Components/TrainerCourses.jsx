@@ -20,7 +20,6 @@ export default class TrainerCourses extends React.Component{
     getData = async() => {
        try {
          let response = await API.get('/trainer/courses')
-         console.log(response);
          this.setState({
              coursesList:response.data,
              loading: false

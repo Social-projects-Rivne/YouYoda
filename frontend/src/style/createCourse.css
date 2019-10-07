@@ -43,7 +43,7 @@
 .field-course-name:focus {
     border-radius: 40px;
     border-color: transparent;
-    box-shadow: inset 0 0 2px #ffd466;
+    box-shadow: inset 0 0 2px white;
 }
 .course-about-area {
     min-height: 120px;
@@ -117,7 +117,9 @@
     justify-content: center;
     margin-top: 10px;
 }
-
+.required-fields {
+    color: #ffd466;
+}
 @media screen and (max-width: 990px){
     .field-course-start-date, .field-course-price, .field-course-location{
         display: flex;

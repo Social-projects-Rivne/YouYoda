@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {Row, Col, Table} from "reactstrap";
+import { toast } from 'react-toastify';
 
 import { API } from '../api/axiosConf';
 
@@ -40,6 +41,7 @@ export default class TrainerListUsers extends React.Component {
             ),
             })
         } catch (error) {
+          toast.error("For some reason now you can not view subscribers of your course, please contact support")
         }
     }
 
@@ -76,7 +78,17 @@ export default class TrainerListUsers extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.dataList.map( (user, index) => this.renderUsers(user, index) )}
+                            {this.state.dataList.map( (user, index) => this.renderUsers(user, index))}
+                            {this.state.dataList.length ? (
+                              null
+                            ) : (
+                              <tr >
+                                  <td></td>
+                                  <td colspan="4" style={{textAlign:"center"}}>Your course has no subscribers</td>
+                                  <td></td>
+                                  <td></td>
+                              </tr>
+                            )}
                             </tbody>
                         </Table>
                     </Col>
