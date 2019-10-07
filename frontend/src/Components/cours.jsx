@@ -33,10 +33,23 @@ export default class Cours extends React.Component{
         this.setState({loading: false})
     }
 
-    handleClick = async (course) => {
+    handleClick = async (event, course) => {
+        event.preventDefault();
         await this.setState({ course });
         await this.setState({ redirect: true });
         window.location.reload();
+    }
+    notResults = () => {
+        if (this.props.coursesList.length == 0) {
+            return (
+                <Col className="d-flex align-items-center justify-content-center" style={{margin:'35px 15px', color:'#FFD466'}}>
+                    <h2>Do, or do not. There is no courses :(</h2>
+                </Col>
+            )
+        }
+        else {
+            return this.props.coursesList.map( course => this.renderCourses(course) )
+        }
     }
 
     renderCourses(course) {
@@ -48,7 +61,7 @@ export default class Cours extends React.Component{
         const newCourseDuration = moment.duration(courseDuration).hours();
         return (
             <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-                <Link className="card-link" onClick={() => this.handleClick(course)} >
+                <Link className="card-link" onClick={(event) => this.handleClick(event, course)} >
                     <Card className="event-card">
                         <CardHeader className="event-header">{newCourseDate}</CardHeader>
                         <CardBody className="event-body">
@@ -58,7 +71,7 @@ export default class Cours extends React.Component{
                             <CardText>
                                 <p><span className="main-text-span">Category: </span>{course.categories}</p>
                                 <p>Duration: {newCourseDuration} hours</p>
-                                <p><span className="main-text-span">Trainer: </span>{course.owner}</p>
+                                <p><span className="main-text-span">Trainer: </span>{`${course.owner.first_name} ${course.owner.last_name}`}</p>
                                 <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{course.location}</p>
                             </CardText>
                         </CardBody>
@@ -88,7 +101,7 @@ export default class Cours extends React.Component{
                     />
                 </div>
                 <Row>
-                    {this.props.coursesList.map( course => this.renderCourses(course) )}
+                    {this.notResults()}
                 </Row>
             </Container>
         )

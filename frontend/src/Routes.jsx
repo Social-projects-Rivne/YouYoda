@@ -22,7 +22,7 @@ import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
-import PDP from './Components/PDP';
+import TrainerPage from './Components/TrainerPage';
 
 
 export default class Routes extends React.Component{
@@ -73,7 +73,9 @@ export default class Routes extends React.Component{
                     render={()=><ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
                 <Route exact path={'/moderator/:option'}
                     render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
-                <Route exact path='/pdp' component={PDP}/>
+                <Route exact path="/trainer/page"
+                    render={(props)=><MainLayout><TrainerPage trainer_id = {props.location.state.trainer_id}/></MainLayout>}
+                />
                 <Route path="*" component={NotFoundPage} />
         </Switch>
         </Router>
