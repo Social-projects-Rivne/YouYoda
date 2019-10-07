@@ -14,18 +14,14 @@ export default class Profile extends React.Component{
       super(props);
 
       this.updateProfile = async() => {
-        //let userData = await this.getInfo();
         let userCourses = await this.getCourses();
         let userEvents = await this.getEvents();
         this.setState(state => ({
-          //userInfo: userData,
           userCompletedCourses: userCourses['completed'],
           userFollowingCourses: userCourses['following'],
           userFavouritesCourses: userCourses['favourites'],
           userCompletedEvents: userEvents['completed'],
           userFollowingEvents: userEvents['following'],
-          //userCreatedEvents: userEvents['created'],
-          //userAchievements: state.userAchievements,
           loading: state.loading,
         }));
       };

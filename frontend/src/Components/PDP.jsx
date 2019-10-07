@@ -300,7 +300,6 @@ export default class PDP extends React.Component{
   }
 
   render() {
-      //console.log(this.state.mainEventsList);
     let tooltip = this.state.tooltip;
     let defImg = "/media/event.png";
     let coverImg = defaultPhoto(defImg, this.state.event.cover_url);

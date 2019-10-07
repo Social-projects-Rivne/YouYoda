@@ -114,7 +114,7 @@ export default class CourseDetail extends React.Component{
             toast.error(error.message);
         }
     }
-    render(){console.log(this.state);
+    render(){
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
         const courseDate = this.props.course.start_date;

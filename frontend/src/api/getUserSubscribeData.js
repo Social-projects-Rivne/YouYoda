@@ -28,7 +28,6 @@ async function getUserSubscribeData(typeItem, item_id) {
 
     try {
         let response = await API.get(urlConnect, {params: paramsData});
-            //return response;
             if (response.status !== 208) {
                 return false;
             }
