@@ -1,6 +1,20 @@
 from rest_framework import serializers
 
+from .courses_serializer import TrainerIdSerializator
 from ..models import CoursesSubscribers, Courses
+
+
+
+class SubscribedSerializer(serializers.ModelSerializer):
+    """Takes data from the CoursesSubscribers model for view user courses.
+
+    Converts it to JSON format for transmission via the API.
+    """
+
+    class Meta:
+
+        model = CoursesSubscribers
+        fields = ('completed', 'rate', 'is_favourite')
 
 
 class UserCoursesSerializer(serializers.ModelSerializer):
@@ -9,10 +23,11 @@ class UserCoursesSerializer(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
     """
 
-    owner = serializers.StringRelatedField()
+    subscribed = SubscribedSerializer(source="subscribed_course", many="True")
+    owner = TrainerIdSerializator()
     categories = serializers.StringRelatedField()
 
     class Meta:
 
         model = Courses
-        exclude = ('id',)
+        fields = ("__all__")

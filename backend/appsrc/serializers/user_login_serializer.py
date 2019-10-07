@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth import authenticate, login
 from facepy import GraphAPI
 from google.oauth2 import credentials
@@ -24,7 +25,8 @@ class LoginSerializer(serializers.Serializer):
             if user.check_password(password):
                 user = authenticate(email=email, password=password)
                 if user and user.is_active:
-                    #login(user)
+                    user.last_login = datetime.now()
+                    user.save(update_fields=['last_login'])
                     return user
         return False
 

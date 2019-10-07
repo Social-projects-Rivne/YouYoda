@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from .courses_serializer import TrainerIdSerializator
 from ..models import EventsSubscribers, Events
 
 
@@ -9,9 +10,10 @@ class UserEventsSerializer(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
     """
 
-    owner = serializers.StringRelatedField()
+    subscribed = SubscribedSerializer(source="subscribed_event", many="True")
+    owner = TrainerIdSerializator()
     categories = serializers.StringRelatedField()
 
     class Meta:
         model = Events
-        exclude = ('id',)
+        fields = ("__all__")

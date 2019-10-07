@@ -41,6 +41,3 @@ class PDP(APIView):
         data_pdp = PDPNotes.objects.filter(author = user.id, id= request.data['id'])
         data_pdp.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-

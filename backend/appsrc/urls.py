@@ -1,22 +1,24 @@
 from django.urls import include, path
 
 from .views.categories import CategoriesList
-from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
+from .views.change_avatar import FileUploadView
 from .views.check_user import CheckUser
-from .views.comment import CourseComments, EventComments
+from .views.comment import CourseComments, EventComments, TrainerComment
 from .views.courses import (CourseIfTrainerView, CourseScheduleView, SearchingCourses,
                             TopCourses, TrainerCoursesView)
 from .views.edit_profile import EditProfile
-from .views.events import TopEvents, SearchingEvents
+from .views.events import SearchingEvents, TopEvents
 from .views.manage_course import ManageCourse
+from .views.last_seen import LastSeen
+from .views.trainer import TopTrainers, TrainerPage
+from .views.pdp import PDP
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
-from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
+from .views.user_to_trainer import UserGetRequest, UserSendRequest, UserToTrainer
 from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses
 from .views.user_subscribe_to_event import UserSubscribeToEvent
 from .views.user_subscribe_to_course import UserSubscribeToCourse, ListUserSubscribeToCourse
-from .views.pdp import PDP
 from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
 
 
@@ -31,8 +33,12 @@ urlpatterns = [
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/comments', EventComments.as_view(), name='comments-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('last/seen', LastSeen.as_view(), name='last_seen'),
     path('trainer/courses', TrainerCoursesView.as_view(), name='trainer-courses'),
     path('trainer/create-course', ManageCourse.as_view(), name='create-course'),
+    path('trainer/comments', TrainerComment.as_view(), name='trainer-comment'),
+    path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
+    path('trainer/top', TopTrainers.as_view(), name='top-trainers'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),

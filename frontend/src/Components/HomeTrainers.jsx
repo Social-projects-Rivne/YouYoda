@@ -1,10 +1,55 @@
 import React from 'react';
 
-import {Container, Row, Col} from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
+import { Redirect, Link } from 'react-router-dom';
+
+import { axiosGet } from '../api/axiosGet';
+import { defaultPhoto, DEFAULT_AVATAR_URL } from '../utils'
 
 
 export default class HomeTrainers extends React.Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            redirect: false,
+            trainerList: [],
+        };
+    }
+    async componentWillMount() {
+        let listTrainer = await axiosGet('trainer/top');
+        this.setState({
+                trainerList: listTrainer,
+            });
+    }
+
+    handleClick = (trainer) => {
+       this.setState({ redirect: true, trainer });
+    };
+
+    renderTrainers = (trainer) => {
+        let coverImg = defaultPhoto(DEFAULT_AVATAR_URL, trainer.avatar_url);
+        return (
+            <Col xl="3" lg="6" md="12">
+                <Link to={{
+                        pathname: '/trainer/page',
+                        state: {'trainer_id':trainer.id}
+                    }}
+                >
+                    <div >
+                        <img src={coverImg} alt="trainer-photo" className="trainer-photo"/>
+                    </div>
+                    <p className="trainer-name">{`${trainer.first_name} ${trainer.last_name}`}</p>
+                    <p className="trainer-title">{trainer.username}</p>
+                </Link>
+            </Col>
+        )
+    }
     render (){
+        const { redirect } = this.state;
+        if (redirect) {
+           return <Redirect to={{pathname: '/p', state: {trainer_id: this.state.trainer.id}}}/>;
+        }
         return(
             <div id="home-trainer">
             <Container className="home-trainers">
@@ -19,30 +64,7 @@ export default class HomeTrainers extends React.Component{
                 </Col>
             </Row>
             <Row>
-                <Col lg="3" md="6">
-                    <a href="/"><img src={require("../img/static/toptrainers/SonyaAlcock.png")}
-                    alt="ico" className="trainer-photo"/></a>
-                    <p className="trainer-name">Sonya Alcock</p>
-                    <p className="trainer-title">Self-Develop</p>
-                </Col>
-                <Col lg="3" md="6">
-                    <a href="/"><img src={require("../img/static/toptrainers/GordonMason.png")}
-                    alt="ico" className="trainer-photo"/></a>
-                    <p className="trainer-name">Gordon Mason</p>
-                    <p className="trainer-title">Cheef</p>
-                </Col>
-                <Col lg="3" md="6">
-                    <a href="/"><img src={require("../img/static/toptrainers/AliyaWorkman.png")}
-                    alt="ico" className="trainer-photo"/></a>
-                    <p className="trainer-name">Aliya Workman</p>
-                    <p className="trainer-title">Motivation</p>
-                </Col>
-                <Col lg="3" md="6">
-                    <a href="/"><img src={require("../img/static/toptrainers/KyranWills.png")}
-                    alt="ico" className="trainer-photo"/></a>
-                    <p className="trainer-name">Kyran Wills</p>
-                    <p className="trainer-title">Piano</p>
-                </Col>
+                {this.state.trainerList.map( trainer => this.renderTrainers(trainer) )}
             </Row>
             </Container>
             </div>

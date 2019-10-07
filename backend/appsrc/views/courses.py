@@ -8,7 +8,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
 from ..models import Courses, CourseSchedule, YouYodaUser
-from ..serializers.courses_serializer import CourseScheduleSerializer, CoursesSerializator
+from ..serializers.courses_serializer import (CourseScheduleSerializer,
+                                              CoursesSerializator)
 
 
 NUMBER_OF_TOP = 6
@@ -69,7 +70,6 @@ class CourseScheduleView(APIView):
 
     permission_classes = [permissions.AllowAny,]
 
-    @method_decorator(cache_page(CACHE_TTL), name='course_schedule')
     def get(self, request):
         """First check request data in cache, then pull data from db"""
         course_id = request.query_params.get('course_id')

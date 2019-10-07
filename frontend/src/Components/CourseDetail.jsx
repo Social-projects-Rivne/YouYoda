@@ -15,6 +15,8 @@ import TrainerListUsers from './TrainerListUsers';
 const URLPATH = 'course/trainer/check';
 
 
+const URLPATH = 'user/course/add';
+
 export default class CourseDetail extends React.Component{
     constructor(props){
       super(props);
@@ -28,13 +30,12 @@ export default class CourseDetail extends React.Component{
     }
     getSchedule = async() => {
         try {
-            let response = await API.get('/courses/schedule',
-                {
+            let response = await API.get('/courses/schedule', {
                     params: {
                         course_id: this.props.course.id,
+                    }
                 }
-            }
-        )
+            )
             this.setState({
                 schedule: response.data,
                 firstDate: response.data[0].date
@@ -49,9 +50,9 @@ export default class CourseDetail extends React.Component{
                 {
                     params: {
                         course_id: this.props.course.id,
+                    }
                 }
-            }
-        )
+            )
             this.setState({
                 comments: response.data,
                 loading: false
@@ -72,10 +73,9 @@ export default class CourseDetail extends React.Component{
     }
 
     addToCourse = async() => {
-        const URLPATH = 'user/course/add';
-        const USERDATA = { "course_id": this.props.course.id};
+        let userdata = { "course_id": this.props.course.id};
         try {
-            const response = await API.post(URLPATH, USERDATA);
+            const response = await API.post(URLPATH, userdata);
             if(response.status === 208)
                 toast.info(response.data);
             if(response.status === 201)
@@ -179,8 +179,14 @@ export default class CourseDetail extends React.Component{
                         <div className="cd cd-trainer">
                             <i className="fas fa-user-tie"/>
                             <span className="main-text">
-                            <Link to="" style={{color:"#fff"}}>
-                            {this.props.course.owner}</Link></span>
+                                <Link to={{
+                                        pathname: '/trainer/page',
+                                        state: {'trainer_id':this.props.course.owner.id}
+                                    }} style={{color:"#fff"}}
+                                >
+                                    {`${this.props.course.owner.first_name} ${this.props.course.owner.last_name}`}
+                                </Link>
+                            </span>
                         </div>
                         <div className="cd cd-cost">
                             <i class="fas fa-dollar-sign"></i>

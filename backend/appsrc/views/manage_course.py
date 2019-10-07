@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from ..models import YouYodaUser, Courses, Categories, CoursesSubscribers
 from ..serializers.courses_serializer import CoursesSerializator
 from ..serializers.manage_course_serializer import ManageCourseSerializer
-from ..serializers.courses_serializer import PostCourseScheduleSerializer
+from ..serializers.courses_serializer import CourseScheduleSerializer
 
 
 class ManageCourse(APIView):
@@ -54,7 +54,7 @@ class ManageCourse(APIView):
         if course_serializer.is_valid():
             course_serializer.save()
             date_list = [{"date": course_date, "course": course_serializer.data['id']} for course_date in course_data['course_schedule']]
-            scheduled_serializer = PostCourseScheduleSerializer(data=date_list, many=True, partial=True)
+            scheduled_serializer = CourseScheduleSerializer(data=date_list, many=True, partial=True)
             if scheduled_serializer.is_valid():
                 scheduled_serializer.save()
                 return Response(course_serializer.data, status=status.HTTP_201_CREATED)
