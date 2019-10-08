@@ -74,7 +74,7 @@ class CheckSubscribeEvent(APIView):
             event = int(event_id),
         )
         if event_data:
-            if event_data.completed is True:
+            if event_data.completed:
                 return Response('completed', status=status.HTTP_208_ALREADY_REPORTED)
             else:
                 return Response(True, status=status.HTTP_208_ALREADY_REPORTED)

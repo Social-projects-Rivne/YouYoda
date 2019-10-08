@@ -260,6 +260,7 @@
 /* manage course and event buttons */
 .col-lg-4.wrap-manage-course {
     max-width: 100%;
+    padding: 0 8px;
 }
 .class-manage-course .event-card {
     margin-top: 0;
