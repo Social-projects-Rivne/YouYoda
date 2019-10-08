@@ -29,7 +29,6 @@ class ManageUserDataSerializer(serializers.Serializer):
     username = serializers.CharField()
     phone_number = serializers.CharField()
     is_trainer = serializers.BooleanField()
-    is_active = serializers.BooleanField()
     
     def update(self, instance, validated_data):
         """Updating user data"""
@@ -40,6 +39,5 @@ class ManageUserDataSerializer(serializers.Serializer):
         instance.username = validated_data.get('username', instance.username)
         instance.phone_number = validated_data.get('phone_number', instance.phone_number)
         instance.is_trainer = validated_data.get('is_trainer', instance.is_trainer)
-        instance.is_active = validated_data.get('is_active', instance.is_active)
         instance.save()
         return instance

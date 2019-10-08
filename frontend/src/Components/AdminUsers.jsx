@@ -3,8 +3,9 @@ import React from 'react';
 import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
 import { UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { toast } from 'react-toastify';
 
-import {getUsersList} from '../api/getAdminUsers';
+import {getUsersList, patchRequests} from '../api/getAdminUsers';
 import {ROLES} from './AdminDashboard';
 
 
@@ -30,13 +31,25 @@ class AdminUsers extends React.Component {
         document.getElementById(user_id_value).textContent = ROLES[role_id_value];
     }
 
+    saveEditedData = async() => {
+        var userData = this.state.selected;
+        var response = patchRequests(userData);
+        response.then( valueResponse => {
+            if(valueResponse)
+            {
+                toast.success('Users data successfully saved');
+            }
+            else
+                toast.error('Data saving is failed');
+        });
+    }
+
     renderUsers(user) {
         if(!user.avatar_url)
             user.avatar_url = require('../img/content/profile_photo.png');
         return (
             <tr id={`user_${user.id}`} key={user.id}>
                 <td align="center"><input type="checkbox" /></td>
-                <td align="center"><input type="checkbox" checked={user.is_active} /></td>
                 <td align="center"><input type="checkbox" checked={user.is_trainer} /></td>
                 <td>
                 <UncontrolledButtonDropdown>
@@ -75,7 +88,6 @@ class AdminUsers extends React.Component {
                             <thead>
                                 <tr>
                                     <th>Select</th>
-                                    <th>Active</th>
                                     <th>Trainer</th>
                                     <th>Role</th>
                                     <th>ID</th>
@@ -97,7 +109,7 @@ class AdminUsers extends React.Component {
                 </Row>
                 <Row className="table-actions mt-3">
                     <Col>
-                        <Button type="button">Edit selected items</Button>
+                        <Button type="button" onClick={()=>{this.saveEditedData()}}>Edit selected items</Button>
                     </Col>
                 </Row>
             </div>

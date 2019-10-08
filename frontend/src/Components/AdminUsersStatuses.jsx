@@ -83,7 +83,7 @@ class UsersStatuses extends React.Component {
                             <thead>
                                 <tr>
                                     <th>User ID</th>
-                                    <th>Role Id</th>
+                                    <th>Role</th>
                                     <th>Email</th>
                                     <th>Is Active</th>
                                     <th>Status</th>
