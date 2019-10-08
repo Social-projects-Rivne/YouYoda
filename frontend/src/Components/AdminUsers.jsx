@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
+import { UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import {getUsersList} from '../api/getAdminUsers';
 import {ROLES} from './AdminDashboard';

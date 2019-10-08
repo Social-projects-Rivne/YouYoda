@@ -11,7 +11,7 @@ from .views.events import TopEvents, SearchingEvents
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
-from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses
+from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses, UpdateUsersData
 from .views.user_subscribe_to_event import UserSubscribeToEvent
 from .views.user_subscribe_to_course import UserSubscribeToCourse
 from .views.pdp import PDP
