@@ -89,7 +89,7 @@ export default class CreateCourse extends React.Component{
         try {
             let response = await API.get("user/profile/view")
         this.setState({
-            owner_name: response.data.first_name + " " + response.data.last_name
+            owner_name: `${response.data.first_name} ${response.data.last_name}`
             })
         }
         catch (error) {
@@ -122,9 +122,7 @@ export default class CreateCourse extends React.Component{
            this.state.status &&
            this.state.start_time)
         {
-        if (this.state.cost > -1 &&
-           this.state.members_limit > -1 &&
-           this.state.duration > -1)
+        if ([this.state.cost, this.state.members_limit, this.state.duration].every(el => el > -1))
         {
         if (this.state.course_img)
         {

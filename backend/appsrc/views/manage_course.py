@@ -67,6 +67,6 @@ class ManageCourse(APIView):
         deleted_course = Courses.objects.filter(id=course.id).delete()
 
         if deleted_course:
-            return Response(status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
