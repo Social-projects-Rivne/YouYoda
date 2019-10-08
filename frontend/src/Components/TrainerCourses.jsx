@@ -37,14 +37,12 @@ export default class TrainerCourses extends React.Component{
     render(){
     return (
         <div id="SearchingCourses" style={{minHeight:"80vh"}}>
-            <Container>
                 <Row>
                     <Col>
-                        <h1 className="title-events">Own courses</h1>
+                        <h1 className="title-events" style={{marginTop:"0px"}}>Own Courses</h1>
                     </Col>
                 </Row>
                 <Cours coursesList={this.state.coursesList} loading={this.state.loading} lg={4}/>
-            </Container>
         </div>
      )
     }

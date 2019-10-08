@@ -18,9 +18,9 @@ export default class CreateCourse extends React.Component{
       this.state = {
           selectedDays: [],
           coursename: '',
-          cost: 'Set price',
-          location: 'Set location',
-          start_date: 'Set start date',
+          cost: '',
+          location: '',
+          start_date: '',
           start_time: '',
           description: '',
           members_limit: '',

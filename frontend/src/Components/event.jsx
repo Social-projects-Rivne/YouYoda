@@ -41,7 +41,7 @@ export default class Event extends React.Component{
     }
 
     notResults = (display = true) => {
-        if (this.props.eventList.length == 0 && display) {
+        if (this.props.eventList.length === 0 && display) {
             return (
                 <Col className="d-flex align-items-center justify-content-center" style={{margin:'35px 15px', color:'#FFD466'}}>
                     <h2>Do, or do not. There is no events :(</h2>

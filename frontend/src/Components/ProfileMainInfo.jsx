@@ -123,7 +123,7 @@ export default class ProfileInfo extends React.Component {
                                 style={{cursor:'pointer', marginBottom:'15px'}}
                             >
                                 <span >
-                                    Own courses
+                                    Own Courses
                                 </span>
                           </div>
                           <div
