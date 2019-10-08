@@ -26,8 +26,8 @@ const override = css`
     margin: 0 auto;
     border-color: #FFD466;
 `;
-const BTN_ALL = 'ALL',
-      BTN_FAV = 'FAVORITE';
+const BTN_ALL = 'ALL';
+const BTN_FAV = 'FAVORITE';
 
 
 export default class ProfileInfo extends React.Component {

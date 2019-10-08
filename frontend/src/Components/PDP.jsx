@@ -45,9 +45,9 @@ export default class PDP extends React.Component{
   }
 
   onSelectEvents = (event, e) => {
-    var item_id = '',
-        itemType = '';
-    let tooltip = {x:e.clientX, y:e.clientY-40}
+    var itemID = '';
+    var itemType = '';
+    let tooltip = {x:e.clientX, y:e.clientY-40};
     this.setState({
       event,
       tooltip,
@@ -55,14 +55,14 @@ export default class PDP extends React.Component{
     });
 
     if(event.course) {
-      item_id = event.course.id;
+      itemID = event.course.id;
       itemType = 'course';
     } else if(event.event) {
-      item_id = event.event.id;
+      itemID = event.event.id;
       itemType = 'event';
     }
-    if(item_id && itemType) {
-      getUserSubscribeData(itemType, item_id).then(isUserSubscribed => {
+    if(itemID && itemType) {
+      getUserSubscribeData(itemType, itemID).then(isUserSubscribed => {
         this.setState({
           isSubscribed: isUserSubscribed
         });
@@ -257,9 +257,9 @@ export default class PDP extends React.Component{
  }
 
   unsubscribeClickCourse = async(courseData, typeItem) => {
-    let unsubscribeURL = '',
-        paramItem = {},
-        itemName = '';
+    let unsubscribeURL = '';
+    let paramItem = {};
+    let itemName = '';
     if(typeItem === 'course') {
         unsubscribeURL = 'user/course/delete';
         paramItem = {'course': courseData.id};
@@ -277,7 +277,7 @@ export default class PDP extends React.Component{
     try {
         const response = await API.delete(unsubscribeURL, USERDATA);
         if(response.status === 204) {
-            toast.success('You unsubscribed from "' + typeItem + " " + itemName + '"');
+            toast.success(`You unsubscribed from ${typeItem} "${itemName}"`);
             // update list of pdp items without request to backend
             let list = this.state.mainEventsList;
             for(let i = 0; i < list.length; i++) {

@@ -82,7 +82,7 @@ export default class CourseDetail extends React.Component{
             if(response.status === 208) 
                 toast.info(response.data);
             if(response.status === 201) {
-                toast.success('You subscribed to "' + this.props.course.coursename + '"');
+                toast.success(`You subscribed to "${this.props.course.coursename}"`);
                 this.setState({
                     isSubscribed: true
                 });
@@ -103,13 +103,11 @@ export default class CourseDetail extends React.Component{
         const URL_UNSUBSCRIBE_COURSE = 'user/course/delete';
         const USERDATA = {"params": {"course": this.props.course.id}};
         try {
-            const response = await API.delete(URL_UNSUBSCRIBE_COURSE, USERDATA);
-            if(response.status === 204) {
-                toast.success('You unsubscribed from "' + this.props.course.coursename + '"');
-                this.setState({
-                    isSubscribed: false
-                });
-            }
+            await API.delete(URL_UNSUBSCRIBE_COURSE, USERDATA);
+            toast.success(`You unsubscribed from "${this.props.course.coursename}"`);
+            this.setState({
+                isSubscribed: false
+            });
         } catch (error) {
             toast.error(error.message);
         }

@@ -6,11 +6,10 @@ import { toast } from 'react-toastify';
 import { API } from '../api/axiosConf';
 
 
-const URL_UNSUBSCRIBE_COURSE = 'user/course/delete',
-      URL_UNSUBSCRIBE_EVENT = 'user/event/delete',
-      URL_FAVORITE = 'user/course/managefavorite',
-      BTN_ALL = 'ALL';
-
+const URL_UNSUBSCRIBE_COURSE = 'user/course/delete';
+const URL_UNSUBSCRIBE_EVENT = 'user/event/delete';
+const URL_FAVORITE = 'user/course/managefavorite';
+const BTN_ALL = 'ALL';
 
 export default class ManageButtons extends React.Component{
     constructor(props) {
@@ -26,7 +25,7 @@ export default class ManageButtons extends React.Component{
         try {
             const response = await API.delete(URL_UNSUBSCRIBE_COURSE, USERDATA);
             if(response.status === 204)
-                toast.success('You unsubscribed from "' + courseData.coursename + '"');
+                toast.success(`You unsubscribed from "${courseData.coursename}"`);
         } catch (error) {
             toast.error(error.message);
         }
@@ -37,8 +36,8 @@ export default class ManageButtons extends React.Component{
         const USERDATA = {"params": {"event": courseData.id}};
         try {
             const response = await API.delete(URL_UNSUBSCRIBE_EVENT, USERDATA);
-            if(response.status === 201)
-                toast.success('You unsubscribed from "' + courseData.coursename + '"');
+            if(response.status === 204)
+                toast.success(`You unsubscribed from "${courseData.name}"`);
         } catch (error) {
             toast.error(error.message);
         }
@@ -56,7 +55,7 @@ export default class ManageButtons extends React.Component{
                 let mess = " was added to your favorite list.";
                 if(!addOrRemove)
                     mess = " was removed from your favorite list.";
-                toast.success('Course "' + courseData.coursename + '"' + mess);
+                toast.success(`Course "${courseData.coursename}"${mess}`);
             }
         } catch (error) {
             toast.error(error.message);
@@ -69,8 +68,8 @@ export default class ManageButtons extends React.Component{
     }
 
     render(){
-        let courseData = {},
-            typeItem = '';
+        let courseData = {};
+        let typeItem = '';
         if(this.props.course) {
             courseData = this.props.course;
             typeItem = 'course';

@@ -16,7 +16,6 @@ class CoursesSubscribersPostSerializator(serializers.Serializer):
                 participant_id = validated_data['participant_id'],
                 course_id = validated_data['course_id'],
                 )
-        course_add.save()
         return course_add
 
 
@@ -32,7 +31,7 @@ class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
 
 
 class FavoriteCoursesSerializator(serializers.ModelSerializer):
-    """ """
+    """Add or remove course to favorites list table"""
 
     class Meta:
         model = CoursesSubscribers

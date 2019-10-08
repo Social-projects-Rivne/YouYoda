@@ -59,7 +59,7 @@ export default class EventDetail extends React.Component{
             if(response.status === 208) 
                 toast.info(response.data);
             if(response.status === 201) {
-                toast.success('You subscribe to "' + this.props.event.name + '"');
+                toast.success(`You subscribe to "${this.props.event.name}"`);
                 this.setState({
                     isSubscribed: true
                 });
@@ -81,13 +81,11 @@ export default class EventDetail extends React.Component{
         const URL_UNSUBSCRIBE_EVENT = 'user/event/delete';
         const USERDATA = {"params": {"event": this.props.event.id}};
         try {
-            const response = await API.delete(URL_UNSUBSCRIBE_EVENT, USERDATA);
-            if(response.status === 204) {
-                toast.success('You unsubscribed from "' + this.props.event.name + '"');
-                this.setState({
-                    isSubscribed: false
-                });
-            }
+            await API.delete(URL_UNSUBSCRIBE_EVENT, USERDATA);
+            toast.success(`You unsubscribed from "${this.props.event.name}"`);
+            this.setState({
+                isSubscribed: false
+            });
         } catch (error) {
             toast.error(error.message);
         }

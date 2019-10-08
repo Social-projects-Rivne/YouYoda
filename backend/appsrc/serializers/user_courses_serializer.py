@@ -28,4 +28,4 @@ class UserCoursesSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = Courses
-        fields = ("__all__")#exclude = ('id',)
+        fields = ("__all__")

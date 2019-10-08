@@ -46,36 +46,18 @@ class UserSubscribeToCourse(APIView):
        
         return Response(serializer.data)
 
+    def patch(self, request):
+        """Manage favorite courses method"""
+        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
+        data_to_update = request.data
+        subscribed_course = CoursesSubscribers.objects.get(course_id=data_to_update['course'], participant_id=user.id)
+        if subscribed_course:
+            serializer = FavoriteCoursesSerializator(subscribed_course, data=data_to_update, partial=True)
+            if serializer.is_valid():
+                subscribe = serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-class CheckSubscribeToCourse(APIView):
-    """Checking user subscription to course"""
-
-    permission_classes = [permissions.IsAuthenticated,]
-
-    def get(self, request):
-        """Method for check status user subscription to course by course ID"""
-        course_id = request.query_params.get('course_id')
-        auth_token = request.headers['Authorization'].replace('Token ', '')
-        user = YouYodaUser.objects.get(auth_token=auth_token)
-        course_data = CoursesSubscribers.objects.get(
-            participant = user.id,
-            course = int(course_id),
-        )
-        if course_data:
-            if course_data.completed is True:
-                return Response('completed', status=status.HTTP_208_ALREADY_REPORTED)
-            else:
-                return Response(True, status=status.HTTP_208_ALREADY_REPORTED)
-        else:
-            return Response(False, status=status.HTTP_204_NO_CONTENT)
-        
-        return Response(False, status=status.HTTP_400_BAD_REQUEST)
-
-
-class UserUnsubscribeCourse(APIView):
-    """Method for user unsubscription to courses"""
-
-    permission_classes = [permissions.IsAuthenticated,]
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request):
         """Gets data from request, searches in database and deletes user subscribes to courses"""
@@ -92,19 +74,26 @@ class UserUnsubscribeCourse(APIView):
         return Response(False, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ManageFavoriteCoursesProfile(APIView):
- 
+class CheckSubscribeToCourse(APIView):
+    """Checking user subscription to course"""
+
     permission_classes = [permissions.IsAuthenticated,]
 
-    def patch(self, request):
-        """ """
-        user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
-        data_to_update = request.data
-        subscribed_course = CoursesSubscribers.objects.get(course_id=data_to_update['course'], participant_id=user.id)
-        if subscribed_course:
-            serializer = FavoriteCoursesSerializator(subscribed_course, data=data_to_update, partial=True)
-            if serializer.is_valid():
-                subscribe = serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
+    def get(self, request):
+        """Method for check status user subscription to course by course ID"""
+        course_id = request.query_params.get('course_id')
+        auth_token = request.headers['Authorization'].replace('Token ', '')
+        user = YouYodaUser.objects.get(auth_token=auth_token)
+        course_data = CoursesSubscribers.objects.get(
+            participant = user.id,
+            course = int(course_id),
+        )
+        if course_data:
+            if course_data.completed:
+                return Response('completed', status=status.HTTP_208_ALREADY_REPORTED)
+            else:
+                return Response(True, status=status.HTTP_208_ALREADY_REPORTED)
+        else:
+            return Response(False, status=status.HTTP_204_NO_CONTENT)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(False, status=status.HTTP_400_BAD_REQUEST)

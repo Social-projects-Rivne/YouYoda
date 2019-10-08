@@ -1,12 +1,12 @@
 import { API } from './axiosConf';
 
 
-const URL_GET_SUBSCRIBE_COURSE = 'user/course/checksubscribe',
-      URL_GET_SUBSCRIBE_EVENT = 'user/event/checksubscribe';
+const URL_GET_SUBSCRIBE_COURSE = 'user/course/checksubscribe';
+const URL_GET_SUBSCRIBE_EVENT = 'user/event/checksubscribe';
 
 async function getUserSubscribeData(typeItem, item_id) {
-    var urlConnect = '',
-        tokenUser = localStorage.getItem('token');
+    let urlConnect = '';
+    let tokenUser = localStorage.getItem('token');
 
     if(!item_id || !tokenUser)
         return false;
