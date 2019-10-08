@@ -60,6 +60,16 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
 		model = CourseSchedule
 		fields = ('date', 'course')
 
+class PostCourseScheduleSerializer(serializers.ModelSerializer):
+	"""Post data from the request for set course schedule.
+    Converts it to JSON format for transmission via the API.
+    """
+
+	class Meta:
+
+		model = CourseSchedule
+		fields = ('date', 'course')
+
 	def create(self, validated_data):
 		course_schedule = CourseSchedule.objects.create(
 			date=validated_data['date'],

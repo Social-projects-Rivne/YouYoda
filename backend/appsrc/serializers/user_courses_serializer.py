@@ -4,7 +4,6 @@ from .courses_serializer import TrainerIdSerializator
 from ..models import CoursesSubscribers, Courses
 
 
-
 class SubscribedSerializer(serializers.ModelSerializer):
     """Takes data from the CoursesSubscribers model for view user courses.
 

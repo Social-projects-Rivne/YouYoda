@@ -12,10 +12,10 @@ import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
 import TrainerListUsers from './TrainerListUsers';
 
-const URLPATH = 'course/trainer/check';
+const URLPATH_CHECK = 'course/trainer/check';
 
 
-const URLPATH = 'user/course/add';
+const URLPATH_ADD = 'user/course/add';
 
 export default class CourseDetail extends React.Component{
     constructor(props){
@@ -75,7 +75,7 @@ export default class CourseDetail extends React.Component{
     addToCourse = async() => {
         let userdata = { "course_id": this.props.course.id};
         try {
-            const response = await API.post(URLPATH, userdata);
+            const response = await API.post(URLPATH_ADD, userdata);
             if(response.status === 208)
                 toast.info(response.data);
             if(response.status === 201)
@@ -95,7 +95,7 @@ export default class CourseDetail extends React.Component{
 
     checkIfTrainer = async() => {
         try {
-            await API.get(URLPATH,
+            await API.get(URLPATH_CHECK,
                 {
                     params: {
                         course_id: this.props.course.id,
