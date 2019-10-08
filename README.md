@@ -32,15 +32,19 @@ For project deployment
 You have to run migrations database from the project folder:
 
     docker-compose run back python3 manage.py makemigrations
-    docker-compose run back python3 manage.py migrate
+    docker-compose run back bash migrate.sh
 
 If some new modules is not installed in the folder Node modules, you have to install them:
 
-    npm install --save module-name 
+    npm install --save module-name
 
 For installing modules for backend:
 
     pip install module-name
+
+Install all required modules for backend:
+
+    pip install --no-cache-dir -r requirements.txt
 
 ## Frontend
 
@@ -91,13 +95,26 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 ## Usefull command for all occasions
 
 Direct access to database
-    
+
     docker exec -it youyoda_mariadb_1 bash
     mysql -p
 
-Remove database 
-    
+Remove database
+
     docker-compose rm -v
+
+Stop and remove all containers
+
+    docker stop $(docker ps -aq)
+    docker rm $(docker ps -aq)
+
+Restart all containers
+
+    docker-compose restart
+
+Restart container
+
+    docker-compose restart container_name
 
 
 ## Testing data
