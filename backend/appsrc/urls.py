@@ -49,5 +49,6 @@ urlpatterns = [
     path('user/pdp', PDP.as_view(), name='pdp'),
     path('users/getlist', UsersGetList.as_view()),
     path('users/getstatuses', GetUsersStatuses.as_view()),
-    path('users/updatestatuses', UpdateUsersStatuses.as_view())
+    path('users/updatestatuses', UpdateUsersStatuses.as_view()),
+    path('users/updateusersdata', UpdateUsersData.as_view())
 ]

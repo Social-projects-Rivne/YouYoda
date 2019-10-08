@@ -4,6 +4,7 @@ import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
 
 import {getUsersList} from '../api/getAdminUsers';
+import {ROLES} from './AdminDashboard';
 
 
 class AdminUsers extends React.Component {
@@ -24,6 +25,10 @@ class AdminUsers extends React.Component {
         });
     }
 
+    handleChange=(role_id_value, user_id_value) => {
+        document.getElementById(user_id_value).textContent = ROLES[role_id_value];
+    }
+
     renderUsers(user) {
         if(!user.avatar_url)
             user.avatar_url = require('../img/content/profile_photo.png');
@@ -33,14 +38,16 @@ class AdminUsers extends React.Component {
                 <td align="center"><input type="checkbox" checked={user.is_active} /></td>
                 <td align="center"><input type="checkbox" checked={user.is_trainer} /></td>
                 <td>
-                {(() => {
-                    var roleId = user.role_id
-                    switch (roleId) {
-                      case 1: return "User(1)";
-                      case 2: return "Moderator(2)";
-                      case 3: return "Admin(3)";
-                    }
-                })()}
+                <UncontrolledButtonDropdown>
+                        <DropdownToggle id={user.id} tag="button" type="button" caret>
+                            { ROLES[user.role_id] }
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={()=>{this.handleChange(Object.keys(ROLES)[0], user.id)}}>User</DropdownItem>
+                            <DropdownItem onClick={()=>{this.handleChange(Object.keys(ROLES)[1], user.id)}}>Moderator</DropdownItem>
+                            <DropdownItem onClick={()=>{this.handleChange(Object.keys(ROLES)[2], user.id)}}>Admin</DropdownItem>
+                        </DropdownMenu>
+                </UncontrolledButtonDropdown> 
                 </td>
                 <td>{user.id}</td>
                 <td>{user.email}</td>
@@ -69,7 +76,7 @@ class AdminUsers extends React.Component {
                                     <th>Select</th>
                                     <th>Active</th>
                                     <th>Trainer</th>
-                                    <th>RoleId</th>
+                                    <th>Role</th>
                                     <th>ID</th>
                                     <th>Email</th>
                                     <th>First Name</th>

@@ -3,6 +3,9 @@ import React from 'react';
 import {Container, Row, Col} from "reactstrap";
 
 
+const ROLES = {1: "User", 2: "Moderator", 3: "Admin"};
+const STATUSES = {1: "Active", 2: "Banned", 3: "Muted", 4: "Idle"};
+
 class AdminDashboard extends React.Component {
     render() {
         return (

@@ -9,4 +9,13 @@ async function getUsersList() {
         return Promise.reject(error);
     }
 }
-export {getUsersList}
+
+async function patchRequests(dataSend) {
+    try {
+        const response = await API.patch('users/updateusersdata', dataSend);
+        return response;
+    } catch (error) {
+        return Promise.reject(error);
+    }
+}
+export {getUsersList, patchRequests}

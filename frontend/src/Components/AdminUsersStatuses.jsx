@@ -6,10 +6,8 @@ import Button from 'reactstrap/es/Button';
 import { toast } from 'react-toastify';
 
 import {getUsersStatusesList, patchRequests} from '../api/getUsersStatuses';
+import {ROLES, STATUSES} from './AdminDashboard';
 
-
-const ROLES = {1: "User", 2: "Moderator", 3: "Admin"};
-const STATUSES = {1: "Active", 2: "Banned", 3: "Muted", 4: "Idle"};
 
 class UsersStatuses extends React.Component {
     constructor(props) {
