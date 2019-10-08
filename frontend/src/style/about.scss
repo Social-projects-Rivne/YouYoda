@@ -81,7 +81,34 @@ br {
         &:hover {
             opacity: 1;
             transform: scale(4);
-            z-index: 100;
+            z-index: 2;
+        }
+
+        .circle-text {
+            padding-right: 15%;
+            padding-top: 15%;
+            font-family: Roboto;
+            font-size: calc(0.05em + 0.5vmin);
+            text-align: center;    
+            color: black;
+            
+            p {
+                text-align: center;
+                padding-left: 17%;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+            }
+            h5 {
+                font-size: calc(0.6em + 1vmin);
+                line-height: 0.3;
+            }
+            ul {
+                padding-top: 0px;
+                padding-right: 3%;
+            }
+            li {
+                font-size: calc(0.03em + 0.45vmin);
+            }
         }
     }
     img {
@@ -106,4 +133,29 @@ br {
     width: 100%;
     height: auto;
     background: #E8E8E8;
+    text-align: center;
+    color: black;
+    
+
+    h1 {
+        padding-top: 40px;
+        padding-bottom: 0px;
+        width: 100%;
+        font-size: 48px;
+    }
+    h3 {
+        padding-top: 30px;
+        padding-bottom: 10px;
+        font-size: 32px;
+        text-decoration: underline;
+        width: 100%;
+    }
+    h4 {
+        padding-top: 5px;
+        text-shadow: 2px 2px 0 #FFBF00, 2px -2px 0 #FFBF00, -2px 2px 0 #FFBF00, -2px -2px 0 #FFBF00, 2px 0px 0 #FFBF00, 0px 2px 0 #FFBF00, -2px 0px 0 #FFBF00, 0px -2px 0 #FFBF00;
+        padding-bottom: 6px;
+    }
+    button {
+        margin-left: 5px;
+    }
 }
