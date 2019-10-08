@@ -21,7 +21,7 @@ class OrganizeEvent(APIView):
         return Response(serializer.data)
 
     def patch(self, request, *args, **kwargs):
-        """Receives and updates user profile data"""
+        """Receives and updates user event data"""
         data_request = request.data
         event = get_object_or_404(Events, id=request.data.get('id'))
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
@@ -36,7 +36,6 @@ class OrganizeEvent(APIView):
         data_request = request.data
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
         data_request['owner'] = user.id
-        # serializer = OrganizeEventSerializer(data=request.data)
         serializer = OrganizeEventSerializer(data=data_request)
         if serializer.is_valid():
             serializer.save()

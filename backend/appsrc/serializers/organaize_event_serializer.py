@@ -3,9 +3,7 @@ from ..models import Events, Categories
 
 
 class CategoriesField(serializers.Field):
-    """
-    Taking id and name of categories from data
-    """
+    """Taking id and name of categories from data"""
     def to_representation(self, value):
         return value.name
 
@@ -18,7 +16,6 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
     """
     categories = CategoriesField()
-    # owner = serializers.StringRelatedField()
 
     class Meta:
         model = Events
@@ -39,7 +36,6 @@ class OrganizeEventSerializer(serializers.ModelSerializer):
             date=validated_data.get('date'),
             location=validated_data.get('location'),
             cover_url=validated_data.get('cover_url'),
-            # id=validated_data.get('id')
         )
         return event
 

@@ -1,13 +1,14 @@
 import React from 'react';
-import Button from "reactstrap/es/Button";
-import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
-import { toast } from 'react-toastify';
 
-import { API } from '../api/axiosConf';
-import LocationSearchInput from '../api/cityselector';
+import Button from "reactstrap/es/Button";
+import {Col, Container, Form, FormGroup, Input, Label, Row,} from "reactstrap";
+import {toast} from 'react-toastify';
+
+import {API} from '../api/axiosConf';
+import Avatar from './Avatar';
 import ChangePassword from "./ChangePassword";
 import ImageUpload from './ImageUploadComponent';
-import Avatar from './Avatar';
+import LocationSearchInput from '../api/cityselector';
 
 
 class FillEditPage extends React.Component {
@@ -26,6 +27,7 @@ class FillEditPage extends React.Component {
             birth_date: '',
             phone_number: '',
             avatar_url: '',
+            description:'',
         };
     }
 
@@ -40,7 +42,7 @@ class FillEditPage extends React.Component {
             const response = await API.get('user/profile/edit');
             localStorage.setItem('avatar_url', response.data.avatar_url);
             let dataAvatarUrl = '';
-            if(response.data.avatar_url)
+            if (response.data.avatar_url)
                 dataAvatarUrl = response.data.avatar_url;
             this.props.avatarIcoFunc(dataAvatarUrl);
             return response.data;
@@ -53,14 +55,14 @@ class FillEditPage extends React.Component {
         try {
             await API.patch('user/profile/edit', formData);
             this.props.avatarIcoFunc(formData.avatar_url);
-            toast.success('Profile updated');
-            setTimeout(window.location.reload(), 2000);
+            toast.success("Profile changed");
         } catch (error) {
             toast.error('You cannot update your profile. Contact administrator or support system.');
         }
     };
 
-    saveForm = async () => {
+    saveForm = async (e) => {
+        e.preventDefault();
         try {
             let payLoad = {};
             payLoad.username = this.state.username;
@@ -75,13 +77,13 @@ class FillEditPage extends React.Component {
             payLoad.avatar_url = this.state.avatar_url;
             payLoad.password = this.state.password;
             await this.postUser(payLoad)
-            toast.success('Changes saved');
         } catch (error) {
-            toast.error('Can\'t save changes' )
+            toast.error('Can\'t save changes')
         }
     };
 
     updateField = (event) => {
+        // event.preventDefault();
         let fieldName = event.target.name;
         let newState = {};
         newState[fieldName] = event.target.value;
@@ -99,7 +101,7 @@ class FillEditPage extends React.Component {
     async componentDidMount() {
         let userData = await this.getUser();
         let mount_dict = {};
-        Object.keys(this.state).map(function(key) {
+        Object.keys(this.state).map(function (key) {
             mount_dict[key] = userData[key];
         });
         this.setState(mount_dict);
@@ -130,6 +132,10 @@ class FillEditPage extends React.Component {
 
 
     render() {
+        let isDisabled = true;
+        if (this.state.first_name && this.state.username && this.state.last_name){
+            isDisabled = false;
+        }
         return (
             <div className="">
                 <Container>
@@ -147,6 +153,9 @@ class FillEditPage extends React.Component {
                                     {this.state.showUploadForm && <ImageUpload updateUrl={this.updateAvatarUrl}/>}
                                 </div>
                                 <Label for="username">User Name*</Label>
+                                {!this.state.username && <span className="text-validate-date">
+                                     .  can't be empty
+                                </span>}
                                 <Input
                                     type="login"
                                     name="username"
@@ -156,6 +165,9 @@ class FillEditPage extends React.Component {
                                     value={this.state.username}
                                 />
                                 <Label className="name">Name*</Label>
+                                {!this.state.first_name && <span className="text-validate-date">
+                                     .  can't be empty
+                                </span>}
                                 <Input
                                     name="first_name"
                                     className="field-box"
@@ -164,6 +176,9 @@ class FillEditPage extends React.Component {
                                     value={this.state.first_name}
                                 />
                                 <Label className="surname">Surname*</Label>
+                                {!this.state.last_name && <span className="text-validate-date">
+                                     .  can't be empty
+                                </span>}
                                 <Input
                                     name="last_name"
                                     className="field-box"
@@ -175,7 +190,6 @@ class FillEditPage extends React.Component {
                                 <Input
                                     type="email"
                                     name="email"
-                                    required
                                     placeholder="example@email.com"
                                     className="row-email"
                                     value={this.state.email}
@@ -259,7 +273,8 @@ class FillEditPage extends React.Component {
                                             size="lg"
                                             className="button-saveall"
                                             block
-                                            onClick={() => this.saveForm()}>
+                                            disabled={isDisabled}
+                                            onClick={(e) => this.saveForm(e)}>
                                         Save all
                                     </Button>
                                 </div>

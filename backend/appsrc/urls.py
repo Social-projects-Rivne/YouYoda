@@ -1,23 +1,22 @@
 from django.urls import path
 
 from .views.categories import CategoriesList
+from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
 from .views.comment import CourseComments, EventComments
-from .views.comment import CourseComments
+from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
 from .views.edit_profile import EditProfile
-from .views.change_avatar import FileUploadView
-from .views.orginize_event import OrganizeEvent
 from .views.events import SearchingEvents, TopEvents
+from .views.orginize_event import OrganizeEvent
+from .views.pdp import PDP
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
-from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
-from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses
 from .views.user_subscribe_to_event import UserSubscribeToEvent
 from .views.user_subscribe_to_course import UserSubscribeToCourse
-from .views.pdp import PDP
-from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
+from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
+from .views.users_administration import GetUsersStatuses, UsersGetList, UpdateUsersStatuses
+from .views.view_profile import ViewAchievementsProfile, ViewEventsProfile, ViewCoursesProfile, ViewProfile
 
 
 urlpatterns = [

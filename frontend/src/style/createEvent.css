@@ -11,7 +11,7 @@
 .your-image {
     max-height: 100%;
     max-width: 100%;
-    width: 500px;
+    width: 400px;
     height: 300px;
     padding-top: 20px;
     background-color: rgba(0, 0, 0, 0);
@@ -34,14 +34,17 @@
 .form-event {
     background-color: beige;
     min-height: 100%;
+
 }
 
 .form-event-own {
     background-color: beige;
+     min-height: 680px;
 }
 
 .text-validate-date {
     color: red;
+    padding-left: 10px;
 }
 
 .card-own-event {
@@ -60,5 +63,29 @@
     color: #710000;
 }
 
+.event-name{
+    padding-top: 20px;
+}
+
+.return-to-events.btn{
+    width: 150px;
+    height: 46px;
+    background-color: #6c757d;
+    min-width: 262px;
+    border-color: #6c757d;
+    border-radius: 25px ;
+    margin-top: 20px;
+    margin-left: auto;
+    font: 19px "Roboto Condensed", sans-serif;
+    padding: 8px 16px;
+}
+
+.event-category{
+    border-radius: 25px;
+}
+
+.field-box-event-description{
+    border-radius: 25px;
+}
 
 

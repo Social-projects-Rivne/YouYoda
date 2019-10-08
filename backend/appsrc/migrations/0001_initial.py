@@ -367,7 +367,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('date', models.IntegerField()),
                 ('location', models.TextField()),
-                ('cover_url', models.CharField(blank=True, max_length=80, null=True)),
+                ('cover_url', models.CharField(blank=True, max_length=80, default='')),
                 ('categories', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Categories')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],

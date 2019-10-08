@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { Container, Row, Col, Card, CardTitle, CardText, CardHeader, CardFooter, CardBody } from 'reactstrap';
+import {Card, CardBody, CardFooter, CardHeader, CardText, CardTitle, Col, Container, Row} from 'reactstrap';
 import ClipLoader from 'react-spinners/ClipLoader';
-import { css } from '@emotion/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {css} from '@emotion/core';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { Redirect, Link } from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
-import { defaultPhoto } from '../utils';
+import {defaultPhoto} from '../utils';
 
 
 const override = css`
@@ -16,26 +16,26 @@ const override = css`
     border-color: #FFD466;
 `;
 
-export default class Cours extends React.Component{
+export default class Cours extends React.Component {
     constructor(props) {
-      super(props);
+        super(props);
 
-      this.state = {
-          redirect: false,
-      }
+        this.state = {
+            redirect: false,
+        }
     }
 
-    componentWillMount(){
-      this.setState({loading: true})
-  }
+    componentWillMount() {
+        this.setState({loading: true})
+    }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({loading: false})
     }
 
     handleClick = async (course) => {
-        await this.setState({ course });
-        await this.setState({ redirect: true });
+        await this.setState({course});
+        await this.setState({redirect: true});
         window.location.reload();
     }
 
@@ -48,7 +48,7 @@ export default class Cours extends React.Component{
         const newCourseDuration = moment.duration(courseDuration).hours();
         return (
             <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-                <Link className="card-link" onClick={() => this.handleClick(course)} >
+                <Link className="card-link" onClick={() => this.handleClick(course)}>
                     <Card className="event-card">
                         <CardHeader className="event-header">{newCourseDate}</CardHeader>
                         <CardBody className="event-body">
@@ -71,24 +71,24 @@ export default class Cours extends React.Component{
         )
     }
 
-    render(){
-        const { redirect } = this.state;
+    render() {
+        const {redirect} = this.state;
         if (redirect) {
-           return <Redirect to={{pathname: '/course/detail', state: {course: this.state.course}}}/>;
+            return <Redirect to={{pathname: '/course/detail', state: {course: this.state.course}}}/>;
         }
         return (
             <Container>
                 <div className='sweet-loading'>
                     <ClipLoader
-                      css={override}
-                      sizeUnit={"px"}
-                      size={150}
-                      color={'#123abc'}
-                      loading={this.props.loading}
+                        css={override}
+                        sizeUnit={"px"}
+                        size={150}
+                        color={'#123abc'}
+                        loading={this.props.loading}
                     />
                 </div>
                 <Row>
-                    {this.props.coursesList.map( course => this.renderCourses(course) )}
+                    {this.props.coursesList.map(course => this.renderCourses(course))}
                 </Row>
             </Container>
         )

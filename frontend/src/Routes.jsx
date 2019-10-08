@@ -77,7 +77,7 @@ export default class Routes extends React.Component{
                 <Route exact path={'/moderator/:option'}
                     render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
                 <Route exact path='/eventedit'
-                       render={(props) => <MainLayout><YourEvents event={props.location.state.event}/></MainLayout>}/>
+                       render={() => <MainLayout><YourEvents /></MainLayout>}/>
                 <Route exact path='/pdp' component={PDP}/>
                 <Route path="*" component={NotFoundPage} />
         </Switch>

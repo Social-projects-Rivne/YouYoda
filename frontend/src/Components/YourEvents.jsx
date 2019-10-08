@@ -10,6 +10,7 @@ import {axiosGet} from "../api/axiosGet";
 import {defaultPhoto} from "../utils";
 import ImageUpload from "./ImageUploadComponent";
 import LocationSearchInput from '../api/cityselector'
+import {Link} from "react-router-dom";
 
 class YourEvents extends React.Component {
     constructor(props) {
@@ -38,9 +39,9 @@ class YourEvents extends React.Component {
     };
 
     patchEvent = async (formData) => {
-        if (this.state.validDate) {
+        if (this.state.validDate ) {
             try {
-                const response = await API.patch('user/profile/event_organize', formData);
+                await API.patch('user/profile/event_organize', formData);
                 toast.success('Changes saved');
             } catch (error) {
                 toast.error('You cannot update your profile. ' + '\b Please fill all fields');
@@ -52,7 +53,7 @@ class YourEvents extends React.Component {
     postEvent = async (formData) => {
         if (this.state.validDate) {
             try {
-                const response = await API.post('user/profile/event_organize', formData);
+                await API.post('user/profile/event_organize', formData);
                 toast.success('Changes saved');
             } catch (error) {
                 toast.error('You cannot update your profile. ' + '\b Please fill all fields');
@@ -81,7 +82,7 @@ class YourEvents extends React.Component {
                 await this.postEvent(payLoad)
             }
         } catch (error) {
-            toast.error(error)
+            toast.error("Can't save changes. Fill all fields")
         }
     };
 
@@ -98,20 +99,20 @@ class YourEvents extends React.Component {
         });
     };
 
-    upCategories = (category) => {
+    updateCategories = (category) => {
         this.setState({
             activeCategory: category.target.value,
         });
     };
 
-    upDate = (event) => {
+    updateDate = (event) => {
         event.preventDefault();
-        let now = moment()
+        let now = moment();
         let chosen = moment(event.target.value);
-        let isafter = moment(chosen).isAfter(now)
+        let isAfter = moment(chosen).isAfter(now);
         this.setState({
             date: event.target.value,
-            validDate: isafter
+            validDate: isAfter
         });
     };
 
@@ -126,12 +127,7 @@ class YourEvents extends React.Component {
     async componentDidMount() {
         let path = '/categories/list';
         let listCategories = await axiosGet(path);
-        let defaultCategory = listCategories;
         let defaultDate = '2020-09-20 14:12:12';
-        let defaultUrl = '/media/beautiful-crowd-cute-2869374.jpg';
-        let defaultLocation = 'Rivne';
-        let defaultDescription = 'Here could be your description';
-        let defaultName = 'N event';
         try {
             let eventsData = this.props.event;
             let date = moment.unix(eventsData.date).format("YYYY-MM-DDTHH:mm:ss");
@@ -147,14 +143,10 @@ class YourEvents extends React.Component {
                 id: eventsData.id
             });
         } catch (e) {
-            toast.error(e)
+            toast.error(e);
             this.setState({
-                categories: defaultCategory,
+                categories: listCategories,
                 date: defaultDate,
-                cover_url: defaultUrl,
-                location: defaultLocation,
-                description: defaultDescription,
-                name: defaultName,
             });
         }
     };
@@ -173,7 +165,7 @@ class YourEvents extends React.Component {
 
     render() {
         let default_avatar_path = "/media/avatar.png";
-        let alt_avatar = defaultPhoto(default_avatar_path, this.state.cover_url)
+        let alt_avatar = defaultPhoto(default_avatar_path, this.state.cover_url);
         let {name, description, date} = this.state;
         return (
             <Form method="POST" className="form-event" style={{paddingBottom: "100px"}}>
@@ -182,21 +174,30 @@ class YourEvents extends React.Component {
                         <Row>
                             <Col sm="10" md="10">
                                 <Label className="event-name">Event Name*</Label>
+                                {!this.state.name && <span className="text-validate-date">
+                                     .  can't be empty
+                                </span>}
                                 <Input
-                                    type="textarea"
+                                    type="text"
                                     name="name"
+                                    maxLength="60"
                                     className="field-box-event-name"
                                     required
+                                    placeholder="Your event's name"
                                     value={name}
                                     onChange={this.updateField}
                                 />
                             </Col>
                             <Col sm="4" md="4" className="column-dropdown-button">
                                 <Label>Choose event category</Label>
+                                {!this.state.activeCategory && <span className="text-validate-date">
+                                     .  can't be empty
+                                </span>}
                                 <Input type="select"
+                                       className="event-category"
                                        name="categories"
                                        value={this.state.activeCategory}
-                                       onChange={(e) => this.upCategories(e)}
+                                       onChange={(e) => this.updateCategories(e)}
                                        required>
                                     <option></option>
                                     {this.state.categories.map((category, index) =>
@@ -207,10 +208,14 @@ class YourEvents extends React.Component {
                         <Row>
                             <Col md="10">
                                 <Label className="course-name">Event description*</Label>
+                                {!this.state.description && <span className="text-validate-date">
+                                      can't be empty
+                                </span>}
                                 <Input
                                     type="textarea"
                                     name="event-description"
                                     className="field-box-event-description"
+                                    placeholder="Here could be your description"
                                     required
                                     onChange={(e) => this.updateDescription(e)}
                                     value={description}
@@ -221,22 +226,26 @@ class YourEvents extends React.Component {
                             <Col md="5">
                                 <Label className="label-date-event">Date of event</Label>
                                 {!this.state.validDate && <span className="text-validate-date">
-                                     .  Date of event must to be after current date
+                                     .  must be after current date
                                 </span>}
                                 <Input
                                     type="datetime-local"
                                     name="event_date"
                                     className="field-box-event-date"
-                                    placeholder=""
-                                    onChange={this.upDate}
+                                    onChange={this.updateDate}
                                     value={moment(date).format("YYYY-MM-DDTHH:mm:ss")}
                                 />
                             </Col>
                             <Col md={{size: 4, offset: 1}}>
                                 <FormGroup className="location-formgroup-event ">
-                                    <Label>Location</Label>
+                                    <Label>Location*</Label>
+                                    {!this.state.location && <span className="text-validate-date">
+                                     .  can't be empty
+                                </span>}
                                     <LocationSearchInput
+                                        required
                                         name="location-event"
+                                        placeholder="Rivne"
                                         updateLocation={this.updateLocation}
                                         city={this.state.location}
                                         className="field-box"
@@ -259,16 +268,27 @@ class YourEvents extends React.Component {
                             </div>
                         </Row>
                         <Row>
-                            <Col sm="6" md={{size: 4, offset: 6}}>
-                                <Button color="secondary"
-                                        type="button"
-                                        size="lg"
-                                        className="button-create-event button-event-save-changes"
-                                        block
-                                        onClick={() => this.saveForm()}>
-                                    Save changes
-                                </Button>
-                            </Col>
+                            <Row sm="6" md={{size: 4, offset: 6}}>
+                                <Col>
+                                    <Link to="/eventcreate" className="">
+                                        <Button type="button"
+                                                className="return-to-events"
+                                                block>
+                                            Return to Events
+                                        </Button>
+                                    </Link>
+                                </Col>
+                                <Col>
+                                    <Button color="secondary"
+                                            type="button"
+                                            size="lg"
+                                            className="button-create-event button-event-save-changes"
+                                            block
+                                            onClick={() => this.saveForm()}>
+                                        Save changes
+                                    </Button>
+                                </Col>
+                            </Row>
                         </Row>
                     </FormGroup>
                 </Col>
