@@ -306,8 +306,8 @@ export default class PDP extends React.Component{
     let start = moment.unix(this.state.event.start).format("H:mm a");
     let end = moment.unix(this.state.event.end).format("H:mm a");
     let { redirect } = this.state;
-    if (redirect) {
-       if( this.state.event.name ){
+    if ( redirect ) {
+       if( this.state.event.event ){
             return <Redirect to={{
                         pathname: '/event/detail',
                         state: {event: this.state.event.event}}}

@@ -160,7 +160,6 @@ export default class HomeEvent extends React.Component{
                                     <img src={coverImg} alt={event.name} className="event-modal-photo"/>
                                     <p className="main-text">Location: {event.location}</p>
                                     <p className="main-text">Date: {newEventDate}</p>
-                                    <p className="main-text">Event organizer: {event.owner}</p>
                                 </ModalBody>
                                 <ModalFooter className="event-footer-centered">
                                     {(!this.state.isSubscribed) ? (
@@ -172,7 +171,7 @@ export default class HomeEvent extends React.Component{
                                     ) : ''}
                                     <Button color="secondary"
                                             className='btn-event-modal-cancel'
-                                            onClick={this.toggle}>Close window
+                                            onClick={this.toggle}>Cancel
                                     </Button>
                                 </ModalFooter>
                             </Modal>

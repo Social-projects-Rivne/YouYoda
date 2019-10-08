@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from .events_serializer import EventsSerializator
 from ..models import EventsSubscribers
 
 
@@ -27,7 +28,7 @@ class EventsSubscribersGetSerializator(serializers.ModelSerializer):
     Converts it to JSON format for transmission via the API.
     """
 
+	event = EventsSerializator()
 	class Meta:
 		model = EventsSubscribers
-		depth = 1
 		fields = ('event',)
