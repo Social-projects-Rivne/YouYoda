@@ -1,10 +1,18 @@
 import React from 'react';
 
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/core';
 import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
 
 import {getUsersList} from '../api/getAdminUsers';
 
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: #FFD466;
+`;
 
 class AdminUsers extends React.Component {
     constructor(props) {
@@ -12,6 +20,7 @@ class AdminUsers extends React.Component {
 
         this.state = {
             dataList: [],
+            loading: true
         };
     }
 
@@ -20,8 +29,9 @@ class AdminUsers extends React.Component {
         usersList.then( valueUsers => {
             this.setState({
                 dataList: valueUsers,
+                loading: false
             });  
-        });
+        })
     }
 
     renderUsers(user) {
@@ -83,6 +93,15 @@ class AdminUsers extends React.Component {
                             </thead>
                             <tbody>
                                 {this.state.dataList.map( user => this.renderUsers(user) )}
+                                <div className='sweet-loading'>
+                                    <ClipLoader
+                                        css={override}
+                                        sizeUnit={"px"}
+                                        size={150}
+                                        color={'#123abc'}
+                                        loading={this.state.loading}
+                                    />
+                                </div>
                             </tbody>
                         </table>
                     </Col>
