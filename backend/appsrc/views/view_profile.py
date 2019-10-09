@@ -58,7 +58,7 @@ class ViewEventsProfile(APIView):
         user = YouYodaUser.objects.get(auth_token=request.headers['Authorization'].replace('Token ', ''))
         user_following_events = Events.objects.filter(subscribed_event__participant=user.id, subscribed_event__completed=False)
         user_completed_events = Events.objects.filter(subscribed_event__participant=user.id, subscribed_event__completed=True)
-        user_created_events = Events.objects.filter(subscribed_event__participant=user.id, owner_id=user.id)
+        user_created_events = Events.objects.filter(owner=user.id)
 
         following_events_serializer = UserEventsSerializer(user_following_events, many=True)
         completed_events_serializer = UserEventsSerializer(user_completed_events, many=True)

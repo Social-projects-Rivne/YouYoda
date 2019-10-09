@@ -135,9 +135,9 @@ export default class PDP extends React.Component{
               data:this.state.event
           })
           let list = this.state.mainEventsList
-          for( let i = 0; i < list.length; i++){ 
+          for( let i = 0; i < list.length; i++){
             if ( list[i] == this.state.event) {
-                list.splice(i, 1); 
+                list.splice(i, 1);
               i--;
             }
          }
@@ -195,7 +195,7 @@ export default class PDP extends React.Component{
                             display: 'none',
                             id: response.data.id
                         }
-                    ], 
+                    ],
                 })
             toast.success('Success');
         } catch (error) {
@@ -283,12 +283,12 @@ export default class PDP extends React.Component{
             for(let i = 0; i < list.length; i++) {
                 if(typeItem === 'course' && list[i].course) {
                     if (list[i].course.id == courseData.id) {
-                        list.splice(i, 1); 
+                        list.splice(i, 1);
                         i--;
                     }
                 } else if(typeItem === 'event' && list[i].event) {
                     if (list[i].event.id == courseData.id) {
-                        list.splice(i, 1); 
+                        list.splice(i, 1);
                         i--;
                     }
                 }

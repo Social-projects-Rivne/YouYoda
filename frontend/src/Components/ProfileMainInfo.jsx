@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Button,
   Col,
   Collapse,
   Container,
@@ -291,8 +292,19 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="6">
                       <Row>
+                        <Col className="create-event-profile">
+                          <a href="/eventcreate">
+                            <Button color="secondary"
+                                    type="button"
+                                    size="sm"
+                                    style={{width:"125px"}}
+                                    block>
+                                Create new event
+                            </Button>
+                          </a>
+                        </Col>
                         <Event eventList={userCreatedEvents} loading={loading} lg={4} display={false}/>
-                        {(userCreatedEvents.length || loading) ? (
+                        {userCreatedEvents.length || loading ? (
                           null
                         ) : (
                           <NoCoursesOrEvents message={'You have not created any events yet'} style={{margin:"auto", marginTop:"100px"}}/>
