@@ -116,8 +116,8 @@
 
 .bm-burger-button::after {
 	content: "\f0b0";
-	font-family: "FontAwesome"; 
-	font-weight: 900; 
+	font-family: "FontAwesome";
+	font-weight: 900;
 	font-size: 1.5rem;
 	color: #4f4f4f;
 	background-color: #fff;
@@ -167,11 +167,11 @@
 	overflow: hidden;
 }
 
-.card-event-footer img {	
+.card-event-footer img {
 	-webkit-transform: scale(1);
 	transform: scale(1);
 	-webkit-transition: .3s ease-in-out;
-	transition: .3s ease-in-out; 
+	transition: .3s ease-in-out;
 }
 
 .card-event-footer:hover img {
