@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { Form, Input, Button } from 'reactstrap';
@@ -9,18 +9,15 @@ class SearchForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            query: '',
             redirectToPage: false,
             inputValue: '',
             hideForm: 'flex'
         };
-        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleInputChange(input) {
+    handleInputChange = (input) => {
         this.setState({
-            inputValue: input.target.value,
-            query: input.target.value
+            inputValue: input.target.value
         })
     }
 

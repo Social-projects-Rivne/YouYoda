@@ -10,6 +10,8 @@ import re
 from ..models import Events, Courses, YouYodaUser
 
 
+PROTECTED_USER = ['password','username','email','phone_number','is_superuser']
+
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,
                     normspace=re.compile(r'\s{2,}').sub):
@@ -59,15 +61,17 @@ class SiteSearch(APIView):
         query_string = ''
         found_entries = None
         limit = int(request.GET['limit'])
-        if ('q' in request.GET) and request.GET['q'].strip():
+        if request.GET.get('q', '').strip():
             query_string = request.GET['q']
-            event_entry_query = get_query(query_string, ['name', 'description', 'location'])
-            course_entry_query = get_query(query_string, ['coursename', 'description', 'location'])
-            user_entry_query = get_query(query_string, ['first_name', 'last_name'])
+            event_entry_query = get_query(query_string,
+                                    ['name', 'description', 'location'])
+            course_entry_query = get_query(query_string,
+                                    ['coursename', 'description', 'location'])
+            user_entry_query = get_query(query_string,
+                                    ['first_name', 'last_name'])
             event_results = Events.objects.filter(event_entry_query).distinct()[:limit]
             course_results = Courses.objects.filter(course_entry_query).distinct()[:limit]
             user_results = YouYodaUser.objects.filter(user_entry_query).exclude(is_trainer=False).exclude(is_active=False).distinct()[:limit]
-
             queryset_chain = list(chain(
                 event_results,
                 course_results,
@@ -79,16 +83,9 @@ class SiteSearch(APIView):
 
             data = json.loads(data_serialized)
             for obj in data:
-                if obj['fields'].get('password'):
-                    del obj['fields']['password']
-                if obj['fields'].get('username'):
-                    del obj['fields']['username']
-                if obj['fields'].get('email'):
-                    del obj['fields']['email']
-                if obj['fields'].get('phone_number'):
-                    del obj['fields']['phone_number']
-                if obj['fields'].get('is_superuser'):
-                    del obj['fields']['is_superuser']
+                for field in PROTECTED_USER:
+                    if obj['fields'].get(field):
+                        del obj['fields'][field]
             response_data = {
                 "data": data,
                 "count": self.count

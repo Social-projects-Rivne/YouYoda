@@ -84,15 +84,15 @@ class SearchContent extends Component {
     }
 
     componentDidMount() {
-        var searchQuery = '';
-        if(this.props.location.search)
+        if(this.props.location.search) {
             var {searchQuery} = this.props.location.state;
-        if(searchQuery) {
-            var inputSearch = document.getElementById('search-input-onpage');
-            var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-            nativeInputValueSetter.call(inputSearch, searchQuery);
-            var eventNew = new Event('input', { bubbles: true});
-            inputSearch.dispatchEvent(eventNew);
+            if(searchQuery) {
+                var inputSearch = document.getElementById('search-input-onpage');
+                var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+                nativeInputValueSetter.call(inputSearch, searchQuery);
+                var eventNew = new Event('input', { bubbles: true});
+                inputSearch.dispatchEvent(eventNew);
+            }
         }
     }
 
