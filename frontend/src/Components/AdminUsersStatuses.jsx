@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/core';
 import { UncontrolledButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
@@ -10,6 +12,11 @@ import {getUsersStatusesList, patchRequests} from '../api/getUsersStatuses';
 
 const ROLES = {1: "User", 2: "Moderator", 3: "Admin"};
 const STATUSES = {1: "Active", 2: "Banned", 3: "Muted", 4: "Idle"};
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: #FFD466;
+`;
 
 class UsersStatuses extends React.Component {
     constructor(props) {
@@ -17,7 +24,8 @@ class UsersStatuses extends React.Component {
 
         this.state = {
             dataList: [],
-            selected: {}
+            selected: {},
+            loading: true
         };
     }
 
@@ -26,6 +34,7 @@ class UsersStatuses extends React.Component {
         statusesList.then( valueUsers => {
             this.setState({
                 dataList: valueUsers,
+                loading: false
             });  
         });
     }
@@ -93,6 +102,15 @@ class UsersStatuses extends React.Component {
                             </thead>
                             <tbody>
                                 {this.state.dataList.map((user)=>this.renderUsers(user) )}
+                                <div className='sweet-loading'>
+                                <ClipLoader
+                                    css={override}
+                                    sizeUnit={"px"}
+                                    size={150}
+                                    color={'#123abc'}
+                                    loading={this.props.loading}
+                                />
+                                </div>
                             </tbody>
                         </table>
                         

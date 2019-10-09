@@ -104,7 +104,7 @@ class Events(models.Model):
     owner = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)
     date = models.IntegerField(blank=False)
     location = models.TextField(blank=False)
-    cover_url = models.CharField(max_length=80)
+    cover_url = models.CharField(max_length=80, blank=True, default='')
 
 class EventsSubscribers(models.Model):
     participant = models.ForeignKey(YouYodaUser, on_delete=models.CASCADE)

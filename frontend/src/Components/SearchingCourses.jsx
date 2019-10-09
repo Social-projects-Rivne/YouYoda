@@ -162,14 +162,14 @@ export default class SearchingCourses extends React.Component{
                       <Container>
                           <div id="wrap">
                               <form action="" autoComplete="on">
-                                  <input id="search" 
-                                         name="search" 
+                                  <input id="search"
+                                         name="search"
                                          type="text" 
                                          placeholder="What're you looking for?"
                                          onChange = {(event) => {this.handleSearchData(event)}}
                                   />
-                                  <input id="search_submit" 
-                                         value="Rechercher" 
+                                  <input id="search_submit"
+                                         value="Rechercher"
                                          type="submit"
                                   />
                               </form>

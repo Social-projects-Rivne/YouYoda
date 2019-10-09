@@ -3,7 +3,10 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 
 from ..models import CoursesSubscribers, YouYodaUser, Courses, CourseSchedule
-from ..serializers.courses_subscribers_serializer import CoursesSubscribersPostSerializator, FavoriteCoursesSerializator
+from ..serializers.courses_subscribers_serializer import (
+                                      CoursesSubscribersPostSerializator, 
+                                      CoursesSubscribersListSerializator,
+                                      FavoriteCoursesSerializator)
 from ..serializers.courses_serializer import CourseScheduleSerializer
 
 
@@ -97,3 +100,17 @@ class CheckSubscribeToCourse(APIView):
             return Response(False, status=status.HTTP_204_NO_CONTENT)
 
         return Response(False, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ListUserSubscribeToCourse(APIView):
+    """Takes data from CoursesSubscribersListSerializator for view list of subscribers"""
+
+    permission_classes = [permissions.IsAuthenticated,]
+
+    def get(self, request):
+        """Receives and transmits a list of subscribers to the course for trainer"""
+        course_id = request.query_params.get('course_id')
+        course_subscribers = CoursesSubscribers.objects.filter(course = course_id)
+        serializer = CoursesSubscribersListSerializator(course_subscribers, many=True)
+       
+        return Response(serializer.data)

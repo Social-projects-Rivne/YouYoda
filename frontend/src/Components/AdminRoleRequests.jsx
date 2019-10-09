@@ -1,11 +1,19 @@
 import React from 'react';
 
+import ClipLoader from 'react-spinners/ClipLoader';
+import { css } from '@emotion/core';
 import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
 import { toast } from 'react-toastify';
 
 import { getRequestsList, patchRequests } from '../api/getAdminRequests';
 
+
+const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: #FFD466;
+`;
 
 class AdminRequests extends React.Component {
     constructor(props) {
@@ -15,7 +23,8 @@ class AdminRequests extends React.Component {
             dataList: [],
             checkedIds: [],
             checkedComments: [],
-            requestsStatus: 'N'
+            requestsStatus: 'N',
+            loading: true
         };
     }
 
@@ -82,7 +91,8 @@ class AdminRequests extends React.Component {
         var requestList = getRequestsList(this.state.requestsStatus);
         requestList.then( valueRequests => {
             this.setState({
-                dataList: valueRequests
+                dataList: valueRequests,
+                loading: false
             });  
         });
         // clear selected items
@@ -244,6 +254,13 @@ class AdminRequests extends React.Component {
                             </thead>
                             <tbody>
                                 {this.state.dataList.map( item => this.renderRequestItem(item) )}
+                                <ClipLoader
+                                    css={override}
+                                    sizeUnit={"px"}
+                                    size={150}
+                                    color={'#123abc'}
+                                    loading={this.props.loading}
+                                />
                             </tbody>
                         </table>
                     </Col>

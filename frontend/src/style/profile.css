@@ -89,11 +89,15 @@
 }
 .user-courses {
     display: flex;
-    font-size: 1.25rem;
     background: #4f4f4f;
     color: #fff;
-    padding-left: 15px;
     border-radius: 16px;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 .user-courses div {
     font-weight: bold;
@@ -381,4 +385,17 @@
     .show-hide {
         margin-right: 0px;
     }
+}
+@media screen and (max-width: 1198px){
+    .left-arrow {
+        margin-left: -15px;
+    }
+}
+
+/*Styles for TrainerDetailCourse*/
+.title-table-list-subscribers {
+    margin-top: 10%;
+    margin-bottom: 8%;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
 }
