@@ -218,7 +218,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        <Cours coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
+                        <Cours coursesList={profile.userFollowingCourses} loading={profile.loading}/>
                         {profile.userFollowingCourses.length || profile.loading ? (
                           null
                         ) : (
@@ -228,7 +228,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
-                        <Cours coursesList={profile.userCompletedCourses} loading={profile.loading} lg={4}/>
+                        <Cours coursesList={profile.userCompletedCourses} loading={profile.loading}/>
                         {profile.userFollowingCourses.length || profile.loading ? (
                           null
                         ) : (
@@ -238,7 +238,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        <Event eventList={profile.userFollowingEvents} loading={profile.loading} lg={4}/>
+                        <Event eventList={profile.userFollowingEvents} loading={profile.loading}/>
                         {profile.userCompletedEvents.length || profile.loading ? (
                           null
                         ) : (
@@ -248,7 +248,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="5">
                       <Row>
-                        <Event eventList={profile.userCompletedEvents} loading={profile.loading} lg={4}/>
+                        <Event eventList={profile.userCompletedEvents} loading={profile.loading}/>
                         {profile.userCompletedEvents.length || profile.loading ? (
                           null
                         ) : (
@@ -258,7 +258,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="6">
                       <Row>
-                        <Event eventList={profile.userCreatedEvents} loading={profile.loading} lg={4}/>
+                        <Event eventList={profile.userCreatedEvents} loading={profile.loading}/>
                         {profile.userCreatedEvents.length || profile.loading ? (
                           null
                         ) : (
