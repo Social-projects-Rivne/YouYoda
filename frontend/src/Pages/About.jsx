@@ -87,7 +87,7 @@ export default class About extends React.Component {
                             <div className="circle">
                                 <div className="circle-text">
                                     <p>
-                                        Hello, im Oleksandr. I really enjoyed working on this project, 
+                                        Hello, I am Oleksandr. I really enjoyed working on this project, 
                                         I hope that our project will be useful and interesting for you to read.<br/>
                                         Join us, use YouYoda!<br />
                                     </p>

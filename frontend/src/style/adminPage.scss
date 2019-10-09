@@ -2,7 +2,7 @@
 #moderator-dashboard {
     width: 100%;
     min-height: 500px;
-    padding: 2rem 2rem;
+    padding-left: 1rem;
 }
 .dashboard-menu {min-height: 400px;}
 .dashboard-menu > [class*="col-"] > a > div {
@@ -109,6 +109,9 @@
  .bm-burger-button::after {
   content: "";
   display: none;
+}
+.bm-overlay {
+  position: absolute;
 }
    
 

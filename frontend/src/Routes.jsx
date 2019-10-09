@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 
+import About from './Pages/About';
 import AdminDashboard from './Components/AdminDashboard';
 import AdminPage from "./Pages/AdminPage";
 import AdminPageInner from './Components/AdminPageInner';
@@ -24,8 +25,6 @@ import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
-import About from './Pages/About';
-import PDP from './Components/PDP';
 import TrainerPage from './Components/TrainerPage';
 import YourEvents from "./Components/YourEvents";
 
@@ -82,7 +81,6 @@ export default class Routes extends React.Component {
                             render={() => <ModeratorPage><ModeratorDashboard /></ModeratorPage>} />
                         <Route exact path={'/moderator/:option'}
                             render={() => <ModeratorPage><ModeratorPageInner /></ModeratorPage>} />
-                        <Route exact path='/pdp' component={PDP} />
                         <Route exact path='/about'
                             render={() => <MainLayout><About /></MainLayout>}
                         />
