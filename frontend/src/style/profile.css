@@ -89,11 +89,14 @@
 }
 .user-courses {
     display: flex;
-    font-size: 1.25rem;
     background: #4f4f4f;
     color: #fff;
-    padding-left: 15px;
     border-radius: 16px;
+    padding-left: 10px; 
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 .user-courses div {
     font-weight: bold;
@@ -213,6 +216,7 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+    padding-left: 15px;
 }
 .user-courses-profile div {
     font-weight: bold;
@@ -255,6 +259,74 @@
     border-radius: 40px;
     transition: border-radius 0.7s;
     -webkit-transition: border-radius 0.7s;
+}
+
+/* manage course and event buttons */
+.col-lg-4.wrap-manage-course {
+    max-width: 100%;
+    padding: 0 8px;
+}
+.class-manage-course .event-card {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.event-card-wrap {
+    display: block;
+    width: 100%;
+    padding: 20px 0;
+    position: relative;
+}
+.manage-buttons-wrap:before {
+    display: none;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.86);
+    z-index: 10;
+}
+.manage-buttons-wrap {
+    display: none;
+    position: absolute;
+    z-index: 100;
+    text-align: center;
+    top: 0%;
+    width: 100%;
+    max-height: 100%;
+    margin: 20px auto;
+    bottom: 0;
+}
+.manage-buttons-wrap .svg-inline--fa {
+    color: #4A90E2;
+}
+.manage-buttons-wrap .button-manage:hover .svg-inline--fa {
+    color: #ffd466;
+}
+.buttons-wrap-inner {
+    display: block;
+    position: relative;
+    z-index: 100;
+    text-align: center;
+    top: 25%;
+    width: 100%;
+    margin: 5px auto;
+}
+.event-card-wrap:hover .manage-buttons-wrap,
+.event-card-wrap:hover .manage-buttons-wrap:before {
+    display: block;
+}
+.manage-buttons-wrap .button-manage {
+    background: #fff;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin: 15px auto;
+    width: 80%;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+.manage-buttons-wrap .button-manage:hover {
+    opacity: 0.8;
 }
 
 /*Styles for NoCoursesOrEvents*/
@@ -313,4 +385,17 @@
     .show-hide {
         margin-right: 0px;
     }
+}
+@media screen and (max-width: 1198px){
+    .left-arrow {
+        margin-left: -15px;
+    }
+}
+
+/*Styles for TrainerDetailCourse*/
+.title-table-list-subscribers {
+    margin-top: 10%;
+    margin-bottom: 8%;
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
 }

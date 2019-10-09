@@ -250,8 +250,8 @@
     background-color: #FFD466;
 }
 
-.btn-event-modal-cancel {
-    margin-right: 82px;
+.modal-footer.event-footer-centered {
+    justify-content: center;
 }
 
 .main-text-event-modal {
@@ -420,6 +420,10 @@
 .header-user-menu a {
     cursor: pointer;
 }
+.header-user-menu button {
+    padding: 5px;
+}
+
 .auth-display-none {
     display: none;
 }

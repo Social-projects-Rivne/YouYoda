@@ -5,9 +5,10 @@ import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom';
 
 import { defaultPhoto } from '../utils';
+import ManageButtons from './CoursManageButtons';
 
 
 const override = css`
@@ -40,8 +41,8 @@ export default class Event extends React.Component{
         window.location.reload();
     }
 
-    notResults = () => {
-        if (this.props.eventList.length == 0) {
+    notResults = (display = true) => {
+        if (this.props.eventList.length === 0 && display) {
             return (
                 <Col className="d-flex align-items-center justify-content-center" style={{margin:'35px 15px', color:'#FFD466'}}>
                     <h2>Do, or do not. There is no events :(</h2>
@@ -58,8 +59,10 @@ export default class Event extends React.Component{
       const newEventDate = moment.unix(eventDate).format('MMMM Do YYYY, h:mm a');
       let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
       let coverImg = defaultPhoto(defImg, event.cover_url);
+      let classManage = (this.props.manage)? 'class-manage-course' : '';
       return (
-          <Col sm="12" md="6" lg="4">
+          <Col sm="12" md="6" lg="4" className="wrap-manage-course">
+              <div className={`event-card-wrap ${classManage}`}>
               <Link className="card-link" onClick={(e) => this.handleClick(e, event)} >
                   <Card className="event-card">
                       <CardHeader className="event-header">{newEventDate}</CardHeader>
@@ -78,6 +81,8 @@ export default class Event extends React.Component{
                       </CardFooter>
                   </Card>
               </Link>
+              {(this.props.manage && this.props.changeProfile)? <ManageButtons manageButtons={this.props.manageButtons} changeProfile={this.props.changeProfile} event={event} /> : null}
+              </div>
           </Col>
      )
   }
@@ -102,7 +107,7 @@ export default class Event extends React.Component{
                 />
                 </div>
                 <Row>
-                    {this.notResults()}
+                    {this.notResults(this.props.display)}
                 </Row>
             </Container>
         )

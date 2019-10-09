@@ -15,7 +15,6 @@ class AdminDashboard extends React.Component {
                     <Col md="6" className="pb-3"><a href="/admin/statuses"><div>Users' statuses</div></a></Col>
                     <Col md="6" className="pb-3"><a href="/admin/roles"><div>Role requests</div></a></Col>
                     <Col md="6" className="pb-3"><a href="/admin/logs"><div>Logs</div></a></Col>
-                    <Col md="6" className="pb-3"><a href="/admin/some"><div>Something else</div></a></Col>
                 </Row>
             </Container>
         );

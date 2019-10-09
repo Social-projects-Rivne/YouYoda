@@ -6,7 +6,7 @@ from ..models import EventsSubscribers, Events
 
 class SubscribedSerializer(serializers.ModelSerializer):
     """Takes data from the EventsSubscribers model for view user events.
-
+    
     Converts it to JSON format for transmission via the API.
     """
 

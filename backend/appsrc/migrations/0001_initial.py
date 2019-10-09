@@ -377,8 +377,6 @@ def insertData(apps, schema_editor):
     CourseSchedule.objects.create(id=203, course_id=17, date=1570455000)
     CourseSchedule.objects.create(id=204, course_id=17, date=1572445800)
 
-
-
     CoursesSubscribers = apps.get_model('appsrc', 'CoursesSubscribers')
     CoursesSubscribers.objects.create(id=1, completed=False, rate=5, is_favourite=True,
         course_id=1, participant_id=1)
@@ -477,17 +475,17 @@ class Migration(migrations.Migration):
                 ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('hide_my_data', models.BooleanField(default=False)),
-                ('first_name', models.CharField(blank=True, max_length=20, null=True)),
-                ('last_name', models.CharField(blank=True, max_length=20, null=True)),
-                ('location', models.TextField(blank=True, null=True)),
+                ('first_name', models.CharField(blank=True, max_length=20, default='')),
+                ('last_name', models.CharField(blank=True, max_length=20, default='')),
+                ('location', models.TextField(blank=True, default='')),
                 ('username', models.CharField(max_length=20, unique=True)),
                 ('password', models.CharField(max_length=80)),
                 ('email', models.EmailField(max_length=254, unique=True)),
-                ('about_me', models.TextField(blank=True, null=True)),
-                ('i_like', models.TextField(blank=True, null=True)),
+                ('about_me', models.TextField(blank=True, default='')),
+                ('i_like', models.TextField(blank=True, default='')),
                 ('birth_date', models.DateField(blank=True, null=True)),
-                ('phone_number', models.CharField(blank=True, max_length=13, null=True)),
-                ('avatar_url', models.CharField(blank=True, max_length=255, null=True)),
+                ('phone_number', models.CharField(blank=True, max_length=13, default='')),
+                ('avatar_url', models.CharField(blank=True, max_length=255, default='')),
                 ('is_trainer', models.BooleanField(default=False)),
                 ('cover_url', models.TextField(blank=True, default='')),
                 ('last_seen', models.IntegerField(default=0)),
@@ -537,7 +535,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('date', models.IntegerField()),
                 ('location', models.TextField()),
-                ('cover_url', models.CharField(max_length=80)),
+                ('cover_url', models.CharField(blank=True, max_length=80, default='')),
                 ('categories', models.ForeignKey(default=1, on_delete=django.db.models.deletion.SET_DEFAULT, to='appsrc.Categories')),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],

@@ -27,6 +27,12 @@ export const isModerator = () => {
     return parseInt(localStorage.getItem('role')) === ROLE_MODERATOR;
 }
 
+export const isTrainer = () => {
+    if (localStorage.getItem('is_trainer') === 'true')
+        return true;
+    return false;
+}
+
 export const defaultPhoto = (defaultPhotoUrl, coverUrl) => {
     let urlphoto;
     if(!coverUrl || coverUrl === ""){

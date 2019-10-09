@@ -4,7 +4,6 @@ from .courses_serializer import TrainerIdSerializator
 from ..models import CoursesSubscribers, Courses
 
 
-
 class SubscribedSerializer(serializers.ModelSerializer):
     """Takes data from the CoursesSubscribers model for view user courses.
 
@@ -14,7 +13,7 @@ class SubscribedSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = CoursesSubscribers
-        fields = ('completed', 'rate', 'is_favourite')
+        fields = ('completed', 'rate', 'is_favourite',)
 
 
 class UserCoursesSerializer(serializers.ModelSerializer):
