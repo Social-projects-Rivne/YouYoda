@@ -302,7 +302,7 @@ export default class ProfileInfo extends React.Component {
                                 Create new event
                             </Button>
                           </a>
-                      </Col>
+                        </Col>
                         <Event eventList={userCreatedEvents} loading={loading} lg={4} display={false}/>
                         {userCreatedEvents.length || loading ? (
                           null
