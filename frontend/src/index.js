@@ -17,6 +17,7 @@ import './style/events.css';
 import './style/forms.css';
 import './style/fillEditPage.css';
 import './style/filter.scss';
+import './style/trainerpage.scss'
 import './style/home.css';
 import './style/media.css';
 import './style/profile.css';

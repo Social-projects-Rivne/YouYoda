@@ -18,12 +18,12 @@ import ModeratorDashboard from './Components/ModeratorDashboard';
 import ModeratorPage from "./Pages/ModeratorPage";
 import ModeratorPageInner from './Components/ModeratorPageInner';
 import NotFoundPage from './Pages/NotFoundPage';
-import PDP from './Components/PDP';
 import Profile from './Pages/Profile';
 import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
+import TrainerPage from './Components/TrainerPage';
 import YourEvents from "./Components/YourEvents";
 
 
@@ -77,8 +77,10 @@ export default class Routes extends React.Component{
                 <Route exact path={'/moderator/:option'}
                     render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
                 <Route exact path='/eventedit'
-                       render={() => <MainLayout><YourEvents /></MainLayout>}/>
-                <Route exact path='/pdp' component={PDP}/>
+                       render={(props) => <MainLayout><YourEvents event = {props.location.state.event}/></MainLayout>}/>
+                <Route exact path="/trainer/page"
+                    render={(props)=><MainLayout><TrainerPage trainer_id = {props.location.state.trainer_id}/></MainLayout>}
+                />
                 <Route path="*" component={NotFoundPage} />
         </Switch>
         </Router>

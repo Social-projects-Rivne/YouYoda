@@ -20,3 +20,6 @@ li {
 .a-dropdown-item {
   cursor: pointer;
 }
+main {
+  min-height: 80vh;
+}

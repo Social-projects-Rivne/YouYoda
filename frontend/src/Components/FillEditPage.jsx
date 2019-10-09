@@ -83,7 +83,6 @@ class FillEditPage extends React.Component {
     };
 
     updateField = (event) => {
-        // event.preventDefault();
         let fieldName = event.target.name;
         let newState = {};
         newState[fieldName] = event.target.value;
@@ -154,7 +153,7 @@ class FillEditPage extends React.Component {
                                 </div>
                                 <Label for="username">User Name*</Label>
                                 {!this.state.username && <span className="text-validate-date">
-                                     .  can't be empty
+                                       can't be empty
                                 </span>}
                                 <Input
                                     type="login"
@@ -166,7 +165,7 @@ class FillEditPage extends React.Component {
                                 />
                                 <Label className="name">Name*</Label>
                                 {!this.state.first_name && <span className="text-validate-date">
-                                     .  can't be empty
+                                       can't be empty
                                 </span>}
                                 <Input
                                     name="first_name"
@@ -177,7 +176,7 @@ class FillEditPage extends React.Component {
                                 />
                                 <Label className="surname">Surname*</Label>
                                 {!this.state.last_name && <span className="text-validate-date">
-                                     .  can't be empty
+                                       can't be empty
                                 </span>}
                                 <Input
                                     name="last_name"
@@ -256,7 +255,7 @@ class FillEditPage extends React.Component {
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.birth_date}
                                 />
-                                <h2 className="security-button">CAUTION ! DANGER ! You can change your password</h2>
+                                <h2 className="security-button">CAUTION! You can change your password</h2>
                                 <div className="row justify-content-start">
                                     <ChangePassword password="this.state.password"/>
                                 </div>

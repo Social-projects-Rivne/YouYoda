@@ -175,7 +175,7 @@ class YourEvents extends React.Component {
                             <Col sm="10" md="10">
                                 <Label className="event-name">Event Name*</Label>
                                 {!this.state.name && <span className="text-validate-date">
-                                     .  can't be empty
+                                       can't be empty
                                 </span>}
                                 <Input
                                     type="text"
@@ -191,7 +191,7 @@ class YourEvents extends React.Component {
                             <Col sm="4" md="4" className="column-dropdown-button">
                                 <Label>Choose event category</Label>
                                 {!this.state.activeCategory && <span className="text-validate-date">
-                                     .  can't be empty
+                                       can't be empty
                                 </span>}
                                 <Input type="select"
                                        className="event-category"
@@ -226,7 +226,7 @@ class YourEvents extends React.Component {
                             <Col md="5">
                                 <Label className="label-date-event">Date of event</Label>
                                 {!this.state.validDate && <span className="text-validate-date">
-                                     .  must be after current date
+                                       must be after current date
                                 </span>}
                                 <Input
                                     type="datetime-local"
@@ -240,7 +240,7 @@ class YourEvents extends React.Component {
                                 <FormGroup className="location-formgroup-event ">
                                     <Label>Location*</Label>
                                     {!this.state.location && <span className="text-validate-date">
-                                     .  can't be empty
+                                       can't be empty
                                 </span>}
                                     <LocationSearchInput
                                         required

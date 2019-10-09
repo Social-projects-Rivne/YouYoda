@@ -1,13 +1,15 @@
-from django.urls import path
+from django.urls import include, path
 
 from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.check_user import CheckUser
-from .views.comment import CourseComments, EventComments
-from .views.courses import CourseScheduleView, TopCourses, SearchingCourses
+from .views.comment import CourseComments, EventComments, TrainerComment
+from .views.courses import CourseScheduleView, SearchingCourses, TopCourses
 from .views.edit_profile import EditProfile
 from .views.events import SearchingEvents, TopEvents
+from .views.last_seen import LastSeen
+from .views.trainer import TopTrainers, TrainerPage
 from .views.orginize_event import OrganizeEvent
 from .views.pdp import PDP
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
@@ -29,6 +31,10 @@ urlpatterns = [
     path('events/comments', EventComments.as_view(), name='comments-events'),
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('last/seen', LastSeen.as_view(), name='last_seen'),
+    path('trainer/comments', TrainerComment.as_view(), name='trainer-comment'),
+    path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
+    path('trainer/top', TopTrainers.as_view(), name='top-trainers'),
     path('user/totrainer/getrequest', UserGetRequest.as_view()),
     path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),

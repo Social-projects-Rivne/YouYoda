@@ -28,8 +28,13 @@
     margin-left: 5px;
 }
 .user-info {
+    height: 57px;
     position: relative;
     bottom: 7px;
+    overflow: hidden;
+}
+.user-info h6{
+    overflow: hidden;
 }
 .profile-photo:hover {
     transform: scale(1.1);

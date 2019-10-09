@@ -21,13 +21,12 @@ export default class EventDetail extends React.Component{
 
     getCommnts = async() => {
         try {
-            let response = await API.get('/events/comments',
-                {
+            let response = await API.get('/events/comments', {
                     params: {
                         event_id: this.props.event.id,
+                    }
                 }
-            }
-        )
+            )
 
             this.setState({
                 comments: response.data,
@@ -103,8 +102,10 @@ export default class EventDetail extends React.Component{
                         <div className="ed cd-trainer">
                             <i className="fas fa-user-tie"/>
                             <span className="main-text">
-                            <Link to="" style={{color:"#fff"}}>
-                            {this.props.event.owner}</Link></span>
+                                <Link to="" style={{color:"#fff"}}>
+                                    {`${this.props.event.owner.first_name} ${this.props.event.owner.last_name}`}
+                                </Link>
+                            </span>
                         </div>
 
                         <div className="ed cd-loc">

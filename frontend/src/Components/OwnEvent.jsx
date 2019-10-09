@@ -47,12 +47,11 @@ export default class OwnEvent extends React.Component {
         this.setState({loading: false})
     }
 
-    handleClick = async (event) => {
-        await this.setState({
+    handleClick = (event) => {
+         this.setState({
             event,
             redirect: true
         });
-        window.location.reload();
     }
 
     renderEvents(event) {

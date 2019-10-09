@@ -32,10 +32,11 @@ class CreateEvent extends React.Component {
         }
     };
 
-    handleClick = async (event) => {
-        await this.setState({event});
-        await this.setState({redirect: true});
-        window.location.reload();
+    handleClick = (event) => {
+        this.setState({
+            event,
+            redirect: true,
+        });
     }
 
     async componentDidMount() {
