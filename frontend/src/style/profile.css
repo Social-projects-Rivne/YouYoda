@@ -260,6 +260,12 @@
     transition: border-radius 0.7s;
     -webkit-transition: border-radius 0.7s;
 }
+.create-event-profile {
+    width: 125px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -26px;
+}
 
 /*Styles for NoCoursesOrEvents*/
 .back-no-info {

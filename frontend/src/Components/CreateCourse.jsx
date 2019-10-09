@@ -5,6 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import moment from "moment";
 
 import { API } from '../api/axiosConf';
 import { defaultPhoto } from '../utils';
@@ -31,6 +32,7 @@ export default class CreateCourse extends React.Component{
           categories: [],
           status: 'Open',
           redirect: false,
+          validSchedule: true,
       };
     }
 
@@ -45,6 +47,13 @@ export default class CreateCourse extends React.Component{
          selectedDays.push(day);
        }
        this.setState({ selectedDays });
+       let start_date = moment(Math.min.apply(null, selectedDays));
+       let chosen = moment(this.state.start_date);
+       let isAfter = moment(chosen).isAfter(start_date);
+       if (isAfter)
+         this.setState({ validSchedule: false });
+       else
+         this.setState({ validSchedule: true });
     }
 
     updateField = async(event) => {
@@ -115,7 +124,8 @@ export default class CreateCourse extends React.Component{
            this.state.duration &&
            this.state.category &&
            this.state.status &&
-           this.state.start_time)
+           this.state.start_time &&
+           this.state.validSchedule)
         {
         if ([this.state.cost, this.state.members_limit, this.state.duration].every(el => el > -1))
         {
@@ -217,9 +227,9 @@ export default class CreateCourse extends React.Component{
                         <Container className="d-flex flex-wrap">
                         <div className="cd cd-trainer">
                             <i className="fas fa-user-tie"/>
-                            <span className="main-text">
-                            <Link to="" style={{color:"#fff"}}>{this.state.owner_name}
-                            </Link></span>
+                            <span className="main-text" style={{color:"#fff"}}>
+                              {this.state.owner_name}
+                            </span>
                         </div>
                         <div className="cd cd-cost">
                             <i class="fas fa-dollar-sign"></i>
@@ -342,6 +352,9 @@ export default class CreateCourse extends React.Component{
                 </Col>
                 <Col md="6" xs="12" className="course-detail-second-col" style={{display:"block"}}>
                     <p className="main-text daypicker-title">Specify the days you want to take course<span className="required-fields"> *</span></p>
+                      {!this.state.validSchedule && <span className="valid-schedule">
+                              schedule cannot start earlier start date
+                        </span>}
                       <DayPicker
                         className="daypicker"
                         selectedDays={this.state.selectedDays}
