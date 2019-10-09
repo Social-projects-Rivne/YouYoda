@@ -9,6 +9,7 @@ import CreateCourse from './Components/CreateCourse'
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
+import CreateEventPage from "./Pages/CreateEventPage";
 import EditPageProfile from "./Pages/EditPageProfile";
 import EnterNewPassword from './Components/EnterNewPassword';
 import EventDetail from './Components/EventDetail';
@@ -24,6 +25,7 @@ import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
 import TrainerPage from './Components/TrainerPage';
+import YourEvents from "./Components/YourEvents";
 
 
 export default class Routes extends React.Component{
@@ -35,6 +37,7 @@ export default class Routes extends React.Component{
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
             <Route path='/editprofile' component={EditPageProfile}/>
+            <Route path='/eventcreate' component={CreateEventPage}/>
                 <Route exact path='/reset/password'
                     render={()=><MainLayout><ResetPassword/></MainLayout>}
                 />
@@ -77,6 +80,8 @@ export default class Routes extends React.Component{
                     render={()=><ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
                 <Route exact path={'/moderator/:option'}
                     render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
+                <Route exact path='/eventedit'
+                       render={(props) => <MainLayout><YourEvents event = {props.location.state.event}/></MainLayout>}/>
                 <Route exact path="/trainer/page"
                     render={(props)=><MainLayout><TrainerPage trainer_id = {props.location.state.trainer_id}/></MainLayout>}
                 />

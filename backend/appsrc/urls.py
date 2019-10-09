@@ -1,6 +1,7 @@
 from django.urls import include, path
 
 from .views.categories import CategoriesList
+from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
 from .views.change_avatar import FileUploadView
 from .views.check_user import CheckUser
@@ -12,14 +13,15 @@ from .views.events import SearchingEvents, TopEvents
 from .views.manage_course import ManageCourse
 from .views.last_seen import LastSeen
 from .views.trainer import TopTrainers, TrainerPage
+from .views.orginize_event import OrganizeEvent
 from .views.pdp import PDP
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
-from .views.user_to_trainer import UserGetRequest, UserSendRequest, UserToTrainer
-from .views.users_administration import UsersGetList, GetUsersStatuses, UpdateUsersStatuses
 from .views.user_subscribe_to_event import UserSubscribeToEvent
 from .views.user_subscribe_to_course import UserSubscribeToCourse, ListUserSubscribeToCourse
-from .views.view_profile import ViewProfile, ViewCoursesProfile, ViewEventsProfile, ViewAchievementsProfile
+from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
+from .views.users_administration import GetUsersStatuses, UsersGetList, UpdateUsersStatuses
+from .views.view_profile import ViewAchievementsProfile, ViewEventsProfile, ViewCoursesProfile, ViewProfile
 
 
 urlpatterns = [
@@ -51,6 +53,7 @@ urlpatterns = [
     path('user/profile/change_password', ChangePassword.as_view(), name='change_password'),
     path('user/profile/edit', EditProfile.as_view()),
     path('user/profile/view', ViewProfile.as_view(), name='view_profile'),
+    path('user/profile/event_organize', OrganizeEvent.as_view(), name='organize_event'),
     path('user/register', UserRegistration.as_view(), name='register'),
     path('user/social/login', UserSocialLogin.as_view(), name='social_login'),
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),

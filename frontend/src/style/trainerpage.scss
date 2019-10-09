@@ -60,7 +60,6 @@
         padding-left: 15px;
         width: 100%;
         font-weight: 500;
-        color: #fff;
     }
     .trainer-general-information{
 
@@ -95,10 +94,12 @@
         align-items: center;
         margin-bottom: 3px;
         border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+
         i {
             margin-right: 15px;
             font-size: 1.5rem;
-            color: #fff;
         }
     }
     #coursesCollaps {

@@ -53,7 +53,7 @@ export default class ModeratorPage extends React.Component{
         return(
             <>
             <PageHeader/>
-                <main style={{display:displayDashboard}}>{this.props.children}</main>
+                <main style={{display:displayDashboard}} style={{minHeight:'80vh'}}>{this.props.children}</main>
             <Footer/>
             </>
         );
