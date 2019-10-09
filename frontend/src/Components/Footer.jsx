@@ -1,11 +1,13 @@
 import React from 'react';
 
-import { Container, Row, Col, Form, Input, Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 import { API } from '../api/axiosConf';
+
+import SearchForm from '../Components/SearchForm';
 
 
 export default class Footer extends React.Component{
@@ -55,13 +57,7 @@ export default class Footer extends React.Component{
                     </Link>
                   </li>
                 </ul>
-                <Form action="#" className="form">
-                    <Input type="search" id="search-input"
-                            placeholder="Search..."/>
-                    <Button id="search-button">
-                        <FontAwesomeIcon icon="search"/>
-                    </Button>
-                </Form>
+                <SearchForm />
               </Col>
               <Col>
                   <ul className="soc">

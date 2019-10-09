@@ -6,6 +6,7 @@ import {Row, Col} from "reactstrap";
 import Button from 'reactstrap/es/Button';
 
 import {getUsersList} from '../api/getAdminUsers';
+import { defaultPhoto, DEFAULT_AVATAR_URL } from '../utils'
 
 
 const override = css`
@@ -35,8 +36,7 @@ class AdminUsers extends React.Component {
     }
 
     renderUsers(user) {
-        if(!user.avatar_url)
-            user.avatar_url = require('../img/content/profile_photo.png');
+        let coverImg = defaultPhoto(DEFAULT_AVATAR_URL, user.avatar_url);
         return (
             <tr id={`user_${user.id}`} key={user.id}>
                 <td align="center"><input type="checkbox" /></td>
@@ -60,7 +60,7 @@ class AdminUsers extends React.Component {
                 <td className="date-td">{user.birth_date}</td>
                 <td className="phone-td">{user.phone_number}</td>
                 <td>{user.location}</td>
-                <td><img width="40" height="40" src={user.avatar_url} alt={user.username} /></td>
+                <td><img width="40" height="40" src={coverImg} alt={user.username} /></td>
             </tr>
         )
     }

@@ -11,7 +11,7 @@ export default class ProfileInfo extends React.Component {
       return (
         <div className="title-profile-block">
           <ProfileContext.Consumer>
-            {profile => (
+            {({userInfo, updateProfile}) => (
             <Container>
               <Row>
                   <Col md="3" className="profile-photo-container">
@@ -26,8 +26,8 @@ export default class ProfileInfo extends React.Component {
                   <Col className="profile-info">
                       <div className="user-name">
                           <div>
-                            <h2>{profile.userInfo.first_name}</h2>
-                            <h2 style={{paddingLeft:"5px"}}>{profile.userInfo.last_name}</h2>
+                            <h2>{userInfo.first_name}</h2>
+                            <h2 style={{paddingLeft:"5px"}}>{userInfo.last_name}</h2>
                           </div>
                           <div>
                             <a href="/editprofile" title="Edit profile">
@@ -37,7 +37,7 @@ export default class ProfileInfo extends React.Component {
                           </div>
                       </div>
                       <div className="user-info">
-                        <h6>{profile.userInfo.about_me}</h6>
+                        <h6>{userInfo.about_me}</h6>
                       </div>
                   </Col>
               </Row>

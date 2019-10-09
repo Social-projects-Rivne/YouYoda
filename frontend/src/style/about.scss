@@ -1,0 +1,176 @@
+.head-text{
+    padding-top: 10px;
+    width: 100%;
+
+    font-family: Roboto;
+    font-weight: 900;
+    font-size: calc(0.75em + 5vmin);
+    text-align: center;
+    color: #FFBF00;
+}
+
+.about-us {
+    background: url("../img/static/about_background.jpg");
+    width: 99.2vw;
+    height: auto;
+
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background-repeat:no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-position:center;
+}
+
+.info {
+    margin: 10px 40px;
+    height: auto;
+
+    border: 5px dashed #FFBF00;
+    border-radius: 5px;
+    perspective: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-text {
+    color: #FFBF00;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: calc(0.75em + 2vmin);
+    
+    text-align: center;
+    font-variant: normal;
+    animation: animateCrawl 30s linear;
+}
+@keyframes animateCrawl {
+    0% { transform: rotateX(30deg) translateY(400px); }
+    100% { transform: rotateX(30deg) translateY(-300px); }
+}
+
+br {
+    content: "A" !important;
+    display: block !important;
+    margin-bottom: 0.7rem !important;
+}
+
+.outer-team {
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.column-team {
+    position: relative;
+    padding-bottom: 60px;
+}
+
+.team {
+    width: 100%;
+    height: auto;
+    background: #ffffff;
+    z-index: 100;
+    .circle{
+        position: absolute;
+        top: 1px;
+        bottom: 0;
+        left: 155px;
+        right: 0;
+        height: 200px;
+        width: 200px;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #FFBF00;
+        border-radius: 50%;
+        &:hover {
+            opacity: 1;
+            transform: scale(4);
+            z-index: 2;
+        }
+
+        .circle-text {
+            padding-right: 15%;
+            padding-top: 15%;
+            font-family: Roboto;
+            font-size: calc(0.05em + 0.5vmin);
+            text-align: center;    
+            color: black;
+            
+            p {
+                text-align: center;
+                padding-left: 17%;
+                padding-bottom: 0px;
+                margin-bottom: 0px;
+            }
+            h5 {
+                font-size: calc(0.6em + 1vmin);
+                line-height: 0.3;
+            }
+            ul {
+                padding-top: 0px;
+                padding-right: 5%;
+            }
+            li {
+                font-size: calc(0.03em + 0.45vmin);
+            }
+        }
+    }
+    img {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        border-radius: 50%;
+        align-self: center;        
+    }
+    h1 {
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    h3 {
+        margin: 0 auto;
+        text-align: center;
+    }
+}
+
+.possibilities {
+    width: 100%;
+    height: auto;
+    background: #E8E8E8;
+    text-align: center;
+    color: black;
+
+    h1 {
+        padding-top: 40px;
+        padding-bottom: 0px;
+        width: 100%;
+        font-size: 48px;
+    }
+    h3 {
+        padding-top: 30px;
+        padding-bottom: 10px;
+        font-size: 32px;
+        text-decoration: underline;
+        width: 100%;
+    }
+    h4 {
+        padding-top: 5px;
+        text-shadow: 2px 2px 0 #FFBF00, 2px -2px 0 #FFBF00, -2px 2px 0 #FFBF00, -2px -2px 0 #FFBF00, 2px 0px 0 #FFBF00, 0px 2px 0 #FFBF00, -2px 0px 0 #FFBF00, 0px -2px 0 #FFBF00;
+        padding-bottom: 6px;
+    }
+    button {
+        margin-left: 5px;
+    }
+}
+
+.team-head {
+    padding-bottom: 40px;
+    width: 100%;
+
+    font-family: Roboto;
+    font-weight: 900;
+    font-size: calc(0.75em + 5vmin);
+    text-align: center;
+}

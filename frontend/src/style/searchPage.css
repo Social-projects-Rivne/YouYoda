@@ -1,0 +1,57 @@
+.search-page-container {
+    padding: 2rem 0;
+    min-height: 80vh;
+}
+.search-page-container form input[type="text"] {
+    width: 400px;
+    border-radius: 20px 20px;
+    height: 40px;
+    padding: 0 15px;
+    border: 1px solid #ced4da;
+}
+.search-page-container form input[type="text"]:focus {
+    border-radius: 20px 20px;
+}
+.search-page-container form .ico-search-wrap {
+    position: relative;
+    display: inline-block;
+}
+.search-page-container form .ico-search-wrap:after {
+    height: 40px;
+    width: 50px;
+    content:" ";
+    display: block;
+    color: grey;
+    float: right;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iOTgwLjAwMDAwMHB0IiBoZWlnaHQ9Ijk4Mi4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDk4MC4wMDAwMDAgOTgyLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgo8bWV0YWRhdGE+CkNyZWF0ZWQgYnkgcG90cmFjZSAxLjE1LCB3cml0dGVuIGJ5IFBldGVyIFNlbGluZ2VyIDIwMDEtMjAxNwo8L21ldGFkYXRhPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCw5ODIuMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIgpmaWxsPSIjMDAwMDAwIiBzdHJva2U9Im5vbmUiPgo8cGF0aCBkPSJNMzE3MyA5Nzk0IGMtNjc4IC03MyAtMTMxMCAtMzMzIC0xODM2IC03NTQgLTEwNTAgLTgzOCAtMTUzNCAtMjE3OQotMTI2MSAtMzQ5NSAxMTMgLTU0MiAzNTQgLTEwNTIgNzA3IC0xNDkzIDEzMCAtMTYzIDQ4MSAtNTE0IDYxNSAtNjE2IDQzNgotMzMwIDk2NSAtNTQ2IDE1NDIgLTYzMCAzOTIgLTU3IDgxMiAtNTIgMTIyMCAxNCAzNjggNjAgNzk2IDIwMiAxMTEyIDM2OApsMTA4IDU3IDE1NDcgLTE1NDcgYzE2MTkgLTE2MTcgMTYwNCAtMTYwMiAxNzQ0IC0xNjU5IDc2IC0zMCAyMTYgLTM3IDI5NCAtMTQKMTQyIDQxIDI3NiAxMzUgNDc1IDMzNSAzMjEgMzIyIDQxNCA1MzcgMzMxIDc3MyAtNDggMTM5IC0xMSA5OSAtMTY0MiAxNzMyCi04NTIgODUzIC0xNTQ5IDE1NTMgLTE1NDkgMTU1NyAwIDQgMzEgNjMgNjkgMTMwIDIzOCA0MjYgMzg2IDkwOCA0MzEgMTQwNiAxOAoxOTMgOCA2MjcgLTE5IDgwMiAtMTA0IDY5MiAtMzY1IDEyNzUgLTgxMCAxODA1IC0xMTcgMTM5IC0zMjMgMzQwIC00NzIgNDU5Ci01NDYgNDQwIC0xMTcxIDY5NiAtMTg3NyA3NzEgLTE3MCAxOCAtNTYxIDE4IC03MjkgLTF6IG01NTIgLTEyMzQgYzU2NiAtNTMKMTA2MCAtMjg4IDE0NDcgLTY4OCAzMDggLTMxOSA1MDYgLTY5NiA1OTMgLTExMjcgMjAxIC05OTggLTI4OSAtMjAxMSAtMTE5MwotMjQ2OCAtMzQ3IC0xNzYgLTY1MSAtMjQ4IC0xMDQyIC0yNDcgLTM2MyAwIC02NzEgNzEgLTk5NSAyMzAgLTEyODUgNjI5Ci0xNjc1IDIyNjUgLTgxMyAzNDA3IDQ2NCA2MTQgMTI0NiA5NjMgMjAwMyA4OTN6Ii8+CjwvZz4KPC9zdmc+Cg==) center center no-repeat;
+    text-indent: -10000px;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    opacity: 0.65;
+    transition: opacity .4s ease;
+    background-size: 25px;
+}
+.search-page-container p {
+    margin-top: 10px;
+}
+.search-page-results {
+    margin: 5px 0;
+}
+.search-item-result {
+    border-top: 1px solid rgb(232, 232, 232);
+    padding: 15px 0;
+}
+.search-item-result h3,
+.search-item-result h4 {
+    font-weight: bold;
+    cursor: pointer;
+}
+.search-item-result h4:hover {
+    opacity: 0.8;
+}
+.search-span {
+    color: grey;
+}
