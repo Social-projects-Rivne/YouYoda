@@ -164,7 +164,7 @@ export default class CourseDetail extends React.Component{
                 <div className='cd-header'>
                 <div className="d-flex justify-content-between flex-wrap container">
                     <h1 className="course-det-header">
-                        {(this.state.isSubscribed !== 'completed') ? (
+                        {(this.state.isSubscribed !== 'completed' && this.props.course.status !== 'Closed') ? (
                             (this.state.isSubscribed) ? (
                                 <Button
                                 color="danger"
@@ -289,7 +289,7 @@ export default class CourseDetail extends React.Component{
                 <Col>
                 </Col>
                 <Col lg='8' md='12' className='d-flex'>
-                    {(this.state.isSubscribed !== 'completed') ? (
+                    {(this.state.isSubscribed !== 'completed' && this.props.course.status !== 'Closed') ? (
                         (this.state.isSubscribed) ? (
                             <Button
                             className='btn-sign'
