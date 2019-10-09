@@ -23,7 +23,7 @@ class ManageUserDataSerializer(serializers.Serializer):
     Takes or updates data from the YouYodaUser model for change user data.
     Converts it to JSON format for transmission via the API.
     """
-    hide_my_data = serializers.BooleanField()
+    role_id = serializers.IntegerField()
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     username = serializers.CharField()
@@ -33,7 +33,7 @@ class ManageUserDataSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         """Updating user data"""
 
-        instance.hide_my_data = validated_data.get('hide_my_data', instance.hide_my_data)
+        instance.role_id = validated_data.get('role_id', instance.role_id)
         instance.first_name = validated_data.get('first_name', instance.first_name)
         instance.last_name = validated_data.get('last_name', instance.last_name)
         instance.username = validated_data.get('username', instance.username)
