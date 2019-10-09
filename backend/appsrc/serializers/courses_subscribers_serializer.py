@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from ..models import CoursesSubscribers
+from ..models import CoursesSubscribers, YouYodaUser
+from .user_serializer import UserShowSerializer
 
 
 class CoursesSubscribersPostSerializator(serializers.Serializer):
@@ -29,3 +30,17 @@ class CoursesSubscribersGetSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = CoursesSubscribers
 		fields = ('course',)
+
+
+class CoursesSubscribersListSerializator(serializers.ModelSerializer):
+    """Takes data for trainer about users from CoursesSubscribers.
+
+    Converts it to JSON format for transmission via the API.
+    """
+
+    participant = UserShowSerializer(many=False, read_only=True)
+
+    class Meta:
+
+        model = CoursesSubscribers
+        fields = ('participant',)

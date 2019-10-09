@@ -3,11 +3,14 @@ from django.urls import include, path
 from .views.categories import CategoriesList
 from .views.change_avatar import FileUploadView
 from .views.change_password import ChangePassword
+from .views.change_avatar import FileUploadView
 from .views.check_user import CheckUser
 from .views.comment import CourseComments, EventComments, TrainerComment
-from .views.courses import CourseScheduleView, SearchingCourses, TopCourses
+from .views.courses import (CourseIfTrainerView, CourseScheduleView, SearchingCourses,
+                            TopCourses, TrainerCoursesView)
 from .views.edit_profile import EditProfile
 from .views.events import SearchingEvents, TopEvents
+from .views.manage_course import ManageCourse
 from .views.last_seen import LastSeen
 from .views.trainer import TopTrainers, TrainerPage
 from .views.orginize_event import OrganizeEvent
@@ -15,7 +18,7 @@ from .views.pdp import PDP
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
 from .views.user_subscribe_to_event import UserSubscribeToEvent
-from .views.user_subscribe_to_course import UserSubscribeToCourse
+from .views.user_subscribe_to_course import UserSubscribeToCourse, ListUserSubscribeToCourse
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import GetUsersStatuses, UsersGetList, UpdateUsersStatuses
 from .views.view_profile import ViewAchievementsProfile, ViewEventsProfile, ViewCoursesProfile, ViewProfile
@@ -27,11 +30,14 @@ urlpatterns = [
     path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('courses/search', SearchingCourses.as_view(), name='search-courses'),
     path('courses/top', TopCourses.as_view(), name='top-courses'),
+    path('course/trainer/check', CourseIfTrainerView.as_view(), name='if-trainer-course'),
+    path('course/list/users', ListUserSubscribeToCourse.as_view(), name='course-list-users'),
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/comments', EventComments.as_view(), name='comments-events'),
-    path('courses/schedule', CourseScheduleView.as_view(), name='courses-schedule'),
     path('events/top', TopEvents.as_view(), name='top-events'),
     path('last/seen', LastSeen.as_view(), name='last_seen'),
+    path('trainer/courses', TrainerCoursesView.as_view(), name='trainer-courses'),
+    path('trainer/create-course', ManageCourse.as_view(), name='create-course'),
     path('trainer/comments', TrainerComment.as_view(), name='trainer-comment'),
     path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
     path('trainer/top', TopTrainers.as_view(), name='top-trainers'),
