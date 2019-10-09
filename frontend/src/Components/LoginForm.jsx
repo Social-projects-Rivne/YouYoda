@@ -105,8 +105,15 @@ class LoginForm extends Component {
     	event.preventDefault();
       try {
           await userSocialLogin(this.state)
-              toast.success('Login successfull');
-              this.setState({ redirect: true });
+          toast.success('Login successfull');
+          let response = await isAuthorized('role');
+          let responseTrainer = await isAuthorized('is_trainer');
+          if(typeof response === 'object' && typeof responseTrainer === 'object')
+            if(response.data_status === 'role' && response.role > 0)
+              localStorage.setItem('role', response.role);
+            if(responseTrainer.data_status === 'is_trainer')
+              localStorage.setItem('is_trainer', responseTrainer.is_trainer)
+          this.setState({ redirect: true });
       } catch (error){
         toast.error('For some reason you can not login, please contact administrator or support system ;)');
       }

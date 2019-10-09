@@ -62,11 +62,6 @@ export default class CreateCourse extends React.Component{
         await this.setState({status: event.target.value});
     }
 
-    _onFocus = (e) => {
-    e.currentTarget.type = "date";
-    e.currentTarget.style.marginLeft = "70px"
-    }
-
     updateLocation = (location) => {
         this.setState({location: location.split(',')[0]});
     };
