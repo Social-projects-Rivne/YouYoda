@@ -3,8 +3,6 @@ import { Redirect } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import moment from 'moment';
 
-import { createBrowserHistory } from 'history';
-
 import '../style/searchPage.css';
 import { axiosGet } from '../api/axiosGet';
 
@@ -18,28 +16,17 @@ class SearchContent extends Component {
         results: [],
         redirectToCourse: false,
         redirectToEvent: false,
-        itemRedirect: [],
-        searchURLVal: ''//this.parsingSearchQuery(this.props.location.search)
+        redirectToTrainer: false,
+        itemRedirect: []
     }
 
-    gotoPageLink = async(typeItem, item) => {
-        //
-        console.log('line 22');
-        //const { redirectToCourse, redirectToEvent } = this.state;
+    gotoPageLink = (typeItem, item) => {
         if(typeItem === 'course')
-            await this.setState({ redirectToCourse: true, itemRedirect: item });
+            this.setState({ redirectToCourse: true, itemRedirect: item });
         else if(typeItem === 'event')
-            await this.setState({ redirectToEvent: true, itemRedirect: item });
-    }
-
-    parsingSearchQuery = (string) => {
-        var regExpVal = /[?&]?([^=]+)=([^&]*)/g;
-        var params = {}, queryArray;
-        while (queryArray = regExpVal.exec(string)) {
-            params[decodeURIComponent(queryArray[1])] = decodeURIComponent(queryArray[2]);
-        }
-        console.log(params['q']);
-        return params['q'];
+            this.setState({ redirectToEvent: true, itemRedirect: item });
+        else if(typeItem === 'trainer')
+            this.setState({ redirectToTrainer: true, itemRedirect: item });
     }
 
     getInfo = () => {
@@ -57,9 +44,9 @@ class SearchContent extends Component {
             query: this.search.value
         }, () => {
             if (this.state.query && this.state.query.length > 3) {
-                if (this.state.query.length % 2 === 0) {
+                //if (this.state.query.length % 2 === 0) {
                     this.getInfo()
-                }
+                //}
             } 
         })
     }
@@ -69,7 +56,7 @@ class SearchContent extends Component {
         if(result.model==='appsrc.youyodauser') {
             return (
                 <div className="search-item-result" key={index}>
-                    <h4>Trainer {dataFields.first_name} {dataFields.last_name}</h4>
+                    <h4><span onClick={() => this.gotoPageLink('trainer', dataFields)}>Trainer {dataFields.first_name} {dataFields.last_name}</span></h4>
                     <div><span className="search-span">Location:</span> {dataFields.location}</div>
                     <div><span className="search-span">About:</span> {dataFields.about_me}</div>
                 </div>
@@ -98,58 +85,34 @@ class SearchContent extends Component {
         }
     }
 
-    updateSearchURLVal = () => {
-        let searchVal = '';
-        if(this.props.location) {
-            searchVal = this.parsingSearchQuery(this.props.location.search);
-            console.log(searchVal);
-            this.setState({
-                searchURLVal: searchVal,
-            });
-        }
-    }
-
     componentDidMount() {
-        //this.updateSearchURLVal();
+        var searchQuery = '';
+        if(this.props.location.search)
+            var {searchQuery} = this.props.location.state;
+        if(searchQuery) {
+            var inp = document.getElementById('search-input-onpage');
+            var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+            nativeInputValueSetter.call(inp, searchQuery);
+            var ev2 = new Event('input', { bubbles: true});
+            inp.dispatchEvent(ev2);
+        }
     }
 
     render() {
-        //let history;
-        //history = createBrowserHistory();
-        //if(this.search)
-        //    history.push(`${API_URL}?q=${this.search.value}`);
-        if(this.search) {
-            console.log('line 123 ='+this.search.value);
-            if(!this.search.value && this.state.searchURLVal) {
-                //this.search.value = this.state.searchURLVal;
-                if(this.state.searchURLVal) {
-                    //this.handleInputChange();
-                    this.setState({
-                        searchURLVal: '',
-                    });
-                }
-                //let history;
-                //history = createBrowserHistory();
-                //history.push(`${API_URL}?q=${this.state.searchURLVal}`);
-            }
-            //if(this.state.searchURLVal)
-            //    this.handleInputChange();
-        }
-
-        console.log(this.props);
-        console.log(this.state);
-        //console.log(history);
-        const {redirectToCourse, redirectToEvent } = this.state;
+        const {redirectToCourse, redirectToEvent, redirectToTrainer } = this.state;
         if(redirectToCourse)
             return <Redirect to={{pathname: '/course/detail', state: {course: this.state.itemRedirect}}}/>;
         else if(redirectToEvent)
             return <Redirect to={{pathname: '/event/detail', state: {event: this.state.itemRedirect}}}/>;
+        else if(redirectToTrainer)
+            return <Redirect to={{pathname: '/trainer/page', state: {trainer_id: this.state.itemRedirect.id}}}/>;
 
         return (
             <Container className="search-page-container">
                 <h2>Search page</h2>
                 <form>
                     <span className="ico-search-wrap"><input
+                    id="search-input-onpage"
                     type="text"
                     placeholder="Search for..."
                     ref={input => this.search = input}

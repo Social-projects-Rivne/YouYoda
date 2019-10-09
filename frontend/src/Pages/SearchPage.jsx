@@ -8,8 +8,8 @@ import SearchContent from '../Components/SearchContent';
 const SearchPage = (props) => (
     <>
         <PageHeader />
-        <SearchContent {...props}>Hello! from search page</SearchContent>
-        <Footer />
+        <SearchContent {...props} />
+        <Footer {...props} />
     </>
 );
 
