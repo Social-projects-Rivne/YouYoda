@@ -16,7 +16,7 @@ export default class ProfileInfo extends React.Component {
               <Row>
                   <Col md="3" className="profile-photo-container">
                     <div>
-                        <img src={defaultPhoto(DEFAULT_AVATAR_URL, profile.userInfo.avatar_url)}
+                        <img src={defaultPhoto(DEFAULT_AVATAR_URL, localStorage.getItem('avatar_url'))}
                           className="profile-photo" alt="profile-photoimg"/>
                         <div className="edit-label">
                             <a href="/editprofile">Edit profile</a>

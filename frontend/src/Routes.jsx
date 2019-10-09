@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import AdminDashboard from './Components/AdminDashboard';
 import AdminPage from "./Pages/AdminPage";
 import AdminPageInner from './Components/AdminPageInner';
+import CreateCourse from './Components/CreateCourse'
 import ConfirmActivationEmail from './Components/ConfirmActivationEmail';
 import ConfirmSendingEmail from './Components/ConfirmSendingEmail';
 import CourseDetail from './Components/CourseDetail';
@@ -67,9 +68,12 @@ export default class Routes extends React.Component{
                 <Route exact path='/event/detail'
                     render={(props)=><MainLayout><EventDetail event = {props.location.state.event}/></MainLayout>}
                 />
-               <Route exact path='/admin'
+                <Route exact path='/admin'
                     render={()=><AdminPage><AdminDashboard/></AdminPage>}
                 />
+              <Route exact path='/create-course'
+                     render={()=><MainLayout><CreateCourse/></MainLayout>}
+                 />
                 <Route exact path={'/admin/:option'}
                     render={()=><AdminPage><AdminPageInner/></AdminPage>}/>
                 <Route exact path='/moderator'

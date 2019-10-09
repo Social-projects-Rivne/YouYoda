@@ -14,12 +14,14 @@ import classnames from 'classnames';
 import ClipLoader from 'react-spinners/ClipLoader';
 import { css } from '@emotion/core';
 
-import { ProfileContext } from './profile-context';
-import PDP from './PDP'
+import Achievement from './Achievement'
+import Cours from './cours'
+import Event from './event'
 import NoCoursesOrEvents from './NoCoursesOrEvents';
-import Cours from './cours';
-import Event from './event';
-import Achievement from './Achievement';
+import PDP from './PDP'
+import TrainerCourses from './TrainerCourses'
+import { ProfileContext } from './profile-context';
+
 
 const override = css`
     display: block;
@@ -27,6 +29,16 @@ const override = css`
     border-color: #FFD466;
 `;
 
+const isTrainer = (data) => {
+    let show = "";
+    if (data){
+            show = "user-courses";
+           }
+    else {
+          show = "auth-display-none";
+        }
+    return show;
+}
 
 export default class ProfileInfo extends React.Component {
     constructor(props) {
@@ -105,6 +117,16 @@ export default class ProfileInfo extends React.Component {
                     <Col>
                       <div className="event-and-courses align">
                           <div
+                                className={`tab-item ${isTrainer(profile.userInfo.is_trainer)}`}
+                                tab-link
+                                onClick={() => { this.toggleTab('8') }}
+                                style={{cursor:'pointer', marginBottom:'15px'}}
+                            >
+                                <span >
+                                    Own Courses
+                                </span>
+                          </div>
+                          <div
                                 className="user-courses tab-item"
                                 tab-link
                                 onClick={() => { this.toggleTab('7') }}
@@ -135,7 +157,7 @@ export default class ProfileInfo extends React.Component {
                           </NavItem>
                       </div>
                       <div className="event-and-courses">
-                        <div className="user-courses" style={{marginTop:"10px"}}>Events</div>
+                        <div className="user-courses">Events</div>
                           <NavItem className="tab-item">
                             <NavLink
                               className={classnames({ active: this.state.activeTab === '4' })} tab-link
@@ -218,57 +240,62 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        <Cours coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4}/>
+                        <Cours coursesList={profile.userFollowingCourses} loading={profile.loading} lg={4} display={false}/>
                         {profile.userFollowingCourses.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not yet followed to courses'}/>
+                          <NoCoursesOrEvents message={'You have not yet followed to courses'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
-                        <Cours coursesList={profile.userCompletedCourses} loading={profile.loading} lg={4}/>
-                        {profile.userFollowingCourses.length || profile.loading ? (
+                        <Cours coursesList={profile.userCompletedCourses} loading={profile.loading} lg={4} display={false}/>
+                        {profile.userCompletedCourses.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not completed any courses yet'}/>
+                          <NoCoursesOrEvents message={'You have not completed any courses yet'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        <Event eventList={profile.userFollowingEvents} loading={profile.loading} lg={4}/>
-                        {profile.userCompletedEvents.length || profile.loading ? (
+                        <Event eventList={profile.userFollowingEvents} loading={profile.loading} lg={4} display={false}/>
+                        {profile.userFollowingEvents.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not yet followed to events'}/>
+                          <NoCoursesOrEvents message={'You have not yet followed to events'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="5">
                       <Row>
-                        <Event eventList={profile.userCompletedEvents} loading={profile.loading} lg={4}/>
+                        <Event eventList={profile.userCompletedEvents} loading={profile.loading} lg={4} display={false}/>
                         {profile.userCompletedEvents.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not completed any events yet'}/>
+                          <NoCoursesOrEvents message={'You have not completed any events yet'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="6">
                       <Row>
-                        <Event eventList={profile.userCreatedEvents} loading={profile.loading} lg={4}/>
+                        <Event eventList={profile.userCreatedEvents} loading={profile.loading} lg={4} display={false}/>
                         {profile.userCreatedEvents.length || profile.loading ? (
                           null
                         ) : (
-                          <NoCoursesOrEvents message={'You have not created any events yet'}/>
+                          <NoCoursesOrEvents message={'You have not created any events yet'} style={{margin:"auto", marginTop:"100px"}}/>
                         )}
                       </Row>
                     </TabPane>
                     <TabPane tabId="7">
                       <Row>
                         <PDP/>
+                      </Row>
+                    </TabPane>
+                     <TabPane tabId="8">
+                      <Row>
+                        <TrainerCourses/>
                       </Row>
                     </TabPane>
                   </TabContent>
@@ -284,7 +311,7 @@ export default class ProfileInfo extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3}/>
+                  <Cours coursesList={profile.userFavouritesCourses.slice(0, 4)} loading={profile.loading} lg={3} display={false}/>
                   {profile.userFavouritesCourses.length || profile.loading ? (
                     null
                   ) : (

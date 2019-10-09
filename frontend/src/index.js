@@ -12,6 +12,7 @@ import 'react-day-picker/lib/style.css';
 import './api/notification';
 import './style/animation.scss';
 import './style/course-event-detail.scss';
+import './style/createCourse.css';
 import './style/createEvent.css';
 import './style/events.css';
 import './style/forms.css';
