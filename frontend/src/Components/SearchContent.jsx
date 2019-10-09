@@ -44,9 +44,7 @@ class SearchContent extends Component {
             query: this.search.value
         }, () => {
             if (this.state.query && this.state.query.length > 3) {
-                //if (this.state.query.length % 2 === 0) {
-                    this.getInfo()
-                //}
+                this.getInfo()
             } 
         })
     }
@@ -90,11 +88,11 @@ class SearchContent extends Component {
         if(this.props.location.search)
             var {searchQuery} = this.props.location.state;
         if(searchQuery) {
-            var inp = document.getElementById('search-input-onpage');
+            var inputSearch = document.getElementById('search-input-onpage');
             var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-            nativeInputValueSetter.call(inp, searchQuery);
-            var ev2 = new Event('input', { bubbles: true});
-            inp.dispatchEvent(ev2);
+            nativeInputValueSetter.call(inputSearch, searchQuery);
+            var eventNew = new Event('input', { bubbles: true});
+            inputSearch.dispatchEvent(eventNew);
         }
     }
 

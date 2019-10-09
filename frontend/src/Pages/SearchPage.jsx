@@ -9,7 +9,7 @@ const SearchPage = (props) => (
     <>
         <PageHeader />
         <SearchContent {...props} />
-        <Footer {...props} />
+        <Footer />
     </>
 );
 
