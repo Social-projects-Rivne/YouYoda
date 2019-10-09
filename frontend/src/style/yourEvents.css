@@ -1,0 +1,40 @@
+.side-bar1 {
+    position: relative;
+    /*width: 136px;*/
+    height: 130px;
+     left: 136px;
+     top: 190px;
+}
+
+.field-box-event-name {
+    width: 100%;
+    max-height: 40px;
+
+}
+
+.field-box-event-description {
+    width: 100%;
+    max-height: 100px;
+}
+
+.column-dropdown-button {
+    /*margin-top: 20px;*/
+}
+
+.location-formgroup-event input{
+    min-width: 100%;
+    min-height: 40px;
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+    padding-left: 10px;
+    height: 37px;
+}
+
+.button-create-event {
+    background-color: #ffc107;
+    min-width: 262px;
+    border-color: orange;
+    border-radius: 25px;
+    margin-top: 20px;
+    margin-left: auto;
+}

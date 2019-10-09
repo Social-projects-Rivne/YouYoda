@@ -9,8 +9,8 @@ export default class Avatar extends React.Component {
     render() {
         let alt_avatar = defaultPhoto(DEFAULT_AVATAR_PATH, this.props.avatar_url)
         return (
-            <div>
-                <img className="avatar"
+            <div className="avatar">
+                <img
                      src={alt_avatar}
                      alt="profile userphoto"
                 />

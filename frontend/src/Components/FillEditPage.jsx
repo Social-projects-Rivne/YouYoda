@@ -1,16 +1,17 @@
 import React from 'react';
-import Button from "reactstrap/es/Button";
-import { Container, Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
-import { toast } from 'react-toastify';
 
-import { API } from '../api/axiosConf';
-import LocationSearchInput from '../api/cityselector';
+import Button from "reactstrap/es/Button";
+import {Col, Container, Form, FormGroup, Input, Label, Row,} from "reactstrap";
+import {toast} from 'react-toastify';
+
+import {API} from '../api/axiosConf';
+import Avatar from './Avatar';
 import ChangePassword from "./ChangePassword";
 import ImageUpload from './ImageUploadComponent';
-import Avatar from './Avatar';
+import LocationSearchInput from '../api/cityselector';
 
 
-class FillEditPage extends React.Component {
+export default class FillEditPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -26,6 +27,7 @@ class FillEditPage extends React.Component {
             birth_date: '',
             phone_number: '',
             avatar_url: '',
+            description:'',
         };
     }
 
@@ -39,7 +41,10 @@ class FillEditPage extends React.Component {
         try {
             const response = await API.get('user/profile/edit');
             localStorage.setItem('avatar_url', response.data.avatar_url);
-            this.props.avatarIcoFunc(response.data.avatar_url); // send avatar ico to header of page
+            let dataAvatarUrl = '';
+            if (response.data.avatar_url)
+                dataAvatarUrl = response.data.avatar_url;
+            this.props.avatarIcoFunc(dataAvatarUrl);
             return response.data;
         } catch (error) {
             toast.error('You cannot view your profile. Contact administrator or support system.');
@@ -49,28 +54,32 @@ class FillEditPage extends React.Component {
     postUser = async (formData) => {
         try {
             await API.patch('user/profile/edit', formData);
-            this.props.avatarIcoFunc(formData.avatar_url); // send avatar ico to header of page
-            setTimeout(window.location.reload(), 2000);
+            this.props.avatarIcoFunc(formData.avatar_url);
+            toast.success("Profile changed");
         } catch (error) {
             toast.error('You cannot update your profile. Contact administrator or support system.');
         }
     };
 
-    saveForm = async () => {
-        let payLoad = {};
-        payLoad.username = this.state.username;
-        payLoad.first_name = this.state.first_name;
-        payLoad.last_name = this.state.last_name;
-        payLoad.location = this.state.location;
-        payLoad.about_me = this.state.about_me;
-        payLoad.i_like = this.state.i_like;
-        payLoad.email = this.state.email;
-        payLoad.birth_date = this.state.birth_date;
-        payLoad.phone_number = this.state.phone_number;
-        payLoad.avatar_url = this.state.avatar_url;
-        payLoad.password = this.state.password;
-        await this.postUser(payLoad);
-        toast.success('Changes saved');
+    saveForm = async (e) => {
+        e.preventDefault();
+        try {
+            let payLoad = {};
+            payLoad.username = this.state.username;
+            payLoad.first_name = this.state.first_name;
+            payLoad.last_name = this.state.last_name;
+            payLoad.location = this.state.location;
+            payLoad.about_me = this.state.about_me;
+            payLoad.i_like = this.state.i_like;
+            payLoad.email = this.state.email;
+            payLoad.birth_date = this.state.birth_date;
+            payLoad.phone_number = this.state.phone_number;
+            payLoad.avatar_url = this.state.avatar_url;
+            payLoad.password = this.state.password;
+            await this.postUser(payLoad)
+        } catch (error) {
+            toast.error('Can\'t save changes')
+        }
     };
 
     updateField = (event) => {
@@ -82,7 +91,6 @@ class FillEditPage extends React.Component {
 
     updateLocation = (location) => {
         this.setState({location: location.split(',')[0]});
-        console.log(location);
     };
 
     updateAvatarUrl = (url) => {
@@ -91,9 +99,9 @@ class FillEditPage extends React.Component {
 
     async componentDidMount() {
         let userData = await this.getUser();
-        let mount_dict = {}
+        let mount_dict = {};
         Object.keys(this.state).map(function (key) {
-            mount_dict[key] = userData[key]
+            mount_dict[key] = userData[key];
         });
         this.setState(mount_dict);
     }
@@ -105,9 +113,9 @@ class FillEditPage extends React.Component {
         };
         try {
             const response = await API.post(URLPATH, USERDATA);
-            if(parseInt(response.status) === 208)
+            if (parseInt(response.status) === 208)
                 toast.info(response.data);
-            else if(parseInt(response.status) === 201)
+            else if (parseInt(response.status) === 201)
                 toast.success('Request was successfully sent. Please, wait for moderation results.');
             else
                 toast.error(response.data);
@@ -116,13 +124,17 @@ class FillEditPage extends React.Component {
         }
     };
 
-    showUpload = (event) =>{
+    showUpload = (event) => {
         event.preventDefault();
         this.setState({showUploadForm: !this.state.showUploadForm})
     };
 
 
     render() {
+        let isDisabled = true;
+        if (this.state.first_name && this.state.username && this.state.last_name){
+            isDisabled = false;
+        }
         return (
             <div className="">
                 <Container>
@@ -130,7 +142,8 @@ class FillEditPage extends React.Component {
                         <Row>
                             <Col md="6" sm="12" className="fill-edit-collumn">
                                 <h2 className="top-text">Personal details</h2>
-                                <button type='file' className='avatar-wrapper' onClick={(event) => this.showUpload(event)}>
+                                <button type='file' className='avatar-wrapper'
+                                        onClick={(event) => this.showUpload(event)}>
                                     <div className="edit-avatar">
                                         <Avatar avatar_url={this.state.avatar_url}/>
                                     </div>
@@ -138,44 +151,48 @@ class FillEditPage extends React.Component {
                                 <div>
                                     {this.state.showUploadForm && <ImageUpload updateUrl={this.updateAvatarUrl}/>}
                                 </div>
-                                <Label for="username">Login*</Label>
+                                <Label for="username">User Name*</Label>
+                                {!this.state.username && <span className="text-validate-date">
+                                       can't be empty
+                                </span>}
                                 <Input
                                     type="login"
                                     name="username"
-                                    id="username"
                                     className="field-box"
                                     required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.username}
                                 />
-                                <Label for="firstname">Name*</Label>
+                                <Label className="name">Name*</Label>
+                                {!this.state.first_name && <span className="text-validate-date">
+                                       can't be empty
+                                </span>}
                                 <Input
                                     name="first_name"
-                                    id="firstname"
                                     className="field-box"
                                     required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.first_name}
                                 />
-                                <Label for="lastname">Surname*</Label>
+                                <Label className="surname">Surname*</Label>
+                                {!this.state.last_name && <span className="text-validate-date">
+                                       can't be empty
+                                </span>}
                                 <Input
                                     name="last_name"
-                                    id="lastname"
                                     className="field-box"
                                     required
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.last_name}
                                 />
-                                <Label for="email">Your email*</Label>
+                                <Label>Your email</Label>
                                 <Input
                                     type="email"
                                     name="email"
-                                    id="email"
-                                    required
                                     placeholder="example@email.com"
-                                    className="field-box"
+                                    className="row-email"
                                     value={this.state.email}
-                                    onChange={(e) => this.updateField(e)}
+                                    disabled
                                 />
                                 <Row>
                                     <Col md={12}>
@@ -190,14 +207,11 @@ class FillEditPage extends React.Component {
                                     </Col>
                                 </Row>
                                 <h2 className="top-text-contact">Contacts</h2>
-                                <Label for="phonenumber">Mobile phone</Label>
+                                <Label for="number">Mobile phone</Label>
                                 <Input
-                                    onSubmit={() => {
-                                        console.log("test")
-                                    }}
-                                    type="number"
+                                    type="tel"
                                     name="phone_number"
-                                    id="phonenumber"
+                                    maxLength="13"
                                     required
                                     className="field-box"
                                     placeholder="(0__)-___-__-__"
@@ -216,35 +230,32 @@ class FillEditPage extends React.Component {
 
                             <Col md="6" sm="12" className="top-text-2 fill-edit-collumn">
                                 <h2>About me</h2>
-                                <Label for="ilike" className="marg-top">I like</Label>
+                                <Label className="marg-top">I like</Label>
                                 <Input
                                     type="textarea"
                                     name="i_like"
-                                    id="ilike"
                                     className="loginInputTextArea"
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.i_like}
                                 />
-                                <Label for="aboutme" className="marg-top">Something about me</Label>
+                                <Label className="marg-top">Something about me</Label>
                                 <Input
                                     type="textarea"
                                     name="about_me"
-                                    id="aboutme"
                                     className="loginInputTextArea-2"
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.about_me}
                                 />
-                                <Label for="birthdate" className="marg-top">Date of birth</Label>
+                                <Label className="marg-top">Date of birth</Label>
                                 <Input
                                     type="date"
                                     name="birth_date"
-                                    id="birthdate"
                                     className="field-box"
                                     placeholder="date placeholder"
                                     onChange={(e) => this.updateField(e)}
                                     value={this.state.birth_date}
                                 />
-                                <h2 className="security-button">CAUTION ! DANGER ! You can change your password</h2>
+                                <h2 className="security-button">CAUTION! You can change your password</h2>
                                 <div className="row justify-content-start">
                                     <ChangePassword password="this.state.password"/>
                                 </div>
@@ -261,7 +272,8 @@ class FillEditPage extends React.Component {
                                             size="lg"
                                             className="button-saveall"
                                             block
-                                            onClick={() => this.saveForm()}>
+                                            disabled={isDisabled}
+                                            onClick={(e) => this.saveForm(e)}>
                                         Save all
                                     </Button>
                                 </div>
@@ -273,5 +285,3 @@ class FillEditPage extends React.Component {
         )
     }
 }
-
-export default FillEditPage;

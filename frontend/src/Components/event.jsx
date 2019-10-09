@@ -33,10 +33,24 @@ export default class Event extends React.Component{
       this.setState({loading: false})
   }
 
-  handleClick = async (event) => {
+  handleClick = async (e, event) => {
+        e.preventDefault();
         await this.setState({ event });
         await this.setState({ redirect: true });
         window.location.reload();
+    }
+
+    notResults = (display = true) => {
+        if (this.props.eventList.length === 0 && display) {
+            return (
+                <Col className="d-flex align-items-center justify-content-center" style={{margin:'35px 15px', color:'#FFD466'}}>
+                    <h2>Do, or do not. There is no events :(</h2>
+                </Col>
+            )
+        }
+        else {
+            return this.props.eventList.map( event => this.renderEvents(event) )
+        }
     }
 
   renderEvents(event) {
@@ -46,7 +60,7 @@ export default class Event extends React.Component{
       let coverImg = defaultPhoto(defImg, event.cover_url);
       return (
           <Col sm="12" md="6" lg="4" xl={this.props.lg}>
-              <Link className="card-link" onClick={() => this.handleClick(event)} >
+              <Link className="card-link" onClick={(e) => this.handleClick(e, event)} >
                   <Card className="event-card">
                       <CardHeader className="event-header">{newEventDate}</CardHeader>
                       <CardBody className="event-body">
@@ -55,8 +69,7 @@ export default class Event extends React.Component{
                           </CardTitle>
                           <CardText>
                               <p><span className="main-text-span">Category: </span>{event.categories}</p>
-                              <p>Rate: {event.rate}</p>
-                              <p><span className="main-text-span">Event organizer: </span>{event.owner}</p>
+                              <p><span className="main-text-span">Event organizer: </span>{`${event.owner.first_name} ${event.owner.last_name}`}</p>
                               <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
                           </CardText>
                       </CardBody>
@@ -72,7 +85,10 @@ export default class Event extends React.Component{
     render(){
         const { redirect } = this.state
         if (redirect) {
-           return <Redirect to={{pathname: '/event/detail', state: {event: this.state.event}}}/>;
+           return <Redirect to={{
+               pathname: '/event/detail',
+               state: {event: this.state.event}
+           }}/>;
         }
         return (
             <Container>
@@ -86,7 +102,7 @@ export default class Event extends React.Component{
                 />
                 </div>
                 <Row>
-                    {this.props.eventList.map( event => this.renderEvents(event) )}
+                    {this.notResults(this.props.display)}
                 </Row>
             </Container>
         )

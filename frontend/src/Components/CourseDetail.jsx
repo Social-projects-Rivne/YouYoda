@@ -10,7 +10,12 @@ import DayPicker from 'react-day-picker';
 import { API } from '../api/axiosConf';
 import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
+import TrainerListUsers from './TrainerListUsers';
 
+const URLPATH_CHECK = 'course/trainer/check';
+
+
+const URLPATH_ADD = 'user/course/add';
 
 export default class CourseDetail extends React.Component{
     constructor(props){
@@ -19,18 +24,18 @@ export default class CourseDetail extends React.Component{
           comments: [],
           schedule: [],
           firstDate: 1569936600,
-          loading: true
+          loading: true,
+          trainer: false
       };
     }
     getSchedule = async() => {
         try {
-            let response = await API.get('/courses/schedule',
-                {
+            let response = await API.get('/courses/schedule', {
                     params: {
                         course_id: this.props.course.id,
+                    }
                 }
-            }
-        )
+            )
             this.setState({
                 schedule: response.data,
                 firstDate: response.data[0].date
@@ -45,9 +50,9 @@ export default class CourseDetail extends React.Component{
                 {
                     params: {
                         course_id: this.props.course.id,
+                    }
                 }
-            }
-        )
+            )
             this.setState({
                 comments: response.data,
                 loading: false
@@ -59,6 +64,7 @@ export default class CourseDetail extends React.Component{
 
     componentWillMount = () => {
         this.getSchedule();
+        this.checkIfTrainer();
         this.getComments();
       }
 
@@ -67,11 +73,10 @@ export default class CourseDetail extends React.Component{
     }
 
     addToCourse = async() => {
-        const URLPATH = 'user/course/add';
-        const USERDATA = { "course_id": this.props.course.id};
+        let userdata = { "course_id": this.props.course.id};
         try {
-            const response = await API.post(URLPATH, USERDATA);
-            if(response.status === 208) 
+            const response = await API.post(URLPATH_ADD, userdata);
+            if(response.status === 208)
                 toast.info(response.data);
             if(response.status === 201)
                 toast.success('You subscribe to ' + this.props.course.coursename);
@@ -87,6 +92,21 @@ export default class CourseDetail extends React.Component{
             this.addToCourse()
         }
     }
+
+    checkIfTrainer = async() => {
+        try {
+            await API.get(URLPATH_CHECK,
+                {
+                    params: {
+                        course_id: this.props.course.id,
+                }
+            }
+        )
+            this.setState({trainer: true});
+        } catch (error) {
+        }
+    }
+
     render(){
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
@@ -107,8 +127,14 @@ export default class CourseDetail extends React.Component{
         } else {
             statuscolor = "#ffce54"
         }
-        return(
 
+        let show = "auth-display-none";
+        let hide = ""
+        if (this.state.trainer) {
+            show = "";
+            hide = "auth-display-none"
+        }
+        return(
             <div className="home-event ">
                 <div className='cd-header'>
                 <div className="d-flex justify-content-between flex-wrap container">
@@ -153,8 +179,14 @@ export default class CourseDetail extends React.Component{
                         <div className="cd cd-trainer">
                             <i className="fas fa-user-tie"/>
                             <span className="main-text">
-                            <Link to="" style={{color:"#fff"}}>
-                            {this.props.course.owner}</Link></span>
+                                <Link to={{
+                                        pathname: '/trainer/page',
+                                        state: {'trainer_id':this.props.course.owner.id}
+                                    }} style={{color:"#fff"}}
+                                >
+                                    {`${this.props.course.owner.first_name} ${this.props.course.owner.last_name}`}
+                                </Link>
+                            </span>
                         </div>
                         <div className="cd cd-cost">
                             <i class="fas fa-dollar-sign"></i>
@@ -209,12 +241,19 @@ export default class CourseDetail extends React.Component{
                     />
               </Col>
             </Row>
+            <Row>
+                <Col className= {show}>
+                    <TrainerListUsers
+                    course = {this.props.course.id}
+                    />
+                </Col>
+            </Row>
             <Row className="btn-group-course-detail d-flex justify-content-between">
                 <Col>
                 </Col>
                 <Col lg='8' md='12' className='d-flex'>
                     <Button
-                    className='btn-sign'
+                    className={`btn-sign ${hide}`}
                     color="warning"
                     style={{margin:'0 33px 10px 33px'}}
                     onClick={this.subscribeCourse}

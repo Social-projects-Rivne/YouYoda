@@ -11,8 +11,12 @@ async function registration(props) {
         "is_trainer": props.userteacher
     }
     try {
-        await API.post('user/register', datasend)
-        toast.success('Registration successfull');
+        const response = await API.post('user/register', datasend)
+        if(response.status === 208)
+            toast.info(response.data);
+        else
+            toast.success('Registration successfull');
+        return response.status;
     }
     catch (error) {
         throw TypeError('Error' + error.message);
