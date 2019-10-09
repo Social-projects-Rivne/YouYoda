@@ -12,7 +12,7 @@ import ImageUpload from "./ImageUploadComponent";
 import LocationSearchInput from '../api/cityselector'
 import {Link} from "react-router-dom";
 
-class YourEvents extends React.Component {
+export default class YourEvents extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -296,5 +296,3 @@ class YourEvents extends React.Component {
         )
     }
 }
-
-export default YourEvents;

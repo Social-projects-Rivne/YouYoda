@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {Card, CardText, CardTitle, Container, Col, CardHeader, CardFooter, CardBody, Row} from 'reactstrap';
-import {css} from '@emotion/core';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import {Redirect, Link} from 'react-router-dom'
@@ -10,12 +9,6 @@ import {API} from "../api/axiosConf";
 import {defaultPhoto} from '../utils';
 import {toast} from "react-toastify";
 
-
-const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: #FFD466;
-`;
 
 export default class OwnEvent extends React.Component {
     constructor(props) {

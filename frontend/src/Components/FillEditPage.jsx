@@ -11,7 +11,7 @@ import ImageUpload from './ImageUploadComponent';
 import LocationSearchInput from '../api/cityselector';
 
 
-class FillEditPage extends React.Component {
+export default class FillEditPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -285,5 +285,3 @@ class FillEditPage extends React.Component {
         )
     }
 }
-
-export default FillEditPage;

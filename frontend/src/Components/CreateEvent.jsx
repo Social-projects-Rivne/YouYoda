@@ -9,7 +9,7 @@ import OwnEvent from "./OwnEvent";
 import {API} from '../api/axiosConf';
 
 
-class CreateEvent extends React.Component {
+export default class CreateEvent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -73,5 +73,3 @@ class CreateEvent extends React.Component {
         )
     }
 }
-
-export default CreateEvent;
