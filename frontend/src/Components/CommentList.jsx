@@ -41,7 +41,6 @@ export class CommentList extends React.Component {
               Nobody leaved comments still
             </div>
           ) : null}
-
               <div className='sweet-loading'>
                   <ClipLoader
                     css={override}

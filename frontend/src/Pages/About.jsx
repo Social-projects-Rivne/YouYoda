@@ -137,21 +137,18 @@ export default class About extends React.Component {
                                         Hi, my name is Helen. I love programming, music and cakes.
                                         I code using Python, PHP, JavaScript, HTML, CSS.
                                         I'm searching harmony in the life, doing yoga and I need to study every day as web-developer. 
-                                        My experience contains about 8 years of creating web-sites and internet stores using different CMS APIs, PHP and JS.<br />
+                                        My experience contains about 8 years of creating web-sites and internet stores using different CMS APIs, PHP and JS.
                                         I understand how important is to motivate yourself and improve own skills. So our project can help people like me. 
                                         Join us, use YouYoda!<br />
                                     </p>
                                     <ul>
-                                        <h5>Worked on:</h5>
-                                        <li>All methods and inteface for managing user subscribed courses and events</li>
-                                        <li>Searching page and method for site searching, history routes</li>
-                                        <li>All methods for user requests to become trainer</li>
-                                        <li>UI and Backend methods for viewing users table</li>
-                                        <li>UI for users registration with validation</li>
-                                        <li>Moderator interface for managing requests</li>
-                                        <li>Admin and Moderator Dashboards</li>
-                                        <li>Develop logo idea</li>
-                                        <li>404 error page</li>
+                                    <h5>Worked on:</h5>
+                                       <li>Methods for managing user subscribed courses and events</li>
+                                       <li>User requests to become trainer, moderation requests</li>
+                                       <li>Searching page and method for site searching</li>
+                                       <li>Admin and Moderator Dashboards, users table</li>
+                                       <li>UI for users registration with validation</li>
+                                       <li>404 error page</li>
                                     </ul>
                                 </div>
                             </div>
@@ -163,15 +160,14 @@ export default class About extends React.Component {
                             <div className="circle">
                                 <div className="circle-text">
                                 <p>
-                                    My name is Maryna. I am a beginner developer. I love programming, reading and pilates.<br/>
+                                    My name is Maryna. I am a beginner developer. I love programming, reading and pilates.
                                     This project has helped me to improve my skills, learn new technologies, become part of a team, 
                                     meet interesting people and change my life for the better and I want everyone to be able to do it with YouYoda.
                                     Join us, use YouYoda!<br/>
                                 </p>
                                 <ul>
                                         <h5>Worked on:</h5>
-                                        <li> Searching, filtering, sorting courses page</li>
-                                        <li> Searching, filtering, sorting events page</li>
+                                        <li> Searching, filtering, sorting courses/events page</li>
                                         <li> The methods for edit, view user profile</li>
                                         <li> The methods for view, edit PDP </li>
                                         <li> Course details page (partially)</li>

@@ -252,7 +252,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="2">
                       <Row>
-                        <Cours manage="True" manageButtons={BTN_ALL} changeProfile={updateProfile} coursesList={userFollowingCourses} loading={loading} lg={4} display={false}/>
+                        <Cours manage="True" manageButtons={BTN_ALL} changeProfile={updateProfile} coursesList={userFollowingCourses} loading={loading} display={false}/>
                         {(userFollowingCourses.length || loading) ? (
                           null
                         ) : (
@@ -262,7 +262,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="3">
                       <Row>
-                        <Cours manage="True" manageButtons={BTN_FAV} changeProfile={updateProfile} coursesList={userCompletedCourses} loading={loading} lg={4} display={false}/>
+                        <Cours manage="True" manageButtons={BTN_FAV} changeProfile={updateProfile} coursesList={userCompletedCourses} loading={loading} display={false}/>
                         {(userFollowingCourses.length || loading) ? (
                           null
                         ) : (
@@ -272,7 +272,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="4">
                       <Row>
-                        <Event manage="True" manageButtons={BTN_ALL} changeProfile={updateProfile} eventList={userFollowingEvents} loading={loading} lg={4} display={false}/>
+                        <Event manage="True" manageButtons={BTN_ALL} changeProfile={updateProfile} eventList={userFollowingEvents} loading={loading} display={false}/>
                         {(userCompletedEvents.length || loading) ? (
                           null
                         ) : (
@@ -282,7 +282,7 @@ export default class ProfileInfo extends React.Component {
                     </TabPane>
                     <TabPane tabId="5">
                       <Row>
-                        <Event eventList={userCompletedEvents} loading={loading} lg={4} display={false}/>
+                        <Event eventList={userCompletedEvents} loading={loading} display={false}/>
                         {(userCompletedEvents.length || loading) ? (
                           null
                         ) : (
@@ -303,7 +303,7 @@ export default class ProfileInfo extends React.Component {
                             </Button>
                           </a>
                         </Col>
-                        <Event eventList={userCreatedEvents} loading={loading} lg={4} display={false}/>
+                        <Event eventList={userCreatedEvents} loading={loading} display={false}/>
                         {userCreatedEvents.length || loading ? (
                           null
                         ) : (

@@ -420,6 +420,10 @@
 .header-user-menu a {
     cursor: pointer;
 }
+.header-user-menu button {
+    padding: 5px;
+}
+
 .auth-display-none {
     display: none;
 }

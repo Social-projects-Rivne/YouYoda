@@ -108,7 +108,7 @@ class UsersStatuses extends React.Component {
                                     sizeUnit={"px"}
                                     size={150}
                                     color={'#123abc'}
-                                    loading={this.props.loading}
+                                    loading={this.state.loading}
                                 />
                                 </div>
                             </tbody>

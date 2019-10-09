@@ -61,7 +61,7 @@ export default class Event extends React.Component{
       let coverImg = defaultPhoto(defImg, event.cover_url);
       let classManage = (this.props.manage)? 'class-manage-course' : '';
       return (
-          <Col sm="12" md="6" lg="4" xl={this.props.lg} className="wrap-manage-course">
+          <Col sm="12" md="6" lg="4" className="wrap-manage-course">
               <div className={`event-card-wrap ${classManage}`}>
               <Link className="card-link" onClick={(e) => this.handleClick(e, event)} >
                   <Card className="event-card">

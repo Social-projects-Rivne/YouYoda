@@ -44,7 +44,19 @@
     
     text-align: center;
     font-variant: normal;
+    -webkit-animation: animateCrawl 30s linear;
+    -moz-animation: animateCrawl 30s linear;
     animation: animateCrawl 30s linear;
+
+
+}
+@-webkit-keyframes animateCrawl {
+    0% { transform: rotateX(30deg) translateY(400px); }
+    100% { transform: rotateX(30deg) translateY(-300px); }
+}
+@-moz-keyframes animateCrawl {
+    0% { transform: rotateX(30deg) translateY(400px); }
+    100% { transform: rotateX(30deg) translateY(-300px); }
 }
 @keyframes animateCrawl {
     0% { transform: rotateX(30deg) translateY(400px); }
@@ -105,7 +117,7 @@ br {
                 margin-bottom: 0px;
             }
             h5 {
-                font-size: calc(0.6em + 1vmin);
+                font-size: calc(0.6em + 0.7vmin);
                 line-height: 0.3;
             }
             ul {

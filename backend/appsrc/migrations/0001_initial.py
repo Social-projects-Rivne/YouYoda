@@ -87,7 +87,7 @@ def insertData(apps, schema_editor):
     Courses.objects.create(id=2, coursename="Course of fun", owner_id=5, status="In Progress", description= description2,
         is_public=True, start_date=1569936600, duration=datetime.timedelta(hours=1), rate=7,
         members_limit=40, categories_id=3, location="Kiev, Ukraine", cover_url="/media/beautiful-crowd-cute-2869374.jpg", cost=0.5)
-    Courses.objects.create(id=3, coursename="Course3", owner_id=4, status="Closed", description= description3,
+    Courses.objects.create(id=3, coursename="Course of geometry", owner_id=4, status="Closed", description= description3,
         is_public=True, start_date=1569936600, duration=datetime.timedelta(hours=4), rate=9,
         members_limit=10, categories_id=4, location="Lviv, Ukraine", cover_url="/media/geometry-1023846_1920.jpg", cost=10)
     Courses.objects.create(id=4, coursename="Baseball", owner_id=4, status="Scheduled", description= description4,
@@ -105,6 +105,34 @@ def insertData(apps, schema_editor):
     Courses.objects.create(id=8, coursename="Sweets as life", owner_id=4, status="Open", description= description8,
         is_public=False, start_date=1569936600, duration=datetime.timedelta(hours=2), rate=9,
         members_limit=12, categories_id=3, location="Rivne, Ukraine", cover_url="/media/bake-baked-bakery-2872882.jpg", cost=100)
+    Courses.objects.create(id=9, coursename="Growing bonsai", owner_id=5, status="Open", description= description1,
+        is_public=True, start_date=1569936600, duration=datetime.timedelta(hours=2), rate=8,
+        members_limit=20, categories_id=2, location="Rivne, Ukraine", cover_url="/media/environmental-protection-683437_1280.jpg", cost=0)
+    Courses.objects.create(id=10, coursename="Running technique of run", owner_id=5, status="In Progress", description= description2,
+        is_public=True, start_date=1569936600, duration=datetime.timedelta(hours=1), rate=7,
+        members_limit=40, categories_id=3, location="Kiev, Ukraine", cover_url="/media/athletic-field-1867053_1920.jpg", cost=0.5)
+    Courses.objects.create(id=11, coursename="Trekking in forest", owner_id=4, status="Closed", description= description3,
+        is_public=True, start_date=1569936600, duration=datetime.timedelta(hours=4), rate=9,
+        members_limit=10, categories_id=4, location="Lviv, Ukraine", cover_url="/media/hiker-918704_1920.jpg", cost=10)
+    Courses.objects.create(id=12, coursename="Trekking at winter", owner_id=4, status="Scheduled", description= description4,
+        is_public=False, start_date=1569936600, duration=datetime.timedelta(hours=2), rate=5,
+        members_limit=60, categories_id=2, location="Harkiv, Ukraine", cover_url="/media/trekking-299000_1920.jpg", cost=20)
+    Courses.objects.create(id=13, coursename="Trekking in desert", owner_id=6, status="Scheduled", description= description5,
+        is_public=False, start_date=1569936600, duration=datetime.timedelta(hours=3), rate=6,
+        members_limit=50, categories_id=3, location="Lviv, Ukraine", cover_url="/media/sand-dunes-691431_1920.jpg", cost=30)
+    Courses.objects.create(id=14, coursename="How to fishing ", owner_id=7, status="Open", description= description6,
+        is_public=False, start_date=1569936600, duration=datetime.timedelta(hours=2), rate=7,
+        members_limit=12, categories_id=1, location="Rivne, Ukraine", cover_url="/media/fishing-1572408_1920.jpg", cost=20)
+    Courses.objects.create(id=15, coursename="Lowpolly Art", owner_id=4, status="Open", description= description7,
+        is_public=False, start_date=1569936600, duration=datetime.timedelta(hours=2), rate=7,
+        members_limit=12, categories_id=3, location="Rivne, Ukraine", cover_url="/media/deer-3275594_1920.jpg", cost=6)
+    Courses.objects.create(id=16, coursename="Painting", owner_id=4, status="Open", description= description8,
+        is_public=False, start_date=1569936600, duration=datetime.timedelta(hours=2), rate=9,
+        members_limit=12, categories_id=3, location="Rivne, Ukraine", cover_url="/media/watercolor-1020509_1920.jpg", cost=100)
+    Courses.objects.create(id=17, coursename="Modern Art", owner_id=4, status="Open", description= description8,
+        is_public=False, start_date=1569936600, duration=datetime.timedelta(hours=2), rate=9,
+        members_limit=12, categories_id=3, location="Rivne, Ukraine", cover_url="/media/abstract-2468874_1920.jpg", cost=100)
+
 
     Events = apps.get_model('appsrc', 'Events')
     Events.objects.create(id=1, name="Game of baseball", owner_id=3, description= description9,
@@ -117,6 +145,31 @@ def insertData(apps, schema_editor):
         date=1571059800, categories_id=4, location="Rivne, Ukraine", cover_url="/media/crossfit-534615_1920.jpg")
     Events.objects.create(id=5, name="Fly on balloons", owner_id=3, description= description13,
         date=1571146200, categories_id=2, location="Rivne, Ukraine", cover_url="/media/hot-air-balloons-4381674_1920.jpg")
+    Events.objects.create(id=6, name="Hiking", owner_id=3, description= description9,
+        date=1570800600, categories_id=1, location="Kiev, Ukraine", cover_url="/media/mountains-4521455_1920.jpg")
+    Events.objects.create(id=7, name="Go to forrest", owner_id=4, description= description10,
+        date=1570887000, categories_id=2, location="Rivne, Ukraine", cover_url="/media/girl-918706_1920.jpg")
+    Events.objects.create(id=8, name="Dj Meet-Up", owner_id=5, description= description11,
+        date=1570973400, categories_id=3, location="Lviv, Ukraine", cover_url="/media/turntable-1109588_1920.jpg")
+    Events.objects.create(id=9, name="Ukraine - Spain", owner_id=6, description= description12,
+        date=1571059800, categories_id=4, location="Rivne, Ukraine", cover_url="/media/stadium-931975_1920.jpg")
+    Events.objects.create(id=10, name="Who play with me?", owner_id=3, description= description13,
+        date=1571146200, categories_id=2, location="Rivne, Ukraine", cover_url="/media/quarterback-67701_1920.jpg")
+    Events.objects.create(id=11, name="Game of basketball", owner_id=3, description= description9,
+        date=1570800600, categories_id=1, location="Kiev, Ukraine", cover_url="/media/basketball-2258650_1920.jpg")
+    Events.objects.create(id=12, name="Cycling", owner_id=4, description= description10,
+        date=1570887000, categories_id=2, location="Rivne, Ukraine", cover_url="/media/cycling-828646_1920.jpg")
+    Events.objects.create(id=13, name="Bike club", owner_id=5, description= description11,
+        date=1570973400, categories_id=3, location="Lviv, Ukraine", cover_url="/media/bmw-1313343_1920.jpg")
+    Events.objects.create(id=14, name="Web UI Meet-up", owner_id=6, description= description12,
+        date=1571059800, categories_id=4, location="Rivne, Ukraine", cover_url="/media/highres_485147130.jpeg")
+    Events.objects.create(id=15, name="Go, I created ", owner_id=3, description= description13,
+        date=1571146200, categories_id=2, location="Rivne, Ukraine", cover_url="/media/pubg-3588510_1920.jpg")
+    Events.objects.create(id=16, name="Game zone", owner_id=6, description= description12,
+        date=1571059800, categories_id=4, location="Rivne, Ukraine", cover_url="/media/signal-3655575_1280.png")
+    Events.objects.create(id=17, name="NFS", owner_id=3, description= description13,
+        date=1571146200, categories_id=2, location="Rivne, Ukraine", cover_url="/media/computer-1845880_1920.jpg")
+
 
     CourseSchedule = apps.get_model('appsrc', 'CourseSchedule')
     CourseSchedule.objects.create(id=1, course_id=1, date=1570800600)
@@ -215,6 +268,114 @@ def insertData(apps, schema_editor):
     CourseSchedule.objects.create(id=94, course_id=8, date=1570368600)
     CourseSchedule.objects.create(id=95, course_id=8, date=1570455000)
     CourseSchedule.objects.create(id=96, course_id=8, date=1572445800)
+    CourseSchedule.objects.create(id=97, course_id=9, date=1570800600)
+    CourseSchedule.objects.create(id=98, course_id=9, date=1570887000)
+    CourseSchedule.objects.create(id=99, course_id=9, date=1570973400)
+    CourseSchedule.objects.create(id=100, course_id=9, date=1571059800)
+    CourseSchedule.objects.create(id=101, course_id=9, date=1571146200)
+    CourseSchedule.objects.create(id=102, course_id=9, date=1571491800)
+    CourseSchedule.objects.create(id=103, course_id=9, date=1569936600)
+    CourseSchedule.objects.create(id=104, course_id=9, date=1570109400)
+    CourseSchedule.objects.create(id=105, course_id=9, date=1570282200)
+    CourseSchedule.objects.create(id=106, course_id=9, date=1570368600)
+    CourseSchedule.objects.create(id=107, course_id=9, date=1570455000)
+    CourseSchedule.objects.create(id=108, course_id=9, date=1572445800)
+    CourseSchedule.objects.create(id=109, course_id=10, date=1570800600)
+    CourseSchedule.objects.create(id=110, course_id=10, date=1570887000)
+    CourseSchedule.objects.create(id=111, course_id=10, date=1570973400)
+    CourseSchedule.objects.create(id=112, course_id=10, date=1571059800)
+    CourseSchedule.objects.create(id=113, course_id=10, date=1571146200)
+    CourseSchedule.objects.create(id=114, course_id=10, date=1571491800)
+    CourseSchedule.objects.create(id=115, course_id=10, date=1569936600)
+    CourseSchedule.objects.create(id=116, course_id=10, date=1570109400)
+    CourseSchedule.objects.create(id=117, course_id=10, date=1570282200)
+    CourseSchedule.objects.create(id=118, course_id=10, date=1570368600)
+    CourseSchedule.objects.create(id=119, course_id=10, date=1570455000)
+    CourseSchedule.objects.create(id=120, course_id=10, date=1572445800)
+    CourseSchedule.objects.create(id=121, course_id=11, date=1570800600)
+    CourseSchedule.objects.create(id=122, course_id=11, date=1570887000)
+    CourseSchedule.objects.create(id=123, course_id=11, date=1570973400)
+    CourseSchedule.objects.create(id=124, course_id=11, date=1571059800)
+    CourseSchedule.objects.create(id=125, course_id=11, date=1571146200)
+    CourseSchedule.objects.create(id=126, course_id=11, date=1571491800)
+    CourseSchedule.objects.create(id=127, course_id=11, date=1569936600)
+    CourseSchedule.objects.create(id=128, course_id=11, date=1570109400)
+    CourseSchedule.objects.create(id=129, course_id=11, date=1570282200)
+    CourseSchedule.objects.create(id=130, course_id=11, date=1570368600)
+    CourseSchedule.objects.create(id=131, course_id=11, date=1570455000)
+    CourseSchedule.objects.create(id=132, course_id=11, date=1572445800)
+    CourseSchedule.objects.create(id=133, course_id=12, date=1570800600)
+    CourseSchedule.objects.create(id=134, course_id=12, date=1570887000)
+    CourseSchedule.objects.create(id=135, course_id=12, date=1570973400)
+    CourseSchedule.objects.create(id=136, course_id=12, date=1571059800)
+    CourseSchedule.objects.create(id=137, course_id=12, date=1571146200)
+    CourseSchedule.objects.create(id=138, course_id=12, date=1571491800)
+    CourseSchedule.objects.create(id=139, course_id=12, date=1569936600)
+    CourseSchedule.objects.create(id=140, course_id=12, date=1570109400)
+    CourseSchedule.objects.create(id=141, course_id=12, date=1570282200)
+    CourseSchedule.objects.create(id=142, course_id=12, date=1570368600)
+    CourseSchedule.objects.create(id=143, course_id=12, date=1570455000)
+    CourseSchedule.objects.create(id=144, course_id=12, date=1572445800)
+    CourseSchedule.objects.create(id=145, course_id=13, date=1570800600)
+    CourseSchedule.objects.create(id=146, course_id=13, date=1570887000)
+    CourseSchedule.objects.create(id=147, course_id=13, date=1570973400)
+    CourseSchedule.objects.create(id=148, course_id=13, date=1571059800)
+    CourseSchedule.objects.create(id=149, course_id=13, date=1571146200)
+    CourseSchedule.objects.create(id=150, course_id=13, date=1571491800)
+    CourseSchedule.objects.create(id=151, course_id=13, date=1569936600)
+    CourseSchedule.objects.create(id=152, course_id=13, date=1570109400)
+    CourseSchedule.objects.create(id=153, course_id=13, date=1570282200)
+    CourseSchedule.objects.create(id=154, course_id=13, date=1570368600)
+    CourseSchedule.objects.create(id=155, course_id=13, date=1570455000)
+    CourseSchedule.objects.create(id=156, course_id=13, date=1572445800)
+    CourseSchedule.objects.create(id=157, course_id=14, date=1570800600)
+    CourseSchedule.objects.create(id=158, course_id=14, date=1570887000)
+    CourseSchedule.objects.create(id=159, course_id=14, date=1570973400)
+    CourseSchedule.objects.create(id=160, course_id=14, date=1571059800)
+    CourseSchedule.objects.create(id=161, course_id=14, date=1571146200)
+    CourseSchedule.objects.create(id=162, course_id=14, date=1571491800)
+    CourseSchedule.objects.create(id=163, course_id=14, date=1569936600)
+    CourseSchedule.objects.create(id=164, course_id=14, date=1570109400)
+    CourseSchedule.objects.create(id=165, course_id=14, date=1570282200)
+    CourseSchedule.objects.create(id=166, course_id=14, date=1570368600)
+    CourseSchedule.objects.create(id=167, course_id=14, date=1570455000)
+    CourseSchedule.objects.create(id=168, course_id=14, date=1572445800)
+    CourseSchedule.objects.create(id=169, course_id=15, date=1570800600)
+    CourseSchedule.objects.create(id=170, course_id=15, date=1570887000)
+    CourseSchedule.objects.create(id=171, course_id=15, date=1570973400)
+    CourseSchedule.objects.create(id=172, course_id=15, date=1571059800)
+    CourseSchedule.objects.create(id=173, course_id=15, date=1571146200)
+    CourseSchedule.objects.create(id=174, course_id=15, date=1571491800)
+    CourseSchedule.objects.create(id=175, course_id=15, date=1569936600)
+    CourseSchedule.objects.create(id=176, course_id=15, date=1570109400)
+    CourseSchedule.objects.create(id=177, course_id=15, date=1570282200)
+    CourseSchedule.objects.create(id=178, course_id=15, date=1570368600)
+    CourseSchedule.objects.create(id=179, course_id=15, date=1570455000)
+    CourseSchedule.objects.create(id=180, course_id=15, date=1572445800)
+    CourseSchedule.objects.create(id=181, course_id=16, date=1570800600)
+    CourseSchedule.objects.create(id=182, course_id=16, date=1570887000)
+    CourseSchedule.objects.create(id=183, course_id=16, date=1570973400)
+    CourseSchedule.objects.create(id=184, course_id=16, date=1571059800)
+    CourseSchedule.objects.create(id=185, course_id=16, date=1571146200)
+    CourseSchedule.objects.create(id=186, course_id=16, date=1571491800)
+    CourseSchedule.objects.create(id=187, course_id=16, date=1569936600)
+    CourseSchedule.objects.create(id=188, course_id=16, date=1570109400)
+    CourseSchedule.objects.create(id=189, course_id=16, date=1570282200)
+    CourseSchedule.objects.create(id=190, course_id=16, date=1570368600)
+    CourseSchedule.objects.create(id=191, course_id=16, date=1570455000)
+    CourseSchedule.objects.create(id=192, course_id=16, date=1572445800)
+    CourseSchedule.objects.create(id=193, course_id=17, date=1570800600)
+    CourseSchedule.objects.create(id=194, course_id=17, date=1570887000)
+    CourseSchedule.objects.create(id=195, course_id=17, date=1570973400)
+    CourseSchedule.objects.create(id=196, course_id=17, date=1571059800)
+    CourseSchedule.objects.create(id=197, course_id=17, date=1571146200)
+    CourseSchedule.objects.create(id=198, course_id=17, date=1571491800)
+    CourseSchedule.objects.create(id=199, course_id=17, date=1569936600)
+    CourseSchedule.objects.create(id=200, course_id=17, date=1570109400)
+    CourseSchedule.objects.create(id=201, course_id=17, date=1570282200)
+    CourseSchedule.objects.create(id=202, course_id=17, date=1570368600)
+    CourseSchedule.objects.create(id=203, course_id=17, date=1570455000)
+    CourseSchedule.objects.create(id=204, course_id=17, date=1572445800)
 
     CoursesSubscribers = apps.get_model('appsrc', 'CoursesSubscribers')
     CoursesSubscribers.objects.create(id=1, completed=False, rate=5, is_favourite=True,

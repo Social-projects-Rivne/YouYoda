@@ -63,7 +63,7 @@ export default class Cours extends React.Component{
         let classManage = (this.props.manage)? 'class-manage-course' : '';
 
         return (
-            <Col sm="12" md="6" lg="4" xl={this.props.lg} className="wrap-manage-course">
+            <Col sm="12" md="6" lg="4" className="wrap-manage-course">
                 <div className={`event-card-wrap ${classManage}`}>
                 <Link className="card-link" onClick={(event) => this.handleClick(event, course)}>
                     <Card className="event-card">

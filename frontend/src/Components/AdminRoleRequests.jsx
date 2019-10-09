@@ -163,6 +163,7 @@ class AdminRequests extends React.Component {
         requestList.then( valueRequests => {
             this.setState({
                 dataList: valueRequests,
+                loading: false
             });  
         });
     }
@@ -259,7 +260,7 @@ class AdminRequests extends React.Component {
                                     sizeUnit={"px"}
                                     size={150}
                                     color={'#123abc'}
-                                    loading={this.props.loading}
+                                    loading={this.state.loading}
                                 />
                             </tbody>
                         </table>
