@@ -303,8 +303,8 @@ export default class ProfileInfo extends React.Component {
                             </Button>
                           </a>
                       </Col>
-                        <Event eventList={profile.userCreatedEvents} loading={profile.loading} lg={4} display={false}/>
-                        {profile.userCreatedEvents.length || profile.loading ? (
+                        <Event eventList={userCreatedEvents} loading={loading} lg={4} display={false}/>
+                        {userCreatedEvents.length || loading ? (
                           null
                         ) : (
                           <NoCoursesOrEvents message={'You have not created any events yet'} style={{margin:"auto", marginTop:"100px"}}/>
