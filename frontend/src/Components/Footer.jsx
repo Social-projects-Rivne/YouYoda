@@ -3,11 +3,30 @@ import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
+
+import { API } from '../api/axiosConf';
 
 import SearchForm from '../Components/SearchForm';
 
 
 export default class Footer extends React.Component{
+  sendStatusOnline = async() => { 
+      let timestamp =  moment().unix();
+      await API.patch('last/seen', {last_seen:timestamp})
+      console.log("Sending online status")
+  }
+    setIntervalSending = () => {
+        if(localStorage.getItem('token')){
+            this.sendStatusOnline()
+            setInterval(()=>{
+                this.sendStatusOnline()
+            }, 1000*60)
+        }
+    }
+    componentDidMount () {
+        this.setIntervalSending()
+    }
   render(){
     return (
       <>

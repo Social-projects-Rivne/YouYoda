@@ -3,6 +3,12 @@ import {API} from "../api/axiosConf";
 import {toast} from "react-toastify";
 
 export default class ImageUpload extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            file: ''
+        }
+    }
 
     uploadAvatar = async (url) => {
         await this.props.updateUrl(url);
@@ -18,7 +24,7 @@ export default class ImageUpload extends React.Component {
             this.uploadAvatar(response.data.avatar_url);
             toast.success('Success uploading. Now you can save changes by pressing button "Save all".');
         } catch (error) {
-            toast.error('error \n choose avatar');
+            toast.error('Error. \n You can`t choose this file.');
         }
     };
 
@@ -32,15 +38,23 @@ export default class ImageUpload extends React.Component {
                 imagePreviewUrl: reader.result,
             });
         };
-        reader.readAsDataURL(file);
+        let url = reader.readAsDataURL(file);
     };
 
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit} method="post" encType="multipart/form-data">
-                    <input type="file" name="image-document" className="button-avatar-input" onChange={this.handleImageChange}/>
-                    <button type="button" onClick={this.handleSubmit} className="button-avatar">Upload Image</button>
+                    <input type="file"
+                           accept="image/*"
+                           name="image-document"
+                           className="button-avatar-input"
+                           onChange={this.handleImageChange}/>
+                    <button type="button"
+                            onClick={this.handleSubmit}
+                            className="button-avatar">
+                        Upload Image
+                    </button>
                 </form>
             </div>
         )

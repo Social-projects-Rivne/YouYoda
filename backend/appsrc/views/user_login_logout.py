@@ -15,10 +15,8 @@ class UserLogin(APIView):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.validated_data
-            # fix for error - Duplicate entry ... for key 'user_id'
-            #login(request, user)
             token = Token.objects.get_or_create(user=user)
-            return Response({'token': token[0].key}, status=status.HTTP_202_ACCEPTED)
+            return Response({'token': token[0].key, 'avatar_url': user.avatar_url}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -31,7 +29,7 @@ class UserSocialLogin(APIView):
             user = serializer.validated_data
             login(request, user)
             token = Token.objects.create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_202_ACCEPTED)
+            return Response({'token': token.key, 'avatar_url': user.avatar_url}, status=status.HTTP_202_ACCEPTED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

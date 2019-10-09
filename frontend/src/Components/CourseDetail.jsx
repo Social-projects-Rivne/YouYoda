@@ -10,27 +10,33 @@ import DayPicker from 'react-day-picker';
 import { API } from '../api/axiosConf';
 import { CommentList, CommentForm } from './CommentList';
 import { defaultPhoto, isAuthenticated } from '../utils';
+import { getUserSubscribeData } from '../api/getUserSubscribeData';
+import TrainerListUsers from './TrainerListUsers';
 
+
+const URLPATH_CHECK = 'course/trainer/check';
+const URLPATH_ADD = 'user/course/add';
 
 export default class CourseDetail extends React.Component{
     constructor(props){
       super(props);
       this.state = {
           comments: [],
+          isSubscribed: false,
           schedule: [],
           firstDate: 1569936600,
-          loading: true
+          loading: true,
+          trainer: false
       };
     }
     getSchedule = async() => {
         try {
-            let response = await API.get('/courses/schedule',
-                {
+            let response = await API.get('/courses/schedule', {
                     params: {
                         course_id: this.props.course.id,
+                    }
                 }
-            }
-        )
+            )
             this.setState({
                 schedule: response.data,
                 firstDate: response.data[0].date
@@ -45,9 +51,9 @@ export default class CourseDetail extends React.Component{
                 {
                     params: {
                         course_id: this.props.course.id,
+                    }
                 }
-            }
-        )
+            )
             this.setState({
                 comments: response.data,
                 loading: false
@@ -59,22 +65,32 @@ export default class CourseDetail extends React.Component{
 
     componentWillMount = () => {
         this.getSchedule();
+        this.checkIfTrainer();
         this.getComments();
-      }
+        const course_id = this.props.course.id;
+        getUserSubscribeData('course', course_id).then(isUserSubscribed => {
+            this.setState({
+                isSubscribed: isUserSubscribed
+            });
+        });
+    }
 
     addComment = async() => {
         await this.getComments()
     }
 
     addToCourse = async() => {
-        const URLPATH = 'user/course/add';
-        const USERDATA = { "course_id": this.props.course.id};
+        let userdata = { "course_id": this.props.course.id};
         try {
-            const response = await API.post(URLPATH, USERDATA);
-            if(response.status === 208) 
+            const response = await API.post(URLPATH_ADD, userdata);
+            if(response.status === 208)
                 toast.info(response.data);
-            if(response.status === 201)
-                toast.success('You subscribe to ' + this.props.course.coursename);
+            if(response.status === 201) {
+                toast.success(`You subscribed to "${this.props.course.coursename}"`);
+                this.setState({
+                    isSubscribed: true
+                });
+            }
         } catch (error) {
             toast.error(error.message)
         }
@@ -87,6 +103,35 @@ export default class CourseDetail extends React.Component{
             this.addToCourse()
         }
     }
+
+    unsubscribeCourse = async() => {
+        const URL_UNSUBSCRIBE_COURSE = 'user/course/delete';
+        const USERDATA = {"params": {"course": this.props.course.id}};
+        try {
+            await API.delete(URL_UNSUBSCRIBE_COURSE, USERDATA);
+            toast.success(`You unsubscribed from "${this.props.course.coursename}"`);
+            this.setState({
+                isSubscribed: false
+            });
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
+    checkIfTrainer = async() => {
+        try {
+            await API.get(URLPATH_CHECK,
+                {
+                    params: {
+                        course_id: this.props.course.id,
+                }
+            }
+        )
+            this.setState({trainer: true});
+        } catch (error) {
+        }
+    }
+
     render(){
         let defImg = "/media/car-racing-4394450_1920.jpg";
         let coverImg = defaultPhoto(defImg, this.props.course.cover_url);
@@ -107,18 +152,36 @@ export default class CourseDetail extends React.Component{
         } else {
             statuscolor = "#ffce54"
         }
-        return(
 
+        let show = "auth-display-none";
+        let hide = ""
+        if (this.state.trainer) {
+            show = "";
+            hide = "auth-display-none"
+        }
+        return(
             <div className="home-event ">
                 <div className='cd-header'>
                 <div className="d-flex justify-content-between flex-wrap container">
                     <h1 className="course-det-header">
-                        <Button
-                            className='btn'
-                            color="warning"
-                            style={{margin:'0 15px 10px 0'}}
-                            onClick={this.subscribeCourse}
-                        >Join</Button>
+                        {(this.state.isSubscribed !== 'completed') ? (
+                            (this.state.isSubscribed) ? (
+                                <Button
+                                color="danger"
+                                style={{margin:'0 15px 10px 0'}}
+                                onClick={this.unsubscribeCourse}>Unsubscribe</Button>
+                            ) : (
+                                <Button
+                                className='btn'
+                                color="warning"
+                                style={{margin:'0 15px 10px 0'}}
+                                onClick={this.subscribeCourse}>Subscribe</Button>
+                            )
+                        ) : (
+                            <span style={{color:'#54DB63'}} title="You have already finished this course">
+                                <i className="fas fa-flag-checkered"></i>&nbsp;
+                            </span>
+                        )}
                         {this.props.course.coursename}
                         <span className="course-detail-status" style={{color:statuscolor}}>
                             {this.props.course.status}
@@ -153,21 +216,27 @@ export default class CourseDetail extends React.Component{
                         <div className="cd cd-trainer">
                             <i className="fas fa-user-tie"/>
                             <span className="main-text">
-                            <Link to="" style={{color:"#fff"}}>
-                            {this.props.course.owner}</Link></span>
+                                <Link to={{
+                                        pathname: '/trainer/page',
+                                        state: {'trainer_id':this.props.course.owner.id}
+                                    }} style={{color:"#fff"}}
+                                >
+                                    {`${this.props.course.owner.first_name} ${this.props.course.owner.last_name}`}
+                                </Link>
+                            </span>
                         </div>
                         <div className="cd cd-cost">
-                            <i class="fas fa-dollar-sign"></i>
+                            <i className="fas fa-dollar-sign"></i>
                             <span className="main-text">
                                 {this.props.course.cost}</span>
                         </div>
                         <div className="cd cd-loc">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i className="fas fa-map-marker-alt"></i>
                             <span className="main-text cd-loc">
                                 {this.props.course.location}</span>
                         </div>
                         <div className="cd cd-date">
-                            <i class="far fa-calendar-alt"></i>
+                            <i className="far fa-calendar-alt"></i>
                             <span className="main-text cd-date">
                                 {newCourseDate}</span>
                         </div>
@@ -209,20 +278,35 @@ export default class CourseDetail extends React.Component{
                     />
               </Col>
             </Row>
+            <Row>
+                <Col className= {show}>
+                    <TrainerListUsers
+                    course = {this.props.course.id}
+                    />
+                </Col>
+            </Row>
             <Row className="btn-group-course-detail d-flex justify-content-between">
                 <Col>
                 </Col>
                 <Col lg='8' md='12' className='d-flex'>
-                    <Button
-                    className='btn-sign'
-                    color="warning"
-                    style={{margin:'0 33px 10px 33px'}}
-                    onClick={this.subscribeCourse}
-                    >Subscribe</Button>
+                    {(this.state.isSubscribed !== 'completed') ? (
+                        (this.state.isSubscribed) ? (
+                            <Button
+                            className='btn-sign'
+                            color="danger"
+                            style={{margin:'0 33px 10px 33px'}}
+                            onClick={this.unsubscribeCourse}>Unsubscribe</Button>
+                        ) : (
+                            <Button
+                            className='btn-sign'
+                            color="warning"
+                            style={{margin:'0 33px 10px 33px'}}
+                            onClick={this.subscribeCourse}>Subscribe</Button>
+                        )
+                    ) : ''}
                     <Link to="/"><Button color="secondary" className="btn-sign" style={{margin:'0 33px 10px 33px'}}>Back</Button></Link>
                 </Col>
             </Row>
-
             </Container>
             </div>
 
