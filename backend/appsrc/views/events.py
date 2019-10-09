@@ -14,7 +14,7 @@ from ..serializers.events_serializer import EventsSerializator
 NUMBER_OF_TOP = 4
 CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 SEARCH_FIELDS = ['name__icontains', 'location__icontains', 'categories__in']
-EVENTS_ON_PAGE = 4
+EVENTS_ON_PAGE = 6
 
 class TopEvents(APIView):
     """Takes data from EventsSerializator for view latest events"""

@@ -59,7 +59,7 @@ export default class Event extends React.Component{
       let defImg = "/media/beautiful-crowd-cute-2869374.jpg";
       let coverImg = defaultPhoto(defImg, event.cover_url);
       return (
-          <Col sm="12" md="6" lg="4" xl={this.props.lg}>
+          <Col sm="12" md="6" lg="4">
               <Link className="card-link" onClick={(e) => this.handleClick(e, event)} >
                   <Card className="event-card">
                       <CardHeader className="event-header">{newEventDate}</CardHeader>
