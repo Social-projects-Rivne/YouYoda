@@ -128,7 +128,7 @@ export default class ProfileInfo extends React.Component {
                     <Col>
                       <div className="event-and-courses align">
                           <div
-                                className={`tab-item ${isTrainer(profile.userInfo.is_trainer)}`}
+                                className={`tab-item ${isTrainer(userInfo.is_trainer)}`}
                                 tab-link
                                 onClick={() => { this.toggleTab('8') }}
                                 style={{cursor:'pointer', marginBottom:'15px'}}
