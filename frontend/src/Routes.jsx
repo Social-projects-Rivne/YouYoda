@@ -25,9 +25,13 @@ import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
+import SearchPage from './Pages/SearchPage';
 import TrainerPage from './Components/TrainerPage';
 import YourEvents from "./Components/YourEvents";
 
+import { createBrowserHistory } from "history";
+
+const customHistory = createBrowserHistory()
 
 export default class Routes extends React.Component {
     render() {
@@ -82,8 +86,8 @@ export default class Routes extends React.Component {
                         <Route exact path={'/moderator/:option'}
                             render={() => <ModeratorPage><ModeratorPageInner /></ModeratorPage>} />
                         <Route exact path='/about'
-                            render={() => <MainLayout><About /></MainLayout>}
-                        />
+                            render={() => <MainLayout><About /></MainLayout>} />
+                            <Route exact path='/search' component={SearchPage}/>
                         <Route exact path='/eventedit'
                             render={(props) => <MainLayout><YourEvents event={props.location.state.event} /></MainLayout>} />
                         <Route exact path="/trainer/page"

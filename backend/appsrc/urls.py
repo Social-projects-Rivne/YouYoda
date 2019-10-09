@@ -9,6 +9,7 @@ from .views.comment import CourseComments, EventComments, TrainerComment
 from .views.courses import (CourseIfTrainerView, CourseScheduleView, SearchingCourses,
                             TopCourses, TrainerCoursesView)
 from .views.edit_profile import EditProfile
+from .views.search import SiteSearch
 from .views.events import SearchingEvents, TopEvents
 from .views.manage_course import ManageCourse
 from .views.last_seen import LastSeen
@@ -35,6 +36,7 @@ urlpatterns = [
     path('events/search', SearchingEvents.as_view(), name='search-events'),
     path('events/comments', EventComments.as_view(), name='comments-events'),
     path('events/top', TopEvents.as_view(), name='top-events'),
+    path('search', SiteSearch.as_view(), name='search'),
     path('last/seen', LastSeen.as_view(), name='last_seen'),
     path('trainer/courses', TrainerCoursesView.as_view(), name='trainer-courses'),
     path('trainer/create-course', ManageCourse.as_view(), name='create-course'),
