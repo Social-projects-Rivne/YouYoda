@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    ports:
+       - '3306:3306'
+    environment:
+       MYSQL_ROOT_PASSWORD: 'root_password'
+       MYSQL_DATABASE: 'YouYoda'
+       MYSQL_USER: 'root'
+       MYSQL_PASSWORD: 'root_password'
+
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+
+  front:
+    build: ./frontend
+    volumes:
+      - ./frontend:/home/node/frontend
+    ports:
+      - '3001:3000'
+    command: npm start
+
+  back:
+    build: ./backend
+    ports:
+       - '8000:8000'
+    volumes:
+       - ./backend:/backend
+    depends_on:
+       - mariadb
+    command: gunicorn -b 0.0.0.0:8000 myproject.wsgi:application

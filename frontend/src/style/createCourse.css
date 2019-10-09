@@ -1,0 +1,133 @@
+/* Styles for MyCourses */
+.edit-course-image {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.edit-course-image::after {
+    content: "\f030";
+    text-align: center;
+    font-size: 15rem;
+    padding-top: 180px;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: FontAwesome;
+    position: absolute;
+}
+.edit-course-image:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+.input-course-image {
+    margin: auto;
+    margin-top: 300px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 15rem;
+    height: 15rem;
+    cursor: pointer;
+}
+.field-course-name, .field-course-name:focus {
+    background: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: 36px;
+    width: auto;
+}
+.field-course-name::placeholder {
+    color: white;
+}
+.field-course-name:focus {
+    border-radius: 40px;
+    border-color: transparent;
+    box-shadow: inset 0 0 2px white;
+}
+.course-about-area {
+    min-height: 120px;
+    border-radius: 25px;
+}
+.field-courselimit {
+    margin-top: 8px;
+}
+.field-courseduration {
+    margin-top: -10px;
+}
+.location-field {
+    border-radius: 40px;
+}
+.select-categody {
+    background-image:
+      linear-gradient(45deg, transparent 50%, gray 50%),
+      linear-gradient(135deg, gray 50%, transparent 50%),
+      linear-gradient(to right, #ffd466, #ffd466);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      100% 0;
+    background-size:
+      5px 5px,
+      5px 5px,
+      2.5em 2.5em;
+    background-repeat: no-repeat;
+    background-color: white;
+    border-radius: 40px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.select-categody:focus {
+    background-image:
+      linear-gradient(45deg, white 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, white 50%),
+      linear-gradient(to right, gray, gray);
+    background-position:
+      calc(100% - 15px) 1em,
+      calc(100% - 20px) 1em,
+      100% 0;
+    background-size:
+      5px 5px,
+      5px 5px,
+      2.5em 2.5em;
+    background-repeat: no-repeat;
+    border-color: grey;
+    outline: 0;
+}
+.create-course-calendar {
+    padding-left: 90px;
+}
+.save-btn {
+    margin-top: 50px;
+}
+.daypicker {
+    display: flex;
+    justify-content: center;
+}
+.daypicker-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.required-fields {
+    color: #ffd466;
+}
+.valid-schedule {
+    color: red;
+    padding-left: 83px;
+    font-size: 14px;
+}
+@media screen and (max-width: 990px){
+    .field-course-start-date, .field-course-price, .field-course-location{
+        display: flex;
+        justify-content: flex-start;
+    }
+}

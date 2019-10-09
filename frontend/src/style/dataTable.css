@@ -1,0 +1,31 @@
+.admin-tables table,
+.admin-tables td,
+.admin-tables tr
+ {
+  border-width: 0;
+}
+.admin-tables tr:nth-of-type(2n+1) {
+  background-color: #f6f7f8;
+}
+.admin-tables thead tr {
+  background-color: #4f4f4f!important;
+  color: #fff;
+}
+.admin-tables th,
+.username-td,
+.date-td,
+.phone-td {
+  white-space: nowrap;
+}
+.users-table-wrap {
+  overflow-x: scroll;
+}
+.admin-tables .comment-td input:read-only,
+.admin-tables .comment-td input:read-only:focus {
+  border: 0 none;
+  background-color: transparent;
+  width: 100%;
+}
+.admin-tables .comment-td input:read-only:focus {
+  outline: none;
+}

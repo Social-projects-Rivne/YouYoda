@@ -1,0 +1,62 @@
+@media screen and (max-width: 980px) {
+    .footer .soc {
+        font-size: 40px;
+    }
+    .footer .soc li{
+        margin: 0 20px;
+    }
+    .course-cover-photo {
+        max-width: 100%;
+        max-height: 400px;
+    }
+
+    .event-cover-photo {
+        max-width: 100%;
+        height: auto;
+    }
+}
+@media screen and (max-width: 767px) {
+    .home-about div,
+    .home-course {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .footer {
+        height: auto;
+    }
+    .footer span {
+        bottom: 0;
+    }
+    .cd-info-block i {
+        width: 100%;
+        text-align: center;
+    }
+
+
+}
+
+@media screen and (max-width: 576px) {
+    .home-last-block img{
+        display: none;
+    }
+    .home-last-block .header-block{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .star {
+        top: 0;
+    }
+    .home-rate .rate-num {
+        display: none;
+    }
+    .home-rate {
+        width: 100%;
+        top: 0;
+        flex-wrap: nowrap;
+    }
+    .tooltip-pass {
+         visibility: hidden;
+     }
+}

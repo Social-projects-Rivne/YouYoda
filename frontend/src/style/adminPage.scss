@@ -1,0 +1,147 @@
+#admin-dashboard,
+#moderator-dashboard {
+    width: 100%;
+    min-height: 500px;
+    padding-left: 1rem;
+}
+.dashboard-menu {min-height: 400px;}
+.dashboard-menu > [class*="col-"] > a > div {
+    background-color: beige;
+    height: 100%;
+    background-image: url(/static/media/footer-bg.60236bd9.png);
+    background-size: cover;
+    background-position: right;
+    text-align: right;
+    font-size: 30px;
+    font-weight: bold;
+    padding-right: 1.5rem;
+    padding-top: 2rem;
+    color: #212529;
+}
+.dashboard-menu a {
+    color: #212529;
+}
+.dashboard-menu a:hover,
+.dashboard-menu a:hover div {
+    color: #212529;
+    opacity: 0.8;
+}
+.dashboard-menu svg {
+    color: grey;
+    margin: 1rem 0;
+}
+
+/* admin menu styles */
+.admin-left-menu {
+    background-color: rgb(232, 232, 232);
+    padding: 25px 0;
+    border-top: 3px solid #444;
+    min-height: 350px;
+}
+.admin-left-menu .wrapper .bm-overlay {
+    top: 0;
+}
+.admin-left-menu a,
+.admin-left-menu a:hover {
+    color: black;
+}
+.admin-left-menu li:hover,
+.admin-left-menu li.active {
+    background-color: #fff;
+    opacity: 0.6;
+}
+.admin-left-menu svg {
+    margin-right: 5px;
+    max-width: 14px;
+    color: grey;
+}
+
+/* button styles */
+.admin-tables button {
+    margin: 5px 5px;
+    border-color: transparent;
+}
+
+
+#wrapper, .wrapper {
+/* FILTERSIDEBAR */
+.bm-burger-button {
+    position: absolute;
+    width: 40px;
+    height: 32px;
+    left: 36px;
+    top: 96px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
+.bm-menu {
+  background: rgb(232, 232, 232);
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+.bm-morph-shape {
+    fill: #373a47;
+}
+.bm-item {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+}
+
+.bm-item:hover {
+  color: white;
+}
+
+.bm-burger-bars {
+    background: #373a47;
+  }
+
+.bm-burger-button {
+  position: fixed;
+  width: 40px;
+  height: 30px;
+  top: 107px;
+  left: 100px;
+ }
+
+ .bm-burger-button::after {
+  content: "";
+  display: none;
+}
+.bm-overlay {
+  position: absolute;
+}
+   
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  font-size: 20px;
+  padding: 1em;
+}
+
+/* Styling of overlay */
+.bm-menu-wrap {
+  bottom: 0;
+  left: 0;
+}
+}
+.users-table-wrap img{
+  border-radius: 50%;
+}

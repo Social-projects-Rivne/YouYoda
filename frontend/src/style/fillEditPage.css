@@ -1,0 +1,185 @@
+#trainerButton {
+    margin-top: 50px;
+}
+
+.fill-edit-collumn {
+    height: 1260px;
+}
+
+.top-text {
+    margin-top: 56px;
+    font-weight: bold;
+}
+
+.top-text-2 {
+    margin-top: 56px;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 165px;
+    height: 165px;
+    overflow: hidden;
+}
+
+.avatar img {
+    height: 100%;
+    min-width: 100%;
+}
+
+.city-country-2 input {
+    margin-top: 1px;
+    padding-left: 10px;
+    width: 100%;
+    height: 37px;
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+}
+
+.city-country-2 input:focus {
+    outline-offset: 0;
+}
+
+.top-text-contact {
+    font-weight: bold;
+    margin-top: 116px;
+}
+
+.fill-edit-collumn label {
+    margin-top: 17px;
+}
+
+.button-change {
+    max-width: 45%;
+}
+
+.loginInputTextArea {
+    min-height: 75px;
+    border-radius: 25px;
+}
+
+.loginInputTextArea-2 {
+    min-height: 135px;
+    border-radius: 25px;
+}
+
+.marg-top {
+    margin-top: 17px;
+}
+
+.text-button-trainer {
+    margin-top: 136px;
+    border-radius: 25px;
+}
+
+.submit-button {
+    min-width: 100px;
+    border-radius: 25px;
+}
+
+.button-saveall {
+    background-color: #ffc107;
+    min-width: 262px;
+    border-color: orange;
+    border-radius: 25px;
+    margin-top: 214px;
+    margin-left: auto;
+}
+
+.button-verify-email {
+    border-radius: 25px;
+}
+
+.field-box {
+    border-radius: 25px;
+}
+
+.your-email {
+    max-width: 50%;
+}
+
+.login {
+    margin-top: 22px;
+}
+
+.security-button {
+    margin-top: 36px;
+}
+
+.button-region {
+    min-width: 257px;
+    min-height: 45px;
+    background-color: #6c757d;
+}
+
+.edit-avatar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.edit-avatar::after {
+    content: "\f030";
+    text-align: center;
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    font-family: FontAwesome;
+    position: absolute;
+    border-radius: 0 0 82px 82px;
+    top: 82px;
+    width: 165px;
+    height: 82px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.edit-avatar:hover::after {
+    color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    border-radius: 0 0 82px 82px;
+    top: 82px;
+    width: 165px;
+    height: 82px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.input-for-password {
+    width: 100%;
+    min-width: 400px;
+}
+
+.security-button {
+    color: #710000;
+}
+
+.avatar-wrapper {
+    border: 0;
+    background-color: transparent;
+    padding-left: 30%;
+
+}
+
+.avatar-wrapper:focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+.button-avatar {
+    border-radius: 50px;
+    width: 136px;
+    margin-left: 4%;
+    background-color: #ffc107;
+    border: solid #ffc107 3px;
+}
+
+.button-avatar-input {
+    width: 225px;
+    min-width: 200px;
+    border-radius: 50px;
+    border: solid #6c757d 1px;
+}
+
+.btn-warning.disabled, .btn-warning:disabled {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
