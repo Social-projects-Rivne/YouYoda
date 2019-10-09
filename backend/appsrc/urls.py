@@ -17,8 +17,8 @@ from .views.orginize_event import OrganizeEvent
 from .views.pdp import PDP
 from .views.user_login_logout import UserLogin, UserLogout, UserSocialLogin
 from .views.user_registration import UserRegistration, UserSocialRegistration
-from .views.user_subscribe_to_event import UserSubscribeToEvent
-from .views.user_subscribe_to_course import UserSubscribeToCourse, ListUserSubscribeToCourse
+from .views.user_subscribe_to_event import CheckSubscribeEvent, UserSubscribeToEvent
+from .views.user_subscribe_to_course import CheckSubscribeToCourse, UserSubscribeToCourse, ListUserSubscribeToCourse
 from .views.user_to_trainer import UserToTrainer, UserSendRequest, UserGetRequest
 from .views.users_administration import GetUsersStatuses, UsersGetList, UpdateUsersStatuses
 from .views.view_profile import ViewAchievementsProfile, ViewEventsProfile, ViewCoursesProfile, ViewProfile
@@ -41,14 +41,12 @@ urlpatterns = [
     path('trainer/comments', TrainerComment.as_view(), name='trainer-comment'),
     path('trainer/page', TrainerPage.as_view(), name='trainer-page'),
     path('trainer/top', TopTrainers.as_view(), name='top-trainers'),
-    path('user/totrainer/getrequest', UserGetRequest.as_view()),
-    path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/check', CheckUser.as_view(), name='check'),
+    path('user/login', UserLogin.as_view(), name='login'),
+    path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/profile/courses', ViewCoursesProfile.as_view(), name='user_courses'),
     path('user/profile/events', ViewEventsProfile.as_view(), name='user_events'),
     path('user/profile/achievements', ViewAchievementsProfile.as_view(), name='user_achievements'),
-    path('user/login', UserLogin.as_view(), name='login'),
-    path('user/logout', UserLogout.as_view(), name='logout'),
     path('user/profile/change_avatar', FileUploadView.as_view(), name='change_avatar'),
     path('user/profile/change_password', ChangePassword.as_view(), name='change_password'),
     path('user/profile/edit', EditProfile.as_view()),
@@ -58,8 +56,15 @@ urlpatterns = [
     path('user/social/login', UserSocialLogin.as_view(), name='social_login'),
     path('user/social/register', UserSocialRegistration.as_view(), name='social_register'),
     path('user/totrainer', UserToTrainer.as_view(), name='change_role'),
+    path('user/totrainer/getrequest', UserGetRequest.as_view()),
+    path('user/totrainer/sendrequest', UserSendRequest.as_view(), name='sendrequest'),
     path('user/course/add', UserSubscribeToCourse.as_view(), name='subscribe_course'),
+    path('user/course/checksubscribe', CheckSubscribeToCourse.as_view(), name='check-subscribe-course'),
+    path('user/course/delete', UserSubscribeToCourse.as_view(), name='unsubscribe-course'),
+    path('user/course/managefavorite', UserSubscribeToCourse.as_view(), name='add-favorite-course'),
     path('user/event/add', UserSubscribeToEvent.as_view(), name='subscribe_event'),
+    path('user/event/checksubscribe', CheckSubscribeEvent.as_view(), name='check-subscribe-event'),
+    path('user/event/delete', UserSubscribeToEvent.as_view(), name='unsubscribe-event'),
     path('user/pdp', PDP.as_view(), name='pdp'),
     path('users/getlist', UsersGetList.as_view()),
     path('users/getstatuses', GetUsersStatuses.as_view()),

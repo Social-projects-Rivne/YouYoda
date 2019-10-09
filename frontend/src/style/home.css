@@ -250,8 +250,8 @@
     background-color: #FFD466;
 }
 
-.btn-event-modal-cancel {
-    margin-right: 82px;
+.modal-footer.event-footer-centered {
+    justify-content: center;
 }
 
 .main-text-event-modal {

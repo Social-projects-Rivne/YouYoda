@@ -32,5 +32,3 @@ class EventsSubscribersGetSerializator(serializers.ModelSerializer):
 	class Meta:
 		model = EventsSubscribers
 		fields = ('event',)
-
-		
