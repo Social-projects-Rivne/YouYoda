@@ -1,16 +1,17 @@
 import React from 'react';
 
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ToolTip from 'react-portal-tooltip'
+import ToolTip from 'react-portal-tooltip';
 
 import { API } from '../api/axiosConf';
 import { axiosGet } from '../api/axiosGet';
 import { defaultPhoto } from '../utils';
 import { FormErrors } from '../api/FormError';
+import { getUserSubscribeData } from '../api/getUserSubscribeData';
 
 
 const localizer = momentLocalizer(moment)
@@ -35,6 +36,7 @@ export default class PDP extends React.Component{
       start:'',
       end:'',
       img: '',
+      isSubscribed: false,
       cover_url: '',
       formErrors: {image: ''},
       imageValid: true,
@@ -42,19 +44,37 @@ export default class PDP extends React.Component{
     }
   }
 
-  onSelectEvents = (event ,e) => {
-    let tooltip = {x:e.clientX, y:e.clientY-40}
+  onSelectEvents = (event, e) => {
+    var itemID = '';
+    var itemType = '';
+    let tooltip = {x:e.clientX, y:e.clientY-40};
     this.setState({
       event,
       tooltip,
       tooltipToggle: true
-    })
+    });
+
+    if(event.course) {
+      itemID = event.course.id;
+      itemType = 'course';
+    } else if(event.event) {
+      itemID = event.event.id;
+      itemType = 'event';
+    }
+    if(itemID && itemType) {
+      getUserSubscribeData(itemType, itemID).then(isUserSubscribed => {
+        this.setState({
+          isSubscribed: isUserSubscribed
+        });
+      });
+    }
   }
 
   hideTooltip = () => {
     this.setState({
-      tooltipToggle: false
-    })
+      tooltipToggle: false,
+      isSubscribed: false
+    });
   }
 
   async componentWillMount() {
@@ -236,14 +256,55 @@ export default class PDP extends React.Component{
    this.setState({formValid: this.state.imageValid});
  }
 
+  unsubscribeClickCourse = async(courseData, typeItem) => {
+    let unsubscribeURL = '';
+    let paramItem = {};
+    let itemName = '';
+    if(typeItem === 'course') {
+        unsubscribeURL = 'user/course/delete';
+        paramItem = {'course': courseData.id};
+        itemName = courseData.coursename;
+    }
+    else if(typeItem === 'event') {
+        unsubscribeURL = 'user/event/delete';
+        paramItem = {'event': courseData.id};
+        itemName = courseData.name;
+    }
+    if(!unsubscribeURL || !paramItem)
+        return;
+
+    const USERDATA = {"params": paramItem};
+    try {
+        const response = await API.delete(unsubscribeURL, USERDATA);
+        if(response.status === 204) {
+            toast.success(`You unsubscribed from ${typeItem} "${itemName}"`);
+            // update list of pdp items without request to backend
+            let list = this.state.mainEventsList;
+            for(let i = 0; i < list.length; i++) {
+                if(typeItem === 'course' && list[i].course) {
+                    if (list[i].course.id == courseData.id) {
+                        list.splice(i, 1); 
+                        i--;
+                    }
+                } else if(typeItem === 'event' && list[i].event) {
+                    if (list[i].event.id == courseData.id) {
+                        list.splice(i, 1); 
+                        i--;
+                    }
+                }
+            }
+        }
+    } catch (error) {
+        toast.error(error.message);
+    }
+  }
 
   render() {
-      console.log(this.state.mainEventsList)
-    let tooltip = this.state.tooltip
+    let tooltip = this.state.tooltip;
     let defImg = "/media/event.png";
     let coverImg = defaultPhoto(defImg, this.state.event.cover_url);
-    let start = moment.unix(this.state.event.start).format("H:mm a")
-    let end = moment.unix(this.state.event.end).format("H:mm a")
+    let start = moment.unix(this.state.event.start).format("H:mm a");
+    let end = moment.unix(this.state.event.end).format("H:mm a");
     let { redirect } = this.state;
     if ( redirect ) {
        if( this.state.event.event ){
@@ -297,10 +358,27 @@ export default class PDP extends React.Component{
                             >Information</button>
                         </p>
                         <div>
-                            <button
-                                className="btn btn-danger"
-                                style={{display:this.state.event.display, color:'#fff'}}
-                            >Unsubscribe</button>
+                            {(this.state.isSubscribed !== 'completed' && this.state.isSubscribed) ? (
+                                (this.state.event.course) ? (
+                                    <button
+                                        className="btn btn-danger"
+                                        style={{display:this.state.event.display, color:'#fff'}}
+                                        onClick={() => this.unsubscribeClickCourse(this.state.event.course, 'course')}
+                                    >Unsubscribe</button>
+                                ) : ((this.state.event.event) ? (
+                                    <button
+                                        className="btn btn-danger"
+                                        style={{display:this.state.event.display, color:'#fff'}}
+                                        onClick={() => this.unsubscribeClickCourse(this.state.event.event, 'event')}
+                                    >Unsubscribe</button>
+                                    ) : ''
+                                )
+                            ) : ''}
+                            {(this.state.isSubscribed === 'completed') ? (
+                                <span style={{color:'#54DB63'}} title="This event has been finished">
+                                    <i className="fas fa-flag-checkered"></i>&nbsp;
+                                </span>
+                            ) : ''}
                             <button
                                 className="btn btn-danger"
                                 style={{display: this.state.event.display === 'none' ? 'inline' : 'none', color:'#fff'}}
@@ -320,18 +398,18 @@ export default class PDP extends React.Component{
               <ModalBody className="pdp-form">
                 <form>
                     <div className="form-group">
-                        <label for="pdp-own-event-title">Title of new note <span style={{color:'red'}}>*</span> :</label>
+                        <label htmlFor="pdp-own-event-title">Title of new note <span style={{color:'red'}}>*</span> :</label>
                         <input
                                 className="form-control"
                                 id="pdp-own-event-title"
                                 name="title"
                                 value={this.state.title}
                                 onChange = {this.handleCreateNote}
-    							required
+                                required
                         />
                     </div>
                     <div className="form-group">
-                        <label for="pdp-own-event-desc">Short description:</label>
+                        <label htmlFor="pdp-own-event-desc">Short description:</label>
                         <textarea className="form-control"
                                 id="pdp-own-event-desc"
                                 rows="3"
