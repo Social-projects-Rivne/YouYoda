@@ -260,6 +260,11 @@
     transition: border-radius 0.7s;
     -webkit-transition: border-radius 0.7s;
 }
+.create-event-profile {
+    width: 125px;
+    display: flex;
+    justify-content: flex-end;
+}
 
 /* manage course and event buttons */
 .col-lg-4.wrap-manage-course {

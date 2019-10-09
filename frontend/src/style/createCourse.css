@@ -120,6 +120,11 @@
 .required-fields {
     color: #ffd466;
 }
+.valid-schedule {
+    color: red;
+    padding-left: 83px;
+    font-size: 14px;
+}
 @media screen and (max-width: 990px){
     .field-course-start-date, .field-course-price, .field-course-location{
         display: flex;

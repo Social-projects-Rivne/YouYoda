@@ -280,9 +280,10 @@ export default class CourseDetail extends React.Component{
             </Row>
             <Row>
                 <Col className= {show}>
+                  {this.state.trainer &&
                     <TrainerListUsers
                     course = {this.props.course.id}
-                    />
+                    />}
                 </Col>
             </Row>
             <Row className="btn-group-course-detail d-flex justify-content-between">

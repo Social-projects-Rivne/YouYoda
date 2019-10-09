@@ -164,7 +164,7 @@ export default class YourEvents extends React.Component {
     };
 
     render() {
-        let default_avatar_path = "/media/avatar.png";
+        let default_avatar_path = "/media/beautiful-crowd-cute-2869374.jpg";
         let alt_avatar = defaultPhoto(default_avatar_path, this.state.cover_url);
         let {name, description, date} = this.state;
         return (
