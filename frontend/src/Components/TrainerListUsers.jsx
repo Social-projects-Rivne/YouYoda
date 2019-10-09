@@ -50,8 +50,8 @@ export default class TrainerListUsers extends React.Component {
             <tr >
                 <th scope="row">{i+1}</th>
                 <td>{user.email}</td>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
+                <td>{user.first_name}</td>
+                <td>{user.last_name}</td>
                 <td>{user.username}</td>
             </tr>
         )
