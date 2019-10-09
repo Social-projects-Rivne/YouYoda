@@ -57,6 +57,7 @@ export default class CreateEvent extends React.Component {
                      xs={{size: 8, offset: 2}}
                      md={{size: 6, offset: 3}}>
                     <Link className="card-link" onClick={() => this.handleClick(event)}>
+                        <p className="own-events-list">Own Events</p>
                         <Button color="secondary"
                                 type="button"
                                 size="lg"

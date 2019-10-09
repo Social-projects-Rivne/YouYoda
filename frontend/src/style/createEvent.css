@@ -54,7 +54,7 @@
 }
 
 .text-span-description-event{
-    max-height: 35px;
+    max-height: 49px;
     overflow: hidden;
     padding: 1px 0 5px 0;
 }
@@ -86,6 +86,15 @@
 
 .field-box-event-description{
     border-radius: 25px;
+}
+
+.own-events-list{
+    font-size: 50px;
+    text-align: center;
+}
+
+.event-body p.description-card{
+    line-height: 100%;
 }
 
 

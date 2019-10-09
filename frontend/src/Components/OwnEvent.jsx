@@ -63,7 +63,7 @@ export default class OwnEvent extends React.Component {
                             </CardTitle>
                             <CardText>
                                 <p><span className="main-text-span">Category: </span>{event.categories}</p>
-                                <p className="text-span-description-event">
+                                <p className="text-span-description-event description-card">
                                     <span className="main-text-span">Description: </span>{event.description}
                                 </p>
                                 <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']}/>{' '}{event.location}</p>
