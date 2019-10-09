@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
-
 import AdminDashboard from './Components/AdminDashboard';
 import AdminPage from "./Pages/AdminPage";
 import AdminPageInner from './Components/AdminPageInner';
@@ -24,15 +23,19 @@ import ResetPassword from './Components/ResetPassword';
 import SendActivationEmail from './Components/SendActivationEmail';
 import SearchingCourses from './Components/SearchingCourses';
 import SearchingEvents from './Components/SearchingEvents';
+import SearchPage from './Pages/SearchPage';
 import TrainerPage from './Components/TrainerPage';
 import YourEvents from "./Components/YourEvents";
 
+import { createBrowserHistory } from "history";
+
+const customHistory = createBrowserHistory()
 
 export default class Routes extends React.Component{
   render(){
     return (
       <div>
-        <Router>
+        <Router history={customHistory}>
         <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/profile' component={Profile}/>
@@ -80,6 +83,7 @@ export default class Routes extends React.Component{
                     render={()=><ModeratorPage><ModeratorDashboard/></ModeratorPage>}/>
                 <Route exact path={'/moderator/:option'}
                     render={()=><ModeratorPage><ModeratorPageInner/></ModeratorPage>}/>
+                <Route exact path='/search' component={SearchPage}/>
                 <Route exact path='/eventedit'
                        render={(props) => <MainLayout><YourEvents event = {props.location.state.event}/></MainLayout>}/>
                 <Route exact path="/trainer/page"
