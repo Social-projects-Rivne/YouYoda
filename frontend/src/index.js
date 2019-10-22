@@ -20,10 +20,10 @@ import './style/fillEditPage.css';
 import './style/filter.scss';
 import './style/trainerpage.scss'
 import './style/home.css';
-import './style/media.css';
 import './style/profile.css';
 import './style/pdp.scss';
 import './style/yourEvents.css';
+import './style/media.css';
 import './index.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';

@@ -47,6 +47,7 @@
     }
     .star {
         top: 0;
+        left: 15px;
     }
     .home-rate .rate-num {
         display: none;
@@ -59,4 +60,38 @@
     .tooltip-pass {
          visibility: hidden;
      }
+     .footer-nav a {
+         margin-right: 15px;
+     }
+     .trainer-page h1 {
+         position: relative;
+         top: -80px;
+         margin-left: 30px;
+     }
+    .trainer-page .status-offline{
+        position: absolute;
+    }
+    .course-det-header{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .course-detail-status {
+        position: absolute;
+        top: 35px;
+        right: 0;
+    }
+    .user-info {
+        margin-left: 0;
+    }
+    .event-and-courses {
+        left: 0;
+        text-align: center;
+    }
+    .event-and-courses{
+        width: 100%;
+    }
+    .input-for-password {
+        min-width: 345px;
+    }
+
 }

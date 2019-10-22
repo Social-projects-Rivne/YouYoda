@@ -51,7 +51,7 @@ export default class TrainerPage extends React.Component{
                 coursesList: response.data.courses,
                 eventsList: response.data.events,
                 certificateList: response.data.certificates,
-                lastSeen: moment.unix(lastSeen.data.last_seen),                
+                lastSeen: moment.unix(lastSeen.data.last_seen),
                 loading: false,
             })
 
@@ -65,7 +65,7 @@ export default class TrainerPage extends React.Component{
         let mins = moment().diff(date, "minutes")
         let days = moment().diff(date, "days");
         let hours = moment().diff(date, "hours");
-        
+
         if (mins) {
             if(days >= 1){
                 return `${days} days`;
@@ -125,7 +125,7 @@ export default class TrainerPage extends React.Component{
 
     onlineOffline = () => {
         let lastActive = moment().diff(this.state.lastSeen, "minute")
-        
+
         if(lastActive < 2){
             return (
                 <ul>
@@ -142,7 +142,7 @@ export default class TrainerPage extends React.Component{
                     </li>
                 </ul>
             )
-            
+
         }
     }
 
@@ -175,7 +175,9 @@ export default class TrainerPage extends React.Component{
                             {this.onlineOffline()}
                         </div>
                         <div className="funny-icon">
-                            <i className="fas fa-business-time"><span> {this.lastLogin(this.state.trainer.date_joined)} with YouYoda</span></i>
+                            <a className='nav-link'>
+                                <i className="fas fa-business-time"><span> {this.lastLogin(this.state.trainer.date_joined)} with YouYoda</span></i>
+                            </a>
                             <Link href="/about" className="nav-link" activeClass="active" to="trainer-courses" spy={true} smooth={true} duration={500}>
                                 <i className="fas fa-hand-spock"><span> {this.state.coursesList.length} Created Courses</span></i>
                             </Link>
@@ -268,4 +270,3 @@ export default class TrainerPage extends React.Component{
         )
     }
 };
-

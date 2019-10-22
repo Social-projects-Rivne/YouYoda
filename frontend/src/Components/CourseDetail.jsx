@@ -289,7 +289,7 @@ export default class CourseDetail extends React.Component{
             <Row className="btn-group-course-detail d-flex justify-content-between">
                 <Col>
                 </Col>
-                <Col lg='8' md='12' className='d-flex'>
+                <Col lg='8' md='12' className='d-flex flex-wrap'>
                     {(this.state.isSubscribed !== 'completed' && this.props.course.status !== 'Closed') ? (
                         (this.state.isSubscribed) ? (
                             <Button
