@@ -116,10 +116,12 @@ export default class SearchingCourses extends React.Component{
         await this.getData();
       }
 
-    handleSortData = async (value) => {
+    handleSortData = async (e) => {
+        let value = e.target.value
         await this.setState({
             order_by: value,
-            curentpage: 1});
+            curentpage: 1})
+            console.log(this.state.order_by)
         await this.getData();
       }
 
@@ -164,7 +166,7 @@ export default class SearchingCourses extends React.Component{
                               <form action="" autoComplete="on">
                                   <input id="search"
                                          name="search"
-                                         type="text" 
+                                         type="text"
                                          placeholder="What're you looking for?"
                                          onChange = {(event) => {this.handleSearchData(event)}}
                                   />
@@ -180,20 +182,20 @@ export default class SearchingCourses extends React.Component{
                               </Col>
                           </Row>
                           <Row className="search-input-group">
-                              <Col>
-                                  <InputGroup className="search-input">
+                              <Col className="d-flex justify-content-end">
+                                  <InputGroup className="search-input" style={{width:'300px'}}>
                                        <InputGroupAddon addonType="prepend">
                                           <InputGroupText className="search-input-icon">
                                               <FontAwesomeIcon icon="sort-amount-up"/>
                                           </InputGroupText>
                                       </InputGroupAddon>
                                       <InputGroupAddon addonType="append" className="search-input-select">
-                                          <Input type="select" name="select" id="search-input-select">
-                                              <option value="" selected>Sort by</option>
-                                              <option onClick={() => this.handleSortData("duration")}>Duration</option>
-                                              <option onClick={() => this.handleSortData("start_date")}>Start date</option>
-                                              <option onClick={() => this.handleSortData("cost")}>Cost</option>
-                                              <option onClick={() => this.handleSortData("rate")}>Rate</option>
+                                          <Input type="select" name="select" id="search-input-select" onChange={(e) => this.handleSortData(e)}>
+                                              <option value="" selected disabled>Sort by</option>
+                                              <option value="duration" >Duration</option>
+                                              <option value="start_date" >Start date</option>
+                                              <option value="cost" >Cost</option>
+                                              <option value="rate" >Rate</option>
                                           </Input>
                                       </InputGroupAddon>
                                   </InputGroup>
