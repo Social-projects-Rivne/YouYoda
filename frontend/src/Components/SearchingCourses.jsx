@@ -121,7 +121,6 @@ export default class SearchingCourses extends React.Component{
         await this.setState({
             order_by: value,
             curentpage: 1})
-            console.log(this.state.order_by)
         await this.getData();
       }
 
