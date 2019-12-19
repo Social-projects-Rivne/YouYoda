@@ -37,7 +37,7 @@ export default class ProfileInfo extends React.Component {
                           </div>
                       </div>
                       <div className="user-info">
-                        <h6>{userInfo.about_me}</h6>
+                        <h6>{userInfo.username}</h6>
                       </div>
                   </Col>
               </Row>

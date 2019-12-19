@@ -167,36 +167,39 @@ export default class ProfileInfo extends React.Component {
                                 </div>
                             </NavLink>
                           </NavItem>
-                      </div>
+                          <div className="user-courses">Events</div>
+                              <NavItem className="tab-item">
+                                <NavLink className={classnames({ active: this.state.activeTab === '4' })}
+                                         tab-link
+                                         onClick={() => { this.toggleTab('4') }}
+                                >
+                                      <div className="user-courses-profile"><span>Following</span>
+                                          <div id="number-following-courses" className="courses-numbers">{userFollowingEvents.length}</div>
+                                      </div>
+                                </NavLink>
+                              </NavItem>
+                              <NavItem className="tab-item">
+                                  <NavLink className={classnames({ active: this.state.activeTab === '5' })}
+                                           tab-link
+                                           onClick={() => { this.toggleTab('5') }}
+                                  >
+                                      <div className="user-courses-profile"><span>Completed</span>
+                                        <div id="number-completed-courses" className="events-numbers">{userCompletedEvents.length}</div>
+                                      </div>
+                                  </NavLink>
+                              </NavItem>
+                              <NavItem className="tab-item">
+                                  <NavLink className={classnames({ active: this.state.activeTab === '6' })}
+                                            tab-link
+                                            onClick={() => { this.toggleTab('6') }}
+                                  >
+                                      <div className="user-courses-profile"><span>Created</span>
+                                        <div id="number-completed-courses" className="courses-numbers">{userCreatedEvents.length}</div>
+                                      </div>
+                                  </NavLink>
+                              </NavItem>
+                          </div>
                       <div className="event-and-courses">
-                        <div className="user-courses">Events</div>
-                          <NavItem className="tab-item">
-                            <NavLink
-                              className={classnames({ active: this.state.activeTab === '4' })} tab-link
-                              onClick={() => { this.toggleTab('4') }}>
-                                <div className="user-courses-profile"><span>Following</span>
-                                  <div id="number-following-courses" className="courses-numbers">{userFollowingEvents.length}</div>
-                                </div>
-                            </NavLink>
-                          </NavItem>
-                          <NavItem className="tab-item">
-                            <NavLink
-                            className={classnames({ active: this.state.activeTab === '5' })} tab-link
-                            onClick={() => { this.toggleTab('5') }}>
-                              <div className="user-courses-profile"><span>Completed</span>
-                                <div id="number-completed-courses" className="events-numbers">{userCompletedEvents.length}</div>
-                              </div>
-                            </NavLink>
-                          </NavItem>
-                          <NavItem className="tab-item">
-                            <NavLink
-                            className={classnames({ active: this.state.activeTab === '6' })} tab-link
-                            onClick={() => { this.toggleTab('6') }}>
-                              <div className="user-courses-profile"><span>Created</span>
-                                <div id="number-completed-courses" className="courses-numbers">{userCreatedEvents.length}</div>
-                              </div>
-                            </NavLink>
-                          </NavItem>
                       </div>
                     </Col>
                   </Row>

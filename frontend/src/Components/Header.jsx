@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { 
-    Container, 
-    Collapse, 
-    Navbar, 
-    NavbarToggler, 
-    NavbarBrand, 
-    Nav, 
+import {
+    Container,
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
     NavItem,
-    Row, 
+    Row,
     Col,
 } from 'reactstrap';
 import { Link } from 'react-scroll';
@@ -32,7 +32,7 @@ export default class Header extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
             <header className='header'>
             <Container>
             <Row>
@@ -66,7 +66,7 @@ export default class Header extends React.Component {
                     </Link>
                     </NavItem>
                     <NavItem className={isAuthenticated("hide")}>
-                        <i className="fas fa-sign-in-alt sign-in-header nav-link" 
+                        <i className="fas fa-sign-in-alt sign-in-header nav-link"
                             onClick={this.props.handleClickLogin}
                             ></i>
                     </NavItem>
@@ -78,7 +78,7 @@ export default class Header extends React.Component {
             </Row>
             </Container>
             </header>
-            </div>
+            </>
     );
   }
 };

@@ -107,6 +107,12 @@ export default class HomeEvent extends React.Component{
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1
+                },
+                breakpoint: 550,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    arrows: false
                 }
             },
           ]

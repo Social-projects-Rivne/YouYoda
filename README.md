@@ -1,6 +1,8 @@
 # YouYoda
 #### **Social project for life activity: training, communication and planning.**
 
+##[DEMO](https://youyoda-academy.herokuapp.com)
+
 * Frontend: React >=16.9.0
 * Backend: Django 2.2.3
 * Database: MariaDB latest version
