@@ -19,4 +19,4 @@ django-allauth
 bcrypt==3.1.7
 facepy==1.0.10
 google-auth==1.6.3
-Pillow==6.1.0
+Pillow==9.0.1
